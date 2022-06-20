@@ -63,17 +63,21 @@ const deskStructure = () =>
             ])
         ),
       S.divider(),
-      S.listItem().title("Pages").icon(RiPagesLine).child(
-        S.list().title("Pages").items([
-          // pageItem({
-          //   schemaType: "datasetDetailsPage",
-          //   id: "datasetDetailsPage",
-          //   title: "Dataset Details Page",
-          //   icon: GiArchiveResearch,
-          //   slug: "",
-          // }),
-        ])
-      ),
+      S.listItem()
+        .title("Pages")
+        .icon(RiPagesLine)
+        .child(
+          S.list()
+            .title("Pages")
+            .items([
+              pageItem({
+                schemaType: "homePage",
+                id: "homePage",
+                title: "Home Page",
+                slug: "",
+              }),
+            ])
+        ),
       S.divider(),
     ]);
 

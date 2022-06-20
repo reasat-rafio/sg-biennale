@@ -19,6 +19,7 @@ const Site = {
         accept: "image/png, image/jpeg, image/webp",
       },
     },
+    { name: "date", type: "string" },
     {
       name: "navigations",
       type: "menu",

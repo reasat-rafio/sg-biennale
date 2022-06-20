@@ -4,19 +4,33 @@ import createSchema from "part:@sanity/base/schema-creator";
 // Then import schema types from any plugins that might expose them
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
-import Site from "./documents/site";
-
 import SEO from "./objects/seo";
+
+import Site from "./documents/site";
 import MenuItems from "./objects/site/menu-item";
-import Social from "./objects/social";
+import Social from "./objects/site/social";
 import Footer from "./objects/site/footer";
 import Menu from "./objects/menu";
 
-// Then we give our schema to the builder and provide the result to Sanity
+import HomePage from "./documents/pages/home";
+import HomeHero from "./objects/home/hero";
+import HomeHeroCarouselItem from "./objects/home/carousel-item";
+import HomeOrganisations from "./objects/home/organisations";
+
 export default createSchema({
-  // We name our schema
   name: "default",
-  // Then proceed to concatenate our document type
-  // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([Site, Menu, Footer, SEO, MenuItems, Social]),
+  types: schemaTypes.concat([
+    SEO,
+
+    Site,
+    Menu,
+    Footer,
+    MenuItems,
+    Social,
+
+    HomePage,
+    HomeHero,
+    HomeHeroCarouselItem,
+    HomeOrganisations,
+  ]),
 });
