@@ -1,5 +1,5 @@
 import S from "@sanity/desk-tool/structure-builder";
-import { FaBlog, FaSitemap } from "react-icons/fa";
+import { FcSettings } from "react-icons/fc";
 import { GrEdit, GrView } from "react-icons/gr";
 import { RiPagesLine } from "react-icons/ri";
 import React from "react";
@@ -49,8 +49,19 @@ const deskStructure = () =>
     .items([
       S.listItem()
         .title("Site")
-        .icon(FaSitemap)
-        .child(S.list().title("Site").items([])),
+        .icon(FcSettings)
+        .child(
+          S.list()
+            .title("Site")
+            .items([
+              pageItem({
+                schemaType: "site",
+                id: "site",
+                title: "Site",
+                slug: "",
+              }),
+            ])
+        ),
       S.divider(),
       S.listItem().title("Pages").icon(RiPagesLine).child(
         S.list().title("Pages").items([
