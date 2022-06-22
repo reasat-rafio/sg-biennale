@@ -10,6 +10,9 @@ const Site = {
     {
       name: "logo",
       type: "image",
+      options: {
+        hotspot: true,
+      },
     },
     {
       name: "ogImage",

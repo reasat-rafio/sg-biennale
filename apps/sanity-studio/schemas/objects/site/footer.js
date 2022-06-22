@@ -10,10 +10,7 @@ const Footer = {
       name: "copyRight",
       type: "string",
     },
-    {
-      name: "date",
-      type: "string",
-    },
+
     {
       name: "address",
       type: "text",

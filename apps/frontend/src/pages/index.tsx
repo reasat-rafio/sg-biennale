@@ -5,8 +5,7 @@ import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
-import { renderObjectArray } from "sanity-react-extra";
-import { withDimensions } from "sanity-react-extra";
+import { renderObjectArray, withDimensions } from "sanity-react-extra";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -32,9 +31,7 @@ export const getStaticProps: GetStaticProps = async (
   revalidate: 10,
 });
 
-const Home = (props: SanityProps<any>) => {
-  console.log(props);
-
+const Home: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
   return (

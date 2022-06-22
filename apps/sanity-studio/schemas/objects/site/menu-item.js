@@ -7,8 +7,13 @@ const MenuItems = {
   icon: MdLink,
   fields: [
     { name: "title", type: "string" },
-    { name: "slug", type: "slug", options: { source: "title" } },
-    { name: "highlight", type: "boolean" },
+    {
+      name: "slug",
+      type: "slug",
+      options: {
+        source: (_, options) => options.parent.title,
+      },
+    },
   ],
   preview: {
     select: {

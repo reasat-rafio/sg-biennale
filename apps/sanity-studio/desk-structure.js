@@ -47,21 +47,11 @@ const deskStructure = () =>
     .title("Content")
     .id("__root__")
     .items([
-      S.listItem()
+      S.documentListItem()
+        .schemaType("site")
+        .id("site")
         .title("Site")
-        .icon(FcSettings)
-        .child(
-          S.list()
-            .title("Site")
-            .items([
-              pageItem({
-                schemaType: "site",
-                id: "site",
-                title: "Site",
-                slug: "",
-              }),
-            ])
-        ),
+        .child(S.editor().schemaType("site").title("Site")),
       S.divider(),
       S.listItem()
         .title("Pages")
