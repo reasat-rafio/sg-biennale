@@ -15,33 +15,31 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
   carouselItems,
 }) => {
   return (
-    <div>
-      <Swiper
-        className="h-screen md:h-[75vh]"
-        modules={[Pagination, EffectFade]}
-        slidesPerView={1}
-        effect="fade"
-        pagination={{ clickable: true }}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
-      >
-        {carouselItems.map(({ key, image, description, title }) => (
-          <SwiperSlide className="relative" key={key}>
-            <SanityImg
-              width={1200}
-              className="h-full w-full absolute object-cover object-center "
-              image={image}
-              builder={imageUrlBuilder}
-            />
-            <div className="absolute h-full w-full flex flex-col justify-center items-center space-y-8">
-              <h3 className="text-5xl font-semibold text-white">{title}</h3>
-              <p className="text-xl text-gray-300 max-w-sm text-center">
-                {description}
-              </p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+    <Swiper
+      className="h-screen md:h-[75vh]"
+      modules={[Pagination, EffectFade]}
+      slidesPerView={1}
+      effect="fade"
+      pagination={{ clickable: true }}
+      onSlideChange={() => console.log("slide change")}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+      {carouselItems.map(({ key, image, description, title }) => (
+        <SwiperSlide className="relative" key={key}>
+          <SanityImg
+            width={1200}
+            className="h-full w-full absolute object-cover object-center "
+            image={image}
+            builder={imageUrlBuilder}
+          />
+          <div className="absolute h-full w-full flex flex-col justify-center items-center space-y-8">
+            <h3 className="text-5xl font-semibold text-white">{title}</h3>
+            <p className="text-xl text-gray-300 max-w-sm text-center">
+              {description}
+            </p>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 };
