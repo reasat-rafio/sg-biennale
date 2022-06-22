@@ -8,7 +8,13 @@ const CarouselItem = {
   fields: [
     { name: "title", type: "string" },
     { name: "description", type: "text" },
-    { name: "image", type: "image" },
+    {
+      name: "image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
   ],
   preview: {
     select: {

@@ -13,3 +13,17 @@ export interface Carousel {
   image: SanityImage;
   title: string;
 }
+
+export interface OrganisationProps {
+  type: string;
+  organisations: Organisation[];
+}
+
+export interface Organisation {
+  key: string;
+  type: string;
+  logo: SanityImage;
+  name: string;
+  title: string;
+  url: string;
+}

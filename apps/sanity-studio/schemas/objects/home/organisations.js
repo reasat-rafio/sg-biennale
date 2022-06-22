@@ -22,6 +22,9 @@ const HomeOrganisations = {
             {
               name: "logo",
               type: "image",
+              options: {
+                hotspot: true,
+              },
             },
             { name: "url", type: "url", description: "optional" },
           ],

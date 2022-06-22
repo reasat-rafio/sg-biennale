@@ -31,6 +31,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
             className="h-full w-full absolute object-cover object-center "
             image={image}
             builder={imageUrlBuilder}
+            alt={title}
           />
           <div className="absolute h-full w-full flex flex-col justify-center items-center space-y-8">
             <h3 className="text-5xl font-semibold text-white">{title}</h3>

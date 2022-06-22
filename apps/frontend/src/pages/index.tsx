@@ -11,9 +11,16 @@ import { withDimensions } from "sanity-react-extra";
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
     ...,
-    carousel[]{
+    sections[]{
       ...,
-      "image": ${withDimensions("image")}
+      carousel[]{
+        ...,
+        "image": ${withDimensions("image")}
+      },
+      organisations[]{
+        ...,
+        "logo": ${withDimensions("logo")}
+      }
     }
   }
 `);
