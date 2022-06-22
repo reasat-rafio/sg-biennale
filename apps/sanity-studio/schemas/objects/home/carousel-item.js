@@ -14,7 +14,7 @@ const CarouselItem = {
     select: {
       title: "title",
       subtitle: "description",
-      image: "image",
+      media: "image",
     },
   },
 };

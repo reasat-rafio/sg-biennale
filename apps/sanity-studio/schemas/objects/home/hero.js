@@ -1,7 +1,10 @@
+import { SiApacherocketmq } from "react-icons/si";
+
 const HomeHeroCarouselItem = {
   name: "homePage.hero",
   type: "object",
   title: "Hero",
+  icon: SiApacherocketmq,
   fields: [
     {
       name: "carousel",

@@ -12,3 +12,8 @@ export const siteQuery = groq`{
       }
     },
   }`;
+
+export const pageQuery = (query: string) => groq`{
+    "site": ${siteQuery},
+    "page": ${query}
+  }`;
