@@ -6,10 +6,15 @@ import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
 import { renderObjectArray } from "sanity-react-extra";
+import { withDimensions } from "sanity-react-extra";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
     ...,
+    carousel[]{
+      ...,
+      "image": ${withDimensions("image")}
+    }
   }
 `);
 
