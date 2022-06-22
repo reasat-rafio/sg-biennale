@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { Dispatch, SetStateAction, useRef } from "react";
 /* eslint-disable react-hooks/exhaustive-deps */
 import { RefObject, useEffect, useState } from "react";
 
@@ -213,4 +213,24 @@ export const useScroll = () => {
   const executeScroll: any = () => elRef?.current?.scrollIntoView();
 
   return [executeScroll, elRef];
+};
+
+export const useOutsideClick = (
+  ref: RefObject<Element>,
+  action: { setState?: Dispatch<SetStateAction<any>>; dispatch?: any }
+) => {
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        if (action?.setState) {
+          action.setState(false);
+        }
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 };

@@ -8,7 +8,7 @@ import { SanityImg } from "sanity-react-extra";
 import { NavItemsPopup } from "./nav-items-popup";
 
 const styles = {
-  date: "lg:text-2xl md:text-lg text-base font-medium",
+  date: "lg:text-2xl md:text-lg text-base font-medium ml-auto",
 };
 
 export const Navbar: React.FC<ISite> = ({
@@ -48,6 +48,7 @@ export const Navbar: React.FC<ISite> = ({
           styles={styles.date}
           date={date}
           navigations={navigations}
+          setShowNavigationItems={setShowNavigationItems}
         />
       )}
     </Container>
