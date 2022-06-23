@@ -11,8 +11,10 @@ const styles = {
   date: "lg:text-2xl md:text-lg text-base font-medium ml-auto",
 };
 
-export const Navbar: React.FC<ISite> = ({
-  site: { date, logo, navigations },
+export const Navbar: React.FC<ISite["site"]> = ({
+  date,
+  logo,
+  navigations,
 }) => {
   const [showNavigationItems, setShowNavigationItems] = useState(false);
 
