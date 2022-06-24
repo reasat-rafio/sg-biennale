@@ -29,6 +29,7 @@ export const Navbar: React.FC<ISite["site"]> = ({
             alt="singapore biennale 2022 logo"
           />
         </div>
+
         <div className="flex flex-col justify-around">
           <span className={styles.date}>{date}</span>
           <div className="flex space-x-2 ml-auto">

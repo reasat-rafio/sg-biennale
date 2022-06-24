@@ -17,6 +17,10 @@ import HomeHero from "./objects/home/hero";
 import HomeHeroCarouselItem from "./objects/home/carousel-item";
 import HomeOrganisations from "./objects/home/organisations";
 
+import Event from "./documents/pages/event";
+import Info from "./objects/event/more-info";
+import Category from "./documents/category";
+
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
@@ -32,5 +36,10 @@ export default createSchema({
     HomeHero,
     HomeHeroCarouselItem,
     HomeOrganisations,
+
+    Event,
+    Info,
+
+    Category,
   ]),
 });

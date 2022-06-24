@@ -1,8 +1,9 @@
 import S from "@sanity/desk-tool/structure-builder";
-import { FcSettings } from "react-icons/fc";
+import { FcCalendar, FcSettings } from "react-icons/fc";
 import { GrEdit, GrView } from "react-icons/gr";
 import { RiPagesLine } from "react-icons/ri";
 import React from "react";
+import { BsFillCalendarEventFill } from "react-icons/bs";
 
 function SitePreview({ document, options }) {
   if (!process.env.SANITY_STUDIO_PREVIEW_URL) {
@@ -69,6 +70,17 @@ const deskStructure = () =>
             ])
         ),
       S.divider(),
+      S.listItem()
+        .title("Events")
+        .icon(FcCalendar)
+        .child(
+          S.list()
+            .title("Events")
+            .items([
+              S.documentTypeListItem("category").title("Category"),
+              S.documentTypeListItem("events").title("Event"),
+            ])
+        ),
     ]);
 
 export default deskStructure;
