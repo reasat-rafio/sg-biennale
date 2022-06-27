@@ -1,9 +1,8 @@
 import S from "@sanity/desk-tool/structure-builder";
-import { FcCalendar, FcSettings } from "react-icons/fc";
+import { FcCalendar } from "react-icons/fc";
 import { GrEdit, GrView } from "react-icons/gr";
 import { RiPagesLine } from "react-icons/ri";
 import React from "react";
-import { BsFillCalendarEventFill } from "react-icons/bs";
 
 function SitePreview({ document, options }) {
   if (!process.env.SANITY_STUDIO_PREVIEW_URL) {
@@ -24,10 +23,10 @@ function SitePreview({ document, options }) {
   );
 }
 
-const singleItem = ({ schemaType, id, title, icon }) =>
-  S.listItem({ schemaType, title, id, icon }).child(
-    S.editor().id(id).title(title).schemaType(schemaType)
-  );
+// const singleItem = ({ schemaType, id, title, icon }) =>
+//   S.listItem({ schemaType, title, id, icon }).child(
+//     S.editor().id(id).title(title).schemaType(schemaType)
+//   );
 
 const pageItem = ({ schemaType, id, title, icon, slug }) =>
   S.documentListItem({ schemaType, id, title, icon }).child(
