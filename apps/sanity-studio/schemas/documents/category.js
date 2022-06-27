@@ -9,6 +9,14 @@ const Category = {
       name: "name",
       type: "string",
     },
+    {
+      title: "Slug",
+      name: "slug",
+      type: "slug",
+      options: {
+        source: (doc) => doc.name,
+      },
+    },
   ],
 };
 

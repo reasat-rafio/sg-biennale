@@ -18,7 +18,7 @@ const Info = {
   preview: {
     select: {
       title: "title",
-      description: "description",
+      subtitle: "description",
     },
   },
 };

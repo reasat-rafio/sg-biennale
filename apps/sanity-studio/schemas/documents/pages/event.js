@@ -7,6 +7,19 @@ const Event = {
   icon: FcCalendar,
   fields: [
     {
+      name: "title",
+      type: "string",
+    },
+    {
+      title: "Slug",
+      name: "slug",
+      type: "slug",
+      options: {
+        source: (doc) => doc.title,
+      },
+    },
+    { name: "images", type: "array", of: [{ type: "image" }] },
+    {
       name: "category",
       type: "array",
       options: {
@@ -20,11 +33,6 @@ const Event = {
         },
       ],
     },
-    {
-      name: "title",
-      type: "string",
-    },
-    { name: "images", type: "array", of: [{ type: "image" }] },
     {
       name: "location",
       type: "string",
@@ -52,6 +60,13 @@ const Event = {
       of: [{ type: "eventPage.info" }],
     },
   ],
+  peview: {
+    select: {
+      title: "title",
+      //   subtitle: "location",
+      media: "images.0",
+    },
+  },
 };
 
 export default Event;
