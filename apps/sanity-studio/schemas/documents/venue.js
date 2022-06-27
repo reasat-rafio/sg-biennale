@@ -1,4 +1,4 @@
-import { FcReading } from "react-icons/fc";
+import { FcFaq, FcReading } from "react-icons/fc";
 
 const Venue = {
   name: "venue",
@@ -7,6 +7,13 @@ const Venue = {
   icon: FcReading,
   fields: [
     { name: "name", type: "string" },
+    {
+      name: "slug",
+      type: "slug",
+      options: {
+        source: (doc) => doc.name,
+      },
+    },
     { name: "image", type: "image" },
     { name: "location", type: "string" },
     { name: "timeAndDate", type: "string" },
@@ -19,14 +26,27 @@ const Venue = {
           name: "faq",
           title: "FAQ",
           type: "object",
+          icon: FcFaq,
           fields: [
             { name: "question", type: "string" },
             {
-              name: "answer",
-              type: "object",
-              fields: [
-                { name: "icon", type: "image", description: "optional" },
-                { name: "description", type: "text" },
+              name: "answers",
+              type: "array",
+              of: [
+                {
+                  name: "answer",
+                  type: "object",
+                  fields: [
+                    { name: "icon", type: "image", description: "optional" },
+                    { name: "description", type: "text" },
+                  ],
+                  preview: {
+                    select: {
+                      title: "description",
+                      media: "icon",
+                    },
+                  },
+                },
               ],
             },
           ],

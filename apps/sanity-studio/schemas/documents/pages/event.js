@@ -11,7 +11,6 @@ const Event = {
       type: "string",
     },
     {
-      title: "Slug",
       name: "slug",
       type: "slug",
       options: {

@@ -14,12 +14,18 @@ const AdmissionInfo = {
       name: "description",
       type: "text",
     },
+    {
+      name: "icon",
+      type: "image",
+      description: "optional",
+    },
     { name: "cta", type: "cta" },
   ],
   preview: {
     select: {
       title: "title",
       subtitle: "description",
+      media: "icon",
     },
   },
 };

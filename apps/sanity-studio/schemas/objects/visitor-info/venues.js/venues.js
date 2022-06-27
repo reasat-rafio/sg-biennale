@@ -8,17 +8,19 @@ const Venues = {
   fields: [
     { name: "title", type: "string" },
     {
-      name: "additionalInfo",
+      name: "highlight",
       type: "object",
       fields: [
-        { name: "title", type: "image" },
-        {
-          name: "venues",
-          type: "array",
-          of: [{ type: "reference", to: { type: "venue" } }],
-        },
+        { name: "icon", type: "image", description: "optional" },
+        { name: "title", type: "string" },
       ],
     },
+    {
+      name: "venues",
+      type: "array",
+      of: [{ type: "reference", to: { type: "venue" } }],
+    },
+    { name: "additionalInfo", type: "array", of: [{ type: "admissionInfo" }] },
   ],
 };
 
