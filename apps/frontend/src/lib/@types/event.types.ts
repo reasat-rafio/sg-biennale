@@ -1,5 +1,5 @@
 import { SanityImage } from "sanity-react-extra";
-import { Slug } from "./global.types";
+import { IAccordion, Slug } from "./global.types";
 
 export interface EventDetailProps {
   createdAt: Date;
@@ -12,7 +12,7 @@ export interface EventDetailProps {
   description: any[];
   images: SanityImage[];
   location: string;
-  moreInfo?: MoreInfo[];
+  moreInfo?: IAccordion[];
   price: string;
   slug: Slug;
   time: string;
@@ -27,7 +27,7 @@ export interface EventDescriptionProps {
   description: any[];
   date: string;
   price: string;
-  moreInfo?: MoreInfo[];
+  moreInfo?: IAccordion[];
   category: Category[];
 }
 
@@ -39,11 +39,4 @@ export interface Category {
   updatedAt: Date;
   name: string;
   slug: Slug;
-}
-
-export interface MoreInfo {
-  key: string;
-  type: string;
-  description: string;
-  title: string;
 }

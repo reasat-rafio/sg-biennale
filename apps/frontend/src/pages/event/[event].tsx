@@ -1,4 +1,6 @@
-import { EventDetail } from "@components/event-detail/event-detail";
+import { EventDescription } from "@components/event-detail/event-description";
+import { ImageCarousel } from "@components/event-detail/image-carousel";
+import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
@@ -49,9 +51,35 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const EventDetailPage: NextPage<SanityProps> = (props) => {
-  const { page } = props.data;
+  const {
+    title,
+    description,
+    date,
+    price,
+    location,
+    time,
+    moreInfo,
+    category,
+    images,
+  } = props.data.page;
 
-  return <EventDetail {...page} />;
+  return (
+    <DetailsLayout
+      DescriptionBlock={
+        <EventDescription
+          title={title}
+          description={description}
+          date={date}
+          price={price}
+          location={location}
+          time={time}
+          moreInfo={moreInfo}
+          category={category}
+        />
+      }
+      CarouselBlock={<ImageCarousel images={images} />}
+    />
+  );
 };
 
 export default EventDetailPage;

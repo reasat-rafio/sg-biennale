@@ -1,13 +1,10 @@
 import { ArrowNarrowLeft } from "@components/icons/arrow-narrow-left";
 import { Calender } from "@components/icons/calender";
-import { ChevronArrow } from "@components/icons/chevron-arrow";
 import { Clock } from "@components/icons/clock";
 import { Location } from "@components/icons/location";
 import { EventDescriptionProps } from "@lib/@types/event.types";
 import { PortableText } from "@utils/sanity";
-import clsx from "clsx";
 import Link from "next/link";
-import { useState } from "react";
 
 export const GoBack: React.FC<{}> = () => {
   return (
@@ -78,42 +75,5 @@ export const Description: React.FC<{ description: any[] }> = ({
     <p className="text-sm">
       <PortableText blocks={description} />
     </p>
-  );
-};
-
-export const Accordions: React.FC<{
-  moreInfo: EventDescriptionProps["moreInfo"];
-}> = ({ moreInfo }) => {
-  const [activeAccordionIndex, setActiveAccordionIndex] = useState<
-    number | null
-  >(null);
-
-  const toggleAccordion = (accordionIndex: number) => {
-    if (activeAccordionIndex === accordionIndex) setActiveAccordionIndex(null);
-    else setActiveAccordionIndex(accordionIndex);
-  };
-  return (
-    <div className="">
-      {moreInfo?.map(({ key, title, description }, index) => (
-        <div
-          className="flex flex-col space-y-2 border-t border-black py-2"
-          onClick={() => {
-            toggleAccordion(index);
-          }}
-          key={key}
-        >
-          <div className="text-sm font-medium flex items-center">
-            <h6 className="flex-1">{title}</h6>
-            <ChevronArrow
-              className={clsx(
-                "h-4 w-4",
-                index === activeAccordionIndex ? "rotate-180" : ""
-              )}
-            />
-          </div>
-          {index === activeAccordionIndex && <p>{description}</p>}
-        </div>
-      ))}
-    </div>
   );
 };

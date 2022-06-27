@@ -1,7 +1,7 @@
+import { Accordion } from "@components/common/accordion";
 import { EventDescriptionProps } from "@lib/@types/event.types";
 import clsx from "clsx";
 import {
-  Accordions,
   Description,
   GoBack,
   Header,
@@ -29,7 +29,7 @@ export const EventDescription: React.FC<EventDescriptionProps> = ({
       <TimeLocationAndDate date={date} location={location} time={time} />
       <PriceAndCTA price={price} />
       <Description description={description} />
-      {moreInfo?.length && <Accordions moreInfo={moreInfo} />}
+      {moreInfo?.length && <Accordion moreInfo={moreInfo} />}
     </div>
   );
 };

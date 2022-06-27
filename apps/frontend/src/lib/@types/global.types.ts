@@ -47,3 +47,10 @@ export interface Slug {
   type: string;
   current: string;
 }
+
+export interface IAccordion {
+  key: string;
+  type: string;
+  description: string;
+  title: string;
+}
