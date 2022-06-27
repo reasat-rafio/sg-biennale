@@ -17,6 +17,7 @@ import "swiper/css/mousewheel";
 import { useRef, useState } from "react";
 import { imageUrlBuilder } from "@utils/sanity";
 import useGlobalStore from "@stores/global-store";
+import { useWindowSize } from "@lib/hooks";
 
 interface ImageCarouselProps {
   className?: string;
@@ -33,12 +34,19 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({
   const { footerHeight, navbarHeight } = useGlobalStore();
   const totalAdditionalHeight = footerHeight + navbarHeight;
 
+  const windowHeight = useWindowSize()?.width ?? 0;
+
   console.log(activeSlide);
 
   return (
     <div className={clsx(className)}>
       <Swiper
-        style={{ height: `calc(100vh - ${totalAdditionalHeight}px)` }}
+        style={{
+          height:
+            windowHeight >= 768
+              ? `calc(100vh - ${totalAdditionalHeight}px)`
+              : `50vh`,
+        }}
         className=""
         modules={[Navigation, Pagination, A11y, Autoplay, Mousewheel]}
         autoplay
