@@ -1,5 +1,5 @@
-import { EventDescription } from "@components/event-detail/event-description";
-import { ImageCarousel } from "@components/event-detail/image-carousel";
+import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
+import { EventDescription } from "@components/event-details/event-description";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
@@ -77,7 +77,7 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
           category={category}
         />
       }
-      CarouselBlock={<ImageCarousel images={images} />}
+      CarouselBlock={<DetailsPageImageCarousel images={images} />}
     />
   );
 };

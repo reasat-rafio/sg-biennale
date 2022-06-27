@@ -24,7 +24,7 @@ interface ImageCarouselProps {
   images: SanityImage[];
 }
 
-export const ImageCarousel: React.FC<ImageCarouselProps> = ({
+export const DetailsPageImageCarousel: React.FC<ImageCarouselProps> = ({
   className,
   images,
 }) => {

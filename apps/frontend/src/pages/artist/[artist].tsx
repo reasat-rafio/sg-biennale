@@ -1,3 +1,4 @@
+import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
@@ -47,11 +48,11 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
-  const { page } = props.data;
+  const { name, description, images, moreInfo } = props.data.page;
 
-  console.log(page);
+  // <DetailsLayout DescriptionBlock={} CarouselBlock={} />;
 
-  return <div></div>;
+  return <></>;
 };
 
 export default ArtistDetailPage;
