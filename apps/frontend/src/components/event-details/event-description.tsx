@@ -1,9 +1,9 @@
 import { Accordion } from "@components/common/accordion";
+import { GoBack } from "@components/ui/go-back-cta";
 import { EventDescriptionProps } from "@lib/@types/event.types";
 import clsx from "clsx";
 import {
   Description,
-  GoBack,
   Header,
   PriceAndCTA,
   TimeLocationAndDate,
@@ -24,7 +24,7 @@ export const EventDescription: React.FC<EventDescriptionProps> = ({
     <div
       className={clsx("p-5 flex flex-col space-y-7 overflow-y-auto", className)}
     >
-      <GoBack />
+      <GoBack href="/event" title="Back to Programmes & Events" />
       <Header category={category} title={title} />
       <TimeLocationAndDate date={date} location={location} time={time} />
       <PriceAndCTA price={price} />

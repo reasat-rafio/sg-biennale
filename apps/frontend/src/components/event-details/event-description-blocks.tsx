@@ -4,20 +4,6 @@ import { Clock } from "@components/icons/clock";
 import { Location } from "@components/icons/location";
 import { EventDescriptionProps } from "@lib/@types/event.types";
 import { PortableText } from "@utils/sanity";
-import Link from "next/link";
-
-export const GoBack: React.FC<{}> = () => {
-  return (
-    <div className="flex">
-      <Link href="/event">
-        <a className="flex text-sm space-x-2 items-center border-t border-black">
-          <ArrowNarrowLeft />
-          <span> Back to Programmes & Events</span>
-        </a>
-      </Link>
-    </div>
-  );
-};
 
 export const Header: React.FC<{
   category: EventDescriptionProps["category"];
