@@ -22,6 +22,7 @@ import Event from "./documents/pages/event";
 import Category from "./documents/category";
 
 import Artist from "./documents/pages/artist";
+import Artwork from "./documents/pages/artwork";
 
 export default createSchema({
   name: "default",
@@ -43,6 +44,7 @@ export default createSchema({
     Event,
 
     Artist,
+    Artwork,
 
     Category,
   ]),

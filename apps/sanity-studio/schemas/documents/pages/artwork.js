@@ -1,10 +1,10 @@
-import { FcButtingIn } from "react-icons/fc";
+import { FcFrame } from "react-icons/fc";
 
-const Artist = {
-  title: "Artist Details Page",
-  name: "artist",
+const Artwork = {
+  title: "Artwork Details Page",
+  name: "artwork",
   type: "document",
-  icon: FcButtingIn,
+  icon: FcFrame,
   fields: [
     {
       name: "name",
@@ -39,4 +39,4 @@ const Artist = {
   },
 };
 
-export default Artist;
+export default Artwork;
