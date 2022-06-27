@@ -1,10 +1,14 @@
-interface ArrowNarrowLeftProps {}
+interface ArrowNarrowLeftProps {
+  className?: string;
+}
 
-export const ArrowNarrowLeft: React.FC<ArrowNarrowLeftProps> = ({}) => {
+export const ArrowNarrowLeft: React.FC<ArrowNarrowLeftProps> = ({
+  className = "h-4 w-4",
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6"
+      className={className}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

@@ -11,6 +11,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({
   location,
   time,
   moreInfo,
+  category,
 }) => {
   const { footerHeight, navbarHeight } = useGlobalStore();
   const totalAdditionalHeight = footerHeight + navbarHeight;
@@ -29,6 +30,7 @@ export const EventDetail: React.FC<EventDetailProps> = ({
         location={location}
         time={time}
         moreInfo={moreInfo}
+        category={category}
       />
       <ImageCarousel className="col-span-8" />
     </div>

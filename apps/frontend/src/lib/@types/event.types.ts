@@ -28,6 +28,7 @@ export interface EventDescriptionProps {
   date: string;
   price: string;
   moreInfo?: MoreInfo[];
+  category: Category[];
 }
 
 export interface Category {
