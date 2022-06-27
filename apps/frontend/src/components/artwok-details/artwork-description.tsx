@@ -2,16 +2,16 @@ import clsx from "clsx";
 import { IAccordion } from "@lib/@types/global.types";
 import { GoBack } from "@components/ui/go-back-cta";
 import { Accordion } from "@components/common/accordion";
-import { Description, Header } from "./artist-description-blocks";
+import { Description, Header } from "./artwork-description-blocks";
 
-interface ArtistDescriptionProps {
+interface ArtworkDescriptionProps {
   name: string;
   description: any[];
   moreInfo: IAccordion[];
   className?: string;
 }
 
-export const ArtistDescription: React.FC<ArtistDescriptionProps> = ({
+export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
   name,
   description,
   moreInfo,
