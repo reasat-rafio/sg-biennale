@@ -5,6 +5,7 @@ import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
 import SEO from "./objects/seo";
+import CTA from "./objects/cta";
 import Info from "./objects/more-info";
 
 import Site from "./documents/site";
@@ -12,6 +13,8 @@ import MenuItems from "./objects/site/menu-item";
 import Social from "./objects/site/social";
 import Footer from "./objects/site/footer";
 import Menu from "./objects/menu";
+
+import Venue from "./documents/venue";
 
 import HomePage from "./documents/pages/home";
 import HomeHero from "./objects/home/hero";
@@ -24,10 +27,16 @@ import Category from "./documents/category";
 import Artist from "./documents/pages/artist";
 import Artwork from "./documents/pages/artwork";
 
+import VisitorInfo from "./documents/pages/visitor-info";
+import AdmissionInfo from "./objects/visitor-info/admission/admission-info";
+import Admission from "./objects/visitor-info/admission/admission";
+import Venues from "./objects/visitor-info/venues.js/venues";
+
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
     SEO,
+    CTA,
     Info,
 
     Site,
@@ -35,6 +44,8 @@ export default createSchema({
     Footer,
     MenuItems,
     Social,
+
+    Venue,
 
     HomePage,
     HomeHero,
@@ -47,5 +58,10 @@ export default createSchema({
     Artwork,
 
     Category,
+
+    VisitorInfo,
+    Admission,
+    AdmissionInfo,
+    Venues,
   ]),
 });

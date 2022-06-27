@@ -66,6 +66,12 @@ const deskStructure = () =>
                 title: "Home Page",
                 slug: "",
               }),
+              pageItem({
+                schemaType: "visitorInfoPage",
+                id: "visitorInfoPage",
+                title: "Visitor Info Page",
+                slug: "",
+              }),
             ])
         ),
       S.divider(),
@@ -82,6 +88,7 @@ const deskStructure = () =>
         ),
       S.documentTypeListItem("artist").title("Artists"),
       S.documentTypeListItem("artwork").title("Artworks"),
+      S.documentTypeListItem("venue").title("Venues"),
     ]);
 
 export default deskStructure;
