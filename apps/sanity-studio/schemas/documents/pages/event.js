@@ -1,7 +1,7 @@
 import { FcCalendar } from "react-icons/fc";
 
 const Event = {
-  title: "Event Page",
+  title: "Event Details Page",
   name: "events",
   type: "document",
   icon: FcCalendar,
@@ -57,7 +57,7 @@ const Event = {
     {
       name: "moreInfo",
       type: "array",
-      of: [{ type: "eventPage.info" }],
+      of: [{ type: "info" }],
     },
   ],
   peview: {

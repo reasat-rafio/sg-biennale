@@ -5,6 +5,7 @@ import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
 import SEO from "./objects/seo";
+import Info from "./objects/more-info";
 
 import Site from "./documents/site";
 import MenuItems from "./objects/site/menu-item";
@@ -18,13 +19,15 @@ import HomeHeroCarouselItem from "./objects/home/carousel-item";
 import HomeOrganisations from "./objects/home/organisations";
 
 import Event from "./documents/pages/event";
-import Info from "./objects/event/more-info";
 import Category from "./documents/category";
+
+import Artist from "./documents/pages/artist";
 
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
     SEO,
+    Info,
 
     Site,
     Menu,
@@ -38,7 +41,8 @@ export default createSchema({
     HomeOrganisations,
 
     Event,
-    Info,
+
+    Artist,
 
     Category,
   ]),

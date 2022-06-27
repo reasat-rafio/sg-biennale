@@ -2,7 +2,7 @@ import { FcInfo } from "react-icons/fc";
 
 const Info = {
   title: "Info",
-  name: "eventPage.info",
+  name: "info",
   type: "object",
   icon: FcInfo,
   fields: [

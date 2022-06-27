@@ -81,6 +81,7 @@ const deskStructure = () =>
               S.documentTypeListItem("events").title("Event"),
             ])
         ),
+      S.documentTypeListItem("artist").title("Artists"),
     ]);
 
 export default deskStructure;

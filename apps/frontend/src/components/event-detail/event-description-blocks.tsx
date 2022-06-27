@@ -93,10 +93,10 @@ export const Accordions: React.FC<{
     else setActiveAccordionIndex(accordionIndex);
   };
   return (
-    <div className="border-t border-black py-2">
+    <div className="">
       {moreInfo?.map(({ key, title, description }, index) => (
         <div
-          className="flex flex-col space-y-2"
+          className="flex flex-col space-y-2 border-t border-black py-2"
           onClick={() => {
             toggleAccordion(index);
           }}
