@@ -19,7 +19,10 @@ export const Navbar: React.FC<ISite["site"]> = ({
   const [showNavigationItems, setShowNavigationItems] = useState(false);
 
   return (
-    <Container className="bg-black sticky top-0 left-0 py-4 z-40 text-white">
+    <Container
+      id="navbar"
+      className="bg-black sticky top-0 left-0 py-4 z-40 text-white"
+    >
       <nav className="flex space-x-3">
         <div className="flex-1">
           <SanityImg

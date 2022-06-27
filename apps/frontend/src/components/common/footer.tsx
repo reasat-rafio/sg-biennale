@@ -9,7 +9,7 @@ export const Footer: React.FC<ISite["site"]> = ({
   footer: { address, copyRight, socials },
 }) => {
   return (
-    <Container className="bg-zinc-500 py-6">
+    <Container id="footer" className="bg-zinc-500 py-6">
       <footer className="grid lg:grid-cols-11 grid-cols-6 text-white lg:gap-6 gap-2 text-sm lg:text-base">
         <div className="sm:col-span-3 col-span-6 flex lg:flex-col lg:space-y-4 lg:space-x-0 space-x-2">
           <span className="font-semibold ">{copyRight}</span>

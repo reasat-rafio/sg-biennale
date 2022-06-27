@@ -19,6 +19,17 @@ export interface EventDetailProps {
   title: string;
 }
 
+export interface EventDescriptionProps {
+  className?: string;
+  time: string;
+  title: string;
+  location: string;
+  description: any[];
+  date: string;
+  price: string;
+  moreInfo?: MoreInfo[];
+}
+
 export interface Category {
   createdAt: Date;
   id: string;
