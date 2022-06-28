@@ -44,7 +44,7 @@ export const Venues: React.FC<VenuesProps> = ({
         ))}
       </div>
 
-      <div className="lg:h-[70vh] h-[45vh] py-10">
+      <div className="lg:h-[90vh] h-[45vh] py-10">
         <GoogleMapReact
           bootstrapURLKeys={{
             key: "",

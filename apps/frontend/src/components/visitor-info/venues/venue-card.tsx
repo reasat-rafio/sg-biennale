@@ -15,7 +15,7 @@ interface VenueCardProps {
 
 export const VenueCard: React.FC<VenueCardProps> = ({
   className,
-  vanue: { faqs, image, name, location, timeAndDate },
+  vanue: { faqs, image, name, location, timeAndDate, icon },
 }) => {
   const [activeFAQIndex, setActiveFAQIndex] = useState<number | null>(null);
 
@@ -35,7 +35,17 @@ export const VenueCard: React.FC<VenueCardProps> = ({
           alt={name}
         />
       </div>
-      <h6 className="text-lg font-semibold">{name}</h6>
+      <div className="flex">
+        <h6 className="text-lg font-semibold flex-1 items-center">{name}</h6>
+        {icon && (
+          <SanityImg
+            height={20}
+            image={icon}
+            builder={imageUrlBuilder}
+            alt="icon"
+          />
+        )}
+      </div>
       <div className="flex flex-col space-y-1">
         <div className="flex space-x-2 items-center">
           <Location className="h-5 w-5" />

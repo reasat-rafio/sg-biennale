@@ -15,6 +15,7 @@ const Venue = {
       },
     },
     { name: "image", type: "image", options: { hotspot: true } },
+    { name: "icon", type: "image" },
     { name: "location", type: "string" },
     { name: "timeAndDate", type: "string" },
     {

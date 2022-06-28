@@ -46,6 +46,7 @@ export interface Venue {
   name: string;
   slug: Slug;
   timeAndDate: string;
+  icon?: SanityImage;
 }
 export interface FAQ {
   key: string;
