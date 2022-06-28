@@ -10,7 +10,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
   return (
     <Container className="grid grid-cols-12 lg:space-x-5 space-x-2 py-10">
       {organisations.map(({ key, logo, name, title, url }) => (
-        <div
+        <section
           className="md:col-span-4 sm:col-span-6 col-span-12 flex justify-center items-center"
           key={key}
         >
@@ -27,7 +27,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
               </a>
             </Link>
           </div>
-        </div>
+        </section>
       ))}
     </Container>
   );

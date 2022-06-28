@@ -1,6 +1,7 @@
 import { Container } from "@components/ui/container";
 import { Admission } from "@components/visitor-info/admission";
 import { Hero } from "@components/visitor-info/hero";
+import { Venues } from "@components/visitor-info/venues/venues";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
@@ -56,6 +57,7 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
       {renderObjectArray(page.sections, {
         "visitorInfoPage.hero": Hero,
         "visitorInfoPage.admission": Admission,
+        "visitorInfoPage.venues": Venues,
       })}
     </Container>
   );

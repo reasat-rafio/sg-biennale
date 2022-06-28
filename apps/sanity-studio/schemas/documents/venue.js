@@ -14,7 +14,7 @@ const Venue = {
         source: (doc) => doc.name,
       },
     },
-    { name: "image", type: "image" },
+    { name: "image", type: "image", options: { hotspot: true } },
     { name: "location", type: "string" },
     { name: "timeAndDate", type: "string" },
     {
@@ -49,6 +49,7 @@ const Venue = {
                 },
               ],
             },
+            { name: "cta", type: "cta" },
           ],
         },
       ],

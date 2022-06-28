@@ -18,8 +18,8 @@ export const Admission: React.FC<AdmissionProps> = ({
   moreInfos,
 }) => {
   return (
-    <div className="py-10 flex flex-col space-y-10 border-b-2 border-black">
-      <h4 className="text-lg font-medium">{title}</h4>
+    <section className="py-10 flex flex-col space-y-10 border-b-2 border-black">
+      <h3 className="text-lg font-medium">{title}</h3>
       <button className="flex">
         <Link href={cta.href}>
           <a className="flex space-x-2 items-center bg-black py-2 px-5 text-white rounded-3xl">
@@ -38,6 +38,6 @@ export const Admission: React.FC<AdmissionProps> = ({
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };

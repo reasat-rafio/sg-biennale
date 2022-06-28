@@ -12,8 +12,6 @@ export const Hero: React.FC<HeroProps> = ({
   header,
   shortGuide: { asset, icon, title },
 }) => {
-  console.log(asset);
-
   return (
     <header className="flex">
       <h1 className="text-2xl font-semibold flex-1">{header}</h1>

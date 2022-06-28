@@ -1,5 +1,5 @@
 import { SanityImage } from "sanity-react-extra";
-import { Cta } from "./global.types";
+import { Cta, Slug } from "./global.types";
 
 export interface ShortGuide {
   type: string;
@@ -32,4 +32,37 @@ export interface MoreInfo {
   description: string;
   title: string;
   icon?: SanityImage;
+}
+
+export interface Venue {
+  createdAt: Date;
+  id: string;
+  rev: string;
+  type: string;
+  updatedAt: Date;
+  faqs: FAQ[];
+  image: SanityImage;
+  location: string;
+  name: string;
+  slug: Slug;
+  timeAndDate: string;
+}
+export interface FAQ {
+  key: string;
+  type: string;
+  answers: Answer[];
+  question: string;
+  cta?: Cta;
+}
+
+export interface Answer {
+  key: string;
+  type: string;
+  description: string;
+  icon: SanityImage;
+}
+
+export interface Highlight {
+  icon: SanityImage;
+  title: string;
 }
