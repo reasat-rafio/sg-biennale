@@ -1,6 +1,6 @@
 import { FcInfo } from "react-icons/fc";
 
-const VisitorInfo = {
+const VisitorInfoPage = {
   name: "visitorInfoPage",
   title: "Visitor Info Page",
   type: "document",
@@ -12,6 +12,7 @@ const VisitorInfo = {
       type: "array",
       title: "Sections",
       of: [
+        { type: "visitorInfoPage.hero" },
         { type: "visitorInfoPage.admission" },
         { type: "visitorInfoPage.venues" },
       ],
@@ -19,4 +20,4 @@ const VisitorInfo = {
   ],
 };
 
-export default VisitorInfo;
+export default VisitorInfoPage;

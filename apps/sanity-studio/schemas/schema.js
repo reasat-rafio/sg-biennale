@@ -27,10 +27,11 @@ import Category from "./documents/category";
 import Artist from "./documents/pages/artist";
 import Artwork from "./documents/pages/artwork";
 
-import VisitorInfo from "./documents/pages/visitor-info";
-import AdmissionInfo from "./objects/visitor-info/admission/admission-info";
-import Admission from "./objects/visitor-info/admission/admission";
-import Venues from "./objects/visitor-info/venues.js/venues";
+import VisitorInfoPage from "./documents/pages/visitor-info";
+import visitorInfoHero from "./objects/visitor-info/hero";
+import VisitorInfoAdmissionInfo from "./objects/visitor-info/admission/admission-info";
+import VisitorInfoAdmission from "./objects/visitor-info/admission/admission";
+import VisitorInfoVenues from "./objects/visitor-info/venues";
 
 export default createSchema({
   name: "default",
@@ -59,9 +60,10 @@ export default createSchema({
 
     Category,
 
-    VisitorInfo,
-    Admission,
-    AdmissionInfo,
-    Venues,
+    VisitorInfoPage,
+    visitorInfoHero,
+    VisitorInfoAdmission,
+    VisitorInfoAdmissionInfo,
+    VisitorInfoVenues,
   ]),
 });

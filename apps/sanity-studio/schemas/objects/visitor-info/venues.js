@@ -1,6 +1,6 @@
 import { FcReading } from "react-icons/fc";
 
-const Venues = {
+const VisitorInfoVenues = {
   name: "visitorInfoPage.venues",
   title: "Venues",
   type: "object",
@@ -24,4 +24,4 @@ const Venues = {
   ],
 };
 
-export default Venues;
+export default VisitorInfoVenues;

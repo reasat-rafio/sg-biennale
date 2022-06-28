@@ -1,6 +1,6 @@
 import { FcInfo } from "react-icons/fc";
 
-const AdmissionInfo = {
+const VisitorInfoAdmissionInfo = {
   title: "Admission Info",
   name: "admissionInfo",
   type: "object",
@@ -30,4 +30,4 @@ const AdmissionInfo = {
   },
 };
 
-export default AdmissionInfo;
+export default VisitorInfoAdmissionInfo;

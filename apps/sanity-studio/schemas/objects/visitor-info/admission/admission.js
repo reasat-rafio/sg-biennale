@@ -1,6 +1,6 @@
 import { FcCameraAddon } from "react-icons/fc";
 
-const Admission = {
+const VisitorInfoAdmission = {
   name: "visitorInfoPage.admission",
   title: "Admission",
   type: "object",
@@ -12,4 +12,4 @@ const Admission = {
   ],
 };
 
-export default Admission;
+export default VisitorInfoAdmission;
