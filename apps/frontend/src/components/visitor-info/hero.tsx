@@ -24,7 +24,7 @@ export const Hero: React.FC<HeroProps> = ({
         }}
       >
         <SanityImg
-          width={25}
+          width={20}
           image={icon}
           builder={imageUrlBuilder}
           alt={`${title}'s icon`}

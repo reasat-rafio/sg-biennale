@@ -54,3 +54,9 @@ export interface IAccordion {
   description: string;
   title: string;
 }
+
+export interface Cta {
+  type: string;
+  href: string;
+  title: string;
+}
