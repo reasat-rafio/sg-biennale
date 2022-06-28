@@ -1,3 +1,5 @@
+import { Container } from "@components/ui/container";
+import { Hero } from "@components/visitor-info/hero";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
@@ -6,13 +8,14 @@ import { SanityProps } from "next-sanity-extra";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
 
 const query = pageQuery(groq`
-  *[_type == "homePage"][0]{
+  *[_type == "visitorInfoPage"][0]{
     ...,
     sections[]{
         ..., 
         shortGuide{
             ...,
-            "icon": ${withDimensions("icon")}
+            "icon": ${withDimensions("icon")},
+            asset->
         },
         moreInfos[]{
             ...,
@@ -48,11 +51,11 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
   return (
-    <div>
+    <Container className="py-3">
       {renderObjectArray(page.sections, {
-        // "visitorInfoPage.hero": "",
+        "visitorInfoPage.hero": Hero,
       })}
-    </div>
+    </Container>
   );
 };
 
