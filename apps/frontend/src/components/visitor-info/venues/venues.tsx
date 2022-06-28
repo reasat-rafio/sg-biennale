@@ -1,7 +1,9 @@
 import { Highlight, MoreInfo, Venue } from "@lib/@types/visitor-info.types";
 import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImg } from "sanity-react-extra";
+import { MoreInfoBlock } from "../more-info-block";
 import { VenueCard } from "./venue-card";
+import GoogleMapReact from "google-map-react";
 
 interface VenuesProps {
   type: string;
@@ -11,7 +13,12 @@ interface VenuesProps {
   venues: Venue[];
 }
 
-export const Venues: React.FC<VenuesProps> = ({ title, venues, highlight }) => {
+export const Venues: React.FC<VenuesProps> = ({
+  title,
+  venues,
+  highlight,
+  additionalInfo,
+}) => {
   return (
     <section className="py-10">
       <header className="flex">
@@ -33,6 +40,29 @@ export const Venues: React.FC<VenuesProps> = ({ title, venues, highlight }) => {
             className="lg:col-span-6 col-span-12"
             key={vanue.id}
             vanue={vanue}
+          />
+        ))}
+      </div>
+
+      <div className="lg:h-[70vh] h-[45vh] py-10">
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: "",
+          }}
+          defaultCenter={{
+            lat: 59.95,
+            lng: 30.33,
+          }}
+          defaultZoom={11}
+        />
+      </div>
+
+      <div className="grid grid-cols-12 xl:gap-x-24 xl:gap-y-16 gap-5">
+        {additionalInfo.map((data) => (
+          <MoreInfoBlock
+            className="lg:col-span-6 col-span-12"
+            key={data.key}
+            moreInfo={data}
           />
         ))}
       </div>

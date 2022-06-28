@@ -74,7 +74,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                 </div>
                 {cta && (
                   <button className="px-3 py-1 border border-black rounded-3xl mr-auto">
-                    <Link href={cta.href}>
+                    <Link href={cta?.href ?? "/"}>
                       <a>{cta.title}</a>
                     </Link>
                   </button>

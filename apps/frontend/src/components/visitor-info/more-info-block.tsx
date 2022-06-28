@@ -18,8 +18,8 @@ export const MoreInfoBlock: React.FC<MoreInfoBlockProps> = ({
       </h6>
       <p className="text-sm">{description}</p>
       <button className="flex border border-black mr-auto px-2 py-1 rounded-3xl text-sm">
-        <Link href={cta.href}>
-          <a>{cta.title}</a>
+        <Link href={cta?.href ?? "/"}>
+          <a>{cta?.title}</a>
         </Link>
       </button>
     </div>
