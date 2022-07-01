@@ -17,6 +17,7 @@ const query = pageQuery(groq`
         location,
         price,
         time,
+        slug,
         category[]->,
         images[] {
         ...        

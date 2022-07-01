@@ -1,5 +1,6 @@
 import { SanityImage } from "sanity-react-extra";
 import { Category } from "./event.types";
+import { Slug } from "./global.types";
 
 export interface IPgrammeEvents {
   _id: string;
@@ -10,4 +11,5 @@ export interface IPgrammeEvents {
   price: string;
   title: string;
   time: string;
+  slug: Slug;
 }

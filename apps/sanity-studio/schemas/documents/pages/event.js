@@ -33,12 +33,33 @@ const Event = {
       ],
     },
     {
-      name: "location",
-      type: "string",
+      name: "venue",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: { type: "venue" },
+        },
+      ],
     },
     {
-      name: "date",
-      type: "string",
+      name: "startsAt",
+      description: "When does the event start?",
+      type: "date",
+      options: {
+        dateFormat: "YYYY-MM-DD",
+        calendarTodayLabel: "Today",
+      },
+    },
+
+    {
+      name: "endsAt",
+      description:
+        "When does the event end?\n PS: keep this empty if the event is only a day long",
+      type: "date",
+      options: {
+        dateFormat: "YYYY-MM-DD",
+      },
     },
     {
       name: "time",

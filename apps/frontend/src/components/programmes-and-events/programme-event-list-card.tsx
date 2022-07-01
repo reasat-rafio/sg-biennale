@@ -11,6 +11,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/autoplay";
 import { SanityImg } from "sanity-react-extra";
 import { imageUrlBuilder } from "@utils/sanity";
+import Link from "next/link";
 
 interface ProgrammeEventListCardProps {
   data: IPgrammeEvents;
@@ -18,7 +19,7 @@ interface ProgrammeEventListCardProps {
 }
 
 export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
-  data: { category, date, images, location, price, title, time },
+  data: { category, date, images, location, price, title, time, slug },
   className,
 }) => {
   const timeLocationAndDate = [
@@ -70,7 +71,9 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
         </div>
         <div>
           <button className="px-4 py-1 bg-black text-white rounded-3xl">
-            Back
+            <Link href={`/programmes-event/${slug.current}`}>
+              <a>Book</a>
+            </Link>
           </button>
         </div>
       </div>
