@@ -35,6 +35,8 @@ export const getStaticProps: GetStaticProps = async (
 const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
+  console.log(page);
+
   return <Container>Events</Container>;
 };
 
