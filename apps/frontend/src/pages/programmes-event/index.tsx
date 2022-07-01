@@ -1,9 +1,13 @@
+import { ProgrammesEventList } from "@components/programmes-and-events/programmes-events-list";
 import { Container } from "@components/ui/container";
+import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import { pageQuery } from "@lib/query";
+import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
+import { useEffect } from "react";
 
 const query = pageQuery(groq`
     *[_type == "events"]{
@@ -12,6 +16,7 @@ const query = pageQuery(groq`
         date,
         location,
         price,
+        time,
         category[]->,
         images[] {
         ...        
@@ -35,9 +40,18 @@ export const getStaticProps: GetStaticProps = async (
 const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
-  console.log(page);
+  const { setAllProgrammesAndEvents, setVisualProgrammesAndEvents } =
+    useProgrammesAndEventsStore();
+  useEffect(() => {
+    setAllProgrammesAndEvents(page);
+    setVisualProgrammesAndEvents((page as IPgrammeEvents[]).slice(0, 8));
+  }, [page, setAllProgrammesAndEvents, setVisualProgrammesAndEvents]);
 
-  return <Container>Events</Container>;
+  return (
+    <Container>
+      <ProgrammesEventList />
+    </Container>
+  );
 };
 
 export default ProgrammesAndEvents;
