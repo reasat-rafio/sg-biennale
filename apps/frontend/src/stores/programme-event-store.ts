@@ -3,6 +3,8 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 
 interface IProgrammesAndEvents {
+  initialVisibleItems: number;
+  numOfItemsWillIncrease: number;
   allProgrammesAndEvents: IPgrammeEvents[];
   visualProgrammesAndEvents: IPgrammeEvents[];
   setAllProgrammesAndEvents: (data: IPgrammeEvents[]) => void;
@@ -11,6 +13,8 @@ interface IProgrammesAndEvents {
 
 const useProgrammesAndEventsStore = create(
   devtools<IProgrammesAndEvents>((set) => ({
+    initialVisibleItems: 8,
+    numOfItemsWillIncrease: 4,
     allProgrammesAndEvents: [],
     visualProgrammesAndEvents: [],
     setAllProgrammesAndEvents: (allProgrammesAndEvents) =>

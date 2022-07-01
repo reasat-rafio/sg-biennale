@@ -28,7 +28,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   ];
   return (
     <div className={clsx("h-[450px] border-t-2 border-black pt-4", className)}>
-      <div className="h-1/2">
+      <div className="h-1/2 mb-2">
         <Swiper
           className="h-full"
           modules={[Pagination, EffectFade, Autoplay]}
@@ -36,8 +36,8 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
           effect="fade"
           autoplay
           pagination={{ clickable: true }}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
+          //   onSlideChange={() => console.log("slide change")}
+          //   onSwiper={(swiper) => console.log(swiper)}
         >
           {images.map((img) => (
             <SwiperSlide key={img.asset}>

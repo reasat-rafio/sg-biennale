@@ -40,12 +40,23 @@ export const getStaticProps: GetStaticProps = async (
 const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
-  const { setAllProgrammesAndEvents, setVisualProgrammesAndEvents } =
-    useProgrammesAndEventsStore();
+  const {
+    initialVisibleItems,
+    setAllProgrammesAndEvents,
+    setVisualProgrammesAndEvents,
+  } = useProgrammesAndEventsStore();
+
   useEffect(() => {
     setAllProgrammesAndEvents(page);
-    setVisualProgrammesAndEvents((page as IPgrammeEvents[]).slice(0, 8));
-  }, [page, setAllProgrammesAndEvents, setVisualProgrammesAndEvents]);
+    setVisualProgrammesAndEvents(
+      (page as IPgrammeEvents[]).slice(0, initialVisibleItems)
+    );
+  }, [
+    page,
+    initialVisibleItems,
+    setAllProgrammesAndEvents,
+    setVisualProgrammesAndEvents,
+  ]);
 
   return (
     <Container>
