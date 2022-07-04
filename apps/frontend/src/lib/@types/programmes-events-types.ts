@@ -15,3 +15,15 @@ export interface IPgrammeEvents {
   eventEndTime: number;
   slug: Slug;
 }
+
+export interface AllCategoriesProps {
+  _id: string;
+  name: string;
+  slug: Slug;
+}
+
+export interface AllVenuesProps {
+  _id: string;
+  name: string;
+  slug: Slug;
+}
