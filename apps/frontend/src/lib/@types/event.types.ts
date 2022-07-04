@@ -9,10 +9,10 @@ export interface EventDetailProps {
   updatedAt: Date;
   category: Category[];
   description: any[];
-  eventEndDate?: Date;
-  eventEndTime: number;
   eventStartDate: Date;
+  eventEndDate?: Date;
   eventStartTime: number;
+  eventEndTime: number;
   images: SanityImage[];
   moreInfo?: IAccordion[];
   price: string;
@@ -29,10 +29,10 @@ export interface EventDescriptionProps {
   price: string;
   moreInfo?: IAccordion[];
   category: Category[];
-  eventEndDate?: Date;
-  eventEndTime: number;
   eventStartDate: Date;
+  eventEndDate?: Date;
   eventStartTime: number;
+  eventEndTime: number;
 }
 
 export interface Category {

@@ -13,14 +13,18 @@ const query = pageQuery(groq`
     *[_type == "events"]{
         _id,
         title,
-        date,
-        location,
+        eventStartDate,
+        eventEndDate,
+        venue[]->{
+          name,
+          slug
+        },
         price,
-        time,
+        eventStartTime,
+        eventEndTime,
         slug,
         category[]->,
         images[] {
-        ...        
         asset->{
           ...,
           metadata {

@@ -1,15 +1,17 @@
 import { SanityImage } from "sanity-react-extra";
-import { Category } from "./event.types";
+import { Category, Venue } from "./event.types";
 import { Slug } from "./global.types";
 
 export interface IPgrammeEvents {
   _id: string;
   category: Category[];
-  date: string;
   images: SanityImage[];
-  location: string;
+  venue: Venue[];
   price: string;
   title: string;
-  time: string;
+  eventStartDate: Date;
+  eventEndDate?: Date;
+  eventStartTime: number;
+  eventEndTime: number;
   slug: Slug;
 }

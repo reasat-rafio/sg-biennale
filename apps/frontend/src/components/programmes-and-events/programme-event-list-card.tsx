@@ -12,6 +12,7 @@ import "swiper/css/autoplay";
 import { SanityImg } from "sanity-react-extra";
 import { imageUrlBuilder } from "@utils/sanity";
 import Link from "next/link";
+import { convertDate, convertSecondsToAMPM } from "@lib/helpers";
 
 interface ProgrammeEventListCardProps {
   data: IPgrammeEvents;
@@ -19,13 +20,37 @@ interface ProgrammeEventListCardProps {
 }
 
 export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
-  data: { category, date, images, location, price, title, time, slug },
+  data: {
+    category,
+    eventEndDate,
+    eventStartDate,
+    images,
+    venue,
+    price,
+    title,
+    eventStartTime,
+    eventEndTime,
+    slug,
+  },
   className,
 }) => {
   const timeLocationAndDate = [
-    { icon: <Location className="h-4 w-4" />, title: location },
-    { icon: <Calender className="h-4 w-4" />, title: date },
-    { icon: <Clock className="h-4 w-4" />, title: time },
+    { icon: <Location className="h-4 w-4" />, title: "location" },
+    {
+      icon: <Calender className="h-4 w-4" />,
+      title: eventEndDate
+        ? ` ${convertDate(eventStartDate, false)} - ${convertDate(
+            eventEndDate
+          )}`
+        : `${convertDate(eventStartDate)}`,
+    },
+    {
+      icon: <Clock className="h-4 w-4" />,
+      title: `${convertSecondsToAMPM(
+        eventStartTime,
+        false
+      )} - ${convertSecondsToAMPM(eventEndTime, true)}`,
+    },
   ];
   return (
     <div className={clsx("h-[450px] border-t-2 border-black pt-4", className)}>
