@@ -1,3 +1,4 @@
+import { FilteringSection } from "@components/programmes-and-events/filter/filtering-section";
 import { ProgrammesEventList } from "@components/programmes-and-events/programmes-events-list";
 import { Container } from "@components/ui/container";
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
@@ -65,6 +66,10 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   return (
     <Container>
+      <header>
+        <h1 className="font-semibold text-3xl py-3">Programmes & Events</h1>
+      </header>
+      <FilteringSection />
       <ProgrammesEventList />
     </Container>
   );

@@ -25,7 +25,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     eventEndDate,
     eventStartDate,
     images,
-    venue,
+    // venue,
     price,
     title,
     eventStartTime,
