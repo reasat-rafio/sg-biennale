@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.5",
     "clsx": "^1.1.1",
     "google-map-react": "^2.1.10",
     "luxon": "^2.4.0",
