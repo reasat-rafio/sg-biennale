@@ -76,8 +76,8 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
         <div className="">
           <div className="flex space-x-2">
             <span className="flex-1">
-              {category.map(({ id, name }) => (
-                <span className="text-sm font-medium" key={id}>
+              {category.map(({ _id, name }) => (
+                <span className="text-sm font-medium" key={_id}>
                   {name}{" "}
                 </span>
               ))}

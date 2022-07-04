@@ -12,8 +12,8 @@ export const Header: React.FC<{
 }> = ({ category, title }) => {
   return (
     <header>
-      {category.map(({ id, name }, index) => (
-        <h4 className="font-normal" key={id}>
+      {category.map(({ _id, name }, index) => (
+        <h4 className="font-normal" key={_id}>
           {index !== 0 || index !== category.length - 1 ? `${name} ,` : name}
         </h4>
       ))}

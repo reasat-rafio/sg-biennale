@@ -12,9 +12,9 @@ interface IProgrammesAndEvents {
   allCategories: AllCategoriesProps[];
   allVenues: AllVenuesProps[];
   allProgrammesAndEvents: IPgrammeEvents[];
-  visualProgrammesAndEvents: IPgrammeEvents[];
+  onScreenProgrammesAndEvents: IPgrammeEvents[];
   setAllProgrammesAndEvents: (data: IPgrammeEvents[]) => void;
-  setVisualProgrammesAndEvents: (data: IPgrammeEvents[]) => void;
+  setOnScreenProgrammesAndEvents: (data: IPgrammeEvents[]) => void;
   setAllCategories: (data: AllCategoriesProps[]) => void;
   setAllVenues: (data: AllVenuesProps[]) => void;
 }
@@ -26,11 +26,11 @@ const useProgrammesAndEventsStore = create(
     allCategories: [],
     allVenues: [],
     allProgrammesAndEvents: [],
-    visualProgrammesAndEvents: [],
+    onScreenProgrammesAndEvents: [],
     setAllProgrammesAndEvents: (allProgrammesAndEvents) =>
       set((state) => ({ ...state, allProgrammesAndEvents })),
-    setVisualProgrammesAndEvents: (visualProgrammesAndEvents) =>
-      set((state) => ({ ...state, visualProgrammesAndEvents })),
+    setOnScreenProgrammesAndEvents: (onScreenProgrammesAndEvents) =>
+      set((state) => ({ ...state, onScreenProgrammesAndEvents })),
     setAllCategories: (allCategories) =>
       set((state) => ({
         ...state,

@@ -3,7 +3,7 @@ import { IAccordion, Slug } from "./global.types";
 
 export interface EventDetailProps {
   createdAt: Date;
-  id: string;
+  _id: string;
   rev: string;
   type: string;
   updatedAt: Date;
@@ -37,7 +37,7 @@ export interface EventDescriptionProps {
 
 export interface Category {
   createdAt: Date;
-  id: string;
+  _id: string;
   rev: string;
   type: string;
   updatedAt: Date;

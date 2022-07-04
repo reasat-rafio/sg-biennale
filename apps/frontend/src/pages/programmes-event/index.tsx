@@ -63,16 +63,17 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
   const {
     initialVisibleItems,
     setAllProgrammesAndEvents,
-    setVisualProgrammesAndEvents,
+    setOnScreenProgrammesAndEvents,
     setAllCategories,
     setAllVenues,
   } = useProgrammesAndEventsStore();
 
   useEffect(() => {
     setAllProgrammesAndEvents(events);
-    setVisualProgrammesAndEvents(
+    setOnScreenProgrammesAndEvents(
       (events as IPgrammeEvents[]).slice(0, initialVisibleItems)
     );
+    setOnScreenProgrammesAndEvents(events);
     setAllCategories(allCategories);
     setAllVenues(allVenues);
   }, [
@@ -81,7 +82,7 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
     allVenues,
     initialVisibleItems,
     setAllProgrammesAndEvents,
-    setVisualProgrammesAndEvents,
+    setOnScreenProgrammesAndEvents,
     setAllCategories,
     setAllVenues,
   ]);
