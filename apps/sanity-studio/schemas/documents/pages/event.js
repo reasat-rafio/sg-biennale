@@ -1,4 +1,5 @@
 import { FcCalendar } from "react-icons/fc";
+import TimeToSecondsField from "sanity-plugin-time-seconds";
 
 const Event = {
   title: "Event Details Page",
@@ -43,7 +44,7 @@ const Event = {
       ],
     },
     {
-      name: "startsAt",
+      name: "eventStartDate",
       description: "When does the event start?",
       type: "date",
       options: {
@@ -51,9 +52,8 @@ const Event = {
         calendarTodayLabel: "Today",
       },
     },
-
     {
-      name: "endsAt",
+      name: "eventEndDate",
       description:
         "When does the event end?\n PS: keep this empty if the event is only a day long",
       type: "date",
@@ -62,8 +62,24 @@ const Event = {
       },
     },
     {
-      name: "time",
-      type: "string",
+      name: "eventStartTime",
+      title: "Event Start Time",
+      type: "number",
+      inputComponent: TimeToSecondsField,
+      description: "Time in the podcast when ad should start",
+      options: {
+        placeholder: "Value in 00:00 format",
+      },
+    },
+    {
+      name: "eventEndTime",
+      title: "Event End Time",
+      type: "number",
+      inputComponent: TimeToSecondsField,
+      description: "Time in the podcast when ad should start",
+      options: {
+        placeholder: "Value in 00:00 format",
+      },
     },
     {
       name: "price",
@@ -83,7 +99,6 @@ const Event = {
   peview: {
     select: {
       title: "title",
-      //   subtitle: "location",
       media: "images.0",
     },
   },

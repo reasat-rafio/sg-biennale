@@ -2,7 +2,8 @@ import { ArrowNarrowLeft } from "@components/icons/arrow-narrow-left";
 import { Calender } from "@components/icons/calender";
 import { Clock } from "@components/icons/clock";
 import { Location } from "@components/icons/location";
-import { EventDescriptionProps } from "@lib/@types/event.types";
+import { EventDescriptionProps, Venue } from "@lib/@types/event.types";
+import { convertDate, convertSecondsToAMPM } from "@lib/helpers";
 import { PortableText } from "@utils/sanity";
 
 export const Header: React.FC<{
@@ -22,14 +23,35 @@ export const Header: React.FC<{
 };
 
 export const TimeLocationAndDate: React.FC<{
-  location: string;
-  date: string;
-  time: string;
-}> = ({ location, date, time }) => {
+  eventEndDate?: Date;
+  eventStartDate: Date;
+  eventEndTime: number;
+  eventStartTime: number;
+  venue: Venue[];
+}> = ({
+  eventEndTime,
+  eventStartTime,
+  eventStartDate,
+  // venue,
+  eventEndDate,
+}) => {
   const timeLocationAndDate = [
-    { icon: <Location className="h-4 w-4" />, title: location },
-    { icon: <Calender className="h-4 w-4" />, title: date },
-    { icon: <Clock className="h-4 w-4" />, title: time },
+    { icon: <Location className="h-4 w-4" />, title: "location" },
+    {
+      icon: <Calender className="h-4 w-4" />,
+      title: eventEndDate
+        ? ` ${convertDate(eventStartDate, false)} - ${convertDate(
+            eventEndDate
+          )}`
+        : `${convertDate(eventStartDate)}`,
+    },
+    {
+      icon: <Clock className="h-4 w-4" />,
+      title: `${convertSecondsToAMPM(
+        eventStartTime,
+        false
+      )} - ${convertSecondsToAMPM(eventEndTime, true)}`,
+    },
   ];
   return (
     <div>

@@ -8,27 +8,31 @@ export interface EventDetailProps {
   type: string;
   updatedAt: Date;
   category: Category[];
-  date: string;
   description: any[];
+  eventEndDate?: Date;
+  eventEndTime: number;
+  eventStartDate: Date;
+  eventStartTime: number;
   images: SanityImage[];
-  location: string;
   moreInfo?: IAccordion[];
   price: string;
   slug: Slug;
-  time: string;
   title: string;
+  venue: Venue[];
 }
 
 export interface EventDescriptionProps {
   className?: string;
-  time: string;
   title: string;
-  location: string;
+  venue: Venue[];
   description: any[];
-  date: string;
   price: string;
   moreInfo?: IAccordion[];
   category: Category[];
+  eventEndDate?: Date;
+  eventEndTime: number;
+  eventStartDate: Date;
+  eventStartTime: number;
 }
 
 export interface Category {
@@ -37,6 +41,11 @@ export interface Category {
   rev: string;
   type: string;
   updatedAt: Date;
+  name: string;
+  slug: Slug;
+}
+
+export interface Venue {
   name: string;
   slug: Slug;
 }

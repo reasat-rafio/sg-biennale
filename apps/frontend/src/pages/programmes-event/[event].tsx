@@ -1,6 +1,7 @@
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
 import { EventDescription } from "@components/event-details/event-description";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
+import { EventDetailProps } from "@lib/@types/event.types";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
@@ -16,6 +17,10 @@ const query = pageQuery(groq`
     *[_type == "events" && slug.current == $event][0]{
         ...,
         category[]->,
+        venue[]->{
+          name,
+          slug
+        },
         images[] {
         ...        
         asset->{
@@ -54,14 +59,16 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
   const {
     title,
     description,
-    date,
+    eventEndTime,
+    eventEndDate,
     price,
-    location,
-    time,
+    eventStartTime,
+    eventStartDate,
     moreInfo,
     category,
     images,
-  } = props.data.page;
+    venue,
+  }: EventDetailProps = props.data.page;
 
   return (
     <DetailsLayout
@@ -69,10 +76,12 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
         <EventDescription
           title={title}
           description={description}
-          date={date}
+          eventEndDate={eventEndDate}
+          eventEndTime={eventEndTime}
           price={price}
-          location={location}
-          time={time}
+          eventStartTime={eventStartTime}
+          eventStartDate={eventStartDate}
+          venue={venue}
           moreInfo={moreInfo}
           category={category}
         />

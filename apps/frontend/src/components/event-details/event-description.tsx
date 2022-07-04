@@ -13,9 +13,11 @@ export const EventDescription: React.FC<EventDescriptionProps> = ({
   className,
   category,
   title,
-  location,
-  time,
-  date,
+  eventEndTime,
+  eventStartDate,
+  eventStartTime,
+  venue,
+  eventEndDate,
   price,
   description,
   moreInfo,
@@ -26,7 +28,13 @@ export const EventDescription: React.FC<EventDescriptionProps> = ({
     >
       <GoBack href="/event" title="Back to Programmes & Events" />
       <Header category={category} title={title} />
-      <TimeLocationAndDate date={date} location={location} time={time} />
+      <TimeLocationAndDate
+        eventEndTime={eventEndTime}
+        eventStartDate={eventStartDate}
+        eventStartTime={eventStartTime}
+        eventEndDate={eventEndDate}
+        venue={venue}
+      />
       <PriceAndCTA price={price} />
       <Description description={description} />
       {moreInfo?.length && <Accordion moreInfo={moreInfo} />}

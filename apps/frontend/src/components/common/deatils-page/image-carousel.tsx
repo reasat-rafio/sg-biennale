@@ -35,9 +35,6 @@ export const DetailsPageImageCarousel: React.FC<ImageCarouselProps> = ({
   const totalAdditionalHeight = footerHeight + navbarHeight;
 
   const windowHeight = useWindowSize()?.width ?? 0;
-
-  console.log(activeSlide);
-
   return (
     <div className={clsx(className)}>
       <Swiper
