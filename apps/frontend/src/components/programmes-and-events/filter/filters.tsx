@@ -5,9 +5,11 @@ import { FilterByVenue } from "./filter-by-venue";
 
 interface FiltersProps {}
 
+export const filterHeaderStyles = "py-2 text-xl font-medium";
+
 export const Filters: React.FC<FiltersProps> = ({}) => {
   return (
-    <div className="grid grid-cols-12 gap-10">
+    <div className="grid grid-cols-12 gap-10 mb-10">
       <FilterByDate className="col-span-3" />
       <FilterByCategory className="col-span-6" />
       <FilterByVenue className="col-span-3" />

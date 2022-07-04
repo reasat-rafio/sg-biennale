@@ -1,11 +1,10 @@
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import clsx from "clsx";
+import { filterHeaderStyles } from "./filters";
 
 interface FilterByCategoryProps {
   className?: string;
 }
-
-export const filterHeaderStyles = "py-2 text-xl font-medium";
 
 export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
   className,
@@ -14,7 +13,7 @@ export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
 
   return (
     <div className={clsx(className)}>
-      <h6>Catagory</h6>
+      <h6 className={filterHeaderStyles}>Catagory</h6>
 
       <ul className="grid grid-cols-12 gap-2">
         {allCategories.map(({ _id, name, slug }) => (
