@@ -49,10 +49,10 @@ export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
     <div className={clsx(className)}>
       <h6 className={filterHeaderStyles}>Category</h6>
 
-      <ul className="grid grid-cols-12 gap-2">
+      <ul className="grid grid-cols-12 | gap-2">
         {allCategories.map(({ _id, name, slug }) => (
           <li
-            className="col-span-3 cursor-pointer"
+            className="col-span-3 | cursor-pointer"
             key={_id}
             onClick={() => onClickAction({ _id, name, slug })}
           >

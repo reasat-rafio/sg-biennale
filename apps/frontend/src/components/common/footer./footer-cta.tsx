@@ -11,25 +11,25 @@ export const FooterCta: React.FC<FooterCtaProps> = ({ menu }) => {
   const btnRef = useRef<HTMLButtonElement | null>(null);
 
   return (
-    <Container className="py-5 border-y-2 border-black flex items-center lg:flex-row flex-col ">
-      <div className="flex lg:space-x-4 space-x-2 flex-1 flex-wrap lg:justify-start justify-center font-medium ">
+    <Container className="flex items-center lg:flex-row flex-col | py-5 | border-y-2 border-black">
+      <div className="flex flex-1 flex-wrap lg:justify-start justify-center | lg:space-x-4 space-x-2 | font-medium ">
         {menu.map(({ _key, title, slug }) => (
           <Link key={_key} href={`/${slug.current}`}>
             <a>{title}</a>
           </Link>
         ))}
       </div>
-      <div className="">
-        <form className="lg:w-[600px] w-auto flex relative rounded-3xl border-2 border-black py-1">
+      <div>
+        <form className="relative lg:w-[600px] w-auto | flex |  py-1 | border-2 border-black | rounded-3xl">
           <input
-            className="flex-1 bg-transparent outline-none pl-3"
+            className="flex-1 | pl-3 | bg-transparent outline-none"
             placeholder="Email"
             type="text"
             style={{ marginRight: `${btnRef.current?.clientWidth! + 10}px` }}
           />
           <button
             ref={btnRef}
-            className="absolute right-0 top-0 rounded-3xl border-l-2 border-black px-4 h-full text-lg"
+            className="absolute right-0 top-0 h-full | px-4 | text-lg | border-l-2 border-black | rounded-3xl"
           >
             Subscribe
           </button>

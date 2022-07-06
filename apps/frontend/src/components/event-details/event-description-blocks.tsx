@@ -56,7 +56,7 @@ export const TimeLocationAndDate: React.FC<{
   return (
     <div>
       {timeLocationAndDate.map(({ icon, title }) => (
-        <div className="flex space-x-2 items-center text-lg" key={title}>
+        <div className="flex items-center | space-x-2 | text-lg" key={title}>
           {icon}
           <span>{title}</span>
         </div>
@@ -67,9 +67,9 @@ export const TimeLocationAndDate: React.FC<{
 
 export const PriceAndCTA: React.FC<{ price: string }> = ({ price }) => {
   return (
-    <div className="text-xl flex">
+    <div className="flex | text-xl">
       <span className="flex-1">S${price}</span>
-      <button className="bg-black px-5 py-1 text-white rounded-3xl">
+      <button className="px-5 py-1 | bg-black text-white | rounded-3xl">
         Back
       </button>
     </div>

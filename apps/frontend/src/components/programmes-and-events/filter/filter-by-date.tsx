@@ -10,7 +10,7 @@ export const FilterByDate: React.FC<FilterByDateProps> = ({ className }) => {
     <div className={clsx(className)}>
       <h6 className={filterHeaderStyles}>Dates</h6>
 
-      <ul className="flex gap-2 flex-wrap justify-between">
+      <ul className="flex flex-wrap justify-between | gap-2">
         <li className=" ">
           <input type="radio" name="Today" /> <span>Today</span>
         </li>

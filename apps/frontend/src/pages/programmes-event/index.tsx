@@ -1,5 +1,5 @@
 import { FilteringSection } from "@components/programmes-and-events/filter/filtering-section";
-import { FilteringWrapper } from "@components/programmes-and-events/filter/filtering-wrapper";
+import { FilteringLogic } from "@components/programmes-and-events/filter/filtering-logic";
 import { ProgrammesEventList } from "@components/programmes-and-events/programmes-events-list";
 import { Container } from "@components/ui/container";
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
@@ -90,13 +90,13 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   return (
     <Container>
-      <FilteringWrapper>
+      <FilteringLogic>
         <header>
-          <h1 className="font-semibold text-3xl py-3">Programmes & Events</h1>
+          <h1 className="py-3 | font-semibold text-3xl">Programmes & Events</h1>
         </header>
         <FilteringSection />
         <ProgrammesEventList />
-      </FilteringWrapper>
+      </FilteringLogic>
     </Container>
   );
 };

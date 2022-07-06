@@ -12,12 +12,12 @@ export const MoreInfoBlock: React.FC<MoreInfoBlockProps> = ({
   className,
 }) => {
   return (
-    <div className={clsx(className, "flex flex-col space-y-5")}>
-      <h6 className="text-lg font-medium border-t-2 border-black mr-auto py-1">
+    <div className={clsx(className, "flex flex-col | space-y-5")}>
+      <h6 className="text-lg font-medium | mr-auto py-1 | border-t-2 border-black">
         {title}
       </h6>
       <p className="text-sm">{description}</p>
-      <button className="flex border border-black mr-auto px-2 py-1 rounded-3xl text-sm">
+      <button className="flex | border border-black | mr-auto px-2 py-1 | text-sm | rounded-3xl">
         <Link href={cta?.href ?? "/"}>
           <a>{cta?.title}</a>
         </Link>

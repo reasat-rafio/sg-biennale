@@ -13,7 +13,7 @@ export const Container: React.FC<ContainerProps> = ({
   id,
 }) => {
   return (
-    <div id={id} className={clsx("max-w-[1920px] lg:px-14 px-6", className)}>
+    <div id={id} className={clsx("max-w-[1920px] | lg:px-14 px-6", className)}>
       {children}
     </div>
   );

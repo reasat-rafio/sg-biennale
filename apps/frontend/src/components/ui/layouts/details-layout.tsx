@@ -24,7 +24,7 @@ export const DetailsLayout: React.FC<DetailsLayoutProps> = ({
             : `100%`,
       }}
     >
-      <div className="xl:col-span-6 md:col-span-5 col-span-12 overflow-y-auto">
+      <div className="xl:col-span-6 md:col-span-5 col-span-12 | overflow-y-auto">
         {DescriptionBlock}
       </div>
       <div className="xl:col-span-6 md:col-span-7 col-span-12">

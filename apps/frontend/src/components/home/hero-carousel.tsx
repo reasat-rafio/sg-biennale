@@ -35,9 +35,9 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
             builder={imageUrlBuilder}
             alt={title}
           />
-          <div className="absolute h-full w-full flex flex-col justify-center items-center space-y-8">
+          <div className="absolute h-full w-full | flex flex-col justify-center items-center | space-y-8">
             <h3 className="text-5xl font-semibold text-white">{title}</h3>
-            <p className="text-xl text-gray-300 max-w-sm text-center">
+            <p className="max-w-sm text-center | text-xl text-gray-300">
               {description}
             </p>
           </div>

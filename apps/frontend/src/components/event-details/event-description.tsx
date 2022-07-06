@@ -23,7 +23,10 @@ export const EventDescription: React.FC<EventDescriptionProps> = ({
 }) => {
   return (
     <div
-      className={clsx("p-5 flex flex-col space-y-7 overflow-y-auto", className)}
+      className={clsx(
+        className,
+        "flex flex-col | space-y-7 p-5 | overflow-y-auto"
+      )}
     >
       <Header category={category} title={title} />
       <TimeLocationAndDate

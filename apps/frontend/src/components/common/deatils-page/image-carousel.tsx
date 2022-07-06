@@ -44,7 +44,6 @@ export const DetailsPageImageCarousel: React.FC<ImageCarouselProps> = ({
               ? `calc(130vh - ${totalAdditionalHeight}px)`
               : `50vh`,
         }}
-        className=""
         modules={[Navigation, Pagination, A11y, Autoplay, Mousewheel]}
         autoplay
         direction="vertical"
@@ -62,7 +61,7 @@ export const DetailsPageImageCarousel: React.FC<ImageCarouselProps> = ({
         {images.map((img) => (
           <SwiperSlide key={img.key}>
             <SanityImg
-              className="h-full w-full object-cover"
+              className="h-full w-full | object-cover"
               image={img}
               width={800}
               builder={imageUrlBuilder}

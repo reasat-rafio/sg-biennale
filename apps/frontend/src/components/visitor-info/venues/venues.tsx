@@ -22,7 +22,7 @@ export const Venues: React.FC<VenuesProps> = ({
   return (
     <section className="py-10">
       <header className="flex">
-        <h3 className="text-lg font-medium flex-1">{title}</h3>
+        <h3 className="flex-1 | text-lg font-medium ">{title}</h3>
         <div className="flex space-x-2 items-center">
           <SanityImg
             width={18}
@@ -34,7 +34,7 @@ export const Venues: React.FC<VenuesProps> = ({
         </div>
       </header>
 
-      <div className="grid grid-cols-12 lg:gap-10 gap-3">
+      <div className="grid grid-cols-12 | lg:gap-10 gap-3">
         {venues.map((vanue) => (
           <VenueCard
             className="lg:col-span-6 col-span-12"
@@ -44,7 +44,7 @@ export const Venues: React.FC<VenuesProps> = ({
         ))}
       </div>
 
-      <div className="lg:h-[90vh] h-[45vh] py-10">
+      <div className="lg:h-[90vh] h-[45vh] | py-10">
         <GoogleMapReact
           bootstrapURLKeys={{
             key: "",
@@ -57,7 +57,7 @@ export const Venues: React.FC<VenuesProps> = ({
         />
       </div>
 
-      <div className="grid grid-cols-12 xl:gap-x-24 xl:gap-y-16 gap-5">
+      <div className="grid grid-cols-12 | xl:gap-x-24 xl:gap-y-16 gap-5">
         {additionalInfo.map((data) => (
           <MoreInfoBlock
             className="lg:col-span-6 col-span-12"

@@ -16,15 +16,15 @@ export const Accordion: React.FC<{
   };
   return (
     <div className="">
-      {moreInfo?.map(({ key, title, description }, index) => (
+      {moreInfo?.map(({ _key, title, description }, index) => (
         <div
-          className="flex flex-col space-y-2 border-t border-black py-2"
+          className="flex flex-col | space-y-2 py-2 | border-t border-black"
           onClick={() => {
             toggleAccordion(index);
           }}
-          key={key}
+          key={_key}
         >
-          <div className="text-sm font-medium flex items-center">
+          <div className="flex items-center | text-sm font-medium">
             <h6 className="flex-1">{title}</h6>
             <ChevronArrow
               className={clsx(

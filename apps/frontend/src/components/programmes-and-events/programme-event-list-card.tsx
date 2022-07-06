@@ -53,7 +53,9 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     },
   ];
   return (
-    <div className={clsx("h-[450px] border-t-2 border-black pt-4", className)}>
+    <div
+      className={clsx("h-[450px] | pt-4 | border-t-2 border-black", className)}
+    >
       <div className="h-1/2 mb-2">
         <Swiper
           className="h-full"
@@ -86,14 +88,17 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
         </div>
         <div>
           {timeLocationAndDate.map(({ icon, title }) => (
-            <div className="flex space-x-2 items-center text-lg" key={title}>
+            <div
+              className="flex items-center | space-x-2 | text-lg"
+              key={title}
+            >
               {icon}
               <span>{title}</span>
             </div>
           ))}
         </div>
         <div>
-          <button className="px-4 py-1 bg-black text-white rounded-3xl">
+          <button className="px-4 py-1 | bg-black text-white | rounded-3xl">
             <Link href={`/programmes-event/${slug.current}`}>
               <a>Book</a>
             </Link>

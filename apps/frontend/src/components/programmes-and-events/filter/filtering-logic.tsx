@@ -2,7 +2,7 @@ import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useRef, useState } from "react";
 
-interface FilteringWrapperProps {
+interface FilteringLogicProps {
   children: ReactNode;
 }
 
@@ -11,9 +11,7 @@ const checkerForTheIntendedQuery = (filteringKeys: string[]) => {
   return filteringKeys.includes("category") || filteringKeys.includes("veneue");
 };
 
-export const FilteringWrapper: React.FC<FilteringWrapperProps> = ({
-  children,
-}) => {
+export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
   const router = useRouter();
 
   const { allProgrammesAndEvents, setOnScreenProgrammesAndEvents } =

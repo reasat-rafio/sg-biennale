@@ -10,7 +10,7 @@ export const FilteringSection: React.FC<FilteringSectionProps> = ({}) => {
   return (
     <section>
       <div
-        className="py-2 border-black border-t flex w-min"
+        className="flex w-min | py-2 | border-black border-t "
         onClick={() => setShowFilters((prev) => !prev)}
       >
         <h6 className="flex-1">Filter</h6>

@@ -18,7 +18,10 @@ export const ArtistDescription: React.FC<ArtistDescriptionProps> = ({
 }) => {
   return (
     <div
-      className={clsx(className, "p-5 flex flex-col space-y-7 overflow-y-auto")}
+      className={clsx(
+        className,
+        "flex flex-col | p-5 space-y-7 | overflow-y-auto"
+      )}
     >
       <Header name={name} />
       <Description description={description} />

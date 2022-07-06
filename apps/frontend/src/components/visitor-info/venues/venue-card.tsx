@@ -25,10 +25,10 @@ export const VenueCard: React.FC<VenueCardProps> = ({
   };
 
   return (
-    <div className={clsx("py-5 h-min flex flex-col space-y-3", className)}>
+    <div className={clsx("h-min | flex flex-col | py-5 space-y-3", className)}>
       <div className="md:h-[400px] h-auto">
         <SanityImg
-          className="w-full h-full object-cover"
+          className="w-full h-full | object-cover"
           width={500}
           image={image}
           builder={imageUrlBuilder}
@@ -36,7 +36,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
         />
       </div>
       <div className="flex">
-        <h6 className="text-lg font-semibold flex-1 items-center">{name}</h6>
+        <h6 className="flex-1 items-center | text-lg font-semibold">{name}</h6>
         {icon && (
           <SanityImg
             height={20}
@@ -46,30 +46,30 @@ export const VenueCard: React.FC<VenueCardProps> = ({
           />
         )}
       </div>
-      <div className="flex flex-col space-y-1">
-        <div className="flex space-x-2 items-center">
+      <div className="flex flex-col | space-y-1">
+        <div className="flex items-center | space-x-2">
           <Location className="h-5 w-5" />
           <span>{location}</span>
         </div>
-        <div className="flex space-x-2 items-center">
+        <div className="flex space-x-2 | items-center">
           <Clock className="h-5 w-5" />
           <span>{timeAndDate}</span>
         </div>
       </div>
 
-      <div className="text-sm cursor-pointer">
+      <div className="text-sm | cursor-pointer">
         {faqs.map(({ key, answers, question, cta }, index) => (
           <div key={key} onClick={() => toggleAccordion(index)}>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center | space-x-2">
               <span>{question}</span>
               <ChevronArrow className="h-5 w-5" />
             </div>
             {index === activeFAQIndex && (
-              <div className="py-3 flex flex-col space-y-2">
+              <div className="flex flex-col | py-3 space-y-2">
                 <div className="grid grid-cols-12">
                   {answers.map(({ key, icon, description }) => (
                     <div
-                      className="flex space-x-2 lg:col-span-6 col-span-12"
+                      className="flex lg:col-span-6 col-span-12 | space-x-2"
                       key={key}
                     >
                       <SanityImg
@@ -83,7 +83,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                   ))}
                 </div>
                 {cta && (
-                  <button className="px-3 py-1 border border-black rounded-3xl mr-auto">
+                  <button className="mr-auto | px-3 py-1 | border border-black | rounded-3xl ">
                     <Link href={cta?.href ?? "/"}>
                       <a>{cta.title}</a>
                     </Link>

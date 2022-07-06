@@ -1,6 +1,6 @@
 import { Hero } from "@components/home/hero";
 import { Organisations } from "@components/home/organisations";
-import { pageQuery, siteQuery } from "@lib/query";
+import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";

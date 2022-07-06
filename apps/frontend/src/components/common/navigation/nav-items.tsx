@@ -11,8 +11,8 @@ interface NavItemsProps {
 
 export const NavItems: React.FC<NavItemsProps> = ({ menu, heightlights }) => {
   return (
-    <Container className="py-5 border-y-2 border-black font-medium text-lg flex items-center md:flex-row flex-col space-y-2 lg:space-y-0">
-      <div className="flex lg:space-x-4 space-x-2 flex-1 flex-wrap lg:justify-start justify-center">
+    <Container className="flex items-center md:flex-row flex-col | py-5 space-y-2 lg:space-y-0 | text-lg font-medium | border-black border-y-2">
+      <div className="flex flex-1 flex-wrap lg:justify-start justify-center | lg:space-x-4 space-x-2">
         {menu.map(({ _key, title, slug }) => (
           <Link href={`/${slug.current}`} key={_key}>
             <a>{title}</a>
@@ -20,10 +20,10 @@ export const NavItems: React.FC<NavItemsProps> = ({ menu, heightlights }) => {
         ))}
       </div>
 
-      <div className="flex lg:space-x-4 space-x-1 space-y-1 lg:space-y-0 flex-wrap items-center justify-center">
+      <div className="flex flex-wrap items-center justify-center | lg:space-x-4 space-x-1 space-y-1 lg:space-y-0">
         {heightlights.map(({ _key, icon, title }) => (
           <button
-            className="border border-black rounded-3xl lg:px-4 lg:py-1 py-2 flex space-x-2 items-center lg:flex-row flex-col"
+            className="flex space-x-2 items-center lg:flex-row flex-col | lg:px-4 lg:py-1 py-2 | border border-black | rounded-3xl "
             key={_key}
           >
             <SanityImg

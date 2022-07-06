@@ -14,9 +14,9 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   return (
     <header className="flex">
-      <h1 className="text-2xl font-semibold flex-1">{header}</h1>
+      <h1 className="flex-1 | text-2xl font-semibold">{header}</h1>
       <div
-        className="flex space-x-2 items-center py-2 border-t-2 border-black cursor-pointer"
+        className="flex items-center | space-x-2 py-2 | border-t-2 border-black | cursor-pointer"
         onClick={() => {
           if (typeof window !== "undefined") window.open(asset.url);
         }}
