@@ -6,7 +6,7 @@ export interface ISite {
 
 export interface Site {
   createdAt: Date;
-  id: string;
+  _id: string;
   rev: string;
   type: string;
   updatedAt: Date;
@@ -25,7 +25,7 @@ export interface Footer {
 }
 
 export interface Social {
-  key: string;
+  _key: string;
   type: string;
   socialType: string;
   url: string;
@@ -34,11 +34,20 @@ export interface Social {
 export interface Navigations {
   type: string;
   menu: Menu[];
+  heightlights: Heightlight[];
+}
+
+export interface Heightlight {
+  _key: string;
+  _type: string;
+  slug: Slug;
+  title: string;
+  icon: SanityImage;
 }
 
 export interface Menu {
-  key: string;
-  type: string;
+  _key: string;
+  _type: string;
   slug: Slug;
   title: string;
 }
@@ -49,7 +58,7 @@ export interface Slug {
 }
 
 export interface IAccordion {
-  key: string;
+  _key: string;
   type: string;
   description: string;
   title: string;

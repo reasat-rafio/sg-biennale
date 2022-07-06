@@ -22,7 +22,7 @@ const Site = {
         accept: "image/png, image/jpeg, image/webp",
       },
     },
-    { name: "date", type: "string" },
+    { name: "date", type: "text" },
     {
       name: "navigations",
       type: "menu",

@@ -11,7 +11,7 @@ const MenuItems = {
       name: "slug",
       type: "slug",
       options: {
-        source: (doc) => doc.title,
+        source: (_, options) => options.parent.title,
       },
     },
   ],

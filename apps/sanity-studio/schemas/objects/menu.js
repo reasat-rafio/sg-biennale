@@ -8,9 +8,30 @@ const Menu = {
   fields: [
     {
       name: "menu",
-      title: "Menu",
       type: "array",
       of: [{ type: "menuItem" }],
+    },
+
+    {
+      name: "heightlights",
+      type: "array",
+      of: [
+        {
+          name: "heightlight",
+          type: "object",
+          fields: [
+            { name: "title", type: "string" },
+            {
+              name: "slug",
+              type: "slug",
+              options: {
+                source: (_, options) => options.parent.title,
+              },
+            },
+            { name: "icon", type: "image" },
+          ],
+        },
+      ],
     },
   ],
 };
