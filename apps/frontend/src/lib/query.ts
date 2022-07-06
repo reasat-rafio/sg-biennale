@@ -15,7 +15,10 @@ export const siteQuery = groq`{
       },
       footer {
         ...,
-        socialButtons[] ->
+        socialButtons[] ->{
+          ...,
+          "icon": ${withDimensions("icon")},
+        }
       }
     },
   }`;

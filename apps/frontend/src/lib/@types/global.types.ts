@@ -27,8 +27,8 @@ export interface Footer {
 export interface Social {
   _key: string;
   type: string;
-  socialType: string;
   url: string;
+  icon: SanityImage;
 }
 
 export interface Navigations {

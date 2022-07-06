@@ -16,6 +16,11 @@ const Footer = {
       type: "text",
     },
     {
+      name: "menu",
+      type: "array",
+      of: [{ type: "menuItem" }],
+    },
+    {
       name: "socials",
       type: "array",
       of: [{ type: "social" }],
