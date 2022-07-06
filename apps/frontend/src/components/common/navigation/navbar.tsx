@@ -1,6 +1,7 @@
 import { Container } from "@components/ui/container";
 import { ISite } from "@lib/@types/global.types";
 import { imageUrlBuilder } from "@utils/sanity";
+import Link from "next/link";
 import { SanityImg } from "sanity-react-extra";
 
 export const Navbar: React.FC<ISite["site"]> = ({
@@ -28,11 +29,13 @@ export const Navbar: React.FC<ISite["site"]> = ({
         </div>
       </Container>
       <Container className="py-5 border-y-2 border-black font-medium text-lg flex items-center md:flex-row flex-col space-y-2 lg:space-y-0">
-        <ul className="flex lg:space-x-4 space-x-2 flex-1 flex-wrap lg:justify-start justify-center">
-          {menu.map(({ _key, title }) => (
-            <li key={_key}>{title}</li>
+        <div className="flex lg:space-x-4 space-x-2 flex-1 flex-wrap lg:justify-start justify-center">
+          {menu.map(({ _key, title, slug }) => (
+            <Link href={`/${slug.current}`} key={_key}>
+              <a>{title}</a>
+            </Link>
           ))}
-        </ul>
+        </div>
 
         <div className="flex lg:space-x-4 space-x-1 space-y-1 lg:space-y-0 flex-wrap items-center justify-center">
           {heightlights.map(({ _key, icon, title }) => (

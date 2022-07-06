@@ -21,6 +21,7 @@ export interface Footer {
   type: string;
   address: string;
   copyRight: string;
+  menu: Menu[];
   socials: Social[];
 }
 
