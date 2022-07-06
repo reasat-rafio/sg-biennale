@@ -41,7 +41,7 @@ export const DetailsPageImageCarousel: React.FC<ImageCarouselProps> = ({
         style={{
           height:
             windowHeight >= 768
-              ? `calc(100vh - ${totalAdditionalHeight}px)`
+              ? `calc(130vh - ${totalAdditionalHeight}px)`
               : `50vh`,
         }}
         className=""

@@ -20,14 +20,14 @@ export const DetailsLayout: React.FC<DetailsLayoutProps> = ({
       style={{
         height:
           windowHeight >= 768
-            ? `calc(100vh - ${totalAdditionalHeight}px)`
+            ? `calc(130vh - ${totalAdditionalHeight}px)`
             : `100%`,
       }}
     >
-      <div className="xl:col-span-4 md:col-span-5 col-span-12 overflow-y-auto">
+      <div className="xl:col-span-6 md:col-span-5 col-span-12 overflow-y-auto">
         {DescriptionBlock}
       </div>
-      <div className="xl:col-span-8 md:col-span-7 col-span-12">
+      <div className="xl:col-span-6 md:col-span-7 col-span-12">
         {CarouselBlock}
       </div>
     </div>
