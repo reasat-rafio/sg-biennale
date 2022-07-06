@@ -22,34 +22,43 @@ export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
   const onClickAction = (_category: AllCategoriesProps) => {
     setSelectedCategory(_category._id);
 
-    // ❓ comparing the selected category with the allEvents and setting the filtered events to display
-    const filterdEvents = allProgrammesAndEvents.filter(({ category }) => {
-      const [matchedEvent] = category.filter(
-        ({ _id }) => _id === _category._id
-      );
-      return matchedEvent;
-    });
+    // setFilters({ ...,category: });
 
-    setOnScreenProgrammesAndEvents(filterdEvents);
+    // ❓ comparing the selected category with the allEvents and setting the filtered events to display
+    // const filterdEvents = allProgrammesAndEvents.filter(({ category }) => {
+    //   const [matchedEvent] = category.filter(
+    //     ({ _id }) => _id === _category._id
+    //   );
+    //   return matchedEvent;
+    // });
+
+    // setOnScreenProgrammesAndEvents(filterdEvents);
 
     // ✅ setting the filter query
-    router.push({ query: { category: _category?.slug.current } }, undefined, {
-      shallow: true,
-    });
+    router.push(
+      { query: { ...router.query, category: _category?.slug.current } },
+      undefined,
+      {
+        shallow: true,
+      }
+    );
   };
 
-  /* ❓ Getting the query from the url and setting them to the state */
-  useEffect(() => {
-    /* 🚩 Flag to check if the category query present  */
-    const selectedCategoryFromUrlQuery = router.query.category;
-    if (selectedCategoryFromUrlQuery) {
-      /* ❓Filtering out the events from allCategories */
-      const [findThecategory] = allCategories.filter(
-        ({ slug }) => slug.current === selectedCategoryFromUrlQuery
-      );
-      setSelectedCategory(findThecategory?._id);
-    }
-  }, [router, allCategories]);
+  /* 
+  ❓Getting the query from the url and setting them to the state 
+  @REASON: This stop the state to reset after refresh
+  */
+  // useEffect(() => {
+  //   /* 🚩 Flag to check if the category query present  */
+  //   const selectedCategoryFromUrlQuery = router.query.category;
+  //   if (selectedCategoryFromUrlQuery) {
+  //     /* ❓Filtering out the events from allCategories */
+  //     const [findThecategory] = allCategories.filter(
+  //       ({ slug }) => slug.current === selectedCategoryFromUrlQuery
+  //     );
+  //     setSelectedCategory(findThecategory?._id);
+  //   }
+  // }, [router, allCategories]);
 
   return (
     <div className={clsx(className)}>

@@ -6,6 +6,12 @@ import {
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
+interface IFilters {
+  venue: string;
+  category: string;
+  date: string;
+}
+
 interface IProgrammesAndEvents {
   initialVisibleItems: number;
   numOfItemsWillIncrease: number;

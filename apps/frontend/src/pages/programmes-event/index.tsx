@@ -1,4 +1,5 @@
 import { FilteringSection } from "@components/programmes-and-events/filter/filtering-section";
+import { FilteringWrapper } from "@components/programmes-and-events/filter/filtering-wrapper";
 import { ProgrammesEventList } from "@components/programmes-and-events/programmes-events-list";
 import { Container } from "@components/ui/container";
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
@@ -70,10 +71,10 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   useEffect(() => {
     setAllProgrammesAndEvents(events);
-    setOnScreenProgrammesAndEvents(
-      (events as IPgrammeEvents[]).slice(0, initialVisibleItems)
-    );
     setOnScreenProgrammesAndEvents(events);
+    // setOnScreenProgrammesAndEvents(
+    //   (events as IPgrammeEvents[]).slice(0, initialVisibleItems)
+    // );
     setAllCategories(allCategories);
     setAllVenues(allVenues);
   }, [
@@ -89,11 +90,13 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   return (
     <Container>
-      <header>
-        <h1 className="font-semibold text-3xl py-3">Programmes & Events</h1>
-      </header>
-      <FilteringSection />
-      <ProgrammesEventList />
+      <FilteringWrapper>
+        <header>
+          <h1 className="font-semibold text-3xl py-3">Programmes & Events</h1>
+        </header>
+        <FilteringSection />
+        <ProgrammesEventList />
+      </FilteringWrapper>
     </Container>
   );
 };

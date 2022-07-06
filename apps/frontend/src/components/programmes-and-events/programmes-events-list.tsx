@@ -4,7 +4,7 @@ import { makeDuplicateArray } from "@lib/helpers";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import { ProgrammeEventListCard } from "./programme-event-list-card";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 interface ProgrammesEventListProps {}
@@ -25,52 +25,26 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({}) => {
     IPgrammeEvents[]
   >(onScreenProgrammesAndEvents);
 
-  useEffect(() => {
-    /* 🚩 Flag to check if the category query present  */
-    const selectedCategoryFromUrlQuery = router.query.category;
+  // useEffect(() => {
+  //   /* 🚩 Flag to check if the category query present  */
+  //   const selectedCategoryFromUrlQuery = router.query.category;
 
-    if (selectedCategoryFromUrlQuery) {
-      /* ❓ Filtering with the selected category from all events and settig  */
-      const filterdEvents = allProgrammesAndEvents.filter(({ category }) => {
-        const [matchedEvent] = category.filter(
-          ({ slug: { current } }) => current === selectedCategoryFromUrlQuery
-        );
-        return matchedEvent;
-      });
-
-      /* ✅ setting the filter events to display */
-      setOnScreenProgrammesAndEvents(filterdEvents);
-    }
-  }, [router, allProgrammesAndEvents, setOnScreenProgrammesAndEvents]);
-
-  // const matchedItems = duplicateVisualProgrammesAndEvents.filter((o1) =>
-  //   duplicateAllProgrammesAndEvents.some((o2) => o1._id === o2._id)
+  //   if (selectedCategoryFromUrlQuery) {
+  //     /* ❓ Filtering with the selected category from all events and settig  */
+  //     const filterdEvents = allProgrammesAndEvents.filter(({ category }) => {
+  // const [matchedEvent] = category.filter(
+  //   ({ slug: { current } }) => current === selectedCategoryFromUrlQuery
   // );
+  //       return matchedEvent;
+  //     });
 
-  const viewMoreAction = () => {
-    // const nextChunkOfItems = [
-    //   ...matchedItems.splice(
-    //     onScreenProgrammesAndEvents.length,
-    //     numOfItemsWillIncrease
-    //   ),
-    // ];
-    // const newVisualPgrmsAndEvnts = [
-    //   ...onScreenProgrammesAndEvents,
-    //   ...nextChunkOfItems,
-    // ];
-    // setOnScreenProgrammesAndEvents(newVisualPgrmsAndEvnts);
-  };
+  //     /* ✅ setting the filter events to display */
+  //     setOnScreenProgrammesAndEvents(filterdEvents);
+  //   }
+  // }, [router, allProgrammesAndEvents, setOnScreenProgrammesAndEvents]);
 
-  const viewLessAction = () => {
-    const newVisualPgrmsAndEvnts = onScreenProgrammesAndEvents.slice(
-      0,
-      initialVisibleItems
-    );
-    setOnScreenProgrammesAndEvents(newVisualPgrmsAndEvnts);
-  };
-
-  /* 🚩 Flag for show more and less event */
-  // let showMore = onScreenProgrammesAndEvents < matchedItems;
+  const viewMoreAction = () => {};
+  const viewLessAction = () => {};
 
   return (
     <div>
@@ -88,17 +62,9 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({}) => {
       </div>
 
       <div className="flex justify-center items-center my-5">
-        <button
-          className="flex space-x-2 items-center"
-          // onClick={showMore ? viewMoreAction : viewLessAction}
-          // onClick={viewMoreAction}
-        >
-          {/* <span>View {showMore ? "More" : "Less"} </span> */}
+        <button className="flex space-x-2 items-center">
           <span>View More </span>
-          <ChevronArrow
-            // className={clsx("h-6 w-6", !showMore && "rotate-180")}
-            className={clsx("h-6 w-6", "rotate-180")}
-          />
+          <ChevronArrow className={clsx("h-6 w-6", "rotate-180")} />
         </button>
       </div>
     </div>
