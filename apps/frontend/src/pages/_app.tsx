@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Navbar } from "@components/common/navigation/navbar";
-import { Footer } from "@components/common/footer";
+import { Footer } from "@components/common/footer./footer";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useWindowSize } from "@lib/hooks";
