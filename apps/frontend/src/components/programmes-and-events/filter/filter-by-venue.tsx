@@ -2,7 +2,7 @@ import { AllVenuesProps } from "@lib/@types/programmes-events-types";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { filterHeaderStyles } from "./filters";
 
 interface FilterByVenueProps {
@@ -19,7 +19,6 @@ export const FilterByVenue: React.FC<FilterByVenueProps> = ({ className }) => {
     const [findSelectedVenue] = allVenues.filter(
       (vanue) => vanue.slug.current === e.target.value
     );
-
     router.push(
       { query: { ...router.query, venue: findSelectedVenue.slug.current } },
       undefined,
@@ -29,6 +28,23 @@ export const FilterByVenue: React.FC<FilterByVenueProps> = ({ className }) => {
     );
     setSelectedVenue(findSelectedVenue.slug.current);
   };
+
+  /*
+  ❓Getting the query from the url and setting them to the state
+  @REASON: This stop the state to reset after refresh
+  */
+  useEffect(() => {
+    /* 🚩 Flag to check if the category query present  */
+    const selectedVenueFromUrlQuery = router.query.venue;
+
+    if (selectedVenueFromUrlQuery) {
+      /* ❓Filtering out the events from allCategories */
+      const [matchedVanue] = allVenues.filter(
+        ({ slug }) => slug.current === selectedVenueFromUrlQuery
+      );
+      setSelectedVenue(matchedVanue.slug.current);
+    }
+  }, [router, allVenues]);
 
   return (
     <div className={clsx(className)}>

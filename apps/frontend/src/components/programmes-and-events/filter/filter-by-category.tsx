@@ -13,27 +13,12 @@ export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
   className,
 }) => {
   const router = useRouter();
-  const { allProgrammesAndEvents, setOnScreenProgrammesAndEvents } =
-    useProgrammesAndEventsStore();
 
   const { allCategories } = useProgrammesAndEventsStore();
   const [selectedCategory, setSelectedCategory] = useState<null | string>(null);
 
   const onClickAction = (_category: AllCategoriesProps) => {
     setSelectedCategory(_category._id);
-
-    // setFilters({ ...,category: });
-
-    // ❓ comparing the selected category with the allEvents and setting the filtered events to display
-    // const filterdEvents = allProgrammesAndEvents.filter(({ category }) => {
-    //   const [matchedEvent] = category.filter(
-    //     ({ _id }) => _id === _category._id
-    //   );
-    //   return matchedEvent;
-    // });
-
-    // setOnScreenProgrammesAndEvents(filterdEvents);
-
     // ✅ setting the filter query
     router.push(
       { query: { ...router.query, category: _category?.slug.current } },
@@ -48,17 +33,17 @@ export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
   ❓Getting the query from the url and setting them to the state 
   @REASON: This stop the state to reset after refresh
   */
-  // useEffect(() => {
-  //   /* 🚩 Flag to check if the category query present  */
-  //   const selectedCategoryFromUrlQuery = router.query.category;
-  //   if (selectedCategoryFromUrlQuery) {
-  //     /* ❓Filtering out the events from allCategories */
-  //     const [findThecategory] = allCategories.filter(
-  //       ({ slug }) => slug.current === selectedCategoryFromUrlQuery
-  //     );
-  //     setSelectedCategory(findThecategory?._id);
-  //   }
-  // }, [router, allCategories]);
+  useEffect(() => {
+    /* 🚩 Flag to check if the category query present  */
+    const selectedCategoryFromUrlQuery = router.query.category;
+    if (selectedCategoryFromUrlQuery) {
+      /* ❓Filtering out the events from allCategories */
+      const [findThecategory] = allCategories.filter(
+        ({ slug }) => slug.current === selectedCategoryFromUrlQuery
+      );
+      setSelectedCategory(findThecategory?._id);
+    }
+  }, [router, allCategories]);
 
   return (
     <div className={clsx(className)}>

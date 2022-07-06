@@ -62,8 +62,6 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
           effect="fade"
           autoplay
           pagination={{ clickable: true }}
-          //   onSlideChange={() => console.log("slide change")}
-          //   onSwiper={(swiper) => console.log(swiper)}
         >
           {images.map((img) => (
             <SwiperSlide key={img.asset}>

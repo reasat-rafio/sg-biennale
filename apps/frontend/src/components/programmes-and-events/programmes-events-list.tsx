@@ -20,29 +20,6 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({}) => {
     setOnScreenProgrammesAndEvents,
   } = useProgrammesAndEventsStore();
 
-  /* ❓ @Reason: We dont want the main array to modify */
-  const duplicateOnScreenProgrammesAndEvents = makeDuplicateArray<
-    IPgrammeEvents[]
-  >(onScreenProgrammesAndEvents);
-
-  // useEffect(() => {
-  //   /* 🚩 Flag to check if the category query present  */
-  //   const selectedCategoryFromUrlQuery = router.query.category;
-
-  //   if (selectedCategoryFromUrlQuery) {
-  //     /* ❓ Filtering with the selected category from all events and settig  */
-  //     const filterdEvents = allProgrammesAndEvents.filter(({ category }) => {
-  // const [matchedEvent] = category.filter(
-  //   ({ slug: { current } }) => current === selectedCategoryFromUrlQuery
-  // );
-  //       return matchedEvent;
-  //     });
-
-  //     /* ✅ setting the filter events to display */
-  //     setOnScreenProgrammesAndEvents(filterdEvents);
-  //   }
-  // }, [router, allProgrammesAndEvents, setOnScreenProgrammesAndEvents]);
-
   const viewMoreAction = () => {};
   const viewLessAction = () => {};
 
