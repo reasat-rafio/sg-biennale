@@ -31,9 +31,10 @@ const Artwork = {
       of: [{ type: "info" }],
     },
   ],
-  peview: {
+  preview: {
     select: {
       title: "name",
+      subtitle: "description",
       media: "images.0",
     },
   },

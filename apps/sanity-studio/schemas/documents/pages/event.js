@@ -96,9 +96,10 @@ const Event = {
       of: [{ type: "info" }],
     },
   ],
-  peview: {
+  preview: {
     select: {
       title: "title",
+      subtitle: "description",
       media: "images.0",
     },
   },
