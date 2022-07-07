@@ -16,14 +16,14 @@ const query = pageQuery(groq`
     *[_type == "artist" && slug.current == $artist][0]{
         ...,
         images[] {
-        ...        
-        asset->{
-          ...,
-          metadata {
-            dimensions
+          ...        
+          asset->{
+            ...,
+            metadata {
+              dimensions
+            }
           }
-        }
-      },
+        },
     },
 `);
 

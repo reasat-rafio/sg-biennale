@@ -27,3 +27,7 @@ export const convertDate = (value: Date, showSuffix: boolean = true) => {
     ? DateTime.fromISO(String(value)).toFormat("dd MMMM yyyy")
     : DateTime.fromISO(String(value)).toFormat("dd MMMM");
 };
+
+export const doTruncate = (text: string, endPosition: number) => {
+  return text.slice(0, endPosition);
+};

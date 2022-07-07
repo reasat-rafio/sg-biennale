@@ -27,3 +27,10 @@ export interface Organisation {
   title: string;
   url: string;
 }
+
+export interface IArtistProps {
+  _id: string;
+  description: any[];
+  images: SanityImage[];
+  name: string;
+}

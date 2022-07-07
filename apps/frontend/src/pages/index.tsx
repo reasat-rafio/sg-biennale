@@ -1,3 +1,4 @@
+import { Artist } from "@components/home/artist";
 import { Hero } from "@components/home/hero";
 import { Organisations } from "@components/home/organisations";
 import { pageQuery } from "@lib/query";
@@ -25,7 +26,15 @@ const query = pageQuery(groq`
         _key,
         name,
         description,
-
+        images[] {
+          ..., 
+          asset->{
+            ...,
+            metadata {
+              dimensions
+            }
+          }
+        },
       },
     }
   }
@@ -46,6 +55,7 @@ const Home: NextPage<SanityProps> = (props) => {
       {renderObjectArray(page.sections, {
         "homePage.hero": Hero,
         "homePage.organisations": Organisations,
+        "homePage.artists": Artist,
       })}
     </div>
   );
