@@ -34,3 +34,9 @@ export interface IArtistProps {
   images: SanityImage[];
   name: string;
 }
+export interface INewsProps {
+  _id: string;
+  description: any[];
+  images: SanityImage[];
+  header: string;
+}

@@ -15,7 +15,7 @@ export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
   return (
     <Container className="py-5" type="section">
       <h3 className="pb-3 | text-2xl font-medium">{title}</h3>
-      <div className="grid grid-cols-12 | gap-10">
+      <div className="grid grid-cols-12 | lg:gap-10 gap-5">
         {artists.map((artistData) => (
           <ArtistCard key={artistData._id} {...artistData} />
         ))}
@@ -25,10 +25,9 @@ export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
 };
 
 const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
-  const artistDescriptionRef = useRef<HTMLSpanElement | null>(null);
+  const artistDescriptionRef = useRef<HTMLDivElement | null>(null);
 
-  const artistDescriptionChilds = artistDescriptionRef.current
-    ?.children as HTMLCollection;
+  const artistDescriptionChilds = artistDescriptionRef.current?.children;
 
   useEffect(() => {
     if (artistDescriptionChilds?.length)
@@ -40,7 +39,7 @@ const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
 
   return (
     <div className="flex flex-col col-span-12 md:col-span-6 xl:col-span-3 | space-y-4">
-      <div className="">
+      <div>
         <SanityImg
           className="w-full"
           width={400}
@@ -51,9 +50,9 @@ const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
       </div>
       <div>
         <h6 className="mb-1 | text-lg font-medium">{name}</h6>
-        <span ref={artistDescriptionRef}>
+        <div ref={artistDescriptionRef}>
           <PortableText blocks={description} />
-        </span>
+        </div>
       </div>
     </div>
   );

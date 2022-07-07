@@ -1,5 +1,6 @@
 import { Artist } from "@components/home/artist";
 import { Hero } from "@components/home/hero";
+import { News } from "@components/home/news";
 import { Organisations } from "@components/home/organisations";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
@@ -23,7 +24,6 @@ const query = pageQuery(groq`
       },
       artists[]->{
         _id,
-        _key,
         name,
         description,
         images[] {
@@ -36,6 +36,20 @@ const query = pageQuery(groq`
           }
         },
       },
+      news[]-> {
+        _id,
+        header,
+        description,
+        images[] {
+          ..., 
+          asset->{
+            ...,
+            metadata {
+              dimensions
+            }
+          }
+        },
+      }
     }
   }
 `);
@@ -54,7 +68,8 @@ const Home: NextPage<SanityProps> = (props) => {
     <div>
       {renderObjectArray(page.sections, {
         "homePage.hero": Hero,
-        "homePage.organisations": Organisations,
+        // "homePage.organisations": Organisations,
+        "homePage.news": News,
         "homePage.artists": Artist,
       })}
     </div>
