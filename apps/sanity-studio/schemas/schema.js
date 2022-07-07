@@ -28,6 +28,8 @@ import Category from "./documents/category";
 import Artist from "./documents/pages/artist";
 import Artwork from "./documents/pages/artwork";
 
+import News from "./documents/news";
+
 import VisitorInfoPage from "./documents/pages/visitor-info";
 import visitorInfoHero from "./objects/visitor-info/hero";
 import VisitorInfoAdmissionInfo from "./objects/visitor-info/admission/admission-info";
@@ -59,6 +61,8 @@ export default createSchema({
 
     Artist,
     Artwork,
+
+    News,
 
     Category,
 
