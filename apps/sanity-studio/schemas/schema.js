@@ -21,6 +21,7 @@ import HomeHero from "./objects/home/hero";
 import HomeHeroCarouselItem from "./objects/home/carousel-item";
 import HomeOrganisations from "./objects/home/organisations";
 import HomeArtists from "./objects/home/artist";
+import HomeNews from "./objects/home/news";
 
 import Event from "./documents/pages/event";
 import Category from "./documents/category";
@@ -56,6 +57,7 @@ export default createSchema({
     HomeHeroCarouselItem,
     HomeOrganisations,
     HomeArtists,
+    HomeNews,
 
     Event,
 
