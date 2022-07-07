@@ -11,7 +11,11 @@ const HomePage = {
       name: "sections",
       type: "array",
       title: "Sections",
-      of: [{ type: "homePage.hero" }, { type: "homePage.organisations" }],
+      of: [
+        { type: "homePage.hero" },
+        { type: "homePage.organisations" },
+        { type: "homePage.artists" },
+      ],
     },
   ],
   preview: {

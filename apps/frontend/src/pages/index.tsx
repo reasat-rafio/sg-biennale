@@ -19,7 +19,14 @@ const query = pageQuery(groq`
       organisations[]{
         ...,
         "logo": ${withDimensions("logo")}
-      }
+      },
+      artists[]->{
+        _id,
+        _key,
+        name,
+        description,
+
+      },
     }
   }
 `);
