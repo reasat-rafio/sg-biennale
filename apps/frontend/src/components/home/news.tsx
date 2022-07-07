@@ -4,6 +4,7 @@ import { INewsProps } from "@lib/@types/home.types";
 import { doTruncate } from "@lib/helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { SanityImg } from "sanity-react-extra";
+import { Header } from "@components/ui/header";
 
 interface NewsProps {
   type: string;
@@ -13,10 +14,10 @@ interface NewsProps {
 
 export const News: React.FC<NewsProps> = ({ title, news }) => {
   return (
-    <Container type="section" className="py-5 | border-y-2 border-black">
-      <h3 className="pb-3 | text-2xl font-medium">{title}</h3>
+    <Container type="section" className="py-section | border-y-2 border-black">
+      <Header type="h3">{title}</Header>
 
-      <div className="grid grid-cols-12 | lg:gap-10 gap-5">
+      <div className="grid grid-cols-12 | pt-5 lg:gap-10 gap-5">
         {news.map((newsData) => (
           <NewsCard key={newsData._id} {...newsData} />
         ))}

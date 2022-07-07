@@ -1,4 +1,5 @@
 import { Container } from "@components/ui/container";
+import { Header } from "@components/ui/header";
 import { IArtistProps } from "@lib/@types/home.types";
 import { doTruncate } from "@lib/helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
@@ -13,9 +14,10 @@ interface ArtistProps {
 
 export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
   return (
-    <Container className="py-5" type="section">
-      <h3 className="pb-3 | text-2xl font-medium">{title}</h3>
-      <div className="grid grid-cols-12 | lg:gap-10 gap-5">
+    <Container className="py-section" type="section">
+      <Header type="h3">{title}</Header>
+
+      <div className="grid grid-cols-12 | pt-5 lg:gap-10 gap-5">
         {artists.map((artistData) => (
           <ArtistCard key={artistData._id} {...artistData} />
         ))}
