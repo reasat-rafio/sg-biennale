@@ -37,14 +37,14 @@ export const VenueCard: React.FC<VenueCardProps> = ({
       </div>
       <div className="flex">
         <h6 className="flex-1 items-center | text-lg font-semibold">{name}</h6>
-        {icon && (
+        {/* {icon && (
           <SanityImg
             height={20}
             image={icon}
             builder={imageUrlBuilder}
             alt="icon"
           />
-        )}
+        )} */}
       </div>
       <div className="flex flex-col | space-y-1">
         <div className="flex items-center | space-x-2">
@@ -66,12 +66,9 @@ export const VenueCard: React.FC<VenueCardProps> = ({
             </div>
             {index === activeFAQIndex && (
               <div className="flex flex-col | py-3 space-y-2">
-                <div className="grid grid-cols-12">
+                <div className="grid grid-cols-12 | gap-2">
                   {answers.map(({ key, icon, description }) => (
-                    <div
-                      className="flex lg:col-span-6 col-span-12 | space-x-2"
-                      key={key}
-                    >
+                    <div className="flex col-span-12" key={key}>
                       <SanityImg
                         width={15}
                         image={icon}

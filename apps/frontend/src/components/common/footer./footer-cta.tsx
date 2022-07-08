@@ -19,22 +19,20 @@ export const FooterCta: React.FC<FooterCtaProps> = ({ menu }) => {
           </Link>
         ))}
       </div>
-      <div>
-        <form className="relative lg:w-[600px] w-auto | flex |  py-1 | border-2 border-black | rounded-3xl">
-          <input
-            className="flex-1 | pl-3 | bg-transparent outline-none"
-            placeholder="Email"
-            type="text"
-            style={{ marginRight: `${btnRef.current?.clientWidth! + 10}px` }}
-          />
-          <button
-            ref={btnRef}
-            className="absolute right-0 top-0 h-full | px-4 | text-lg | border-l-2 border-black | rounded-3xl"
-          >
-            Subscribe
-          </button>
-        </form>
-      </div>
+      <form className="relative lg:w-[600px] w-auto | flex |  py-1 | border-2 border-black | rounded-3xl">
+        <input
+          className="flex-1 | pl-3 | bg-transparent outline-none"
+          placeholder="Email"
+          type="text"
+          style={{ marginRight: `${btnRef.current?.clientWidth! + 10}px` }}
+        />
+        <button
+          ref={btnRef}
+          className="absolute right-0 top-0 h-full | px-4 | text-lg | border-l-2 border-black | rounded-3xl"
+        >
+          Subscribe
+        </button>
+      </form>
     </Container>
   );
 };

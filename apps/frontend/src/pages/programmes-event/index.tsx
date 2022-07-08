@@ -2,7 +2,6 @@ import { FilteringSection } from "@components/programmes-and-events/filter/filte
 import { FilteringLogic } from "@components/programmes-and-events/filter/filtering-logic";
 import { ProgrammesEventList } from "@components/programmes-and-events/programmes-events-list";
 import { Container } from "@components/ui/container";
-import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import { siteQuery } from "@lib/query";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";

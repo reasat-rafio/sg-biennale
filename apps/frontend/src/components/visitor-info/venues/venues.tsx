@@ -4,6 +4,7 @@ import { SanityImg } from "sanity-react-extra";
 import { MoreInfoBlock } from "../more-info-block";
 import { VenueCard } from "./venue-card";
 import GoogleMapReact from "google-map-react";
+import { Header } from "@components/ui/header";
 
 interface VenuesProps {
   type: string;
@@ -21,9 +22,9 @@ export const Venues: React.FC<VenuesProps> = ({
 }) => {
   return (
     <section className="py-10">
-      <header className="flex">
-        <h3 className="flex-1 | text-lg font-medium ">{title}</h3>
-        <div className="flex space-x-2 items-center">
+      <header>
+        <Header>{title}</Header>
+        {/* <div className="flex space-x-2 items-center">
           <SanityImg
             width={18}
             builder={imageUrlBuilder}
@@ -31,7 +32,7 @@ export const Venues: React.FC<VenuesProps> = ({
             alt={`${highlight.title}'s icon`}
           />
           <span className="text-sm">{highlight.title}</span>
-        </div>
+        </div> */}
       </header>
 
       <div className="grid grid-cols-12 | lg:gap-10 gap-3">
