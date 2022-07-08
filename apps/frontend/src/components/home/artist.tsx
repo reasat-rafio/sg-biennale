@@ -3,7 +3,7 @@ import { Header } from "@components/ui/header";
 import { IArtistProps } from "@lib/@types/home.types";
 import { doTruncate } from "@lib/helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import { useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { SanityImg } from "sanity-react-extra";
 
 interface ArtistProps {
@@ -27,17 +27,16 @@ export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
 };
 
 const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
-  const artistDescriptionRef = useRef<HTMLDivElement | null>(null);
+  const artistDescriptionRef = useCallback((node: HTMLDivElement | null) => {
+    if (node !== null) {
+      const artistDescriptionChilds = node.children;
 
-  const artistDescriptionChilds = artistDescriptionRef.current?.children;
-
-  useEffect(() => {
-    if (artistDescriptionChilds?.length)
       artistDescriptionChilds[0].innerHTML = `${doTruncate(
         artistDescriptionChilds[0].textContent as string,
         400
       )} ...`;
-  }, [artistDescriptionChilds]);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col col-span-12 md:col-span-6 xl:col-span-3 | space-y-4">

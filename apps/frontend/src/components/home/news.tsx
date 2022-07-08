@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Container } from "@components/ui/container";
 import { INewsProps } from "@lib/@types/home.types";
 import { doTruncate } from "@lib/helpers";
@@ -27,16 +27,15 @@ export const News: React.FC<NewsProps> = ({ title, news }) => {
 };
 
 const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
-  const newsDescriptionRef = useRef<HTMLDivElement | null>(null);
-  const newsDescriptionRefChilds = newsDescriptionRef.current?.children;
-
-  useEffect(() => {
-    if (newsDescriptionRefChilds?.length)
+  const newsDescriptionRef = useCallback((node: HTMLDivElement | null) => {
+    if (node !== null) {
+      const newsDescriptionRefChilds = node.children;
       newsDescriptionRefChilds[0].innerHTML = `${doTruncate(
         newsDescriptionRefChilds[0].textContent as string,
         800
       )} ...`;
-  }, [newsDescriptionRefChilds]);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">
