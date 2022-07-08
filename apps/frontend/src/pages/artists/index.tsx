@@ -5,6 +5,7 @@ import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
+import { useState } from "react";
 
 const query = groq`{
     "site": ${siteQuery},
@@ -33,11 +34,16 @@ export const getStaticProps: GetStaticProps = async (
 
 const Artists: NextPage<SanityProps> = (props) => {
   const { artists } = useSanityQuery(query, props).data;
+  const [_artists, setArtists] = useState(artists);
 
   return (
     <div>
-      <Filtering />
-      <ArtistsList artists={artists} />
+      <Filtering
+        setArtists={setArtists}
+        artists={_artists}
+        allArtists={artists}
+      />
+      <ArtistsList artists={_artists} />
     </div>
   );
 };

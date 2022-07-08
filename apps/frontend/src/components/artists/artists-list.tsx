@@ -10,7 +10,7 @@ interface SortedArtistsList {
   data: ArtistsProps[];
 }
 
-interface ArtistsProps {
+export interface ArtistsProps {
   _id: string;
   images: SanityImage[];
   name: string;
