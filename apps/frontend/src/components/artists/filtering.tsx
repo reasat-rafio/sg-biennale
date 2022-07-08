@@ -16,7 +16,7 @@ export const Filtering: React.FC<FilteringProps> = ({}) => {
           Sort by
         </button>
       </div>
-      <div className="relative lg:w-[350px] w-auto | flex |  py-1 | border-2 border-black | rounded-3xl">
+      <div className="relative lg:w-[350px] w-auto | flex | py-1 | border-2 border-black | rounded-3xl">
         <input
           className="flex-1 | pl-3 | bg-transparent outline-none"
           placeholder="Email"

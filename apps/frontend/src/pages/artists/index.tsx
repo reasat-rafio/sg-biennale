@@ -1,3 +1,4 @@
+import { ArtistsList } from "@components/artists/artists-list";
 import { Filtering } from "@components/artists/filtering";
 import { siteQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
@@ -8,6 +9,7 @@ import { SanityProps } from "next-sanity-extra";
 const query = groq`{
     "site": ${siteQuery},
     "artists": *[_type == "artist"]{
+        _id,
         name,
         slug,
         images[] {
@@ -35,6 +37,7 @@ const Artists: NextPage<SanityProps> = (props) => {
   return (
     <div>
       <Filtering />
+      <ArtistsList artists={artists} />
     </div>
   );
 };
