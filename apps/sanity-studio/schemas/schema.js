@@ -23,6 +23,11 @@ import HomeOrganisations from "./objects/home/organisations";
 import HomeArtists from "./objects/home/artist";
 import HomeNews from "./objects/home/news";
 
+import AboutPage from "./documents/pages/about";
+import AboutPageHero from "./objects/about/hero";
+import AboutPageAboutUs from "./objects/about/about-us";
+import AboutPagePostEditions from "./objects/about/post-edition";
+
 import Event from "./documents/pages/event";
 import Category from "./documents/category";
 
@@ -36,6 +41,8 @@ import visitorInfoHero from "./objects/visitor-info/hero";
 import VisitorInfoAdmissionInfo from "./objects/visitor-info/admission/admission-info";
 import VisitorInfoAdmission from "./objects/visitor-info/admission/admission";
 import VisitorInfoVenues from "./objects/visitor-info/venues";
+import AboutPageCuratorialTeam from "./objects/about/curatorial-team";
+import AboutPageTeam from "./objects/about/team";
 
 export default createSchema({
   name: "default",
@@ -58,6 +65,13 @@ export default createSchema({
     HomeOrganisations,
     HomeArtists,
     HomeNews,
+
+    AboutPage,
+    AboutPageHero,
+    AboutPageAboutUs,
+    AboutPagePostEditions,
+    AboutPageCuratorialTeam,
+    AboutPageTeam,
 
     Event,
 
