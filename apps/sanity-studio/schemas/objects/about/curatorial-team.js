@@ -15,11 +15,24 @@ const AboutPageCuratorialTeam = {
       type: "array",
       of: [
         {
-          name: "image",
-          type: "image",
+          name: "item",
+          type: "object",
+          fields: [
+            {
+              name: "image",
+              type: "image",
+            },
+            { name: "name", type: "string" },
+            { name: "description", type: "text" },
+          ],
+          preview: {
+            select: {
+              title: "name",
+              subtitle: "description",
+              media: "image",
+            },
+          },
         },
-        { name: "name", type: "string" },
-        { name: "description", type: "text" },
       ],
     },
   ],

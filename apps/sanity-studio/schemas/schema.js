@@ -26,7 +26,7 @@ import HomeNews from "./objects/home/news";
 import AboutPage from "./documents/pages/about";
 import AboutPageHero from "./objects/about/hero";
 import AboutPageAboutUs from "./objects/about/about-us";
-import AboutPagePostEditions from "./objects/about/post-edition";
+import AboutPagePastEditions from "./objects/about/past-edition";
 
 import Event from "./documents/pages/event";
 import Category from "./documents/category";
@@ -69,7 +69,7 @@ export default createSchema({
     AboutPage,
     AboutPageHero,
     AboutPageAboutUs,
-    AboutPagePostEditions,
+    AboutPagePastEditions,
     AboutPageCuratorialTeam,
     AboutPageTeam,
 

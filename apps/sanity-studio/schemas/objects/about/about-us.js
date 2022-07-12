@@ -22,6 +22,12 @@ const AboutPageAboutUs = {
             { name: "image", type: "image" },
             { name: "description", type: "text" },
           ],
+          preview: {
+            select: {
+              title: "description",
+              media: "image",
+            },
+          },
         },
       ],
     },

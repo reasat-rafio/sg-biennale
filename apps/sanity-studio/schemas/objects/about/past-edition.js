@@ -1,6 +1,6 @@
 import { GrNote } from "react-icons/gr";
 
-const AboutPagePostEditions = {
+const AboutPagePastEditions = {
   name: "aboutPage.postEdition",
   title: "Post Editions",
   type: "object",
@@ -22,10 +22,17 @@ const AboutPagePostEditions = {
             { name: "title", type: "string" },
             { name: "description", type: "text" },
           ],
+          preview: {
+            select: {
+              title: "title",
+              subtitle: "description",
+              media: "image",
+            },
+          },
         },
       ],
     },
   ],
 };
 
-export default AboutPagePostEditions;
+export default AboutPagePastEditions;
