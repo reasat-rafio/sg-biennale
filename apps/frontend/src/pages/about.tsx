@@ -6,6 +6,7 @@ import { groq } from "next-sanity";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { pageQuery } from "@lib/query";
 import { Hero } from "@components/about/hero";
+import { CuratorialTeam } from "@components/about/curatorial-team";
 
 const query = pageQuery(groq`
   *[_type == "aboutPage"][0]{
@@ -45,6 +46,7 @@ const About: NextPage<SanityProps> = (props) => {
     <div>
       {renderObjectArray(page.sections, {
         "aboutPage.hero": Hero,
+        "aboutPage.curatorialTeam": CuratorialTeam,
       })}
     </div>
   );
