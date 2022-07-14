@@ -12,8 +12,20 @@ const query = pageQuery(groq`
         sections[]{
             ...,
             'image': ${withDimensions("image")},
-    },
-  }
+            teamCollection[]{
+              ...,
+              'image': ${withDimensions("image")},
+            },
+            aboutCollection[]{
+              ...,
+              'image': ${withDimensions("image")},
+            },
+            pastEditionCollection[]{
+              ...,
+              'image': ${withDimensions("image")},
+            }
+        },
+    }
 `);
 
 export const getStaticProps: GetStaticProps = async (
