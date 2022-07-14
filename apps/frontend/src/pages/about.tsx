@@ -5,6 +5,7 @@ import { withDimensions, renderObjectArray } from "sanity-react-extra";
 import { groq } from "next-sanity";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { pageQuery } from "@lib/query";
+import { Hero } from "@components/about/hero";
 
 const query = pageQuery(groq`
   *[_type == "aboutPage"][0]{
@@ -38,7 +39,15 @@ export const getStaticProps: GetStaticProps = async (
 const About: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
-  return <div>{renderObjectArray(page.sections, {})}</div>;
+  console.log(page.sections);
+
+  return (
+    <div>
+      {renderObjectArray(page.sections, {
+        "aboutPage.hero": Hero,
+      })}
+    </div>
+  );
 };
 
 export default About;
