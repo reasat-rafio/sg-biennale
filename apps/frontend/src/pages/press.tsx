@@ -6,6 +6,7 @@ import { groq } from "next-sanity";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { pageQuery } from "@lib/query";
 import { Release } from "@components/press/release";
+import { KitsInfo } from "@components/press/kits-info";
 
 const query = pageQuery(groq`
   *[_type == "pressPage"][0]{
@@ -13,8 +14,10 @@ const query = pageQuery(groq`
         sections[]{
             ...,
             releases[]-> {
+                _id,
                 header,
                 description,
+                slug,
                 images[] {
                     ..., 
                     asset->{
@@ -44,6 +47,7 @@ const Press: NextPage<SanityProps> = (props) => {
     <div>
       {renderObjectArray(page.sections, {
         "pressPage.release": Release,
+        "pressPage.kitInfo": KitsInfo,
       })}
     </div>
   );
