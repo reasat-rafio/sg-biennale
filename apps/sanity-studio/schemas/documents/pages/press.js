@@ -10,7 +10,7 @@ const PressPage = {
     {
       name: "sections",
       type: "array",
-      of: [{ type: "pressPage.release" }],
+      of: [{ type: "pressPage.release" }, { type: "pressPage.kitInfo" }],
     },
   ],
 };

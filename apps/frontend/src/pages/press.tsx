@@ -1,0 +1,52 @@
+import React from "react";
+import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
+import { SanityProps } from "next-sanity-extra";
+import { renderObjectArray } from "sanity-react-extra";
+import { groq } from "next-sanity";
+import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
+import { pageQuery } from "@lib/query";
+import { Release } from "@components/press/release";
+
+const query = pageQuery(groq`
+  *[_type == "pressPage"][0]{
+        ...,
+        sections[]{
+            ...,
+            releases[]-> {
+                header,
+                description,
+                images[] {
+                    ..., 
+                    asset->{
+                        ...,
+                        metadata {
+                            dimensions
+                         }
+                    }
+                },
+            }
+        },
+    }
+`);
+
+export const getStaticProps: GetStaticProps = async (
+  context: GetStaticPropsContext
+) => ({
+  props: await sanityStaticProps({ context, query }),
+  revalidate: 10,
+});
+
+const Press: NextPage<SanityProps> = (props) => {
+  const { page } = useSanityQuery(query, props).data;
+  console.log(page);
+
+  return (
+    <div>
+      {renderObjectArray(page.sections, {
+        "pressPage.release": Release,
+      })}
+    </div>
+  );
+};
+
+export default Press;

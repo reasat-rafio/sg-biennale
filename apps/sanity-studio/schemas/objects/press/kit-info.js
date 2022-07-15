@@ -28,7 +28,17 @@ const PressKitInfo = {
         },
       ],
     },
-    { name: "infoAndContacts", type: "array", of: [{ type: "block" }] },
+    {
+      name: "infoAndContacts",
+      type: "object",
+      fields: [
+        {
+          name: "title",
+          type: "string",
+        },
+        { name: "contacts", type: "array", of: [{ type: "block" }] },
+      ],
+    },
   ],
 };
 
