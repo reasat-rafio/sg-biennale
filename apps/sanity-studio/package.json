@@ -8,7 +8,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build ../frontend/public/studio -y"
   },
   "keywords": [
     "sanity"

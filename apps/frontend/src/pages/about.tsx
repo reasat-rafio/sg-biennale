@@ -43,8 +43,6 @@ export const getStaticProps: GetStaticProps = async (
 const About: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
-  console.log(page.sections);
-
   return (
     <div>
       {renderObjectArray(page.sections, {

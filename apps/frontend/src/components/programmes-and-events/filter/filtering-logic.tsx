@@ -6,7 +6,7 @@ interface FilteringLogicProps {
   children: ReactNode;
 }
 
-/* 🚩 gatekeepre of the intended queries */
+/* 🚩 gatekeeper of the intended queries */
 const checkerForTheIntendedQuery = (filteringKeys: string[]) => {
   return filteringKeys.includes("category") || filteringKeys.includes("veneue");
 };

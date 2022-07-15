@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { Container } from "@components/ui/container";
 import { INewsProps } from "@lib/@types/home.types";
 import { doTruncate } from "@lib/helpers";
