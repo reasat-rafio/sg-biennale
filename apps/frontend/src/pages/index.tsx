@@ -1,7 +1,7 @@
 import { Artist } from "@components/home/artist";
 import { Hero } from "@components/home/hero";
 import { News } from "@components/home/news";
-import { Organisations } from "@components/home/organisations";
+// import { Organisations } from "@components/home/organisations";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
@@ -72,7 +72,6 @@ const Home: NextPage<SanityProps> = (props) => {
         "homePage.news": News,
         "homePage.artists": Artist,
       })}
-      TEST
     </div>
   );
 };

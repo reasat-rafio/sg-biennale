@@ -43,6 +43,9 @@ import VisitorInfoAdmission from "./objects/visitor-info/admission/admission";
 import VisitorInfoVenues from "./objects/visitor-info/venues";
 import AboutPageCuratorialTeam from "./objects/about/curatorial-team";
 import AboutPageTeam from "./objects/about/team";
+import PressPage from "./documents/pages/press";
+import PressRelease from "./objects/press/release";
+import PressKitInfo from "./objects/press/kit-info";
 
 export default createSchema({
   name: "default",
@@ -72,6 +75,10 @@ export default createSchema({
     AboutPagePastEditions,
     AboutPageCuratorialTeam,
     AboutPageTeam,
+
+    PressPage,
+    PressRelease,
+    PressKitInfo,
 
     Event,
 

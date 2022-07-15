@@ -63,19 +63,25 @@ const deskStructure = () =>
               pageItem({
                 schemaType: "homePage",
                 id: "homePage",
-                title: "Home Page",
+                title: "Home",
                 slug: "",
               }),
               pageItem({
                 schemaType: "visitorInfoPage",
                 id: "visitorInfoPage",
-                title: "Visitor Info Page",
+                title: "Visitor Info",
+                slug: "",
+              }),
+              pageItem({
+                schemaType: "pressPage",
+                id: "pressPage",
+                title: "Press",
                 slug: "",
               }),
               pageItem({
                 schemaType: "aboutPage",
                 id: "aboutPage",
-                title: "About Page",
+                title: "About",
                 slug: "",
               }),
             ])

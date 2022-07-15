@@ -10,7 +10,6 @@ const HomePage = {
     {
       name: "sections",
       type: "array",
-      title: "Sections",
       of: [
         { type: "homePage.hero" },
         { type: "homePage.organisations" },
