@@ -84,6 +84,12 @@ const deskStructure = () =>
                 title: "About",
                 slug: "",
               }),
+              pageItem({
+                schemaType: "supportUsPage",
+                id: "supportUsPage",
+                title: "Support Us",
+                slug: "",
+              }),
             ])
         ),
       S.divider(),

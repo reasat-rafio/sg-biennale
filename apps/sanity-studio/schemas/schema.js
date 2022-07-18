@@ -28,6 +28,8 @@ import AboutPageHero from "./objects/about/hero";
 import AboutPageAboutUs from "./objects/about/about-us";
 import AboutPagePastEditions from "./objects/about/past-edition";
 
+import SupportUsPage from "./documents/pages/support-us";
+
 import Event from "./documents/pages/event";
 import Category from "./documents/category";
 
@@ -79,6 +81,8 @@ export default createSchema({
     PressPage,
     PressRelease,
     PressKitInfo,
+
+    SupportUsPage,
 
     Event,
 
