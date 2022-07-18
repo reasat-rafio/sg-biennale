@@ -13,4 +13,5 @@ export const Navbar: React.FC<ISite["site"]> = ({
       <NavItems heightlights={heightlights} menu={menu} />
     </nav>
   );
+  1;
 };

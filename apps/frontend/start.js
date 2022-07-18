@@ -10,6 +10,9 @@ const port = 3000;
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
+// smee io
+const SmeeClient = require("smee-client");
+
 app.prepare().then(() => {
   createServer(async (req, res) => {
     try {
@@ -35,3 +38,14 @@ app.prepare().then(() => {
     console.log(`> Ready on http://${hostname}:${port}`);
   });
 });
+
+const smee = new SmeeClient({
+  source: "https://smee.io/uLUJvpIxZjvLLj7C",
+  target: "http://localhost:3000",
+  logger: console,
+});
+
+const events = smee.start();
+
+// Stop forwarding events
+events.close();
