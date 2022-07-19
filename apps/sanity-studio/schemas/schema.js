@@ -28,16 +28,6 @@ import AboutPageHero from "./objects/about/hero";
 import AboutPageAboutUs from "./objects/about/about-us";
 import AboutPagePastEditions from "./objects/about/past-edition";
 
-import SupportUsPage from "./documents/pages/support-us";
-
-import Event from "./documents/pages/event";
-import Category from "./documents/category";
-
-import Artist from "./documents/pages/artist";
-import Artwork from "./documents/pages/artwork";
-
-import News from "./documents/news";
-
 import VisitorInfoPage from "./documents/pages/visitor-info";
 import visitorInfoHero from "./objects/visitor-info/hero";
 import VisitorInfoAdmissionInfo from "./objects/visitor-info/admission/admission-info";
@@ -48,6 +38,18 @@ import AboutPageTeam from "./objects/about/team";
 import PressPage from "./documents/pages/press";
 import PressRelease from "./objects/press/release";
 import PressKitInfo from "./objects/press/kit-info";
+
+import SupportUsPage from "./documents/pages/support-us";
+
+import Event from "./documents/pages/event";
+import Category from "./documents/category";
+
+import Artist from "./documents/pages/artist";
+import Artwork from "./documents/pages/artwork";
+
+import News from "./documents/news";
+
+import Partner from "./documents/partner";
 
 export default createSchema({
   name: "default",
@@ -62,7 +64,17 @@ export default createSchema({
     MenuItems,
     Social,
 
+    Category,
+
     Venue,
+    Event,
+
+    Artist,
+    Artwork,
+
+    News,
+
+    Partner,
 
     HomePage,
     HomeHero,
@@ -82,21 +94,12 @@ export default createSchema({
     PressRelease,
     PressKitInfo,
 
-    SupportUsPage,
-
-    Event,
-
-    Artist,
-    Artwork,
-
-    News,
-
-    Category,
-
     VisitorInfoPage,
     visitorInfoHero,
     VisitorInfoAdmission,
     VisitorInfoAdmissionInfo,
     VisitorInfoVenues,
+
+    SupportUsPage,
   ]),
 });
