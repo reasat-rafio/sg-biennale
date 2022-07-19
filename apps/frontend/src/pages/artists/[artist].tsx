@@ -1,8 +1,9 @@
 import { ArtistDescription } from "@components/artist-details/artist-description";
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
+import { Container } from "@components/ui/container";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
-import { sanityClient, sanityStaticProps } from "@utils/sanity";
+import { PortableText, sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -53,16 +54,22 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
   const { name, description, images, moreInfo } = props.data.page;
 
   return (
-    <DetailsLayout
-      DescriptionBlock={
-        <ArtistDescription
-          name={name}
-          description={description}
-          moreInfo={moreInfo}
-        />
-      }
-      CarouselBlock={<DetailsPageImageCarousel images={images} />}
-    />
+    // <DetailsLayout
+    //   DescriptionBlock={
+    //     <ArtistDescription
+    //       name={name}
+    //       description={description}
+    //       moreInfo={moreInfo}
+    //     />
+    //   }
+    //   CarouselBlock={<DetailsPageImageCarousel images={images} />}
+    // />
+    <Container className="min-h-[60vh] grid lg:grid-cols-2  | py-section">
+      <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>
+      <span>
+        <PortableText blocks={description} />
+      </span>
+    </Container>
   );
 };
 

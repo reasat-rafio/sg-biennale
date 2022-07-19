@@ -23,7 +23,7 @@ export const NavItems: React.FC<NavItemsProps> = ({ menu, heightlights }) => {
       <div className="flex flex-wrap items-center justify-center | lg:space-x-4 space-x-1 space-y-1 lg:space-y-0">
         {heightlights.map(({ _key, icon, title }) => (
           <button
-            className="flex space-x-2 items-center lg:flex-row flex-col | lg:px-4 lg:py-1 py-2 | border border-black | rounded-3xl "
+            className="flex space-x-2 items-center lg:flex-row flex-col | lg:px-4 lg:py-1 py-2 px-2 | border border-black | rounded-3xl "
             key={_key}
           >
             <SanityImg
@@ -32,7 +32,7 @@ export const NavItems: React.FC<NavItemsProps> = ({ menu, heightlights }) => {
               image={icon}
               alt={`${title}'s icon`}
             />
-            <span className="lg:text-xl">{title}</span>
+            <span className="hidden lg:block | lg:text-xl">{title}</span>
           </button>
         ))}
       </div>
