@@ -29,7 +29,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
                 alt="image"
               />
             </div>
-            <p className="mt-4">{description}</p>
+            <p className="mt-4 text-base">{description}</p>
           </div>
         ))}
       </div>

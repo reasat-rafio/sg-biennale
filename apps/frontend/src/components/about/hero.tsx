@@ -22,12 +22,14 @@ export const Hero: React.FC<HeroProps> = ({
   image,
 }) => {
   return (
-    <Container type="section">
-      <h1 className="pt-7 pb-2 text-2xl font-medium">{header}</h1>
+    <Container type="section" className="py-section">
+      <h1 className="pb-10 text-3xl font-medium">{header}</h1>
       <div className="grid grid-cols-12 | gap-5">
         <div className="col-span-12 lg:col-span-6">
           <Header>{subheader}</Header>
-          <PortableText blocks={description} />
+          <div className="text-lg">
+            <PortableText blocks={description} />
+          </div>
         </div>
         <div className="col-span-12 lg:col-span-6">
           <SanityImg

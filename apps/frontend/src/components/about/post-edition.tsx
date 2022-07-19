@@ -33,8 +33,8 @@ export const PostEdition: React.FC<PostEditionProps> = ({
               />
             </div>
             <div>
-              <h6 className="text-sm font-medium mb-1">{title}</h6>
-              <p className="text-sm">{description}</p>
+              <h6 className="text-lg font-medium mb-1">{title}</h6>
+              <p className="text-base">{description}</p>
             </div>
           </div>
         ))}

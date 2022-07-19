@@ -64,9 +64,9 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
     //   }
     //   CarouselBlock={<DetailsPageImageCarousel images={images} />}
     // />
-    <Container className="min-h-[60vh] grid lg:grid-cols-2  | py-section">
+    <Container className="min-h-[60vh] grid lg:grid-cols-2 | py-16">
       <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>
-      <span>
+      <span className="text-lg">
         <PortableText blocks={description} />
       </span>
     </Container>

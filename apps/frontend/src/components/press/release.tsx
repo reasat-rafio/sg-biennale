@@ -48,8 +48,8 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
               />
             </div>
             <div className="flex flex-col | space-y-5">
-              <h6 className="text-xl font-medium">{data.header}</h6>
-              <div ref={descriptionRef}>
+              <h6 className="text-xl font-semibold | pt-2">{data.header}</h6>
+              <div className="text-lg" ref={descriptionRef}>
                 <PortableText blocks={data.description} />
               </div>
               <Link href={`/news/${data.slug.current}`}>

@@ -19,7 +19,7 @@ export const Methods: React.FC<MethodsProps> = ({ methods }) => {
           className="flex flex-col items-start space-y-6 col-span-12 lg:col-span-6"
         >
           <h5 className="text-xl font-medium">{title}</h5>
-          <p className="font-medium">{description}</p>
+          <p className="font-medium | text-lg">{description}</p>
           <button className="px-4 py-1 | text-xl | border-2 border-black | rounded-3xl">
             <Link href={cta.href}>
               <a>{cta.title}</a>

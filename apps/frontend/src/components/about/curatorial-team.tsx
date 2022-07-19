@@ -33,8 +33,8 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
               />
             </div>
             <div className="flex flex-col space-y-4">
-              <h6 className="font-medium">{name}</h6>
-              <p className="text-sm">{description}</p>
+              <h6 className="text-lg font-medium">{name}</h6>
+              <p className="text-base">{description}</p>
             </div>
           </div>
         ))}
