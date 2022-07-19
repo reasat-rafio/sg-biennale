@@ -12,7 +12,6 @@ interface FilteringProps {
 
 export const Filtering: React.FC<FilteringProps> = ({
   allArtists,
-  artists,
   setArtists,
 }) => {
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -23,7 +22,7 @@ export const Filtering: React.FC<FilteringProps> = ({
 
     if (!searchInputValue || searchInputValue === "") setArtists(allArtists);
     else {
-      const filteredArtist = artists.filter(({ name }) =>
+      const filteredArtist = allArtists.filter(({ name }) =>
         name
           .toLowerCase()
           .trim()
@@ -43,17 +42,14 @@ export const Filtering: React.FC<FilteringProps> = ({
       </div>
       <div className="relative lg:w-[350px] w-auto | flex | py-1 | border-2 border-black | rounded-3xl">
         <input
+          onChange={onSearchAction}
           ref={searchRef}
           className="flex-1 | pl-3 | bg-transparent outline-none"
           placeholder="Search"
           type="text"
           style={{ marginRight: `${btnRef.current?.clientWidth! + 10}px` }}
         />
-        <button
-          onClick={onSearchAction}
-          ref={btnRef}
-          className="absolute right-0 top-0 h-full px-2"
-        >
+        <button ref={btnRef} className="absolute right-0 top-0 h-full px-2">
           <Search />
         </button>
       </div>
