@@ -14,6 +14,8 @@ export const FooterDescription: React.FC<FooterDescriptionProps> = ({
   address,
   socials,
 }) => {
+  console.log(socials);
+
   return (
     <Container className="py-3 flex items-center lg:flex-row flex-col ">
       <div className="flex flex-1 space-x-1">

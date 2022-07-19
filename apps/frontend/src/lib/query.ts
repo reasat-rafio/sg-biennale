@@ -15,7 +15,7 @@ export const siteQuery = groq`{
       },
       footer {
         ...,
-        socialButtons[] ->{
+        socials[] {
           ...,
           "icon": ${withDimensions("icon")},
         }
