@@ -30,6 +30,7 @@ const Artwork = {
       type: "array",
       of: [{ type: "info" }],
     },
+    { name: "artist", type: "reference", to: { type: "artist" } },
   ],
   preview: {
     select: {

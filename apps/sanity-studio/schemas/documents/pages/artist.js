@@ -29,6 +29,16 @@ const Artist = {
       type: "array",
       of: [{ type: "info" }],
     },
+    {
+      name: "artworks",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: { type: "artwork" },
+        },
+      ],
+    },
   ],
   preview: {
     select: {

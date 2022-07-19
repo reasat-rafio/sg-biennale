@@ -13,7 +13,7 @@ import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
 
 const query = pageQuery(groq`
-    *[_type == "artwork" && slug.current == $artwork][0]{
+    *[_type == "artwork" && slug.current == $artwork && artist->.slug.current == $artist][0]{
         ...,
         images[] {
         ...        
@@ -29,6 +29,9 @@ const query = pageQuery(groq`
 
 const pathsQuery = groq`*[_type == 'artwork'][]{
   slug,
+  artist->{
+    slug
+  }
   }`;
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -37,7 +40,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: slugs
       .filter((s: any) => s)
-      .map((s: any) => ({ params: { artwork: s.slug.current } })),
+      .map((s: any) => ({
+        params: { artist: s.artist.slug.current, artwork: s.slug.current },
+      })),
     fallback: "blocking",
   };
 };
