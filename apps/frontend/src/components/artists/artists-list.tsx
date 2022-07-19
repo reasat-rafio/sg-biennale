@@ -1,7 +1,7 @@
 import { Container } from "@components/ui/container";
-import { Header } from "@components/ui/header";
 import { Slug } from "@lib/@types/global.types";
-import { imageUrlBuilder } from "@utils/sanity";
+import clsx from "clsx";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 
@@ -49,22 +49,28 @@ export const ArtistsList: React.FC<ArtistsListProps> = ({ artists }) => {
 
   return (
     <Container>
-      {sortedArtistsList.map(({ data, title }) => (
-        <div className="flex flex-col | mb-8" key={title}>
-          <Header>{title}</Header>
+      {sortedArtistsList.map(({ data, title }, index) => (
+        <div
+          className={clsx(
+            "flex flex-col | lg:py-14 py-8",
+            index !== sortedArtistsList.length - 1 && "border-b-2 border-black"
+          )}
+          key={title}
+        >
+          <h5 className="mb-7 text-xl font-medium">{title}</h5>
           <div className="grid grid-cols-12 | lg:gap-10 gap-5">
-            {data.map(({ _id, images, name, slug }) => (
+            {data.map(({ _id, name, slug }) => (
               <div key={_id} className="col-span-6 md:col-span-4 lg:col-span-3">
-                <div>
-                  <SanityImg
-                    builder={imageUrlBuilder}
-                    image={images[0]}
-                    alt={name}
-                  />
-                </div>
-                <div>
-                  <h6 className="py-3">{name}</h6>
-                </div>
+                <h2
+                  style={{ wordSpacing: "2000px" }}
+                  className="text-2xl font-semibold leading-snug mb-3"
+                >
+                  {name}
+                </h2>
+
+                <Link href={`artists/${slug.current}`}>
+                  <a className="text-gray-500 text-sm">See Artist</a>
+                </Link>
               </div>
             ))}
           </div>

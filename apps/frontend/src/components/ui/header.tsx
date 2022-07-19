@@ -21,7 +21,7 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <Component className={clsx(className, styles[`${variant}`])}>
+    <Component className={clsx(styles[`${variant}`], className)}>
       {children}
     </Component>
   );
