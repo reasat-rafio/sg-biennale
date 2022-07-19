@@ -46,7 +46,4 @@ const smee = new SmeeClient({
   logger: console,
 });
 
-const events = smee.start();
-
-// Stop forwarding events
-events.close();
+smee.start();
