@@ -1,5 +1,6 @@
 import { Container } from "@components/ui/container";
 import { Slug } from "@lib/@types/global.types";
+import useArtistsStore from "@stores/artists-store";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -17,11 +18,9 @@ export interface ArtistsProps {
   slug: Slug;
 }
 
-interface ArtistsListProps {
-  artists: ArtistsProps[];
-}
+export const ArtistsList: React.FC<{}> = ({}) => {
+  const { filteredArtists } = useArtistsStore();
 
-export const ArtistsList: React.FC<ArtistsListProps> = ({ artists }) => {
   const [sortedArtistsList, setSortedArtistList] = useState<
     SortedArtistsList[]
   >([]);
@@ -29,7 +28,7 @@ export const ArtistsList: React.FC<ArtistsListProps> = ({ artists }) => {
   useEffect(() => {
     const newSortedArtistListWithTitleAsFirstLatter: SortedArtistsList[] =
       Object.values(
-        artists.reduce((newVal: any, artist) => {
+        filteredArtists.reduce((newVal: any, artist) => {
           let firstLetter = artist.name[0].toLocaleUpperCase();
 
           !newVal[firstLetter]
@@ -45,7 +44,7 @@ export const ArtistsList: React.FC<ArtistsListProps> = ({ artists }) => {
     );
 
     setSortedArtistList(alphabeticalSorting);
-  }, [artists]);
+  }, [filteredArtists]);
 
   return (
     <Container>

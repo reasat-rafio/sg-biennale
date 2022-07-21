@@ -1,20 +1,14 @@
 import { ChevronArrow } from "@components/icons/chevron-arrow";
 import { Combobox } from "@headlessui/react";
+import useArtistsStore from "@stores/artists-store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-interface FilterByDropdownProps {
-  name: string;
-  data: {
-    name: string;
-    code: string;
-  }[];
-}
+interface FilterByVenueProps {}
 
-export const FilterByDropdown: React.FC<FilterByDropdownProps> = ({
-  name,
-  data,
-}) => {
+export const FilterByVenue: React.FC<FilterByVenueProps> = () => {
+  const { allCountries } = useArtistsStore();
+
   const router = useRouter();
 
   const [selectedVenue, setSelectedVenue] = useState([]);
@@ -22,8 +16,8 @@ export const FilterByDropdown: React.FC<FilterByDropdownProps> = ({
 
   const filteredCountries =
     query === ""
-      ? data
-      : data.filter((person) => {
+      ? allCountries
+      : allCountries.filter((person) => {
           return person.name.toLowerCase().includes(query.toLowerCase());
         });
 
@@ -41,12 +35,12 @@ export const FilterByDropdown: React.FC<FilterByDropdownProps> = ({
       }
     );
   }, [selectedVenue]);
-  
+
   return (
     <div className="relative">
       <Combobox value={selectedVenue} onChange={setSelectedVenue} multiple>
         <Combobox.Button className="flex items-center justify-between | w-36 | space-x-2 px-4 py-1 | border-2 border-black | rounded-lg">
-          <span>{name}</span>
+          <span>Venue</span>
           <ChevronArrow className="h-4 w-4" />
         </Combobox.Button>
 

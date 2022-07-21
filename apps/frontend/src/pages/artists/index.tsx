@@ -1,11 +1,12 @@
 import { ArtistsList } from "@components/artists/artists-list";
 import { Filtering } from "@components/artists/filtering";
 import { siteQuery } from "@lib/query";
+import useArtistsStore from "@stores/artists-store";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
-import { useState } from "react";
+import { useEffect } from "react";
 
 const query = groq`{
     "site": ${siteQuery},
@@ -33,17 +34,18 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const Artists: NextPage<SanityProps> = (props) => {
+  const { setAllArtists, setFilteredArtists } = useArtistsStore();
   const { artists } = useSanityQuery(query, props).data;
-  const [_artists, setArtists] = useState(artists);
+
+  useEffect(() => {
+    setAllArtists(artists);
+    setFilteredArtists(artists);
+  }, [artists, setAllArtists, setFilteredArtists]);
 
   return (
     <div>
-      <Filtering
-        setArtists={setArtists}
-        artists={_artists}
-        allArtists={artists}
-      />
-      <ArtistsList artists={_artists} />
+      <Filtering />
+      <ArtistsList />
     </div>
   );
 };
