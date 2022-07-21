@@ -11,6 +11,10 @@ const query = groq`{
   "site": ${siteQuery},
   "partners":*[_type == "partner"][]{
         ...,
+        tier->{
+          _id,
+          title
+        },
         'image': ${withDimensions("image")},
     },    
 }`;

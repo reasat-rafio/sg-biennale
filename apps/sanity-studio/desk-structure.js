@@ -11,6 +11,7 @@ function SitePreview({ document, options }) {
       "SANITY_STUDIO_PREVIEW_URL should be set for preview to work! Falling back to localhost:3000"
     );
   }
+
   return (
     <iframe
       title="Page preview"

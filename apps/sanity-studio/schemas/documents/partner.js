@@ -18,6 +18,7 @@ const Partner = {
         source: (doc) => doc.name,
       },
     },
+    { name: "tier", type: "reference", to: { type: "tier" } },
     {
       name: "image",
       type: "image",

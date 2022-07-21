@@ -29,14 +29,14 @@ export const ArtistsList: React.FC<ArtistsListProps> = ({ artists }) => {
   useEffect(() => {
     const newSortedArtistListWithTitleAsFirstLatter: SortedArtistsList[] =
       Object.values(
-        artists.reduce((acc: any, word) => {
-          let firstLetter = word.name[0].toLocaleUpperCase();
-          if (!acc[firstLetter]) {
-            acc[firstLetter] = { title: firstLetter, data: [word] };
-          } else {
-            acc[firstLetter].data.push(word);
-          }
-          return acc;
+        artists.reduce((newVal: any, artist) => {
+          let firstLetter = artist.name[0].toLocaleUpperCase();
+
+          !newVal[firstLetter]
+            ? (newVal[firstLetter] = { title: firstLetter, data: [artist] })
+            : newVal[firstLetter].data.push(artist);
+
+          return newVal;
         }, {})
       );
 
@@ -68,7 +68,7 @@ export const ArtistsList: React.FC<ArtistsListProps> = ({ artists }) => {
                   {name}
                 </h2>
 
-                <Link href={`artists/${slug.current}`}>
+                <Link href={`artists/${slug?.current ?? ""}`}>
                   <a className="text-gray-500 text-sm">See Artist</a>
                 </Link>
               </div>
