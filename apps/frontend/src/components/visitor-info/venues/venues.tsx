@@ -22,9 +22,9 @@ export const Venues: React.FC<VenuesProps> = ({
 }) => {
   return (
     <section className="py-10">
-      <header>
-        <Header>{title}</Header>
-        {/* <div className="flex space-x-2 items-center">
+      {/* <header>
+        <Header>{title}</Header> 
+       <div className="flex space-x-2 items-center">
           <SanityImg
             width={18}
             builder={imageUrlBuilder}
@@ -32,10 +32,10 @@ export const Venues: React.FC<VenuesProps> = ({
             alt={`${highlight.title}'s icon`}
           />
           <span className="text-sm">{highlight.title}</span>
-        </div> */}
-      </header>
+        </div> 
+      </header> */}
 
-      <div className="grid grid-cols-12 | lg:gap-10 gap-3">
+      {/* <div className="grid grid-cols-12 | lg:gap-10 gap-3">
         {venues.map((vanue) => (
           <VenueCard
             className="lg:col-span-6 col-span-12"
@@ -43,8 +43,8 @@ export const Venues: React.FC<VenuesProps> = ({
             vanue={vanue}
           />
         ))}
-      </div>
-
+      </div> */}
+      {/* 
       <div className="lg:h-[90vh] h-[45vh] | py-10">
         <GoogleMapReact
           bootstrapURLKeys={{
@@ -56,7 +56,7 @@ export const Venues: React.FC<VenuesProps> = ({
           }}
           defaultZoom={11}
         />
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-12 | xl:gap-x-24 xl:gap-y-16 gap-5">
         {additionalInfo.map((data) => (
