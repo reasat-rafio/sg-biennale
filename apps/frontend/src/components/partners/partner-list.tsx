@@ -46,7 +46,6 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
     );
     setPartners(newPatnersList);
   }, [partners]);
-  console.log(_partners);
 
   return (
     <div className="flex flex-col | space-y-10">

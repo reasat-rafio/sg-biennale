@@ -57,7 +57,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
               <div className="text-lg" ref={descriptionRef}>
                 <PortableText blocks={data.description} />
               </div>
-              <Link href={data.cta.href}>
+              <Link href={data.cta?.href ?? ""}>
                 <a
                   onClick={(event) => {
                     if (data?.file) {
