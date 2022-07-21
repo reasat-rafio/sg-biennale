@@ -50,6 +50,7 @@ import Artwork from "./documents/pages/artwork";
 import News from "./documents/news";
 
 import Partner from "./documents/partner";
+import Tier from "./documents/tier";
 
 export default createSchema({
   name: "default",
@@ -74,8 +75,6 @@ export default createSchema({
 
     News,
 
-    Partner,
-
     HomePage,
     HomeHero,
     HomeHeroCarouselItem,
@@ -99,6 +98,9 @@ export default createSchema({
     VisitorInfoAdmission,
     VisitorInfoAdmissionInfo,
     VisitorInfoVenues,
+
+    Partner,
+    Tier,
 
     SupportUsPage,
   ]),

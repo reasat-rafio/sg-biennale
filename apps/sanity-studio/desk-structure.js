@@ -3,6 +3,7 @@ import { FcCalendar } from "react-icons/fc";
 import { GrEdit, GrView } from "react-icons/gr";
 import { RiPagesLine } from "react-icons/ri";
 import React from "react";
+import { FaUserFriends } from "react-icons/fa";
 
 function SitePreview({ document, options }) {
   if (!process.env.SANITY_STUDIO_PREVIEW_URL) {
@@ -108,7 +109,18 @@ const deskStructure = () =>
       S.documentTypeListItem("artwork").title("Artworks"),
       S.documentTypeListItem("venue").title("Venues"),
       S.documentTypeListItem("news").title("News"),
-      S.documentTypeListItem("partner").title("Partner"),
+
+      S.listItem()
+        .title("Partners")
+        .icon(FaUserFriends)
+        .child(
+          S.list()
+            .title("Partners")
+            .items([
+              S.documentTypeListItem("tier").title("Tiers"),
+              S.documentTypeListItem("partner").title("Partners"),
+            ])
+        ),
     ]);
 
 export default deskStructure;
