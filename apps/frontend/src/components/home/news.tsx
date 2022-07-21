@@ -29,11 +29,14 @@ export const News: React.FC<NewsProps> = ({ title, news }) => {
 const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
   const newsDescriptionRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
+      const maxLength = 800;
       const newsDescriptionRefChilds = node.children;
+      const textContent = newsDescriptionRefChilds[0].textContent;
+
       newsDescriptionRefChilds[0].innerHTML = `${doTruncate(
         newsDescriptionRefChilds[0].textContent as string,
-        800
-      )} ...`;
+        maxLength
+      )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
     }
   }, []);
 

@@ -1,6 +1,6 @@
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
-import { Slug } from "@lib/@types/global.types";
+import { Cta, Slug } from "@lib/@types/global.types";
 import { doTruncate } from "@lib/helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import Link from "next/link";
@@ -15,17 +15,21 @@ interface ReleaseProps {
     description: any[];
     images: SanityImage[];
     slug: Slug;
+    cta: Cta;
   }[];
 }
 
 export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
   const descriptionRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
+      const maxLength = 400;
       const descriptionRefChilds = node.children;
+      const textContent = descriptionRefChilds[0].textContent;
+
       descriptionRefChilds[0].innerHTML = `${doTruncate(
-        descriptionRefChilds[0].textContent as string,
-        800
-      )} ...`;
+        textContent as string,
+        maxLength
+      )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
     }
   }, []);
 
@@ -52,8 +56,10 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
               <div className="text-lg" ref={descriptionRef}>
                 <PortableText blocks={data.description} />
               </div>
-              <Link href={`/news/${data.slug.current}`}>
-                <a className="text-lg font-medium">Read More</a>
+              <Link href={data.cta.href}>
+                <a target="_blank" className="text-lg font-medium">
+                  {data.cta.title}
+                </a>
               </Link>
             </div>
           </div>

@@ -24,6 +24,7 @@ const News = {
       type: "array",
       of: [{ type: "block" }],
     },
+    { name: "cta", type: "cta" },
   ],
   preview: {
     select: {

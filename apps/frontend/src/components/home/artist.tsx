@@ -29,12 +29,14 @@ export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
 const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
   const artistDescriptionRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
+      const maxLength = 400;
       const artistDescriptionChilds = node.children;
+      const textContent = artistDescriptionChilds[0].textContent;
 
       artistDescriptionChilds[0].innerHTML = `${doTruncate(
-        artistDescriptionChilds[0].textContent as string,
-        400
-      )} ...`;
+        textContent as string,
+        maxLength
+      )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
     }
   }, []);
 

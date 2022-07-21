@@ -18,6 +18,7 @@ const query = pageQuery(groq`
                 header,
                 description,
                 slug,
+                cta,
                 images[] {
                     ..., 
                     asset->{
