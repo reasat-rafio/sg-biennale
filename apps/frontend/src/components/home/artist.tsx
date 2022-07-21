@@ -40,9 +40,9 @@ const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
 
   return (
     <div className="flex flex-col col-span-12 md:col-span-6 xl:col-span-3 | space-y-4">
-      <div>
+      <div className="md:h-[305px] h-auto">
         <SanityImg
-          className="w-full"
+          className="w-full h-full object-cover"
           width={400}
           builder={imageUrlBuilder}
           image={images[0]}

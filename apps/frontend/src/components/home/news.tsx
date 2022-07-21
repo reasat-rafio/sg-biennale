@@ -39,9 +39,9 @@ const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
 
   return (
     <div className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">
-      <div>
+      <div className="lg:h-[350px] h-auto">
         <SanityImg
-          className="h-full w-full"
+          className="h-full w-full object-cover"
           height={400}
           builder={imageUrlBuilder}
           image={images[0]}

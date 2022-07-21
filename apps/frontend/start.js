@@ -10,9 +10,6 @@ const port = 3000;
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-// smee io
-const SmeeClient = require("smee-client");
-
 app.prepare().then(() => {
   createServer(async (req, res) => {
     try {
@@ -38,12 +35,3 @@ app.prepare().then(() => {
     console.log(`> Ready on http://${hostname}:${port}`);
   });
 });
-
-const smee = new SmeeClient({
-  source: "https://smee.io/uLUJvpIxZjvLLj7C",
-  target:
-    "https://staging.singaporebiennale.org/modules/git/public/web-hook.php?uuid=23c06c15-780d-1618-8c40-a4536b16e221",
-  logger: console,
-});
-
-smee.start();
