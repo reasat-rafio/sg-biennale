@@ -4,9 +4,9 @@ import useArtistsStore from "@stores/artists-store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-interface FilterByVenueProps {}
+interface FilterByCountryProps {}
 
-export const FilterByVenue: React.FC<FilterByVenueProps> = () => {
+export const FilterByCountry: React.FC<FilterByCountryProps> = () => {
   const { allCountries } = useArtistsStore();
 
   const router = useRouter();
@@ -18,7 +18,7 @@ export const FilterByVenue: React.FC<FilterByVenueProps> = () => {
     query === ""
       ? allCountries
       : allCountries.filter((person) => {
-          return person.name.toLowerCase().includes(query.toLowerCase());
+          return person.title.toLowerCase().includes(query.toLowerCase());
         });
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const FilterByVenue: React.FC<FilterByVenueProps> = () => {
       {
         query: {
           ...router.query,
-          venue: selectedVenue.map(({ code }) => code),
+          country: selectedVenue.map(({ value }) => value),
         },
       },
       undefined,
@@ -40,7 +40,7 @@ export const FilterByVenue: React.FC<FilterByVenueProps> = () => {
     <div className="relative">
       <Combobox value={selectedVenue} onChange={setSelectedVenue} multiple>
         <Combobox.Button className="flex items-center justify-between | w-36 | space-x-2 px-4 py-1 | border-2 border-black | rounded-lg">
-          <span>Venue</span>
+          <span>Country</span>
           <ChevronArrow className="h-4 w-4" />
         </Combobox.Button>
 
@@ -55,17 +55,17 @@ export const FilterByVenue: React.FC<FilterByVenueProps> = () => {
             {filteredCountries.length ? (
               filteredCountries.map((data) => (
                 <Combobox.Option
-                  key={data.code}
+                  key={data.value}
                   value={data}
                   // onClick={onVenueSelect}
                 >
                   <input
                     type="checkbox"
                     checked={selectedVenue.some(
-                      ({ code }) => code === data.code
+                      ({ value }) => value === data.value
                     )}
                   />
-                  <span>{data.name}</span>
+                  <span>{data.title}</span>
                 </Combobox.Option>
               ))
             ) : (

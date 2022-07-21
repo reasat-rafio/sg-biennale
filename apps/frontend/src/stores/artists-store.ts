@@ -1,11 +1,11 @@
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import countries from "country-list";
 import { ArtistsProps } from "@components/artists/artists-list";
+import countries from "../../../../libs/countries";
 
 interface ICountry {
-  name: string;
-  code: string;
+  title: string;
+  value: string;
 }
 
 interface IArtistsStore {
@@ -18,7 +18,7 @@ interface IArtistsStore {
 
 const useArtistsStore = create(
   devtools<IArtistsStore>((set) => ({
-    allCountries: countries.getData(),
+    allCountries: countries,
     allArtists: [],
     filteredArtists: [],
     setAllArtists: (allArtists) => set((state) => ({ ...state, allArtists })),

@@ -15,6 +15,7 @@ export interface ArtistsProps {
   _id: string;
   images: SanityImage[];
   name: string;
+  country: string;
   slug: Slug;
 }
 

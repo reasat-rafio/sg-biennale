@@ -2,13 +2,10 @@ import { Search } from "@components/icons/search";
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import useArtistsStore from "@stores/artists-store";
-import { Dispatch, SetStateAction, useRef } from "react";
-import { ArtistsProps } from "./artists-list";
-import { FilterByVenue } from "./filter-by-venue";
+import { useRef } from "react";
+import { FilterByCountry } from "./filter-by-country";
 
-interface FilteringProps {}
-
-export const Filtering: React.FC<FilteringProps> = () => {
+export const Filtering: React.FC<{}> = () => {
   const { allArtists, setFilteredArtists } = useArtistsStore();
 
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -36,7 +33,7 @@ export const Filtering: React.FC<FilteringProps> = () => {
         <Header>Artist</Header>
 
         <div>
-          <FilterByVenue />
+          <FilterByCountry />
         </div>
       </div>
       <div className="relative lg:w-[350px] w-auto | flex | py-1 | border-2 border-black | rounded-3xl">

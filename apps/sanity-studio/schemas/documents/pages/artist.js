@@ -1,4 +1,5 @@
 import { FcButtingIn } from "react-icons/fc";
+import countries from "../../../../../libs/countries";
 
 const Artist = {
   title: "Artist Details Page",
@@ -38,6 +39,14 @@ const Artist = {
           to: { type: "artwork" },
         },
       ],
+    },
+
+    {
+      name: "country",
+      type: "string",
+      options: {
+        list: [...countries],
+      },
     },
   ],
   preview: {
