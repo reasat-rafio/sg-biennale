@@ -47,6 +47,8 @@ import Category from "./documents/category";
 import Artist from "./documents/pages/artist";
 import Artwork from "./documents/pages/artwork";
 
+import Curatorial from "./documents/curatorial";
+
 import News from "./documents/news";
 
 import Partner from "./documents/partner";
@@ -72,6 +74,8 @@ export default createSchema({
 
     Artist,
     Artwork,
+
+    Curatorial,
 
     News,
 
