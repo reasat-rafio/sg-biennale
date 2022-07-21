@@ -19,6 +19,10 @@ const query = pageQuery(groq`
                 description,
                 slug,
                 cta,
+                file {
+                  ...,
+                  asset->
+                },
                 images[] {
                     ..., 
                     asset->{
@@ -42,7 +46,6 @@ export const getStaticProps: GetStaticProps = async (
 
 const Press: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
-  console.log(page);
 
   return (
     <div>

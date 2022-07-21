@@ -16,6 +16,7 @@ interface ReleaseProps {
     images: SanityImage[];
     slug: Slug;
     cta: Cta;
+    file?: any;
   }[];
 }
 
@@ -32,6 +33,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
       )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
     }
   }, []);
+  console.log(releases);
 
   return (
     <Container type="section" className="py-section | border-b-2 border-black">
@@ -57,7 +59,16 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
                 <PortableText blocks={data.description} />
               </div>
               <Link href={data.cta.href}>
-                <a target="_blank" className="text-lg font-medium">
+                <a
+                  onClick={(event) => {
+                    if (data?.file) {
+                      event.preventDefault();
+                      window.open(data?.file.asset.url);
+                    }
+                  }}
+                  target="_blank"
+                  className="text-lg font-medium"
+                >
                   {data.cta.title}
                 </a>
               </Link>

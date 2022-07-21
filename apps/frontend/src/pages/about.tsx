@@ -17,7 +17,7 @@ const query = pageQuery(groq`
         sections[]{
             ...,
             'image': ${withDimensions("image")},
-            teamCollection[]{
+            teamCollection[]->{
               ...,
               'image': ${withDimensions("image")},
             },
