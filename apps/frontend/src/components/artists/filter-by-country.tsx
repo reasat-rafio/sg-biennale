@@ -18,7 +18,7 @@ export const FilterByCountry: React.FC<FilterByCountryProps> = () => {
     query === ""
       ? allCountries
       : allCountries.filter((person) => {
-          return person.title.toLowerCase().includes(query.toLowerCase());
+          return person.label.toLowerCase().includes(query.toLowerCase());
         });
 
   useEffect(() => {
@@ -54,22 +54,18 @@ export const FilterByCountry: React.FC<FilterByCountryProps> = () => {
           <div className="px-4 py-1">
             {filteredCountries.length ? (
               filteredCountries.map((data) => (
-                <Combobox.Option
-                  key={data.value}
-                  value={data}
-                  // onClick={onVenueSelect}
-                >
+                <Combobox.Option key={data.value} value={data}>
                   <input
                     type="checkbox"
                     checked={selectedVenue.some(
                       ({ value }) => value === data.value
                     )}
                   />
-                  <span>{data.title}</span>
+                  <span>{data.label}</span>
                 </Combobox.Option>
               ))
             ) : (
-              <div>No venue found</div>
+              <div>No country found</div>
             )}
           </div>
         </Combobox.Options>

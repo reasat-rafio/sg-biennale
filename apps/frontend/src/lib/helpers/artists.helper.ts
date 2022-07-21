@@ -1,4 +1,4 @@
-import { ArtistsProps } from "@components/artists/artists-list";
+import { ArtistsProps } from "@lib/@types/artists.types";
 import { NextRouter, useRouter } from "next/router";
 
 type TSelectedCountry = string | string[] | undefined;
@@ -23,9 +23,15 @@ export const filterLogicFactory = (
       const filterdArtists = allArtists.filter((artist) => {
         if (selectedCountry) {
           if (typeof selectedCountry === "string") {
-            return artist.country === selectedCountry;
+            return artist.countries.some(
+              (country) => country.value === selectedCountry
+            );
           } else {
-            return selectedCountry.some((cntry) => cntry === artist.country);
+            return selectedCountry.some((cntry) =>
+              artist.countries.some(
+                (artistCntry) => artistCntry.label === cntry
+              )
+            );
           }
         } else return artist;
       });

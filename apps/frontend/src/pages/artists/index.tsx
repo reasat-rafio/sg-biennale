@@ -15,7 +15,7 @@ const query = groq`{
         _id,
         name,
         slug,
-        country,
+        countries,
         images[] {
           ..., 
           asset->{

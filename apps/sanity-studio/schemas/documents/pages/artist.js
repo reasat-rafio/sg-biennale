@@ -42,10 +42,11 @@ const Artist = {
     },
 
     {
-      name: "country",
-      type: "string",
+      name: "countries",
+      type: "tags",
       options: {
-        list: [...countries],
+        predefinedTags: [...countries],
+        allowCreate: false,
       },
     },
   ],

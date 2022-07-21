@@ -1,10 +1,10 @@
+import { ArtistsProps } from "@lib/@types/artists.types";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import { ArtistsProps } from "@components/artists/artists-list";
 import countries from "../../../../libs/countries";
 
 interface ICountry {
-  title: string;
+  label: string;
   value: string;
 }
 

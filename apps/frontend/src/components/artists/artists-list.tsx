@@ -1,22 +1,13 @@
 import { Container } from "@components/ui/container";
-import { Slug } from "@lib/@types/global.types";
+import { ArtistsProps } from "@lib/@types/artists.types";
 import useArtistsStore from "@stores/artists-store";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SanityImage, SanityImg } from "sanity-react-extra";
 
 interface SortedArtistsList {
   title: string;
   data: ArtistsProps[];
-}
-
-export interface ArtistsProps {
-  _id: string;
-  images: SanityImage[];
-  name: string;
-  country: string;
-  slug: Slug;
 }
 
 export const ArtistsList: React.FC<{}> = ({}) => {
