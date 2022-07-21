@@ -33,7 +33,6 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
       )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
     }
   }, []);
-  console.log(releases);
 
   return (
     <Container type="section" className="py-section | border-b-2 border-black">

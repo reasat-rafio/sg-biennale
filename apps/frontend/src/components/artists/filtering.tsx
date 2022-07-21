@@ -3,6 +3,8 @@ import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { Dispatch, SetStateAction, useRef } from "react";
 import { ArtistsProps } from "./artists-list";
+import countries from "country-list";
+import { FilterByDropdown } from "./filter-by-dropdown";
 
 interface FilteringProps {
   allArtists: ArtistsProps[];
@@ -16,6 +18,7 @@ export const Filtering: React.FC<FilteringProps> = ({
 }) => {
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const searchRef = useRef<HTMLInputElement | null>(null);
+  const countryNames = countries.getData();
 
   const onSearchAction = () => {
     const searchInputValue = searchRef.current?.value;
@@ -36,9 +39,10 @@ export const Filtering: React.FC<FilteringProps> = ({
     <Container className="flex lg:flex-row flex-col items-center | py-5 ">
       <div className="flex-1 flex items-center | space-x-6">
         <Header>Artist</Header>
-        <button className="px-4 py-1 | border-2 border-black | rounded-3xl ">
-          Sort by
-        </button>
+
+        <div>
+          <FilterByDropdown name="Venue" data={countryNames} />
+        </div>
       </div>
       <div className="relative lg:w-[350px] w-auto | flex | py-1 | border-2 border-black | rounded-3xl">
         <input
