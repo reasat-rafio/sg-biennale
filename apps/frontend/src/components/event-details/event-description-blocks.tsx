@@ -3,7 +3,7 @@ import { Calender } from "@components/icons/calender";
 import { Clock } from "@components/icons/clock";
 import { Location } from "@components/icons/location";
 import { EventDescriptionProps, Venue } from "@lib/@types/event.types";
-import { convertDate, convertSecondsToAMPM } from "@lib/helpers";
+import { convertDate, convertSecondsToAMPM } from "@lib/helpers/global.helpers";
 import { PortableText } from "@utils/sanity";
 
 export const Header: React.FC<{

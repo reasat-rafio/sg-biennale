@@ -12,7 +12,7 @@ import "swiper/css/autoplay";
 import { SanityImg } from "sanity-react-extra";
 import { imageUrlBuilder } from "@utils/sanity";
 import Link from "next/link";
-import { convertDate, convertSecondsToAMPM } from "@lib/helpers";
+import { convertDate, convertSecondsToAMPM } from "@lib/helpers/global.helpers";
 
 interface ProgrammeEventListCardProps {
   data: IPgrammeEvents;

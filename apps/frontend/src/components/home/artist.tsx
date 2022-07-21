@@ -1,7 +1,7 @@
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { IArtistProps } from "@lib/@types/home.types";
-import { doTruncate } from "@lib/helpers";
+import { doTruncate } from "@lib/helpers/global.helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { useCallback } from "react";
 import { SanityImg } from "sanity-react-extra";

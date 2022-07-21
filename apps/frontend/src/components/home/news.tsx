@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { Container } from "@components/ui/container";
 import { INewsProps } from "@lib/@types/home.types";
-import { doTruncate } from "@lib/helpers";
+import { doTruncate } from "@lib/helpers/global.helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { SanityImg } from "sanity-react-extra";
 import { Header } from "@components/ui/header";
