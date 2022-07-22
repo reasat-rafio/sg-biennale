@@ -1,6 +1,7 @@
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { Cta } from "@lib/@types/global.types";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import Link from "next/link";
 import { SanityImage, SanityImg } from "sanity-react-extra";
@@ -21,6 +22,8 @@ export const Hero: React.FC<HeroProps> = ({
   ctas,
   image,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <Container type="section" className="py-section">
       <h1 className="pb-10 text-3xl font-medium">{header}</h1>
@@ -35,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({
           <SanityImg
             className="w-full"
             builder={imageUrlBuilder}
-            width={500}
+            width={windowWidth >= 768 ? 650 : 400}
             image={image}
             alt={subheader}
           />

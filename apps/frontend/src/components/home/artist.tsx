@@ -2,6 +2,7 @@ import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { IArtistProps } from "@lib/@types/home.types";
 import { doTruncate } from "@lib/helpers/global.helpers";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { useCallback } from "react";
 import { SanityImg } from "sanity-react-extra";
@@ -27,6 +28,8 @@ export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
 };
 
 const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   const artistDescriptionRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
       const maxLength = 400;
@@ -45,7 +48,7 @@ const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
       <div className="md:h-[305px] h-auto">
         <SanityImg
           className="w-full h-full object-cover"
-          width={400}
+          height={windowWidth >= 768 ? 400 : 200}
           builder={imageUrlBuilder}
           image={images[0]}
           alt={`${name}'s image`}

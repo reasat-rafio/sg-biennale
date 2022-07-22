@@ -2,6 +2,7 @@ import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { TeamCollection } from "@lib/@types/about.types";
 import { doTruncate } from "@lib/helpers/global.helpers";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { useCallback } from "react";
 import { SanityImg } from "sanity-react-extra";
@@ -16,6 +17,8 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
   header,
   teamCollection,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   const descriptionRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
       const maxLength = 400;
@@ -40,8 +43,8 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
           >
             <div className="flex | justify-center items-center | overflow-hidden">
               <SanityImg
-                width={305}
-                className="h-[305px] | object-cover rounded-full"
+                width={windowWidth >= 768 ? 400 : 200}
+                className="xl:h-[305px] xl:w-[305px] h-auto w-auto | object-cover rounded-full"
                 image={images[0]}
                 builder={imageUrlBuilder}
                 alt={`${name}'s image`}

@@ -5,6 +5,7 @@ import { doTruncate } from "@lib/helpers/global.helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { SanityImg } from "sanity-react-extra";
 import { Header } from "@components/ui/header";
+import { useWindowSize } from "@lib/hooks";
 
 interface NewsProps {
   type: string;
@@ -27,6 +28,8 @@ export const News: React.FC<NewsProps> = ({ title, news }) => {
 };
 
 const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   const newsDescriptionRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
       const maxLength = 800;
@@ -45,7 +48,7 @@ const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
       <div className="lg:h-[350px] h-auto">
         <SanityImg
           className="h-full w-full object-cover"
-          height={400}
+          height={windowWidth >= 768 ? 400 : 200}
           builder={imageUrlBuilder}
           image={images[0]}
           alt={`${header}`}

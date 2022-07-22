@@ -1,6 +1,7 @@
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { AboutCollection } from "@lib/@types/about.types";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImg } from "sanity-react-extra";
 
@@ -14,6 +15,8 @@ export const AboutUs: React.FC<AboutUsProps> = ({
   aboutCollection,
   header,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <Container type="section" className="py-section">
       <Header>{header}</Header>
@@ -23,7 +26,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
             <div>
               <SanityImg
                 className="max-h-[350px] w-full | object-cover"
-                width={350}
+                width={windowWidth >= 768 ? 600 : 400}
                 image={image}
                 builder={imageUrlBuilder}
                 alt="image"

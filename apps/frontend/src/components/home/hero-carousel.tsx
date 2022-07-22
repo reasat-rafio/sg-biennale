@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import "swiper/css/autoplay";
+import { useWindowSize } from "@lib/hooks";
 
 interface HeroCarouselProps {
   carouselItems: HomHeroProps["carousel"];
@@ -15,6 +16,8 @@ interface HeroCarouselProps {
 export const HeroCarousel: React.FC<HeroCarouselProps> = ({
   carouselItems,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <Swiper
       className="h-screen md:h-[75vh]"
@@ -29,7 +32,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
       {carouselItems.map(({ key, image, description, title }) => (
         <SwiperSlide className="relative" key={key}>
           <SanityImg
-            width={1200}
+            width={windowWidth >= 1024 ? 1200 : 700}
             className="h-full w-full absolute object-cover object-center "
             image={image}
             builder={imageUrlBuilder}

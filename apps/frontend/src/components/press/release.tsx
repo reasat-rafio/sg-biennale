@@ -2,6 +2,7 @@ import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { Cta, Slug } from "@lib/@types/global.types";
 import { doTruncate } from "@lib/helpers/global.helpers";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import Link from "next/link";
 import { useCallback } from "react";
@@ -21,6 +22,8 @@ interface ReleaseProps {
 }
 
 export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   const descriptionRef = useCallback((node: HTMLDivElement | null) => {
     if (node !== null) {
       const maxLength = 400;
@@ -45,7 +48,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
           >
             <div>
               <SanityImg
-                width={500}
+                width={windowWidth >= 768 ? 700 : 500}
                 className="w-full max-h-[400px] object-cover"
                 image={data.images[0]}
                 builder={imageUrlBuilder}

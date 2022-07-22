@@ -1,4 +1,5 @@
 import { Slug } from "@lib/@types/global.types";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import { useEffect, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
@@ -24,6 +25,8 @@ interface PartnerListProps {
 }
 
 export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   const [_partners, setPartners] = useState<ModifyedPartnersList[] | null>(
     null
   );
@@ -61,7 +64,7 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
               >
                 <div className="lg:h-[350px] h-auto">
                   <SanityImg
-                    width={300}
+                    width={windowWidth >= 768 ? 500 : 200}
                     image={image}
                     className="w-full h-full | object-cover"
                     builder={imageUrlBuilder}
