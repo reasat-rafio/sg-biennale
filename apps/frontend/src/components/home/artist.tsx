@@ -1,10 +1,8 @@
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { IArtistProps } from "@lib/@types/home.types";
-import { doTruncate } from "@lib/helpers/global.helpers";
-import { useWindowSize } from "@lib/hooks";
+import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import { useCallback } from "react";
 import { SanityImg } from "sanity-react-extra";
 
 interface ArtistProps {
@@ -30,29 +28,20 @@ export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
 const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
 
-  const artistDescriptionRef = useCallback((node: HTMLDivElement | null) => {
-    if (node !== null) {
-      const maxLength = 400;
-      const artistDescriptionChilds = node.children;
-      const textContent = artistDescriptionChilds[0].textContent;
-
-      artistDescriptionChilds[0].innerHTML = `${doTruncate(
-        textContent as string,
-        maxLength
-      )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
-    }
-  }, []);
+  const [artistDescriptionRef, setMaxLength] = usePortableTextTruncate({
+    maxLength: 400,
+  });
 
   return (
     <div className="flex flex-col col-span-12 md:col-span-6 xl:col-span-3 | space-y-4">
       <div className="md:h-[305px] h-auto">
-        <SanityImg
+        {/* <SanityImg
           className="w-full h-full object-cover"
           height={windowWidth >= 768 ? 400 : 200}
           builder={imageUrlBuilder}
           image={images[0]}
           alt={`${name}'s image`}
-        />
+        /> */}
       </div>
       <div>
         <h6 className="mb-1 | text-lg font-medium">{name}</h6>

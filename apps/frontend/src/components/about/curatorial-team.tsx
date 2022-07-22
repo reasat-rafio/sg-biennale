@@ -1,10 +1,8 @@
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { TeamCollection } from "@lib/@types/about.types";
-import { doTruncate } from "@lib/helpers/global.helpers";
-import { useWindowSize } from "@lib/hooks";
+import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import { useCallback } from "react";
 import { SanityImg } from "sanity-react-extra";
 
 interface CuratorialTeamProps {
@@ -18,19 +16,7 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
   teamCollection,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
-
-  const descriptionRef = useCallback((node: HTMLDivElement | null) => {
-    if (node !== null) {
-      const maxLength = 400;
-      const descriptionRefChilds = node.children;
-      const textContent = descriptionRefChilds[0].textContent;
-
-      descriptionRefChilds[0].innerHTML = `${doTruncate(
-        descriptionRefChilds[0].textContent as string,
-        maxLength
-      )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
-    }
-  }, []);
+  const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
 
   return (
     <Container type="section" className="py-section">

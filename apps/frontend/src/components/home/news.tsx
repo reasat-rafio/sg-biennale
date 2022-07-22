@@ -5,7 +5,7 @@ import { doTruncate } from "@lib/helpers/global.helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { SanityImg } from "sanity-react-extra";
 import { Header } from "@components/ui/header";
-import { useWindowSize } from "@lib/hooks";
+import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 
 interface NewsProps {
   type: string;
@@ -29,19 +29,7 @@ export const News: React.FC<NewsProps> = ({ title, news }) => {
 
 const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
-
-  const newsDescriptionRef = useCallback((node: HTMLDivElement | null) => {
-    if (node !== null) {
-      const maxLength = 800;
-      const newsDescriptionRefChilds = node.children;
-      const textContent = newsDescriptionRefChilds[0].textContent;
-
-      newsDescriptionRefChilds[0].innerHTML = `${doTruncate(
-        newsDescriptionRefChilds[0].textContent as string,
-        maxLength
-      )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
-    }
-  }, []);
+  const [newsDescriptionRef] = usePortableTextTruncate({ maxLength: 800 });
 
   return (
     <div className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">

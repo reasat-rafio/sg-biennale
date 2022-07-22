@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef } from "react";
+import { Dispatch, SetStateAction, useCallback, useRef } from "react";
 /* eslint-disable react-hooks/exhaustive-deps */
 import { RefObject, useEffect, useState } from "react";
 
@@ -233,4 +233,39 @@ export const useOutsideClick = (
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [ref]);
+};
+
+interface IPortableTextHook {
+  maxLength: number;
+}
+
+const doTruncate = (text: string, endPosition: number) => {
+  return text.slice(0, endPosition);
+};
+
+export const usePortableTextTruncate = ({
+  maxLength,
+}: IPortableTextHook): [
+  (node: HTMLElement | null) => void,
+  Dispatch<SetStateAction<number>>
+] => {
+  const [_maxLength, setMaxlength] = useState(maxLength);
+
+  const ref = useCallback(
+    (node: HTMLElement | null) => {
+      if (node !== null) {
+        const childElement = node?.children;
+        const childElementTextContent = childElement[0].textContent;
+
+        childElement[0].innerHTML = `${doTruncate(
+          childElementTextContent as string,
+          _maxLength
+        )} ${
+          (childElementTextContent?.length as number) > _maxLength ? "..." : ""
+        }`;
+      }
+    },
+    [_maxLength]
+  );
+  return [ref, setMaxlength];
 };

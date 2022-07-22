@@ -2,7 +2,7 @@ import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { Cta, Slug } from "@lib/@types/global.types";
 import { doTruncate } from "@lib/helpers/global.helpers";
-import { useWindowSize } from "@lib/hooks";
+import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import Link from "next/link";
 import { useCallback } from "react";
@@ -24,18 +24,7 @@ interface ReleaseProps {
 export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
 
-  const descriptionRef = useCallback((node: HTMLDivElement | null) => {
-    if (node !== null) {
-      const maxLength = 400;
-      const descriptionRefChilds = node.children;
-      const textContent = descriptionRefChilds[0].textContent;
-
-      descriptionRefChilds[0].innerHTML = `${doTruncate(
-        textContent as string,
-        maxLength
-      )} ${(textContent?.length as number) > maxLength ? "..." : ""}`;
-    }
-  }, []);
+  const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
 
   return (
     <Container type="section" className="py-section | border-b-2 border-black">

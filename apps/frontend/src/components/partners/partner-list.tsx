@@ -1,28 +1,11 @@
-import { Slug } from "@lib/@types/global.types";
+import {
+  ModifyedPartnersList,
+  PartnerListProps,
+} from "@lib/@types/partners.types";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import { useEffect, useState } from "react";
-import { SanityImage, SanityImg } from "sanity-react-extra";
-
-interface ModifyedPartnersList {
-  tierName: string;
-  id: string;
-  data: PartnerListProps["partners"];
-}
-
-interface PartnerListProps {
-  partners: {
-    _id: string;
-    name: string;
-    description: string;
-    image: SanityImage;
-    slug: Slug;
-    tier: {
-      _id: string;
-      title: string;
-    };
-  }[];
-}
+import { SanityImg } from "sanity-react-extra";
 
 export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
