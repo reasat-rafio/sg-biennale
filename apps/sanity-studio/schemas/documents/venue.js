@@ -55,6 +55,12 @@ const Venue = {
         },
       ],
     },
+    {
+      title: "Artists",
+      name: "artists",
+      type: "array",
+      of: [{ type: "reference", to: { type: "artist" } }],
+    },
   ],
   preview: {
     select: {
