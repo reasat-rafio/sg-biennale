@@ -20,7 +20,7 @@ export const FooterCta: React.FC<FooterCtaProps> = ({ menu }) => {
         ))}
       </div>
 
-      <Link href="https://singaporebiennale.us8.list-manage.com/subscribe?u=a3765dacd752c5813e8ec836a&id=10da056cfa">
+      <Link href="http://eepurl.com/gQTlD5">
         <a className="px-4 | text-lg | border-2 border-black | rounded-3xl">
           Subscribe
         </a>

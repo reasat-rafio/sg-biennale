@@ -35,7 +35,7 @@ export const Filtering: React.FC<{}> = () => {
   return (
     <Container className="flex lg:flex-row flex-col items-center | py-5 ">
       <div className="flex-1 flex items-center | space-x-6">
-        <Header>Artist</Header>
+        <Header>Artist & Collaborators</Header>
 
         <div>
           <FilterByCountry />
