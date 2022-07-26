@@ -19,7 +19,13 @@ export const FooterCta: React.FC<FooterCtaProps> = ({ menu }) => {
           </Link>
         ))}
       </div>
-      <form className="relative lg:w-[600px] w-full | flex |  py-1 | border-2 border-black | rounded-3xl">
+
+      <Link href="https://singaporebiennale.us8.list-manage.com/subscribe?u=a3765dacd752c5813e8ec836a&id=10da056cfa">
+        <a className="px-4 | text-lg | border-2 border-black | rounded-3xl">
+          Subscribe
+        </a>
+      </Link>
+      {/* <form className="relative lg:w-[600px] w-full | flex |  py-1 | border-2 border-black | rounded-3xl">
         <input
           className="flex-1 | pl-3 | bg-transparent outline-none"
           placeholder="Email"
@@ -32,7 +38,7 @@ export const FooterCta: React.FC<FooterCtaProps> = ({ menu }) => {
         >
           Subscribe
         </button>
-      </form>
+      </form> */}
     </Container>
   );
 };

@@ -3,6 +3,7 @@ import { Header } from "@components/ui/header";
 import { TeamCollection } from "@lib/@types/about.types";
 import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
+import Link from "next/link";
 import { SanityImg } from "sanity-react-extra";
 
 interface CuratorialTeamProps {
@@ -22,7 +23,7 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
     <Container type="section" className="py-section">
       <Header>{header}</Header>
       <div className="grid grid-cols-12 | gap-4 mt-8">
-        {teamCollection.map(({ _key, name, description, images }) => (
+        {teamCollection.map(({ _key, name, description, images, slug }) => (
           <div
             key={_key}
             className=" flex flex-col space-y-4 | col-span-12 md:col-span-4 lg:col-span-3"
@@ -41,6 +42,10 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
               <div ref={descriptionRef} className="text-base">
                 <PortableText blocks={description} />
               </div>
+
+              <Link href={`/director/${slug.current}`}>
+                <a>Read More</a>
+              </Link>
             </div>
           </div>
         ))}

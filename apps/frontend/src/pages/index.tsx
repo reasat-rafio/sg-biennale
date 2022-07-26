@@ -26,6 +26,7 @@ const query = pageQuery(groq`
         _id,
         name,
         description,
+        slug,
         images[] {
           ..., 
           asset->{

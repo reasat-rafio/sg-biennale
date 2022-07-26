@@ -51,7 +51,7 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
             {data.map(({ _id, name, image }) => (
               <div
                 key={_id}
-                className="xl:col-span-3 md:col-span-4 sm:col-span-6 col-span-12 | lg:h-[350px] h-auto"
+                className="xl:col-span-3 md:col-span-4 sm:col-span-6 col-span-12 | lg:h-[124px] lg:w-[220px] h-auto"
               >
                 <SanityImg
                   width={windowWidth >= 768 ? 500 : 200}

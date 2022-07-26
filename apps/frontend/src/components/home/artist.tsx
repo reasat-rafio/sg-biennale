@@ -3,6 +3,7 @@ import { Header } from "@components/ui/header";
 import { IArtistProps } from "@lib/@types/home.types";
 import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
+import Link from "next/link";
 import { SanityImg } from "sanity-react-extra";
 
 interface ArtistProps {
@@ -25,10 +26,15 @@ export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
   );
 };
 
-const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
+const ArtistCard: React.FC<IArtistProps> = ({
+  description,
+  images,
+  name,
+  slug,
+}) => {
   const windowWidth = useWindowSize()?.width ?? 0;
 
-  const [artistDescriptionRef, setMaxLength] = usePortableTextTruncate({
+  const [artistDescriptionRef] = usePortableTextTruncate({
     maxLength: 400,
   });
 
@@ -44,11 +50,14 @@ const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
           alt={`${name}'s image`}
         /> */}
       </div>
-      <div>
-        <h6 className="mb-1 | text-lg font-medium">{name}</h6>
+      <div className="flex flex-col space-y-3">
+        <h6 className="text-lg font-medium">{name}</h6>
         <div ref={artistDescriptionRef}>
           <PortableText blocks={description} />
         </div>
+        <Link href={`/artists/${slug.current}`}>
+          <a className="font-medium">Read More</a>
+        </Link>
       </div>
     </div>
   );

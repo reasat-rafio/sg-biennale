@@ -7,7 +7,7 @@ export interface TeamCollection {
   description: string;
   images: SanityImage[];
   name: string;
-  slug: Slug[];
+  slug: Slug;
 }
 
 export interface AboutCollection {

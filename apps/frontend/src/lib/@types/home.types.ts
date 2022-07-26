@@ -1,4 +1,5 @@
 import { SanityImage } from "sanity-react-extra";
+import { Slug } from "./global.types";
 
 export interface HomHeroProps {
   type: string;
@@ -33,6 +34,7 @@ export interface IArtistProps {
   description: any[];
   images: SanityImage[];
   name: string;
+  slug: Slug;
 }
 export interface INewsProps {
   _id: string;
