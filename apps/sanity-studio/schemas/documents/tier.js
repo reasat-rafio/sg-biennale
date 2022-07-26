@@ -16,6 +16,11 @@ const Tier = {
         source: (doc) => doc.title,
       },
     },
+    {
+      name: "order",
+      type: "number",
+      hidden: true,
+    },
   ],
 };
 
