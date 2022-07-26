@@ -34,7 +34,7 @@ const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
       <div className="lg:h-[350px] h-auto">
         <SanityImg
           className="h-full w-full object-cover"
-          height={windowWidth >= 768 ? 400 : 200}
+          height={windowWidth >= 768 ? 500 : 200}
           builder={imageUrlBuilder}
           image={images[0]}
           alt={`${header}`}

@@ -32,6 +32,7 @@ export interface MoreInfo {
   description: string;
   title: string;
   icon?: SanityImage;
+  image?: SanityImage;
 }
 
 export interface Venue {
