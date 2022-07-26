@@ -80,11 +80,11 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                   ))}
                 </div>
                 {cta && (
-                  <button className="mr-auto | px-3 py-1 | border border-black | rounded-3xl ">
-                    <Link href={cta?.href ?? "/"}>
-                      <a>{cta.title}</a>
-                    </Link>
-                  </button>
+                  <Link href={cta?.href ?? "/"}>
+                    <a className="mr-auto | px-3 py-1 | border border-black | rounded-3xl ">
+                      {cta.title}
+                    </a>
+                  </Link>
                 )}
               </div>
             )}

@@ -29,7 +29,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
   return (
     <Container type="section" className="py-section | border-b-2 border-black">
       <Header type="h1">{header}</Header>
-      <div className="grid grid-cols-12 | mt-7 lg:gap-8 gap-4">
+      <div className="grid grid-cols-12 | my-7 lg:gap-8 gap-4">
         {releases.map((data) => (
           <div
             key={data._id}
@@ -66,12 +66,6 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="flex justify-center items-center | my-7">
-        <button className="px-4 py-1 | border-black border-2 | rounded-3xl">
-          Archive
-        </button>
       </div>
     </Container>
   );

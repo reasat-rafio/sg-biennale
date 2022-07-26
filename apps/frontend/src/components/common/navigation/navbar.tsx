@@ -8,7 +8,7 @@ export const Navbar: React.FC<ISite["site"]> = ({
   navigations: { heightlights, menu },
 }) => {
   return (
-    <nav id="navbar" className="sticky top-0 left-0 z-40 bg-white">
+    <nav id="navbar" className="lg:sticky top-0 left-0 z-40 bg-white">
       <NavHeader date={date} logo={logo} />
       <NavItems heightlights={heightlights} menu={menu} />
     </nav>

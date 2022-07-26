@@ -28,7 +28,7 @@ export interface ShortGuideAsset {
 export interface MoreInfo {
   key: string;
   type: string;
-  cta: Cta;
+  cta?: Cta;
   description: string;
   title: string;
   icon?: SanityImage;

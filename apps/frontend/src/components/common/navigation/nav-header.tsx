@@ -29,7 +29,7 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, date }) => {
         </div>
 
         <div className="flex flex-col justify-around | ml-auto | lg:text-2xl md:text-lg text-base font-semibold">
-          <div className="flex | space-x-2 ml-auto">Natasha</div>
+          <div className="flex | space-x-2 ml-auto">natasha</div>
           <span className="whitespace-pre-wrap text-right">{date}</span>
         </div>
       </div>

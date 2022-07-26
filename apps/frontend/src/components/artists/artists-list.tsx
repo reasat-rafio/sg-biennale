@@ -56,12 +56,10 @@ export const ArtistsList: React.FC<{}> = ({}) => {
                   style={{ wordSpacing: "2000px" }}
                   className="text-2xl font-semibold leading-snug mb-3"
                 >
-                  {name}
+                  <Link href={`artists/${slug?.current ?? ""}`}>
+                    <a>{name}</a>
+                  </Link>
                 </h2>
-
-                <Link href={`artists/${slug?.current ?? ""}`}>
-                  <a className="text-gray-500 text-sm">See Artist</a>
-                </Link>
               </div>
             ))}
           </div>

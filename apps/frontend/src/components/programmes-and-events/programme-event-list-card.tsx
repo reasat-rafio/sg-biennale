@@ -98,11 +98,11 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
           ))}
         </div>
         <div>
-          <button className="px-4 py-1 | bg-black text-white | rounded-3xl">
-            <Link href={`/programmes-events/${slug.current}`}>
-              <a>Book</a>
-            </Link>
-          </button>
+          <Link href={`/programmes-events/${slug.current}`}>
+            <a className="px-4 py-1 | bg-black text-white | rounded-3xl">
+              Book
+            </a>
+          </Link>
         </div>
       </div>
     </div>

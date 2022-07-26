@@ -34,7 +34,8 @@ const ArtistCard: React.FC<IArtistProps> = ({ description, images, name }) => {
 
   return (
     <div className="flex flex-col col-span-12 md:col-span-6 xl:col-span-3 | space-y-4">
-      <div className="md:h-[305px] h-auto">
+      {/*lg:h-[305px] h-auto */}
+      <div>
         {/* <SanityImg
           className="w-full h-full object-cover"
           height={windowWidth >= 768 ? 400 : 200}

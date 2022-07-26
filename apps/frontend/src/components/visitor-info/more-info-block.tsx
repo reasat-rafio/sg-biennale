@@ -15,11 +15,13 @@ export const MoreInfoBlock: React.FC<MoreInfoBlockProps> = ({
     <div className={clsx(className, "flex flex-col | space-y-5")}>
       <h6 className="text-xl font-semibold | mr-auto py-1">{title}</h6>
       <p className="text-lg">{description}</p>
-      <button className="flex | border border-black | mr-auto px-2 py-1 | text-sm | rounded-3xl">
+      {cta?.href && (
         <Link href={cta?.href ?? "/"}>
-          <a>{cta?.title}</a>
+          <a className="flex | border border-black | mr-auto px-2 py-1 | text-sm | rounded-3xl">
+            {cta?.title}
+          </a>
         </Link>
-      </button>
+      )}
     </div>
   );
 };

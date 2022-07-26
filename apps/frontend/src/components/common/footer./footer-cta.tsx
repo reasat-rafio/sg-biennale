@@ -19,7 +19,7 @@ export const FooterCta: React.FC<FooterCtaProps> = ({ menu }) => {
           </Link>
         ))}
       </div>
-      <form className="relative lg:w-[600px] w-auto | flex |  py-1 | border-2 border-black | rounded-3xl">
+      <form className="relative lg:w-[600px] w-full | flex |  py-1 | border-2 border-black | rounded-3xl">
         <input
           className="flex-1 | pl-3 | bg-transparent outline-none"
           placeholder="Email"

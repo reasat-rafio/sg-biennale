@@ -45,7 +45,7 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
       </div>
       <div className="flex flex-col lg:flex-row | lg:space-x-5 space-y-3 lg:space-y-0 my-5">
-        {ctas.map(({ href, title, _key }) => (
+        {ctas?.map(({ href, title, _key }) => (
           <Link key={_key} href={href}>
             <a className="flex-1 | py-2 px-4 | border-black border-2 | text-center | rounded-3xl">
               {title}
