@@ -38,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({
           <SanityImg
             className="w-full"
             builder={imageUrlBuilder}
-            width={windowWidth >= 768 ? 650 : 400}
+            width={windowWidth >= 768 ? 900 : 500}
             image={image}
             alt={subheader}
           />

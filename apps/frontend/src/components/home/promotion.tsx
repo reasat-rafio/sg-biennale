@@ -39,7 +39,7 @@ const PromotionCard: React.FC<IPromotion> = ({
       <div className="lg:h-[350px] h-auto">
         <SanityImg
           className="h-full w-full object-cover"
-          height={windowWidth >= 768 ? 500 : 250}
+          height={windowWidth >= 768 ? 600 : 400}
           builder={imageUrlBuilder}
           image={image}
           alt={`${title}`}

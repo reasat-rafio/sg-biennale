@@ -30,7 +30,7 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
           >
             <div className="flex | justify-center items-center | overflow-hidden">
               <SanityImg
-                width={windowWidth >= 768 ? 400 : 200}
+                width={windowWidth >= 768 ? 600 : 350}
                 className="xl:h-[305px] xl:w-[305px] h-auto w-auto | object-cover rounded-full"
                 image={images[0]}
                 builder={imageUrlBuilder}

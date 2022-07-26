@@ -26,7 +26,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
             <div>
               <SanityImg
                 className="max-h-[350px] w-full | object-cover"
-                width={windowWidth >= 768 ? 600 : 400}
+                width={windowWidth >= 768 ? 900 : 500}
                 image={image}
                 builder={imageUrlBuilder}
                 alt="image"

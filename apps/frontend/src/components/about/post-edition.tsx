@@ -28,7 +28,7 @@ export const PostEdition: React.FC<PostEditionProps> = ({
           >
             <div>
               <SanityImg
-                width={windowWidth >= 768 ? 400 : 200}
+                width={windowWidth >= 768 ? 600 : 300}
                 className="w-full max-h-[350px] | object-contain"
                 image={image}
                 builder={imageUrlBuilder}
