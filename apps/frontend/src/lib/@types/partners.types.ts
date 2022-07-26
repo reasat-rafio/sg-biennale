@@ -4,6 +4,7 @@ import { SanityImage } from "sanity-react-extra";
 export interface ModifyedPartnersList {
   tierName: string;
   id: string;
+  order: number;
   data: PartnerListProps["partners"];
 }
 
@@ -17,6 +18,7 @@ export interface PartnerListProps {
     tier: {
       _id: string;
       title: string;
+      order: number;
     };
   }[];
 }

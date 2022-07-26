@@ -13,7 +13,8 @@ const query = groq`{
         ...,
         tier->{
           _id,
-          title
+          title,
+          order
         },
         'image': ${withDimensions("image")},
     },    

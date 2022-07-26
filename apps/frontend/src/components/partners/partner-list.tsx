@@ -18,10 +18,12 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
     const newPatnersList: ModifyedPartnersList[] = Object.values(
       partners.reduce((newArr: any, patner) => {
         let tierName = patner.tier.title;
+        let order = patner.tier.order;
 
         !newArr[tierName]
           ? (newArr[tierName] = {
-              tierName: patner.tier.title,
+              tierName,
+              order,
               id: patner.tier._id,
               data: [patner],
             })
@@ -30,7 +32,13 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
         return newArr;
       }, {})
     );
-    setPartners(newPatnersList);
+
+    /* ❓ sorting the partnes by their tiper level */
+    const sortPartnersByTierLevel = newPatnersList.sort((a, b) =>
+      a.order > b.order ? 1 : -1
+    );
+
+    setPartners(sortPartnersByTierLevel);
   }, [partners]);
 
   return (
@@ -39,22 +47,19 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
         <div className="pb-5" key={id}>
           <h2 className="text-2xl font-medium">{tierName}</h2>
 
-          <div className="grid grid-cols-12 | py-10 lg:gap-x-7 sm:gap-x-3 lg:gap-y-14 gap-y-5">
+          <div className="grid grid-cols-12 | pt-5 lg:gap-x-7 sm:gap-x-3 lg:gap-y-14 gap-y-5">
             {data.map(({ _id, name, image }) => (
               <div
                 key={_id}
-                className="xl:col-span-3 md:col-span-4 sm:col-span-6 col-span-12"
+                className="xl:col-span-3 md:col-span-4 sm:col-span-6 col-span-12 | lg:h-[350px] h-auto"
               >
-                <div className="lg:h-[350px] h-auto">
-                  <SanityImg
-                    width={windowWidth >= 768 ? 500 : 200}
-                    image={image}
-                    className="w-full h-full | object-cover"
-                    builder={imageUrlBuilder}
-                    alt={`${name}'s logo`}
-                  />
-                </div>
-                <h3 className="pt-5 | text-sm font-semibold">{name}</h3>
+                <SanityImg
+                  width={windowWidth >= 768 ? 500 : 200}
+                  image={image}
+                  className="w-full h-full | object-cover"
+                  builder={imageUrlBuilder}
+                  alt={`${name}'s logo`}
+                />
               </div>
             ))}
           </div>
