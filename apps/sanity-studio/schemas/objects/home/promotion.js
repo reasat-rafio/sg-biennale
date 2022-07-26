@@ -1,12 +1,12 @@
-import { VscOrganization } from "react-icons/vsc";
+import { FcBusiness } from "react-icons/fc";
 
 const HomePromotion = {
   name: "homePage.promotion",
   type: "object",
   title: "Promotion",
-  icon: VscOrganization,
-
+  icon: FcBusiness,
   fields: [
+    { name: "header", type: "string" },
     {
       name: "promotions",
       type: "array",

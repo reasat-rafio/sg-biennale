@@ -1,5 +1,5 @@
 import { SanityImage } from "sanity-react-extra";
-import { Slug } from "./global.types";
+import { Cta, Slug } from "./global.types";
 
 export interface HomHeroProps {
   type: string;
@@ -41,4 +41,12 @@ export interface INewsProps {
   description: any[];
   images: SanityImage[];
   header: string;
+}
+
+export interface IPromotion {
+  _id: string;
+  title: string;
+  description: string;
+  image: SanityImage;
+  cta?: Cta;
 }

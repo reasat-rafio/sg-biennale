@@ -1,7 +1,5 @@
-import { useCallback } from "react";
 import { Container } from "@components/ui/container";
 import { INewsProps } from "@lib/@types/home.types";
-import { doTruncate } from "@lib/helpers/global.helpers";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { SanityImg } from "sanity-react-extra";
 import { Header } from "@components/ui/header";
@@ -15,7 +13,7 @@ interface NewsProps {
 
 export const News: React.FC<NewsProps> = ({ title, news }) => {
   return (
-    <Container type="section" className="py-section | border-y-2 border-black">
+    <Container type="section" className="py-section | border-b-2 border-black">
       <Header type="h3">{title}</Header>
 
       <div className="grid grid-cols-12 | pt-5 lg:gap-10 gap-5">

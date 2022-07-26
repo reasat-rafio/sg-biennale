@@ -15,7 +15,7 @@ const VisitorInfoAdmissionInfo = {
       type: "text",
     },
     {
-      name: "icon",
+      name: "image",
       type: "image",
       description: "optional",
     },
