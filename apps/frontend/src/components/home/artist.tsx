@@ -6,6 +6,14 @@ import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import Link from "next/link";
 import { SanityImg } from "sanity-react-extra";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Mousewheel, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/mousewheel";
+import "swiper/css/pagination";
+import { useState } from "react";
+
 interface ArtistProps {
   type: string;
   artists: IArtistProps[];
@@ -13,15 +21,46 @@ interface ArtistProps {
 }
 
 export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
+  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
+  const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
+
   return (
     <Container className="py-section" type="section">
       <Header type="h3">{title}</Header>
 
-      <div className="grid grid-cols-12 | pt-5 lg:gap-10 gap-5">
+      <Swiper
+        loop
+        grabCursor
+        speed={600}
+        loopedSlides={artists.length}
+        navigation={{ prevEl, nextEl }}
+        autoplay={{ disableOnInteraction: false, delay: 6000 }}
+        modules={[Autoplay, Navigation, Mousewheel, Pagination]}
+        pagination={{
+          dynamicBullets: true,
+          clickable: true,
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1280: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+        }}
+      >
         {artists.map((artistData) => (
-          <ArtistCard key={artistData._id} {...artistData} />
+          <SwiperSlide key={artistData._id}>
+            <ArtistCard key={artistData._id} {...artistData} />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </Container>
   );
 };
@@ -39,7 +78,7 @@ const ArtistCard: React.FC<IArtistProps> = ({
   });
 
   return (
-    <div className="flex flex-col col-span-12 md:col-span-6 xl:col-span-3 | space-y-4">
+    <>
       {/*lg:h-[305px] h-auto */}
       <div>
         {/* <SanityImg
@@ -59,6 +98,6 @@ const ArtistCard: React.FC<IArtistProps> = ({
           <a className="font-medium">Read More</a>
         </Link>
       </div>
-    </div>
+    </>
   );
 };
