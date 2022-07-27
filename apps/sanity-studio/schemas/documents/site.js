@@ -22,6 +22,13 @@ const Site = {
         accept: "image/png, image/jpeg, image/webp",
       },
     },
+    {
+      name: "favicon",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
     { name: "date", type: "text" },
     {
       name: "navigations",
