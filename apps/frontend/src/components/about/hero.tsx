@@ -34,9 +34,9 @@ export const Hero: React.FC<HeroProps> = ({
             <PortableText blocks={description} />
           </div>
         </div>
-        <div className="col-span-12 lg:col-span-6">
+        <div className="col-span-12 lg:col-span-6 | max-h-[500px] lg:max-h-auto | overflow-hidden">
           <SanityImg
-            className="w-full"
+            className="w-full h-full object-contain"
             builder={imageUrlBuilder}
             width={windowWidth >= 768 ? 900 : 500}
             image={image}

@@ -20,7 +20,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
 
   return (
     <Swiper
-      className="h-screen md:h-[75vh]"
+      className="h-[300px] md:h-[75vh]"
       modules={[Pagination, EffectFade, Autoplay]}
       slidesPerView={1}
       effect="fade"
