@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const is404Page = router.pathname === "/_error";
 
   const ogImage =
-    pageProps.data?.page?.seo.seoImage ?? pageProps.data?.site?.site.ogImage;
+    pageProps.data?.page?.seo?.seoImage ?? pageProps.data?.site?.site.ogImage;
 
   const openGraphImages = ogImage
     ? [
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         url: `${imageUrlBuilder.image(ogImage).width(w).height(h).url()}`,
         width: w,
         height: h,
-        alt: `${pageProps.data?.page?.seo.title}`,
+        alt: `${pageProps.data?.page?.seo?.title}`,
       }))
     : [];
 
