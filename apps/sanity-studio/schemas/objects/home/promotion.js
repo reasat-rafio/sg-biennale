@@ -3,7 +3,7 @@ import { FcBusiness } from "react-icons/fc";
 const HomePromotion = {
   name: "homePage.promotion",
   type: "object",
-  title: "Promotion",
+  title: "Promotion_",
   icon: FcBusiness,
   fields: [
     { name: "header", type: "string" },
