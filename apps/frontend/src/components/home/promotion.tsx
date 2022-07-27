@@ -38,7 +38,7 @@ const PromotionCard: React.FC<IPromotion> = ({
     <div className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">
       <div className="lg:h-[350px] h-auto">
         <SanityImg
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           height={windowWidth >= 768 ? 600 : 400}
           builder={imageUrlBuilder}
           image={image}

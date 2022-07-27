@@ -21,7 +21,7 @@ export const MoreInfoBlock: React.FC<MoreInfoBlockProps> = ({
       {image && (
         <div className="lg:h-[350px] h-auto">
           <SanityImg
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
             height={windowWidth >= 768 ? 700 : 450}
             image={image}
             builder={imageUrlBuilder}
