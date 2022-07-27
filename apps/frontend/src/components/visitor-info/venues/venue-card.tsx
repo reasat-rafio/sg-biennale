@@ -75,7 +75,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({
                         builder={imageUrlBuilder}
                         alt="icon"
                       />
-                      <p>{description}</p>
+                      <p className="whitespace-pre-wrap">{description}</p>
                     </div>
                   ))}
                 </div>

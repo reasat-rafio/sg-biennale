@@ -33,7 +33,9 @@ export const Accordion: React.FC<{
               )}
             />
           </div>
-          {index === activeAccordionIndex && <p>{description}</p>}
+          {index === activeAccordionIndex && (
+            <p className="whitespace-pre-wrap">{description}</p>
+          )}
         </div>
       ))}
     </div>
