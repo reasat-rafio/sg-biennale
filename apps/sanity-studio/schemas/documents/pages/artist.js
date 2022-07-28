@@ -7,6 +7,7 @@ const Artist = {
   type: "document",
   icon: FcButtingIn,
   fields: [
+    { name: "seo", type: "seo" },
     {
       name: "name",
       type: "string",

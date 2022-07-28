@@ -3,7 +3,12 @@ import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-
 import { Container } from "@components/ui/container";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
-import { PortableText, sanityClient, sanityStaticProps } from "@utils/sanity";
+import {
+  imageUrlBuilder,
+  PortableText,
+  sanityClient,
+  sanityStaticProps,
+} from "@utils/sanity";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -12,6 +17,7 @@ import {
 } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
+import { NextSeo } from "next-seo";
 
 const query = pageQuery(groq`
     *[_type == "artist" && slug.current == $artist][0]{
@@ -51,10 +57,25 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
-  const { name, description, images, moreInfo } = props.data.page;
+  const { name, description, images, seo } = props.data.page;
+
+  const openGraphImages = seo?.ogImage
+    ? [
+        { w: 800, h: 600 },
+        { w: 1200, h: 630 },
+        { w: 600, h: 600 },
+        { w: 256, h: 256 },
+      ].map(({ w, h }) => ({
+        url: `${imageUrlBuilder.image(seo?.ogImage).width(w).height(h).url()}`,
+        width: w,
+        height: h,
+        alt: `${seo?.title}`,
+      }))
+    : [];
 
   return (
-    // <DetailsLayout
+    <>
+      {/* // <DetailsLayout
     //   DescriptionBlock={
     //     <ArtistDescription
     //       name={name}
@@ -63,13 +84,23 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
     //     />
     //   }
     //   CarouselBlock={<DetailsPageImageCarousel images={images} />}
-    // />
-    <Container className="min-h-[60vh] grid lg:grid-cols-2 | py-16">
-      <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>
-      <span className="text-lg">
-        <PortableText blocks={description} />
-      </span>
-    </Container>
+    // /> */}
+
+      <NextSeo
+        title={seo?.title}
+        description={seo?.description}
+        openGraph={{
+          images: openGraphImages,
+        }}
+      />
+
+      <Container className="min-h-[60vh] grid lg:grid-cols-2 | py-16">
+        <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>
+        <span className="text-lg">
+          <PortableText blocks={description} />
+        </span>
+      </Container>
+    </>
   );
 };
 
