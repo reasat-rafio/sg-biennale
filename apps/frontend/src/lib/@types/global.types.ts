@@ -71,3 +71,9 @@ export interface Cta {
   title: string;
   _key?: string;
 }
+
+export interface ISeo {
+  title?: string;
+  description?: string;
+  ogImage: string;
+}

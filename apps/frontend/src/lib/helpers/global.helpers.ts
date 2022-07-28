@@ -1,3 +1,4 @@
+import { imageUrlBuilder } from "@utils/sanity";
 import { DateTime } from "luxon";
 
 export const makeDuplicateArray = <T>(arr: T): T => {
@@ -30,4 +31,23 @@ export const convertDate = (value: Date, showSuffix: boolean = true) => {
 
 export const doTruncate = (text: string, endPosition: number) => {
   return text.slice(0, endPosition);
+};
+
+export const makeOpenGraphImages = (
+  ogImage: any,
+  metaTitle: string | undefined
+) => {
+  return ogImage
+    ? [
+        { w: 800, h: 600 },
+        { w: 1200, h: 630 },
+        { w: 600, h: 600 },
+        { w: 256, h: 256 },
+      ].map(({ w, h }) => ({
+        url: `${imageUrlBuilder.image(ogImage).width(w).height(h).url()}`,
+        width: w,
+        height: h,
+        alt: `${metaTitle ?? "og image"}`,
+      }))
+    : [];
 };

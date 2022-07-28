@@ -1,5 +1,6 @@
 import { ArtistDescription } from "@components/artist-details/artist-description";
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
+import { SEO } from "@components/common/seo";
 import { Container } from "@components/ui/container";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
@@ -17,7 +18,6 @@ import {
 } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
-import { NextSeo } from "next-seo";
 
 const query = pageQuery(groq`
     *[_type == "artist" && slug.current == $artist][0]{
@@ -59,20 +59,6 @@ export const getStaticProps: GetStaticProps = async (
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
   const { name, description, images, seo } = props.data.page;
 
-  const openGraphImages = seo?.ogImage
-    ? [
-        { w: 800, h: 600 },
-        { w: 1200, h: 630 },
-        { w: 600, h: 600 },
-        { w: 256, h: 256 },
-      ].map(({ w, h }) => ({
-        url: `${imageUrlBuilder.image(seo?.ogImage).width(w).height(h).url()}`,
-        width: w,
-        height: h,
-        alt: `${seo?.title}`,
-      }))
-    : [];
-
   return (
     <>
       {/* // <DetailsLayout
@@ -86,13 +72,7 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
     //   CarouselBlock={<DetailsPageImageCarousel images={images} />}
     // /> */}
 
-      <NextSeo
-        title={seo?.title}
-        description={seo?.description}
-        openGraph={{
-          images: openGraphImages,
-        }}
-      />
+      <SEO pageType="detail" seo={seo} />
 
       <Container className="min-h-[60vh] grid lg:grid-cols-2 | py-16">
         <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>
