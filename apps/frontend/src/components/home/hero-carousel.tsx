@@ -32,7 +32,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
       {carouselItems.map(({ key, image, description, title }) => (
         <SwiperSlide className="relative" key={key}>
           <SanityImg
-            width={windowWidth >= 1024 ? 3000 : 1000}
+            width={windowWidth >= 1024 ? 3000 : 1400}
             className="h-full w-full absolute object-cover object-center "
             image={image}
             builder={imageUrlBuilder}

@@ -32,6 +32,7 @@ export const Artist: React.FC<ArtistProps> = ({ title, artists }) => {
         loop
         grabCursor
         speed={600}
+        className="pb-14"
         loopedSlides={artists.length}
         navigation={{ prevEl, nextEl }}
         autoplay={{ disableOnInteraction: false, delay: 6000 }}
