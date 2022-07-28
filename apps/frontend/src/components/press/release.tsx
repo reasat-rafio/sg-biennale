@@ -38,7 +38,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
             <div>
               <SanityImg
                 width={windowWidth >= 768 ? 900 : 500}
-                className="w-full max-h-[400px] object-cover"
+                className="w-full sm:h-[400px] h-auto | object-cover"
                 image={data.images[0]}
                 builder={imageUrlBuilder}
                 alt={header + "'s image"}
