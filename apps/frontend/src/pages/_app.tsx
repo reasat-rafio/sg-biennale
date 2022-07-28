@@ -24,8 +24,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     addNavbarHeight(footerHeight);
   }, [windowWidth, addFooterHeight, addNavbarHeight]);
 
-  console.log(pageProps);
-
   return (
     <>
       <Head>
