@@ -2,7 +2,11 @@ import { ArtworkDescription } from "@components/artwok-details/artwork-descripti
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
-import { sanityClient, sanityStaticProps } from "@utils/sanity";
+import {
+  imageUrlBuilder,
+  sanityClient,
+  sanityStaticProps,
+} from "@utils/sanity";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -11,6 +15,7 @@ import {
 } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
+import { NextSeo } from "next-seo";
 
 const query = pageQuery(groq`
     *[_type == "artwork" && slug.current == $artwork && artist->.slug.current == $artist][0]{
@@ -55,19 +60,42 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const ArtworkDetailPage: NextPage<SanityProps> = (props) => {
-  const { name, description, images, moreInfo } = props.data.page;
+  const { name, description, images, moreInfo, seo } = props.data.page;
+
+  const openGraphImages = seo?.ogImage
+    ? [
+        { w: 800, h: 600 },
+        { w: 1200, h: 630 },
+        { w: 600, h: 600 },
+        { w: 256, h: 256 },
+      ].map(({ w, h }) => ({
+        url: `${imageUrlBuilder.image(seo?.ogImage).width(w).height(h).url()}`,
+        width: w,
+        height: h,
+        alt: `${seo?.title}`,
+      }))
+    : [];
 
   return (
-    <DetailsLayout
-      DescriptionBlock={
-        <ArtworkDescription
-          name={name}
-          description={description}
-          moreInfo={moreInfo}
-        />
-      }
-      CarouselBlock={<DetailsPageImageCarousel images={images} />}
-    />
+    <>
+      <NextSeo
+        title={seo?.title}
+        description={seo?.description}
+        openGraph={{
+          images: openGraphImages,
+        }}
+      />
+      <DetailsLayout
+        DescriptionBlock={
+          <ArtworkDescription
+            name={name}
+            description={description}
+            moreInfo={moreInfo}
+          />
+        }
+        CarouselBlock={<DetailsPageImageCarousel images={images} />}
+      />
+    </>
   );
 };
 

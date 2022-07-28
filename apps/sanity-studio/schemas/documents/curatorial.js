@@ -5,6 +5,7 @@ const Curatorial = {
   type: "document",
   icon: FcManager,
   fields: [
+    { name: "seo", type: "seo" },
     {
       name: "name",
       type: "string",

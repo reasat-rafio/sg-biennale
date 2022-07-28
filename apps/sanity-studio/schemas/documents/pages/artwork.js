@@ -7,6 +7,10 @@ const Artwork = {
   icon: FcFrame,
   fields: [
     {
+      name: "seo",
+      type: "seo",
+    },
+    {
       name: "name",
       type: "string",
     },
