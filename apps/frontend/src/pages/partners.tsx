@@ -9,6 +9,7 @@ import { withDimensions } from "sanity-react-extra";
 
 const query = groq`{
   "site": ${siteQuery},
+  "page": *[_type == "partnerListingPage"][0],
   "partners":*[_type == "partner"][]{
         ...,
         tier->{

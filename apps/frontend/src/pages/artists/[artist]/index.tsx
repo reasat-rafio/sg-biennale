@@ -1,6 +1,5 @@
 import { ArtistDescription } from "@components/artist-details/artist-description";
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
-import { SEO } from "@components/common/seo";
 import { Container } from "@components/ui/container";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
@@ -71,8 +70,6 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
     //   }
     //   CarouselBlock={<DetailsPageImageCarousel images={images} />}
     // /> */}
-
-      <SEO pageType="detail" seo={seo} />
 
       <Container className="min-h-[60vh] grid lg:grid-cols-2 | py-16">
         <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>

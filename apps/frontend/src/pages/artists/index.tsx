@@ -11,13 +11,14 @@ import { useEffect } from "react";
 
 const query = groq`{
     "site": ${siteQuery},
+    "page": *[_type == "artistListingPage"][0],
     "artists": *[_type == "artist"]{
         _id,
         name,
         slug,
         countries,
         images[] {
-          ..., 
+          ...,
           asset->{
             ...,
             metadata {
@@ -37,7 +38,7 @@ export const getStaticProps: GetStaticProps = async (
 
 const Artists: NextPage<SanityProps> = (props) => {
   const { setAllArtists, setFilteredArtists } = useArtistsStore();
-  const { artists } = useSanityQuery(query, props).data;
+  const { artists, page } = useSanityQuery(query, props).data;
 
   useEffect(() => {
     setAllArtists(artists);

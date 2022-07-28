@@ -42,11 +42,15 @@ import PressKitInfo from "./objects/press/kit-info";
 
 import SupportUsPage from "./documents/pages/support-us";
 
-import Event from "./documents/pages/event";
+import Event from "./documents/event";
 import Category from "./documents/category";
 
-import Artist from "./documents/pages/artist";
-import Artwork from "./documents/pages/artwork";
+import EventsListing from "./documents/pages/event-listing";
+
+import Artist from "./documents/artist";
+import Artwork from "./documents/artwork";
+
+import ArtistListing from "./documents/pages/artist-listing";
 
 import Curatorial from "./documents/curatorial";
 
@@ -54,6 +58,8 @@ import News from "./documents/news";
 
 import Partner from "./documents/partner";
 import Tier from "./documents/tier";
+
+import PartnersListing from "./documents/pages/partners-lisrting";
 
 export default createSchema({
   name: "default",
@@ -73,8 +79,12 @@ export default createSchema({
     Venue,
     Event,
 
+    EventsListing,
+
     Artist,
     Artwork,
+
+    ArtistListing,
 
     Curatorial,
 
@@ -107,6 +117,8 @@ export default createSchema({
 
     Partner,
     Tier,
+
+    PartnersListing,
 
     SupportUsPage,
   ]),

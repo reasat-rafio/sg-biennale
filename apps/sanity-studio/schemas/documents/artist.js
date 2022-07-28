@@ -1,5 +1,5 @@
 import { FcButtingIn } from "react-icons/fc";
-import countries from "../../../../../libs/countries";
+import countries from "../../../../libs/countries";
 
 const Artist = {
   title: "Artist Details Page",

@@ -24,6 +24,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     addNavbarHeight(footerHeight);
   }, [windowWidth, addFooterHeight, addNavbarHeight]);
 
+  console.log(pageProps);
+
   return (
     <>
       <Head>
@@ -33,13 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           href={pageProps.data?.site.site.favicon.asset.url}
         />
       </Head>
-      {pageProps?.data?.page?.seo && (
-        <SEO
-          pageType="detail"
-          seo={pageProps.data?.page?.seo}
-          site={pageProps.data?.site?.site}
-        />
-      )}
+      <SEO seo={pageProps.data?.page?.seo} site={pageProps.data?.site?.site} />
 
       {!is404Page && <Navbar {...pageProps.data?.site?.site} />}
       <Component {...pageProps} />

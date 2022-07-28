@@ -92,6 +92,24 @@ const deskStructure = () =>
                 title: "Support Us",
                 slug: "",
               }),
+              pageItem({
+                schemaType: "eventsListingPage",
+                id: "eventsListingPage",
+                title: "Events Listing",
+                slug: "",
+              }),
+              pageItem({
+                schemaType: "artistListingPage",
+                id: "artistListingPage",
+                title: "Artists Listing",
+                slug: "",
+              }),
+              pageItem({
+                schemaType: "partnerListingPage",
+                id: "partnerListingPage",
+                title: "Partners Listing",
+                slug: "",
+              }),
             ])
         ),
       S.divider(),
