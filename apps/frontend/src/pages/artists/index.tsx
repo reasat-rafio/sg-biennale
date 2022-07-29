@@ -12,6 +12,10 @@ import { useEffect } from "react";
 const query = groq`{
     "site": ${siteQuery},
     "page": *[_type == "artistListingPage"][0],
+    "venues": *[_type == "venue"][]{
+      name, 
+      slug
+    },
     "artists": *[_type == "artist"]{
         _id,
         name,
@@ -37,13 +41,14 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const Artists: NextPage<SanityProps> = (props) => {
-  const { setAllArtists, setFilteredArtists } = useArtistsStore();
-  const { artists, page } = useSanityQuery(query, props).data;
+  const { setAllArtists, setFilteredArtists, setAllVenues } = useArtistsStore();
+  const { artists, venues } = useSanityQuery(query, props).data;
 
   useEffect(() => {
     setAllArtists(artists);
     setFilteredArtists(artists);
-  }, [artists, setAllArtists, setFilteredArtists]);
+    setAllVenues(venues);
+  }, [artists, venues, setAllArtists, setFilteredArtists, setAllVenues]);
 
   return (
     <FilteringLogic>
