@@ -38,9 +38,9 @@ export const KitsInfo: React.FC<KitsInfoProps> = ({
         </div>
         <div className="flex flex-col items-start | space-y-4">
           <h6 className="text-lg font-medium">{infoAndContacts.title}</h6>
-          <div className="text-base">
+          <address className="text-base">
             <PortableText blocks={infoAndContacts.contacts} />
-          </div>
+          </address>
         </div>
       </div>
     </Container>

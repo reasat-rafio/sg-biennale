@@ -22,11 +22,11 @@ export const PostEdition: React.FC<PostEditionProps> = ({
       <Header>{header}</Header>
       <div className="grid grid-cols-12 | mt-7 lg:gap-10 gap-5">
         {pastEditionCollection.map(({ _key, description, image, title }) => (
-          <div
+          <article
             key={_key}
             className=" flex flex-col | col-span-12 lg:col-span-4 | space-y-4"
           >
-            <div>
+            <figure>
               <SanityImg
                 width={windowWidth >= 768 ? 600 : 300}
                 className="w-full max-h-[350px] | object-contain"
@@ -34,12 +34,12 @@ export const PostEdition: React.FC<PostEditionProps> = ({
                 builder={imageUrlBuilder}
                 alt={`${title}'s image`}
               />
-            </div>
-            <div>
+            </figure>
+            <section>
               <h6 className="text-lg font-medium mb-1">{title}</h6>
               <p className="text-base">{description}</p>
-            </div>
-          </div>
+            </section>
+          </article>
         ))}
       </div>
     </Container>

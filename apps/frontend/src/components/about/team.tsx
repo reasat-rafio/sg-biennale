@@ -15,7 +15,7 @@ export const Team: React.FC<TeamProps> = ({ header, image }) => {
   return (
     <Container type="section" className="py-section">
       <Header>{header}</Header>
-      <div className="mt-7">
+      <figure className="mt-7">
         <SanityImg
           width={windowWidth >= 768 ? 1000 : 600}
           className="w-full max-h-[650px] | object-cover"
@@ -23,7 +23,7 @@ export const Team: React.FC<TeamProps> = ({ header, image }) => {
           builder={imageUrlBuilder}
           alt={`${header}'s image`}
         />
-      </div>
+      </figure>
     </Container>
   );
 };

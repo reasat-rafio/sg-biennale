@@ -44,12 +44,12 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
   return (
     <div className="flex flex-col | space-y-10">
       {_partners?.map(({ tierName, data, id }) => (
-        <div className="pb-5" key={id}>
+        <article className="pb-5" key={id}>
           <h2 className="text-2xl font-medium">{tierName}</h2>
 
-          <div className="grid grid-cols-12 | pt-5 lg:gap-x-7 sm:gap-x-3 lg:gap-y-14 gap-y-5">
+          <section className="grid grid-cols-12 | pt-5 lg:gap-x-7 sm:gap-x-3 lg:gap-y-14 gap-y-5">
             {data.map(({ _id, name, image }) => (
-              <div
+              <figure
                 key={_id}
                 className="xl:col-span-3 md:col-span-4 sm:col-span-6 col-span-12 | lg:h-[124px] lg:w-[220px] h-auto"
               >
@@ -60,10 +60,10 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
                   builder={imageUrlBuilder}
                   alt={`${name}'s logo`}
                 />
-              </div>
+              </figure>
             ))}
-          </div>
-        </div>
+          </section>
+        </article>
       ))}
     </div>
   );

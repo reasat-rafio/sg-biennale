@@ -4,7 +4,7 @@ import React from "react";
 interface ContainerProps {
   className?: string;
   id?: string;
-  type?: "section" | "div";
+  type?: "section" | "div" | "p";
   children: React.ReactNode;
 }
 

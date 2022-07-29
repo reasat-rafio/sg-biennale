@@ -22,8 +22,8 @@ export const AboutUs: React.FC<AboutUsProps> = ({
       <Header>{header}</Header>
       <div className="grid grid-cols-12 | gap-8 mt-7">
         {aboutCollection.map(({ _key, description, image }) => (
-          <div key={_key} className="col-span-12 lg:col-span-6">
-            <div>
+          <article key={_key} className="col-span-12 lg:col-span-6">
+            <figure>
               <SanityImg
                 className="max-h-[350px] w-full | object-cover"
                 width={windowWidth >= 768 ? 900 : 500}
@@ -31,9 +31,9 @@ export const AboutUs: React.FC<AboutUsProps> = ({
                 builder={imageUrlBuilder}
                 alt="image"
               />
-            </div>
+            </figure>
             <p className="mt-4 text-base">{description}</p>
-          </div>
+          </article>
         ))}
       </div>
     </Container>

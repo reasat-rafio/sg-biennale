@@ -30,8 +30,8 @@ const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
   const [newsDescriptionRef] = usePortableTextTruncate({ maxLength: 800 });
 
   return (
-    <div className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">
-      <div className="lg:h-[350px] h-auto">
+    <article className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">
+      <figure className="lg:h-[350px] h-auto">
         <SanityImg
           className="h-full w-full object-cover"
           height={windowWidth >= 768 ? 500 : 200}
@@ -39,10 +39,10 @@ const NewsCard: React.FC<INewsProps> = ({ description, header, images }) => {
           image={images[0]}
           alt={`${header}`}
         />
-      </div>
+      </figure>
       <div ref={newsDescriptionRef}>
         <PortableText blocks={description} />
       </div>
-    </div>
+    </article>
   );
 };

@@ -35,8 +35,8 @@ const PromotionCard: React.FC<IPromotion> = ({
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
-    <div className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">
-      <div className="lg:h-[350px] h-auto">
+    <article className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">
+      <figure className="lg:h-[350px] h-auto">
         <SanityImg
           className="h-full w-full object-contain"
           height={windowWidth >= 768 ? 600 : 400}
@@ -44,7 +44,7 @@ const PromotionCard: React.FC<IPromotion> = ({
           image={image}
           alt={`${title}`}
         />
-      </div>
+      </figure>
 
       <h6>{title}</h6>
       <p>{description}</p>
@@ -54,6 +54,6 @@ const PromotionCard: React.FC<IPromotion> = ({
           <a>{cta.title}</a>
         </Link>
       )}
-    </div>
+    </article>
   );
 };

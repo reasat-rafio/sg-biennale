@@ -17,9 +17,9 @@ export const MoreInfoBlock: React.FC<MoreInfoBlockProps> = ({
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
-    <div className={clsx(className, "flex flex-col | space-y-5")}>
+    <article className={clsx(className, "flex flex-col | space-y-5")}>
       {image && (
-        <div className="lg:h-[350px] h-auto">
+        <figure className="lg:h-[350px] h-auto">
           <SanityImg
             className="h-full w-full object-contain"
             height={windowWidth >= 768 ? 700 : 450}
@@ -27,7 +27,7 @@ export const MoreInfoBlock: React.FC<MoreInfoBlockProps> = ({
             builder={imageUrlBuilder}
             alt={title}
           />
-        </div>
+        </figure>
       )}
       <h6 className="text-xl font-semibold | mr-auto py-1">{title}</h6>
       <p className="text-lg whitespace-pre-wrap">{description}</p>
@@ -38,6 +38,6 @@ export const MoreInfoBlock: React.FC<MoreInfoBlockProps> = ({
           </a>
         </Link>
       )}
-    </div>
+    </article>
   );
 };

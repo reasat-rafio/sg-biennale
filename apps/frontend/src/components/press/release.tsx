@@ -31,11 +31,11 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
       <Header type="h1">{header}</Header>
       <div className="grid grid-cols-12 | my-7 lg:gap-8 gap-4">
         {releases.map((data) => (
-          <div
+          <article
             key={data._id}
             className="flex flex-col | col-span-12 lg:col-span-6 | space-y-1"
           >
-            <div>
+            <figure>
               <SanityImg
                 width={windowWidth >= 768 ? 900 : 500}
                 className="w-full sm:h-[400px] h-auto | object-cover"
@@ -43,8 +43,8 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
                 builder={imageUrlBuilder}
                 alt={header + "'s image"}
               />
-            </div>
-            <div className="flex flex-col | space-y-5">
+            </figure>
+            <section className="flex flex-col | space-y-5">
               <h6 className="text-xl font-semibold | pt-2">{data.header}</h6>
               <div className="text-lg" ref={descriptionRef}>
                 <PortableText blocks={data.description} />
@@ -63,8 +63,8 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
                   {data.cta.title}
                 </a>
               </Link>
-            </div>
-          </div>
+            </section>
+          </article>
         ))}
       </div>
     </Container>

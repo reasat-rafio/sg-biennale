@@ -79,9 +79,9 @@ const ArtistCard: React.FC<IArtistProps> = ({
   });
 
   return (
-    <>
+    <article>
       {/*lg:h-[305px] h-auto */}
-      <div>
+      <figure>
         {/* <SanityImg
           className="w-full h-full object-cover"
           height={windowWidth >= 768 ? 400 : 200}
@@ -89,8 +89,8 @@ const ArtistCard: React.FC<IArtistProps> = ({
           image={images[0]}
           alt={`${name}'s image`}
         /> */}
-      </div>
-      <div className="flex flex-col space-y-3">
+      </figure>
+      <section className="flex flex-col space-y-3">
         <h6 className="text-lg font-medium">{name}</h6>
         <div ref={artistDescriptionRef}>
           <PortableText blocks={description} />
@@ -98,7 +98,7 @@ const ArtistCard: React.FC<IArtistProps> = ({
         <Link href={`/artists/${slug.current}`}>
           <a className="font-medium">Read More</a>
         </Link>
-      </div>
-    </>
+      </section>
+    </article>
   );
 };
