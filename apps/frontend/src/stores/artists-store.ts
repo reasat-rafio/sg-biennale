@@ -1,4 +1,4 @@
-import { ArtistsProps } from "@lib/@types/artists.types";
+import { ArtistsProps, IFilterVenue } from "@lib/@types/artists.types";
 import { Slug } from "@lib/@types/global.types";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
@@ -9,19 +9,14 @@ interface ICountry {
   value: string;
 }
 
-interface IVenue {
-  name: string;
-  slug: Slug;
-}
-
 interface IArtistsStore {
   allCountries: ICountry[];
   allArtists: ArtistsProps[];
-  allVenues: IVenue[];
+  allVenues: IFilterVenue[];
   filteredArtists: ArtistsProps[];
   setAllArtists: (data: ArtistsProps[]) => void;
   setFilteredArtists: (data: ArtistsProps[]) => void;
-  setAllVenues: (data: IVenue[]) => void;
+  setAllVenues: (data: IFilterVenue[]) => void;
 }
 
 const useArtistsStore = create(

@@ -6,6 +6,7 @@ import useArtistsStore from "@stores/artists-store";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import { FilterByCountry } from "./filter-by-country";
+import { FilterByVenue } from "./filter-by-venue";
 
 export const Filtering: React.FC<{}> = () => {
   const { allArtists, setFilteredArtists } = useArtistsStore();
@@ -34,11 +35,12 @@ export const Filtering: React.FC<{}> = () => {
 
   return (
     <Container className="flex lg:flex-row flex-col items-center | py-5 ">
-      <div className="flex-1 flex items-center | space-x-6">
+      <div className="flex-1 flex items-center lg:flex-row flex-col | space-x-6 mb-3 lg:mb-0">
         <Header>Artist & Collaborators</Header>
 
-        <div>
+        <div className="flex | lg:space-x-6 space-x-3">
           <FilterByCountry />
+          <FilterByVenue />
         </div>
       </div>
       <div className="relative lg:w-[350px] w-auto | flex | py-1 | border-2 border-black | rounded-3xl">

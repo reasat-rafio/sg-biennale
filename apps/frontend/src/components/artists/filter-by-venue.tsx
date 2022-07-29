@@ -1,24 +1,25 @@
 import { ChevronArrow } from "@components/icons/chevron-arrow";
 import { Combobox } from "@headlessui/react";
+import { IFilterVenue } from "@lib/@types/artists.types";
 import useArtistsStore from "@stores/artists-store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-interface FilterByCountryProps {}
+interface FilterByVenueProps {}
 
-export const FilterByCountry: React.FC<FilterByCountryProps> = () => {
-  const { allCountries } = useArtistsStore();
+export const FilterByVenue: React.FC<FilterByVenueProps> = ({}) => {
+  const { allVenues } = useArtistsStore();
 
   const router = useRouter();
 
-  const [selectedCountry, setSelectedCountry] = useState([]);
+  const [selectedVenue, setSelectedVenue] = useState<IFilterVenue[]>([]);
   const [query, setQuery] = useState("");
 
-  const filteredCountries =
+  const filteredVenues =
     query === ""
-      ? allCountries
-      : allCountries.filter((country) => {
-          return country.label.toLowerCase().includes(query.toLowerCase());
+      ? allVenues
+      : allVenues.filter((venue) => {
+          return venue.name.toLowerCase().includes(query.toLowerCase());
         });
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export const FilterByCountry: React.FC<FilterByCountryProps> = () => {
       {
         query: {
           ...router.query,
-          country: selectedCountry.map(({ value }) => value),
+          venue: selectedVenue.map(({ slug }) => slug?.current),
         },
       },
       undefined,
@@ -34,13 +35,13 @@ export const FilterByCountry: React.FC<FilterByCountryProps> = () => {
         shallow: true,
       }
     );
-  }, [selectedCountry]);
+  }, [selectedVenue]);
 
   return (
     <aside className="relative">
-      <Combobox value={selectedCountry} onChange={setSelectedCountry} multiple>
+      <Combobox value={selectedVenue} onChange={setSelectedVenue} multiple>
         <Combobox.Button className="flex items-center justify-between | w-36 | space-x-2 px-4 py-1 | border-2 border-black | rounded-lg">
-          <span>Country</span>
+          <span>Venue</span>
           <ChevronArrow className="h-4 w-4" />
         </Combobox.Button>
 
@@ -52,20 +53,20 @@ export const FilterByCountry: React.FC<FilterByCountryProps> = () => {
             />
           </div>
           <div className="px-4 py-1">
-            {filteredCountries.length ? (
-              filteredCountries.map((data) => (
-                <Combobox.Option key={data.value} value={data}>
+            {filteredVenues.length ? (
+              filteredVenues.map((data) => (
+                <Combobox.Option key={data.slug.current} value={data}>
                   <input
                     type="checkbox"
-                    checked={selectedCountry.some(
-                      ({ value }) => value === data.value
+                    checked={selectedVenue.some(
+                      ({ slug }) => slug.current === data.slug.current
                     )}
                   />
-                  <span>{data.label}</span>
+                  <span>{data.name}</span>
                 </Combobox.Option>
               ))
             ) : (
-              <div>No country found</div>
+              <div>No venue found</div>
             )}
           </div>
         </Combobox.Options>

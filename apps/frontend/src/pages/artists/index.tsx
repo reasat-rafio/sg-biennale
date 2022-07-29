@@ -21,6 +21,10 @@ const query = groq`{
         name,
         slug,
         countries,
+        "venues":  *[_type == "venue" && ^._id in artists[]._ref][] {
+            name,
+            slug
+        },
         images[] {
           ...,
           asset->{
@@ -43,7 +47,6 @@ export const getStaticProps: GetStaticProps = async (
 const Artists: NextPage<SanityProps> = (props) => {
   const { setAllArtists, setFilteredArtists, setAllVenues } = useArtistsStore();
   const { artists, venues } = useSanityQuery(query, props).data;
-
   useEffect(() => {
     setAllArtists(artists);
     setFilteredArtists(artists);
