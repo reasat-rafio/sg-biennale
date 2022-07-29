@@ -43,7 +43,7 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
                 <PortableText blocks={description} />
               </div>
 
-              <Link href={`/director/${slug.current}`}>
+              <Link href={`/directors/${slug.current}`}>
                 <a>Read More</a>
               </Link>
             </div>

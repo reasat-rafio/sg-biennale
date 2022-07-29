@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { FilterByCategory } from "./filter-by-category";
 import { FilterByDate } from "./filter-by-date";
 import { FilterByVenue } from "./filter-by-venue";
