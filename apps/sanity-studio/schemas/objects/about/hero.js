@@ -22,6 +22,19 @@ const AboutHero = {
     {
       name: "image",
       type: "image",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: "caption",
+          type: "string",
+          title: "Caption",
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
     },
     {
       name: "ctas",

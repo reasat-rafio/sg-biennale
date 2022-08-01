@@ -34,14 +34,17 @@ export const Hero: React.FC<HeroProps> = ({
             <PortableText blocks={description} />
           </div>
         </section>
-        <figure className="col-span-12 lg:col-span-6 | max-h-[500px] lg:max-h-auto | overflow-hidden">
+
+        <figure className="col-span-12 lg:col-span-6 | overflow-hidden">
           <SanityImg
-            className="w-full h-full object-contain"
+            className="w-full max-h-[500px] object-contain"
             builder={imageUrlBuilder}
             width={windowWidth >= 768 ? 900 : 500}
             image={image}
             alt={subheader}
           />
+
+          <figcaption className="text-center mt-3">{image.caption}</figcaption>
         </figure>
       </article>
       <div className="flex flex-col lg:flex-row | lg:space-x-5 space-y-3 lg:space-y-0 my-5">
