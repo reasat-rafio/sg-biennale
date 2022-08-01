@@ -6,7 +6,7 @@ import { Description, Header } from "./artist-description-blocks";
 interface ArtistDescriptionProps {
   name: string;
   description: any[];
-  moreInfo: IAccordion[];
+  moreInfo?: IAccordion[];
   className?: string;
 }
 

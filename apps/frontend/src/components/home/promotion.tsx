@@ -51,7 +51,9 @@ const PromotionCard: React.FC<IPromotion> = ({
 
       {cta?.title && (
         <Link href={cta.href}>
-          <a>{cta.title}</a>
+          <a className="mr-auto px-4 | text-lg | border-2 border-black | rounded-3xl">
+            {cta.title}
+          </a>
         </Link>
       )}
     </article>
