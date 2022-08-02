@@ -7,6 +7,9 @@ module.exports = {
       padding: {
         section: "24px",
       },
+      fontFamily: {
+        manrope: ["Manrope", "system-ui"],
+      },
     },
   },
   plugins: [],
