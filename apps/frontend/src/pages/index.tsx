@@ -32,6 +32,7 @@ const query = pageQuery(groq`
         name,
         description,
         slug,
+        countries,
         images[] {
           ..., 
           asset->{
@@ -41,6 +42,17 @@ const query = pageQuery(groq`
             }
           }
         },
+        artworks[]-> {
+          images[] {
+            ..., 
+            asset->{
+              ...,
+              metadata {
+                dimensions
+             }
+            }
+          },
+        }
       },
       news[]-> {
         _id,
@@ -72,13 +84,13 @@ const Home: NextPage<SanityProps> = (props) => {
 
   return (
     <div>
-      {/* {renderObjectArray(page.sections, {
-        "homePage.hero": Hero,
-        "homePage.organisations": Organisations,
-        "homePage.promotion": promotion,
-        "homePage.news": News, //
+      {renderObjectArray(page.sections, {
+        // "homePage.hero": Hero,
+        // "homePage.organisations": Organisations,
+        // "homePage.promotion": promotion,
+        // "homePage.news": News,
         "homePage.artists": Artist,
-      })} */}
+      })}
     </div>
   );
 };

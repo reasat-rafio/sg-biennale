@@ -1,3 +1,4 @@
+import { ICountry } from "@stores/artists-store";
 import { SanityImage } from "sanity-react-extra";
 import { Cta, Slug } from "./global.types";
 
@@ -35,6 +36,10 @@ export interface IArtistProps {
   images: SanityImage[];
   name: string;
   slug: Slug;
+  artworks: {
+    images: SanityImage[];
+  }[];
+  countries: ICountry[];
 }
 export interface INewsProps {
   _id: string;

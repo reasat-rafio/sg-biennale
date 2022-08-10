@@ -1,13 +1,8 @@
 import { ArtistsProps, IFilterVenue } from "@lib/@types/artists.types";
-import { Slug } from "@lib/@types/global.types";
+import { ICountry } from "@lib/@types/global.types";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 import countries from "../../../../libs/countries";
-
-interface ICountry {
-  label: string;
-  value: string;
-}
 
 interface IArtistsStore {
   allCountries: ICountry[];

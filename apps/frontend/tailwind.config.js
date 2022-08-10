@@ -22,6 +22,10 @@ module.exports = {
       lineHeight: {
         primary: "26px",
       },
+      flex: {
+        2: "2 2 0%",
+        3: "3 3 0%",
+      },
     },
   },
   plugins: [],

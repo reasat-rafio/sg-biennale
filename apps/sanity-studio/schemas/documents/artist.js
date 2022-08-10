@@ -7,10 +7,15 @@ const Artist = {
   type: "document",
   icon: FcButtingIn,
   fields: [
-    { name: "seo", type: "seo" },
+    {
+      name: "seo",
+      type: "seo",
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: "name",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
@@ -18,13 +23,20 @@ const Artist = {
       options: {
         source: (doc) => doc.name,
       },
+      validation: (Rule) => Rule.required(),
     },
-    { name: "images", type: "array", of: [{ type: "image" }] },
+    {
+      name: "images",
+      type: "array",
+      of: [{ type: "image" }],
+      // validation: (Rule) => Rule.required(),
+    },
 
     {
       name: "description",
       type: "array",
       of: [{ type: "block" }],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "moreInfo",
@@ -49,6 +61,7 @@ const Artist = {
         predefinedTags: [...countries],
         allowCreate: false,
       },
+      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {

@@ -96,3 +96,8 @@ export interface ISeo {
   description?: string;
   ogImage: string;
 }
+
+export interface ICountry {
+  label: string;
+  value: string;
+}
