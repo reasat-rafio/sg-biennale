@@ -8,6 +8,11 @@ const MenuItems = {
   fields: [
     { name: "title", type: "string" },
     {
+      name: "heighLight",
+      description: "Highlight this to primary the navbar",
+      type: "boolean",
+    },
+    {
       name: "slug",
       type: "slug",
       options: {

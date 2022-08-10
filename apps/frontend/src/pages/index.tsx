@@ -72,14 +72,13 @@ const Home: NextPage<SanityProps> = (props) => {
 
   return (
     <div>
-      {renderObjectArray(page.sections, {
+      {/* {renderObjectArray(page.sections, {
         "homePage.hero": Hero,
-
-        // "homePage.organisations": Organisations,
+        "homePage.organisations": Organisations,
         "homePage.promotion": promotion,
-        "homePage.news": News,
+        "homePage.news": News, //
         "homePage.artists": Artist,
-      })}
+      })} */}
     </div>
   );
 };

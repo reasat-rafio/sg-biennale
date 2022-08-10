@@ -21,7 +21,7 @@ export const NavItems: React.FC<NavItemsProps> = ({ menu, heightlights }) => {
       </div>
 
       <div className="flex flex-wrap items-center justify-center | lg:space-x-4 space-x-1 space-y-1 lg:space-y-0">
-        {heightlights.map(({ _key, icon, title, slug }) => (
+        {heightlights?.map(({ _key, icon, title, slug }) => (
           <Link href={slug.current} key={_key}>
             <a className="flex space-x-2 items-center lg:flex-row flex-col | lg:px-4 lg:py-1 py-2 px-2 | border border-black | rounded-3xl ">
               <SanityImg

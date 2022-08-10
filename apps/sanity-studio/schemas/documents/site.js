@@ -13,6 +13,7 @@ const Site = {
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "ogImage",
@@ -21,6 +22,7 @@ const Site = {
       options: {
         accept: "image/png, image/jpeg, image/webp",
       },
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "favicon",
@@ -28,12 +30,14 @@ const Site = {
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required(),
     },
     { name: "date", type: "text" },
     {
       name: "navigations",
       type: "menu",
       group: "navigations",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "footer",
