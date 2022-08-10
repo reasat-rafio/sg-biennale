@@ -1,6 +1,5 @@
-import { ICountry } from "@stores/artists-store";
 import { SanityImage } from "sanity-react-extra";
-import { Cta, Slug } from "./global.types";
+import { Cta, ICountry, Slug } from "./global.types";
 
 export interface HomHeroProps {
   type: string;
@@ -46,6 +45,7 @@ export interface INewsProps {
   description: any[];
   images: SanityImage[];
   header: string;
+  index?: number;
 }
 
 export interface IPromotion {

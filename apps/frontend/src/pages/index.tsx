@@ -88,7 +88,7 @@ const Home: NextPage<SanityProps> = (props) => {
         // "homePage.hero": Hero,
         // "homePage.organisations": Organisations,
         // "homePage.promotion": promotion,
-        // "homePage.news": News,
+        "homePage.news": News,
         "homePage.artists": Artist,
       })}
     </div>
