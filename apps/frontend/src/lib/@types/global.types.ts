@@ -19,9 +19,27 @@ export interface Site {
 
 export interface Footer {
   type: string;
+  header: string;
+  image: SanityImage;
+  menu?: Menu[];
+  newsLetter: FooterNewsLetter;
+  location: FooterLocation;
+  social: FooterSocial;
+}
+
+export interface FooterLocation {
+  title: string;
   address: string;
-  copyRight: string;
-  menu: Menu[];
+}
+
+export interface FooterNewsLetter {
+  title: string;
+  placeholder: string;
+  ctaButton: Cta;
+}
+
+export interface FooterSocial {
+  title: string;
   socials: Social[];
 }
 

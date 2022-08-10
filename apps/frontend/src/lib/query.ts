@@ -19,9 +19,13 @@ export const siteQuery = groq`{
       },
       footer {
         ...,
-        socials[] {
-          ...,
-          "icon": ${withDimensions("icon")},
+        "image": ${withDimensions("image")},
+        social{
+          ..., 
+          socials[] {
+            ...,
+            "icon": ${withDimensions("icon")},
+          }
         }
       }
     },

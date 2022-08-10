@@ -4,11 +4,23 @@ module.exports = {
   theme: {
     container: { center: true },
     extend: {
-      padding: {
-        section: "24px",
+      fontSize: {
+        body: "16px",
       },
       fontFamily: {
         manrope: ["Manrope", "system-ui"],
+      },
+      colors: {
+        gray: "#676767",
+      },
+      padding: {
+        section: "24px",
+      },
+      letterSpacing: {
+        base: "-0.02em",
+      },
+      lineHeight: {
+        primary: "26px",
       },
     },
   },

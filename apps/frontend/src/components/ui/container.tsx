@@ -4,7 +4,7 @@ import React from "react";
 interface ContainerProps {
   className?: string;
   id?: string;
-  type?: "section" | "div" | "p";
+  type?: "section" | "div" | "p" | "footer";
   children: React.ReactNode;
 }
 
@@ -19,7 +19,7 @@ export const Container: React.FC<ContainerProps> = ({
   return (
     <Component
       id={id}
-      className={clsx("max-w-[1920px] | lg:px-14 px-6", className)}
+      className={clsx("max-w-[1920px] | lg:px-32 px-6", className)}
     >
       {children}
     </Component>
