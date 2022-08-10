@@ -11,7 +11,7 @@ const Menu = {
       type: "array",
       validation: (Rule) =>
         Rule.custom((menuItem) => {
-          const manuItemArr = menuItem.filter((e) => e.heighLight);
+          const manuItemArr = menuItem.filter((e) => e.highLight);
           return manuItemArr.length > 1
             ? "Only one navitem allowed to be highlighted"
             : true;

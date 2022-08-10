@@ -51,6 +51,7 @@ export interface Menu {
   _type: string;
   slug: Slug;
   title: string;
+  highLight?: boolean;
 }
 
 export interface Slug {

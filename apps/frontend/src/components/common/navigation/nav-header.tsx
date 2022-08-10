@@ -1,6 +1,6 @@
 import { HamburgerMenu } from "@components/icons/hamburger-menu";
 import { Container } from "@components/ui/container";
-import { ISite } from "@lib/@types/global.types";
+import { ISite, Menu } from "@lib/@types/global.types";
 import { imageUrlBuilder } from "@utils/sanity";
 import Link from "next/link";
 import { SanityImg } from "sanity-react-extra";
@@ -8,9 +8,14 @@ import { SanityImg } from "sanity-react-extra";
 interface NavHeaderProps {
   logo: ISite["site"]["logo"];
   date: ISite["site"]["date"];
+  highLightedMenu: Menu;
 }
 
-export const NavHeader: React.FC<NavHeaderProps> = ({ logo, date }) => {
+export const NavHeader: React.FC<NavHeaderProps> = ({
+  logo,
+  date,
+  highLightedMenu,
+}) => {
   return (
     <Container className="py-3">
       <div className="flex items-center | space-x-3">
@@ -32,8 +37,8 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, date }) => {
 
         <div className="flex justify-around items-center | ml-auto space-x-20 | lg:text-[16px] md:text-lg text-base font-semibold font-manrope">
           <span className=" text-right">{date}</span>
-          <Link href={""}>
-            <a>Programmes & Events</a>
+          <Link href={`/${highLightedMenu.slug}`}>
+            <a>{highLightedMenu.title}</a>
           </Link>
           <HamburgerMenu />
         </div>
