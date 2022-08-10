@@ -7,13 +7,9 @@ const Footer = {
   icon: FcAutomatic,
   fields: [
     {
-      name: "copyRight",
-      type: "string",
-    },
-
-    {
-      name: "address",
+      name: "header",
       type: "text",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "menu",
@@ -21,9 +17,60 @@ const Footer = {
       of: [{ type: "menuItem" }],
     },
     {
-      name: "socials",
-      type: "array",
-      of: [{ type: "social" }],
+      name: "newsLetter",
+      type: "object",
+      fields: [
+        {
+          name: "title",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          title: "Input field placeholder",
+          name: "placeholder",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: "ctaButton",
+          type: "cta",
+          validation: (Rule) => Rule.required(),
+        },
+      ],
+    },
+    {
+      name: "location",
+      type: "object",
+      fields: [
+        {
+          name: "title",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: "address",
+          type: "text",
+          validation: (Rule) => Rule.required(),
+        },
+      ],
+    },
+
+    {
+      name: "social",
+      type: "object",
+      fields: [
+        {
+          name: "title",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: "socials",
+          type: "array",
+          of: [{ type: "social" }],
+          validation: (Rule) => Rule.required(),
+        },
+      ],
     },
   ],
 };
