@@ -25,7 +25,7 @@ export const News: React.FC<NewsProps> = ({ title, news }) => {
 
       <motion.div className="grid grid-cols-12 | pt-5  gap-5 my-20">
         {news.map((newsData, index) => (
-          <NewsCard key={newsData._id} {...newsData} index={index} />
+          <NewsCard key={newsData._id} {...newsData} index={index + 1} />
         ))}
       </motion.div>
     </Container>
@@ -56,7 +56,7 @@ const NewsCard: React.FC<INewsProps> = ({
     [windowHeight]
   );
 
-  const y = useTransform(scrollY, [0, 600], [150 * index, 0]);
+  const y = useTransform(scrollY, [0, 600], [110 * index + 1, 0]);
   const animatedY = useSpring(y, { damping: 15 });
 
   const [newsDescriptionRef] = usePortableTextTruncate({ maxLength: 800 });

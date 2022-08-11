@@ -13,12 +13,14 @@ import MenuItems from "./objects/site/menu-item";
 import Social from "./objects/site/social";
 import Footer from "./objects/site/footer";
 import Menu from "./objects/menu";
+import Video from "./objects/video";
 
 import Venue from "./documents/venue";
 
 import HomePage from "./documents/pages/home";
 import HomeHero from "./objects/home/hero";
 import HomeHeroCarouselItem from "./objects/home/carousel-item";
+import HomeIntroduction from "./objects/home/introduction";
 import HomePromotion from "./objects/home/promotion";
 import HomeOrganisations from "./objects/home/organisations";
 import HomeArtists from "./objects/home/artist";
@@ -73,6 +75,7 @@ export default createSchema({
     Footer,
     MenuItems,
     Social,
+    Video,
 
     Category,
 
@@ -96,6 +99,7 @@ export default createSchema({
     HomePromotion,
     HomeOrganisations,
     HomeArtists,
+    HomeIntroduction,
     HomeNews,
 
     AboutPage,
