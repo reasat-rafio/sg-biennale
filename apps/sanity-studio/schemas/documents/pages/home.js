@@ -12,7 +12,7 @@ const HomePage = {
       type: "array",
       of: [
         { type: "homePage.hero" },
-        { type: "homePage.introducion" },
+        { type: "homePage.introduction" },
         { type: "homePage.organisations" },
         { type: "homePage.promotion" },
         { type: "homePage.news" },

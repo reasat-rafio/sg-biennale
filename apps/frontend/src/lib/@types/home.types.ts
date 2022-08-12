@@ -46,6 +46,7 @@ export interface INewsProps {
   images: SanityImage[];
   header: string;
   index?: number;
+  length?: number;
 }
 
 export interface IPromotion {

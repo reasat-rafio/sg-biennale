@@ -23,9 +23,14 @@ export const News: React.FC<NewsProps> = ({ title, news }) => {
     <Container type="section" className="py-section">
       <Header type="h3">{title}</Header>
 
-      <motion.div className="grid grid-cols-12 | pt-5  gap-5 my-20">
+      <motion.div className="grid grid-cols-12 | pb-56  gap-x-5 gap-y-20 ">
         {news.map((newsData, index) => (
-          <NewsCard key={newsData._id} {...newsData} index={index + 1} />
+          <NewsCard
+            key={newsData._id}
+            {...newsData}
+            index={index + 1}
+            length={news.length}
+          />
         ))}
       </motion.div>
     </Container>
@@ -38,6 +43,7 @@ const NewsCard: React.FC<INewsProps> = ({
   images,
   index = 1,
   _id,
+  length,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const windowHeight = useWindowSize()?.height ?? 0;
@@ -56,7 +62,11 @@ const NewsCard: React.FC<INewsProps> = ({
     [windowHeight]
   );
 
-  const y = useTransform(scrollY, [0, 600], [110 * index + 1, 0]);
+  const y = useTransform(
+    scrollY,
+    [0, 500],
+    [110 * index + 1, (length as number) - (index + 1) * -40]
+  );
   const animatedY = useSpring(y, { damping: 15 });
 
   const [newsDescriptionRef] = usePortableTextTruncate({ maxLength: 800 });
@@ -68,7 +78,7 @@ const NewsCard: React.FC<INewsProps> = ({
       style={{
         y: animatedY,
       }}
-      className="flex flex-col col-span-12 lg:col-span-6 | space-y-4 mx-10 "
+      className="flex flex-col col-span-12 lg:col-span-6 | space-y-4 mx-10"
     >
       <figure className="lg:h-[488px] h-auto flex justify-center items-center bg-[#F8F8F8]">
         <SanityImg

@@ -1,5 +1,6 @@
 import { Artist } from "@components/home/artist";
 import { Hero } from "@components/home/hero";
+import { Introduction } from "@components/home/introduction/introduction";
 import { News } from "@components/home/news";
 import { promotion } from "@components/home/promotion";
 // import { Organisations } from "@components/home/organisations";
@@ -26,6 +27,13 @@ const query = pageQuery(groq`
       promotions[] {
         ...,
         "image": ${withDimensions("image")}
+      },
+      introudction{
+        ...,
+        collection[]{
+          ...,
+          "image": ${withDimensions("image")}
+        }
       },
       artists[]->{
         _id,
@@ -88,8 +96,9 @@ const Home: NextPage<SanityProps> = (props) => {
         // "homePage.hero": Hero,
         // "homePage.organisations": Organisations,
         // "homePage.promotion": promotion,
-        "homePage.news": News,
+        "homePage.introduction": Introduction,
         "homePage.artists": Artist,
+        "homePage.news": News,
       })}
     </div>
   );
