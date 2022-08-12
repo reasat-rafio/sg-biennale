@@ -38,6 +38,11 @@ const HomeIntroduction = {
       ],
     },
     {
+      name: "subtitle",
+      type: "text",
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "description",
       type: "text",
       validation: (Rule) => Rule.required(),
@@ -50,6 +55,7 @@ const HomeIntroduction = {
     prepare({ subtitle }) {
       return {
         title: "Introduction",
+        subtitle,
       };
     },
   },

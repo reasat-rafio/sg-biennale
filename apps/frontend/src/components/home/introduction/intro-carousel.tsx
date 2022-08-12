@@ -53,7 +53,7 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
     setPage([page + newDirection, newDirection]);
   };
   return (
-    <div className="relative  overflow-hidden h-[700px] container ">
+    <div className="relative  overflow-hidden h-[700px] ">
       <AnimatePresence initial={false} custom={{ direction, page }}>
         {Array.from({ length: 3 }, (_, idx) => idx).map((index) => (
           <motion.div
