@@ -10,8 +10,9 @@ const swipeConfidenceThreshold = 10000;
 const swipePower = (offset: any, velocity: any) => {
   return Math.abs(offset) * velocity;
 };
-
-const imageIndex = (page: number, length: number) => wrap(0, length, page);
+const imageIndex = (page: number, length: number) => {
+  return wrap(0, length, page);
+};
 
 const variants = (length: number) => {
   return {
@@ -49,20 +50,23 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
   collection,
 }) => {
   const [[page, direction], setPage] = useState([0, 0]);
+  const [disableDragging, setDisableDragging] = useState(false);
+
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
   };
   return (
-    <div className="relative  overflow-hidden h-[700px] ">
+    <div className="relative overflow-hidden h-[700px] ">
       <AnimatePresence initial={false} custom={{ direction, page }}>
         {Array.from({ length: 3 }, (_, idx) => idx).map((index) => (
           <motion.div
             className="absolute w-full h-full  flex items-center justify-center p-10"
             key={page + index}
             layout
-            drag={index === 0 && "x"}
+            drag={disableDragging ? false : index === 0 && "x"}
             dragConstraints={{ right: 0, top: 0, left: 0, bottom: 0 }}
             dragElastic={0.5}
+            dragTransition={{ bounceStiffness: 600, bounceDamping: 15 }}
             custom={{ direction, i: index, page }}
             variants={variants(collection.length)}
             initial="enter"
@@ -71,22 +75,24 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
             transition={{
               x: {
                 type: "tween",
-                duration: 0.7,
+                duration: 0.65,
               },
               scale: {
                 type: "spring",
                 elapsed: 0.1,
               },
-              damping: 15,
-              zIndex: { delay: direction > 0 ? 0.7 : 0 },
+              zIndex: { delay: direction > 0 ? 0.5 : 0 },
             }}
-            onDragEnd={(e, { offset, velocity }) => {
+            onDragEnd={(_, { offset, velocity }) => {
               const swipe = swipePower(offset.x, velocity.x);
               if (swipe < -swipeConfidenceThreshold || offset.x < -720) {
                 paginate(1);
-              } else if (swipe > swipeConfidenceThreshold || offset.x > 720) {
+                setDisableDragging(true);
+                setTimeout(() => setDisableDragging(false), 500);
+              } else if (swipe > swipeConfidenceThreshold || offset.x > 720)
                 paginate(-1);
-              }
+              setDisableDragging(true);
+              setTimeout(() => setDisableDragging(false), 500);
             }}
           >
             <motion.div className="overflow-hidden w-[95%] h-full">
@@ -97,6 +103,7 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
                 draggable={false}
                 builder={imageUrlBuilder}
                 width={900}
+                loading="eager"
                 image={
                   collection[imageIndex(page + index, collection.length)].image
                 }
