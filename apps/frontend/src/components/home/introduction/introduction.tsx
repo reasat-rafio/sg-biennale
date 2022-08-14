@@ -1,3 +1,5 @@
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { AnimatedHeader } from "./animated-header";
 import { Description } from "./description";
 import { IntroCarousel, IntroCarouselProps } from "./intro-carousel";
@@ -16,6 +18,8 @@ export const Introduction: React.FC<IntroductionProps> = ({
   subtitle,
   description,
 }) => {
+  const [[page, direction], setPage] = useState([0, 0]);
+
   return (
     <section className="py-32 mx-20">
       <header>

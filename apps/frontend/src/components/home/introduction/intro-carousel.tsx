@@ -1,3 +1,4 @@
+import { useVisibleScrollEffect } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
@@ -55,6 +56,18 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
   };
+
+  // useVisibleScrollEffect(
+  //   cardRef,
+  //   (offsetBoundingRect, _, y) =>
+  //     animationFrameEffect(() => {
+  //       const yDelta = y + windowHeight - offsetBoundingRect.top;
+  //       const ratio = Math.max(0, Math.min(yDelta / windowHeight)) * 1500;
+  //       scrollY.set(ratio);
+  //     }),
+  //   [windowHeight]
+  // );
+
   return (
     <div className="relative overflow-hidden h-[700px] ">
       <AnimatePresence initial={false} custom={{ direction, page }}>
@@ -81,7 +94,7 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
                 type: "spring",
                 elapsed: 0.1,
               },
-              zIndex: { delay: direction > 0 ? 0.5 : 0 },
+              zIndex: { delay: direction > 0 ? 0.65 : 0 },
             }}
             onDragEnd={(_, { offset, velocity }) => {
               const swipe = swipePower(offset.x, velocity.x);

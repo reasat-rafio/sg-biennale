@@ -9,6 +9,7 @@ const HomeOrganisations = {
     {
       name: "organisations",
       type: "array",
+      validation: (Rule) => Rule.required(),
       of: [
         {
           name: "organisation",
@@ -17,14 +18,20 @@ const HomeOrganisations = {
             {
               name: "title",
               type: "string",
+              validation: (Rule) => Rule.required(),
             },
-            { name: "name", type: "string" },
+            {
+              name: "name",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
             {
               name: "logo",
               type: "image",
               options: {
                 hotspot: true,
               },
+              validation: (Rule) => Rule.required(),
             },
             { name: "url", type: "url", description: "optional" },
           ],

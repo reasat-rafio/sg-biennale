@@ -3,7 +3,7 @@ import { Hero } from "@components/home/hero";
 import { Introduction } from "@components/home/introduction/introduction";
 import { News } from "@components/home/news";
 import { promotion } from "@components/home/promotion";
-// import { Organisations } from "@components/home/organisations";
+import { Organisations } from "@components/home/organisations";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
@@ -28,12 +28,9 @@ const query = pageQuery(groq`
         ...,
         "image": ${withDimensions("image")}
       },
-      introudction{
-        ...,
-        collection[]{
-          ...,
-          "image": ${withDimensions("image")}
-        }
+      collection[]{
+        ..., 
+        "image": ${withDimensions("image")}
       },
       artists[]->{
         _id,
@@ -94,10 +91,10 @@ const Home: NextPage<SanityProps> = (props) => {
     <div>
       {renderObjectArray(page.sections, {
         // "homePage.hero": Hero,
-        // "homePage.organisations": Organisations,
         // "homePage.promotion": promotion,
         "homePage.introduction": Introduction,
         "homePage.artists": Artist,
+        "homePage.organisations": Organisations,
         "homePage.news": News,
       })}
     </div>

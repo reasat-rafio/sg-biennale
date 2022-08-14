@@ -21,12 +21,12 @@ export interface OrganisationProps {
 }
 
 export interface Organisation {
-  key: string;
+  _key: string;
   type: string;
   logo: SanityImage;
   name: string;
   title: string;
-  url: string;
+  url?: string;
 }
 
 export interface IArtistProps {

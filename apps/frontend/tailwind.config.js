@@ -12,6 +12,7 @@ module.exports = {
       },
       colors: {
         gray: "#676767",
+        "secondary-gray": "#828282",
       },
       padding: {
         section: "24px",
