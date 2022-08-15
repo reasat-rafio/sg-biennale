@@ -2,6 +2,11 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "scripts": {
     "dev": "node start.js",
     "build": "next build",
@@ -11,9 +16,13 @@
   "dependencies": {
     "@headlessui/react": "^1.6.5",
     "@react-spring/three": "^9.5.2",
+    "@react-three/drei": "^9.22.1",
     "@react-three/fiber": "^8.3.1",
+    "babel-plugin-glsl": "^1.0.0",
     "clsx": "^1.1.1",
     "framer-motion": "^6.5.1",
+    "glsl-noise": "^0.0.0",
+    "glslify": "^7.1.1",
     "google-map-react": "^2.1.10",
     "luxon": "^2.4.0",
     "next": "12.1.6",
@@ -21,6 +30,7 @@
     "next-sanity-extra": "^0.2.3",
     "next-seo": "^5.5.0",
     "popmotion": "^11.0.4",
+    "postprocessing": "^6.28.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sanity-react-extra": "^0.2.4",

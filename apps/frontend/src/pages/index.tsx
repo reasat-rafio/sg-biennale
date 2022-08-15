@@ -11,6 +11,9 @@ import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
 
+import dynamic from "next/dynamic";
+import App from "@components/home/test";
+
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
     ...,
@@ -92,11 +95,12 @@ const Home: NextPage<SanityProps> = (props) => {
       {renderObjectArray(page.sections, {
         // "homePage.hero": Hero,
         // "homePage.promotion": promotion,
-        "homePage.introduction": Introduction,
-        "homePage.artists": Artist,
+        // "homePage.introduction": Introduction,
+        // "homePage.artists": Artist,
         "homePage.organisations": Organisations,
-        "homePage.news": News,
+        // "homePage.news": News,
       })}
+      {/* <App /> */}
     </div>
   );
 };

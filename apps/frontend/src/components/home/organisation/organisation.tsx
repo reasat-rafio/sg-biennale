@@ -1,16 +1,16 @@
 import { OrganisationProps } from "@lib/@types/home.types";
-import { Canvas } from "@react-three/fiber";
-import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
 import { useState } from "react";
-import { SanityImg } from "sanity-react-extra";
-import { ImageWebGl } from "./image-webgl";
+import dynamic from "next/dynamic";
+const Scene = dynamic(() => import("./image"), {
+  ssr: false,
+});
 
 export const Organisations: React.FC<OrganisationProps> = ({
   organisations,
 }) => {
   const [prevSelectedLogo, setPrevSelectedLogo] = useState(
-    organisations[0].logo.asset.url
+    organisations[1].logo.asset.url
   );
   const [selectedLogo, setSelectedLogo] = useState(
     organisations[0].logo.asset.url
@@ -31,7 +31,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
               className="font-manrope cursor-pointer"
               onClick={() => {
                 setPrevSelectedLogo(selectedLogo);
-                setSelectedLogo(logo);
+                setSelectedLogo(logo.asset.url);
               }}
             >
               <h6 className="text-secondary-gray font-bold text-[24px] leading-tight ">
@@ -50,22 +50,15 @@ export const Organisations: React.FC<OrganisationProps> = ({
             </div>
           ))}
         </div>
-        <div className="col-span-7 ">
-          <Canvas>
-            {/* <ImageWebGl image={selectedLogo} prevImage={prevSelectedLogo} /> */}
-          </Canvas>
-          {/* <Image image={selectedLogo} prevImage={prevSelectedLogo} /> */}
+        <div className="col-span-7">
+          <div className="flex justify-center items-center h-[60vh]">
+            <Scene
+              selectedLogo={selectedLogo}
+              prevSelectedLogo={prevSelectedLogo}
+            />
+          </div>
         </div>
       </div>
     </section>
   );
 };
-
-{
-  /* <SanityImg
-            className="h-full w-full shadow-xl object-contain"
-            builder={imageUrlBuilder}
-            image={selectedLogo}
-            width={500}
-          /> */
-}
