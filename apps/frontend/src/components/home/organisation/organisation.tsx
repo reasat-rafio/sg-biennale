@@ -1,13 +1,20 @@
 import { OrganisationProps } from "@lib/@types/home.types";
+import { Canvas } from "@react-three/fiber";
 import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
 import { useState } from "react";
 import { SanityImg } from "sanity-react-extra";
+import { ImageWebGl } from "./image-webgl";
 
 export const Organisations: React.FC<OrganisationProps> = ({
   organisations,
 }) => {
-  const [selectedLogo, setSelectedLogo] = useState(organisations[0].logo);
+  const [prevSelectedLogo, setPrevSelectedLogo] = useState(
+    organisations[0].logo.asset.url
+  );
+  const [selectedLogo, setSelectedLogo] = useState(
+    organisations[0].logo.asset.url
+  );
 
   return (
     <section
@@ -22,17 +29,20 @@ export const Organisations: React.FC<OrganisationProps> = ({
             <div
               key={_key}
               className="font-manrope cursor-pointer"
-              onClick={() => setSelectedLogo(logo)}
+              onClick={() => {
+                setPrevSelectedLogo(selectedLogo);
+                setSelectedLogo(logo);
+              }}
             >
               <h6 className="text-secondary-gray font-bold text-[24px] leading-tight ">
                 {title}
               </h6>
               <span
                 className={clsx(
-                  "text-[36px] font-extrabold transition-colors duration-300 ease-in-out leading-tight",
-                  selectedLogo.asset._id === logo.asset._id
-                    ? "text-black"
-                    : "text-secondary-gray"
+                  "text-[36px] font-extrabold transition-colors duration-300 ease-in-out leading-tight"
+                  // selectedLogo.asset._id === logo.asset._id
+                  //   ? "text-black"
+                  //   : "text-secondary-gray"
                 )}
               >
                 {name}
@@ -40,15 +50,22 @@ export const Organisations: React.FC<OrganisationProps> = ({
             </div>
           ))}
         </div>
-        <figure className="col-span-7 ">
-          <SanityImg
-            className="h-full w-full shadow-xl object-contain"
-            builder={imageUrlBuilder}
-            image={selectedLogo}
-            width={500}
-          />
-        </figure>
+        <div className="col-span-7 ">
+          <Canvas>
+            {/* <ImageWebGl image={selectedLogo} prevImage={prevSelectedLogo} /> */}
+          </Canvas>
+          {/* <Image image={selectedLogo} prevImage={prevSelectedLogo} /> */}
+        </div>
       </div>
     </section>
   );
 };
+
+{
+  /* <SanityImg
+            className="h-full w-full shadow-xl object-contain"
+            builder={imageUrlBuilder}
+            image={selectedLogo}
+            width={500}
+          /> */
+}

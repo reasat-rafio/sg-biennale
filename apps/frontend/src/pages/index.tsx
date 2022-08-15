@@ -3,7 +3,7 @@ import { Hero } from "@components/home/hero";
 import { Introduction } from "@components/home/introduction/introduction";
 import { News } from "@components/home/news";
 import { promotion } from "@components/home/promotion";
-import { Organisations } from "@components/home/organisations";
+import { Organisations } from "@components/home/organisation/organisation";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
