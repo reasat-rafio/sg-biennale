@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import React, { useRef, useState } from "react";
-import { useFrame, useThree, Vector3 } from "@react-three/fiber";
+import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Image, ScrollControls, Scroll, useScroll } from "@react-three/drei";
 import { useSnapshot } from "valtio";
 import { Minimap } from "./minmap";
@@ -13,17 +13,28 @@ interface ImageProps {
   scale: any;
   url: string;
   length: number;
+  clicked: null | number;
+  setClikced: Dispatch<SetStateAction<null | number>>;
 }
-const Image_ = ({ index, position, scale, url, length }: ImageProps) => {
+const Image_ = ({
+  index,
+  position,
+  scale,
+  url,
+  length,
+  clicked,
+  setClikced,
+}: ImageProps) => {
   const c = new THREE.Color();
 
   const ref = useRef<any>();
   const scroll = useScroll();
 
-  const { clicked } = useSnapshot(state);
-
   const [hovered, hover] = useState(false);
-  const click = () => (state.clicked = index === clicked ? null : index);
+
+  const click = () =>
+    index === clicked ? setClikced(null) : setClikced(index);
+
   const over = () => hover(true);
   const out = () => hover(false);
   useFrame((_, delta) => {
@@ -91,6 +102,8 @@ interface ImagesProps {
 const w = 3;
 const gap = 0.15;
 export const Images: React.FC<ImagesProps> = ({ artists }) => {
+  const [clicked, setClikced] = useState<null | number>(null);
+
   const { width } = useThree((state) => state.viewport);
 
   const xW = w + gap;
@@ -112,6 +125,8 @@ export const Images: React.FC<ImagesProps> = ({ artists }) => {
             position={[i * xW, 0, 0]}
             scale={[w, 4, 1]}
             length={artworks.length}
+            clicked={clicked}
+            setClikced={setClikced}
             url={artworks[0].images[0].asset.url}
           />
         ))}

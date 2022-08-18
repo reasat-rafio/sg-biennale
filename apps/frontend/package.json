@@ -37,7 +37,6 @@
     "smee-client": "^1.2.3",
     "swiper": "^8.2.4",
     "three": "^0.143.0",
-    "valtio": "^1.6.3",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {

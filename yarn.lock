@@ -9659,11 +9659,6 @@ proxy-addr@~2.0.7:
     forwarded "0.2.0"
     ipaddr.js "1.9.1"
 
-proxy-compare@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/proxy-compare/-/proxy-compare-2.2.0.tgz#2357330407241b091501644d08a446a4a28e0e15"
-  integrity sha512-hEtMJevUmOByZCTw1NRUVaWWHCGJLO0ogizpey8yX6zMPolDe8YVa+PHgMOTiZuyUkFj+hMKs/1UaM0+ZkuvgA==
-
 prr@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/prr/-/prr-1.0.1.tgz#d3fc114ba06995a45ec6893f484ceb1d78f5f476"
@@ -12256,14 +12251,6 @@ validator@^13.7.0:
   version "13.7.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-13.7.0.tgz#4f9658ba13ba8f3d82ee881d3516489ea85c0857"
   integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
-
-valtio@^1.6.3:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/valtio/-/valtio-1.6.3.tgz#7ea4aa72cd3deb14f18283ecb1ef2e4f802899f6"
-  integrity sha512-ySg2q5nFFSY0zSm/a/sxEGHshWGGvelo4m4y/oAlO92fuXZ9WHSi0J214P3ZDjDiveGp08wck0qJZcA2ubEj+Q==
-  dependencies:
-    proxy-compare "2.2.0"
-    use-sync-external-store "1.2.0"
 
 value-equal@^1.0.1:
   version "1.0.1"
