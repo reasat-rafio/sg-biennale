@@ -22,20 +22,23 @@ export const Organisations: React.FC<OrganisationProps> = ({
   const imgContainerStateOn = (e: MouseEvent<HTMLDivElement, any>) => {
     const { clientX, clientY } = e;
 
-    const XDelta = (num: number) =>
+    const XDelta =
       ((clientX -
         (cardRef?.current?.offsetLeft ??
           0 + cardRef?.current!.offsetWidth ??
           0)) /
-        cardRef?.current!.offsetWidth ?? 0) - num;
-    const YDelta = (num: number) =>
+        cardRef?.current!.offsetWidth ?? 0) - 0.5;
+    const YDelta =
       ((clientY -
         (cardRef?.current?.getBoundingClientRect().top ??
           0 + cardRef?.current!.offsetHeight ??
           0)) /
-        cardRef?.current!.offsetHeight ?? 0) - num;
+        cardRef?.current!.offsetHeight ?? 0) - 0.5;
 
-    bgPositionAnim.start({ x: XDelta(0.5) * 50, y: YDelta(0.5) * 50 });
+    bgPositionAnim.start({
+      x: XDelta * 50,
+      y: YDelta * 50,
+    });
   };
 
   return (

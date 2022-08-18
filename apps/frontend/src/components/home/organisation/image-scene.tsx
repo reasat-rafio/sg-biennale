@@ -2,8 +2,9 @@ import * as THREE from "three";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSpring, a } from "@react-spring/three";
-import { vertexShader } from "./shaders/vertex-shader";
-import { fragmentShader } from "./shaders/fragment-shader";
+import vertexShader from "./shaders/vertex-shader.glsl";
+import fragmentShader from "./shaders/fragment-shader.glsl";
+import { Html } from "@react-three/drei";
 
 const Image: React.FC<{
   selectedImg: string;
@@ -65,9 +66,16 @@ const ImageScene: React.FC<{
   return (
     <Canvas
       gl={(canvas) => new THREE.WebGL1Renderer({ canvas })}
-      camera={{ fov: 8, position: [0, 0, 5] }}
+      camera={{ fov: 13, position: [0, 0, 3] }}
     >
-      <Suspense fallback={null}>
+      <Suspense
+        fallback={
+          <Html prepend center>
+            <p>Loading..</p>
+          </Html>
+        }
+      >
+        <color attach="background" args={["#F5F5F5"]} />
         <Image prevSelectedImg={prevSelectedImg} selectedImg={selectedImg} />
       </Suspense>
     </Canvas>

@@ -12,7 +12,7 @@ interface PromotionProps {
   promotions: IPromotion[];
 }
 
-export const promotion: React.FC<PromotionProps> = ({ header, promotions }) => {
+export const Promotion: React.FC<PromotionProps> = ({ header, promotions }) => {
   return (
     <Container type="section" className="py-section | border-y-2 border-black">
       <Header type="h3">{header}</Header>
