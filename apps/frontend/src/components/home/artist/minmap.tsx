@@ -11,25 +11,27 @@ const geometry = new THREE.BufferGeometry().setFromPoints([
 ]);
 
 export const Minimap: React.FC<{ length: number }> = ({ length }) => {
-  const ref = useRef<any>();
+  const ref = useRef<any>(null);
   const scroll = useScroll();
   const { height } = useThree((state) => state.viewport);
   useFrame((_, delta) => {
-    ref.current.children.forEach(
-      (child: SVGProps<SVGLineElement>, index: number) => {
-        // Give me a value between 0 and 1
-        //   starting at the position of my item
-        //   ranging across 4 / total length
-        //   make it a sine, so the value goes from 0 to 1 to 0.
-        const y = scroll.curve(index / length - 1.5 / length, 4 / length);
-        (child.scale as any).y = damp(
-          (child.scale as any).y,
-          0.1 + y / 6,
-          8,
-          delta
-        );
-      }
-    );
+    if (ref?.current) {
+      ref.current.children.forEach(
+        (child: SVGProps<SVGLineElement>, index: number) => {
+          // Give me a value between 0 and 1
+          //   starting at the position of my item
+          //   ranging across 4 / total length
+          //   make it a sine, so the value goes from 0 to 1 to 0.
+          const y = scroll.curve(index / length - 1.5 / length, 4 / length);
+          (child.scale as any).y = damp(
+            (child.scale as any).y,
+            0.1 + y / 6,
+            8,
+            delta
+          );
+        }
+      );
+    }
   });
   return (
     <group ref={ref}>
