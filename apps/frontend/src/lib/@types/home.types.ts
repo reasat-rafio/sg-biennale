@@ -3,7 +3,7 @@ import { Cta, ICountry, Slug } from "./global.types";
 
 export interface HomHeroProps {
   type: string;
-  carousel: Carousel[];
+  image: SanityImage;
   description: any[];
 }
 

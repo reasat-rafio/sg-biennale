@@ -1,14 +1,18 @@
 import React from "react";
 import { HomHeroProps } from "@lib/@types/home.types";
-import { HeroCarousel } from "./hero-carousel";
 import { PortableText } from "@utils/sanity";
 import { Container } from "@components/ui/container";
+import dynamic from "next/dynamic";
 
-export const Hero: React.FC<HomHeroProps> = ({ carousel, description }) => {
+const HeroScene = dynamic(() => import("./hero-scene"), {
+  ssr: false,
+});
+
+export const Hero: React.FC<HomHeroProps> = ({ image, description }) => {
   return (
-    <section>
-      <HeroCarousel carouselItems={carousel} />
-      <Container type="p" className="py-10 | lg:text-2xl text-xl">
+    <section className="h-screen">
+      <HeroScene image={image} />
+      <Container>
         <PortableText blocks={description} />
       </Container>
     </section>

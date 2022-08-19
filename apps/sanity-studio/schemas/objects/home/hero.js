@@ -6,11 +6,6 @@ const HomeHeroCarouselItem = {
   title: "Hero",
   icon: SiApacherocketmq,
   fields: [
-    // {
-    //   name: "carousel",
-    //   type: "array",
-    //   of: [{ type: "homePage.hero.carousel-item" }],
-    // },
     {
       name: "image",
       type: "image",

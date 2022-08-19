@@ -65,8 +65,8 @@ const ImageScene: React.FC<{
 }> = ({ selectedImg, prevSelectedImg }) => {
   return (
     <Canvas
-      gl={(canvas) => new THREE.WebGL1Renderer({ canvas })}
-      camera={{ fov: 13, position: [0, 0, 3] }}
+      gl={(canvas) => new THREE.WebGL1Renderer({ canvas, alpha: true })}
+      camera={{ fov: 16, position: [0, 0, 3] }}
     >
       <Suspense
         fallback={
@@ -75,7 +75,6 @@ const ImageScene: React.FC<{
           </Html>
         }
       >
-        <color attach="background" args={["#F5F5F5"]} />
         <Image prevSelectedImg={prevSelectedImg} selectedImg={selectedImg} />
       </Suspense>
     </Canvas>
