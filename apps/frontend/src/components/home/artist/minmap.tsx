@@ -4,7 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useScroll } from "@react-three/drei";
 import { damp } from "./util";
 
-const material = new THREE.LineBasicMaterial({ color: "#828282" });
+const material = new THREE.LineBasicMaterial({ color: "#000000" });
 const geometry = new THREE.BufferGeometry().setFromPoints([
   new THREE.Vector3(0, -0.5, 0),
   new THREE.Vector3(0, 0.5, 0),

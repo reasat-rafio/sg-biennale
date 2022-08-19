@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import { ScrollControls, Scroll } from "@react-three/drei";
 import { Minimap } from "./minmap";
@@ -8,13 +8,15 @@ import { Image_ } from "./image";
 interface ImagesProps {
   artists: IArtistProps[];
   clicked: null | number;
+  scrollPassRatio: number;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
-const w = 3;
+const w = 4;
 const gap = 0.15;
 export const Images: React.FC<ImagesProps> = ({
   artists,
   clicked,
+  scrollPassRatio,
   setClikced,
 }) => {
   const { width } = useThree((state) => state.viewport);
@@ -22,9 +24,9 @@ export const Images: React.FC<ImagesProps> = ({
 
   return (
     <ScrollControls
-      // style={{ overflow: "hidden" }}
+      style={{ overflow: "hidden" }}
       horizontal
-      enabled
+      enabled={false}
       damping={10}
       pages={(width - xW + artists.length * xW) / width}
     >
@@ -37,6 +39,7 @@ export const Images: React.FC<ImagesProps> = ({
             position={[i * xW, 0, 0]}
             scale={[w, 4, 1]}
             length={artists.length}
+            scrollPassRatio={scrollPassRatio}
             clicked={clicked}
             name={name}
             countries={countries}
