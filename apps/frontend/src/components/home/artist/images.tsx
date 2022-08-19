@@ -10,6 +10,7 @@ interface ImagesProps {
   clicked: null | number;
   scrollPassRatio: number;
   offsetX: number;
+  cursorGrab: boolean;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
 const w = 4;
@@ -17,9 +18,9 @@ const gap = 0.15;
 export const Images: React.FC<ImagesProps> = ({
   artists,
   clicked,
+  offsetX,
   scrollPassRatio,
   setClikced,
-  offsetX,
 }) => {
   const { width } = useThree((state) => state.viewport);
   const xW = w + gap;

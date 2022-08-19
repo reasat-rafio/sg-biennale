@@ -29,7 +29,7 @@ export const Introduction: React.FC<IntroductionProps> = ({
 
       <div className="container">
         <IntroCarousel collection={collection} />
-        {/* <Description subtitle={subtitle} description={description} /> */}
+        <Description subtitle={subtitle} description={description} />
       </div>
       <figure className="absolute bottom-0 left-0 max-h-[1000px] pointer-events-none">
         <img src="/bg/home-shape-2.svg" alt="" />

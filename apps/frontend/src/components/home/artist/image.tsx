@@ -2,18 +2,10 @@ import { ICountry } from "@lib/@types/global.types";
 import { Html, Image, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import clsx from "clsx";
-import {
-  Dispatch,
-  RefObject,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { damp } from "./util";
-import { a, useSpring } from "@react-spring/three";
-import { useDrag } from "@use-gesture/react";
+import { a, config, useSpring } from "@react-spring/three";
 
 interface imageProps {
   index: number;
@@ -48,19 +40,23 @@ export const Image_: React.FC<imageProps> = ({
   const scroll = useScroll();
   const [hovered, hover] = useState(false);
 
+  const y = scroll.curve(index / length - 1.5 / length, 4 / length);
+  const { progress } = useSpring({
+    progress: Math.min(scrollPassRatio * 0.1 + offsetX * 2, 1),
+    config: config.slow,
+  });
+
   const click = () =>
     index === clicked ? setClikced(null) : setClikced(index);
   const over = () => hover(true);
   const out = () => hover(false);
 
-  const { progress } = useSpring({ progress: scrollPassRatio * 0.1 });
-  const asd = useSpring({ progress: offsetX * 0.5 });
+  useEffect(() => {
+    document.body.style.cursor = hovered ? "pointer" : "auto";
+  }, [hovered]);
 
   useFrame((_, delta) => {
-    const y = scroll.curve(index / length - 1.5 / length, 4 / length);
-    console.log(offsetX);
-
-    scroll.offset = progress.get() + asd.progress.get();
+    scroll.offset = progress.get();
 
     // Scale Y
     if (imageRef?.current) {
@@ -122,7 +118,7 @@ export const Image_: React.FC<imageProps> = ({
       >
         <div
           className={clsx(
-            "duration-500 transition-all w-[200px]  text-white font-manrope ",
+            "duration-500 transition-all w-[200px]  text-white font-manrope pointer-events-none",
             clicked !== null && index > clicked && "!translate-x-full",
             clicked !== null && index < clicked && "!-translate-x-full"
           )}

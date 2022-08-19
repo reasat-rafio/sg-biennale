@@ -1,5 +1,5 @@
 import { IArtistProps } from "@lib/@types/home.types";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { PointerEvent, Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   animationFrameEffect,
@@ -22,6 +22,32 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
   const [isDown, setDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
+  const [cursorGrab, setCursorGrab] = useState(false);
+
+  const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {
+    setDown(true);
+    setCursorGrab(false);
+    setStartX(e.pageX - sectionRef?.current!.offsetLeft);
+  };
+  const onPointerLeaveAction = () => {
+    setDown(false);
+    setCursorGrab(false);
+  };
+  const onPointerUpAction = () => {
+    setDown(false);
+    setCursorGrab(false);
+  };
+  const onPointerMoveAction = (e: PointerEvent<HTMLDivElement>) => {
+    if (!isDown) return;
+    const x = e.pageX - sectionRef?.current!.offsetLeft;
+    const walk = (x - startX) * 0.00001 * -1;
+    setCursorGrab(true);
+    setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
+  };
+
+  useEffect(() => {
+    document.body.style.cursor = cursorGrab ? "grab" : "auto";
+  }, [cursorGrab]);
 
   useVisibleScrollEffect(
     sectionRef,
@@ -33,20 +59,6 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
       }),
     [windowHeight]
   );
-
-  const onPointerDownAction = (e: any) => {
-    setDown(true);
-    setStartX(e.pageX - sectionRef?.current!.offsetLeft);
-  };
-  const onPointerLeaveAction = () => setDown(false);
-  const onPointerUpAction = () => setDown(false);
-  const onPointerMoveAction = (e: any) => {
-    if (!isDown) return;
-    const x = e.pageX - sectionRef?.current!.offsetLeft;
-    const walk = (x - startX) * 0.001 * -1;
-
-    setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
-  };
 
   return (
     <section ref={sectionRef} className="h-[100vh]" id="artist-image-carouel">
@@ -61,6 +73,7 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
           onPointerMissed={() => setClikced(null)}
         >
           <Images
+            cursorGrab={cursorGrab}
             offsetX={offsetX}
             artists={artists}
             clicked={clicked}
