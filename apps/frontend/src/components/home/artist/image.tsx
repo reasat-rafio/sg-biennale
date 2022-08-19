@@ -2,10 +2,18 @@ import { ICountry } from "@lib/@types/global.types";
 import { Html, Image, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import clsx from "clsx";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import * as THREE from "three";
 import { damp } from "./util";
 import { a, useSpring } from "@react-spring/three";
+import { useDrag } from "@use-gesture/react";
 
 interface imageProps {
   index: number;
@@ -16,6 +24,7 @@ interface imageProps {
   name: string;
   countries: ICountry[];
   clicked: null | number;
+  offsetX: number;
   scrollPassRatio: number;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
@@ -29,6 +38,7 @@ export const Image_: React.FC<imageProps> = ({
   clicked,
   name,
   countries,
+  offsetX,
   scrollPassRatio,
   setClikced,
 }) => {
@@ -44,9 +54,13 @@ export const Image_: React.FC<imageProps> = ({
   const out = () => hover(false);
 
   const { progress } = useSpring({ progress: scrollPassRatio * 0.1 });
+  const asd = useSpring({ progress: offsetX * 0.5 });
+
   useFrame((_, delta) => {
     const y = scroll.curve(index / length - 1.5 / length, 4 / length);
-    scroll.offset = progress.get();
+    console.log(offsetX);
+
+    scroll.offset = progress.get() + asd.progress.get();
 
     // Scale Y
     if (imageRef?.current) {
@@ -97,14 +111,10 @@ export const Image_: React.FC<imageProps> = ({
       );
     }
   });
+
   return (
-    <a.group
-      // progress={progress}
-      onClick={click}
-      onPointerOver={over}
-      onPointerOut={out}
-    >
-      <Image scale={scale} position={position} ref={imageRef} url={url} />
+    <a.group onClick={click} onPointerOver={over} onPointerOut={out}>
+      <Image ref={imageRef} scale={scale} position={position} url={url} />
       <Html
         className="pointer-events-none -translate-x-[50%]"
         position={position}
