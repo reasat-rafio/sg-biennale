@@ -17,13 +17,11 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
   header,
   idx,
 }) => {
-  const animatedTo = idx === 2 ? [100, 0] : [-100 * (idx + 1), 0];
-
+  const headerRef = useRef<HTMLHeadingElement>(null);
   const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
 
-  const headerRef = useRef<HTMLHeadingElement>(null);
-
+  const animatedTo = idx === 2 ? [100, 0] : [-100 * (idx + 1), 0];
   const positionX = useMotionValue(0);
 
   const x = useTransform(positionX, [0, windowWidth / 4], animatedTo);
