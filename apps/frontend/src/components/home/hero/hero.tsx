@@ -28,7 +28,7 @@ export const Hero: React.FC<HomHeroProps> = ({ image, description }) => {
       className="h-screen"
       onMouseMove={handleMouseMove}
     >
-      <HeroScene coords={coords} image={image} />
+      <HeroScene sectionRef={sectionRef} coords={coords} image={image} />
       <Container>
         <PortableText blocks={description} />
       </Container>

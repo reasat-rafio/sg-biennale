@@ -7,4 +7,3 @@ void main() {
     vUv = uv;
     gl_Position = projectedPosition;
 }
-

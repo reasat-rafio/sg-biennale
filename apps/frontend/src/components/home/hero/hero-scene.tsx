@@ -4,7 +4,7 @@ import {
   useLoader,
   Vector2 as Vec2,
 } from "@react-three/fiber";
-import { Suspense, useMemo, useRef } from "react";
+import { RefObject, Suspense, useMemo, useRef } from "react";
 import { SanityImage } from "sanity-react-extra";
 import vertexShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
@@ -14,9 +14,10 @@ import { useWindowSize } from "@lib/hooks";
 interface HeroSceneProps {
   image: SanityImage;
   coords: Vec2;
+  sectionRef: RefObject<HTMLElement>;
 }
 
-const HeroImage: React.FC<HeroSceneProps> = ({ image, coords }) => {
+const HeroImage: React.FC<HeroSceneProps> = ({ image, sectionRef, coords }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const windowHeight = useWindowSize()?.height ?? 0;
 
@@ -28,9 +29,10 @@ const HeroImage: React.FC<HeroSceneProps> = ({ image, coords }) => {
     return {
       uniforms: {
         uTexture: { value: img },
-        uCoords: { value: coords },
+        uCoords: { value: new Vector2(0, 0) },
         uRes: { value: new Vector2(windowWidth, windowHeight) },
         uTime: { value: 0 },
+        uAngle: { value: 0 },
       },
       vertexShader,
       fragmentShader,
@@ -38,29 +40,37 @@ const HeroImage: React.FC<HeroSceneProps> = ({ image, coords }) => {
   }, []);
 
   useFrame(({ clock }) => {
-    if (meshRef?.current) {
+    if (meshRef?.current && sectionRef?.current) {
+      // const x =
+      //   windowWidth / 2 +
+      //   Math.sin(clock.getElapsedTime() * 0.6) * -(windowWidth * 0.35);
+      // const y =
+      //   -(windowHeight / 2) +
+      //   Math.sin(clock.getElapsedTime() * 1) * (windowHeight * 0.25) +
+      //   sectionRef.current.offsetHeight;
+
       meshRef.current.uniforms.uCoords = { value: coords };
       meshRef.current.uniforms.uTime = { value: clock.getElapsedTime() };
+      meshRef.current.uniforms.uAngle = { value: clock.getElapsedTime() };
     }
   });
 
   return (
     <mesh>
-      <planeBufferGeometry args={[1, 0.7, 16, 16]} />
+      <planeBufferGeometry args={[1, 0.6, 16, 16]} />
       <shaderMaterial ref={meshRef} name="material" args={[args]} />
     </mesh>
   );
 };
 
-const HeroScene: React.FC<HeroSceneProps> = ({ image, coords }) => {
+const HeroScene: React.FC<HeroSceneProps> = ({ image, coords, sectionRef }) => {
   return (
     <Canvas
       gl={(canvas) => new WebGL1Renderer({ canvas, alpha: true })}
-      camera={{ fov: 16, position: [0, 0, 3] }}
+      camera={{ fov: 13, position: [0, 0, 3] }}
     >
       <Suspense fallback={null}>
-        <ambientLight args={["#eeeeee", 0.6]} />
-        <HeroImage coords={coords} image={image} />
+        <HeroImage sectionRef={sectionRef} coords={coords} image={image} />
       </Suspense>
     </Canvas>
   );
