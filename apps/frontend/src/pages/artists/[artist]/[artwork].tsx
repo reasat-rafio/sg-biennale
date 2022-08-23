@@ -77,8 +77,8 @@ const ArtworkDetailPage: NextPage<SanityProps> = (props) => {
     : [];
 
   return (
-    <>
-      <NextSeo
+    <div>
+      {/* <NextSeo
         title={seo?.title}
         description={seo?.description}
         openGraph={{
@@ -94,8 +94,8 @@ const ArtworkDetailPage: NextPage<SanityProps> = (props) => {
           />
         }
         CarouselBlock={<DetailsPageImageCarousel images={images} />}
-      />
-    </>
+      /> */}
+    </div>
   );
 };
 

@@ -70,25 +70,25 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
     venue,
   }: EventDetailProps = props.data.page;
 
-  return (
-    <DetailsLayout
-      DescriptionBlock={
-        <EventDescription
-          title={title}
-          description={description}
-          eventEndDate={eventEndDate}
-          eventEndTime={eventEndTime}
-          price={price}
-          eventStartTime={eventStartTime}
-          eventStartDate={eventStartDate}
-          venue={venue}
-          moreInfo={moreInfo}
-          category={category}
-        />
-      }
-      CarouselBlock={<DetailsPageImageCarousel images={images} />}
-    />
-  );
+  return <div />;
+  //   <DetailsLayout
+  //     DescriptionBlock={
+  //       <EventDescription
+  //         title={title}
+  //         description={description}
+  //         eventEndDate={eventEndDate}
+  //         eventEndTime={eventEndTime}
+  //         price={price}
+  //         eventStartTime={eventStartTime}
+  //         eventStartDate={eventStartDate}
+  //         venue={venue}
+  //         moreInfo={moreInfo}
+  //         category={category}
+  //       />
+  //     }
+  //     CarouselBlock={<DetailsPageImageCarousel images={images} />}
+  //   />
+  // );
 };
 
 export default EventDetailPage;

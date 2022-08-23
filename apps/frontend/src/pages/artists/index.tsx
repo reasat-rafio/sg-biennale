@@ -55,8 +55,8 @@ const Artists: NextPage<SanityProps> = (props) => {
 
   return (
     <FilteringLogic>
-      <Filtering />
-      <ArtistsList />
+      {/* <Filtering />
+      <ArtistsList /> */}
     </FilteringLogic>
   );
 };

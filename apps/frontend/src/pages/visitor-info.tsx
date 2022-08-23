@@ -56,8 +56,8 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
     <Container className="py-5">
       {renderObjectArray(page.sections, {
         // "visitorInfoPage.hero": Hero,
-        "visitorInfoPage.admission": Admission,
-        "visitorInfoPage.venues": Venues,
+        // "visitorInfoPage.admission": Admission,
+        // "visitorInfoPage.venues": Venues,
       })}
     </Container>
   );

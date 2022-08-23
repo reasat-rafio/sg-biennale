@@ -1,7 +1,7 @@
 import { Artist } from "@components/home/artist/artist";
 import { Hero } from "@components/home/hero/hero";
 import { Introduction } from "@components/home/introduction/introduction";
-import { News } from "@components/home/news";
+import { News } from "@components/home/news/news";
 import { Promotion } from "@components/home/promotion";
 import { Organisations } from "@components/home/organisation/organisation";
 import { pageQuery } from "@lib/query";
@@ -87,7 +87,7 @@ const Home: NextPage<SanityProps> = (props) => {
   return (
     <div>
       {renderObjectArray(page.sections, {
-        "homePage.hero": Hero,
+        // "homePage.hero": Hero,
         "homePage.introduction": Introduction,
         "homePage.promotion": Promotion,
         "homePage.artists": Artist,

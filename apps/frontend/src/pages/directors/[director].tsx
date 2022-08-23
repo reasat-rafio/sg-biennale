@@ -58,7 +58,7 @@ const DirectorDetailPage: NextPage<SanityProps> = (props) => {
 
   return (
     <Container className="min-h-[60vh] flex lg:flex-row flex-col-reverse | py-16 gap-5">
-      <div className="flex-1">
+      {/* <div className="flex-1">
         <h1 className="lg:text-3xl text-2xl font-semibold mb-4">{name}</h1>
         <span className="text-lg">
           <PortableText blocks={description} />
@@ -72,7 +72,7 @@ const DirectorDetailPage: NextPage<SanityProps> = (props) => {
           width={600}
           alt={`${name}`}
         />
-      </figure>
+      </figure> */}
     </Container>
   );
 };

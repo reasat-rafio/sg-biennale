@@ -33,7 +33,7 @@ const Partners: NextPage<SanityProps> = (props) => {
 
   return (
     <Container className="py-section">
-      <PartnerList partners={partners} />
+      {/* <PartnerList partners={partners} /> */}
     </Container>
   );
 };

@@ -50,8 +50,8 @@ const Press: NextPage<SanityProps> = (props) => {
   return (
     <div>
       {renderObjectArray(page.sections, {
-        "pressPage.release": Release,
-        "pressPage.kitInfo": KitsInfo,
+        // "pressPage.release": Release,
+        // "pressPage.kitInfo": KitsInfo,
       })}
     </div>
   );

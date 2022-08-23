@@ -26,8 +26,8 @@ const SupportUs: NextPage<SanityProps> = (props) => {
 
   return (
     <Container className="py-section">
-      <Header type="h1">{header}</Header>
-      <Methods methods={methods} />
+      {/* <Header type="h1">{header}</Header>
+      <Methods methods={methods} /> */}
     </Container>
   );
 };

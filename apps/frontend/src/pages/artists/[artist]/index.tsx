@@ -72,10 +72,10 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
     // /> */}
 
       <Container className="min-h-[60vh] grid lg:grid-cols-2 | py-16">
-        <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>
+        {/* <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>
         <span className="text-lg">
           <PortableText blocks={description} />
-        </span>
+        </span> */}
       </Container>
     </>
   );

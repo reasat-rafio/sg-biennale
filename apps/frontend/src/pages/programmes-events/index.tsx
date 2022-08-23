@@ -89,13 +89,13 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   return (
     <Container>
-      <FilteringLogic>
+      {/* <FilteringLogic>
         <header>
           <h1 className="py-3 | font-semibold text-3xl">Programmes & Events</h1>
         </header>
         <FilteringSection />
         <ProgrammesEventList />
-      </FilteringLogic>
+      </FilteringLogic> */}
     </Container>
   );
 };
