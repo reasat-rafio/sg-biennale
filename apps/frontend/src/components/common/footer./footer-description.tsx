@@ -6,17 +6,19 @@ import Link from "next/link";
 import { SanityImg } from "sanity-react-extra";
 
 interface FooterDescriptionProps {
-  address: ISite["site"]["footer"]["address"];
-  socials: ISite["site"]["footer"]["socials"];
+  // address: ISite["site"]["footer"]["address"];
+  // socials: ISite["site"]["footer"]["socials"];
 }
 
-export const FooterDescription: React.FC<FooterDescriptionProps> = ({
-  address,
-  socials,
-}) => {
+export const FooterDescription: React.FC<FooterDescriptionProps> = (
+  {
+    // address,
+    // socials,
+  }
+) => {
   return (
     <Container className="py-3 flex items-center lg:flex-row flex-col ">
-      <div className="flex flex-1 space-x-1">
+      {/* <div className="flex flex-1 space-x-1">
         <Location />
         <span>{address}</span>
       </div>
@@ -33,7 +35,7 @@ export const FooterDescription: React.FC<FooterDescriptionProps> = ({
             </a>
           </Link>
         ))}
-      </div>
+      </div> */}
     </Container>
   );
 };

@@ -10,7 +10,7 @@ import "swiper/css/autoplay";
 import { useWindowSize } from "@lib/hooks";
 
 interface HeroCarouselProps {
-  carouselItems: HomHeroProps["carousel"];
+  carouselItems: HomHeroProps["image"];
 }
 
 export const HeroCarousel: React.FC<HeroCarouselProps> = ({
@@ -19,33 +19,34 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
-    <Swiper
-      className="h-[400px] md:h-[75vh]"
-      modules={[Pagination, EffectFade, Autoplay]}
-      slidesPerView={1}
-      effect="fade"
-      autoplay
-      pagination={{ clickable: true }}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      {carouselItems.map(({ key, image, description, title }) => (
-        <SwiperSlide className="relative" key={key}>
-          <SanityImg
-            width={windowWidth >= 1024 ? 3000 : 1400}
-            className="h-full w-full absolute object-cover object-center "
-            image={image}
-            builder={imageUrlBuilder}
-            alt={title}
-          />
-          <div className="absolute h-full w-full | flex flex-col justify-center items-center | space-y-8">
-            <h3 className="text-5xl font-semibold text-white">{title}</h3>
-            <p className="max-w-sm text-center | text-xl text-gray-300">
-              {description}
-            </p>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div />
+    // <Swiper
+    //   className="h-[400px] md:h-[75vh]"
+    //   modules={[Pagination, EffectFade, Autoplay]}
+    //   slidesPerView={1}
+    //   effect="fade"
+    //   autoplay
+    //   pagination={{ clickable: true }}
+    //   onSlideChange={() => console.log("slide change")}
+    //   onSwiper={(swiper) => console.log(swiper)}
+    // >
+    //   {carouselItems.map(({ key, image, description, title }) => (
+    //     <SwiperSlide className="relative" key={key}>
+    //       <SanityImg
+    //         width={windowWidth >= 1024 ? 3000 : 1400}
+    //         className="h-full w-full absolute object-cover object-center "
+    //         image={image}
+    //         builder={imageUrlBuilder}
+    //         alt={title}
+    //       />
+    //       <div className="absolute h-full w-full | flex flex-col justify-center items-center | space-y-8">
+    //         <h3 className="text-5xl font-semibold text-white">{title}</h3>
+    //         <p className="max-w-sm text-center | text-xl text-gray-300">
+    //           {description}
+    //         </p>
+    //       </div>
+    //     </SwiperSlide>
+    //   ))}
+    // </Swiper>
   );
 };

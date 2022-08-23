@@ -20,9 +20,9 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const SupportUs: NextPage<SanityProps> = (props) => {
-  const {
-    page: { header, methods },
-  } = useSanityQuery(query, props).data;
+  // const {
+  //   page: { header, methods },
+  // } = useSanityQuery(query, props).data;
 
   return (
     <Container className="py-section">

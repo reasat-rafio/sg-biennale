@@ -43,11 +43,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await sanityClient("anonymous").fetch(pathsQuery);
 
   return {
-    paths: slugs
-      .filter((s: any) => s)
-      .map((s: any) => ({
-        params: { artist: s.artist.slug.current, artwork: s.slug.current },
-      })),
+    // paths: slugs
+    //   .filter((s: any) => s)
+    //   .map((s: any) => ({
+    //     params: { artist: s.artist.slug.current, artwork: s.slug.current },
+    //   })),
+    paths: [],
     fallback: "blocking",
   };
 };

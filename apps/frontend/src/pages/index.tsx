@@ -1,5 +1,4 @@
 import { Artist } from "@components/home/artist/artist";
-import { Hero } from "@components/home/hero/hero";
 import { Introduction } from "@components/home/introduction/introduction";
 import { News } from "@components/home/news/news";
 import { Promotion } from "@components/home/promotion";
