@@ -1,19 +1,31 @@
 import { Html } from "@react-three/drei";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { Suspense, useMemo, useRef, useState } from "react";
-import { Color, ShaderMaterial, TextureLoader, WebGL1Renderer } from "three";
+import { ShaderMaterial, TextureLoader, WebGL1Renderer } from "three";
 import vertexShader from "./shaders/vartex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
+import { useSpring, animated, config, SpringValue } from "@react-spring/three";
 
 interface CardImgSceneProps {
   url: string;
+  hovered: boolean;
+  cardImageAnimationProps: {
+    scale: SpringValue<number[]>;
+    pos: SpringValue<number[]>;
+  };
 }
 
-const Image: React.FC<{
-  url: string;
-}> = ({ url }) => {
-  const [doAnimation, setDoAnimation] = useState(false);
+const Image: React.FC<CardImgSceneProps> = ({
+  url,
+  hovered,
+  cardImageAnimationProps,
+}) => {
   const materialRef = useRef<ShaderMaterial>(null);
+
+  const { hoverValue } = useSpring({
+    hoverValue: hovered ? 1 : 0,
+    config: config.molasses,
+  });
 
   const args = useMemo(() => {
     const [imgTexture] = useLoader(TextureLoader, [url]);
@@ -21,29 +33,36 @@ const Image: React.FC<{
     return {
       uniforms: {
         uTexture: { value: imgTexture },
-        uTime: { value: 0 },
-        uColor: { value: new Color(0.0, 0.0, 0.0) },
+        uImageAspectRatio: { value: 1.0 },
+        uOpacity: { value: 1.0 },
+        uHover: { value: 0.0 },
       },
       vertexShader,
       fragmentShader,
     };
   }, [url]);
 
-  useFrame(({ clock }) => {
-    if (materialRef?.current) {
-      materialRef.current.uniforms.uTime = { value: clock.getElapsedTime() };
-    }
-  });
-
   return (
-    <mesh>
+    // @ts-ignore
+    <animated.mesh {...cardImageAnimationProps}>
       <planeBufferGeometry args={[1, 0.6, 16, 16]} />
-      <shaderMaterial ref={materialRef} name="material" args={[args]} />
-    </mesh>
+      {/* @ts-ignore */}
+      <animated.shaderMaterial
+        transparent
+        ref={materialRef}
+        name="material"
+        args={[args]}
+        uniforms-uHover-value={hoverValue}
+      />
+    </animated.mesh>
   );
 };
 
-const CardImgScene: React.FC<CardImgSceneProps> = ({ url }) => {
+const CardImgScene: React.FC<CardImgSceneProps> = ({
+  url,
+  hovered,
+  cardImageAnimationProps,
+}) => {
   return (
     <Canvas
       gl={(canvas) => new WebGL1Renderer({ canvas, alpha: true })}
@@ -56,7 +75,11 @@ const CardImgScene: React.FC<CardImgSceneProps> = ({ url }) => {
           </Html>
         }
       >
-        <Image url={url} />
+        <Image
+          url={url}
+          hovered={hovered}
+          cardImageAnimationProps={cardImageAnimationProps}
+        />
       </Suspense>
     </Canvas>
   );
