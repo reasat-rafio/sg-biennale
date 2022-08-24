@@ -51,7 +51,8 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
   damping = 4,
   children,
 }) => {
-  const { gl, size, invalidate, events, raycaster } = useThree();
+  const { gl, size, invalidate, events, raycaster, get, setEvents, camera } =
+    useThree();
   const [el] = useState(() => document.createElement("div"));
   const [fill] = useState(() => document.createElement("div"));
   const [fixed] = useState(() => document.createElement("div"));
@@ -95,6 +96,51 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
     };
     return state;
   }, [eps, damping, horizontal, pages]);
+
+  useEffect(() => {
+    el.style.position = "absolute";
+    el.style.width = "100%";
+    el.style.height = "100%";
+    el.style[horizontal ? "overflowX" : "overflowY"] = "auto";
+    el.style[horizontal ? "overflowY" : "overflowX"] = "hidden";
+    el.style.top = "0px";
+    el.style.left = "0px";
+
+    fixed.style.position = "sticky";
+    fixed.style.top = "0px";
+    fixed.style.left = "0px";
+    fixed.style.width = "100%";
+    fixed.style.height = "100%";
+    fixed.style.overflow = "hidden";
+    el.appendChild(fixed);
+
+    fill.style.height = horizontal ? "100%" : `${pages * distance * 100}%`;
+    fill.style.width = horizontal ? `${pages * distance * 100}%` : "100%";
+    fill.style.pointerEvents = "none";
+    el.appendChild(fill);
+    target.appendChild(el);
+
+    // Init scroll one pixel in to allow upward/leftward scroll
+    el[horizontal ? "scrollLeft" : "scrollTop"] = 1;
+
+    const oldTarget =
+      typeof events.connected !== "boolean" ? events.connected : gl.domElement;
+    requestAnimationFrame(() => events.connect?.(el));
+    const oldCompute = get().events.compute;
+    setEvents({
+      compute({ clientX, clientY }) {
+        const offsetX = clientX - (target as HTMLElement).offsetLeft;
+        const offsetY = clientY - (target as HTMLElement).offsetTop;
+        raycaster.setFromCamera({ x: offsetX, y: offsetY }, camera);
+      },
+    });
+
+    return () => {
+      target.removeChild(el);
+      setEvents({ compute: oldCompute });
+      events.connect?.(oldTarget);
+    };
+  }, [pages, distance, horizontal, el, fill, fixed, target]);
 
   useEffect(() => {
     const containerLength = size[horizontal ? "width" : "height"];

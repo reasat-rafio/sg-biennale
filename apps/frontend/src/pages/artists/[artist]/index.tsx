@@ -1,15 +1,6 @@
-import { ArtistDescription } from "@components/artist-details/artist-description";
 import { Artwork } from "@components/artist-details/artwork/artwork";
-import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
-import { Container } from "@components/ui/container";
-import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
-import {
-  imageUrlBuilder,
-  PortableText,
-  sanityClient,
-  sanityStaticProps,
-} from "@utils/sanity";
+import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -22,6 +13,25 @@ import { SanityProps } from "next-sanity-extra";
 const query = pageQuery(groq`
     *[_type == "artist" && slug.current == $artist][0]{
         ...,
+        artworks[]-> {
+          name,
+          slug,
+          description,
+          artworks[]-> {
+            name,
+            slug,
+            description,
+            images[] {
+              ...        
+              asset->{
+                ...,
+                metadata {
+                dimensions
+              }
+            }
+          },
+        },
+        },
         images[] {
           ...        
           asset->{
@@ -57,7 +67,7 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
-  const { name, description, images, artworks } = props.data.page;
+  const { name, artworks } = props.data.page;
 
   return (
     <section>
