@@ -1,58 +1,69 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
-import { ArtworkGalleryProps } from "./artwork-gallery";
 import { useScroll } from "./scroll-controls";
 import { Image as ImageImpl } from "@react-three/drei";
 import * as THREE from "three";
 import { Group } from "three";
+import { ArtworkProps } from "../artwork";
 
-export const Pages: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
+export const Pages: React.FC<{ artworks: ArtworkProps[][] }> = ({
+  artworks,
+}) => {
   const { width } = useThree((state) => state.viewport);
-  const arts = artworks.map(({ images }) => images[0]);
 
   return (
     <>
-      <Page
-        position={[width * 0, 0, 0]}
-        urls={[arts[3].asset.url, arts[4].asset.url, arts[5].asset.url]}
-      />
-      <Page
-        position={[width * 1, 0, 0]}
-        urls={[arts[0].asset.url, arts[1].asset.url, arts[2].asset.url]}
-      />
+      {artworks.map((arts, index) => (
+        <Page
+          index={index}
+          position={[width * index * 0.7, 0, 0]}
+          urls={arts.map((_, idx) => artworks[index][idx].images[0].asset.url)}
+          length={arts.length}
+          dimensions={arts.map(
+            (_, idx) => artworks[index][idx].images[0].asset.metadata.dimensions
+          )}
+        />
+      ))}
     </>
   );
 };
 
 function Page({
-  m = 0.4,
+  index,
   urls,
-  ...props
+  position,
+  length,
+  dimensions,
 }: {
-  m?: number;
-  urls: [string, string, string];
+  index: number;
+  urls: string[];
   position: any;
+  length: number;
+  dimensions: {
+    aspectRatio: number;
+    height: number;
+    width: number;
+  }[];
 }) {
-  const { width } = useThree((state) => state.viewport);
-  const w = width < 10 ? 1.5 / 3 : 1 / 3;
-
   return (
-    <group {...props}>
-      <Image
-        position={[-width * w, 0, -1]}
-        scale={[width * w - m * 2, 5, 1]}
-        url={urls[0]}
-      />
-      <Image
-        position={[0, 0, 0]}
-        scale={[width * w - m * 2, 5, 1]}
-        url={urls[1]}
-      />
-      <Image
-        position={[width * w, 0, 1]}
-        scale={[width * w - m * 2, 5, 1]}
-        url={urls[2]}
-      />
+    <group position={position}>
+      {Array.from({ length }).map((_, index) => {
+        const aspectRatio = dimensions[index].aspectRatio;
+        const scaleX = 0.8 + aspectRatio * 1.8;
+        const scaleY = 3.5 - aspectRatio;
+
+        return (
+          <Image
+            position={
+              index % 2
+                ? [6 + index * 2.3 - length, 1.4, aspectRatio]
+                : [6 + index * 2.3 - length, -1.1, aspectRatio]
+            }
+            scale={[scaleX, scaleY, 1]}
+            url={urls[index]}
+          />
+        );
+      })}
     </group>
   );
 }

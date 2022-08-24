@@ -208,7 +208,7 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
   return <context.Provider value={state}>{children}</context.Provider>;
 };
 
-const ScrollCanvas = React.forwardRef(({ children }, ref) => {
+const ScrollCanvas = React.forwardRef(({ children }: any, ref) => {
   const group = React.useRef<THREE.Group>(null!);
   const state = useScroll();
   const { width, height } = useThree((state) => state.viewport);

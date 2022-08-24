@@ -2,7 +2,7 @@ import { ISeo, Slug } from "@lib/@types/global.types";
 import { SanityImage } from "sanity-react-extra";
 import { ArtworkGallery } from "./gallery/artwork-gallery";
 
-interface ArtworkProps {
+export interface ArtworkProps {
   seo: ISeo;
   name: string;
   slug: Slug;
@@ -19,7 +19,7 @@ export const Artwork: React.FC<ArtworkPageProps> = ({ name, artworks }) => {
   return (
     <section>
       <h2 className="container my-3">{name}'s Artworks</h2>
-      <section className="h-screen">
+      <section className="h-[100vh]">
         <ArtworkGallery artworks={artworks} />
       </section>
     </section>
