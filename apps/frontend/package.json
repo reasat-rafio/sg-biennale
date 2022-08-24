@@ -33,6 +33,7 @@
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-merge-refs": "^2.0.1",
     "sanity-react-extra": "^0.2.4",
     "smee-client": "^1.2.3",
     "swiper": "^8.2.4",

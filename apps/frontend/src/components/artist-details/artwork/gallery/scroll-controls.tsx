@@ -1,12 +1,14 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import {
+import React, {
   createContext,
+  forwardRef,
   useContext,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
+import { mergeRefs } from "react-merge-refs";
 import * as THREE from "three";
 
 interface ScrollControlsState {
@@ -157,7 +159,6 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
       invalidate();
       current = el[horizontal ? "scrollLeft" : "scrollTop"];
       scroll.current = current / scrollThreshold;
-
       if (infinite) {
         if (!disableScroll) {
           if (scroll.current >= 1 - 0.001) {
@@ -174,16 +175,16 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
         }
         if (disableScroll) setTimeout(() => (disableScroll = false), 40);
       }
-      el.addEventListener("scroll", onScroll, { passive: true });
-      requestAnimationFrame(() => (firstRun = false));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    requestAnimationFrame(() => (firstRun = false));
 
-      const onWheel = (e: WheelEvent) => (el.scrollLeft += e.deltaY / 2);
-      if (horizontal) el.addEventListener("wheel", onWheel, { passive: true });
+    const onWheel = (e: WheelEvent) => (el.scrollLeft += e.deltaY / 2);
+    if (horizontal) el.addEventListener("wheel", onWheel, { passive: true });
 
-      return () => {
-        el.removeEventListener("scroll", onScroll);
-        if (horizontal) el.removeEventListener("wheel", onWheel);
-      };
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      if (horizontal) el.removeEventListener("wheel", onWheel);
     };
   }, [el, size, infinite, state, invalidate, horizontal]);
 
@@ -206,3 +207,32 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
 
   return <context.Provider value={state}>{children}</context.Provider>;
 };
+
+const ScrollCanvas = React.forwardRef(({ children }, ref) => {
+  const group = React.useRef<THREE.Group>(null!);
+  const state = useScroll();
+  const { width, height } = useThree((state) => state.viewport);
+  useFrame(() => {
+    if (group?.current) {
+      group.current.position.x = state.horizontal
+        ? -width * (state.pages - 1) * state.offset
+        : 0;
+      group.current.position.y = state.horizontal
+        ? 0
+        : height * (state.pages - 1) * state.offset;
+    }
+  });
+  return <group ref={mergeRefs([ref, group])}>{children}</group>;
+});
+
+type ScrollProps = {
+  html?: boolean;
+  children?: React.ReactNode;
+};
+
+export const Scroll = React.forwardRef(
+  ({ html, ...props }: ScrollProps, ref) => {
+    const El = ScrollCanvas;
+    return <El ref={ref} {...props} />;
+  }
+);

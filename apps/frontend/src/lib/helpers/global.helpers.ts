@@ -51,3 +51,8 @@ export const makeOpenGraphImages = (
       }))
     : [];
 };
+
+export function ChunkArray<T>(a: T[], n: number): T[][] {
+  const b = Math.ceil(a.length / n);
+  return [...Array(n)].map((_, i) => a.slice(i * b, (i + 1) * b));
+}

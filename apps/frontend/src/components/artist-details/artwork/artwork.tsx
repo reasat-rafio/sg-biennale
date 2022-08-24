@@ -19,7 +19,9 @@ export const Artwork: React.FC<ArtworkPageProps> = ({ name, artworks }) => {
   return (
     <section>
       <h2 className="container my-3">{name}'s Artworks</h2>
-      <ArtworkGallery artworks={artworks} />
+      <section className="h-screen">
+        <ArtworkGallery artworks={artworks} />
+      </section>
     </section>
   );
 };
