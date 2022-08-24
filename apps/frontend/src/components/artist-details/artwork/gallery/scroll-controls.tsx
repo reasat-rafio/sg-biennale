@@ -128,18 +128,9 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
     const oldTarget =
       typeof events.connected !== "boolean" ? events.connected : gl.domElement;
     requestAnimationFrame(() => events.connect?.(el));
-    const oldCompute = get().events.compute;
-    setEvents({
-      compute({ clientX, clientY }) {
-        const offsetX = clientX - (target as HTMLElement).offsetLeft;
-        const offsetY = clientY - (target as HTMLElement).offsetTop;
-        raycaster.setFromCamera({ x: offsetX, y: offsetY }, camera);
-      },
-    });
 
     return () => {
       target.removeChild(el);
-      setEvents({ compute: oldCompute });
       events.connect?.(oldTarget);
     };
   }, [pages, distance, horizontal, el, fill, fixed, target]);

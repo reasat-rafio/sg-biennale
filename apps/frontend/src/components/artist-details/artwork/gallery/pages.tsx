@@ -1,5 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useScroll } from "./scroll-controls";
 import { Image as ImageImpl } from "@react-three/drei";
 import * as THREE from "three";
@@ -29,7 +29,7 @@ export const Pages: React.FC<{ artworks: ArtworkProps[][] }> = ({
 };
 
 function Page({
-  index,
+  // index,
   urls,
   position,
   length,
@@ -46,7 +46,12 @@ function Page({
   }[];
 }) {
   return (
-    <group position={position}>
+    <group
+      onClick={() => {
+        console.log("asds");
+      }}
+      position={position}
+    >
       {Array.from({ length }).map((_, index) => {
         const aspectRatio = dimensions[index].aspectRatio;
         const scaleX = 0.8 + aspectRatio * 1.8;
@@ -72,6 +77,11 @@ function Image(props: { position: any; scale: any; url: string }) {
   const ref = useRef<any>(null);
   const group = useRef<Group | null>(null);
   const data = useScroll();
+
+  // useEffect(() => {
+  //   document.body.style.cursor = hovered ? "pointer" : "auto";
+  // }, [hovered]);
+
   useFrame((_, delta) => {
     if (group?.current)
       group.current.position.z = THREE.MathUtils.damp(
@@ -80,13 +90,12 @@ function Image(props: { position: any; scale: any; url: string }) {
         4,
         delta
       );
-    if (ref.current)
-      ref.current.material.grayscale = THREE.MathUtils.damp(
-        ref.current.material.grayscale,
-        Math.max(0, 1 - data.delta * 1000),
-        4,
-        delta
-      );
+    ref.current.material.grayscale = THREE.MathUtils.damp(
+      ref.current.material.grayscale,
+      Math.max(0, 1 - data.delta * 1000),
+      4,
+      delta
+    );
   });
   return (
     <group ref={group}>
