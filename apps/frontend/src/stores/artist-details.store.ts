@@ -1,11 +1,17 @@
+import { ArtworkProps } from "./../components/artist-details/artwork/artwork";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
+interface SelectedImageProps {
+  index: number;
+  artwork: ArtworkProps;
+}
+
 interface IArtistsStore {
   galleryIsScrollable: boolean;
-  selectedImage: number | null;
+  selectedImage: SelectedImageProps | null;
   galleryImagePerPage: number;
-  setSelectedImage: (data: number | null) => void;
+  setSelectedImage: (data: SelectedImageProps | null) => void;
   setGalleryIsScrollable: (data: boolean) => void;
 }
 
@@ -14,8 +20,11 @@ const useArtistsDetailsStore = create(
     galleryIsScrollable: true,
     selectedImage: null,
     galleryImagePerPage: 5,
-    setSelectedImage: (selectedImage: null | number) =>
-      set((state) => ({ ...state, selectedImage })),
+    setSelectedImage: (selectedImage: SelectedImageProps | null) =>
+      set((state) => ({
+        ...state,
+        selectedImage: selectedImage ? selectedImage : null,
+      })),
     setGalleryIsScrollable: (galleryIsScrollable) =>
       set((state) => ({ ...state, galleryIsScrollable })),
   }))

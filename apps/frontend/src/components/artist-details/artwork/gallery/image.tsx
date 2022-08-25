@@ -6,6 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import { Group } from "three";
 import * as THREE from "three";
 import { useScroll } from "./scroll-controls";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArtworkProps } from "../artwork";
+import { PortableText } from "@utils/sanity";
 
 interface ImageProps {
   outterArrIndex: number;
@@ -13,6 +16,7 @@ interface ImageProps {
   position: any;
   scale: any;
   url: string;
+  artwork: ArtworkProps;
 }
 
 export const Image: React.FC<ImageProps> = ({
@@ -21,25 +25,26 @@ export const Image: React.FC<ImageProps> = ({
   position,
   scale,
   url,
+  artwork,
 }) => {
-  const windowWidth = useWindowSize()?.width ?? 0;
-
-  const { selectedImage, setSelectedImage } = useArtistsDetailsStore();
+  const { selectedImage, setSelectedImage, galleryImagePerPage } =
+    useArtistsDetailsStore();
   const imageRef = useRef<any>(null);
   const group = useRef<Group | null>(null);
   const scrollData = useScroll();
   const [hovered, setHovered] = useState(false);
   const data = useThree((state) => state.viewport);
 
-  //   console.log(data);
+  const w =
+    data.width < 10
+      ? 2 / galleryImagePerPage
+      : scrollData.pages / galleryImagePerPage;
 
   const uniqueIndex = outterArrIndex * 10 + innerArrIndex;
-  const totoalCanvasWidth = windowWidth * scrollData.pages;
-
-  //   const asd = totoalCanvasWidth * (scrollData.offset / 190);
 
   const onClickAction = () => {
-    if (uniqueIndex !== selectedImage) setSelectedImage(uniqueIndex);
+    if (uniqueIndex !== selectedImage?.index)
+      setSelectedImage({ index: uniqueIndex, artwork: artwork });
     else setSelectedImage(null);
   };
 
@@ -51,7 +56,18 @@ export const Image: React.FC<ImageProps> = ({
     if (group?.current) {
       group.current.position.z = THREE.MathUtils.damp(
         group.current.position.z,
-        Math.max(0, scrollData.delta * 20),
+        Math.max(0, scrollData.delta * 40),
+        4,
+        delta
+      );
+
+      group.current.position.x = THREE.MathUtils.damp(
+        group.current.position.x,
+        selectedImage?.index === uniqueIndex
+          ? outterArrIndex !== 0
+            ? scrollData.offset * data.width + -data.width * w * 2.5
+            : scrollData.offset * data.width
+          : position[0],
         4,
         delta
       );
@@ -60,7 +76,7 @@ export const Image: React.FC<ImageProps> = ({
     if (imageRef?.current) {
       imageRef.current.material.grayscale = THREE.MathUtils.damp(
         imageRef.current.material.grayscale,
-        hovered || selectedImage === uniqueIndex
+        hovered || selectedImage?.index === uniqueIndex
           ? Math.max(0, 1 - delta * 10000)
           : Math.max(0, 1 - scrollData.delta * 1000),
         4,
@@ -77,33 +93,26 @@ export const Image: React.FC<ImageProps> = ({
       imageRef.current.material.scale[0] = imageRef.current.scale.x =
         THREE.MathUtils.damp(
           imageRef.current.scale.x,
-          selectedImage === uniqueIndex ? 5 : scale[0],
+          selectedImage?.index === uniqueIndex ? scale[0] * 1.2 : scale[0],
           6,
           delta
         );
       imageRef.current.material.scale[1] = imageRef.current.scale.y =
         THREE.MathUtils.damp(
           imageRef.current.scale.y,
-          selectedImage === uniqueIndex ? 3 : scale[1],
+          selectedImage?.index === uniqueIndex ? scale[1] * 1.2 : scale[1],
           8,
           delta
         );
       imageRef.current.position.z = THREE.MathUtils.damp(
         imageRef.current.position.z,
-        selectedImage === uniqueIndex ? 1 : position[2],
+        selectedImage?.index === uniqueIndex ? 1 : position[2],
         4,
         delta
       );
       imageRef.current.position.y = THREE.MathUtils.damp(
         imageRef.current.position.y,
-        selectedImage === uniqueIndex ? 0 : position[1],
-        4,
-        delta
-      );
-
-      imageRef.current.position.x = THREE.MathUtils.damp(
-        imageRef.current.position.x,
-        selectedImage === uniqueIndex ? 0 : position[0],
+        selectedImage?.index === uniqueIndex ? 1 : position[1],
         4,
         delta
       );
@@ -118,13 +127,29 @@ export const Image: React.FC<ImageProps> = ({
       ref={group}
     >
       <ImageImpl ref={imageRef} url={url} />
-      {/* {clicked && (
-        <Html position={[-0, 3, 0]} className="">
-          <div className="fixed left-0 top-0 w-screen min-h-[120vh] bg-black bg-opacity-60 backdrop-blur-md !z-50 ">
-            a
-          </div>
-        </Html>
-      )} */}
+      <Html className="">
+        <AnimatePresence>
+          {selectedImage?.index === uniqueIndex && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="bg-black w-[1000px] -translate-x-1/2 p-6 text-white bg-opacity-90 rounded-lg space-y-6 "
+            >
+              <h2 className="text-4xl font-semibold">
+                {selectedImage.artwork.name}
+              </h2>
+
+              <div>
+                <PortableText blocks={selectedImage.artwork.description} />
+              </div>
+              <button className="bg-[#FFFFFF] text-black rounded-3xl px-10 py-3 w-fit">
+                See Venue
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </Html>
     </group>
   );
 };

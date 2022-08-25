@@ -4,17 +4,19 @@ import React from "react";
 import { ArtworkProps } from "../artwork";
 import { Image } from "./image";
 
+export interface DimensionsProps {
+  aspectRatio: number;
+  height: number;
+  width: number;
+}
+
 interface PageProps {
   outterArrIndex: number;
-  urls: string[];
   position: any;
   length: number;
   pages: number;
-  dimensions: {
-    aspectRatio: number;
-    height: number;
-    width: number;
-  }[];
+  artworks: ArtworkProps[];
+  dimensions: DimensionsProps[];
 }
 
 export const Pages: React.FC<{
@@ -32,9 +34,7 @@ export const Pages: React.FC<{
             pages={pages}
             length={arts.length}
             position={[data.width * index, 0, 0]}
-            urls={arts.map(
-              (_, idx) => artworks[index][idx].images[0].asset.url
-            )}
+            artworks={arts.map((_, idx) => artworks[index][idx])}
             dimensions={arts.map(
               (_, idx) =>
                 artworks[index][idx].images[0].asset.metadata.dimensions
@@ -48,14 +48,13 @@ export const Pages: React.FC<{
 
 const Page: React.FC<PageProps> = ({
   outterArrIndex,
-  urls,
   position,
   length,
   dimensions,
   pages,
+  artworks,
 }) => {
   const { galleryImagePerPage } = useArtistsDetailsStore();
-
   const data = useThree((state) => state.viewport);
   const w =
     data.width < 10 ? 2 / galleryImagePerPage : pages / galleryImagePerPage;
@@ -67,14 +66,14 @@ const Page: React.FC<PageProps> = ({
         const aspectRatio = dimensions[idx].aspectRatio;
         const scaleX = 0.8 + aspectRatio * 1.8;
         const scaleY = 3.5 - aspectRatio;
-
         startingXPosition += (data.width * w * 2) / galleryImagePerPage;
 
         return (
           <Image
             outterArrIndex={outterArrIndex}
             innerArrIndex={idx}
-            url={urls[idx]}
+            url={artworks[idx].images[0].asset.url}
+            artwork={artworks[idx]}
             scale={[scaleX, scaleY, 1]}
             position={[
               startingXPosition,

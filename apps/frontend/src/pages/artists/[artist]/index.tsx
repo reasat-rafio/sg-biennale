@@ -4,6 +4,7 @@ import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-
 import { Container } from "@components/ui/container";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
+import useArtistsDetailsStore from "@stores/artist-details.store";
 import {
   imageUrlBuilder,
   PortableText,
@@ -71,7 +72,8 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
-  const { name, description, images, artworks } = props.data.page;
+  const { name, artworks } = props.data.page;
+  const { selectedImage, setSelectedImage } = useArtistsDetailsStore();
 
   return (
     <section>
