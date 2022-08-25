@@ -53,8 +53,7 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
   damping = 4,
   children,
 }) => {
-  const { gl, size, invalidate, events, raycaster, get, setEvents, camera } =
-    useThree();
+  const { gl, size, invalidate, events } = useThree();
   const [el] = useState(() => document.createElement("div"));
   const [fill] = useState(() => document.createElement("div"));
   const [fixed] = useState(() => document.createElement("div"));
@@ -73,7 +72,6 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
       delta: 0,
       scroll,
       pages,
-
       // 0-1 for a range between from -> from + distance
       range(from: number, distance: number, margin: number = 0) {
         let range;
