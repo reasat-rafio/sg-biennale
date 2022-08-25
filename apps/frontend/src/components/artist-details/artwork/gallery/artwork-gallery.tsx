@@ -32,7 +32,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
         <ScrollControls
           horizontal
           damping={4}
-          pages={Math.ceil(pages) + 0.5}
+          pages={Math.ceil(pages)}
           distance={1}
           enabled={galleryIsScrollable}
         >

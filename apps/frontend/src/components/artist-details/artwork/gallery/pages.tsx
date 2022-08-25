@@ -1,4 +1,5 @@
 import { useThree } from "@react-three/fiber";
+import useArtistsDetailsStore from "@stores/artist-details.store";
 import React from "react";
 import { ArtworkProps } from "../artwork";
 import { Image } from "./image";
@@ -21,7 +22,6 @@ export const Pages: React.FC<{
   pages: number;
 }> = ({ artworks, pages }) => {
   const data = useThree((state) => state.viewport);
-  const calcPostion = (index: number) => data.width * index - data.width * 0.33;
 
   return (
     <>
@@ -54,8 +54,12 @@ const Page: React.FC<PageProps> = ({
   dimensions,
   pages,
 }) => {
+  const { galleryImagePerPage } = useArtistsDetailsStore();
+
   const data = useThree((state) => state.viewport);
-  console.log(data.width / pages);
+  const w =
+    data.width < 10 ? 2 / galleryImagePerPage : pages / galleryImagePerPage;
+  let startingXPosition = -data.width * w;
 
   return (
     <group position={position}>
@@ -64,6 +68,8 @@ const Page: React.FC<PageProps> = ({
         const scaleX = 0.8 + aspectRatio * 1.8;
         const scaleY = 3.5 - aspectRatio;
 
+        startingXPosition += (data.width * w * 2) / galleryImagePerPage;
+
         return (
           <Image
             outterArrIndex={outterArrIndex}
@@ -71,7 +77,7 @@ const Page: React.FC<PageProps> = ({
             url={urls[idx]}
             scale={[scaleX, scaleY, 1]}
             position={[
-              (data.width / pages) * (idx / (pages * 1.5)),
+              startingXPosition,
               idx % 2 ? 1.4 : -1.1,
               aspectRatio * 0.5,
             ]}
