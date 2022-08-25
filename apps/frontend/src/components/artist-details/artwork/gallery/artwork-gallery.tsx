@@ -1,7 +1,8 @@
 import { sliceIntoChunks } from "@lib/helpers/global.helpers";
-import { Html, Preload } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Preload } from "@react-three/drei";
+import { Canvas, useThree } from "@react-three/fiber";
+import useArtistsDetailsStore from "@stores/artist-details.store";
+import { Suspense, useRef } from "react";
 import { ArtworkPageProps } from "../artwork";
 import { Pages } from "./pages";
 import { Scroll, ScrollControls } from "./scroll-controls";
@@ -10,13 +11,14 @@ export interface ArtworkGalleryProps {
   artworks: ArtworkPageProps["artworks"];
 }
 
-export const imagePerPageView = 6;
-
 export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
-  const [clicked, setClikced] = useState<null | number>(null);
-  const _artworks = sliceIntoChunks(artworks, imagePerPageView);
+  const { galleryImagePerPage } = useArtistsDetailsStore();
 
+  const { galleryIsScrollable, setSelectedImage } = useArtistsDetailsStore();
+  const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  const pages = artworks.length / galleryImagePerPage;
 
   return (
     <Canvas
@@ -24,22 +26,18 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
       ref={canvasRef}
       gl={{ antialias: false }}
       dpr={[1, 1.5]}
-      onPointerMissed={() => setClikced(null)}
+      onPointerMissed={() => setSelectedImage(null)}
     >
       <Suspense fallback={null}>
         <ScrollControls
           horizontal
           damping={4}
-          pages={artworks.length / imagePerPageView + 0.5}
+          pages={Math.ceil(pages) + 0.5}
           distance={1}
-          // enabled={false}
+          enabled={galleryIsScrollable}
         >
           <Scroll>
-            <Pages
-              artworks={_artworks}
-              clicked={clicked}
-              setClikced={setClikced}
-            />
+            <Pages pages={pages} artworks={_artworks} />
           </Scroll>
         </ScrollControls>
         <Preload />
