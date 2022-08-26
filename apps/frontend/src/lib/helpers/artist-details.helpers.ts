@@ -35,11 +35,13 @@ export const opacityController = ({
 };
 
 interface PositionControllerProps extends InitialProps {
+  groupRef: RefObject<any>;
   imageRef: RefObject<any>;
   position: any;
   animateXTo: number;
 }
 export const positionController = ({
+  groupRef,
   imageRef,
   selectedImage,
   uniqueIndex,
@@ -51,7 +53,7 @@ export const positionController = ({
   imageRef.current.position.z = THREE.MathUtils.damp(
     imageRef.current.position.z,
     selectedImage?.index === uniqueIndex ? 1 : position[2],
-    4,
+    selectedImage?.index === uniqueIndex ? 10 : 4,
     delta
   );
 
@@ -63,8 +65,8 @@ export const positionController = ({
     delta
   );
 
-  imageRef.current.position.x = THREE.MathUtils.damp(
-    imageRef.current.position.x,
+  groupRef.current.position.x = THREE.MathUtils.damp(
+    groupRef.current.position.x,
     selectedImage?.index === uniqueIndex ? animateXTo : position[0],
     4,
     delta
@@ -86,7 +88,7 @@ export const scalingController = ({
   imageRef.current.material.scale[0] = imageRef.current.scale.x =
     THREE.MathUtils.damp(
       imageRef.current.scale.x,
-      selectedImage?.index === uniqueIndex ? scale[0] * 1.2 : scale[0],
+      selectedImage?.index === uniqueIndex ? scale[0] * 1.5 : scale[0],
       6,
       delta
     );
@@ -95,7 +97,7 @@ export const scalingController = ({
   imageRef.current.material.scale[1] = imageRef.current.scale.y =
     THREE.MathUtils.damp(
       imageRef.current.scale.y,
-      selectedImage?.index === uniqueIndex ? scale[1] * 1.2 : scale[1],
+      selectedImage?.index === uniqueIndex ? scale[1] * 1.5 : scale[1],
       8,
       delta
     );

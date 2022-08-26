@@ -36,7 +36,7 @@ export const Image: React.FC<ImageProps> = ({
     selectedImage,
     setSelectedImage,
     galleryImagePerPage,
-    setGalleryAnimationVals,
+    setGalleryIsScrollable,
   } = useArtistsDetailsStore();
   const imageRef = useRef<any>(null);
   const group = useRef<Group | null>(null);
@@ -54,18 +54,20 @@ export const Image: React.FC<ImageProps> = ({
   const onClickAction = () => {
     if (!selectedImage) {
       setSelectedImage({ index: uniqueIndex, artwork: artwork });
-    } else if (uniqueIndex === selectedImage?.index) setSelectedImage(null);
-    // if (uniqueIndex !== selectedImage?.index) {
-    // setSelectedImage({ index: uniqueIndex, artwork: artwork });
-    //   setGalleryAnimationVals({
-    //     initialImagePosition: position,
-    //     initialImageScale: scale,
-    //   });
-    // } else setSelectedImage(null);
+      setTimeout(() => {
+        document.body.style.position = "fixed";
+        setGalleryIsScrollable(false);
+      }, 1000);
+    } else if (uniqueIndex === selectedImage?.index) {
+      setSelectedImage(null);
+      setGalleryIsScrollable(true);
+      document.body.style.position = "static";
+    }
   };
 
   useEffect(() => {
-    document.body.style.cursor = hovered ? "pointer" : "auto";
+    if (!selectedImage)
+      document.body.style.cursor = hovered ? "pointer" : "auto";
   }, [hovered]);
 
   useFrame((_, delta) => {
@@ -96,21 +98,22 @@ export const Image: React.FC<ImageProps> = ({
       );
 
       opacityController({ imageRef, selectedImage, delta, uniqueIndex });
+      scalingController({
+        imageRef,
+        scale,
+        delta,
+        uniqueIndex,
+        selectedImage,
+      });
       setTimeout(() => {
         positionController({
+          groupRef: group,
           imageRef,
           selectedImage,
           uniqueIndex,
           position,
           delta,
-          animateXTo: data.width * w - data.width * 0.2,
-        });
-        scalingController({
-          imageRef,
-          scale,
-          delta,
-          uniqueIndex,
-          selectedImage,
+          animateXTo: data.width * w - data.width * 0.1,
         });
       }, 500);
     }
@@ -124,21 +127,42 @@ export const Image: React.FC<ImageProps> = ({
       ref={group}
     >
       <ImageImpl ref={imageRef} url={url} />
-      {/* <Html className="">
+      <Html
+        position={[-12, 1, 0]}
+        className="w-[75vw] flex justify-center items-center"
+      >
         <AnimatePresence>
           {selectedImage?.index === uniqueIndex && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="bg-black w-[1000px] -translate-x-1/2 p-6 text-white bg-opacity-90 rounded-lg space-y-6 "
-            >
-              <h2 className="text-4xl font-semibold">
-                {selectedImage.artwork.name}
-              </h2>
+            <motion.div className=" p-6 space-y-6 max-w-3xl">
+              <motion.div className="overflow-hidden">
+                <motion.h2
+                  initial={{ y: "120%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    delay: 1,
+                    type: "tween",
+                    duration: 0.6,
+                    ease: "easeInOut",
+                  }}
+                  className="text-4xl text-black font-semibold"
+                >
+                  {selectedImage.artwork.name}
+                </motion.h2>
+              </motion.div>
 
-              <div>
-                <PortableText blocks={selectedImage.artwork.description} />
+              <div className="overflow-hidden">
+                <motion.div
+                  initial={{ y: "120%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    delay: 1,
+                    type: "tween",
+                    duration: 0.6,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <PortableText blocks={selectedImage.artwork.description} />
+                </motion.div>
               </div>
               <button className="bg-[#FFFFFF] text-black rounded-3xl px-10 py-3 w-fit">
                 See Venue
@@ -146,7 +170,7 @@ export const Image: React.FC<ImageProps> = ({
             </motion.div>
           )}
         </AnimatePresence>
-      </Html> */}
+      </Html>
     </group>
   );
 };
