@@ -22,7 +22,6 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
 
   return (
     <Canvas
-      style={{ overflow: "visible" }}
       ref={canvasRef}
       gl={{ antialias: false }}
       dpr={[1, 1.5]}

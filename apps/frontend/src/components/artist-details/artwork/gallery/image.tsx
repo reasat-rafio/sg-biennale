@@ -9,6 +9,11 @@ import { useScroll } from "./scroll-controls";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArtworkProps } from "../artwork";
 import { PortableText } from "@utils/sanity";
+import {
+  opacityController,
+  positionController,
+  scalingController,
+} from "@lib/helpers/artist-details.helpers";
 
 interface ImageProps {
   outterArrIndex: number;
@@ -27,8 +32,12 @@ export const Image: React.FC<ImageProps> = ({
   url,
   artwork,
 }) => {
-  const { selectedImage, setSelectedImage, galleryImagePerPage } =
-    useArtistsDetailsStore();
+  const {
+    selectedImage,
+    setSelectedImage,
+    galleryImagePerPage,
+    setGalleryAnimationVals,
+  } = useArtistsDetailsStore();
   const imageRef = useRef<any>(null);
   const group = useRef<Group | null>(null);
   const scrollData = useScroll();
@@ -43,9 +52,16 @@ export const Image: React.FC<ImageProps> = ({
   const uniqueIndex = outterArrIndex * 10 + innerArrIndex;
 
   const onClickAction = () => {
-    if (uniqueIndex !== selectedImage?.index)
+    if (!selectedImage) {
       setSelectedImage({ index: uniqueIndex, artwork: artwork });
-    else setSelectedImage(null);
+    } else if (uniqueIndex === selectedImage?.index) setSelectedImage(null);
+    // if (uniqueIndex !== selectedImage?.index) {
+    // setSelectedImage({ index: uniqueIndex, artwork: artwork });
+    //   setGalleryAnimationVals({
+    //     initialImagePosition: position,
+    //     initialImageScale: scale,
+    //   });
+    // } else setSelectedImage(null);
   };
 
   useEffect(() => {
@@ -57,17 +73,6 @@ export const Image: React.FC<ImageProps> = ({
       group.current.position.z = THREE.MathUtils.damp(
         group.current.position.z,
         Math.max(0, scrollData.delta * 40),
-        4,
-        delta
-      );
-
-      group.current.position.x = THREE.MathUtils.damp(
-        group.current.position.x,
-        selectedImage?.index === uniqueIndex
-          ? outterArrIndex !== 0
-            ? scrollData.offset * data.width + -data.width * w * 2.5
-            : scrollData.offset * data.width
-          : position[0],
         4,
         delta
       );
@@ -90,32 +95,24 @@ export const Image: React.FC<ImageProps> = ({
         delta
       );
 
-      imageRef.current.material.scale[0] = imageRef.current.scale.x =
-        THREE.MathUtils.damp(
-          imageRef.current.scale.x,
-          selectedImage?.index === uniqueIndex ? scale[0] * 1.2 : scale[0],
-          6,
-          delta
-        );
-      imageRef.current.material.scale[1] = imageRef.current.scale.y =
-        THREE.MathUtils.damp(
-          imageRef.current.scale.y,
-          selectedImage?.index === uniqueIndex ? scale[1] * 1.2 : scale[1],
-          8,
-          delta
-        );
-      imageRef.current.position.z = THREE.MathUtils.damp(
-        imageRef.current.position.z,
-        selectedImage?.index === uniqueIndex ? 1 : position[2],
-        4,
-        delta
-      );
-      imageRef.current.position.y = THREE.MathUtils.damp(
-        imageRef.current.position.y,
-        selectedImage?.index === uniqueIndex ? 1 : position[1],
-        4,
-        delta
-      );
+      opacityController({ imageRef, selectedImage, delta, uniqueIndex });
+      setTimeout(() => {
+        positionController({
+          imageRef,
+          selectedImage,
+          uniqueIndex,
+          position,
+          delta,
+          animateXTo: data.width * w - data.width * 0.2,
+        });
+        scalingController({
+          imageRef,
+          scale,
+          delta,
+          uniqueIndex,
+          selectedImage,
+        });
+      }, 500);
     }
   });
 
@@ -127,7 +124,7 @@ export const Image: React.FC<ImageProps> = ({
       ref={group}
     >
       <ImageImpl ref={imageRef} url={url} />
-      <Html className="">
+      {/* <Html className="">
         <AnimatePresence>
           {selectedImage?.index === uniqueIndex && (
             <motion.div
@@ -149,7 +146,7 @@ export const Image: React.FC<ImageProps> = ({
             </motion.div>
           )}
         </AnimatePresence>
-      </Html>
+      </Html> */}
     </group>
   );
 };

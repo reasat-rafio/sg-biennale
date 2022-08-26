@@ -1,5 +1,6 @@
 import { ArtistDescription } from "@components/artist-details/artist-description";
 import { Artwork } from "@components/artist-details/artwork/artwork";
+import { ArtworkDescription } from "@components/artist-details/artwork/gallery/popup/artwork-description";
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
 import { Container } from "@components/ui/container";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
@@ -73,33 +74,14 @@ export const getStaticProps: GetStaticProps = async (
 
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
   const { name, artworks } = props.data.page;
-  const { selectedImage, setSelectedImage } = useArtistsDetailsStore();
+  const { selectedImage } = useArtistsDetailsStore();
 
   return (
     <section>
       <Artwork name={name} artworks={artworks} />
+      {/* {selectedImage?.artwork && <ArtworkDescription />} */}
     </section>
   );
 };
 
 export default ArtistDetailPage;
-{
-  /* <DetailsLayout
-      DescriptionBlock={
-        <ArtistDescription
-          name={name}
-          description={description}
-          moreInfo={moreInfo}
-        />
-      }
-      CarouselBlock={<DetailsPageImageCarousel images={images} />}
-    /> */
-}
-{
-  /* <Container className="min-h-[60vh] grid lg:grid-cols-2 | py-16">
-        <h1 className="lg:text-3xl text-2xl font-semibold">{name}</h1>
-        <span className="text-lg">
-          <PortableText blocks={description} />
-        </span>
-      </Container> */
-}
