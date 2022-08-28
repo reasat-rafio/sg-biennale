@@ -56,9 +56,13 @@ const Page: React.FC<PageProps> = ({
 }) => {
   const { galleryImagePerPage } = useArtistsDetailsStore();
   const data = useThree((state) => state.viewport);
-  const w =
-    data.width < 10 ? 2 / galleryImagePerPage : pages / galleryImagePerPage;
-  let startingXPosition = -data.width * w;
+
+  const w = pages / galleryImagePerPage;
+
+  const posisitonXMin = Math.floor(-data.width * w);
+  let positionXMax = Math.ceil(data.width * w);
+  const posXIncreaseBY =
+    (positionXMax + Math.abs(posisitonXMin)) / (galleryImagePerPage - 1);
 
   return (
     <group position={position}>
@@ -66,7 +70,8 @@ const Page: React.FC<PageProps> = ({
         const aspectRatio = dimensions[idx].aspectRatio;
         const scaleX = 0.8 + aspectRatio * 1.8;
         const scaleY = 3.5 - aspectRatio;
-        startingXPosition += (data.width * w * 2) / galleryImagePerPage;
+
+        console.log(outterArrIndex, posisitonXMin + idx * posXIncreaseBY);
 
         return (
           <Image
@@ -76,9 +81,10 @@ const Page: React.FC<PageProps> = ({
             artwork={artworks[idx]}
             scale={[scaleX, scaleY, 1]}
             position={[
-              startingXPosition,
+              posisitonXMin + idx * posXIncreaseBY,
               idx % 2 ? 1.4 : -1.1,
-              aspectRatio * 0.5,
+              0,
+              // aspectRatio * 0.5,
             ]}
           />
         );

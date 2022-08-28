@@ -1,4 +1,5 @@
 import { sliceIntoChunks } from "@lib/helpers/global.helpers";
+import { useIntersection } from "@lib/hooks";
 import { Preload } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
@@ -14,22 +15,22 @@ export interface ArtworkGalleryProps {
 
 export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const { galleryImagePerPage } = useArtistsDetailsStore();
-
   const { galleryIsScrollable, setSelectedImage, selectedImage } =
     useArtistsDetailsStore();
   const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
   const pages = artworks.length / galleryImagePerPage;
 
+  const intersection = useIntersection(canvasRef, { threshold: 0.8 });
+
   useEffect(() => {
-    if (selectedImage) {
+    if (selectedImage && !intersection?.isIntersecting) {
       window.scrollTo({
         top: canvasRef.current?.getBoundingClientRect().top,
         behavior: "smooth",
       });
     }
-  }, [selectedImage]);
+  }, [selectedImage, intersection?.isIntersecting]);
 
   return (
     <Canvas ref={canvasRef} gl={{ antialias: false }} dpr={[1, 1.5]}>
@@ -37,7 +38,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
         <ScrollControls
           horizontal
           damping={4}
-          pages={Math.ceil(pages)}
+          pages={pages}
           distance={1}
           enabled={galleryIsScrollable}
         >

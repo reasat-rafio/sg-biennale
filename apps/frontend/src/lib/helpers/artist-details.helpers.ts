@@ -67,7 +67,7 @@ export const positionController = ({
 
   groupRef.current.position.x = THREE.MathUtils.damp(
     groupRef.current.position.x,
-    selectedImage?.index === uniqueIndex ? animateXTo : position[0],
+    selectedImage?.index === uniqueIndex ? 0 : position[0],
     4,
     delta
   );

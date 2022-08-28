@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { Navbar } from "@components/common/navigation/navbar";
 import { Footer } from "@components/common/footer./footer";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useWindowSize } from "@lib/hooks";
 import useGlobalStore from "@stores/global-store";
 import Head from "next/head";

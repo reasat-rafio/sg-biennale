@@ -27,7 +27,7 @@ const useArtistsDetailsStore = create(
     galleryIsScrollable: true,
     selectedImage: null,
     galleryAnimationVals: null,
-    galleryImagePerPage: 5,
+    galleryImagePerPage: 6,
     setGalleryAnimationVals: (
       galleryAnimationVals: GalleryAnimationValsProps | null
     ) => set((state) => ({ ...state, galleryAnimationVals })),
