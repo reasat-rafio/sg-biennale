@@ -19,7 +19,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     useArtistsDetailsStore();
   const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pages = artworks.length / galleryImagePerPage;
+  const pages = artworks.length / galleryImagePerPage + 0.5;
 
   const intersection = useIntersection(canvasRef, { threshold: 0.8 });
 

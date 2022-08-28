@@ -33,7 +33,7 @@ export const Pages: React.FC<{
             outterArrIndex={index}
             pages={pages}
             length={arts.length}
-            position={[data.width * index, 0, 0]}
+            position={[5 + data.width * index, 0, 0]}
             artworks={arts.map((_, idx) => artworks[index][idx])}
             dimensions={arts.map(
               (_, idx) =>
@@ -71,8 +71,6 @@ const Page: React.FC<PageProps> = ({
         const scaleX = 0.8 + aspectRatio * 1.8;
         const scaleY = 3.5 - aspectRatio;
 
-        console.log(outterArrIndex, posisitonXMin + idx * posXIncreaseBY);
-
         return (
           <Image
             outterArrIndex={outterArrIndex}
@@ -83,8 +81,7 @@ const Page: React.FC<PageProps> = ({
             position={[
               posisitonXMin + idx * posXIncreaseBY,
               idx % 2 ? 1.4 : -1.1,
-              0,
-              // aspectRatio * 0.5,
+              aspectRatio * Math.random(),
             ]}
           />
         );
