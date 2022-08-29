@@ -19,6 +19,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     setSelectedImage,
     selectedImage,
     setGalleryImagePerPage,
+    setGalleryIsScrollable,
   } = useArtistsDetailsStore();
   const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -30,15 +31,15 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
 
   useEffect(() => {
     if (selectedImage) {
-      // setGalleryImagePerPage(artworks.length)
-      // setPages(1);
+      setGalleryIsScrollable(false);
+      document.body.style.position = "fixed";
       // window.scrollTo({
-      //   top: canvasRef.current?.getBoundingClientRect().top,
+      //   top: canvasRef.current?.getBoundingClientRect().bottom,
       //   behavior: "smooth",
       // });
     } else {
-      // setGalleryImagePerPage(artworks.length);
-      // setPages(artworks.length / galleryImagePerPage + 0.5);
+      document.body.style.position = "static";
+      setGalleryIsScrollable(true);
     }
   }, [selectedImage, intersection?.isIntersecting]);
 

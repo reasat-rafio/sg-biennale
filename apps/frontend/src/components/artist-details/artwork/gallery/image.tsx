@@ -14,6 +14,7 @@ import {
   positionController,
   scalingController,
 } from "@lib/helpers/artist-details.helpers";
+import { ArtworkDescription } from "./artwork-description";
 
 interface ImageProps {
   outterArrIndex: number;
@@ -44,29 +45,25 @@ export const Image: React.FC<ImageProps> = ({
   const group = useRef<Group | null>(null);
   const scrollData = useScroll();
   const [hovered, setHovered] = useState(false);
+  const [triggerExitAnimation, setTriggerExitAnimation] = useState(false);
   const data = useThree((state) => state.viewport);
-  console.log(position);
-
   const w = scrollData.pages / galleryImagePerPage;
-
   const uniqueIndex = outterArrIndex * 10 + innerArrIndex;
 
   const onClickAction = () => {
     if (!selectedImage) {
       setSelectedImage({ index: uniqueIndex, artwork: artwork });
-      // document.body.style.position = "fixed";
-      // setGalleryIsScrollable(false);
-    } else if (uniqueIndex === selectedImage?.index) {
-      // scrollData
-      setSelectedImage(null);
-      // setGalleryIsScrollable(true);
-      // document.body.style.position = "static";
     }
+    // setGalleryIsScrollable(false);
+    // scrollData
+    // setSelectedImage(null);
+    // setGalleryIsScrollable(true);
+    // document.body.style.position = "static";
   };
 
   useEffect(() => {
     if (!selectedImage) {
-      document.body.style.cursor = hovered ? "pointer" : "auto";
+      // document.body.style.cursor = hovered ? "pointer" : "auto";
       // setGalleryIsScrollable(false);
     } else {
       // setGalleryIsScrollable(true);
@@ -134,50 +131,36 @@ export const Image: React.FC<ImageProps> = ({
       ref={group}
     >
       <Html
-        position={[positionXMax - 5.5, 1, 0]}
+        position={[positionXMax - 5.5, 0, 0]}
         className="w-[75vw] flex justify-center items-center"
       >
-        <AnimatePresence>
-          {selectedImage?.index === uniqueIndex && (
-            <motion.div className=" p-6 space-y-6 max-w-3xl">
-              <motion.div className="overflow-hidden">
-                <motion.h2
-                  initial={{ y: "120%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{
-                    delay: 1,
-                    type: "tween",
-                    duration: 0.6,
-                    ease: "easeInOut",
-                  }}
-                  className="text-4xl text-black font-semibold"
-                >
-                  {selectedImage.artwork.name}
-                </motion.h2>
-              </motion.div>
-
-              <div className="overflow-hidden">
-                <motion.div
-                  initial={{ y: "120%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{
-                    delay: 1,
-                    type: "tween",
-                    duration: 0.6,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <PortableText blocks={selectedImage.artwork.description} />
-                </motion.div>
-              </div>
-              <button className="bg-[#FFFFFF] text-black rounded-3xl px-10 py-3 w-fit">
-                See Venue
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <ArtworkDescription
+          triggerExitAnimation={triggerExitAnimation}
+          uniqueIndex={uniqueIndex}
+        />
       </Html>
       <ImageImpl ref={imageRef} url={url} />
+      {selectedImage?.index === uniqueIndex && (
+        <Html
+          className="w-6 h-6"
+          position={[(data.width * w) / 2 + 0.5, data.height / 2.5, 0]}
+        >
+          <motion.img
+            onClick={() => {
+              setTriggerExitAnimation(true);
+              setTimeout(() => {
+                setTriggerExitAnimation(false);
+                setSelectedImage(null);
+              }, 1200);
+            }}
+            className="h-10 w-10 cursor-pointer hover:scale-125 transition-all duration-300 ease-in-out"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1, transition: { delay: 1 } }}
+            src="/icons/cross.svg"
+            alt="close icon"
+          />
+        </Html>
+      )}
     </group>
   );
 };
