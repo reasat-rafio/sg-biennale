@@ -43,11 +43,15 @@ const ImageMaterialImpl = shaderMaterial(
     zoom: 1,
     grayscale: 0,
     opacity: 1,
+    shift: 0,
   },
   /* glsl */ `
   varying vec2 vUv;
+  uniform float shift;
   void main() {
-    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.);
+    vec3 pos = position;
+    pos.x = pos.x + ((sin(uv.y *5.1415926535897932384626433832795) * shift * 5.0) * 0.125);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
     vUv = uv;
   }
 `,

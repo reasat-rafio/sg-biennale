@@ -56,6 +56,9 @@ export const Image: React.FC<ImageProps> = ({
   const onPointerOverAction = () => setHovered(true);
   const onPointerOutAction = () => setHovered(false);
   const onPointerMoveAction = (e: ThreeEvent<globalThis.PointerEvent>) => {};
+  // console.log(imageRef.current.material.shift);
+
+  let prevOffset = 0;
 
   useFrame(({ mouse, camera }, delta) => {
     if (hovered && selectedImage) {
@@ -77,14 +80,22 @@ export const Image: React.FC<ImageProps> = ({
       // );
       // camera.lookAt(imageRef.current.position);
     }
-
+    imageRef.current.material.shift = THREE.MathUtils.damp(
+      imageRef.current.material.shift,
+      prevOffset > scrollData.offset
+        ? -scrollData.delta * 10
+        : scrollData.delta * 10,
+      4,
+      delta
+    );
+    prevOffset = scrollData.offset;
     if (groupRef?.current) {
-      groupRef.current.position.z = THREE.MathUtils.damp(
-        groupRef.current.position.z,
-        Math.max(0, scrollData.delta * 40),
-        4,
-        delta
-      );
+      // groupRef.current.position.z = THREE.MathUtils.damp(
+      //   groupRef.current.position.z,
+      //   Math.max(0, scrollData.delta * 40),
+      //   4,
+      //   delta
+      // );
     }
     if (imageRef?.current) {
       imageRef.current.material.grayscale = THREE.MathUtils.damp(
@@ -96,14 +107,21 @@ export const Image: React.FC<ImageProps> = ({
         delta
       );
 
-      imageRef.current.material.zoom = THREE.MathUtils.damp(
-        imageRef.current.material.zoom,
-        !selectedImage && hovered
-          ? 1.05
-          : Math.max(0, 1 - scrollData.delta * 5),
-        4,
-        delta
-      );
+      // imageRef.current.material.zoom = THREE.MathUtils.damp(
+      //   imageRef.current.material.zoom,
+      //   !selectedImage && hovered
+      //     ? 1.05
+      //     : Math.max(0, 1 - scrollData.delta * 5),
+      //   4,
+      //   delta
+      // );
+
+      // imageRef.current.material.shift = THREE.MathUtils.damp(
+      //   imageRef.current.shift,
+      //   200,
+      //   10,
+      //   delta
+      // );
 
       opacityController({ imageRef, selectedImage, delta, uniqueIndex });
       scalingController({
