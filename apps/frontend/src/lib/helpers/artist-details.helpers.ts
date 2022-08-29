@@ -39,7 +39,23 @@ interface PositionControllerProps extends InitialProps {
   imageRef: RefObject<any>;
   position: any;
   animateXTo: number;
+  hovered: boolean;
 }
+
+function calcZ(
+  isSelecterd: boolean,
+  isHovered: boolean,
+  positionZ: number
+): number {
+  if (isSelecterd) {
+    return 1;
+  } else if (!isSelecterd && isHovered) {
+    return 1;
+  } else {
+    return positionZ;
+  }
+}
+
 export const positionController = ({
   groupRef,
   imageRef,
@@ -48,11 +64,12 @@ export const positionController = ({
   position,
   delta,
   animateXTo,
+  hovered,
 }: PositionControllerProps) => {
   // controlling the z index
   imageRef.current.position.z = THREE.MathUtils.damp(
     imageRef.current.position.z,
-    selectedImage?.index === uniqueIndex ? 1 : position[2],
+    calcZ(selectedImage?.index === uniqueIndex, hovered, position[2]),
     selectedImage?.index === uniqueIndex ? 10 : 4,
     delta
   );

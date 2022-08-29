@@ -1,7 +1,14 @@
 import { Image as ImageImpl } from "./image-impl";
 import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
-import { useRef, useState, PointerEvent, RefAttributes, Ref } from "react";
+import {
+  useRef,
+  useState,
+  PointerEvent,
+  RefAttributes,
+  Ref,
+  useEffect,
+} from "react";
 import { BufferGeometry, Group, Mesh } from "three";
 import * as THREE from "three";
 import { useScroll } from "./scroll-controls";
@@ -41,11 +48,20 @@ export const Image: React.FC<ImageProps> = ({
   const groupRef = useRef<Group | null>(null);
   const scrollData = useScroll();
   const [hovered, setHovered] = useState(false);
+  const [imageHoverGlitchAnimation, setImageHoverGlitchAnimation] =
+    useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [triggerExitAnimation, setTriggerExitAnimation] = useState(false);
   const data = useThree((state) => state.viewport);
   const w = scrollData.pages / galleryImagePerPage;
   const uniqueIndex = outterArrIndex * 10 + innerArrIndex;
+
+  useEffect(() => {
+    if (hovered) {
+      setImageHoverGlitchAnimation(true),
+        setTimeout(() => setImageHoverGlitchAnimation(false), 500);
+    } else setImageHoverGlitchAnimation(false);
+  }, [hovered]);
 
   const onClickAction = () => {
     if (!selectedImage) {
@@ -53,7 +69,9 @@ export const Image: React.FC<ImageProps> = ({
     }
   };
 
-  const onPointerOverAction = () => setHovered(true);
+  const onPointerOverAction = () => {
+    if (!selectedImage) setHovered(true);
+  };
   const onPointerOutAction = () => setHovered(false);
   const onPointerMoveAction = (e: ThreeEvent<globalThis.PointerEvent>) => {};
   // console.log(imageRef.current.material.shift);
@@ -65,39 +83,34 @@ export const Image: React.FC<ImageProps> = ({
       const x = (mouse.x * data.width) / 2;
       const y = (mouse.y * data.height) / 2;
       setOffset({ x, y });
-      // imageRef.current.position.x = THREE.MathUtils.damp(
-      //   imageRef.current.position.x,
-      //   hovered && selectedImage ? x : position[0],
-      //   4,
-      //   delta
-      // );
-      // camera.rotation.set(x, 0, 0);
-      // imageRef.current.material.zoom = THREE.MathUtils.damp(
-      //   imageRef.current.material.zoom,
-      //   x,
-      //   1,
-      //   delta
-      // );
-      // camera.lookAt(imageRef.current.position);
     }
-    imageRef.current.material.shift = THREE.MathUtils.damp(
-      imageRef.current.material.shift,
-      prevOffset > scrollData.offset
-        ? -scrollData.delta * 10
-        : scrollData.delta * 10,
-      4,
-      delta
-    );
-    prevOffset = scrollData.offset;
+
     if (groupRef?.current) {
-      // groupRef.current.position.z = THREE.MathUtils.damp(
-      //   groupRef.current.position.z,
-      //   Math.max(0, scrollData.delta * 40),
-      //   4,
-      //   delta
-      // );
+      groupRef.current.position.z = THREE.MathUtils.damp(
+        groupRef.current.position.z,
+        Math.max(0, scrollData.delta * 40),
+        4,
+        delta
+      );
     }
     if (imageRef?.current) {
+      imageRef.current.material.shift = THREE.MathUtils.damp(
+        imageRef.current.material.shift,
+        prevOffset > scrollData.offset
+          ? -scrollData.delta * 10
+          : scrollData.delta * 10,
+        4,
+        delta
+      );
+      prevOffset = scrollData.offset;
+
+      imageRef.current.material.hover = THREE.MathUtils.damp(
+        imageRef.current.material.hover,
+        imageHoverGlitchAnimation ? 1 : 0,
+        2,
+        delta
+      );
+
       imageRef.current.material.grayscale = THREE.MathUtils.damp(
         imageRef.current.material.grayscale,
         hovered || selectedImage?.index === uniqueIndex
@@ -107,21 +120,14 @@ export const Image: React.FC<ImageProps> = ({
         delta
       );
 
-      // imageRef.current.material.zoom = THREE.MathUtils.damp(
-      //   imageRef.current.material.zoom,
-      //   !selectedImage && hovered
-      //     ? 1.05
-      //     : Math.max(0, 1 - scrollData.delta * 5),
-      //   4,
-      //   delta
-      // );
-
-      // imageRef.current.material.shift = THREE.MathUtils.damp(
-      //   imageRef.current.shift,
-      //   200,
-      //   10,
-      //   delta
-      // );
+      imageRef.current.material.zoom = THREE.MathUtils.damp(
+        imageRef.current.material.zoom,
+        !selectedImage && hovered
+          ? 1.05
+          : Math.max(0, 1 - scrollData.delta * 5),
+        4,
+        delta
+      );
 
       opacityController({ imageRef, selectedImage, delta, uniqueIndex });
       scalingController({
@@ -138,6 +144,7 @@ export const Image: React.FC<ImageProps> = ({
         uniqueIndex,
         position,
         delta,
+        hovered,
         animateXTo:
           outterArrIndex !== 0
             ? scrollData.offset * data.width -

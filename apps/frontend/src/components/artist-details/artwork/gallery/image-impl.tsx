@@ -44,6 +44,7 @@ const ImageMaterialImpl = shaderMaterial(
     grayscale: 0,
     opacity: 1,
     shift: 0,
+    hover: 0,
   },
   /* glsl */ `
   varying vec2 vUv;
@@ -65,6 +66,7 @@ const ImageMaterialImpl = shaderMaterial(
   uniform float zoom;
   uniform float grayscale;
   uniform float opacity;
+  uniform float hover;
   const vec3 luma = vec3(.299, 0.587, 0.114);
   vec4 toGrayscale(vec4 color, float intensity) {
     return vec4(mix(color.rgb, vec3(dot(color.rgb, luma)), intensity), color.a);
@@ -72,6 +74,15 @@ const ImageMaterialImpl = shaderMaterial(
   vec2 aspect(vec2 size) {
     return size / min(size.x, size.y);
   }
+
+    float exponentialInOut(float t) {
+      return t == 0.0 || t == 1.0 
+        ? t 
+        : t < 0.5
+          ? +0.5 * pow(2.0, (20.0 * t) - 10.0)
+          : -0.5 * pow(2.0, 10.0 - (t * 20.0)) + 1.0;
+    } 
+
   void main() {
     vec2 s = aspect(scale);
     vec2 i = aspect(imageBounds);
@@ -81,7 +92,12 @@ const ImageMaterialImpl = shaderMaterial(
     vec2 offset = (rs < ri ? vec2((new.x - s.x) / 2.0, 0.0) : vec2(0.0, (new.y - s.y) / 2.0)) / new;
     vec2 uv = vUv * s / new + offset;
     vec2 zUv = (uv - vec2(0.5, 0.5)) / zoom + vec2(0.5, 0.5);
-    gl_FragColor = toGrayscale(texture2D(map, zUv) * vec4(color, opacity), grayscale);
+    float hoverLevel = exponentialInOut(min(1., (distance(vec2(.5), uv) * hover) + hover));
+    vec4 _color = texture2D(map, zUv) * vec4(color, opacity);
+    _color.r = (texture2D(map, zUv+(hoverLevel)*0.01) * vec4(color, opacity)).r;
+    _color.g = (texture2D(map, zUv-(hoverLevel)*0.01) * vec4(color, opacity)).g;
+
+    gl_FragColor = toGrayscale(_color, grayscale);
     
     #include <tonemapping_fragment>
     #include <encodings_fragment>
