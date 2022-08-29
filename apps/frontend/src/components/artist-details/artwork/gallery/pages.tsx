@@ -77,11 +77,12 @@ const Page: React.FC<PageProps> = ({
             innerArrIndex={idx}
             url={artworks[idx].images[0].asset.url}
             artwork={artworks[idx]}
+            positionXMax={posisitonXMin}
             scale={[scaleX, scaleY, 1]}
             position={[
               posisitonXMin + idx * posXIncreaseBY,
               idx % 2 ? 1.4 : -1.1,
-              aspectRatio * Math.random(),
+              Math.min(aspectRatio * Math.random(), 0.9),
             ]}
           />
         );

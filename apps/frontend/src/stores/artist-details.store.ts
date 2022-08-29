@@ -17,6 +17,7 @@ interface IArtistsStore {
   selectedImage: SelectedImageProps | null;
   galleryImagePerPage: number;
   galleryAnimationVals: GalleryAnimationValsProps | null;
+  setGalleryImagePerPage: (data: number) => void;
   setGalleryAnimationVals: (data: GalleryAnimationValsProps | null) => void;
   setSelectedImage: (data: SelectedImageProps | null) => void;
   setGalleryIsScrollable: (data: boolean) => void;
@@ -38,6 +39,8 @@ const useArtistsDetailsStore = create(
       })),
     setGalleryIsScrollable: (galleryIsScrollable) =>
       set((state) => ({ ...state, galleryIsScrollable })),
+    setGalleryImagePerPage: (galleryImagePerPage) =>
+      set((state) => ({ ...state, galleryImagePerPage })),
   }))
 );
 

@@ -22,6 +22,7 @@ interface ImageProps {
   scale: any;
   url: string;
   artwork: ArtworkProps;
+  positionXMax: number;
 }
 
 export const Image: React.FC<ImageProps> = ({
@@ -31,6 +32,7 @@ export const Image: React.FC<ImageProps> = ({
   scale,
   url,
   artwork,
+  positionXMax,
 }) => {
   const {
     selectedImage,
@@ -43,31 +45,32 @@ export const Image: React.FC<ImageProps> = ({
   const scrollData = useScroll();
   const [hovered, setHovered] = useState(false);
   const data = useThree((state) => state.viewport);
+  console.log(position);
 
-  const w =
-    data.width < 10
-      ? 2 / galleryImagePerPage
-      : scrollData.pages / galleryImagePerPage;
+  const w = scrollData.pages / galleryImagePerPage;
 
   const uniqueIndex = outterArrIndex * 10 + innerArrIndex;
 
   const onClickAction = () => {
     if (!selectedImage) {
       setSelectedImage({ index: uniqueIndex, artwork: artwork });
-      setTimeout(() => {
-        document.body.style.position = "fixed";
-        setGalleryIsScrollable(false);
-      }, 1000);
+      // document.body.style.position = "fixed";
+      // setGalleryIsScrollable(false);
     } else if (uniqueIndex === selectedImage?.index) {
+      // scrollData
       setSelectedImage(null);
-      setGalleryIsScrollable(true);
-      document.body.style.position = "static";
+      // setGalleryIsScrollable(true);
+      // document.body.style.position = "static";
     }
   };
 
   useEffect(() => {
-    if (!selectedImage)
+    if (!selectedImage) {
       document.body.style.cursor = hovered ? "pointer" : "auto";
+      // setGalleryIsScrollable(false);
+    } else {
+      // setGalleryIsScrollable(true);
+    }
   }, [hovered]);
 
   useFrame((_, delta) => {
@@ -105,17 +108,21 @@ export const Image: React.FC<ImageProps> = ({
         uniqueIndex,
         selectedImage,
       });
-      setTimeout(() => {
-        positionController({
-          groupRef: group,
-          imageRef,
-          selectedImage,
-          uniqueIndex,
-          position,
-          delta,
-          animateXTo: data.width * w - data.width * 0.1,
-        });
-      }, 500);
+      positionController({
+        groupRef: group,
+        imageRef,
+        selectedImage,
+        uniqueIndex,
+        position,
+        delta,
+        animateXTo:
+          outterArrIndex !== 0
+            ? scrollData.offset * data.width -
+              2.5 +
+              scrollData.offset * 2 -
+              data.width * w * 2.7
+            : scrollData.offset * data.width - 2.3 + scrollData.offset * 2,
+      });
     }
   });
 
@@ -126,9 +133,8 @@ export const Image: React.FC<ImageProps> = ({
       onPointerOut={() => setHovered(false)}
       ref={group}
     >
-      <ImageImpl ref={imageRef} url={url} />
       <Html
-        position={[-12, 1, 0]}
+        position={[positionXMax - 5.5, 1, 0]}
         className="w-[75vw] flex justify-center items-center"
       >
         <AnimatePresence>
@@ -171,6 +177,7 @@ export const Image: React.FC<ImageProps> = ({
           )}
         </AnimatePresence>
       </Html>
+      <ImageImpl ref={imageRef} url={url} />
     </group>
   );
 };

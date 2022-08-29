@@ -60,7 +60,7 @@ export const positionController = ({
   // controling the y position
   imageRef.current.position.y = THREE.MathUtils.damp(
     imageRef.current.position.y,
-    selectedImage?.index === uniqueIndex ? 1 : position[1],
+    selectedImage?.index === uniqueIndex ? 0 : position[1],
     4,
     delta
   );

@@ -1,10 +1,9 @@
 import { sliceIntoChunks } from "@lib/helpers/global.helpers";
 import { useIntersection } from "@lib/hooks";
 import { Preload } from "@react-three/drei";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
-import { smooth } from "popmotion";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { ArtworkPageProps } from "../artwork";
 import { Pages } from "./pages";
 import { Scroll, ScrollControls } from "./scroll-controls";
@@ -15,20 +14,31 @@ export interface ArtworkGalleryProps {
 
 export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const { galleryImagePerPage } = useArtistsDetailsStore();
-  const { galleryIsScrollable, setSelectedImage, selectedImage } =
-    useArtistsDetailsStore();
+  const {
+    galleryIsScrollable,
+    setSelectedImage,
+    selectedImage,
+    setGalleryImagePerPage,
+  } = useArtistsDetailsStore();
   const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pages = artworks.length / galleryImagePerPage + 0.5;
+  const [pages, setPages] = useState(
+    () => artworks.length / galleryImagePerPage + 0.5
+  );
 
   const intersection = useIntersection(canvasRef, { threshold: 0.8 });
 
   useEffect(() => {
-    if (selectedImage && !intersection?.isIntersecting) {
-      window.scrollTo({
-        top: canvasRef.current?.getBoundingClientRect().top,
-        behavior: "smooth",
-      });
+    if (selectedImage) {
+      // setGalleryImagePerPage(artworks.length)
+      // setPages(1);
+      // window.scrollTo({
+      //   top: canvasRef.current?.getBoundingClientRect().top,
+      //   behavior: "smooth",
+      // });
+    } else {
+      // setGalleryImagePerPage(artworks.length);
+      // setPages(artworks.length / galleryImagePerPage + 0.5);
     }
   }, [selectedImage, intersection?.isIntersecting]);
 
