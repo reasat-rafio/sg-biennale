@@ -61,7 +61,7 @@ import News from "./documents/news";
 import Partner from "./documents/partner";
 import Tier from "./documents/tier";
 
-import PartnersListing from "./documents/pages/partners-lisrting";
+import PartnersListing from "./documents/pages/partners-listing";
 
 export default createSchema({
   name: "default",

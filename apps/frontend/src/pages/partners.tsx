@@ -1,3 +1,4 @@
+import { Heading } from "@components/partners/heading";
 import { PartnerList } from "@components/partners/partner-list";
 import { Container } from "@components/ui/container";
 import { siteQuery } from "@lib/query";
@@ -29,11 +30,15 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const Partners: NextPage<SanityProps> = (props) => {
-  const { partners } = useSanityQuery(query, props).data;
+  const {
+    page: { header, description },
+    partners,
+  } = useSanityQuery(query, props).data;
 
   return (
     <Container className="py-section">
-      {/* <PartnerList partners={partners} /> */}
+      <Heading header={header} description={description} />
+      <PartnerList partners={partners} />
     </Container>
   );
 };

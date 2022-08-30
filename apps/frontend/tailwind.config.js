@@ -40,6 +40,13 @@ module.exports = {
             letterSpacing: "-2%",
           },
         ],
+        "heading-6": [
+          "32px",
+          {
+            lineHeight: "95%",
+            letterSpacing: "-2%",
+          },
+        ],
         "body-1": [
           "16px",
           {
@@ -85,6 +92,19 @@ module.exports = {
       },
       padding: {
         section: "24px",
+        xxl: "126px",
+        xl: "84px",
+        x: "56px",
+        lg: "28px",
+        md: "24px",
+      },
+      margin: {
+        section: "24px",
+        xxl: "126px",
+        xl: "84px",
+        x: "56px",
+        lg: "28px",
+        md: "24px",
       },
       letterSpacing: {
         base: "-0.02em",

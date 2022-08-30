@@ -9,6 +9,7 @@ const Partner = {
     {
       name: "name",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       title: "Slug",
@@ -17,11 +18,23 @@ const Partner = {
       options: {
         source: (doc) => doc.name,
       },
+      validation: (Rule) => Rule.required(),
     },
-    { name: "tier", type: "reference", to: { type: "tier" } },
+    {
+      name: "href",
+      type: "url",
+    },
+    {
+      name: "tier",
+      type: "reference",
+      to: { type: "tier" },
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: "image",
       type: "image",
+      options: { hotspot: true },
+      validation: (Rule) => Rule.required(),
     },
     { name: "description", type: "text" },
   ],

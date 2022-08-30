@@ -15,7 +15,17 @@ const PartnersListing = {
       title: "💡 Call Out",
       name: "callout",
       type: "text",
-      //   readOnly: true,
+      readOnly: true,
+    },
+    {
+      name: "header",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "description",
+      type: "text",
+      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {

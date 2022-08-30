@@ -6,20 +6,23 @@ import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import { useEffect, useState } from "react";
 import { SanityImg } from "sanity-react-extra";
+import { motion } from "framer-motion";
 
 export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
-
   const [_partners, setPartners] = useState<ModifyedPartnersList[] | null>(
     null
   );
+
+  const onClickAction = (href?: string) => {
+    if (href && typeof window !== "undefined") window.location.href = href;
+  };
 
   useEffect(() => {
     const newPatnersList: ModifyedPartnersList[] = Object.values(
       partners.reduce((newArr: any, patner) => {
         let tierName = patner.tier.title;
         let order = patner.tier.order;
-
         !newArr[tierName]
           ? (newArr[tierName] = {
               tierName,
@@ -32,35 +35,40 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
         return newArr;
       }, {})
     );
-
     /* ❓ sorting the partnes by their tiper level */
     const sortPartnersByTierLevel = newPatnersList.sort((a, b) =>
       a.order > b.order ? 1 : -1
     );
-
     setPartners(sortPartnersByTierLevel);
   }, [partners]);
 
   return (
-    <div className="flex flex-col | space-y-10">
+    <div className="flex flex-col | space-y-10 xl:my-xxl lg:my-xl my-x">
       {_partners?.map(({ tierName, data, id }) => (
-        <article className="pb-5" key={id}>
-          <h2 className="text-2xl font-medium">{tierName}</h2>
+        <article className="pb-5 space-y-10" key={id}>
+          <h2 className="text-heading-6 font-medium">Partner {tierName}</h2>
 
-          <section className="grid grid-cols-12 | pt-5 lg:gap-x-7 sm:gap-x-3 lg:gap-y-14 gap-y-5">
-            {data.map(({ _id, name, image }) => (
-              <figure
+          <section className="grid grid-cols-12 | gap-5">
+            {data.map(({ _id, name, image, href }) => (
+              <motion.figure
                 key={_id}
-                className="xl:col-span-3 md:col-span-4 sm:col-span-6 col-span-12 | lg:h-[124px] lg:w-[220px] h-auto"
+                className="md:col-span-4 sm:col-span-6 col-span-12 | flex justify-center items-center | h-[255px] p-5 | bg-white  border border-gray--200 hover:border-none | overflow-hidden cursor-pointer | hover:shadow-2xl"
+                whileHover={{
+                  scaleX: 1.2,
+                  scaleY: 1.1,
+                  rotate: -6,
+                  transition: { type: "tween", delay: 0.1, ease: "easeInOut" },
+                }}
+                onClick={() => onClickAction(href)}
               >
                 <SanityImg
                   width={windowWidth >= 768 ? 500 : 200}
                   image={image}
-                  className="w-full h-full | object-cover"
+                  className="h-[70%] | object-contain"
                   builder={imageUrlBuilder}
                   alt={`${name}'s logo`}
                 />
-              </figure>
+              </motion.figure>
             ))}
           </section>
         </article>

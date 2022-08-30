@@ -12,9 +12,10 @@ export interface PartnerListProps {
   partners: {
     _id: string;
     name: string;
-    description: string;
+    description?: string;
     image: SanityImage;
     slug: Slug;
+    href?: string;
     tier: {
       _id: string;
       title: string;
