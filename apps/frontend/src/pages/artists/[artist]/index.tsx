@@ -1,6 +1,5 @@
 import { ArtistDescription } from "@components/artist-details/artist-description";
 import { Artwork } from "@components/artist-details/artwork/artwork";
-import { ArtworkDescription } from "@components/artist-details/artwork/gallery/popup/artwork-description";
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
 import { Container } from "@components/ui/container";
 import { DetailsLayout } from "@components/ui/layouts/details-layout";
@@ -74,12 +73,10 @@ export const getStaticProps: GetStaticProps = async (
 
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
   const { name, artworks } = props.data.page;
-  const { selectedImage } = useArtistsDetailsStore();
 
   return (
     <section>
       <Artwork name={name} artworks={artworks} />
-      {/* {selectedImage?.artwork && <ArtworkDescription />} */}
     </section>
   );
 };

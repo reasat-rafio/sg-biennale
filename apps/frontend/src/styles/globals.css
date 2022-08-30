@@ -8,7 +8,7 @@
 @layer base {
   html {
     font-family: Outfit, sans-serif;
-    @apply tracking-base text-body;
+    @apply tracking-base text-body-1;
   }
 }
 

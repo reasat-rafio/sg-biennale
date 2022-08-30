@@ -5,14 +5,83 @@ module.exports = {
     container: { center: true },
     extend: {
       fontSize: {
-        body: "16px",
+        "heading-1": [
+          "112px",
+          {
+            lineHeight: "160%",
+            letterSpacing: "-2%",
+          },
+        ],
+        "heading-2": [
+          "86px",
+          {
+            lineHeight: "160%",
+            letterSpacing: "-2%",
+          },
+        ],
+        "heading-3": [
+          "64px",
+          {
+            lineHeight: "120%",
+            letterSpacing: "-2%",
+          },
+        ],
+        "heading-4": [
+          "48px",
+          {
+            lineHeight: "140%",
+            letterSpacing: "-2%",
+          },
+        ],
+        "heading-5": [
+          "36px",
+          {
+            lineHeight: "95%",
+            letterSpacing: "-2%",
+          },
+        ],
+        "body-1": [
+          "16px",
+          {
+            letterSpacing: "0%",
+            lineHeight: "160%",
+          },
+        ],
+        "body-2": [
+          "14px",
+          {
+            letterSpacing: "0%",
+            lineHeight: "150%",
+          },
+        ],
+        "body-3": [
+          "12px",
+          {
+            letterSpacing: "0%",
+            lineHeight: "155%",
+          },
+        ],
+        "body-4": [
+          "10px",
+          {
+            letterSpacing: "0%",
+            lineHeight: "155%",
+          },
+        ],
       },
       fontFamily: {
         manrope: ["Manrope", "system-ui"],
       },
       colors: {
-        gray: "#676767",
-        "secondary-gray": "#828282",
+        "gray--700": "#4D4D4D",
+        "gray--400": "#999999",
+        "gray--200": "#CCCCCC",
+        skyblue: "#74A0C1",
+        "leaf-green": "#176100",
+        "peach--blossom": "#C59986",
+        "red-love": "#DE5742",
+        motherland: "#292221",
+        vulcanic: "#F3F2EC",
       },
       padding: {
         section: "24px",
