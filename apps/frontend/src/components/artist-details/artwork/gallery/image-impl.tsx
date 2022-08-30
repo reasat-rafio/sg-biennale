@@ -45,6 +45,7 @@ const ImageMaterialImpl = shaderMaterial(
     opacity: 1,
     shift: 0,
     hover: 0,
+    mouseoffset: [0, 0],
   },
   /* glsl */ `
   varying vec2 vUv;
@@ -60,6 +61,7 @@ const ImageMaterialImpl = shaderMaterial(
   // mostly from https://gist.github.com/statico/df64c5d167362ecf7b34fca0b1459a44
   varying vec2 vUv;
   uniform vec2 scale;
+  uniform vec2 mouseoffset;
   uniform vec2 imageBounds;
   uniform vec3 color;
   uniform sampler2D map;
@@ -84,18 +86,32 @@ const ImageMaterialImpl = shaderMaterial(
     } 
 
   void main() {
-    vec2 s = aspect(scale);
+    vec2 _scale = scale;
+    _scale.x = _scale.x +(exponentialInOut(min(1., (distance(vec2(.5), vUv) * hover) + hover)))*0.01;
+    _scale.y = _scale.y-(exponentialInOut(min(1., (distance(vec2(.5), vUv) * hover) + hover)))*0.01;
+
+    vec2 s = aspect(_scale);
+   
+
     vec2 i = aspect(imageBounds);
     float rs = s.x / s.y;
     float ri = i.x / i.y;
     vec2 new = rs < ri ? vec2(i.x * s.y / i.y, s.y) : vec2(s.x, i.y * s.x / i.x);
     vec2 offset = (rs < ri ? vec2((new.x - s.x) / 2.0, 0.0) : vec2(0.0, (new.y - s.y) / 2.0)) / new;
     vec2 uv = vUv * s / new + offset;
-    vec2 zUv = (uv - vec2(0.5, 0.5)) / zoom + vec2(0.5, 0.5);
+
     float hoverLevel = exponentialInOut(min(1., (distance(vec2(.5), uv) * hover) + hover));
+
+    vec2 _zUv = (uv - vec2(0.5, 0.5)) / zoom + vec2(0.5, 0.5);
+    vec2 zUv = _zUv;
+
+    zUv.x =  _zUv.x + mouseoffset.x * 0.02;
+    zUv.y =  _zUv.y + mouseoffset.x * 0.02;
+
     vec4 _color = texture2D(map, zUv) * vec4(color, opacity);
-    _color.r = (texture2D(map, zUv+(hoverLevel)*0.01) * vec4(color, opacity)).r;
-    _color.g = (texture2D(map, zUv-(hoverLevel)*0.01) * vec4(color, opacity)).g;
+    _color.r = (texture2D(map, zUv+(hoverLevel)*0.005) * vec4(color, opacity)).r;
+    _color.g = (texture2D(map, zUv-(hoverLevel)*0.005) * vec4(color, opacity)).g;
+
 
     gl_FragColor = toGrayscale(_color, grayscale);
     

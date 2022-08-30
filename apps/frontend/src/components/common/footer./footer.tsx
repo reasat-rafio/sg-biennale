@@ -29,7 +29,7 @@ export const Footer: React.FC<ISite["site"]> = ({
           builder={imageUrlBuilder}
           alt={`${header}' image`}
         />
-        <span className="bg__gradient | absolute top-0 left-0 h-full w-full" />
+        <span className="bg_fadede_gradient_y | absolute top-0 left-0 h-full w-full" />
       </figure>
     </footer>
   );

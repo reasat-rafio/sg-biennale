@@ -55,13 +55,20 @@ export const Image: React.FC<ImageProps> = ({
   const data = useThree((state) => state.viewport);
   const w = scrollData.pages / galleryImagePerPage;
   const uniqueIndex = outterArrIndex * 10 + innerArrIndex;
+  const selectedImagePosition =
+    outterArrIndex !== 0
+      ? scrollData.offset * data.width -
+        2.5 +
+        scrollData.offset * 2 -
+        data.width * w * 2.7
+      : scrollData.offset * data.width - 2.3 + scrollData.offset * 2;
 
   useEffect(() => {
-    if (hovered) {
+    if (hovered && !selectedImage) {
       setImageHoverGlitchAnimation(true),
         setTimeout(() => setImageHoverGlitchAnimation(false), 500);
     } else setImageHoverGlitchAnimation(false);
-  }, [hovered]);
+  }, [hovered, selectedImage]);
 
   const onClickAction = () => {
     if (!selectedImage) {
@@ -70,15 +77,16 @@ export const Image: React.FC<ImageProps> = ({
   };
 
   const onPointerOverAction = () => {
-    if (!selectedImage) setHovered(true);
+    setHovered(true);
   };
-  const onPointerOutAction = () => setHovered(false);
+  const onPointerOutAction = () => {
+    setOffset({ x: 10, y: 0 });
+    setHovered(false);
+  };
   const onPointerMoveAction = (e: ThreeEvent<globalThis.PointerEvent>) => {};
-  // console.log(imageRef.current.material.shift);
 
   let prevOffset = 0;
-
-  useFrame(({ mouse, camera }, delta) => {
+  useFrame(({ mouse }, delta) => {
     if (hovered && selectedImage) {
       const x = (mouse.x * data.width) / 2;
       const y = (mouse.y * data.height) / 2;
@@ -104,6 +112,19 @@ export const Image: React.FC<ImageProps> = ({
       );
       prevOffset = scrollData.offset;
 
+      imageRef.current.material.mouseoffset[0] = THREE.MathUtils.damp(
+        imageRef.current.material.mouseoffset[0],
+        selectedImage && hovered ? offset.x : 0,
+        4,
+        delta
+      );
+      imageRef.current.material.mouseoffset[1] = THREE.MathUtils.damp(
+        imageRef.current.material.mouseoffset[1],
+        offset.y,
+        4,
+        delta
+      );
+
       imageRef.current.material.hover = THREE.MathUtils.damp(
         imageRef.current.material.hover,
         imageHoverGlitchAnimation ? 1 : 0,
@@ -122,9 +143,7 @@ export const Image: React.FC<ImageProps> = ({
 
       imageRef.current.material.zoom = THREE.MathUtils.damp(
         imageRef.current.material.zoom,
-        !selectedImage && hovered
-          ? 1.05
-          : Math.max(0, 1 - scrollData.delta * 5),
+        selectedImage && hovered ? 1.5 : Math.max(0, 1 - scrollData.delta * 5),
         4,
         delta
       );
@@ -145,13 +164,7 @@ export const Image: React.FC<ImageProps> = ({
         position,
         delta,
         hovered,
-        animateXTo:
-          outterArrIndex !== 0
-            ? scrollData.offset * data.width -
-              2.5 +
-              scrollData.offset * 2 -
-              data.width * w * 2.7
-            : scrollData.offset * data.width - 2.3 + scrollData.offset * 2,
+        animateXTo: selectedImagePosition,
       });
     }
   });
@@ -168,12 +181,7 @@ export const Image: React.FC<ImageProps> = ({
         uniqueIndex={uniqueIndex}
         positionXMax={positionXMax}
       />
-      <ImageImpl
-        // lookAt={() => [offset.x, 0, 0]}
-        onPointerMove={onPointerMoveAction}
-        ref={imageRef}
-        url={url}
-      />
+      <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon
         data={data}
         w={w}

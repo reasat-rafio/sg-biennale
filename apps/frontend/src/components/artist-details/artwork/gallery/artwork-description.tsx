@@ -45,48 +45,121 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
   return (
     <Html
       position={[positionXMax - 5.5, 0, 0]}
-      className="w-[75vw] flex justify-center items-center"
+      className="w-[70vw] flex justify-center items-center -translate-y-1/2 pointer-events-none"
     >
       <AnimatePresence>
         {selectedImage?.index === uniqueIndex && (
-          <motion.div className=" p-6 space-y-6 max-w-3xl -translate-y-1/2 max-h-[70vh] overflow-x-auto">
-            <motion.div className="overflow-hidden">
-              <motion.h2
-                className="text-4xl text-black font-semibold"
-                initial="initial"
-                exit="exit"
-                animate={triggerExitAnimation ? "exit" : "enter"}
-                variants={AnimationVariant}
-                custom={0.3}
-              >
-                {selectedImage.artwork.name}
-              </motion.h2>
-            </motion.div>
-
-            <div className="overflow-hidden">
-              <motion.div
-                initial="initial"
-                exit="exit"
-                animate={triggerExitAnimation ? "exit" : "enter"}
-                variants={AnimationVariant}
-                custom={0.6}
-              >
-                <PortableText blocks={selectedImage.artwork.description} />
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={
+                triggerExitAnimation
+                  ? { opacity: 0, transition: { delay: 0.9 } }
+                  : { opacity: 1, transition: { delay: 0.6 } }
+              }
+              className=" px-6 py-10 space-y-6 max-w-3xl overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-transparent max-h-[60vh] pointer-events-auto"
+            >
+              <motion.div className="overflow-hidden">
+                <motion.h2
+                  className="text-4xl text-black font-semibold"
+                  initial="initial"
+                  exit="exit"
+                  animate={triggerExitAnimation ? "exit" : "enter"}
+                  variants={AnimationVariant}
+                  custom={0.3}
+                >
+                  {selectedImage.artwork.name}
+                </motion.h2>
               </motion.div>
-            </div>
-            <div className="overflow-hidden">
-              <motion.button
-                className="bg-black text-white rounded-3xl px-10 py-3 w-fit"
-                initial="initial"
-                exit="exit"
-                animate={triggerExitAnimation ? "exit" : "enter"}
-                variants={AnimationVariant}
-                custom={0.9}
-              >
-                See Venue
-              </motion.button>
-            </div>
-          </motion.div>
+
+              <div className="overflow-hidden">
+                <motion.div
+                  initial="initial"
+                  exit="exit"
+                  animate={triggerExitAnimation ? "exit" : "enter"}
+                  variants={AnimationVariant}
+                  custom={0.6}
+                >
+                  <PortableText blocks={selectedImage.artwork.description} />
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Laboriosam dolores ut omnis similique non atque iste esse
+                  inventore! Fuga totam tempora quisquam quae dolorem! Commodi
+                  minus nihil veniam excepturi fugiat nulla dolorem, iure
+                  pariatur voluptatum ducimus cumque, exercitationem quam porro
+                  non quidem sequi! Impedit dolorem sed consectetur temporibus
+                  neque praesentium voluptate consequatur, voluptatem
+                  voluptates! Adipisci consequuntur provident recusandae alias
+                  numquam voluptatum id asperiores voluptatibus perspiciatis
+                  excepturi blanditiis sed facere, quasi odit neque vero tempore
+                  necessitatibus voluptas totam nam corrupti quaerat fuga? Nam
+                  tempora quas, cum similique officiis asperiores nulla, alias
+                  ex quasi esse numquam aut unde repellat. Non voluptatum saepe
+                  quia iusto, earum obcaecati eaque similique officiis dicta
+                  iste aliquid nihil maiores assumenda nulla, temporibus et
+                  culpa accusamus consequatur aut dolore animi dolorum hic
+                  atque. Maiores laboriosam perspiciatis quo suscipit sunt,
+                  placeat, molestiae deserunt architecto et fuga, velit quod!
+                  Eum neque exercitationem cupiditate, non quis eveniet nihil
+                  est. Quos minus ullam labore? Sequi ad expedita beatae
+                  blanditiis animi obcaecati ipsa tenetur maxime et esse iusto
+                  quam quaerat reprehenderit adipisci officiis enim ut, hic,
+                  fugit repudiandae aspernatur eum voluptates, accusamus
+                  explicabo. Minima sint, laborum alias ut aperiam odit quae
+                  perspiciatis debitis cumque laboriosam repudiandae delectus
+                  facilis sit aliquid, ipsa, ab Lorem ipsum dolor sit amet
+                  consectetur, adipisicing elit. Quo debitis voluptatem natus
+                  maiores aliquid aut odit dolores, consequuntur sed sint est
+                  porro quasi labore corporis, possimus atque praesentium
+                  quaerat obcaecati et vero dolorem! Modi in, molestias libero
+                  quae quam doloribus. Veniam neque, nihil hic laborum quasi
+                  enim blanditiis impedit aspernatur totam temporibus autem
+                  itaque explicabo! Neque perferendis minus facilis nostrum,
+                  inventore, labore reprehenderit quas molestiae et sit dolores
+                  consectetur ex veniam at distinctio, alias nulla quam
+                  voluptates dolor enim possimus atque. Aspernatur odit ducimus
+                  ea delectus error porro alias aperiam itaque illum nesciunt,
+                  consequuntur, magni impedit assumenda blanditiis tempore cum
+                  ratione velit recusandae ad nobis necessitatibus eum explicabo
+                  nulla et. Laborum repellat vel aperiam rem provident nisi illo
+                  cupiditate voluptatem laudantium nulla saepe, deleniti
+                  mollitia quia necessitatibus aliquid accusantium debitis vitae
+                  corrupti rerum? Sequi quisquam hic vitae nisi mollitia sunt
+                  vero nemo possimus voluptates dolorem est dolor iusto, culpa
+                  odit similique dignissimos odio eligendi eum quam deserunt.
+                  Aperiam consectetur reprehenderit eaque similique dolore
+                  perspiciatis impedit numquam nostrum velit. Reprehenderit eos
+                  maxime consectetur sed numquam obcaecati quibusdam molestiae
+                  aliquam magnam illum recusandae voluptas laudantium rerum odio
+                  adipisci iure facilis possimus et, fugit deserunt modi. Nam
+                  est laudantium dolorem. Ipsum, neque aliquid? id?
+                </motion.div>
+              </div>
+              <div className="overflow-hidden">
+                <motion.button
+                  className="bg-black text-white rounded-3xl px-10 py-3 w-fit"
+                  initial="initial"
+                  exit="exit"
+                  animate={triggerExitAnimation ? "exit" : "enter"}
+                  variants={AnimationVariant}
+                  custom={0.9}
+                >
+                  See Venue
+                </motion.button>
+              </div>
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={
+                triggerExitAnimation
+                  ? { opacity: 0, transition: { delay: 0.6 } }
+                  : { opacity: 1 }
+              }
+              style={{
+                backgroundImage: `linear-gradient(to bottom,rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 80%)`,
+              }}
+              className="h-[20px] w-full absolute bottom-[-2px] pointer-events-none"
+            />
+          </>
         )}
       </AnimatePresence>
     </Html>

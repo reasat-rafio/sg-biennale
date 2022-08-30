@@ -1,6 +1,6 @@
 import { sliceIntoChunks } from "@lib/helpers/global.helpers";
 import { useIntersection } from "@lib/hooks";
-import { Preload } from "@react-three/drei";
+import { Html, Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
 import { Suspense, useEffect, useRef, useState } from "react";
@@ -14,13 +14,8 @@ export interface ArtworkGalleryProps {
 
 export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const { galleryImagePerPage } = useArtistsDetailsStore();
-  const {
-    galleryIsScrollable,
-    setSelectedImage,
-    selectedImage,
-    setGalleryImagePerPage,
-    setGalleryIsScrollable,
-  } = useArtistsDetailsStore();
+  const { galleryIsScrollable, selectedImage, setGalleryIsScrollable } =
+    useArtistsDetailsStore();
   const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [pages, setPages] = useState(
@@ -33,10 +28,10 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     if (selectedImage) {
       setGalleryIsScrollable(false);
       document.body.style.position = "fixed";
-      // window.scrollTo({
-      //   top: canvasRef.current?.getBoundingClientRect().bottom,
-      //   behavior: "smooth",
-      // });
+      window.scrollTo({
+        top: canvasRef.current!.getBoundingClientRect().top,
+        behavior: "smooth",
+      });
     } else {
       document.body.style.position = "static";
       setGalleryIsScrollable(true);
