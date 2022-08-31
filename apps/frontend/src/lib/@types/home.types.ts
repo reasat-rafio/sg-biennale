@@ -47,6 +47,12 @@ export interface INewsProps {
   header: string;
   index?: number;
   length?: number;
+  backgroundColor?: {
+    hex: string;
+    hsl: any;
+    hsv: any;
+    rgb: any;
+  };
 }
 
 export interface IPromotion {

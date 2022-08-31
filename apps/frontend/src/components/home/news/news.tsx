@@ -16,7 +16,7 @@ export const News: React.FC<NewsProps> = ({ title, news }) => {
         {title}
       </h3>
 
-      <motion.div className="grid grid-cols-12 | pb-56 xl:gap-28 lg:gap-16 gap-8">
+      <motion.div className="grid grid-cols-12 | pb-56 xl:gap-28 lg:gap-16 gap-3">
         {news.map((newsData, index) => (
           <NewsCard
             key={newsData._id}

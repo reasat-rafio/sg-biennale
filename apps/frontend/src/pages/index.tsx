@@ -59,6 +59,7 @@ const query = pageQuery(groq`
         _id,
         header,
         description,
+        backgroundColor,
         images[] {
           ..., 
           asset->{

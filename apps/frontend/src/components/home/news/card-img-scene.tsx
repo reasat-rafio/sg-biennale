@@ -1,30 +1,51 @@
 import { Html } from "@react-three/drei";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { Suspense, useMemo, useRef, useState } from "react";
-import { ShaderMaterial, TextureLoader, WebGL1Renderer } from "three";
+import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
+import {
+  Dispatch,
+  SetStateAction,
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
+import {
+  MathUtils,
+  ShaderMaterial,
+  TextureLoader,
+  WebGL1Renderer,
+} from "three";
 import vertexShader from "./shaders/vartex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
-import { useSpring, animated, config, SpringValue } from "@react-spring/three";
+import { useSpring, animated, config } from "@react-spring/three";
 
 interface CardImgSceneProps {
   url: string;
   hovered: boolean;
-  cardImageAnimationProps: {
-    scale: SpringValue<number[]>;
-    pos: SpringValue<number[]>;
-  };
+  scalePos: number[];
 }
 
-const Image: React.FC<CardImgSceneProps> = ({
-  url,
-  hovered,
-  cardImageAnimationProps,
-}) => {
+const Image: React.FC<CardImgSceneProps> = ({ url, hovered, scalePos }) => {
+  const { viewport } = useThree();
+  const meshRef = useRef<any>(null);
   const materialRef = useRef<ShaderMaterial>(null);
-
   const { hoverValue } = useSpring({
     hoverValue: hovered ? 1 : 0,
     config: config.molasses,
+  });
+
+  useFrame((_, delta) => {
+    meshRef.current.scale.x = MathUtils.damp(
+      meshRef.current.scale.x,
+      viewport.width - scalePos[0],
+      4,
+      delta
+    );
+    meshRef.current.scale.y = MathUtils.damp(
+      meshRef.current.scale.y,
+      viewport.height + scalePos[1],
+      4,
+      delta
+    );
   });
 
   const args = useMemo(() => {
@@ -43,9 +64,8 @@ const Image: React.FC<CardImgSceneProps> = ({
   }, [url]);
 
   return (
-    // @ts-ignore
-    <animated.mesh {...cardImageAnimationProps}>
-      <planeBufferGeometry args={[1, 0.6, 16, 16]} />
+    <animated.mesh ref={meshRef} scale={[viewport.width, viewport.height, 1]}>
+      <planeBufferGeometry args={[1, 1, 16, 16]} />
       {/* @ts-ignore */}
       <animated.shaderMaterial
         transparent
@@ -61,12 +81,12 @@ const Image: React.FC<CardImgSceneProps> = ({
 const CardImgScene: React.FC<CardImgSceneProps> = ({
   url,
   hovered,
-  cardImageAnimationProps,
+  scalePos,
 }) => {
   return (
     <Canvas
       gl={(canvas) => new WebGL1Renderer({ canvas, alpha: true })}
-      camera={{ fov: 10, position: [0, 0, 5] }}
+      camera={{ fov: 16, position: [0, 0, 3] }}
     >
       <Suspense
         fallback={
@@ -75,11 +95,7 @@ const CardImgScene: React.FC<CardImgSceneProps> = ({
           </Html>
         }
       >
-        <Image
-          url={url}
-          hovered={hovered}
-          cardImageAnimationProps={cardImageAnimationProps}
-        />
+        <Image url={url} scalePos={scalePos} hovered={hovered} />
       </Suspense>
     </Canvas>
   );
