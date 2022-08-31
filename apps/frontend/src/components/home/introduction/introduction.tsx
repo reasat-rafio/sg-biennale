@@ -25,7 +25,7 @@ export const Introduction: React.FC<IntroductionProps> = ({
         ))}
       </header>
 
-      <div className="container">
+      <div className="">
         <IntroCarousel collection={collection} />
         <Description subtitle={subtitle} description={description} />
       </div>

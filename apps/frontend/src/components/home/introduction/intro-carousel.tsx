@@ -69,11 +69,11 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
   // );
 
   return (
-    <div className="relative overflow-hidden h-[700px] ">
+    <div className="relative max-h-[800px] w-full | overflow-hidden aspect-video">
       <AnimatePresence initial={false} custom={{ direction, page }}>
         {Array.from({ length: 3 }, (_, idx) => idx).map((index) => (
           <motion.div
-            className="absolute w-full h-full  flex items-center justify-center p-10"
+            className="absolute w-full h-full | flex items-center justify-center xl:p-10 p-5"
             key={page + index}
             layout
             drag={disableDragging ? false : index === 0 && "x"}
@@ -116,7 +116,6 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
                 draggable={false}
                 builder={imageUrlBuilder}
                 width={900}
-                loading="eager"
                 image={
                   collection[imageIndex(page + index, collection.length)].image
                 }

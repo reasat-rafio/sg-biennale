@@ -45,7 +45,7 @@ export const Footer: React.FC<ISite["site"]> = ({
       <span
         className={clsx(
           "absolute top-0 left-0 h-full w-full",
-          windowWidth > 1024
+          windowWidth >= 1024
             ? Styles.footer_bg_gradient_left_to_right
             : Styles.footer_bg_gradient_top_to_bottom
         )}

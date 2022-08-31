@@ -45,7 +45,7 @@ export const Description: React.FC<DescriptionProps> = ({
         const difference = skewConfig.current - skewConfig.rounded;
         const acceleration = difference / windowWidth;
         const velocity = +acceleration;
-        const skew = velocity * 20;
+        const skew = velocity * 5;
         motionSkew.set(skew);
       };
 
@@ -60,7 +60,7 @@ export const Description: React.FC<DescriptionProps> = ({
     <motion.div
       ref={containerRef}
       style={{ skewY: animatedMotionSkewY }}
-      className="flex flex-col space-y-10 mx-20 "
+      className="flex flex-col space-y-8 max-w-7xl mx-auto pt-xl"
     >
       <motion.h6
         ref={subtitleRef}
@@ -69,7 +69,7 @@ export const Description: React.FC<DescriptionProps> = ({
         transition={{
           staggerChildren: intersection?.isIntersecting ? 0.03 : 0,
         }}
-        className=" text-[64px] font-bold leading-tight text-black"
+        className="xl:text-heading-3 lg:text-heading-4 text-heading-6 font-medium leading-tight text-black"
       >
         {letters.map((letter, index) => (
           <motion.span
@@ -84,7 +84,9 @@ export const Description: React.FC<DescriptionProps> = ({
           </motion.span>
         ))}
       </motion.h6>
-      <p>{description}</p>
+      <p className="text-gray--700 font-manrope lg:text-body-1 text-body-2">
+        {description}
+      </p>
     </motion.div>
   );
 };

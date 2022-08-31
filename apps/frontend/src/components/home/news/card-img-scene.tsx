@@ -66,7 +66,7 @@ const CardImgScene: React.FC<CardImgSceneProps> = ({
   return (
     <Canvas
       gl={(canvas) => new WebGL1Renderer({ canvas, alpha: true })}
-      camera={{ fov: 12, position: [0, 0, 5] }}
+      camera={{ fov: 10, position: [0, 0, 5] }}
     >
       <Suspense
         fallback={

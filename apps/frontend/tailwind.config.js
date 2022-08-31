@@ -81,6 +81,7 @@ module.exports = {
       },
       colors: {
         "gray--700": "#4D4D4D",
+        "gray--600": "#797979",
         "gray--400": "#999999",
         "gray--200": "#CCCCCC",
         skyblue: "#74A0C1",

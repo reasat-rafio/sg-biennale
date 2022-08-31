@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { MouseEvent, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, useAnimation } from "framer-motion";
+import { Container } from "@components/ui/container";
 const ImageScene = dynamic(() => import("./image-scene"), {
   ssr: false,
 });
@@ -16,6 +17,8 @@ export const Organisations: React.FC<OrganisationProps> = ({
   const [prevSelectedImg, setPrevSelectedImage] = useState(
     organisations[1].logo.asset
   );
+
+  console.log(selectedImg);
 
   // dynamic position
   const bgPositionAnim = useAnimation();
@@ -42,40 +45,40 @@ export const Organisations: React.FC<OrganisationProps> = ({
   };
 
   return (
-    <section
+    <Container
       style={{
         background: `linear-gradient(180deg, #F5F5F5 0%, rgba(245, 245, 245, 0) 100%)`,
       }}
     >
-      <div className="container lg:px-32 px-10 grid grid-cols-12 justify-center items-center | lg:space-x-5 space-x-2 py-20">
-        <div className="lg:col-span-5 col-span-12 space-y-6 ">
+      <div className=" grid grid-cols-12 justify-center items-center | lg:space-x-5 lg:space-y-0 space-y-8">
+        <div className="lg:col-span-7 col-span-12 lg:space-y-16 space-y-8">
           {organisations.map(({ _key, name, title, logo }) => (
             <div
               key={_key}
-              className="font-manrope cursor-pointer"
+              className="font-manrope cursor-pointer | space-y-4"
               onClick={() => {
                 setPrevSelectedImage(selectedImg);
                 setSelectedImg(logo.asset);
               }}
             >
-              <h6 className="text-secondary-gray font-bold text-[24px] leading-tight ">
+              <span className="text-gray--400 font-bold font-manrope lg:text-body-1 text-body-2">
                 {title}
-              </h6>
-              <span
+              </span>
+              <h4
                 className={clsx(
-                  "text-[36px] font-extrabold transition-colors duration-[400ms] ease-in-out leading-tight",
+                  "text-heading-5 font-semibold transition-colors duration-[400ms] ease-in-out max-w-xl",
                   selectedImg._id === logo.asset._id
                     ? "text-black"
-                    : "text-secondary-gray"
+                    : "text-gray--400"
                 )}
               >
                 {name}
-              </span>
+              </h4>
             </div>
           ))}
         </div>
         <div
-          className="lg:col-span-7 col-span-12 h-[60vh] relative"
+          className="lg:col-span-5 col-span-12 | flex justify-center items-center"
           ref={cardRef}
           onMouseMove={imgContainerStateOn}
           onMouseLeave={() => {
@@ -84,7 +87,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
         >
           <motion.div
             animate={bgPositionAnim}
-            className="absolute top-0 left-0 h-full w-full rounded overflow-hidden"
+            className="rounded aspect-video max-h-[350px] w-full | overflow-hidden drop-shadow-[5px_0px_200px_rgba(0,0,0,0.25)] "
           >
             <ImageScene
               selectedImg={selectedImg.url}
@@ -93,6 +96,6 @@ export const Organisations: React.FC<OrganisationProps> = ({
           </motion.div>
         </div>
       </div>
-    </section>
+    </Container>
   );
 };

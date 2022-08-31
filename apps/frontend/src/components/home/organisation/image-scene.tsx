@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useLoader, useThree } from "@react-three/fiber";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSpring, a } from "@react-spring/three";
 import vertexShader from "./shaders/vertex-shader.glsl";
 import fragmentShader from "./shaders/fragment-shader.glsl";
@@ -10,6 +10,7 @@ const Image: React.FC<{
   selectedImg: string;
   prevSelectedImg: string;
 }> = ({ selectedImg, prevSelectedImg }) => {
+  const { viewport } = useThree();
   const [doAnimation, setDoAnimation] = useState(false);
   const { progress } = useSpring({ progress: doAnimation ? 0.5 : 0 });
 
@@ -47,8 +48,8 @@ const Image: React.FC<{
   }, [selectedImg, prevSelectedImg]);
 
   return (
-    <a.mesh>
-      <planeBufferGeometry args={[1, 0.7, 16, 16]} />
+    <a.mesh scale={[viewport.width, viewport.height, 1]}>
+      <planeBufferGeometry args={[1, 1, 16, 16]} />
       {/* @ts-ignore */}
       <a.shaderMaterial
         name="material"

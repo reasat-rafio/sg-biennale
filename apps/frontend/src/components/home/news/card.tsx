@@ -6,20 +6,10 @@ import {
 } from "@lib/hooks";
 import { INewsProps } from "@lib/@types/home.types";
 import { useRef, useState } from "react";
-import {
-  useMotionValue,
-  useSpring,
-  useTransform,
-  motion,
-  useAnimation,
-} from "framer-motion";
+import { useMotionValue, useSpring, useTransform, motion } from "framer-motion";
 import { PortableText } from "@utils/sanity";
 import dynamic from "next/dynamic";
-import {
-  useSpring as RSpringUseSpring,
-  animated,
-  config,
-} from "@react-spring/three";
+import { useSpring as RSpringUseSpring } from "@react-spring/three";
 
 const CardImgScene = dynamic(() => import("./card-img-scene"), { ssr: false });
 
@@ -68,7 +58,7 @@ export const NewsCard: React.FC<INewsProps> = ({
       style={{
         y: animatedY,
       }}
-      className="flex flex-col col-span-12 lg:col-span-6 | space-y-4 mx-10"
+      className="flex flex-col col-span-12 lg:col-span-6 | space-y-5"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onMouseMove={({ clientX, clientY }) => {
@@ -83,16 +73,18 @@ export const NewsCard: React.FC<INewsProps> = ({
         }
       }}
     >
-      <motion.figure className="lg:h-[488px] h-auto flex justify-center items-center bg-[#F8F8F8]">
+      <motion.figure className="lg:h-[490px] h-auto flex justify-center items-center bg-[#F8F8F8]">
         <CardImgScene
           hovered={hovered}
           url={images[0].asset.url}
           cardImageAnimationProps={cardImageAnimationProps}
         />
       </motion.figure>
-      <section>
-        <h4 className="text-[32px] font-semibold leading-[40px]">{header}</h4>
-        <div className="text-gray font-manrope" ref={newsDescriptionRef}>
+      <section className="space-y-5">
+        <h4 className="xl:text-heading-5 text-heading-6 font-semibold">
+          {header}
+        </h4>
+        <div className="text-gray-600 font-manrope" ref={newsDescriptionRef}>
           <PortableText blocks={description} />
         </div>
       </section>

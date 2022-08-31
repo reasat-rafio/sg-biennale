@@ -6,6 +6,7 @@ interface ContainerProps {
   id?: string;
   type?: "section" | "div" | "p" | "footer";
   children: React.ReactNode;
+  style?: any;
 }
 
 export const Container: React.FC<ContainerProps> = ({
@@ -13,11 +14,13 @@ export const Container: React.FC<ContainerProps> = ({
   children,
   id,
   type = "div",
+  style,
 }) => {
   const Component = type;
 
   return (
     <Component
+      style={style}
       id={id}
       className={clsx(
         "max-w-[1920px] | 3xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md",

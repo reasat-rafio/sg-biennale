@@ -45,7 +45,7 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
       ref={headerRef}
       style={{ x: animatedx }}
       className={clsx(
-        "font-medium text-[112px] leading-tight",
+        "font-medium xl:text-heading-1 lg:text-heading-2 md:text-heading-3 sm:text-heading-4 text-heading-5 ",
         idx === 0 && "text-left",
         idx === 1 && "text-center",
         idx === 2 && "text-right"
