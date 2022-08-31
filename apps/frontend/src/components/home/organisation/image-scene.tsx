@@ -27,7 +27,7 @@ const Image: React.FC<{
     const [texture1, texture2, dispTexture] = useLoader(THREE.TextureLoader, [
       selectedImg,
       prevSelectedImg,
-      "/displacement/6.jpg",
+      "/displacement/14.jpg",
     ]);
 
     dispTexture.wrapS = dispTexture.wrapT = THREE.RepeatWrapping;

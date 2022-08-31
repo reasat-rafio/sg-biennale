@@ -11,7 +11,7 @@ export interface NewsProps {
 
 export const News: React.FC<NewsProps> = ({ title, news }) => {
   return (
-    <Container type="section" className="py-section">
+    <Container type="section" className="pt-32 pb-60">
       <h3 className="xl:text-heading-4 lg:text-heading-5 text-heading-6 font-semibold">
         {title}
       </h3>

@@ -10,7 +10,7 @@ export const NewsLetter: React.FC<FooterNewsLetter> = ({
 
   return (
     <section className="w-full | pb-9 | font-semibold">
-      <div className="mb-4">{title}</div>
+      <div className="mb-4 lg:text-left text-center">{title}</div>
       <form className="relative flex | px-5 py-3  | border__round">
         <input
           className="flex-1 | pl-3 | bg-transparent outline-none placeholder:text-sm"

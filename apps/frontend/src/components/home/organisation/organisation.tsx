@@ -2,11 +2,23 @@ import { OrganisationProps } from "@lib/@types/home.types";
 import clsx from "clsx";
 import { MouseEvent, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, Variants } from "framer-motion";
 import { Container } from "@components/ui/container";
 const ImageScene = dynamic(() => import("./image-scene"), {
   ssr: false,
 });
+
+const TextAnimationVariants: Variants = {
+  enter: {
+    color: "#000000",
+    scale: 1.1,
+    originX: 0.1,
+  },
+  exit: {
+    color: "#999999",
+    scale: 1,
+  },
+};
 
 export const Organisations: React.FC<OrganisationProps> = ({
   organisations,
@@ -18,9 +30,6 @@ export const Organisations: React.FC<OrganisationProps> = ({
     organisations[1].logo.asset
   );
 
-  console.log(selectedImg);
-
-  // dynamic position
   const bgPositionAnim = useAnimation();
   const imgContainerStateOn = (e: MouseEvent<HTMLDivElement, any>) => {
     const { clientX, clientY } = e;
@@ -46,11 +55,12 @@ export const Organisations: React.FC<OrganisationProps> = ({
 
   return (
     <Container
+      className="py-32"
       style={{
         background: `linear-gradient(180deg, #F5F5F5 0%, rgba(245, 245, 245, 0) 100%)`,
       }}
     >
-      <div className=" grid grid-cols-12 justify-center items-center | lg:space-x-5 lg:space-y-0 space-y-8">
+      <div className="grid grid-cols-12 justify-center items-center | lg:space-x-5 lg:space-y-0 space-y-8">
         <div className="lg:col-span-7 col-span-12 lg:space-y-16 space-y-8">
           {organisations.map(({ _key, name, title, logo }) => (
             <div
@@ -64,16 +74,15 @@ export const Organisations: React.FC<OrganisationProps> = ({
               <span className="text-gray--400 font-bold font-manrope lg:text-body-1 text-body-2">
                 {title}
               </span>
-              <h4
-                className={clsx(
-                  "text-heading-5 font-semibold transition-colors duration-[400ms] ease-in-out max-w-xl",
-                  selectedImg._id === logo.asset._id
-                    ? "text-black"
-                    : "text-gray--400"
-                )}
+              <motion.h4
+                initial={false}
+                animate={selectedImg._id === logo.asset._id ? "enter" : "exit"}
+                transition={{ duration: 0.4, type: "tween", ease: "easeInOut" }}
+                variants={TextAnimationVariants}
+                className={clsx("text-heading-5 font-semibold max-w-xl")}
               >
                 {name}
-              </h4>
+              </motion.h4>
             </div>
           ))}
         </div>

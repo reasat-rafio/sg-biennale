@@ -72,7 +72,7 @@ export const NewsCard: React.FC<INewsProps> = ({
           "xl:h-[460px] lg:h-[390px] md:h-[470px] sm:h-[350px] h-[250px] flex justify-center items-center"
         )}
       >
-        <figure className="lg:h-[60%] lg:w-[70%] sm:h-[70%] sm:w-[70%] h-[85%] w-[85%] rounded overflow-hidden">
+        <figure className="aspect-video w-[70%] rounded overflow-hidden">
           <CardImgScene
             hovered={hovered}
             url={images[0].asset.url}
@@ -80,7 +80,7 @@ export const NewsCard: React.FC<INewsProps> = ({
           />
         </figure>
       </motion.div>
-      <section className="space-y-5">
+      <section className="space-y-5 bg-white">
         <h4 className="xl:text-heading-5 text-heading-6 font-semibold">
           {header}
         </h4>

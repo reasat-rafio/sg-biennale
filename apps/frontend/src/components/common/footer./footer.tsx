@@ -16,14 +16,14 @@ export const Footer: React.FC<ISite["site"]> = ({
   return (
     <footer
       id="footer"
-      className="relative | grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md"
+      className="relative | grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md py-10"
     >
-      <section className="relative z-10 | flex flex-col justify-center items-center col-span-12 lg:col-span-6  xl:col-span-5 |  xl:space-y-20 xl:pl-[112px]">
+      <section className="relative z-10 | flex flex-col justify-center items-center col-span-12 lg:col-span-6  xl:col-span-5 | xl:space-y-20 xl:pl-max">
         <header className="w-full | font-semibold">
-          <h2 className=" mb-4 | whitespace-pre-wrap | xl:text-[56px] leading-[71px]">
+          <h2 className=" mb-4 | lg:text-left text-center | whitespace-pre-wrap | lg:text-heading-4 text-heading-6">
             {header}
           </h2>
-          <h6 className="font-manrope"> {date}</h6>
+          <h6 className="font-manrope | lg:text-left text-center"> {date}</h6>
         </header>
         <NewsLetter {...newsLetter} />
         <Address social={social} location={location} />

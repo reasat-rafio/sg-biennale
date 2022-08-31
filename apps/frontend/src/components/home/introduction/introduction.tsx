@@ -18,7 +18,10 @@ export const Introduction: React.FC<IntroductionProps> = ({
   description,
 }) => {
   return (
-    <Container type="section" className="py-32 overflow-hidden ">
+    <Container
+      type="section"
+      className="xl:py-32 lg:py-24 py-16 overflow-hidden "
+    >
       <header>
         {header.map((text, idx) => (
           <AnimatedHeader header={text} idx={idx} />
