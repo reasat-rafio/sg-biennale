@@ -17,7 +17,13 @@ export const Container: React.FC<ContainerProps> = ({
   const Component = type;
 
   return (
-    <Component id={id} className={clsx("container | lg:px-32 px-6", className)}>
+    <Component
+      id={id}
+      className={clsx(
+        "max-w-[1920px] | 3xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md",
+        className
+      )}
+    >
       {children}
     </Component>
   );

@@ -91,6 +91,7 @@ module.exports = {
         vulcanic: "#F3F2EC",
       },
       padding: {
+        max: "224px",
         section: "24px",
         xxl: "126px",
         xl: "84px",

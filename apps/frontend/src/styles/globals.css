@@ -62,12 +62,3 @@
     rgba(255, 255, 255, 1) 80%
   );
 }
-
-.faded_container {
-  pointer-events: none;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 1) 80%
-  );
-}
