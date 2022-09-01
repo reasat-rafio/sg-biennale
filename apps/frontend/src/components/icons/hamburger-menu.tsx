@@ -15,7 +15,7 @@ export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   className = "h-6 w-6",
 }) => {
   const [animate, setAnimation] = useState(false);
-  const { setShowNavDropDown, showNavDropDown } = useGlobalStore();
+  const { showNavDropDown, setShowNavDropDown } = useGlobalStore();
 
   return (
     <motion.svg
@@ -31,43 +31,85 @@ export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
       onMouseEnter={() => setAnimation(true)}
       onMouseLeave={() => setAnimation(false)}
       onClick={() => setShowNavDropDown(!showNavDropDown)}
+      // whileHover={{ rotate: showNavDropDown ? 360 : 0 }}
     >
-      <rect width="24" height="3" fill="black" fill-opacity="0.3" />
+      <motion.rect
+        initial={{
+          opacity: 1,
+        }}
+        animate={{
+          opacity: showNavDropDown ? 0 : 1,
+        }}
+        width="24"
+        height="3"
+        fill="black"
+        fill-opacity="0.3"
+      />
       <motion.rect
         height="3"
         fill="black"
         initial={{
           width: 17,
+          rotate: 0,
+          y: 0,
         }}
         animate={{
-          width: animate ? 24 : 17,
+          width: showNavDropDown ? 24 : animate ? 24 : 17,
           transition,
+          rotate: showNavDropDown ? -45 : 0,
+          y: showNavDropDown ? "52%" : 0,
         }}
       />
-      <rect y="9" width="24" height="3" fill="black" fill-opacity="0.3" />
+      <motion.rect
+        initial={{ opacity: 1 }}
+        animate={{ opacity: showNavDropDown ? 0 : 1 }}
+        y="9"
+        width="24"
+        height="3"
+        fill="black"
+        fill-opacity="0.3"
+      />
       <motion.rect
         y="9"
         height="3"
         fill="black"
         initial={{
           width: 12,
+          opacity: 1,
         }}
         animate={{
-          width: animate ? 24 : 12,
+          width: showNavDropDown ? 24 : animate ? 24 : 12,
           transition,
+          opacity: showNavDropDown ? 0 : 1,
         }}
       />
-      <rect y="17" width="24" height="3" fill="black" fill-opacity="0.3" />
+      <motion.rect
+        initial={{
+          opacity: 1,
+        }}
+        animate={{
+          opacity: showNavDropDown ? 0 : 1,
+        }}
+        y="17"
+        width="24"
+        height="3"
+        fill="black"
+        fill-opacity="0.3"
+      />
       <motion.rect
         y="17"
         height="3"
         fill="black"
         initial={{
           width: 19,
+          rotate: 0,
+          y: 0,
         }}
         animate={{
-          width: animate ? 24 : 19,
+          width: showNavDropDown ? 24 : animate ? 24 : 19,
           transition,
+          rotate: showNavDropDown ? 45 : 0,
+          y: showNavDropDown ? "-52%" : 0,
         }}
       />
     </motion.svg>
