@@ -1,3 +1,4 @@
+import { RedirectIcon } from "@components/icons/redirect";
 import { Menu } from "@lib/@types/global.types";
 import {
   ImageVariants,
@@ -43,14 +44,8 @@ export const Nav: React.FC<NavProps> = ({ menu, image }) => {
               <Link href={`/${slug.current}`}>
                 <a className="text-heading-3 font-medium">{title}</a>
               </Link>
-              <motion.img
-                initial="initial"
-                animate={hoveredIdx === index ? "enter" : "exit"}
-                variants={RedirectIconVariant}
-                className="w-[24px] h-[24px]"
-                src="/icons/redirect.svg"
-                alt=""
-              />
+
+              <RedirectIcon triggerAnimation={hoveredIdx === index} />
             </motion.li>
           ))}
         </ul>
