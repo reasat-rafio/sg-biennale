@@ -1,3 +1,4 @@
+import useGlobalStore from "@stores/global-store";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
   className = "h-6 w-6",
 }) => {
   const [animate, setAnimation] = useState(false);
+  const { setShowNavDropDown, showNavDropDown } = useGlobalStore();
 
   return (
     <motion.svg
@@ -28,6 +30,7 @@ export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
       style={{ rotate: 180 }}
       onMouseEnter={() => setAnimation(true)}
       onMouseLeave={() => setAnimation(false)}
+      onClick={() => setShowNavDropDown(!showNavDropDown)}
     >
       <rect width="24" height="3" fill="black" fill-opacity="0.3" />
       <motion.rect

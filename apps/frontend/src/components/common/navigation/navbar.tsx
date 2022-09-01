@@ -11,7 +11,7 @@ export const Navbar: React.FC<ISite["site"]> = ({
   const [highLightedMenu] = menu.filter((m) => m.highLight);
 
   return (
-    <nav id="navbar" className="lg:sticky top-0 left-0 z-40 bg-white">
+    <nav id="navbar" className="lg:sticky top-0 left-0 z-50 bg-white">
       <NavHeader date={date} logo={logo} highLightedMenu={highLightedMenu} />
       {/* <NavItems heightlights={heightlights} menu={menu} /> */}
     </nav>
