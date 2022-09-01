@@ -2,15 +2,18 @@ import { Variants } from "framer-motion";
 
 export const ContainerVariants: Variants = {
   initial: {
+    y: -50,
     height: 0,
     display: "none",
   },
   enter: {
+    y: 0,
     height: "100vh",
     display: "block",
     transition: { duration: 0.8, damping: 2, ease: "easeInOut" },
   },
   exit: {
+    y: -50,
     height: 0,
     display: "none",
     transition: {
@@ -18,7 +21,7 @@ export const ContainerVariants: Variants = {
       damping: 12,
       delay: 0.3,
       display: {
-        delay: 0.75,
+        delay: 0.8,
       },
     },
   },

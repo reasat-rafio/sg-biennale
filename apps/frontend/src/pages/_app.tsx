@@ -8,7 +8,7 @@ import { useWindowSize } from "@lib/hooks";
 import useGlobalStore from "@stores/global-store";
 import Head from "next/head";
 import { SEO } from "@components/common/seo";
-import { Dropdown } from "@components/common/navigation/dropdown";
+import { NavDropdown } from "@components/common/navigation/dropdown";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { addFooterHeight, addNavbarHeight, showNavDropDown } =
@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {!is404Page && <Navbar {...pageProps.data?.site?.site} />}
       <Component {...pageProps} />
       {!is404Page && <Footer {...pageProps.data?.site?.site} />}
-      <Dropdown {...pageProps.data?.site?.site} />
+      <NavDropdown {...pageProps.data?.site?.site} />
     </>
   );
 }
