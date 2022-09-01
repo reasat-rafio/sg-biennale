@@ -7,6 +7,7 @@ import {
   useWindowSize,
 } from "@lib/hooks";
 import { Images } from "./images";
+import { useRouter } from "next/router";
 
 interface ArtistProps {
   type: string;
@@ -15,6 +16,7 @@ interface ArtistProps {
 }
 
 export const Artist: React.FC<ArtistProps> = ({ artists }) => {
+  const router = useRouter();
   const windowHeight = useWindowSize()?.height ?? 0;
   const sectionRef = useRef<HTMLElement>(null);
   const [clicked, setClikced] = useState<null | number>(null);
@@ -77,6 +79,7 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
             offsetX={offsetX}
             artists={artists}
             clicked={clicked}
+            router={router}
             setClikced={setClikced}
             scrollPassRatio={scrollPassRatio}
           />

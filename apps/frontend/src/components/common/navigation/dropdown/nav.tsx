@@ -17,7 +17,7 @@ interface NavProps {
 }
 
 export const Nav: React.FC<NavProps> = ({ menu, image }) => {
-  const { showNavDropDown } = useGlobalStore();
+  const { showNavDropDown, setShowNavDropDown } = useGlobalStore();
   const [hoveredIdx, setHoveredIdx] = useState<null | number>(null);
   const _menu = menu.filter((m) => !m.highLight);
 
@@ -38,6 +38,7 @@ export const Nav: React.FC<NavProps> = ({ menu, image }) => {
               }}
               onMouseEnter={() => setHoveredIdx(index)}
               onMouseLeave={() => setHoveredIdx(null)}
+              onClick={() => setShowNavDropDown(false)}
             >
               <Link href={`/${slug.current}`}>
                 <a className="text-heading-3 font-medium">{title}</a>

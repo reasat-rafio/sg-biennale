@@ -4,6 +4,7 @@ import { ScrollControls, Scroll } from "@react-three/drei";
 import { Minimap } from "./minmap";
 import { IArtistProps } from "@lib/@types/home.types";
 import { Image_ } from "./image";
+import { NextRouter } from "next/router";
 
 interface ImagesProps {
   artists: IArtistProps[];
@@ -11,6 +12,7 @@ interface ImagesProps {
   scrollPassRatio: number;
   offsetX: number;
   cursorGrab: boolean;
+  router: NextRouter;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
 const w = 4;
@@ -19,6 +21,7 @@ export const Images: React.FC<ImagesProps> = ({
   artists,
   clicked,
   offsetX,
+  router,
   scrollPassRatio,
   setClikced,
 }) => {
@@ -35,7 +38,7 @@ export const Images: React.FC<ImagesProps> = ({
     >
       <Minimap length={artists.length} />
       <Scroll>
-        {artists.map(({ artworks, name, countries }, i) => (
+        {artists.map(({ artworks, name, countries, slug }, i) => (
           <Image_
             key={i}
             index={i}
@@ -43,10 +46,12 @@ export const Images: React.FC<ImagesProps> = ({
             scale={[w, 4, 1]}
             length={artists.length}
             scrollPassRatio={scrollPassRatio}
+            slug={slug}
             clicked={clicked}
             name={name}
             offsetX={offsetX}
             countries={countries}
+            router={router}
             setClikced={setClikced}
             url={artworks[0].images[0].asset.url}
           />

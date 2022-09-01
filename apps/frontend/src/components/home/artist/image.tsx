@@ -1,4 +1,4 @@
-import { ICountry } from "@lib/@types/global.types";
+import { ICountry, Slug } from "@lib/@types/global.types";
 import { Html, Image, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import clsx from "clsx";
@@ -6,6 +6,9 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { damp } from "./util";
 import { a, config, useSpring } from "@react-spring/three";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { NextRouter, useRouter } from "next/router";
 
 interface imageProps {
   index: number;
@@ -17,6 +20,8 @@ interface imageProps {
   countries: ICountry[];
   clicked: null | number;
   offsetX: number;
+  slug: Slug;
+  router: NextRouter;
   scrollPassRatio: number;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
@@ -31,6 +36,8 @@ export const Image_: React.FC<imageProps> = ({
   name,
   countries,
   offsetX,
+  slug,
+  router,
   scrollPassRatio,
   setClikced,
 }) => {
@@ -116,13 +123,17 @@ export const Image_: React.FC<imageProps> = ({
         position={position}
         scale={scale}
       >
-        <div
+        <motion.div
+          ref={contentRef}
           className={clsx(
-            "duration-500 transition-all w-[200px]  text-white font-manrope pointer-events-none",
+            "duration-500 transition-all w-[200px]  text-white font-manrope pointer-events-auto cursor-pointer",
             clicked !== null && index > clicked && "!translate-x-full",
             clicked !== null && index < clicked && "!-translate-x-full"
           )}
-          ref={contentRef}
+          whileHover={{ scale: 1.1 }}
+          onClick={() => {
+            router.push(`/artists/${slug.current}`);
+          }}
         >
           <h6 className="text-white font-bold text-[24px]">{name}</h6>
           <span>
@@ -130,7 +141,7 @@ export const Image_: React.FC<imageProps> = ({
               <span>{label} ,</span>
             ))}
           </span>
-        </div>
+        </motion.div>
       </Html>
     </a.group>
   );

@@ -11,7 +11,7 @@ import { SEO } from "@components/common/seo";
 import { NavDropdown } from "@components/common/navigation/dropdown";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { addFooterHeight, addNavbarHeight, showNavDropDown } =
+  const { addFooterHeight, addNavbarHeight, setShowNavDropDown } =
     useGlobalStore();
   const windowWidth = useWindowSize()?.width ?? 0;
 
@@ -25,6 +25,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     addFooterHeight(navbarHeight);
     addNavbarHeight(footerHeight);
   }, [windowWidth, addFooterHeight, addNavbarHeight]);
+
+  useEffect(() => {
+    setShowNavDropDown(false);
+  }, [router.pathname]);
 
   return (
     <>
