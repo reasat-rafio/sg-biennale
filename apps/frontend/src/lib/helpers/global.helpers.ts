@@ -1,6 +1,17 @@
 import { imageUrlBuilder } from "@utils/sanity";
 import { DateTime } from "luxon";
 
+export function lockBody() {
+  document.body.style.top = `-${window.scrollY}px`;
+  document.body.classList.add("locked");
+}
+export function unlockBody() {
+  const scrollY = parseInt(document.body.style.top, 10) * -1;
+  document.body.classList.remove("locked");
+  document.body.style.top = "";
+  window.scrollTo({ top: scrollY, behavior: "smooth" });
+}
+
 export const makeDuplicateArray = <T>(arr: T): T => {
   return JSON.parse(JSON.stringify(arr));
 };

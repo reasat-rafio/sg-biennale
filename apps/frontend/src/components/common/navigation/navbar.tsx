@@ -1,7 +1,7 @@
 import { ISite } from "@lib/@types/global.types";
 import { NavHeader } from "./nav-header";
 import { NavItems } from "./nav-items";
-import React from "react";
+import React, { useEffect } from "react";
 
 export const Navbar: React.FC<ISite["site"]> = ({
   date,

@@ -4,12 +4,18 @@ import { ContainerVariants } from "@lib/helpers/nav-dropdown-helpers";
 import useGlobalStore from "@stores/global-store";
 import { CTA } from "./cta";
 import { Nav } from "./nav";
+import { useEffect } from "react";
+import { lockBody, unlockBody } from "@lib/helpers/global.helpers";
 
 export const NavDropdown: React.FC<ISite["site"]> = ({
   navigations: { menu },
   footer: { image, social },
 }) => {
   const { showNavDropDown } = useGlobalStore();
+
+  useEffect(() => {
+    showNavDropDown ? lockBody() : unlockBody();
+  }, [showNavDropDown]);
 
   return (
     <motion.div
