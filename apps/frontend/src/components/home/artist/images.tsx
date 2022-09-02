@@ -1,4 +1,4 @@
-import React, { Dispatch, RefObject, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useThree } from "@react-three/fiber";
 import { Minimap } from "./minmap";
 import { IArtistProps } from "@lib/@types/home.types";
@@ -13,6 +13,7 @@ interface ImagesProps {
   offsetX: number;
   isDown: boolean;
   router: NextRouter;
+  myTimeout: NodeJS.Timeout | null;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
 const w = 4;
@@ -23,6 +24,7 @@ export const Images: React.FC<ImagesProps> = ({
   offsetX,
   router,
   scrollPassRatio,
+  myTimeout,
   isDown,
   setClikced,
 }) => {
@@ -43,7 +45,6 @@ export const Images: React.FC<ImagesProps> = ({
           <Image_
             key={_id}
             index={i}
-            isDown={isDown}
             position={[i * xW, 0, 0]}
             scale={[w, 4, 1]}
             length={artists.length}
@@ -51,7 +52,9 @@ export const Images: React.FC<ImagesProps> = ({
             slug={slug}
             clicked={clicked}
             name={name}
+            isDown={isDown}
             offsetX={offsetX}
+            myTimeout={myTimeout}
             countries={countries}
             router={router}
             setClikced={setClikced}

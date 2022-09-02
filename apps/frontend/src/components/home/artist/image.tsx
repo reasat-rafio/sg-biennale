@@ -19,11 +19,12 @@ interface imageProps {
   name: string;
   countries: ICountry[];
   clicked: null | number;
-  isDown: boolean;
   offsetX: number;
   slug: Slug;
+  myTimeout: NodeJS.Timeout | null;
   router: NextRouter;
   scrollPassRatio: number;
+  isDown: boolean;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
 
@@ -35,10 +36,11 @@ export const Image_: React.FC<imageProps> = ({
   length,
   clicked,
   name,
-  isDown,
   countries,
   offsetX,
   slug,
+  isDown,
+  myTimeout,
   router,
   scrollPassRatio,
   setClikced,
@@ -55,14 +57,16 @@ export const Image_: React.FC<imageProps> = ({
     config: config.slow,
   });
 
-  const click = () =>
-    index === clicked ? setClikced(null) : setClikced(index);
+  const click = () => {
+    if (myTimeout) clearTimeout(myTimeout);
+    if (index === clicked) {
+      setClikced(null);
+    } else if (!isDown) {
+      setClikced(index);
+    }
+  };
   const over = () => hover(true);
   const out = () => hover(false);
-
-  useEffect(() => {
-    document.body.style.cursor = hovered ? "pointer" : "auto";
-  }, [hovered]);
 
   useFrame((_, delta) => {
     scroll.offset = progress.get();
@@ -70,14 +74,14 @@ export const Image_: React.FC<imageProps> = ({
     if (imageRef?.current) {
       imageRef.current.material.scale[1] = imageRef.current.scale.y = damp(
         imageRef.current.scale.y,
-        !isDown && clicked === index ? scale[1] + 2 : scale[1],
+        clicked === index ? scale[1] + scale[1] * 0.4 : scale[1],
         8,
         delta
       );
       // Scale X
       imageRef.current.material.scale[0] = imageRef.current.scale.x = damp(
         imageRef.current.scale.x,
-        !isDown && clicked === index ? scale[0] + scale[0] * 0.5 : scale[0],
+        clicked === index ? scale[0] + scale[0] * 0.4 : scale[0],
         6,
         delta
       );
@@ -111,10 +115,7 @@ export const Image_: React.FC<imageProps> = ({
         delta
       );
 
-      imageRef.current.material.color.lerp(
-        color.set(hovered || clicked === index ? "white" : "rbga(0,0,0,0)"),
-        hovered ? 1 : 0
-      );
+      imageRef.current.material.color.lerp(color.set("white"), hovered ? 1 : 0);
     }
   });
 
@@ -135,7 +136,7 @@ export const Image_: React.FC<imageProps> = ({
           )}
           whileHover={{ scale: 1.1 }}
           onClick={() => {
-            // router.push(`/artists/${slug.current}`);
+            router.push(`/artists/${slug.current}`);
           }}
         >
           <h6 className="text-white font-bold text-[24px]">{name}</h6>

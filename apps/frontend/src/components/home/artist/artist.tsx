@@ -23,7 +23,9 @@ interface ArtistProps {
 
 export const Artist: React.FC<ArtistProps> = ({ artists }) => {
   const router = useRouter();
+  let myTimeout: NodeJS.Timeout | null = null;
   const windowHeight = useWindowSize()?.height ?? 0;
+  const windowWidth = useWindowSize()?.width ?? 0;
   const sectionRef = useRef<HTMLElement>(null);
   const [clicked, setClikced] = useState<null | number>(null);
   const [scrollPassRatio, setScrollPassRatio] = useState(0);
@@ -32,15 +34,19 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
   const [offsetX, setOffsetX] = useState(0);
 
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {
-    setDown(true);
-    if (sectionRef?.current) sectionRef.current!.style.cursor = "grab";
-    setStartX(e.pageX - sectionRef?.current!.offsetLeft);
+    myTimeout = setTimeout(() => {
+      setDown(true);
+      if (sectionRef?.current) sectionRef.current!.style.cursor = "grabbing";
+      setStartX(e.pageX - sectionRef?.current!.offsetLeft);
+    }, 200);
   };
   const onPointerLeaveAction = () => {
+    if (myTimeout) clearTimeout(myTimeout);
     setDown(false);
     if (sectionRef?.current) sectionRef.current!.style.cursor = "auto";
   };
   const onPointerUpAction = () => {
+    if (myTimeout) clearTimeout(myTimeout);
     setDown(false);
     if (sectionRef?.current) sectionRef.current!.style.cursor = "auto";
   };
@@ -66,9 +72,13 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
     sectionRef,
     (offsetBoundingRect, _, y) =>
       animationFrameEffect(() => {
-        const yDelta = y + windowHeight - offsetBoundingRect.top;
-        const ratio = Math.max(0, Math.min(yDelta / windowHeight));
-        setScrollPassRatio(ratio);
+        if (windowWidth >= 1024) {
+          const yDelta = y + windowHeight - offsetBoundingRect.top;
+          const ratio = Math.max(0, Math.min(yDelta / windowHeight));
+          setScrollPassRatio(ratio);
+        } else {
+          setScrollPassRatio(-0.3);
+        }
       }),
     [windowHeight]
   );
@@ -95,6 +105,7 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
             artists={artists}
             clicked={clicked}
             router={router}
+            myTimeout={myTimeout}
             setClikced={setClikced}
             scrollPassRatio={scrollPassRatio}
           />
