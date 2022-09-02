@@ -84,11 +84,7 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
   );
 
   return (
-    <section
-      ref={sectionRef}
-      className="min-h-[100vh]"
-      id="artist-image-carouel"
-    >
+    <section ref={sectionRef} className="h-[100vh]" id="artist-image-carouel">
       <Suspense fallback={null}>
         <Canvas
           style={{ overflow: "hidden" }}

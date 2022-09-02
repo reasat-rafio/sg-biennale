@@ -14,6 +14,7 @@ import Social from "./objects/site/social";
 import Footer from "./objects/site/footer";
 import Menu from "./objects/menu";
 import Video from "./objects/video";
+import PageHeading from "./objects/page-heading";
 
 import Venue from "./documents/venue";
 
@@ -72,6 +73,7 @@ export default createSchema({
 
     Site,
     Menu,
+    PageHeading,
     Footer,
     MenuItems,
     Social,

@@ -88,24 +88,24 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
             transition={{
               x: {
                 type: "tween",
-                duration: 0.65,
+                duration: 0.85,
               },
               scale: {
                 type: "spring",
                 elapsed: 0.1,
               },
-              zIndex: { delay: direction > 0 ? 0.65 : 0 },
+              zIndex: { delay: direction > 0 ? 0.85 : 0 },
             }}
             onDragEnd={(_, { offset, velocity }) => {
               const swipe = swipePower(offset.x, velocity.x);
               if (swipe < -swipeConfidenceThreshold || offset.x < -720) {
                 paginate(1);
                 setDisableDragging(true);
-                setTimeout(() => setDisableDragging(false), 500);
+                setTimeout(() => setDisableDragging(false), 650);
               } else if (swipe > swipeConfidenceThreshold || offset.x > 720)
                 paginate(-1);
               setDisableDragging(true);
-              setTimeout(() => setDisableDragging(false), 500);
+              setTimeout(() => setDisableDragging(false), 650);
             }}
           >
             <motion.div className="overflow-hidden w-[95%] h-full">

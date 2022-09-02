@@ -42,7 +42,7 @@ const Image: React.FC<CardImgSceneProps> = ({ url, hovered, scalePos }) => {
     );
     meshRef.current.scale.y = MathUtils.damp(
       meshRef.current.scale.y,
-      viewport.height + scalePos[1],
+      viewport.height - scalePos[1],
       4,
       delta
     );
