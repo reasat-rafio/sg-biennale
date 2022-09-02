@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { useThree } from "@react-three/fiber";
 import { Minimap } from "./minmap";
 import { IArtistProps } from "@lib/@types/home.types";
-import { Image_ } from "./image";
+import { Image } from "./image";
 import { NextRouter } from "next/router";
 import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls-helper";
 
@@ -42,11 +42,11 @@ export const Images: React.FC<ImagesProps> = ({
       <Minimap length={artists.length} />
       <Scroll>
         {artists.map(({ artworks, name, countries, slug, _id }, i) => (
-          <Image_
+          <Image
             key={_id}
             index={i}
             position={[i * xW, 0, 0]}
-            scale={[w, 4, 1]}
+            scale={[w, 4.5, 1]}
             length={artists.length}
             scrollPassRatio={scrollPassRatio}
             slug={slug}

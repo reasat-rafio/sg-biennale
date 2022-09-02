@@ -38,7 +38,7 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
       setDown(true);
       if (sectionRef?.current) sectionRef.current!.style.cursor = "grabbing";
       setStartX(e.pageX - sectionRef?.current!.offsetLeft);
-    }, 200);
+    }, 100);
   };
   const onPointerLeaveAction = () => {
     if (myTimeout) clearTimeout(myTimeout);
@@ -64,7 +64,7 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
   const onTouchMoveAction = (e: TouchEvent) => {
     if (!isDown) return;
     const x = e.touches[0].pageX - sectionRef?.current!.offsetLeft;
-    const walk = (x - startX) * 0.001 * -5;
+    const walk = (x - startX) * 0.00001 * -5;
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
   };
 
@@ -84,7 +84,11 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
   );
 
   return (
-    <section ref={sectionRef} className="h-[100vh]" id="artist-image-carouel">
+    <section
+      ref={sectionRef}
+      className="min-h-[100vh]"
+      id="artist-image-carouel"
+    >
       <Suspense fallback={null}>
         <Canvas
           style={{ overflow: "hidden" }}

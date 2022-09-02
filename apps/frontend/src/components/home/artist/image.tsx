@@ -1,34 +1,15 @@
-import { ICountry, Slug } from "@lib/@types/global.types";
-import { Html, Image } from "@react-three/drei";
+import { Html, Image as ImageImpl } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import clsx from "clsx";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import * as THREE from "three";
 import { damp } from "./util";
 import { a, config, useSpring } from "@react-spring/three";
 import { motion } from "framer-motion";
-import { NextRouter } from "next/router";
 import { useScroll } from "@lib/helpers/scroll-controls-helper";
+import { ArtworkImageProps } from "@lib/@types/home.types";
 
-interface imageProps {
-  index: number;
-  position: any;
-  scale: any;
-  url: string;
-  length: number;
-  name: string;
-  countries: ICountry[];
-  clicked: null | number;
-  offsetX: number;
-  slug: Slug;
-  myTimeout: NodeJS.Timeout | null;
-  router: NextRouter;
-  scrollPassRatio: number;
-  isDown: boolean;
-  setClikced: Dispatch<SetStateAction<null | number>>;
-}
-
-export const Image_: React.FC<imageProps> = ({
+export const Image: React.FC<ArtworkImageProps> = ({
   index,
   position,
   scale,
@@ -47,27 +28,24 @@ export const Image_: React.FC<imageProps> = ({
 }) => {
   const color = new THREE.Color();
   const imageRef = useRef<any>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
   const scroll = useScroll();
   const [hovered, hover] = useState(false);
 
   const y = scroll.curve(index / length - 1.5 / length, 4 / length);
   const { progress } = useSpring({
     progress: Math.min(scrollPassRatio * 0.1 + offsetX * 2, 1),
-    config: config.slow,
+    config: config.molasses,
   });
 
   const click = () => {
     if (myTimeout) clearTimeout(myTimeout);
-    if (index === clicked) {
-      setClikced(null);
-    } else if (!isDown) {
-      setClikced(index);
-    }
+    if (index === clicked) setClikced(null);
+    else if (!isDown) setClikced(index);
   };
   const over = () => hover(true);
   const out = () => hover(false);
 
+  let prevOffset = 0;
   useFrame((_, delta) => {
     scroll.offset = progress.get();
     // Scale Y
@@ -85,6 +63,7 @@ export const Image_: React.FC<imageProps> = ({
         6,
         delta
       );
+      // position x from leftside of the active card
       if (clicked !== null && index < clicked) {
         imageRef.current.position.x = damp(
           imageRef.current.position.x,
@@ -93,6 +72,7 @@ export const Image_: React.FC<imageProps> = ({
           delta
         );
       }
+      // position x from rightside of the active card
       if (clicked !== null && index > clicked)
         imageRef.current.position.x = damp(
           imageRef.current.position.x,
@@ -108,6 +88,18 @@ export const Image_: React.FC<imageProps> = ({
           delta
         );
 
+      // card position shift on move
+      imageRef.current.material.shift = THREE.MathUtils.damp(
+        imageRef.current.material.shift,
+        prevOffset > scroll.offset
+          ? -scroll.delta * 1000000000
+          : scroll.delta * 10000000000,
+        4,
+        delta
+      );
+      prevOffset = scroll.offset;
+
+      // grayscale color
       imageRef.current.material.grayscale = damp(
         imageRef.current.material.grayscale,
         hovered || clicked === index ? 0 : Math.max(0, 1 - y),
@@ -115,24 +107,25 @@ export const Image_: React.FC<imageProps> = ({
         delta
       );
 
+      // color
       imageRef.current.material.color.lerp(color.set("white"), hovered ? 1 : 0);
     }
   });
 
   return (
     <a.group onClick={click} onPointerOver={over} onPointerOut={out}>
-      <Image ref={imageRef} scale={scale} position={position} url={url} />
+      <ImageImpl ref={imageRef} scale={scale} position={position} url={url} />
       <Html
         className="pointer-events-none -translate-x-[50%]"
         position={position}
         scale={scale}
       >
         <motion.div
-          ref={contentRef}
           className={clsx(
-            "duration-500 transition-all w-[200px]  text-white font-manrope pointer-events-none cursor-pointer",
+            "duration-500 transition-all w-[200px] text-white font-manrope cursor-pointer",
             clicked !== null && index > clicked && "!translate-x-full",
-            clicked !== null && index < clicked && "!-translate-x-full"
+            clicked !== null && index < clicked && "!-translate-x-full",
+            isDown ? "pointer-events-none" : "pointer-events-auto"
           )}
           whileHover={{ scale: 1.1 }}
           onClick={() => {

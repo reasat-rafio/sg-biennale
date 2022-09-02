@@ -1,3 +1,5 @@
+import { NextRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 import { SanityImage } from "sanity-react-extra";
 import { Cta, ICountry, Slug } from "./global.types";
 
@@ -61,4 +63,22 @@ export interface IPromotion {
   description: string;
   image: SanityImage;
   cta?: Cta;
+}
+
+export interface ArtworkImageProps {
+  index: number;
+  position: any;
+  scale: any;
+  url: string;
+  length: number;
+  name: string;
+  countries: ICountry[];
+  clicked: null | number;
+  offsetX: number;
+  slug: Slug;
+  myTimeout: NodeJS.Timeout | null;
+  router: NextRouter;
+  scrollPassRatio: number;
+  isDown: boolean;
+  setClikced: Dispatch<SetStateAction<null | number>>;
 }
