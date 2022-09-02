@@ -1,5 +1,5 @@
 import { ICountry, Slug } from "@lib/@types/global.types";
-import { Html, Image, useScroll } from "@react-three/drei";
+import { Html, Image } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import clsx from "clsx";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
@@ -7,8 +7,8 @@ import * as THREE from "three";
 import { damp } from "./util";
 import { a, config, useSpring } from "@react-spring/three";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { NextRouter, useRouter } from "next/router";
+import { NextRouter } from "next/router";
+import { useScroll } from "@lib/helpers/scroll-controls-helper";
 
 interface imageProps {
   index: number;
@@ -19,6 +19,7 @@ interface imageProps {
   name: string;
   countries: ICountry[];
   clicked: null | number;
+  isDown: boolean;
   offsetX: number;
   slug: Slug;
   router: NextRouter;
@@ -34,6 +35,7 @@ export const Image_: React.FC<imageProps> = ({
   length,
   clicked,
   name,
+  isDown,
   countries,
   offsetX,
   slug,
@@ -64,19 +66,18 @@ export const Image_: React.FC<imageProps> = ({
 
   useFrame((_, delta) => {
     scroll.offset = progress.get();
-
     // Scale Y
     if (imageRef?.current) {
       imageRef.current.material.scale[1] = imageRef.current.scale.y = damp(
         imageRef.current.scale.y,
-        clicked === index ? 6 : 4.5 + y,
+        !isDown && clicked === index ? scale[1] + 2 : scale[1],
         8,
         delta
       );
       // Scale X
       imageRef.current.material.scale[0] = imageRef.current.scale.x = damp(
         imageRef.current.scale.x,
-        clicked === index ? 6 : scale[0],
+        !isDown && clicked === index ? scale[0] + scale[0] * 0.5 : scale[0],
         6,
         delta
       );
@@ -102,15 +103,17 @@ export const Image_: React.FC<imageProps> = ({
           6,
           delta
         );
+
       imageRef.current.material.grayscale = damp(
         imageRef.current.material.grayscale,
         hovered || clicked === index ? 0 : Math.max(0, 1 - y),
         6,
         delta
       );
+
       imageRef.current.material.color.lerp(
-        color.set(hovered || clicked === index ? "white" : "#aaa"),
-        hovered ? 0.3 : 0.1
+        color.set(hovered || clicked === index ? "white" : "rbga(0,0,0,0)"),
+        hovered ? 1 : 0
       );
     }
   });
@@ -126,13 +129,13 @@ export const Image_: React.FC<imageProps> = ({
         <motion.div
           ref={contentRef}
           className={clsx(
-            "duration-500 transition-all w-[200px]  text-white font-manrope pointer-events-auto cursor-pointer",
+            "duration-500 transition-all w-[200px]  text-white font-manrope pointer-events-none cursor-pointer",
             clicked !== null && index > clicked && "!translate-x-full",
             clicked !== null && index < clicked && "!-translate-x-full"
           )}
           whileHover={{ scale: 1.1 }}
           onClick={() => {
-            router.push(`/artists/${slug.current}`);
+            // router.push(`/artists/${slug.current}`);
           }}
         >
           <h6 className="text-white font-bold text-[24px]">{name}</h6>

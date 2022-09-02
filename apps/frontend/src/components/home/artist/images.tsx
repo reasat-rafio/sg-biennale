@@ -1,17 +1,17 @@
 import React, { Dispatch, RefObject, SetStateAction } from "react";
 import { useThree } from "@react-three/fiber";
-import { ScrollControls, Scroll } from "@react-three/drei";
 import { Minimap } from "./minmap";
 import { IArtistProps } from "@lib/@types/home.types";
 import { Image_ } from "./image";
 import { NextRouter } from "next/router";
+import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls-helper";
 
 interface ImagesProps {
   artists: IArtistProps[];
   clicked: null | number;
   scrollPassRatio: number;
   offsetX: number;
-  cursorGrab: boolean;
+  isDown: boolean;
   router: NextRouter;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
@@ -23,6 +23,7 @@ export const Images: React.FC<ImagesProps> = ({
   offsetX,
   router,
   scrollPassRatio,
+  isDown,
   setClikced,
 }) => {
   const { width } = useThree((state) => state.viewport);
@@ -30,18 +31,19 @@ export const Images: React.FC<ImagesProps> = ({
 
   return (
     <ScrollControls
-      style={{ overflow: "hidden" }}
       horizontal
+      damping={1}
+      distance={1}
       enabled={false}
-      damping={10}
       pages={(width - xW + artists.length * xW) / width}
     >
       <Minimap length={artists.length} />
       <Scroll>
-        {artists.map(({ artworks, name, countries, slug }, i) => (
+        {artists.map(({ artworks, name, countries, slug, _id }, i) => (
           <Image_
-            key={i}
+            key={_id}
             index={i}
+            isDown={isDown}
             position={[i * xW, 0, 0]}
             scale={[w, 4, 1]}
             length={artists.length}

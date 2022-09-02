@@ -1,12 +1,11 @@
 import { ISite } from "@lib/@types/global.types";
 import { NavHeader } from "./nav-header";
-import { NavItems } from "./nav-items";
 import React, { useEffect } from "react";
 
 export const Navbar: React.FC<ISite["site"]> = ({
   date,
   logo,
-  navigations: { heightlights, menu },
+  navigations: { menu },
 }) => {
   const [highLightedMenu] = menu.filter((m) => m.highLight);
 

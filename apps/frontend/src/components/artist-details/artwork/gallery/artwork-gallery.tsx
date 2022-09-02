@@ -1,4 +1,5 @@
 import { sliceIntoChunks } from "@lib/helpers/global.helpers";
+import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls-helper";
 import { useIntersection } from "@lib/hooks";
 import { Html, Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
@@ -6,7 +7,6 @@ import useArtistsDetailsStore from "@stores/artist-details.store";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { ArtworkPageProps } from "../artwork";
 import { Pages } from "./pages";
-import { Scroll, ScrollControls } from "./scroll-controls";
 
 export interface ArtworkGalleryProps {
   artworks: ArtworkPageProps["artworks"];

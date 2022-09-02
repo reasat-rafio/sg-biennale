@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { SVGProps, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { useScroll } from "@react-three/drei";
 import { damp } from "./util";
+import { useScroll } from "@lib/helpers/scroll-controls-helper";
 
 const material = new THREE.LineBasicMaterial({ color: "#000000" });
 const geometry = new THREE.BufferGeometry().setFromPoints([

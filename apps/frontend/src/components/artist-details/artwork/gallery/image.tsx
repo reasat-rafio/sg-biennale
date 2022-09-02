@@ -1,17 +1,8 @@
 import { Image as ImageImpl } from "./image-impl";
 import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
-import {
-  useRef,
-  useState,
-  PointerEvent,
-  RefAttributes,
-  Ref,
-  useEffect,
-} from "react";
-import { BufferGeometry, Group, Mesh } from "three";
+import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
-import { useScroll } from "./scroll-controls";
 import { ArtworkProps } from "../artwork";
 import {
   opacityController,
@@ -19,6 +10,7 @@ import {
   scalingController,
 } from "@lib/helpers/artist-details.helpers";
 import { ArtworkDescription, CloseIcon } from "./artwork-description";
+import { useScroll } from "@lib/helpers/scroll-controls-helper";
 
 interface ImageProps {
   outterArrIndex: number;
@@ -45,7 +37,7 @@ export const Image: React.FC<ImageProps> = ({
     THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]> | any
   >(null);
 
-  const groupRef = useRef<Group | null>(null);
+  const groupRef = useRef<THREE.Group | null>(null);
   const scrollData = useScroll();
   const [hovered, setHovered] = useState(false);
   const [imageHoverGlitchAnimation, setImageHoverGlitchAnimation] =

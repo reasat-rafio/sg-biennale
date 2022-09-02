@@ -1,5 +1,11 @@
 import { IArtistProps } from "@lib/@types/home.types";
-import { PointerEvent, Suspense, useEffect, useRef, useState } from "react";
+import React, {
+  PointerEvent,
+  Suspense,
+  TouchEvent,
+  useRef,
+  useState,
+} from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   animationFrameEffect,
@@ -24,32 +30,37 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
   const [isDown, setDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
-  const [cursorGrab, setCursorGrab] = useState(false);
 
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {
     setDown(true);
-    setCursorGrab(false);
+    if (sectionRef?.current) sectionRef.current!.style.cursor = "grab";
     setStartX(e.pageX - sectionRef?.current!.offsetLeft);
   };
   const onPointerLeaveAction = () => {
     setDown(false);
-    setCursorGrab(false);
+    if (sectionRef?.current) sectionRef.current!.style.cursor = "auto";
   };
   const onPointerUpAction = () => {
     setDown(false);
-    setCursorGrab(false);
+    if (sectionRef?.current) sectionRef.current!.style.cursor = "auto";
   };
   const onPointerMoveAction = (e: PointerEvent<HTMLDivElement>) => {
     if (!isDown) return;
     const x = e.pageX - sectionRef?.current!.offsetLeft;
-    const walk = (x - startX) * 0.00001 * -1;
-    setCursorGrab(true);
+    const walk = (x - startX) * 0.00001 * -5;
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
   };
-
-  useEffect(() => {
-    document.body.style.cursor = cursorGrab ? "grab" : "auto";
-  }, [cursorGrab]);
+  const onTouchStartAction = (e: TouchEvent) => {
+    setDown(true);
+    setStartX(e.touches[0].pageX - sectionRef?.current!.offsetLeft);
+  };
+  const onTouchEndAction = () => setDown(false);
+  const onTouchMoveAction = (e: TouchEvent) => {
+    if (!isDown) return;
+    const x = e.touches[0].pageX - sectionRef?.current!.offsetLeft;
+    const walk = (x - startX) * 0.001 * -5;
+    setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
+  };
 
   useVisibleScrollEffect(
     sectionRef,
@@ -66,6 +77,10 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
     <section ref={sectionRef} className="h-[100vh]" id="artist-image-carouel">
       <Suspense fallback={null}>
         <Canvas
+          style={{ overflow: "hidden" }}
+          onTouchStart={onTouchStartAction}
+          onTouchEnd={onTouchEndAction}
+          onTouchMove={onTouchMoveAction}
           onPointerDown={onPointerDownAction}
           onPointerLeave={onPointerLeaveAction}
           onPointerUp={onPointerUpAction}
@@ -75,8 +90,8 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
           onPointerMissed={() => setClikced(null)}
         >
           <Images
-            cursorGrab={cursorGrab}
             offsetX={offsetX}
+            isDown={isDown}
             artists={artists}
             clicked={clicked}
             router={router}

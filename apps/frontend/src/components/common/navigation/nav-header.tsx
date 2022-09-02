@@ -35,8 +35,8 @@ export const NavHeader: React.FC<NavHeaderProps> = ({
           </figure>
         </div>
 
-        <div className="flex justify-around items-center | ml-auto space-x-20 | lg:text-[16px] md:text-lg text-base font-semibold font-manrope">
-          <span className=" text-right">{date}</span>
+        <div className="flex justify-around items-center | ml-auto xl:space-x-20 md:space-x-10 space-x-5 | lg:text-body-1 text-body-2 font-semibold font-manrope">
+          <span className="text-right ">{date}</span>
           <Link href={`/${highLightedMenu.slug}`}>
             <a>{highLightedMenu.title}</a>
           </Link>

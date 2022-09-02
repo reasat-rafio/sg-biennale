@@ -1,7 +1,6 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import React, {
   createContext,
-  forwardRef,
   useContext,
   useEffect,
   useMemo,
@@ -54,6 +53,7 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
   children,
 }) => {
   const { gl, size, invalidate, events } = useThree();
+
   const [el] = useState(() => document.createElement("div"));
   const [fill] = useState(() => document.createElement("div"));
   const [fixed] = useState(() => document.createElement("div"));
@@ -101,8 +101,14 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
     el.style.position = "absolute";
     el.style.width = "100%";
     el.style.height = "100%";
-    el.style[horizontal ? "overflowX" : "overflowY"] = "auto";
-    el.style[horizontal ? "overflowY" : "overflowX"] = "hidden";
+    if (enabled) {
+      el.style[horizontal ? "overflowX" : "overflowY"] = "auto";
+      el.style[horizontal ? "overflowY" : "overflowX"] = "hidden";
+    } else {
+      el.style.overflowX = "hidden";
+      el.style.overflowY = "hidden";
+    }
+
     el.style.top = "0px";
     el.style.left = "0px";
 
@@ -131,7 +137,7 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
       target.removeChild(el);
       events.connect?.(oldTarget);
     };
-  }, [pages, distance, horizontal, el, fill, fixed, target]);
+  }, [pages, distance, horizontal, el, fill, fixed, target, enabled]);
 
   useEffect(() => {
     const containerLength = size[horizontal ? "width" : "height"];
@@ -165,8 +171,12 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
         if (disableScroll) setTimeout(() => (disableScroll = false), 40);
       }
     };
+
     el.addEventListener("scroll", onScroll, { passive: true });
-    requestAnimationFrame(() => (firstRun = false));
+
+    requestAnimationFrame(() => {
+      firstRun = false;
+    });
 
     const onWheel = (e: WheelEvent) => (el.scrollLeft += e.deltaY / 2);
     if (horizontal) el.addEventListener("wheel", onWheel, { passive: true });
