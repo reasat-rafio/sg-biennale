@@ -42,6 +42,7 @@ import AboutPageTeam from "./objects/about/team";
 import PressPage from "./documents/pages/press";
 import PressRelease from "./objects/press/release";
 import PressKitInfo from "./objects/press/kit-info";
+import PressRecentUpdate from "./objects/press/recent-update";
 
 import SupportUsPage from "./documents/pages/support-us";
 
@@ -114,6 +115,7 @@ export default createSchema({
     PressPage,
     PressRelease,
     PressKitInfo,
+    PressRecentUpdate,
 
     VisitorInfoPage,
     visitorInfoHero,

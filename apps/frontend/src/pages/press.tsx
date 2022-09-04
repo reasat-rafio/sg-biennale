@@ -20,6 +20,19 @@ const query = pageQuery(groq`
               ...,
              "icon": ${withDimensions("icon")},
            },
+           updates[]->{
+            _id,
+            header,
+            images[] {
+              ..., 
+              asset->{
+                ...,
+                metadata {
+                dimensions
+                }
+              }
+            },
+           },
             releases[]-> {
                 _id,
                 header,
@@ -65,7 +78,6 @@ const Press: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
-
         "pressPage.kitInfo": KitsInfo,
       })}
     </div>

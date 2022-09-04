@@ -12,6 +12,7 @@ const PressPage = {
       type: "array",
       of: [
         { type: "pageHeading" },
+        { type: "pressPage.recentUpdate" },
         { type: "pressPage.release" },
         { type: "pressPage.kitInfo" },
       ],
