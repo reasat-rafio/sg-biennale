@@ -1,3 +1,4 @@
+import { Button } from "@components/ui/button";
 import { Cta } from "@lib/@types/global.types";
 import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
@@ -53,9 +54,22 @@ const Header: React.FC<{
       <h2 className="text-red-love font-medium text-heading-4">{header}</h2>
       <p className="font-manrope text-body-2 text-gray--700">{description}</p>
       <div className="pt-9">
-        <button className="border border-black | rounded-3xl px-12 py-3 text-xl ">
+        <Button
+          variant="secondary"
+          type="href"
+          href={cta?.href}
+          icon={
+            <SanityImg
+              className="w-[14px] h-[13px]"
+              width={14}
+              image={cta.icon}
+              builder={imageUrlBuilder}
+              alt="download icon"
+            />
+          }
+        >
           {cta.title}
-        </button>
+        </Button>
       </div>
     </div>
   );

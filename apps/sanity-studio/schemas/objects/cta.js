@@ -11,6 +11,7 @@ const CTA = {
       name: "href",
       type: "string",
     },
+    { name: "icon", type: "image", description: "optional" },
   ],
 };
 

@@ -16,6 +16,10 @@ const query = pageQuery(groq`
         sections[]{
             ...,
            "image": ${withDimensions("image")},
+           cta {
+              ...,
+             "icon": ${withDimensions("icon")},
+           },
             releases[]-> {
                 _id,
                 header,

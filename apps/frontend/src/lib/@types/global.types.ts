@@ -88,6 +88,7 @@ export interface Cta {
   type: string;
   href: string;
   title: string;
+  icon?: SanityImage;
   _key?: string;
 }
 
