@@ -27,8 +27,8 @@ export const KitsInfo: React.FC<KitsInfoProps> = ({
   infoAndContacts,
 }) => {
   return (
-    <section className="grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md pt-max">
-      <div className="col-span-12 lg:col-span-6 xl:col-span-5 | grid grid-rows-6 | pr-20">
+    <section className="grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md 2xl:pt-max lg:pt-xl pt-section">
+      <div className="col-span-12 lg:col-span-6 xl:col-span-5 | grid grid-rows-6 | xl:pr-20 lg:pr-10">
         <Header header={header} description={description} cta={cta} />
         <InfoAndContacts {...infoAndContacts} />
       </div>
@@ -50,10 +50,12 @@ const Header: React.FC<{
   cta: Cta;
 }> = ({ header, description, cta }) => {
   return (
-    <div className="row-span-4 | flex flex-col justify-center | border-b | space-y-4 xl:pl-max">
-      <h2 className="text-red-love font-medium text-heading-4">{header}</h2>
+    <div className="row-span-4 | flex flex-col justify-center | border-b | space-y-4 xl:pl-max py-5">
+      <h2 className="text-red-love font-medium xl:text-heading-4 text-heading-5">
+        {header}
+      </h2>
       <p className="font-manrope text-body-2 text-gray--700">{description}</p>
-      <div className="pt-9">
+      <div className="xl:pt-9 pt-5">
         <Button
           variant="secondary"
           type="href"
@@ -79,9 +81,12 @@ const InfoAndContacts: React.FC<InfoAndContactsProps> = ({ infos, title }) => {
   return (
     <div className="row-span-2 | flex flex-col justify-center py-5 | xl:pl-max space-y-4 | font-manrope">
       <h6 className="text-body-1 font-semibold">{title}</h6>
-      <ul className="">
+      <ul>
         {infos.map(({ _key, label, value }) => (
-          <li className="grid grid-cols-2 | mt-2 | text-body-2" key={_key}>
+          <li
+            className="grid sm:grid-cols-2 grid-cols-1 | mt-2 | text-body-2"
+            key={_key}
+          >
             <span>{label}</span>
             <span>{value}</span>
           </li>
