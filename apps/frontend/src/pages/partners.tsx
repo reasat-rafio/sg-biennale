@@ -1,5 +1,5 @@
-import { Heading } from "@components/partners/heading";
 import { PartnerList } from "@components/partners/partner-list";
+import { PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
 import { siteQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
@@ -37,7 +37,7 @@ const Partners: NextPage<SanityProps> = (props) => {
 
   return (
     <Container className="py-section">
-      <Heading header={header} description={description} />
+      <PageHeading heading={header} tagline={description} />
       <PartnerList partners={partners} />
     </Container>
   );

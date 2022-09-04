@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { lockBody, unlockBody } from "@lib/helpers/global.helpers";
 
 export const NavDropdown: React.FC<ISite["site"]> = ({
-  navigations: { menu },
+  navigations: { menu, cta },
   footer: { image, social },
 }) => {
   const { showNavDropDown } = useGlobalStore();
@@ -26,7 +26,7 @@ export const NavDropdown: React.FC<ISite["site"]> = ({
     >
       <div className="flex flex-col space-y-4 | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto | mt-10">
         <Nav image={image} menu={menu} />
-        <CTA menuLength={menu.length} social={social} />
+        <CTA menuLength={menu.length} social={social} cta={cta} />
       </div>
     </motion.div>
   );

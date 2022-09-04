@@ -1,4 +1,5 @@
-import { FooterSocial } from "@lib/@types/global.types";
+import { Button } from "@components/ui/button";
+import { Cta, FooterSocial } from "@lib/@types/global.types";
 import { CTAVarinats } from "@lib/helpers/nav-dropdown-helpers";
 import useGlobalStore from "@stores/global-store";
 import { imageUrlBuilder } from "@utils/sanity";
@@ -9,9 +10,10 @@ import { SanityImg } from "sanity-react-extra";
 interface CtaProps {
   menuLength: number;
   social: FooterSocial;
+  cta: Cta;
 }
 
-export const CTA: React.FC<CtaProps> = ({ menuLength, social }) => {
+export const CTA: React.FC<CtaProps> = ({ menuLength, social, cta }) => {
   const { showNavDropDown } = useGlobalStore();
 
   return (
@@ -23,9 +25,21 @@ export const CTA: React.FC<CtaProps> = ({ menuLength, social }) => {
       custom={0.5 + menuLength * 0.2}
     >
       <div className="col-span-6">
-        <button className="border border-black | rounded-3xl px-12 py-3 text-xl">
-          Book Ticket Now
-        </button>
+        <Button
+          variant="secondary"
+          type="href"
+          icon={
+            <SanityImg
+              className="w-[14px] h-[13px]"
+              width={14}
+              image={cta.icon}
+              builder={imageUrlBuilder}
+              alt="download icon"
+            />
+          }
+        >
+          {cta.title}
+        </Button>
       </div>
       <div className="col-span-6 | flex justify-center items-center | space-x-9">
         <span className="font-manrope text-body-1">Social Media</span>

@@ -12,7 +12,7 @@ export const siteQuery = groq`{
       },
       navigations {
         ...,
-        heightlights[]{
+        cta {
           ...,
           "icon": ${withDimensions("icon")},
         },
