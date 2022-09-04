@@ -8,6 +8,7 @@ interface ButtonProps {
   href?: string;
   children: ReactNode;
   icon?: JSX.Element;
+  className?: string;
 }
 
 const defaultStyles =
@@ -23,12 +24,15 @@ export const Button: React.FC<ButtonProps> = ({
   type = "button",
   href,
   children,
+  className,
   icon,
 }) => {
   return (
     <>
       {type === "button" && (
-        <button className={clsx(defaultStyles, variantStyles[variant])}>
+        <button
+          className={clsx(defaultStyles, className, variantStyles[variant])}
+        >
           {children}
           {icon && icon}
         </button>

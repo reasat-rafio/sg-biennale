@@ -9,6 +9,8 @@ import { Release } from "@components/press/release";
 import { KitsInfo } from "@components/press/kits-info";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
+import { RecentUpdate } from "@components/press/recent-update";
+import { motion } from "framer-motion";
 
 const query = pageQuery(groq`
   *[_type == "pressPage"][0]{
@@ -78,8 +80,17 @@ const Press: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
-        "pressPage.kitInfo": KitsInfo,
       })}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 3 }}
+      >
+        {renderObjectArray(page.sections, {
+          "pressPage.recentUpdate": RecentUpdate,
+          "pressPage.kitInfo": KitsInfo,
+        })}
+      </motion.div>
     </div>
   );
 };
