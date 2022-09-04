@@ -65,6 +65,7 @@ const Press: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
+
         "pressPage.kitInfo": KitsInfo,
       })}
     </div>

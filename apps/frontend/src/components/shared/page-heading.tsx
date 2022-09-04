@@ -1,3 +1,4 @@
+import { SlideupLettersAnimation } from "@components/ui/animated-component/slideup-letters-animation";
 import { motion, Variants } from "framer-motion";
 
 export interface PageHeaderProps {
@@ -7,24 +8,6 @@ export interface PageHeaderProps {
 }
 
 const AnimationDuration = 0.7;
-const HeaderVariant: Variants = {
-  initial: {
-    translateY: "100%",
-    rotateX: "-95deg",
-    rotateY: 120,
-  },
-  animate: (delay: number) => ({
-    rotateX: 0,
-    translateY: 0,
-    rotateY: 0,
-    transition: {
-      delay: delay,
-      type: "tween",
-      ease: "easeInOut",
-      duration: AnimationDuration,
-    },
-  }),
-};
 const DescriptionVariants: Variants = {
   initial: { opacity: 0 },
   animate: (delay: number) => ({
@@ -49,18 +32,9 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
   return (
     <header className="flex flex-col space-y-3 | xl:pt-xl md:pt-x pt-lg">
       <motion.h1 className="overflow-hidden">
-        {letters.map((letter, index) => (
-          <motion.span
-            className="xl:text-heading-4 text-heading-5 font-medium inline-block whitespace-pre"
-            key={letter + index}
-            initial="initial"
-            animate="animate"
-            variants={HeaderVariant}
-            custom={index * 0.1}
-          >
-            {letter}
-          </motion.span>
-        ))}
+        <SlideupLettersAnimation className="xl:text-heading-4 text-heading-5 font-medium">
+          {heading}
+        </SlideupLettersAnimation>
       </motion.h1>
       <motion.h4
         initial="initial"

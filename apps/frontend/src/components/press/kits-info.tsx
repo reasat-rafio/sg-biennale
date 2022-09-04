@@ -2,6 +2,10 @@ import { Button } from "@components/ui/button";
 import { Cta } from "@lib/@types/global.types";
 import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
+import { motion } from "framer-motion";
+import { SlideupLettersAnimation } from "@components/ui/animated-component/slideup-letters-animation";
+import { RefObject, useRef } from "react";
+import { useIntersection } from "@lib/hooks";
 
 interface InfoAndContactsProps {
   title: string;
@@ -26,20 +30,27 @@ export const KitsInfo: React.FC<KitsInfoProps> = ({
   cta,
   infoAndContacts,
 }) => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  const intersecting = useIntersection(sectionRef, { threshold: 0.25 });
+
   return (
-    <section className="grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md 2xl:pt-max lg:pt-xl pt-section">
+    <section
+      ref={sectionRef}
+      className="grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md 2xl:pt-max lg:pt-xl pt-section"
+    >
       <div className="col-span-12 lg:col-span-6 xl:col-span-5 | grid grid-rows-6 | xl:pr-20 lg:pr-10">
-        <Header header={header} description={description} cta={cta} />
+        <Header
+          intersecting={intersecting?.isIntersecting}
+          header={header}
+          description={description}
+          cta={cta}
+        />
         <InfoAndContacts {...infoAndContacts} />
       </div>
-      <figure className="col-span-12 lg:col-span-6 xl:col-span-7 | flex justify-center items-center max-h-[700px]">
-        <SanityImg
-          className="h-full w-full object-cover"
-          width={1080}
-          image={image}
-          builder={imageUrlBuilder}
-        />
-      </figure>
+      <div className="col-span-12 lg:col-span-6 xl:col-span-7 | flex justify-center items-center overflow-hidden">
+        <Image url={image} />
+      </div>
     </section>
   );
 };
@@ -48,12 +59,18 @@ const Header: React.FC<{
   header: string;
   description: string;
   cta: Cta;
-}> = ({ header, description, cta }) => {
+  intersecting: boolean | undefined;
+}> = ({ header, description, cta, intersecting }) => {
   return (
     <div className="row-span-4 | flex flex-col justify-center | border-b | space-y-4 xl:pl-max py-5">
-      <h2 className="text-red-love font-medium xl:text-heading-4 text-heading-5">
-        {header}
-      </h2>
+      <motion.h2 className="text-red-love font-medium xl:text-heading-4 text-heading-5 | overflow-hidden">
+        <SlideupLettersAnimation
+          animationType="inview"
+          intersecting={intersecting}
+        >
+          {header}
+        </SlideupLettersAnimation>
+      </motion.h2>
       <p className="font-manrope text-body-2 text-gray--700">{description}</p>
       <div className="xl:pt-9 pt-5">
         <Button
@@ -93,5 +110,26 @@ const InfoAndContacts: React.FC<InfoAndContactsProps> = ({ infos, title }) => {
         ))}
       </ul>
     </div>
+  );
+};
+
+const Image: React.FC<{ url: SanityImage }> = ({ url }) => {
+  return (
+    <motion.figure
+      initial={{ scale: 0.9 }}
+      whileInView={{
+        scale: 1.1,
+      }}
+      transition={{ type: "tween", duration: 0.7, ease: "easeInOut" }}
+      viewport={{ margin: "-20%" }}
+      className="max-h-[700px] overflow-hidden"
+    >
+      <SanityImg
+        className="h-full w-full object-cover "
+        width={1080}
+        image={url}
+        builder={imageUrlBuilder}
+      />
+    </motion.figure>
   );
 };
