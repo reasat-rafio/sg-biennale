@@ -18,7 +18,7 @@ export const Footer: React.FC<ISite["site"]> = ({
       id="footer"
       className="relative | grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md py-10"
     >
-      <section className="relative z-10 | flex flex-col justify-center items-center col-span-12 lg:col-span-6  xl:col-span-5 | xl:space-y-20 xl:pl-max">
+      <section className="relative z-10 | flex flex-col justify-center items-center col-span-12 lg:col-span-6 xl:col-span-5 | xl:space-y-20 xl:pl-max">
         <header className="w-full | font-semibold">
           <h2 className=" mb-4 | lg:text-left text-center | whitespace-pre-wrap | lg:text-heading-4 text-heading-6">
             {header}

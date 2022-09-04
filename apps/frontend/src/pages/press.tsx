@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { SanityProps } from "next-sanity-extra";
-import { renderObjectArray } from "sanity-react-extra";
+import { renderObjectArray, withDimensions } from "sanity-react-extra";
 import { groq } from "next-sanity";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { pageQuery } from "@lib/query";
 import { Release } from "@components/press/release";
 import { KitsInfo } from "@components/press/kits-info";
+import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
+import { Container } from "@components/ui/container";
 
 const query = pageQuery(groq`
   *[_type == "pressPage"][0]{
         ...,
         sections[]{
             ...,
+           "image": ${withDimensions("image")},
             releases[]-> {
                 _id,
                 header,
@@ -49,10 +52,17 @@ const Press: NextPage<SanityProps> = (props) => {
 
   return (
     <div>
-      {/* {renderObjectArray(page.sections, {
-        "pressPage.release": Release,
+      {renderObjectArray(page.sections, {
+        pageHeading: useCallback(
+          (props: PageHeaderProps) => (
+            <Container>
+              <PageHeading {...props} color="#DE5742" />
+            </Container>
+          ),
+          []
+        ),
         "pressPage.kitInfo": KitsInfo,
-      })} */}
+      })}
     </div>
   );
 };
