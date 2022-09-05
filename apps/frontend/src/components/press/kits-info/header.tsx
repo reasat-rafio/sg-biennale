@@ -54,8 +54,27 @@ export const Header: React.FC<{
         </div>
       )}
 
-      <p className="font-manrope text-body-2 text-gray--700">{description}</p>
-      <div className="xl:pt-9 pt-5">
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1, transition: { delay: 0.8 } }}
+        className="font-manrope text-body-2 text-gray--700"
+      >
+        {description}
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: "50%" }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: 1.2,
+            duration: 0.3,
+            type: "tween",
+            ease: "easeInOut",
+          },
+        }}
+        className="xl:pt-9 pt-5"
+      >
         <Button
           variant="secondary"
           type="href"
@@ -72,7 +91,7 @@ export const Header: React.FC<{
         >
           {cta.title}
         </Button>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ export interface PageHeaderProps {
   color?: string;
 }
 
-const AnimationDuration = 0.7;
+const AnimationDuration = 0.3;
 const DescriptionVariants: Variants = {
   initial: { opacity: 0 },
   animate: (delay: number) => ({

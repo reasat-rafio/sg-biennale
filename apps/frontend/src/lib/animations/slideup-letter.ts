@@ -1,7 +1,7 @@
 import { Variants } from "framer-motion";
 
 export const SlideUpLetterVariants = ({
-  duration = 0.7,
+  duration = 0.3,
 }: {
   duration?: number;
 }): Variants => ({

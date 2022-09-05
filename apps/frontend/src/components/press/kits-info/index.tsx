@@ -41,7 +41,7 @@ export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
                 className={clsx(
                   "grid grid-rows-6 | xl:pr-20 lg:pr-10",
                   image
-                    ? "col-span-12 lg:col-span-6 xl:col-span-5"
+                    ? "col-span-12 lg:col-span-6 2xl:col-span-5"
                     : "col-span-12 "
                 )}
               >
@@ -55,7 +55,7 @@ export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
                 <InfoAndContacts {...infoAndContacts} />
               </div>
               {image && windowWidth >= 1024 && (
-                <div className="col-span-12 lg:col-span-6 | flex justify-center items-center overflow-hidden">
+                <div className="col-span-12 lg:col-span-6 2xl:col-span-7 | flex justify-center items-center overflow-hidden">
                   <Image url={image} />
                 </div>
               )}

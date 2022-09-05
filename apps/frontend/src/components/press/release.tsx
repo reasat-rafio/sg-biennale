@@ -91,7 +91,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
                 variants={CardVariants}
                 custom={index}
                 transition={{
-                  duration: 0.4,
+                  duration: 0.5,
                   type: "tween",
                   ease: "easeInOut",
                 }}
