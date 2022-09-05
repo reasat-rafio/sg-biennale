@@ -1,4 +1,6 @@
+import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
+import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { Admission } from "@components/visitor-info/admission";
 // import { Hero } from "@components/visitor-info/hero";
 import { Venues } from "@components/visitor-info/venues/venues";
@@ -7,6 +9,7 @@ import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
+import { useCallback } from "react";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
 
 const query = pageQuery(groq`
@@ -53,13 +56,20 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
   return (
-    <Container className="py-5">
-      {/* {renderObjectArray(page.sections, {
-        "visitorInfoPage.hero": Hero,
-        "visitorInfoPage.admission": Admission,
-        "visitorInfoPage.venues": Venues,
-      })} */}
-    </Container>
+    <>
+      {renderObjectArray(page.sections, {
+        pageHeading: useCallback(
+          (data: PageHeaderProps) => (
+            <Container>
+              <PageHeading {...data} color="#74A0C1" />
+            </Container>
+          ),
+          []
+        ),
+        "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
+        // "visitorInfoPage.venues": Venues,
+      })}
+    </>
   );
 };
 

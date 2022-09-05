@@ -8,6 +8,20 @@ export interface ShortGuide {
   title: string;
 }
 
+export interface AccesibilityInfoProps {
+  type: string;
+  cta: Cta;
+  header: string;
+  infos: Info[];
+}
+
+export interface Info {
+  _key: string;
+  _type: string;
+  description: string;
+  title: string;
+}
+
 export interface ShortGuideAsset {
   createdAt: Date;
   id: string;
