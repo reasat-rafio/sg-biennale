@@ -88,6 +88,7 @@ const Press: NextPage<SanityProps> = (props) => {
       >
         {renderObjectArray(page.sections, {
           "pressPage.recentUpdate": RecentUpdate,
+          "pressPage.release": Release,
           "pressPage.kitInfo": KitsInfo,
         })}
       </motion.div>

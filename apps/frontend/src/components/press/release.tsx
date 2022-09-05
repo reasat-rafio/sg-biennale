@@ -27,44 +27,11 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
 
   return (
-    <Container type="section" className="py-section | border-b-2 border-black">
+    <Container type="section" className="">
       <Header type="h1">{header}</Header>
-      <div className="grid grid-cols-12 | my-7 lg:gap-8 gap-4">
+      <div className="flex flex-col | my-7 lg:gap-8 gap-4">
         {releases.map((data) => (
-          <article
-            key={data._id}
-            className="flex flex-col | col-span-12 lg:col-span-6 | space-y-1"
-          >
-            <figure>
-              <SanityImg
-                width={windowWidth >= 768 ? 900 : 500}
-                className="w-full sm:h-[400px] h-auto | object-cover"
-                image={data.images[0]}
-                builder={imageUrlBuilder}
-                alt={header + "'s image"}
-              />
-            </figure>
-            <section className="flex flex-col | space-y-5">
-              <h6 className="text-xl font-semibold | pt-2">{data.header}</h6>
-              <div className="text-lg" ref={descriptionRef}>
-                <PortableText blocks={data.description} />
-              </div>
-              <Link href={data.cta?.href ?? ""}>
-                <a
-                  onClick={(event) => {
-                    if (data?.file) {
-                      event.preventDefault();
-                      window.open(data?.file.asset.url);
-                    }
-                  }}
-                  target="_blank"
-                  className="text-lg font-medium"
-                >
-                  {data.cta.title}
-                </a>
-              </Link>
-            </section>
-          </article>
+          <article key={data._id} className=""></article>
         ))}
       </div>
     </Container>

@@ -8,6 +8,20 @@ const STUDIO_REWRITE = {
       : "/studio/index.html",
 };
 
+const ContentSecurityPolicy = `
+  default-src 'self';
+  script-src 'self';
+  child-src example.com;
+  style-src 'self' example.com;
+  font-src 'self';  
+`;
+const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
+  },
+];
+
 module.exports = {
   reactStrictMode: true,
   webpack: (config, options) => {
@@ -21,6 +35,13 @@ module.exports = {
   images: {
     domains: ["cdn.sanity.io"],
   },
-
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
+  },
   rewrites: async () => [STUDIO_REWRITE],
 };
