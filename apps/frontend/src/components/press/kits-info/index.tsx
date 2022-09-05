@@ -1,5 +1,5 @@
 import { Cta } from "@lib/@types/global.types";
-import { useIntersection } from "@lib/hooks";
+import { useIntersection, useWindowSize } from "@lib/hooks";
 import clsx from "clsx";
 import { useRef } from "react";
 import { SanityImage } from "sanity-react-extra";
@@ -19,6 +19,8 @@ interface KitsInfoProps {
 export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
   kitInfos,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <section className="grid grid-cols-12 | 2xl:pt-max lg:pt-xl">
       {kitInfos.map(
@@ -32,7 +34,7 @@ export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
               ref={sectionRef}
               className={clsx(
                 "grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md pt-section",
-                image ? "col-span-12" : "col-span-6"
+                image ? "col-span-12" : "sm:col-span-6 col-span-12"
               )}
             >
               <div
@@ -40,7 +42,7 @@ export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
                   "grid grid-rows-6 | xl:pr-20 lg:pr-10",
                   image
                     ? "col-span-12 lg:col-span-6 xl:col-span-5"
-                    : "col-span-12"
+                    : "col-span-12 "
                 )}
               >
                 <Header
@@ -52,8 +54,8 @@ export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
                 />
                 <InfoAndContacts {...infoAndContacts} />
               </div>
-              {image && (
-                <div className="col-span-12 lg:col-span-6 xl:col-span-7 | flex justify-center items-center overflow-hidden">
+              {image && windowWidth >= 1024 && (
+                <div className="col-span-12 lg:col-span-6 | flex justify-center items-center overflow-hidden">
                   <Image url={image} />
                 </div>
               )}

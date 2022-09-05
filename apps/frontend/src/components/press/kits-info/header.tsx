@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { useCallback, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
+import { Image } from "./image";
 
 export const Header: React.FC<{
   header: string;
@@ -46,6 +47,13 @@ export const Header: React.FC<{
           {header}
         </SlideupLettersAnimation>
       </motion.h2>
+
+      {image && windowWidth < 1024 && (
+        <div className="flex justify-center items-center overflow-hidden">
+          <Image url={image} />
+        </div>
+      )}
+
       <p className="font-manrope text-body-2 text-gray--700">{description}</p>
       <div className="xl:pt-9 pt-5">
         <Button
