@@ -12,9 +12,11 @@ const VisitorInfoPage = {
       type: "array",
       title: "Sections",
       of: [
-        { type: "visitorInfoPage.hero" },
+        { type: "pageHeading" },
         { type: "visitorInfoPage.admission" },
-        { type: "visitorInfoPage.venues" },
+        { type: "visitorInfoPage.tour" },
+        { type: "visitorInfoPage.accesibilityInfo" },
+        // { type: "visitorInfoPage.venues" },
       ],
     },
   ],

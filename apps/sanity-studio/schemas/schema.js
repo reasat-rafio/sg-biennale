@@ -37,6 +37,9 @@ import visitorInfoHero from "./objects/visitor-info/hero";
 import VisitorInfoAdmissionInfo from "./objects/visitor-info/admission/admission-info";
 import VisitorInfoAdmission from "./objects/visitor-info/admission/admission";
 import VisitorInfoVenues from "./objects/visitor-info/venues";
+import VisitorInfoTour from "./objects/visitor-info/tour";
+import VisitorInfoAccesibilityInfo from "./objects/visitor-info/accesibility-info";
+
 import AboutPageCuratorialTeam from "./objects/about/curatorial-team";
 import AboutPageTeam from "./objects/about/team";
 import PressPage from "./documents/pages/press";
@@ -124,6 +127,8 @@ export default createSchema({
     VisitorInfoAdmission,
     VisitorInfoAdmissionInfo,
     VisitorInfoVenues,
+    VisitorInfoTour,
+    VisitorInfoAccesibilityInfo,
 
     Partner,
     Tier,
