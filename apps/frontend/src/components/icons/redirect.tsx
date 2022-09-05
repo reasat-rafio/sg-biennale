@@ -19,8 +19,8 @@ export const RedirectIcon: React.FC<RedirectProps> = ({ triggerAnimation }) => {
     >
       <circle cx="12" cy="12" r="12" fill="#176100" />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M8.54997 8H15.55C15.9795 8 16.3277 8.34822 16.3277 8.77778V15.7778H15.55H14.7722V10.6555L9.09994 16.3278L8 15.2278L13.6722 9.55556H8.54997L8.5498 8.77778L8.54997 8Z"
         fill="#FEFEFE"
       />

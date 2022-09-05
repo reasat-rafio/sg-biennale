@@ -43,7 +43,7 @@ export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         width="24"
         height="3"
         fill="black"
-        fill-opacity="0.3"
+        fillOpacity="0.3"
       />
       <motion.rect
         height="3"
@@ -67,7 +67,7 @@ export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         width="24"
         height="3"
         fill="black"
-        fill-opacity="0.3"
+        fillOpacity="0.3"
       />
       <motion.rect
         y="9"
@@ -94,7 +94,7 @@ export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
         width="24"
         height="3"
         fill="black"
-        fill-opacity="0.3"
+        fillOpacity="0.3"
       />
       <motion.rect
         y="17"
