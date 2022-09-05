@@ -6,12 +6,12 @@ import { groq } from "next-sanity";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { pageQuery } from "@lib/query";
 import { Release } from "@components/press/release";
-import { KitsInfo } from "@components/press/kits-info/kits-info";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
 import { RecentUpdate } from "@components/press/recent-update";
 import { motion } from "framer-motion";
 import { useIntersection } from "@lib/hooks";
+import { KitsInfo } from "@components/press/kits-info";
 
 const query = pageQuery(groq`
   *[_type == "pressPage"][0]{
