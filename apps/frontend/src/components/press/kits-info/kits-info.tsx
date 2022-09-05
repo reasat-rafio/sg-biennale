@@ -4,8 +4,9 @@ import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
 import { SlideupLettersAnimation } from "@components/ui/animated-component/slideup-letters-animation";
-import { RefObject, useRef } from "react";
-import { useIntersection } from "@lib/hooks";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { useIntersection, useWindowSize } from "@lib/hooks";
+import clsx from "clsx";
 
 interface InfoAndContactsProps {
   title: string;
@@ -16,41 +17,59 @@ interface InfoAndContactsProps {
   }[];
 }
 interface KitsInfoProps {
+  _key?: string;
   header: string;
   description: string;
-  image: SanityImage;
+  image?: SanityImage;
   cta: Cta;
   infoAndContacts: InfoAndContactsProps;
 }
 
-export const KitsInfo: React.FC<KitsInfoProps> = ({
-  header,
-  description,
-  image,
-  cta,
-  infoAndContacts,
+export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
+  kitInfos,
 }) => {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  const intersecting = useIntersection(sectionRef, { threshold: 0.25 });
-
   return (
-    <section
-      ref={sectionRef}
-      className="grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md 2xl:pt-max lg:pt-xl pt-section"
-    >
-      <div className="col-span-12 lg:col-span-6 xl:col-span-5 | grid grid-rows-6 | xl:pr-20 lg:pr-10">
-        <Header
-          intersecting={intersecting?.isIntersecting}
-          header={header}
-          description={description}
-          cta={cta}
-        />
-        <InfoAndContacts {...infoAndContacts} />
-      </div>
-      <div className="col-span-12 lg:col-span-6 xl:col-span-7 | flex justify-center items-center overflow-hidden">
-        <Image url={image} />
-      </div>
+    <section className="grid grid-cols-12 | 2xl:pt-max lg:pt-xl">
+      {kitInfos.map(
+        ({ _key, cta, description, header, image, infoAndContacts }) => {
+          const sectionRef = useRef<HTMLElement | null>(null);
+          const intersecting = useIntersection(sectionRef, { threshold: 0.25 });
+
+          return (
+            <section
+              key={_key}
+              ref={sectionRef}
+              className={clsx(
+                "grid grid-cols-12 | xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md pt-section",
+                image ? "col-span-12" : "col-span-6"
+              )}
+            >
+              <div
+                className={clsx(
+                  "grid grid-rows-6 | xl:pr-20 lg:pr-10",
+                  image
+                    ? "col-span-12 lg:col-span-6 xl:col-span-5"
+                    : "col-span-12"
+                )}
+              >
+                <Header
+                  intersecting={intersecting?.isIntersecting}
+                  header={header}
+                  description={description}
+                  cta={cta}
+                  image={image}
+                />
+                <InfoAndContacts {...infoAndContacts} />
+              </div>
+              {image && (
+                <div className="col-span-12 lg:col-span-6 xl:col-span-7 | flex justify-center items-center overflow-hidden">
+                  <Image url={image} />
+                </div>
+              )}
+            </section>
+          );
+        }
+      )}
     </section>
   );
 };
@@ -60,9 +79,28 @@ const Header: React.FC<{
   description: string;
   cta: Cta;
   intersecting: boolean | undefined;
-}> = ({ header, description, cta, intersecting }) => {
+  image?: SanityImage;
+}> = ({ header, description, cta, intersecting, image }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+  const [positionedAtRight, setPositionedAtRight] = useState(false);
+
+  const headerRef = useCallback((node: HTMLElement | null) => {
+    if (node !== null) {
+      node.getBoundingClientRect().left > windowWidth / 2
+        ? setPositionedAtRight(false)
+        : setPositionedAtRight(true);
+    }
+  }, []);
+
   return (
-    <div className="row-span-4 | flex flex-col justify-center | border-b | space-y-4 xl:pl-max py-5">
+    <div
+      ref={headerRef}
+      className={clsx(
+        "row-span-4 | flex flex-col | border-b | space-y-4 py-5",
+        image ? "justify-center" : "justify-start",
+        positionedAtRight && "xl:pl-max"
+      )}
+    >
       <motion.h2 className="text-red-love font-medium xl:text-heading-4 text-heading-5 | overflow-hidden">
         <SlideupLettersAnimation
           animationType="inview"

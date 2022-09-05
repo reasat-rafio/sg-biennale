@@ -35,13 +35,13 @@ module.exports = {
   images: {
     domains: ["cdn.sanity.io"],
   },
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/:path*",
+  //       headers: securityHeaders,
+  //     },
+  //   ];
+  // },
   rewrites: async () => [STUDIO_REWRITE],
 };
