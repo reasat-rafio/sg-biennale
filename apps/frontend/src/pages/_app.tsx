@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
+    <AnimatePresence onExitComplete={handleExitComplete}>
       <Head>
         <link
           rel="icon"

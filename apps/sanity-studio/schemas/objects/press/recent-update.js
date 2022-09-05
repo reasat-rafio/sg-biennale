@@ -16,17 +16,6 @@ const PressRecentUpdate = {
       type: "text",
       validation: (Rule) => Rule.required(),
     },
-    {
-      name: "updates",
-      type: "array",
-      validation: (Rule) => Rule.required(),
-      of: [
-        {
-          type: "reference",
-          to: { type: "news" },
-        },
-      ],
-    },
   ],
 };
 

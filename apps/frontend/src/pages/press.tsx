@@ -16,6 +16,19 @@ import { KitsInfo } from "@components/press/kits-info";
 const query = pageQuery(groq`
   *[_type == "pressPage"][0]{
         ...,
+        "recentUpdates" : *[_type == "news"] | order(_createdAt desc) [0...2]{
+          _id,
+          header,
+          images[] {
+            ..., 
+            asset->{
+              ...,
+              metadata {
+                dimensions
+              }
+            }
+          },
+        },
         sections[]{
             ...,
            "image": ${withDimensions("image")},
@@ -29,19 +42,6 @@ const query = pageQuery(groq`
             cta {
               ...,
              "icon": ${withDimensions("icon")},
-            },
-           },
-           updates[]->{
-            _id,
-            header,
-            images[] {
-              ..., 
-              asset->{
-                ...,
-                metadata {
-                dimensions
-                }
-              }
             },
            },
             releases[]-> {
@@ -79,6 +79,7 @@ const Press: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
   const ref = useRef<HTMLDivElement>(null);
   const intersecting = useIntersection(ref, { threshold: 0.4 });
+  console.log(page.sections);
 
   return (
     <div>
@@ -99,7 +100,12 @@ const Press: NextPage<SanityProps> = (props) => {
         transition={{ delay: intersecting?.isIntersecting ? 0 : 3 }}
       >
         {renderObjectArray(page.sections, {
-          "pressPage.recentUpdate": RecentUpdate,
+          "pressPage.recentUpdate": useCallback(
+            (props: any) => (
+              <RecentUpdate {...props} updates={page.recentUpdates} />
+            ),
+            []
+          ),
           "pressPage.release": Release,
           "pressPage.kitInfo": KitsInfo,
         })}

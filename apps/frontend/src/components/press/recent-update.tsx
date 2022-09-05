@@ -47,8 +47,9 @@ export const RecentUpdate: React.FC<RecentUpdateProps> = ({
               delay: 3,
             }}
           >
-            <figure>
+            <figure className="2xl:h-[370px] xl:h-[300px] lg:h-[300px]md:h-[250px] h-auto">
               <SanityImg
+                className="w-full h-full object-cover"
                 image={update.images[0]}
                 builder={imageUrlBuilder}
                 alt=""
