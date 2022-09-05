@@ -99,7 +99,7 @@ const Press: NextPage<SanityProps> = (props) => {
         transition={{ delay: intersecting?.isIntersecting ? 0 : 3 }}
       >
         {renderObjectArray(page.sections, {
-          // "pressPage.recentUpdate": RecentUpdate,
+          "pressPage.recentUpdate": RecentUpdate,
           "pressPage.release": Release,
           "pressPage.kitInfo": KitsInfo,
         })}
