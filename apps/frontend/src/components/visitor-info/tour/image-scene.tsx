@@ -27,7 +27,7 @@ const Image: React.FC<ImageSceneProps> = ({ image }) => {
     };
   }, [image]);
 
-  useFrame(({ clock, mouse }) => {
+  useFrame(({ clock }) => {
     if (materialRef.current) {
       materialRef.current.uniforms.uTime = { value: clock.getElapsedTime() };
     }

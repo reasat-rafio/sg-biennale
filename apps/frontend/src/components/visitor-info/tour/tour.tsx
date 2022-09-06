@@ -1,8 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
-import { imageUrlBuilder } from "@utils/sanity";
-import { useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { ImageScene } from "./image-scene";
 

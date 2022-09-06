@@ -82,3 +82,20 @@ export interface Highlight {
   icon: SanityImage;
   title: string;
 }
+
+export interface Welcome {
+  type: string;
+  moreInfos: MoreInfo[];
+}
+
+export interface MoreInfosProps {
+  moreInfos: {
+    _key: string;
+    _type: string;
+    description: string;
+    image?: SanityImage;
+    subtitle?: string;
+    title: string;
+    cta: Cta;
+  }[];
+}

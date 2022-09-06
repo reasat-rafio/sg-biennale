@@ -2,6 +2,7 @@ import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
 import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { Admission } from "@components/visitor-info/admission";
+import { MoreInfos } from "@components/visitor-info/more-infos";
 import { Tour } from "@components/visitor-info/tour/tour";
 import { Venues } from "@components/visitor-info/venues/venues";
 import { pageQuery } from "@lib/query";
@@ -67,6 +68,7 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
+        "visitorInfoPage.moreInfo": MoreInfos,
         "visitorInfoPage.tour": Tour,
         "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
       })}
