@@ -76,12 +76,12 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
         y.set(0);
         setHovered(false);
       }}
-      className="grid grid-cols-12 col-span-12 justify-center items-center | py-10 gap-10"
+      className="grid grid-cols-12 col-span-12 justify-center items-center | py-10 lg:gap-10 gap-5"
     >
-      <section className="col-span-7 | space-y-6">
-        <h3 className="text-heading-6">{title}</h3>
+      <section className="xl:col-span-7 md:col-span-6 col-span-12 | space-y-6">
+        <h3 className="lg:text-heading-6 text-3xl">{title}</h3>
         {subtitle && (
-          <h6 className="text-heading-4 font-medium text-skyblue">
+          <h6 className="lg:text-heading-4 text-heading-5 font-medium text-skyblue">
             {subtitle}
           </h6>
         )}
@@ -89,12 +89,12 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
         <Button variant="secondary">{cta.title}</Button>
       </section>
       <motion.figure
+        className="xl:col-span-5 md:col-span-6 col-span-12 -z-20"
         style={{
           x,
           y,
           rotate,
         }}
-        className="col-span-5 -z-20"
       >
         <SanityImg builder={imageUrlBuilder} image={image} />
       </motion.figure>

@@ -3,30 +3,39 @@ import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
 import { MoreInfosProps } from "@lib/@types/visitor-info.types";
 import { WithImageSection } from "./more-info/with-image-section";
+import { motion } from "framer-motion";
 
 export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
   return (
-    <Container className="grid grid-cols-12 | gap-10 py-max">
-      {moreInfos.map(({ _key, title, subtitle, description, image, cta }) =>
-        image ? (
-          <WithImageSection
-            _key={_key}
-            title={title}
-            subtitle={subtitle}
-            description={description}
-            cta={cta}
-            image={image}
-          />
-        ) : (
-          <Section
-            _key={_key}
-            title={title}
-            subtitle={subtitle}
-            description={description}
-            cta={cta}
-          />
-        )
-      )}
+    <Container className="xl:py-max lg:py-xl py-section">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 2 }}
+        viewport={{ margin: "-30%", once: true }}
+        className="grid grid-cols-12 | lg:gap-10 gap-5"
+      >
+        {moreInfos.map(({ _key, title, subtitle, description, image, cta }) =>
+          image ? (
+            <WithImageSection
+              _key={_key}
+              title={title}
+              subtitle={subtitle}
+              description={description}
+              cta={cta}
+              image={image}
+            />
+          ) : (
+            <Section
+              _key={_key}
+              title={title}
+              subtitle={subtitle}
+              description={description}
+              cta={cta}
+            />
+          )
+        )}
+      </motion.div>
     </Container>
   );
 };
@@ -41,7 +50,7 @@ const Section: React.FC<{
   return (
     <article
       key={_key}
-      className=" grid grid-cols-12 col-span-6 justify-center items-center | py-10"
+      className=" grid grid-cols-12 sm:col-span-6 col-span-12 justify-center items-center | py-10"
     >
       <section className="col-span-12 | space-y-6">
         <h3 className="text-heading-6">{title}</h3>
