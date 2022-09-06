@@ -1,5 +1,6 @@
 import { imageUrlBuilder } from "@utils/sanity";
 import { DateTime } from "luxon";
+import * as THREE from "three";
 
 export function lockBody() {
   document.body.style.top = `-${window.scrollY}px`;

@@ -13,10 +13,9 @@ const VisitorInfoPage = {
       title: "Sections",
       of: [
         { type: "pageHeading" },
-        { type: "visitorInfoPage.admission" },
+        { type: "visitorInfoPage.moreInfo" },
         { type: "visitorInfoPage.tour" },
         { type: "visitorInfoPage.accesibilityInfo" },
-        // { type: "visitorInfoPage.venues" },
       ],
     },
   ],

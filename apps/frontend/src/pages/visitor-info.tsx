@@ -2,7 +2,7 @@ import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
 import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { Admission } from "@components/visitor-info/admission";
-// import { Hero } from "@components/visitor-info/hero";
+import { Tour } from "@components/visitor-info/tour/tour";
 import { Venues } from "@components/visitor-info/venues/venues";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
@@ -17,6 +17,7 @@ const query = pageQuery(groq`
     ...,
     sections[]{
         ..., 
+        "image": ${withDimensions("image")},
         shortGuide{
             ...,
             "icon": ${withDimensions("icon")},
@@ -66,8 +67,8 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
+        "visitorInfoPage.tour": Tour,
         "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
-        // "visitorInfoPage.venues": Venues,
       })}
     </>
   );

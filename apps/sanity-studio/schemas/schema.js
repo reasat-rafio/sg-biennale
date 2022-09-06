@@ -34,11 +34,9 @@ import AboutPagePastEditions from "./objects/about/past-edition";
 
 import VisitorInfoPage from "./documents/pages/visitor-info";
 import visitorInfoHero from "./objects/visitor-info/hero";
-import VisitorInfoAdmissionInfo from "./objects/visitor-info/admission/admission-info";
-import VisitorInfoAdmission from "./objects/visitor-info/admission/admission";
-import VisitorInfoVenues from "./objects/visitor-info/venues";
 import VisitorInfoTour from "./objects/visitor-info/tour";
 import VisitorInfoAccesibilityInfo from "./objects/visitor-info/accesibility-info";
+import VisitorMoreInfo from "./objects/visitor-info/more-info";
 
 import AboutPageCuratorialTeam from "./objects/about/curatorial-team";
 import AboutPageTeam from "./objects/about/team";
@@ -124,9 +122,7 @@ export default createSchema({
 
     VisitorInfoPage,
     visitorInfoHero,
-    VisitorInfoAdmission,
-    VisitorInfoAdmissionInfo,
-    VisitorInfoVenues,
+    VisitorMoreInfo,
     VisitorInfoTour,
     VisitorInfoAccesibilityInfo,
 
