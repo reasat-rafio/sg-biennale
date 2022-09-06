@@ -1,7 +1,7 @@
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
-import { SanityImage, SanityImg } from "sanity-react-extra";
+import { SanityImage } from "sanity-react-extra";
 import { ImageScene } from "./image-scene";
 import { motion } from "framer-motion";
 

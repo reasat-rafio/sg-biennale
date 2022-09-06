@@ -9,7 +9,7 @@ import {
   useTransform,
   motion,
 } from "framer-motion";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 
 interface WithImageSectionProps {

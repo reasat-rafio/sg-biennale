@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
   return (
-    <Container className="xl:py-max lg:py-xl py-section">
+    <Container className="xl:py-max lg:py-xl py-section | overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
