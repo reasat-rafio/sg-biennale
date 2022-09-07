@@ -79,7 +79,6 @@ const Press: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
   const ref = useRef<HTMLDivElement>(null);
   const intersecting = useIntersection(ref, { threshold: 0.4 });
-  console.log(page.sections);
 
   return (
     <div>

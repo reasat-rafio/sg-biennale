@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { SanityProps } from "next-sanity-extra";
 import { groq } from "next-sanity";
@@ -7,9 +7,30 @@ import { pageQuery } from "@lib/query";
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { Methods } from "@components/support-us/methods";
+import { renderObjectArray, withDimensions } from "sanity-react-extra";
+import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 
 const query = pageQuery(groq`
-  *[_type == "supportUsPage"][0]
+  *[_type == "supportUsPage"][0]{
+    ...,
+    sections[]{
+      ...,
+      "image": ${withDimensions("image")},
+      cta {
+        ...,
+        "icon": ${withDimensions("icon")},
+      },
+      images[] {
+        ..., 
+        asset->{
+          ...,
+          metadata {
+            dimensions
+          }
+        }
+      },
+    }
+  }
 `);
 
 export const getStaticProps: GetStaticProps = async (
@@ -20,15 +41,21 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const SupportUs: NextPage<SanityProps> = (props) => {
-  // const {
-  //   page: { header, methods },
-  // } = useSanityQuery(query, props).data;
+  const { page } = useSanityQuery(query, props).data;
 
   return (
-    <Container className="py-section">
-      {/* <Header type="h1">{header}</Header>
-      <Methods methods={methods} /> */}
-    </Container>
+    <div>
+      {renderObjectArray(page.sections, {
+        pageHeading: useCallback(
+          (props: PageHeaderProps) => (
+            <Container>
+              <PageHeading position="center" {...props} color="#F3F2EC" />
+            </Container>
+          ),
+          []
+        ),
+      })}
+    </div>
   );
 };
 
