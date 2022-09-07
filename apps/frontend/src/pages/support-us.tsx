@@ -11,6 +11,7 @@ import { renderObjectArray, withDimensions } from "sanity-react-extra";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Donation } from "@components/support-us/donation";
 import { Decor } from "@components/support-us/decor";
+import { Volunteer } from "@components/support-us/volunteer";
 
 const query = pageQuery(groq`
   *[_type == "supportUsPage"][0]{
@@ -56,6 +57,7 @@ const SupportUs: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
+        "supportUs.volunteer": Volunteer,
         "supportUs.donation": Donation,
         "supportUs.decor": Decor,
       })}
