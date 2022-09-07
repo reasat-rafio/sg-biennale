@@ -1183,9 +1183,9 @@
     fast-deep-equal "^3.1.3"
 
 "@headlessui/react@^1.6.5":
-  version "1.6.6"
-  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.6.6.tgz#3073c066b85535c9d28783da0a4d9288b5354d0c"
-  integrity sha512-MFJtmj9Xh/hhBMhLccGbBoSk+sk61BlP6sJe4uQcVMtXZhCgGqd2GyIQzzmsdPdTEWGSF434CBi8mnhR6um46Q==
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.7.0.tgz#7e36e6bbc25a24b02011527ae157a000dda88b85"
+  integrity sha512-/nDsijOXRwXVLpUBEiYuWguIBSIN3ZbKyah+KPUiD8bdIKtX1U/k+qLYUEr7NCQnSF2e4w1dr8me42ECuG3cvw==
 
 "@humanwhocodes/config-array@^0.10.4":
   version "0.10.4"
@@ -1577,15 +1577,16 @@
   integrity sha512-n/wBRSHPqTmEd4BFWY6TeR1o/UY+3ujoqMxLjqy90CcY/ozJzDRuREL3c+pxMeTF2+B7dX33dTPCtFMX51nbxg==
 
 "@react-three/drei@^9.22.1":
-  version "9.26.1"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.26.1.tgz#c78e4d158b379203611839875f641426be790ccf"
-  integrity sha512-bx8nK9ZGCjCVwIh5HkMTmdTyrwwvW0ojAXfOB+E+9cjt+DvxSdmY5IiSfCnMImAOlp3s8yOEeXhVhkD7whrElQ==
+  version "9.28.2"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.28.2.tgz#9798896c7360d9da96809b33432dc99d95b1f0fe"
+  integrity sha512-lmYz4dmcFcbuavVVPZqdVCWbdhgsNZ+PIWYkz3qEHU1SKaT+CSZKQUTLLnjOijRcWz6LBP3CiBnj0dVujvsu4A==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
     "@use-gesture/react" "^10.2.0"
     detect-gpu "^4.0.36"
     glsl-noise "^0.0.0"
+    lodash.clamp "^4.0.3"
     lodash.omit "^4.5.0"
     lodash.pick "^4.4.0"
     meshline "^2.0.4"
@@ -1600,9 +1601,9 @@
     zustand "^3.5.13"
 
 "@react-three/fiber@^8.3.1":
-  version "8.7.1"
-  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.7.1.tgz#66f2f8e634aa27510d5de6a1ffc7ba0b687e5f75"
-  integrity sha512-ruDqawrbFzlO0ugCcKA2ELfN/nMehy+XcEiP2/WSEBcexulziUCm99RU3jEVsICuvarDscRmRJbmKqdyFrVTJQ==
+  version "8.7.2"
+  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.7.2.tgz#90ff088c1f38f4a12d89520af527909e0411627b"
+  integrity sha512-tV9XjVUhCE+yZgY5dPHoEJi9+LmPZemJfVC9oVItT+sGm/uVMC7pEMUzmfo3Igax7KiL7lyQHM7sJOJKFtbuNg==
   dependencies:
     "@babel/runtime" "^7.17.8"
     "@types/react-reconciler" "^0.26.7"
@@ -7393,6 +7394,11 @@ jsprim@^1.2.2:
     array-includes "^3.1.5"
     object.assign "^4.1.3"
 
+keen-slider@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/keen-slider/-/keen-slider-6.7.0.tgz#06a9c21cca34817031f2f15092874a7d606f4ae1"
+  integrity sha512-tsxUE2PXCRQZcZsLmFY5S4UK0yStQd9Dw/qnH57RyXDTUr3XMDhoAOkPbOQT68lGNSpghBcEftPfcgggYoHFTA==
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -7602,6 +7608,11 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
   integrity sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==
+
+lodash.clamp@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/lodash.clamp/-/lodash.clamp-4.0.3.tgz#5c24bedeeeef0753560dc2b4cb4671f90a6ddfaa"
+  integrity sha512-HvzRFWjtcguTW7yd8NJBshuNaCa8aqNFtnswdT7f/cMd/1YKy5Zzoq4W/Oxvnx9l7aeY258uSdDfM793+eLsVg==
 
 lodash.curry@^4.0.1:
   version "4.1.1"
