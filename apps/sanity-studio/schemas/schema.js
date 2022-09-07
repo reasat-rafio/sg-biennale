@@ -47,6 +47,8 @@ import PressRecentUpdate from "./objects/press/recent-update";
 import KitinfoAndContacts from "./objects/press/kit-info/info-contacts";
 
 import SupportUsPage from "./documents/pages/support-us";
+import SupportUsDonation from "./objects/support-us/donation";
+import SupportUsVolunteer from "./objects/support-us/volunteer";
 
 import Event from "./documents/event";
 import Category from "./documents/category";
@@ -132,5 +134,7 @@ export default createSchema({
     PartnersListing,
 
     SupportUsPage,
+    SupportUsDonation,
+    SupportUsVolunteer,
   ]),
 });

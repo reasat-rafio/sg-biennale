@@ -1,4 +1,3 @@
-import { FaHandsHelping } from "react-icons/fa";
 import { FcCollaboration } from "react-icons/fc";
 
 const SupportUsPage = {
@@ -7,30 +6,23 @@ const SupportUsPage = {
   icon: FcCollaboration,
   fields: [
     { name: "seo", type: "seo" },
+
     {
-      name: "header",
-      type: "string",
-    },
-    {
-      name: "methods",
+      name: "sections",
       type: "array",
       of: [
+        { type: "pageHeading" },
+        { type: "supportUs.volunteer" },
+        { type: "supportUs.donation" },
         {
-          name: "method",
-          icon: FaHandsHelping,
+          name: "supportUs.decor",
+          title: "Decor",
           type: "object",
           fields: [
             {
-              name: "title",
-              type: "string",
-            },
-            {
-              name: "description",
-              type: "text",
-            },
-            {
-              name: "cta",
-              type: "cta",
+              name: "image",
+              type: "image",
+              validation: (Rule) => Rule.required(),
             },
           ],
         },
