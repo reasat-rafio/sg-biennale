@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { SanityProps } from "next-sanity-extra";
 import { groq } from "next-sanity";
@@ -12,6 +12,8 @@ import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Donation } from "@components/support-us/donation";
 import { Decor } from "@components/support-us/decor";
 import { Volunteer } from "@components/support-us/volunteer";
+import { motion } from "framer-motion";
+import { useIntersection } from "@lib/hooks";
 
 const query = pageQuery(groq`
   *[_type == "supportUsPage"][0]{
@@ -45,6 +47,8 @@ export const getStaticProps: GetStaticProps = async (
 
 const SupportUs: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
+  const ref = useRef<HTMLDivElement>(null);
+  const intersecting = useIntersection(ref, { threshold: 0.4 });
 
   return (
     <div>
@@ -57,10 +61,19 @@ const SupportUs: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
-        "supportUs.volunteer": Volunteer,
-        "supportUs.donation": Donation,
-        "supportUs.decor": Decor,
       })}
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: intersecting?.isIntersecting ? 0 : 3 }}
+      >
+        {renderObjectArray(page.sections, {
+          "supportUs.volunteer": Volunteer,
+          "supportUs.donation": Donation,
+          "supportUs.decor": Decor,
+        })}
+      </motion.div>
     </div>
   );
 };
