@@ -17,13 +17,23 @@ const query = pageQuery(groq`
         sections[]{
             ...,
             'image': ${withDimensions("image")},
-            teamCollection[]->{
+            cta {
               ...,
+              "icon": ${withDimensions("icon")},
+            },
+            teamCollection[] {
+              ...,
+              team->{
+                ...,
               'image': ${withDimensions("image")},
+              }
             },
             aboutCollection[]{
               ...,
+              item{
+                ...,
               'image': ${withDimensions("image")},
+              }
             },
             pastEditionCollection[]{
               ...,
