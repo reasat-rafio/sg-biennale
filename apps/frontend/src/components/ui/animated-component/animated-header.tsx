@@ -11,17 +11,21 @@ import { useRef } from "react";
 interface AnimatedHeaderProps {
   header: string;
   idx: number;
+  lineLength: number;
+  className: string;
 }
 
 export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
+  className,
   header,
   idx,
+  lineLength = 3,
 }) => {
   const headerRef = useRef<HTMLHeadingElement>(null);
   const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
 
-  const animatedTo = idx === 2 ? [100, 0] : [-100 * (idx + 1), 0];
+  const animatedTo = idx === lineLength - 1 ? [100, 0] : [-100 * (idx + 1), 0];
   const positionX = useMotionValue(0);
 
   const x = useTransform(positionX, [0, windowWidth / 4], animatedTo);
@@ -40,18 +44,36 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
   );
 
   return (
-    <motion.h2
-      id={header}
-      ref={headerRef}
-      style={{ x: animatedx }}
-      className={clsx(
-        "font-medium xl:text-heading-1 lg:text-heading-2 md:text-heading-3 sm:text-heading-4 text-heading-5 ",
-        idx === 0 && "text-left",
-        idx === 1 && "text-center",
-        idx === 2 && "text-right"
+    <>
+      {lineLength === 3 && (
+        <motion.h2
+          id={header}
+          ref={headerRef}
+          style={{ x: animatedx }}
+          className={clsx(
+            className,
+            idx === 0 && "text-left",
+            idx === 1 && "text-center",
+            idx === 2 && "text-right"
+          )}
+        >
+          {header}
+        </motion.h2>
       )}
-    >
-      {header}
-    </motion.h2>
+      {lineLength === 2 && (
+        <motion.h2
+          id={header}
+          ref={headerRef}
+          style={{ x: animatedx }}
+          className={clsx(
+            className,
+            idx === 0 && "text-left",
+            idx === 1 && "text-right"
+          )}
+        >
+          {header}
+        </motion.h2>
+      )}
+    </>
   );
 };
