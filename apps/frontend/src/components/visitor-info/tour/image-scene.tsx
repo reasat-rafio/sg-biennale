@@ -41,15 +41,17 @@ const Image: React.FC<ImageSceneProps> = ({ image }) => {
   );
 };
 
-export const ImageScene: React.FC<ImageSceneProps> = ({ image }) => {
+const ImageScene: React.FC<ImageSceneProps> = ({ image }) => {
   return (
-    <Suspense fallback={null}>
-      <Canvas
-        gl={(canvas) => new THREE.WebGL1Renderer({ canvas, alpha: true })}
-        camera={{ fov: 16, position: [0, 0, 3] }}
-      >
+    <Canvas
+      gl={(canvas) => new THREE.WebGL1Renderer({ canvas, alpha: true })}
+      camera={{ fov: 16, position: [0, 0, 3] }}
+    >
+      <Suspense fallback={null}>
         <Image image={image} />
-      </Canvas>
-    </Suspense>
+      </Suspense>
+    </Canvas>
   );
 };
+
+export default ImageScene;

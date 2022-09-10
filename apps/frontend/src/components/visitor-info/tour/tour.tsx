@@ -2,8 +2,13 @@ import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
 import { SanityImage } from "sanity-react-extra";
-import { ImageScene } from "./image-scene";
 import { motion } from "framer-motion";
+
+const ImageScene = dynamic(() => import("./image-scene"), {
+  ssr: false,
+});
+
+import dynamic from "next/dynamic";
 
 interface TourProps {
   header: string;
