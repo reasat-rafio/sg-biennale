@@ -3,9 +3,10 @@ import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { useRef, useState } from "react";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import * as React from "react";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+import { Swiper } from "swiper/react";
 
 interface VolunteerProps {
   header: string;
@@ -20,9 +21,7 @@ export const Volunteer: React.FC<VolunteerProps> = ({
   cta,
   images,
 }) => {
-  const swiperRef = useRef() as any;
-  const [activeSlide, setActiveSlide] = useState<SanityImage | null>(images[0]);
-
+  // const [ref] = useKeenSlider<HTMLDivElement>();
   return (
     <Container className="py-max">
       <section className="grid grid-cols-12 | items-center">
@@ -38,21 +37,5 @@ export const Volunteer: React.FC<VolunteerProps> = ({
       </section>
       <div></div>
     </Container>
-  );
-};
-
-const Carousel = () => {
-  return (
-    <Swiper
-      spaceBetween={50}
-      slidesPerView={3}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      <SwiperSlide>Slide 1</SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-    </Swiper>
   );
 };
