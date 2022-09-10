@@ -10,7 +10,7 @@ const AboutPageCuratorialTeam = {
       name: "headers",
       type: "array",
       of: [{ name: "header", type: "string" }],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => [Rule.required(), Rule.max(2), Rule.min(2)],
     },
     {
       name: "teamCollection",
@@ -45,10 +45,28 @@ const AboutPageCuratorialTeam = {
               ],
             },
           ],
+          preview: {
+            select: {
+              title: "team.name",
+              subtitle: "team.description",
+              media: "team.images.0",
+            },
+          },
         },
       ],
     },
   ],
+  preview: {
+    select: {
+      title1: "headers.0",
+      title2: "headers.1",
+    },
+    prepare({ title1, title2 }) {
+      return {
+        title: `${title1}  ${title2}`,
+      };
+    },
+  },
 };
 
 export default AboutPageCuratorialTeam;

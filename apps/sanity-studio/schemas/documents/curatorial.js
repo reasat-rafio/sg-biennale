@@ -24,6 +24,13 @@ const Curatorial = {
       of: [{ type: "block" }],
     },
   ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "description",
+      media: "images.0",
+    },
+  },
 };
 
 export default Curatorial;
