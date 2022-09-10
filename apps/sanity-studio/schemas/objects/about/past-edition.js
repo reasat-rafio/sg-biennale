@@ -1,8 +1,8 @@
 import { GrNote } from "react-icons/gr";
 
 const AboutPagePastEditions = {
-  name: "aboutPage.postEdition",
-  title: "Post Editions",
+  name: "aboutPage.pastEdition",
+  title: "Past Editions",
   type: "object",
   icon: GrNote,
   fields: [
@@ -32,6 +32,7 @@ const AboutPagePastEditions = {
         },
       ],
     },
+    { name: "cta", type: "cta" },
   ],
 };
 

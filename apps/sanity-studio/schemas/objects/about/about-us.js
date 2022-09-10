@@ -9,18 +9,29 @@ const AboutPageAboutUs = {
     {
       name: "header",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "aboutCollection",
       title: "About",
       type: "array",
+      validation: (Rule) => Rule.required(),
       of: [
         {
           name: "item",
           type: "object",
+          validation: (Rule) => Rule.required(),
           fields: [
-            { name: "image", type: "image" },
-            { name: "description", type: "text" },
+            {
+              name: "image",
+              type: "image",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "description",
+              type: "text",
+              validation: (Rule) => Rule.required(),
+            },
           ],
           preview: {
             select: {

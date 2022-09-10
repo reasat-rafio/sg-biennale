@@ -5,10 +5,15 @@ const AboutPageTeam = {
   type: "object",
   icon: HiOutlineUserGroup,
   fields: [
-    { name: "header", type: "string" },
+    {
+      name: "header",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: "image",
       type: "image",
+      validation: (Rule) => Rule.required(),
     },
   ],
 };

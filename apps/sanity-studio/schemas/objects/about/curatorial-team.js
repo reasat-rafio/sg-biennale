@@ -7,17 +7,44 @@ const AboutPageCuratorialTeam = {
   icon: AiOutlineTeam,
   fields: [
     {
-      name: "header",
-      type: "string",
+      name: "headers",
+      type: "array",
+      of: [{ name: "header", type: "string" }],
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "teamCollection",
       type: "array",
+      validation: (Rule) => Rule.required(),
       of: [
         {
           name: "team",
-          type: "reference",
-          to: { type: "curatorial" },
+          type: "object",
+          fields: [
+            {
+              name: "team",
+              type: "reference",
+              to: { type: "curatorial" },
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "cardBackgroundGardiants",
+              type: "object",
+              validation: (Rule) => Rule.required(),
+              fields: [
+                {
+                  name: "from",
+                  type: "color",
+                  validation: (Rule) => Rule.required(),
+                },
+                {
+                  name: "to",
+                  type: "color",
+                  validation: (Rule) => Rule.required(),
+                },
+              ],
+            },
+          ],
         },
       ],
     },

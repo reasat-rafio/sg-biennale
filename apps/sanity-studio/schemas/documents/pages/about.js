@@ -19,7 +19,7 @@ const AboutPage = {
         { type: "aboutPage.curatorialTeam" },
         { type: "aboutPage.team" },
         { type: "aboutPage.about" },
-        { type: "aboutPage.postEdition" },
+        { type: "aboutPage.pastEdition" },
       ],
     },
   ],
