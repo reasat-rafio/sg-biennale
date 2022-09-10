@@ -1,3 +1,4 @@
+import { AnimatedHeader } from "@components/ui/animated-component/animated-header";
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { TeamCollection } from "@lib/@types/about.types";
@@ -8,12 +9,12 @@ import { SanityImg } from "sanity-react-extra";
 
 interface CuratorialTeamProps {
   type: string;
-  header: string;
+  headers: string[];
   teamCollection: TeamCollection[];
 }
 
 export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
-  header,
+  headers,
   teamCollection,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
@@ -22,7 +23,16 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
 
   return (
     <Container type="section" className="py-section">
-      <Header>{header}</Header>
+      <header>
+        {headers.map((text, idx, allText) => (
+          <AnimatedHeader
+            className="font-semibold xl:text-[138px] lg:text-[110px] md:text-[90px] sm:text-[70px] text-heading-4 | text-[#D9D9D9]"
+            lineLength={allText.length}
+            header={text}
+            idx={idx}
+          />
+        ))}
+      </header>
       {/* <div className="grid grid-cols-12 | gap-4 mt-8">
         {teamCollection.map(({ _key, name, description, images, slug }) => (
           <article
