@@ -38,7 +38,11 @@ export const FilterByCountry: React.FC<FilterByCountryProps> = () => {
 
   return (
     <aside className="relative">
-      <Combobox value={selectedCountry} onChange={setSelectedCountry} multiple>
+      <Combobox
+        value={selectedCountry}
+        onChange={(e) => setSelectedCountry(e)}
+        multiple
+      >
         <Combobox.Button className="flex items-center justify-between | w-36 | space-x-2 px-4 py-1 | border-2 border-black | rounded-lg">
           <span>Country</span>
           <ChevronArrow className="h-4 w-4" />

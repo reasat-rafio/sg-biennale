@@ -39,7 +39,11 @@ export const FilterByVenue: React.FC<FilterByVenueProps> = ({}) => {
 
   return (
     <aside className="relative">
-      <Combobox value={selectedVenue} onChange={setSelectedVenue} multiple>
+      <Combobox
+        value={selectedVenue}
+        onChange={(e) => setSelectedVenue(e)}
+        multiple
+      >
         <Combobox.Button className="flex items-center justify-between | w-36 | space-x-2 px-4 py-1 | border-2 border-black | rounded-lg">
           <span>Venue</span>
           <ChevronArrow className="h-4 w-4" />
