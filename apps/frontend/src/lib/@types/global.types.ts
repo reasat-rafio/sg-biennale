@@ -102,3 +102,25 @@ export interface ICountry {
   label: string;
   value: string;
 }
+
+export interface Hsl {
+  _type: Type;
+  a: number;
+  h: number;
+  l?: number;
+  s: number;
+  v?: number;
+}
+
+export enum Type {
+  HslaColor = "hslaColor",
+  HsvaColor = "hsvaColor",
+}
+
+export interface RGB {
+  _type: string;
+  a: number;
+  b: number;
+  g: number;
+  r: number;
+}

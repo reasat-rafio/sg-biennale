@@ -55,13 +55,13 @@ const About: NextPage<SanityProps> = (props) => {
 
   return (
     <div>
-      {/* {renderObjectArray(page.sections, {
-        "aboutPage.hero": Hero,
+      {renderObjectArray(page.sections, {
+        // "aboutPage.hero": Hero,
         "aboutPage.curatorialTeam": CuratorialTeam,
-        "aboutPage.team": Team,
-        "aboutPage.about": AboutUs,
-        "aboutPage.postEdition": PostEdition,
-      })} */}
+        // "aboutPage.team": Team,
+        // "aboutPage.about": AboutUs,
+        // "aboutPage.postEdition": PostEdition,
+      })}
     </div>
   );
 };

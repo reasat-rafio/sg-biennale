@@ -18,11 +18,12 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
+  console.log(teamCollection);
 
   return (
     <Container type="section" className="py-section">
       <Header>{header}</Header>
-      <div className="grid grid-cols-12 | gap-4 mt-8">
+      {/* <div className="grid grid-cols-12 | gap-4 mt-8">
         {teamCollection.map(({ _key, name, description, images, slug }) => (
           <article
             key={_key}
@@ -49,7 +50,7 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
             </section>
           </article>
         ))}
-      </div>
+      </div> */}
     </Container>
   );
 };
