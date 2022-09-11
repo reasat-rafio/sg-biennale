@@ -19,7 +19,6 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
-  console.log(teamCollection);
 
   return (
     <Container type="section" className="py-section">
