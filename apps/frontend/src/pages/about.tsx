@@ -5,10 +5,8 @@ import { withDimensions, renderObjectArray } from "sanity-react-extra";
 import { groq } from "next-sanity";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { pageQuery } from "@lib/query";
-import { Hero } from "@components/about/hero";
 import { CuratorialTeam } from "@components/about/curatorial-team";
 import { AboutUs } from "@components/about/about-us";
-import { PostEdition } from "@components/about/post-edition";
 import { Team } from "@components/about/team";
 
 const query = pageQuery(groq`
@@ -30,10 +28,7 @@ const query = pageQuery(groq`
             },
             aboutCollection[]{
               ...,
-              item{
-                ...,
               'image': ${withDimensions("image")},
-              }
             },
             pastEditionCollection[]{
               ...,
@@ -54,12 +49,12 @@ const About: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
   return (
-    <div>
+    <div className="relative">
       {renderObjectArray(page.sections, {
         // "aboutPage.hero": Hero,
         "aboutPage.curatorialTeam": CuratorialTeam,
         "aboutPage.team": Team,
-        // "aboutPage.about": AboutUs,
+        "aboutPage.about": AboutUs,
         // "aboutPage.postEdition": PostEdition,
       })}
     </div>

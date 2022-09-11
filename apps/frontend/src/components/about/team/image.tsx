@@ -57,7 +57,7 @@ export const Image: React.FC<ImageProps> = ({ image, header }) => {
     <motion.figure
       style={{ scale }}
       ref={imageRef}
-      className="mt-10 | rounded | overflow-hidden  max-h-[650px]"
+      className="mt-10 | rounded | overflow-hidden max-h-fit"
     >
       <SanityImg
         width={windowWidth >= 768 ? 2000 : 1000}
