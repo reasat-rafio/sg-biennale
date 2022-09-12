@@ -1,12 +1,14 @@
 import { motion, useSpring, useTransform } from "framer-motion";
 import {
   animationFrameEffect,
+  useIntersection,
   useVisibleScrollEffect,
   useWindowSize,
 } from "@lib/hooks";
 import clsx from "clsx";
 import { useMotionValue } from "framer-motion";
-import { useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useTransformSpring } from "@lib/helpers/animation.helpers";
 
 interface AnimatedHeaderProps {
   header: string;
@@ -15,6 +17,7 @@ interface AnimatedHeaderProps {
   className: string;
 }
 
+const physics = { damping: 15 };
 export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
   className,
   header,
@@ -24,12 +27,20 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
   const headerRef = useRef<HTMLHeadingElement>(null);
   const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
+  const _ = useIntersection(headerRef);
+  const [, updateState] = useState({});
+  const forceUpdate = useCallback(() => updateState({}), []);
 
-  const animatedTo = idx === lineLength - 1 ? [100, 0] : [-100 * (idx + 1), 0];
-  const positionX = useMotionValue(0);
+  const outputRange: [number, number] =
+    idx === lineLength - 1 ? [200, 0] : [-400 * (idx + 1), 0];
+  const xValue = useMotionValue(0);
 
-  const x = useTransform(positionX, [0, windowWidth / 4], animatedTo);
-  const animatedx = useSpring(x, { damping: 15 });
+  const x = useTransformSpring({
+    physics,
+    value: xValue,
+    outputRange,
+    inputRange: [0, windowWidth],
+  });
 
   useVisibleScrollEffect(
     headerRef,
@@ -37,11 +48,14 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
       animationFrameEffect(() => {
         const yDelta = y + windowHeight - offsetBoundingRect.top;
         const ratio = Math.max(0, Math.min(yDelta / windowHeight));
-        const displacement = ratio * (windowWidth / 4);
-        positionX.set(displacement);
+        const displacement = ratio * windowWidth;
+
+        forceUpdate();
+        xValue.set(displacement);
       }),
     [windowHeight, windowWidth]
   );
+  console.log(x.get(), "asdasd");
 
   return (
     <>
@@ -49,7 +63,7 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
         <motion.h2
           id={header}
           ref={headerRef}
-          style={{ x: animatedx }}
+          style={{ x }}
           className={clsx(
             className,
             idx === 0 && "text-left",
@@ -64,7 +78,7 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
         <motion.h2
           id={header}
           ref={headerRef}
-          style={{ x: animatedx }}
+          style={{ x }}
           className={clsx(
             className,
             idx === 0 && "text-left",

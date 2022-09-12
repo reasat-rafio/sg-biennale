@@ -9,7 +9,7 @@ import { CuratorialTeam } from "@components/about/curatorial-team";
 import { AboutUs } from "@components/about/about-us";
 import { Team } from "@components/about/team";
 import SmoothScroll from "@components/ui/smooth-scrolling";
-import { useIntersection } from "@lib/hooks";
+import useGlobalStore from "@stores/global-store";
 
 const query = pageQuery(groq`
   *[_type == "aboutPage"][0]{
@@ -48,17 +48,25 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const About: NextPage<SanityProps> = (props) => {
+  const { pageScrollY } = useGlobalStore();
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     console.log(pageScrollY);
+  //   });
+  // }, []);
+
   const { page } = useSanityQuery(query, props).data;
   const pageRef = useRef<HTMLDivElement>(null);
 
   return (
     <SmoothScroll>
-      <div ref={pageRef} className="relative">
+      <div ref={pageRef} className="relative mt-[50vh]">
         {renderObjectArray(page.sections, {
           // "aboutPage.hero": Hero,
           "aboutPage.curatorialTeam": CuratorialTeam,
           "aboutPage.team": Team,
-          "aboutPage.about": AboutUs,
+          // "aboutPage.about": AboutUs,
           // "aboutPage.postEdition": PostEdition,
         })}
       </div>

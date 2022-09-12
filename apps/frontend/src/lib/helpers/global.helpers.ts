@@ -1,4 +1,5 @@
 import { imageUrlBuilder } from "@utils/sanity";
+import { MotionValue } from "framer-motion";
 import { DateTime } from "luxon";
 import * as THREE from "three";
 
@@ -71,4 +72,18 @@ export function sliceIntoChunks<T>(arr: T[], chunkSize: number): T[][] {
     res.push(chunk);
   }
   return res;
+}
+
+export function useTransformSpring(
+  value: MotionValue,
+  range: [number, number]
+) {
+  const transformValue = useTransform(value, [0, 1], range);
+  const springValue = useSpring(transformValue, {
+    damping: 30,
+    stiffness: 60,
+    // bounce: 0.1,
+    // mass: 10,
+  });
+  return springValue;
 }

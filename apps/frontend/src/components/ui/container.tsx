@@ -23,7 +23,7 @@ export const Container: React.FC<ContainerProps> = ({
       style={style}
       id={id}
       className={clsx(
-        "max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md",
+        "max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto",
         className
       )}
     >

@@ -16,7 +16,6 @@ import useGlobalStore from "@stores/global-store";
 React.useLayoutEffect = React.useEffect;
 
 const SmoothScroll = ({ children }: { children: any }) => {
-  const { setPageScrollY } = useGlobalStore();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [pageHeight, setPageHeight] = useState<null | number>(null);
 
@@ -44,10 +43,6 @@ const SmoothScroll = ({ children }: { children: any }) => {
   );
   const physics = { damping: 50, mass: 0.4, stiffness: 300 };
   const spring = useSpring(transform, physics);
-
-  useEffect(() => {
-    setPageScrollY(spring.get());
-  }, [spring.get(), setPageScrollY]);
 
   return (
     <>
