@@ -15,10 +15,10 @@ interface CuratorialTeamProps {
 
 export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
   headers,
-  teamCollection,
+  // teamCollection,
 }) => {
-  const windowWidth = useWindowSize()?.width ?? 0;
-  const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
+  // const windowWidth = useWindowSize()?.width ?? 0;
+  // const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
 
   return (
     <Container type="section" className="py-section">
