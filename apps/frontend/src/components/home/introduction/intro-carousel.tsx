@@ -15,7 +15,7 @@ const imageIndex = (page: number, length: number) => {
   return wrap(0, length, page);
 };
 
-const variants = (length: number) => {
+const variants = (lengthflyMove: number) => {
   return {
     enter: ({ direction }: any) => {
       return {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { SanityProps } from "next-sanity-extra";
 import { withDimensions, renderObjectArray } from "sanity-react-extra";
@@ -8,6 +8,8 @@ import { pageQuery } from "@lib/query";
 import { CuratorialTeam } from "@components/about/curatorial-team";
 import { AboutUs } from "@components/about/about-us";
 import { Team } from "@components/about/team";
+import SmoothScroll from "@components/ui/smooth-scrolling";
+import { useIntersection } from "@lib/hooks";
 
 const query = pageQuery(groq`
   *[_type == "aboutPage"][0]{
@@ -47,17 +49,20 @@ export const getStaticProps: GetStaticProps = async (
 
 const About: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
+  const pageRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="relative">
-      {renderObjectArray(page.sections, {
-        // "aboutPage.hero": Hero,
-        "aboutPage.curatorialTeam": CuratorialTeam,
-        "aboutPage.team": Team,
-        "aboutPage.about": AboutUs,
-        // "aboutPage.postEdition": PostEdition,
-      })}
-    </div>
+    <SmoothScroll>
+      <div ref={pageRef} className="relative">
+        {renderObjectArray(page.sections, {
+          // "aboutPage.hero": Hero,
+          "aboutPage.curatorialTeam": CuratorialTeam,
+          "aboutPage.team": Team,
+          "aboutPage.about": AboutUs,
+          // "aboutPage.postEdition": PostEdition,
+        })}
+      </div>
+    </SmoothScroll>
   );
 };
 

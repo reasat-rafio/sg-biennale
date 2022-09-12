@@ -17,7 +17,6 @@ export const Page: React.FC<PageProps> = ({
   const data = useThree((state) => state.viewport);
   const scale: any = [data.width - gap, data.height, 5];
   const scroll = useScroll();
-
   const { progress } = useSpring({
     progress: Math.min(scrollPassRatio * 2, 1),
     config: config.molasses,
