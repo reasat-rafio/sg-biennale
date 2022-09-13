@@ -6,8 +6,8 @@ interface IGlobalStore {
   footerHeight: number;
   pageScrollY: number;
   showNavDropDown: boolean;
-  disable: boolean;
-  setDisable: (data: boolean) => void;
+  disableSmoothScrolling: boolean;
+  setDisableSmoothScrolling: (data: boolean) => void;
   setShowNavDropDown: (data: boolean) => void;
   setPageScrollY: (data: number) => void;
   addNavbarHeight: (data: number) => void;
@@ -20,13 +20,14 @@ const useGlobalStore = create(
     footerHeight: 0,
     pageScrollY: 0,
     showNavDropDown: false,
-    disable: false,
+    disableSmoothScrolling: false,
     setShowNavDropDown: (showNavDropDown) =>
       set((state) => ({
         ...state,
         showNavDropDown,
       })),
-    setDisable: (disable) => set((state) => ({ ...state, disable })),
+    setDisableSmoothScrolling: (disableSmoothScrolling) =>
+      set((state) => ({ ...state, disableSmoothScrolling })),
     setPageScrollY: (pageScrollY) =>
       set((state) => ({ ...state, pageScrollY })),
     addNavbarHeight: (navbarHeight) =>

@@ -22,22 +22,24 @@ interface AboutUsProps {
   header: string;
 }
 const xPhysics = { damping: 50, mass: 0.4, stiffness: 300 };
-const transitionY = { type: "tween", duration: 0.5, ease: "easeInOut" };
 export const AboutUs: React.FC<AboutUsProps> = ({
   aboutCollection,
   header,
 }) => {
-  const { navbarHeight, setDisable } = useGlobalStore();
+  const { setDisableSmoothScrolling } = useGlobalStore();
   const viewPortScroll = useScroll();
-  const [ref, { width: scrollSceneWidth }] = useMeasure();
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const windowWidth = useWindowSize()?.width ?? 0;
   const windowHeight = useWindowSize()?.height ?? 0;
-  const [scrollY, setScrollY] = useState(0);
+  const windowWidth = useWindowSize()?.width ?? 0;
+  const [ref, { width: scrollSceneWidth }] = useMeasure();
+
+  const sectionRef = useRef<HTMLDivElement | null>(null);
   const [_stickyRef, setStikcyRef] = useState<HTMLElement | null>(null);
+
+  const [scrollY, setScrollY] = useState(0);
   const xVal = useTransform(useMotionValue(scrollY), (value) => -value);
   const positionY = useMotionValue(0);
   const x = useSpring(xVal, xPhysics);
+  const y = useSpring(positionY, xPhysics);
 
   const stickyRef = useCallback(
     (node: HTMLElement) => {
@@ -57,11 +59,11 @@ export const AboutUs: React.FC<AboutUsProps> = ({
       const top = _stickyRef.getBoundingClientRect().top ?? 0;
       const y = top + viewPortScroll.scrollY.get();
       if (top <= 0 && y >= _stickyRef?.offsetTop) {
-        setDisable(true);
         positionY.set(viewPortScroll.scrollY.get() - _stickyRef?.offsetTop);
+        setDisableSmoothScrolling(true);
       } else {
-        setDisable(false);
         positionY.set(0);
+        setDisableSmoothScrolling(false);
       }
     }
   };
@@ -95,8 +97,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
   return (
     <motion.section
       ref={stickyRef}
-      style={{ y: positionY }}
-      transition={transitionY}
+      style={{ y: y }}
       className="bg-white sticky top-0"
     >
       <div

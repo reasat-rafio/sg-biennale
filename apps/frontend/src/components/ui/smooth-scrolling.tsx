@@ -1,18 +1,10 @@
-import React, {
-  useRef,
-  useState,
-  useCallback,
-  useLayoutEffect,
-  useEffect,
-} from "react";
+import React, { useRef, useState, useCallback, useLayoutEffect } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 import { useTransform, useSpring, motion, useScroll } from "framer-motion";
-import useGlobalStore from "@stores/global-store";
 React.useLayoutEffect = React.useEffect;
 
 const physics = { damping: 50, mass: 0.4, stiffness: 300 };
 const SmoothScroll = ({ children }: { children: any }) => {
-  const { disable } = useGlobalStore();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [pageHeight, setPageHeight] = useState<null | number>(null);
   const { scrollY } = useScroll();
@@ -40,7 +32,10 @@ const SmoothScroll = ({ children }: { children: any }) => {
     <>
       <motion.div
         ref={scrollRef}
-        style={{ y: disable ? transform : spring, willChange: "transform" }}
+        style={{
+          y: spring,
+          willChange: "transform",
+        }}
         className="fixed top-0 left-0 w-full overflow-hidden"
       >
         {children}
