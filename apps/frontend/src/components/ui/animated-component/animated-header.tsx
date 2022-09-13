@@ -55,7 +55,6 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
       }),
     [windowHeight, windowWidth]
   );
-  console.log(x.get(), "asdasd");
 
   return (
     <>
