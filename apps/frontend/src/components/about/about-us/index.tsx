@@ -1,5 +1,5 @@
-import SmoothScroll from "@components/ui/smooth-scrolling";
 import { AboutCollection } from "@lib/@types/about.types";
+import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import {
   animationFrameEffect,
   useIntersection,
@@ -11,52 +11,67 @@ import useGlobalStore from "@stores/global-store";
 import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
 import {
-  AnimatePresence,
   motion,
+  useAnimationControls,
   useMotionValue,
+  useSpring,
   useTransform,
   useViewportScroll,
 } from "framer-motion";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SanityImg } from "sanity-react-extra";
-import { Canvas } from "./canvas";
 
 interface AboutUsProps {
   type: string;
   aboutCollection: AboutCollection[];
   header: string;
 }
+const xPhysics = { damping: 50, mass: 0.4, stiffness: 300 };
+const yPhysics = { damping: 50, mass: 0.4, stiffness: 300 };
 
 export const AboutUs: React.FC<AboutUsProps> = ({
   aboutCollection,
   header,
 }) => {
-  const { navbarHeight } = useGlobalStore();
-
+  const { navbarHeight, setDisable } = useGlobalStore();
   const viewPortScroll = useViewportScroll();
   const [ref, { width: scrollSceneWidth }] = useMeasure();
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const instersecting = useIntersection(sectionRef);
   const windowWidth = useWindowSize()?.width ?? 0;
   const windowHeight = useWindowSize()?.height ?? 0;
   const [scrollY, setScrollY] = useState(0);
-  const intersecting = useIntersection(sectionRef);
-  const [sticky, setSticky] = useState(false);
+  const [_stickyRef, setStikcyRef] = useState<HTMLElement | null>(null);
+  const yVal = useMotionValue(0);
+  const xVal = useTransform(useMotionValue(scrollY), (value) => -value);
+  const x = useSpring(xVal, xPhysics);
+  const y = useSpring(yVal, {
+    damping: 50,
+    // mass: 0.1,
+    // stiffness: 50,
+    // bounce: 0,
+  });
+  const controls = useAnimationControls();
+  const stickyRef = useCallback(
+    (node: HTMLElement) => {
+      if (node) setStikcyRef(node);
+    },
+    [windowWidth]
+  );
 
-  const x = useTransform(useMotionValue(scrollY), (value) => -value);
+  // useEffect(() => {
+  //   if (instersecting?.isIntersecting) setDisable(true);
+  //   else setDisable(false);
+  // }, [instersecting?.isIntersecting]);
 
   useVisibleScrollEffect(
     sectionRef,
     (offsetBoundingRect, _, y) =>
       animationFrameEffect(() => {
-        if (offsetBoundingRect.y < viewPortScroll.scrollY.get())
-          setSticky(true);
-        else setSticky(false);
-
         const yDelta = Math.max(
           y + windowHeight - offsetBoundingRect.top - windowWidth / 2,
           0
         );
-
         setScrollY(-yDelta);
       }),
     [windowHeight, windowWidth]
@@ -77,47 +92,38 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     return () => window.removeEventListener("scroll", changeScrollDirection);
   }, []);
 
-  const [_stickyRef, setStikcyRef] = useState<HTMLElement | null>(null);
-  const stickyRef = useCallback(
-    (node: HTMLElement) => {
-      if (node) setStikcyRef(node);
-    },
-    [windowWidth]
-  );
-
-  const yVal = useMotionValue(0);
   const onLoadAction = () => {
     if (_stickyRef) {
       const top = _stickyRef.getBoundingClientRect().top ?? 0;
       const y = top + viewPortScroll.scrollY.get();
-
-      if (top <= 0 || y > 0) {
+      if (top <= 0 && y >= _stickyRef?.offsetTop) {
+        setDisable(true);
         yVal.set(viewPortScroll.scrollY.get() - _stickyRef?.offsetTop);
+      } else {
+        setDisable(false);
+        yVal.set(0);
       }
-
-      console.log("====================================");
-      console.log(viewPortScroll.scrollY.get() - _stickyRef?.offsetTop);
-      console.log("====================================");
     }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      while (!_stickyRef) {
-        onLoadAction();
-      }
-    });
-  }, []);
+    window.addEventListener("scroll", onLoadAction);
+  }, [_stickyRef]);
+
   return (
     <motion.section
       ref={stickyRef}
-      style={{ y: yVal.get() }}
+      style={{ y: yVal }}
+      transition={{
+        type: "tween",
+        duration: 0.5,
+        ease: "easeInOut",
+      }}
       className={clsx("bg-black sticky top-0")}
     >
       <motion.div
         ref={sectionRef}
         style={{
-          // contain: "paint",
           height: scrollSceneWidth - windowHeight / 2,
         }}
       >
@@ -130,8 +136,8 @@ export const AboutUs: React.FC<AboutUsProps> = ({
         >
           {aboutCollection.map(({ _key, image }, index) => (
             <motion.div
-              initial={{ scale: 0.9 }}
-              whileInView={{ scale: 1 }}
+              // initial={{ scale: 0.9 }}
+              // whileInView={{ scale: 1 }}
               key={_key}
               className="h-screen relative basis-[25vw] min-w-[100vw] ml-100vw"
             >
@@ -152,30 +158,3 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     </motion.section>
   );
 };
-
-{
-  /* <Canvas
-  scrollPassRatio={scrollPassRatio}
-  aboutCollection={aboutCollection}
-/> */
-}
-
-//  {
-//    aboutCollection.map(({ _key, image }) => (
-//  <div
-//    key={_key}
-//    className="h-screen relative basis-[25vw] min-w-[100vw] ml-100vw"
-//  >
-//    <div className="h-full overflow-hidden">
-//      <figure className="absolute h-full w-full top-0">
-//        <SanityImg
-//          className="h-full w-full object-cover"
-//          width={1000}
-//          image={image}
-//          builder={imageUrlBuilder}
-//        />
-//      </figure>
-//    </div>
-//  </div>
-//    ));
-//  }

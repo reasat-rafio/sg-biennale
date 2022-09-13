@@ -12,10 +12,12 @@ import {
   useSpring,
   motion,
 } from "framer-motion";
+import useGlobalStore from "@stores/global-store";
 React.useLayoutEffect = React.useEffect;
 
 const physics = { damping: 50, mass: 0.4, stiffness: 300 };
 const SmoothScroll = ({ children }: { children: any }) => {
+  const { disable } = useGlobalStore();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [pageHeight, setPageHeight] = useState<null | number>(null);
   const { scrollY } = useViewportScroll();
@@ -39,27 +41,11 @@ const SmoothScroll = ({ children }: { children: any }) => {
   );
   const spring = useSpring(transform, physics);
 
-  // const onLoadAction = () => {
-  //   const stickyElems = document.querySelectorAll(".sticky_contianer");
-  //   stickyElems.forEach((elem) => {
-  //     const rect = elem.getBoundingClientRect();
-  //     const top = rect.top;
-  //     console.log(top);
-  //     const y = gsap.getProperty(elem, "y");
-  // if (top <= 0 || y > 0) {
-  //   gsap.set(elem, { y: scroller.y - elem.offsetTop });
-  // }
-  //   });
-  // };
-
-  useEffect(() => {
-    //   window.addEventListener("scroll", onLoadAction);
-  }, []);
   return (
     <>
       <motion.div
         ref={scrollRef}
-        style={{ y: spring, willChange: "transform" }}
+        style={{ y: disable ? transform : spring, willChange: "transform" }}
         className="fixed top-0 left-0 w-full overflow-hidden"
       >
         {children}
