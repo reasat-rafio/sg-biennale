@@ -73,17 +73,3 @@ export function sliceIntoChunks<T>(arr: T[], chunkSize: number): T[][] {
   }
   return res;
 }
-
-export function useTransformSpring(
-  value: MotionValue,
-  range: [number, number]
-) {
-  const transformValue = useTransform(value, [0, 1], range);
-  const springValue = useSpring(transformValue, {
-    damping: 30,
-    stiffness: 60,
-    // bounce: 0.1,
-    // mass: 10,
-  });
-  return springValue;
-}

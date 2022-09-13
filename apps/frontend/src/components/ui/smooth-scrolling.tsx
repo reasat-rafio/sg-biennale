@@ -6,12 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import ResizeObserver from "resize-observer-polyfill";
-import {
-  useViewportScroll,
-  useTransform,
-  useSpring,
-  motion,
-} from "framer-motion";
+import { useTransform, useSpring, motion, useScroll } from "framer-motion";
 import useGlobalStore from "@stores/global-store";
 React.useLayoutEffect = React.useEffect;
 
@@ -20,7 +15,7 @@ const SmoothScroll = ({ children }: { children: any }) => {
   const { disable } = useGlobalStore();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [pageHeight, setPageHeight] = useState<null | number>(null);
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
 
   const resizePageHeight = useCallback((entries: ResizeObserverEntry[]) => {
     for (const entry of entries) {

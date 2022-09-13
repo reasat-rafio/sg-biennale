@@ -1,34 +1,24 @@
-import { useFrame, useThree } from "@react-three/fiber";
 import { AboutCollection } from "@lib/@types/about.types";
-import { Image } from "@react-three/drei";
-import { config, useSpring } from "@react-spring/three";
-import { useScroll } from "@lib/helpers/scroll-controls-helper";
+import { imageUrlBuilder } from "@utils/sanity";
+import { motion } from "framer-motion";
+import { SanityImg } from "sanity-react-extra";
 
-interface PageProps extends AboutCollection {
-  index: number;
-  scrollPassRatio: number;
-}
-const gap = 0.2;
-export const Page: React.FC<PageProps> = ({
-  image,
-  index,
-  scrollPassRatio,
-}) => {
-  const data = useThree((state) => state.viewport);
-  const scale: any = [data.width - gap, data.height, 5];
-  const scroll = useScroll();
-  const { progress } = useSpring({
-    progress: Math.min(scrollPassRatio * 2, 1),
-    config: config.molasses,
-  });
-
-  useFrame(() => {
-    scroll.offset = progress.get();
-  });
-
+export const Page: React.FC<AboutCollection> = ({ _key, image }) => {
   return (
-    <group position={[data.width * index, 0, 0]}>
-      <Image scale={scale} url={image.asset.url} />
-    </group>
+    <motion.div
+      key={_key}
+      className="h-screen relative basis-[25vw] min-w-[100vw] ml-100vw"
+    >
+      <div className="h-full overflow-hidden">
+        <figure className="absolute h-full w-full top-0">
+          <SanityImg
+            className="h-full w-full object-cover"
+            width={1000}
+            image={image}
+            builder={imageUrlBuilder}
+          />
+        </figure>
+      </div>
+    </motion.div>
   );
 };
