@@ -9,6 +9,7 @@ import { CuratorialTeam } from "@components/about/curatorial-team";
 import { AboutUs } from "@components/about/about-us";
 import { Team } from "@components/about/team";
 import SmoothScroll from "@components/ui/smooth-scrolling";
+import { PastEdition } from "@components/about/past-edition";
 
 const query = pageQuery(groq`
   *[_type == "aboutPage"][0]{
@@ -58,7 +59,7 @@ const About: NextPage<SanityProps> = (props) => {
           "aboutPage.curatorialTeam": CuratorialTeam,
           "aboutPage.team": Team,
           "aboutPage.about": AboutUs,
-          // "aboutPage.postEdition": PostEdition,
+          "aboutPage.pastEdition": PastEdition,
         })}
       </div>
     </SmoothScroll>

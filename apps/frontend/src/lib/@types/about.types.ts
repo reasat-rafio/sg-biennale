@@ -44,7 +44,8 @@ export interface AboutCollection {
 export interface PastEditionCollection {
   _key: string;
   type: string;
-  description: string;
+  description?: string;
+  url?: string;
   image: SanityImage;
   title: string;
 }
