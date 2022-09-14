@@ -7,7 +7,7 @@ import {
 import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
 import { useMotionValue, motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 
 interface ImageProps {

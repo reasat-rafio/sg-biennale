@@ -1,3 +1,4 @@
+import { Container } from "@components/ui/container";
 import { AboutCollection } from "@lib/@types/about.types";
 import {
   animationFrameEffect,
@@ -32,13 +33,13 @@ export const AboutUs: React.FC<AboutUsProps> = ({
   const windowWidth = useWindowSize()?.width ?? 0;
   const [ref, { width: scrollSceneWidth }] = useMeasure();
 
+  const [scrollYVals, setScrollYVals] = useState<number[]>([0]);
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [_stickyRef, setStikcyRef] = useState<HTMLElement | null>(null);
 
-  const [scrollY, setScrollY] = useState(0);
-  const xVal = useTransform(useMotionValue(scrollY), (value) => -value);
+  const [scrollYRatio, setScrollYRatio] = useState(0);
+  const activePage = Math.floor(scrollYRatio);
   const positionY = useMotionValue(0);
-  const x = useSpring(xVal, xPhysics);
   const y = useSpring(positionY, xPhysics);
 
   const stickyRef = useCallback(
@@ -47,12 +48,6 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     },
     [windowWidth]
   );
-
-  const changeScrollDirection = () => {
-    if (scrollY - (scrollSceneWidth - windowWidth) > 0) {
-      x.set(scrollSceneWidth - windowWidth);
-    }
-  };
 
   const onLoadAction = () => {
     if (_stickyRef) {
@@ -72,23 +67,15 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     sectionRef,
     (offsetBoundingRect, _, y) =>
       animationFrameEffect(() => {
-        const yDelta = Math.max(
-          y + windowHeight - offsetBoundingRect.top - windowWidth / 2,
-          0
+        const scrollYdelta = y + windowHeight - offsetBoundingRect.top;
+        const scrollYRatio = Math.max(
+          0,
+          Math.min(scrollYdelta / windowHeight, aboutCollection.length + 1)
         );
-        setScrollY(-yDelta);
+        setScrollYRatio(scrollYRatio);
       }),
     [windowHeight, windowWidth]
   );
-
-  useEffect(() => {
-    x.set(scrollY);
-  }, [scrollY]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeScrollDirection);
-    return () => window.removeEventListener("scroll", changeScrollDirection);
-  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", onLoadAction);
@@ -103,18 +90,34 @@ export const AboutUs: React.FC<AboutUsProps> = ({
       <div
         ref={sectionRef}
         style={{
-          height: scrollSceneWidth - windowHeight / 2,
+          height: `${aboutCollection.length + 1}50vh`,
         }}
       >
         <motion.div
-          className="inline-flex flex-row"
+          className="relative inline-flex flex-row-reverse"
           ref={ref as any}
-          style={{
-            x: x,
-          }}
         >
-          {aboutCollection.map((data) => (
-            <Page {...data} />
+          <Container className="z-50 relative">
+            <motion.h2
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+              viewport={{ margin: "-200px" }}
+              className="text-heading-4 font-medium w-[700px] absolute top-40 left-0 xl:pl-max "
+            >
+              {header}
+            </motion.h2>
+          </Container>
+          {aboutCollection.map((data, index) => (
+            <Page
+              {...data}
+              length={aboutCollection.length}
+              index={index}
+              scrollYRatio={scrollYRatio}
+              activePage={activePage}
+              setScrollYVals={setScrollYVals}
+              scrollYVals={scrollYVals}
+            />
           ))}
         </motion.div>
       </div>
