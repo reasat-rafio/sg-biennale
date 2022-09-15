@@ -9,12 +9,12 @@ const STUDIO_REWRITE = {
 };
 
 const ContentSecurityPolicy = `
-  default-src 'self';
-  child-src http://localhost:3000;
-  style-src 'self' http://localhost:3000;
-  font-src 'self';  
-  script-src 'self' 'unsafe-inline' *.sanity.io;
-  style-src 'self' 'unsafe-inline' *.sanity.io
+  default-src 'self' https://66wl3wil.api.sanity.io;
+  child-src 'none';
+  font-src 'self' https://fonts.googleapis.com  data:;
+  img-src 'self' cdn.sanity.io; 
+  script-src 'self' 'unsafe-inline' 'unsafe-eval';
+  style-src 'self' 'unsafe-inline' data: https://fonts.googleapis.com/css2; 
 `;
 const securityHeaders = [
   {
@@ -37,13 +37,13 @@ module.exports = {
     domains: ["cdn.sanity.io"],
   },
 
-  // async headers() {
-  //   return [
-  //     {
-  //       source: "/:path*",
-  //       headers: securityHeaders,
-  //     },
-  //   ];
-  // },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
+  },
   rewrites: async () => [STUDIO_REWRITE],
 };
