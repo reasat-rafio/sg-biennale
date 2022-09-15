@@ -32,7 +32,7 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const outputRange: [number, number] =
-    idx === lineLength - 1 ? [200, 0] : [-400 * (idx + 1), 0];
+    idx === lineLength - 1 ? [100, 0] : [-200 * (idx + 1), 0];
   const xValue = useMotionValue(0);
 
   const x = useTransformSpring({

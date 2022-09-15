@@ -1,15 +1,10 @@
 import { AboutCollection } from "@lib/@types/about.types";
-import {
-  animationFrameEffect,
-  useVisibleScrollEffect,
-  useWindowSize,
-} from "@lib/hooks";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { motion, useMotionValue, Variants } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { SanityImg } from "sanity-react-extra";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
-import clsx from "clsx";
 
 interface PageProps extends AboutCollection {
   length: number;
@@ -92,7 +87,7 @@ export const Page: React.FC<PageProps> = ({
         <figure className="absolute h-full w-full top-0">
           <SanityImg
             className="h-full w-full object-cover"
-            width={1000}
+            width={3000}
             image={image}
             builder={imageUrlBuilder}
           />
