@@ -2,7 +2,6 @@ import { Container } from "@components/ui/container";
 import { AboutCollection } from "@lib/@types/about.types";
 import {
   animationFrameEffect,
-  useMeasure,
   useVisibleScrollEffect,
   useWindowSize,
 } from "@lib/hooks";
@@ -31,7 +30,6 @@ export const AboutUs: React.FC<AboutUsProps> = ({
   const viewPortScroll = useScroll();
   const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
-  const [ref, { width: scrollSceneWidth }] = useMeasure();
 
   const [scrollYVals, setScrollYVals] = useState<number[]>([0]);
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -93,10 +91,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
           height: `${aboutCollection.length + 1}50vh`,
         }}
       >
-        <motion.div
-          className="relative inline-flex flex-row-reverse"
-          ref={ref as any}
-        >
+        <motion.div className="relative inline-flex flex-row-reverse">
           <Container className="z-50 relative">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}

@@ -15,7 +15,7 @@ interface PageProps extends AboutCollection {
   setScrollYVals: Dispatch<SetStateAction<number[]>>;
 }
 
-const physics = { damping: 50, mass: 0.4, stiffness: 300 };
+const physics = { damping: 100, mass: 0.4, stiffness: 300 };
 export const Page: React.FC<PageProps> = ({
   _key,
   image,
@@ -30,7 +30,6 @@ export const Page: React.FC<PageProps> = ({
   console.log(description);
 
   const sectionRef = useRef<HTMLElement>(null);
-  const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
   const [scrollY, setScrollY] = useState(0);
   const scrollByRatio = useMotionValue(0);

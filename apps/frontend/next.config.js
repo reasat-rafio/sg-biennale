@@ -10,10 +10,11 @@ const STUDIO_REWRITE = {
 
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self';
-  child-src example.com;
-  style-src 'self' example.com;
+  child-src http://localhost:3000;
+  style-src 'self' http://localhost:3000;
   font-src 'self';  
+  script-src 'self' 'unsafe-inline' *.sanity.io;
+  style-src 'self' 'unsafe-inline' *.sanity.io
 `;
 const securityHeaders = [
   {

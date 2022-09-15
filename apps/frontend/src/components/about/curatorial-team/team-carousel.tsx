@@ -18,7 +18,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   teamCollection,
 }) => {
   const [position, setPosition] = useState(1);
-  const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   console.log(activeCardIndex);
 
   const paginate = (newDirection: number) => {
@@ -38,7 +38,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
         ) => {
           const initialPosition = (index + 1 - position) * 20;
           const animationPosition =
-            activeCardIndex < index
+            activeCardIndex !== null && activeCardIndex < index
               ? initialPosition + 20
               : initialPosition * 1;
 
@@ -59,7 +59,9 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.25}
-              onClick={() => setActiveCardIndex((prev) => index)}
+              onClick={() =>
+                setActiveCardIndex((prev) => (prev === index ? null : index))
+              }
               onDragEnd={(e, { offset, velocity }) => {
                 const swipe = swipePower(offset.x, velocity.x);
                 if (swipe < -swipeConfidenceThreshold) {
