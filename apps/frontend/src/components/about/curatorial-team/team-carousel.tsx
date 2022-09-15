@@ -1,9 +1,11 @@
 import { TeamCollection } from "@lib/@types/about.types";
 import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 import { SanityImg } from "sanity-react-extra";
+import { BackSide } from "./back-side";
+import { FrontSide } from "./front-side";
 
 interface TeamCarouselProps {
   teamCollection: TeamCollection[];
@@ -19,7 +21,6 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
 }) => {
   const [position, setPosition] = useState(1);
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
-  console.log(activeCardIndex);
 
   const paginate = (newDirection: number) => {
     setPosition(position + newDirection);
@@ -31,7 +32,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
         (
           {
             _key,
-            cardBackgroundGardiants: { from, to },
+            cardBackgroundGardiants,
             team: { name, images, slug, description },
           },
           index
@@ -46,10 +47,6 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
             <motion.div
               key={_key}
               className="flex flex-col overflow-hidden absolute top-0 h-[500px]"
-              style={{
-                left: `${index * 10}vw`,
-                background: `linear-gradient(180deg, ${from.hex} 0%, ${to.hex} 100%)`,
-              }}
               animate={{
                 left: `${animationPosition}vw`,
                 scale: index === position ? 1 : 0.9,
@@ -71,26 +68,18 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                 }
               }}
             >
-              <motion.figure
-                className={clsx(
-                  "absolute h-[250px] bottom-0 left-1/2 -translate-x-1/2 translate-y-[10%]"
-                  //   activeCardIndex === index ? "w-1/2" : "w-full"
-                )}
-              >
-                <SanityImg
-                  className={clsx(
-                    "pointer-events-none h-full w-full object-contain transition-transform duration-500 ease-in-out",
-                    activeCardIndex === index ? "scale-125" : "scale-100"
-                  )}
-                  image={images[0]}
-                  builder={imageUrlBuilder}
-                />
-              </motion.figure>
-              <header>
-                <h6 className="absolute top-[20%] w-full | px-5 | text-center text-white text-heading-5 font-medium ">
-                  {name}
-                </h6>
-              </header>
+              <FrontSide
+                key={_key}
+                name={name}
+                image={images[0]}
+                cardBackgroundGardiants={cardBackgroundGardiants}
+                active={activeCardIndex === index}
+              />
+              <BackSide
+                description={description}
+                slug={slug}
+                active={activeCardIndex === index}
+              />
             </motion.div>
           );
         }
