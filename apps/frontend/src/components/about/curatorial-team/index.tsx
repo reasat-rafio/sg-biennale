@@ -22,19 +22,21 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
   // const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
 
   return (
-    <Container type="section" className="py-section ">
-      <header>
-        {headers.map((text, idx, allText) => (
-          <AnimatedHeader
-            key={idx + text}
-            className="font-semibold xl:text-[138px] lg:text-[110px] md:text-[90px] sm:text-[70px] text-heading-4 | text-[#D9D9D9]"
-            lineLength={allText.length}
-            header={text}
-            idx={idx}
-          />
-        ))}
-      </header>
+    <section className="py-section ">
+      <Container type="section">
+        <header>
+          {headers.map((text, idx, allText) => (
+            <AnimatedHeader
+              key={idx + text}
+              className="font-semibold xl:text-[138px] lg:text-[110px] md:text-[90px] sm:text-[70px] text-heading-4 | text-[#D9D9D9]"
+              lineLength={allText.length}
+              header={text}
+              idx={idx}
+            />
+          ))}
+        </header>
+      </Container>
       <TeamCarousel teamCollection={teamCollection} />
-    </Container>
+    </section>
   );
 };

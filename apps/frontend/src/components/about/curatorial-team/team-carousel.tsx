@@ -1,9 +1,6 @@
 import { TeamCollection } from "@lib/@types/about.types";
-import { imageUrlBuilder } from "@utils/sanity";
-import clsx from "clsx";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
-import { SanityImg } from "sanity-react-extra";
 import { BackSide } from "./back-side";
 import { FrontSide } from "./front-side";
 
@@ -27,7 +24,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   };
 
   return (
-    <section className="relative h-[70vh]  flex  flex-col items-center justify-center">
+    <section className="relative h-[70vh] flex flex-col items-center justify-center">
       {teamCollection.map(
         (
           {
@@ -37,7 +34,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
           },
           index
         ) => {
-          const initialPosition = (index + 1 - position) * 20;
+          const initialPosition = (index + 1 - position) * 25;
           const animationPosition =
             activeCardIndex !== null && activeCardIndex < index
               ? initialPosition + 20
@@ -46,7 +43,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
           return (
             <motion.div
               key={_key}
-              className="flex flex-col overflow-hidden absolute top-0 h-[500px]"
+              className="flex flex-col overflow-hidden absolute top-0 h-[500px] px-5"
               animate={{
                 left: `${animationPosition}vw`,
                 scale: index === position ? 1 : 0.9,
@@ -61,6 +58,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               }
               onDragEnd={(e, { offset, velocity }) => {
                 const swipe = swipePower(offset.x, velocity.x);
+                console.log({ index, offset: offset.x });
                 if (swipe < -swipeConfidenceThreshold) {
                   paginate(1);
                 } else if (swipe > swipeConfidenceThreshold) {

@@ -28,7 +28,7 @@ export const BackSide: React.FC<BackSideProps> = ({ description, active }) => {
   return (
     <motion.div
       className={clsx(
-        "absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | p-5 ml-auto | bg-white"
+        "absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | pl-5 pr-10 box-border ml-auto | bg-white"
       )}
       initial="initial"
       onClick={(e) => {
@@ -42,11 +42,13 @@ export const BackSide: React.FC<BackSideProps> = ({ description, active }) => {
       variants={AnimationVariants}
     >
       <div className="flex-1 flex justify-center items-center">
-        <span ref={ref}>
+        <span className="font-mono text-body-1 text-gray-500" ref={ref}>
           <PortableText blocks={description} />
         </span>
       </div>
-      <Button className="w-full">View Artist</Button>
+      <div className="w-full">
+        <Button>View Artist</Button>
+      </div>
     </motion.div>
   );
 };

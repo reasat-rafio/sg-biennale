@@ -15,9 +15,9 @@ export const AnimationVariants: Variants = {
   initial: {
     width: "100%",
   },
-  animate: (active: boolean) => ({
+  animate: {
     width: ["100%", "40%", "50%"],
-  }),
+  },
 };
 
 export const FrontSide: React.FC<FrontSideProps> = ({
@@ -37,7 +37,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         background: `linear-gradient(180deg, ${from.hex} 0%, ${to.hex} 100%)`,
       }}
     >
-      <header>
+      <header className="mt-20">
         <h6 className="w-full | px-5 | text-center text-white text-heading-5 font-medium ">
           {name}
         </h6>

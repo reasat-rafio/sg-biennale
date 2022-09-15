@@ -27,8 +27,6 @@ export const Page: React.FC<PageProps> = ({
   scrollYVals,
   description,
 }) => {
-  console.log(description);
-
   const sectionRef = useRef<HTMLElement>(null);
   const windowWidth = useWindowSize()?.width ?? 0;
   const [scrollY, setScrollY] = useState(0);
