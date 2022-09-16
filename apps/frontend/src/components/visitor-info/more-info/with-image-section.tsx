@@ -1,14 +1,8 @@
 import { Button } from "@components/ui/button";
 import { Cta } from "@lib/@types/global.types";
+import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { imageUrlBuilder } from "@utils/sanity";
-import {
-  MotionValue,
-  transform,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  motion,
-} from "framer-motion";
+import { transform, useMotionValue, motion } from "framer-motion";
 import { MouseEvent, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 
@@ -21,20 +15,12 @@ interface WithImageSectionProps {
   image: SanityImage;
 }
 
-function useTransformSpring(
-  value: MotionValue,
-  range: [number, number],
-  hovered: boolean
-) {
-  const transformValue = useTransform(value, [0, 1], hovered ? range : [0, 0]);
-  const springValue = useSpring(transformValue, {
-    damping: 30,
-    stiffness: 60,
-    bounce: 0.1,
-    mass: 10,
-  });
-  return springValue;
-}
+const physics = {
+  damping: 30,
+  stiffness: 60,
+  bounce: 0.1,
+  mass: 10,
+};
 
 export const WithImageSection: React.FC<WithImageSectionProps> = ({
   cta,
@@ -49,9 +35,21 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
   const screenY = useMotionValue(0);
   const _rotate = useMotionValue(0);
 
-  const x = useTransformSpring(screenX, [-500, 500], hovered);
-  const y = useTransformSpring(screenY, [-200, 200], hovered);
-  const rotate = useTransformSpring(_rotate, [-20, 20], hovered);
+  const x = useTransformSpring({
+    value: screenX,
+    outputRange: hovered ? [-500, 500] : [0, 0],
+    physics,
+  });
+  const y = useTransformSpring({
+    value: screenY,
+    outputRange: hovered ? [-200, 200] : [0, 0],
+    physics,
+  });
+  const rotate = useTransformSpring({
+    value: _rotate,
+    outputRange: hovered ? [-20, 20] : [0, 0],
+    physics,
+  });
 
   function handleMouseMove(event: MouseEvent<HTMLElement>) {
     const width = transform([0, window.innerWidth], [0, 1])(event.clientX);
