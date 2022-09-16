@@ -16,7 +16,7 @@ export const AnimationVariants: Variants = {
     width: "100%",
   },
   animate: {
-    width: ["100%", "40%", "50%"],
+    width: ["100%", "50%", "50%"],
   },
 };
 
