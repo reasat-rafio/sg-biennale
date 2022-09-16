@@ -56,9 +56,9 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               onClick={() =>
                 setActiveCardIndex((prev) => (prev === index ? null : index))
               }
-              onDragEnd={(e, { offset, velocity }) => {
+              onDragEnd={(e, { offset, velocity, delta, point }) => {
                 const swipe = swipePower(offset.x, velocity.x);
-                console.log({ index, offset: offset.x });
+                console.log(point.x);
                 if (swipe < -swipeConfidenceThreshold) {
                   paginate(1);
                 } else if (swipe > swipeConfidenceThreshold) {

@@ -25,7 +25,15 @@ const query = pageQuery(groq`
               ...,
               team->{
                 ...,
-              'image': ${withDimensions("image")},
+                images[] {
+                  ..., 
+                  asset->{
+                    ...,
+                    metadata {
+                      dimensions
+                    }
+                  }
+                },
               }
             },
             aboutCollection[]{
