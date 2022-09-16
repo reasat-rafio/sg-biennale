@@ -1,6 +1,7 @@
 import { TeamCollection } from "@lib/@types/about.types";
+import { useLongPress, useWindowSize } from "@lib/hooks";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BackSide } from "./back-side";
 import { FrontSide } from "./front-side";
 
@@ -16,8 +17,12 @@ const swipePower = (offset: number, velocity: number) => {
 export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   teamCollection,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   const [position, setPosition] = useState(1);
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
+  const [disableSwipingRight, setDisableSwipingRight] =
+    useState<boolean>(false);
+  const [disableSwipingLeft, setDisableSwipingLeft] = useState<boolean>(false);
 
   const paginate = (newDirection: number) => {
     setPosition(position + newDirection);
@@ -40,6 +45,19 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               ? initialPosition + 20
               : initialPosition * 1;
 
+          useEffect(() => {
+            const firstIndex = index === 0;
+            const lastIndex = index === teamCollection.length - 1;
+            if (firstIndex && animationPosition >= 70)
+              setDisableSwipingRight(true);
+            else if (firstIndex && animationPosition < 70)
+              setDisableSwipingRight(false);
+            if (lastIndex && animationPosition <= 10)
+              setDisableSwipingLeft(true);
+            else if (lastIndex && animationPosition > 10)
+              setDisableSwipingLeft(false);
+          }, [animationPosition, windowWidth]);
+
           return (
             <motion.div
               key={_key}
@@ -50,18 +68,20 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                 width: index === activeCardIndex ? "50%" : "25%",
               }}
               transition={{ type: "tween", ease: "easeInOut" }}
-              drag="x"
+              drag={"x"}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.25}
               onClick={() =>
                 setActiveCardIndex((prev) => (prev === index ? null : index))
               }
-              onDragEnd={(e, { offset, velocity, delta, point }) => {
+              onDragEnd={(_, { offset, velocity }) => {
                 const swipe = swipePower(offset.x, velocity.x);
-                console.log(point.x);
-                if (swipe < -swipeConfidenceThreshold) {
+                if (swipe < -swipeConfidenceThreshold && !disableSwipingLeft) {
                   paginate(1);
-                } else if (swipe > swipeConfidenceThreshold) {
+                } else if (
+                  swipe > swipeConfidenceThreshold &&
+                  !disableSwipingRight
+                ) {
                   paginate(-1);
                 }
               }}

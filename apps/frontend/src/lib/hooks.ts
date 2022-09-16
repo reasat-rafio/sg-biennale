@@ -333,3 +333,28 @@ export default isBrowser &&
 typeof (window as any).ResizeObserver !== "undefined"
   ? useMeasure
   : ((() => [noop, defaultState]) as typeof useMeasure);
+
+export function useLongPress(callback = () => {}, ms = 300) {
+  const [startLongPress, setStartLongPress] = useState(false);
+
+  useEffect(() => {
+    let timerId: NodeJS.Timeout | null = null;
+    if (startLongPress) {
+      timerId = setTimeout(callback, ms);
+    } else {
+      if (timerId !== null) clearTimeout(timerId);
+    }
+
+    return () => {
+      if (timerId !== null) clearTimeout(timerId);
+    };
+  }, [callback, ms, startLongPress]);
+
+  return {
+    onMouseDown: () => setStartLongPress(true),
+    onMouseUp: () => setStartLongPress(false),
+    onMouseLeave: () => setStartLongPress(false),
+    onTouchStart: () => setStartLongPress(true),
+    onTouchEnd: () => setStartLongPress(false),
+  };
+}

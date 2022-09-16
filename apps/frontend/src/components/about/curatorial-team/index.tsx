@@ -1,11 +1,6 @@
 import { AnimatedHeader } from "@components/ui/animated-component/animated-header";
 import { Container } from "@components/ui/container";
-import { Header } from "@components/ui/header";
 import { TeamCollection } from "@lib/@types/about.types";
-import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
-import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import Link from "next/link";
-import { SanityImg } from "sanity-react-extra";
 import { TeamCarousel } from "./team-carousel";
 
 interface CuratorialTeamProps {
@@ -18,9 +13,6 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
   headers,
   teamCollection,
 }) => {
-  // const windowWidth = useWindowSize()?.width ?? 0;
-  // const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
-
   return (
     <section className="py-section ">
       <Container type="section">
