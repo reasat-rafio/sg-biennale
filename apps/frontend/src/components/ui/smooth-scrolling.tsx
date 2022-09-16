@@ -3,7 +3,7 @@ import ResizeObserver from "resize-observer-polyfill";
 import { useTransform, useSpring, motion, useScroll } from "framer-motion";
 React.useLayoutEffect = React.useEffect;
 
-const physics = { damping: 50, mass: 0.4, stiffness: 300 };
+const physics = { damping: 100, mass: 0.4, stiffness: 300 };
 const SmoothScroll = ({ children }: { children: any }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [pageHeight, setPageHeight] = useState<null | number>(null);
