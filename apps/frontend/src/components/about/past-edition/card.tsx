@@ -27,7 +27,7 @@ export const Card: React.FC<CardProps> = ({
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
-  const _rotate = useMotionValue(0);
+  const rotateValue = useMotionValue(0);
 
   const x = useTransformSpring({
     value: screenX,
@@ -40,7 +40,7 @@ export const Card: React.FC<CardProps> = ({
     physics,
   });
   const rotate = useTransformSpring({
-    value: _rotate,
+    value: rotateValue,
     outputRange: hovered ? [-10, 10] : [0, 0],
     physics,
   });
@@ -52,26 +52,23 @@ export const Card: React.FC<CardProps> = ({
       [0, window.innerWidth + window.innerHeight],
       [0, 1]
     )(event.clientX + event.clientY);
-
     screenX.set(width);
     screenY.set(height);
-    _rotate.set(rotateX);
+    rotateValue.set(rotateX);
   };
 
   return (
     <motion.article
       key={_key}
       ref={cardRef}
-      className="flex w-[calc(25%-2%)] flex-col | space-y-4 p-5 | bg-white | rounded | cursor-pointer overflow-hidden"
+      className="xl:col-span-3 lg:col-span-4 sm:col-span-6 col-span-12 | flex flex-col | space-y-4 p-5 | bg-white | rounded | cursor-pointer overflow-hidden"
       initial={{ y: 150 }}
-      whileInView={{
-        y: 0,
-      }}
+      whileInView={{ y: 0 }}
       transition={{
-        delay: index * 0.3,
+        delay: index * 0.2,
         type: "tween",
         ease: "easeInOut",
-        duration: 0.5,
+        duration: 0.6,
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
