@@ -15,7 +15,13 @@ const physics = {
   bounce: 0.1,
   mass: 10,
 };
-export const Card: React.FC<CardProps> = ({ _key, image, title, url }) => {
+export const Card: React.FC<CardProps> = ({
+  _key,
+  image,
+  title,
+  url,
+  index,
+}) => {
   const router = useRouter();
   const cardRef = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState(false);
@@ -25,12 +31,12 @@ export const Card: React.FC<CardProps> = ({ _key, image, title, url }) => {
 
   const x = useTransformSpring({
     value: screenX,
-    outputRange: hovered ? [-100, 100] : [0, 0],
+    outputRange: hovered ? [-50, 50] : [0, 0],
     physics,
   });
   const y = useTransformSpring({
     value: screenY,
-    outputRange: hovered ? [-150, 150] : [0, 0],
+    outputRange: hovered ? [-50, 50] : [0, 0],
     physics,
   });
   const rotate = useTransformSpring({
@@ -39,7 +45,7 @@ export const Card: React.FC<CardProps> = ({ _key, image, title, url }) => {
     physics,
   });
 
-  function handleMouseMove(event: MouseEvent<HTMLElement>) {
+  const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
     const width = transform([0, window.innerWidth], [0, 1])(event.clientX);
     const height = transform([0, window.innerHeight], [0, 1])(event.clientY);
     const rotateX = transform(
@@ -50,13 +56,23 @@ export const Card: React.FC<CardProps> = ({ _key, image, title, url }) => {
     screenX.set(width);
     screenY.set(height);
     _rotate.set(rotateX);
-  }
+  };
 
   return (
-    <article
+    <motion.article
       key={_key}
       ref={cardRef}
       className="flex w-[calc(25%-2%)] flex-col | space-y-4 p-5 | bg-white | rounded | cursor-pointer overflow-hidden"
+      initial={{ y: 150 }}
+      whileInView={{
+        y: 0,
+      }}
+      transition={{
+        delay: index * 0.3,
+        type: "tween",
+        ease: "easeInOut",
+        duration: 0.5,
+      }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => {
@@ -64,17 +80,15 @@ export const Card: React.FC<CardProps> = ({ _key, image, title, url }) => {
         y.set(0);
         setHovered(false);
       }}
-      onClick={() => {
-        if (url) router.push(url);
-      }}
+      onClick={() => url && router.push(url)}
     >
       <motion.figure
+        className="max-h-[350px] p-7 overflow-hidden"
         style={{
           x,
           y,
           rotate,
         }}
-        className="max-h-[350px] p-7 overflow-hidden"
       >
         <SanityImg
           width={400}
@@ -84,8 +98,10 @@ export const Card: React.FC<CardProps> = ({ _key, image, title, url }) => {
         />
       </motion.figure>
       <section>
-        <h6 className="text-lg font-medium mb-1 font-manrope">{title}</h6>
+        <h6 className="text-lg font-medium mb-1 font-manrope z-20 relative">
+          {title}
+        </h6>
       </section>
-    </article>
+    </motion.article>
   );
 };
