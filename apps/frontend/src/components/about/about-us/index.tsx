@@ -6,14 +6,8 @@ import {
   useWindowSize,
 } from "@lib/hooks";
 import useGlobalStore from "@stores/global-store";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  useScroll,
-} from "framer-motion";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useScroll } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 import { Page } from "./page";
 
 interface AboutUsProps {
@@ -37,29 +31,10 @@ export const AboutUs: React.FC<AboutUsProps> = ({
 
   const [scrollYRatio, setScrollYRatio] = useState(0);
   const activePage = Math.floor(scrollYRatio);
-  const positionY = useMotionValue(0);
-  const y = useSpring(positionY, xPhysics);
+  const [positionY, setPositionY] = useState(0);
 
-  const stickyRef = useCallback(
-    (node: HTMLElement) => {
-      if (node) setStikcyRef(node);
-    },
-    [windowWidth]
-  );
-
-  const onLoadAction = () => {
-    if (_stickyRef) {
-      const top = _stickyRef.getBoundingClientRect().top ?? 0;
-      const y = top + viewPortScroll.scrollY.get();
-      if (top <= 0 && y >= _stickyRef?.offsetTop) {
-        positionY.set(viewPortScroll.scrollY.get() - _stickyRef?.offsetTop);
-        setDisableSmoothScrolling(true);
-      } else {
-        positionY.set(0);
-        setDisableSmoothScrolling(false);
-      }
-    }
-  };
+  const stickyRef = useRef<HTMLElement>(null);
+  const asd = useRef(0);
 
   useVisibleScrollEffect(
     sectionRef,
@@ -75,20 +50,34 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     [windowHeight, windowWidth]
   );
 
+  const top = stickyRef?.current?.getBoundingClientRect().top ?? 0;
+  const fn = () => {
+    if (stickyRef.current) {
+      const y = top + viewPortScroll.scrollY.get();
+      if (top <= 0 && y >= stickyRef.current.offsetTop) {
+        setPositionY(
+          viewPortScroll.scrollY.get() - stickyRef.current.offsetTop
+        );
+      } else {
+        setPositionY(0);
+      }
+    }
+  };
   useEffect(() => {
-    window.addEventListener("scroll", onLoadAction);
-  }, [_stickyRef]);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
 
   return (
     <motion.section
       ref={stickyRef}
-      style={{ y: y }}
+      style={{ y: `${positionY}px` }}
       className="bg-white sticky top-0"
     >
       <div
         ref={sectionRef}
         style={{
-          height: `${aboutCollection.length + 1}50vh`,
+          height: `${aboutCollection.length}50vh`,
         }}
       >
         <motion.div className="relative inline-flex flex-row-reverse">
@@ -116,6 +105,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
           ))}
         </motion.div>
       </div>
+      offsetBoundingRect
     </motion.section>
   );
 };
