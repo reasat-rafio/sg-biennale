@@ -73,17 +73,31 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               key={_key}
               className="flex flex-col overflow-hidden absolute top-0 h-[500px] px-5"
               initial={{
-                left: `${initialPosition * 2}vw`,
+                scale: 0.4,
               }}
               animate={{
                 left: `${animationPosition}vw`,
-                scale: 0.9,
                 width:
                   index === activeCardIndex
                     ? `${(1 / cardsPerView) * 2 * 100}%`
                     : `${(1 / cardsPerView) * 100}%`,
               }}
-              transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+              whileInView={{
+                scale: 0.9,
+              }}
+              transition={{
+                left: {
+                  type: "tween",
+                  duration: 0.6,
+                  ease: "easeInOut",
+                },
+                scale: {
+                  delay: index * 0.2,
+                  type: "tween",
+                  duration: 0.5,
+                  ease: "easeInOut",
+                },
+              }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.15}
