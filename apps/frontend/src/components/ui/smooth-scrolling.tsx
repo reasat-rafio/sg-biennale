@@ -38,6 +38,7 @@ const SmoothScroll = ({ children }: { children: any }) => {
         ref={scrollRef}
         style={{
           y: disableSmoothScrolling ? transform : spring,
+          // y: transform,
           willChange: "transform",
         }}
         className="fixed top-0 left-0 w-full overflow-hidden"

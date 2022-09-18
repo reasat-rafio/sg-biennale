@@ -7,10 +7,8 @@ import { SanityImg } from "sanity-react-extra";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 
 interface PageProps extends AboutCollection {
-  length: number;
   index: number;
   scrollYRatio: number;
-  activePage: number;
   scrollYVals: number[];
   setScrollYVals: Dispatch<SetStateAction<number[]>>;
 }
@@ -19,10 +17,8 @@ const physics = { damping: 80, mass: 0.4, stiffness: 300 };
 export const Page: React.FC<PageProps> = ({
   _key,
   image,
-  length,
   index,
   scrollYRatio,
-  activePage,
   setScrollYVals,
   scrollYVals,
   description,
@@ -63,7 +59,7 @@ export const Page: React.FC<PageProps> = ({
     <motion.section
       key={_key}
       ref={sectionRef}
-      className="h-screen basis-[25vw] min-w-[100vw] absolute top-0 left-0"
+      className="h-screen basis-[25vw] w-screen absolute top-0 left-0"
       style={{
         x: x,
         scale,

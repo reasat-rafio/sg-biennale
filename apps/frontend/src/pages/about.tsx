@@ -59,19 +59,18 @@ const About: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
   const pageRef = useRef<HTMLDivElement>(null);
 
+  // <SmoothScroll>
   return (
-    <SmoothScroll>
-      <div ref={pageRef} className="h-full mt-[50vh]">
-        {renderObjectArray(page.sections, {
-          // "aboutPage.hero": Hero,
-          "aboutPage.curatorialTeam": CuratorialTeam,
-          "aboutPage.team": Team,
-          "aboutPage.about": AboutUs,
-          "aboutPage.pastEdition": PastEdition,
-        })}
-      </div>
-    </SmoothScroll>
+    <div ref={pageRef} className="h-full ">
+      {renderObjectArray(page.sections, {
+        // "aboutPage.hero": Hero,
+        "aboutPage.curatorialTeam": CuratorialTeam,
+        "aboutPage.team": Team,
+        "aboutPage.about": AboutUs,
+        "aboutPage.pastEdition": PastEdition,
+      })}
+    </div>
   );
 };
-
+// </SmoothScroll>
 export default About;

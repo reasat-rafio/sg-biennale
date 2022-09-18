@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { RefObject, useRef } from "react";
 
 interface ContainerProps {
   className?: string;
@@ -7,6 +7,7 @@ interface ContainerProps {
   type?: "section" | "div" | "p" | "footer" | "ul";
   children: React.ReactNode;
   style?: any;
+  ref?: RefObject<any>;
 }
 
 export const Container: React.FC<ContainerProps> = ({
@@ -15,11 +16,14 @@ export const Container: React.FC<ContainerProps> = ({
   id,
   type = "div",
   style,
+  ref,
 }) => {
   const Component = type;
+  const containerRef = useRef(null);
 
   return (
     <Component
+      ref={ref ? ref : containerRef}
       style={style}
       id={id}
       className={clsx(

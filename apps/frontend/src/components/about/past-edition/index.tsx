@@ -20,7 +20,7 @@ export const PastEdition: React.FC<PastEditionProps> = ({
   return (
     <Container
       type="section"
-      className="py-max space-y-28 | bg-[#f8f8f8f8] z-40 relative"
+      className="py-max space-y-28 | bg-[#F8F8F8] z-40 relative"
     >
       <h2 className="text-heading-4 font-medium">{header}</h2>
       <div className={clsx("grid grid-cols-12 lg:gap-10 gap-5 | mt-7 ")}>
