@@ -2,12 +2,13 @@ import { Container } from "@components/ui/container";
 import { AboutCollection } from "@lib/@types/about.types";
 import {
   animationFrameEffect,
+  useIntersection,
   useVisibleScrollEffect,
   useWindowSize,
 } from "@lib/hooks";
 import useGlobalStore from "@stores/global-store";
-import { motion, useMotionValue, useSpring, useScroll } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import { motion, useScroll } from "framer-motion";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Page } from "./page";
 
 interface AboutUsProps {
@@ -15,7 +16,7 @@ interface AboutUsProps {
   aboutCollection: AboutCollection[];
   header: string;
 }
-const xPhysics = { damping: 50, mass: 0.4, stiffness: 300 };
+
 export const AboutUs: React.FC<AboutUsProps> = ({
   aboutCollection,
   header,
@@ -23,21 +24,14 @@ export const AboutUs: React.FC<AboutUsProps> = ({
   const { setDisableSmoothScrolling } = useGlobalStore();
   const viewPortScroll = useScroll();
   const windowHeight = useWindowSize()?.height ?? 0;
-  const windowWidth = useWindowSize()?.width ?? 0;
-
   const [scrollYVals, setScrollYVals] = useState<number[]>([0]);
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const [_stickyRef, setStikcyRef] = useState<HTMLElement | null>(null);
-
+  const stickyRef = useRef<HTMLElement>(null);
   const [scrollYRatio, setScrollYRatio] = useState(0);
   const activePage = Math.floor(scrollYRatio);
-  const [positionY, setPositionY] = useState(0);
-
-  const stickyRef = useRef<HTMLElement>(null);
-  const asd = useRef(0);
+  const intersecting = useIntersection(stickyRef, {})?.isIntersecting;
 
   useVisibleScrollEffect(
-    sectionRef,
+    stickyRef,
     (offsetBoundingRect, _, y) =>
       animationFrameEffect(() => {
         const scrollYdelta = y + windowHeight - offsetBoundingRect.top;
@@ -47,35 +41,35 @@ export const AboutUs: React.FC<AboutUsProps> = ({
         );
         setScrollYRatio(scrollYRatio);
       }),
-    [windowHeight, windowWidth]
+    [windowHeight]
   );
 
-  const top = stickyRef?.current?.getBoundingClientRect().top ?? 0;
-  const fn = () => {
-    if (stickyRef.current) {
-      const y = top + viewPortScroll.scrollY.get();
-      if (top <= 0 && y >= stickyRef.current.offsetTop) {
-        setPositionY(
-          viewPortScroll.scrollY.get() - stickyRef.current.offsetTop
-        );
+  const onScrollAction = () => {
+    if (stickyRef?.current) {
+      const top = stickyRef?.current?.getBoundingClientRect().top ?? 0;
+      const y = top + viewPortScroll.scrollY.get() + 100;
+
+      if (top <= 0 && y > stickyRef.current.offsetTop) {
+        setDisableSmoothScrolling(true);
+        stickyRef.current.style.transform = `translateY(${
+          window.pageYOffset - stickyRef!.current!.offsetTop
+        }px)`;
       } else {
-        setPositionY(0);
+        setDisableSmoothScrolling(false);
+        stickyRef!.current!.style.transform = `translateY(0)`;
       }
     }
   };
-  useEffect(() => {
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
+
+  useLayoutEffect(() => {
+    if (intersecting)
+      window.addEventListener("scroll", onScrollAction, { passive: true });
+    return () => window.removeEventListener("scroll", onScrollAction);
+  }, [intersecting]);
 
   return (
-    <motion.section
-      ref={stickyRef}
-      style={{ y: `${positionY}px` }}
-      className="bg-white sticky top-0"
-    >
+    <motion.section ref={stickyRef} className="bg-white ">
       <div
-        ref={sectionRef}
         style={{
           height: `${aboutCollection.length}50vh`,
         }}
@@ -105,7 +99,6 @@ export const AboutUs: React.FC<AboutUsProps> = ({
           ))}
         </motion.div>
       </div>
-      offsetBoundingRect
     </motion.section>
   );
 };

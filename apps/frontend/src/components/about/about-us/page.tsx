@@ -15,7 +15,7 @@ interface PageProps extends AboutCollection {
   setScrollYVals: Dispatch<SetStateAction<number[]>>;
 }
 
-const physics = { damping: 100, mass: 0.4, stiffness: 300 };
+const physics = { damping: 80, mass: 0.4, stiffness: 300 };
 export const Page: React.FC<PageProps> = ({
   _key,
   image,

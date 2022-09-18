@@ -67,7 +67,7 @@ const About: NextPage<SanityProps> = (props) => {
           "aboutPage.curatorialTeam": CuratorialTeam,
           "aboutPage.team": Team,
           "aboutPage.about": AboutUs,
-          // "aboutPage.pastEdition": PastEdition,
+          "aboutPage.pastEdition": PastEdition,
         })}
       </div>
     </SmoothScroll>
