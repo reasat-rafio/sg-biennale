@@ -8,7 +8,6 @@ import { pageQuery } from "@lib/query";
 import { CuratorialTeam } from "@components/about/curatorial-team";
 import { AboutUs } from "@components/about/about-us";
 import { Team } from "@components/about/team";
-import SmoothScroll from "@components/ui/smooth-scrolling";
 import { PastEdition } from "@components/about/past-edition";
 
 const query = pageQuery(groq`
@@ -59,7 +58,6 @@ const About: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
   const pageRef = useRef<HTMLDivElement>(null);
 
-  // <SmoothScroll>
   return (
     <div ref={pageRef} className="h-full ">
       {renderObjectArray(page.sections, {
@@ -72,5 +70,4 @@ const About: NextPage<SanityProps> = (props) => {
     </div>
   );
 };
-// </SmoothScroll>
 export default About;

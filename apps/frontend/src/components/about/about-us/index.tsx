@@ -1,11 +1,12 @@
 import { Container } from "@components/ui/container";
 import { AboutCollection } from "@lib/@types/about.types";
+import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import {
   animationFrameEffect,
   useVisibleScrollEffect,
   useWindowSize,
 } from "@lib/hooks";
-import { motion } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { useRef, useState } from "react";
 import { Page } from "./page";
 
@@ -15,6 +16,7 @@ interface AboutUsProps {
   header: string;
 }
 
+const physics = { damping: 80, mass: 0.4, stiffness: 300 };
 export const AboutUs: React.FC<AboutUsProps> = ({
   aboutCollection,
   header,
@@ -23,6 +25,14 @@ export const AboutUs: React.FC<AboutUsProps> = ({
   const [scrollYRatio, setScrollYRatio] = useState(0);
   const windowHeight = useWindowSize()?.height ?? 0;
   const [scrollYVals, setScrollYVals] = useState<number[]>([0]);
+
+  const scaleRatio = useMotionValue(0);
+  const scale = useTransformSpring({
+    value: scaleRatio,
+    outputRange: [1, 0.8],
+    inputRange: [1, 0],
+    physics,
+  });
 
   useVisibleScrollEffect(
     stickyRef,
@@ -33,17 +43,18 @@ export const AboutUs: React.FC<AboutUsProps> = ({
           0,
           Math.min(scrollYdelta / windowHeight, aboutCollection.length + 1)
         );
-
+        scaleRatio.set(scrollYRatio);
         setScrollYRatio(scrollYRatio);
       }),
     [windowHeight]
   );
 
   return (
-    <section
+    <motion.section
       ref={stickyRef}
       className="overflow-x-clip"
       style={{
+        scale,
         height: `${aboutCollection.length * 100 + 50}vh`,
       }}
     >
@@ -71,6 +82,6 @@ export const AboutUs: React.FC<AboutUsProps> = ({
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
