@@ -210,7 +210,7 @@ const countries = [
   { label: "Sweden", value: "SE" },
   { label: "Switzerland", value: "CH" },
   { label: "Syrian Arab Republic", value: "SY" },
-  { label: "Taiwan, Province of China", value: "TW" },
+  { label: "Taiwan", value: "TW" },
   { label: "Tajikistan", value: "TJ" },
   { label: "Tanzania, United Republic of", value: "TZ" },
   { label: "Thailand", value: "TH" },

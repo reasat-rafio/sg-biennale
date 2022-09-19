@@ -25,11 +25,6 @@ function SitePreview({ document, options }) {
   );
 }
 
-// const singleItem = ({ schemaType, id, title, icon }) =>
-//   S.listItem({ schemaType, title, id, icon }).child(
-//     S.editor().id(id).title(title).schemaType(schemaType)
-//   );
-
 const pageItem = ({ schemaType, id, title, icon, slug }) =>
   S.documentListItem({ schemaType, id, title, icon }).child(
     S.editor()
@@ -93,11 +88,12 @@ const deskStructure = () =>
                 slug: "",
               }),
               pageItem({
-                schemaType: "eventsListingPage",
-                id: "eventsListingPage",
-                title: "Events Listing",
+                schemaType: "programmesEventsPage",
+                id: "programmesEventsPage",
+                title: "Programmes Events",
                 slug: "",
               }),
+
               pageItem({
                 schemaType: "artistListingPage",
                 id: "artistListingPage",
@@ -108,6 +104,12 @@ const deskStructure = () =>
                 schemaType: "partnerListingPage",
                 id: "partnerListingPage",
                 title: "Partners Listing",
+                slug: "",
+              }),
+              pageItem({
+                schemaType: "eventsListingPage",
+                id: "eventsListingPage",
+                title: "Events Listing",
                 slug: "",
               }),
             ])

@@ -14,6 +14,7 @@ const swipeConfidenceThreshold = 1500;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
+
 const transition = (index: number) => ({
   left: {
     type: "tween",
@@ -27,6 +28,7 @@ const transition = (index: number) => ({
     ease: "easeInOut",
   },
 });
+
 export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   teamCollection,
 }) => {
@@ -117,11 +119,6 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               animate={{
                 left: `${positionLeft}vw`,
                 width: cardWidth,
-                // filter: `${
-                //   oneCardPerView && activeCardIndex === index
-                //     ? "blur(4px)"
-                //     : "blur(0px)"
-                // }`,
               }}
               whileInView={{ scale: 0.9 }}
               viewport={{ once: true }}

@@ -68,6 +68,11 @@ export const Volunteer: React.FC<VolunteerProps> = ({
           <Button>{cta.title}</Button>
         </div>
       </section>
+      {/* <Swiper>
+        <SwiperSlide>asd</SwiperSlide>
+        <SwiperSlide>asd</SwiperSlide>
+        <SwiperSlide>asd</SwiperSlide>
+      </Swiper> */}
       <Slider className="lg:my-8 my-5" {...settings}>
         {images.map((image) => (
           <div className="p-5 h-[330px] outline-none" key={image._key}>
@@ -80,6 +85,14 @@ export const Volunteer: React.FC<VolunteerProps> = ({
           </div>
         ))}
       </Slider>
+      {/* <div ref={ref} className="keen-slider">
+        <div className="keen-slider__slide number-slide1">1</div>
+        <div className="keen-slider__slide number-slide2">2</div>
+        <div className="keen-slider__slide number-slide3">3</div>
+        <div className="keen-slider__slide number-slide4">4</div>
+        <div className="keen-slider__slide number-slide5">5</div>
+        <div className="keen-slider__slide number-slide6">6</div>
+      </div> */}
     </Container>
   );
 };

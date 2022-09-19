@@ -52,7 +52,6 @@ import SupportUsVolunteer from "./objects/support-us/volunteer";
 
 import Event from "./documents/event";
 import Category from "./documents/category";
-
 import EventsListing from "./documents/pages/event-listing";
 
 import Artist from "./documents/artist";
@@ -68,6 +67,7 @@ import Partner from "./documents/partner";
 import Tier from "./documents/tier";
 
 import PartnersListing from "./documents/pages/partners-listing";
+import ProgrammesEventsPage from "./documents/pages/programmes-events";
 
 export default createSchema({
   name: "default",
@@ -88,8 +88,8 @@ export default createSchema({
 
     Venue,
     Event,
-
     EventsListing,
+    ProgrammesEventsPage,
 
     Artist,
     Artwork,
