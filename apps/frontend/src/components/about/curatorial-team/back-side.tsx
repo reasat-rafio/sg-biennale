@@ -87,18 +87,18 @@ const ScaleUp: React.FC<BackSideVariantsProps> = ({
   return (
     <motion.div
       className={clsx(
-        "absolute top-0 left-0 w-full z-20 bg-black bg-opacity-90"
+        "absolute top-0 left-0 h-full w-full z-20 bg-black bg-opacity-80"
       )}
-      initial={{ height: 0, y: 1200 }}
+      initial={{ opacity: 0, y: 100 }}
       animate={{
-        height: active ? "100%" : 0,
-        y: active ? 0 : 1200,
+        opacity: active ? 1 : 0,
+        y: active ? 0 : 100,
       }}
       transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
     >
       <div className="w-[80%] mx-auto flex justify-center items-center flex-col h-full space-y-5">
         <span
-          className="font-mono text-body-1 text-gray-500 text-center"
+          className="font-mono text-body-1 text-white text-center"
           ref={ref}
         >
           <PortableText blocks={description} />
