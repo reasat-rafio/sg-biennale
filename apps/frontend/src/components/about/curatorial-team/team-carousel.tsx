@@ -1,6 +1,6 @@
 import { TeamCollection } from "@lib/@types/about.types";
 import { useWindowSize } from "@lib/hooks";
-import { motion } from "framer-motion";
+import { motion, Point } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BackSide } from "./back-side";
 import { FrontSide } from "./front-side";
@@ -13,7 +13,19 @@ const swipeConfidenceThreshold = 1500;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
-
+const transition = (index: number) => ({
+  left: {
+    type: "tween",
+    duration: 0.6,
+    ease: "easeInOut",
+  },
+  scale: {
+    delay: index * 0.2,
+    type: "tween",
+    duration: 0.5,
+    ease: "easeInOut",
+  },
+});
 export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   teamCollection,
 }) => {
@@ -34,6 +46,24 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
 
   const paginate = (newDirection: number) => {
     setPosition(position + newDirection);
+  };
+
+  const onDragAction = (offset: Point, velocity: Point) => {
+    const swipe = swipePower(offset.x, velocity.x);
+    if (swipe < -swipeConfidenceThreshold && !disableSwipingLeft) {
+      paginate(1);
+    } else if (swipe > swipeConfidenceThreshold && !disableSwipingRight) {
+      paginate(-1);
+    }
+  };
+
+  const onClickAction = (index: number) => {
+    setActiveCardIndex((prev) => (prev === index ? null : index));
+    const positionsToCheck = cardsPerView > 2 ? [1, 2] : [0, 1, 2];
+    const lastPosition = positionsToCheck.some(
+      (num) => num === index - position
+    );
+    if (position <= 0 || (lastPosition && !activeCardIndex)) paginate(1);
   };
 
   return (
@@ -72,9 +102,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
             <motion.div
               key={_key}
               className="flex flex-col overflow-hidden absolute top-0 h-[500px] px-5"
-              initial={{
-                scale: 0.4,
-              }}
+              initial={{ scale: 0.4 }}
               animate={{
                 left: `${animationPosition}vw`,
                 width:
@@ -82,39 +110,16 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                     ? `${(1 / cardsPerView) * 2 * 100}%`
                     : `${(1 / cardsPerView) * 100}%`,
               }}
-              whileInView={{
-                scale: 0.9,
-              }}
-              transition={{
-                left: {
-                  type: "tween",
-                  duration: 0.6,
-                  ease: "easeInOut",
-                },
-                scale: {
-                  delay: index * 0.2,
-                  type: "tween",
-                  duration: 0.5,
-                  ease: "easeInOut",
-                },
-              }}
+              whileInView={{ scale: 0.9 }}
+              viewport={{ once: true }}
+              transition={transition(index)}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.15}
-              onClick={() =>
-                setActiveCardIndex((prev) => (prev === index ? null : index))
+              onClick={() => onClickAction(index)}
+              onDragEnd={(_, { offset, velocity }) =>
+                onDragAction(offset, velocity)
               }
-              onDragEnd={(_, { offset, velocity }) => {
-                const swipe = swipePower(offset.x, velocity.x);
-                if (swipe < -swipeConfidenceThreshold && !disableSwipingLeft) {
-                  paginate(1);
-                } else if (
-                  swipe > swipeConfidenceThreshold &&
-                  !disableSwipingRight
-                ) {
-                  paginate(-1);
-                }
-              }}
             >
               <FrontSide
                 key={_key}
