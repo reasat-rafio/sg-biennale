@@ -8,6 +8,12 @@ const Category = {
     {
       name: "name",
       type: "string",
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "order",
+      type: "number",
+      hidden: true,
     },
     {
       title: "Slug",
@@ -16,6 +22,7 @@ const Category = {
       options: {
         source: (doc) => doc.name,
       },
+      validation: (Rule) => Rule.required(),
     },
   ],
 };

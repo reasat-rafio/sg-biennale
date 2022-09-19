@@ -8,10 +8,13 @@ import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
+import { renderObjectArray } from "sanity-react-extra";
 
 const query = groq`{
   "site": ${siteQuery},
+  "page": *[_type == "programmesEventsPage"][0],
   "events":*[_type == "events"][]{
         _id,
         title,
@@ -55,7 +58,7 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
-  const { events, allCategories, allVenues } = useSanityQuery(
+  const { events, allCategories, allVenues, page } = useSanityQuery(
     query,
     props
   ).data;
@@ -89,13 +92,19 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   return (
     <Container>
-      {/* <FilteringLogic>
-        <header>
-          <h1 className="py-3 | font-semibold text-3xl">Programmes & Events</h1>
-        </header>
-        <FilteringSection />
-        <ProgrammesEventList />
-      </FilteringLogic> */}
+      <FilteringLogic>
+        {renderObjectArray(page.sections, {
+          pageHeading: useCallback(
+            (data: PageHeaderProps) => (
+              <PageHeading {...data} color="#292221" />
+            ),
+            []
+          ),
+        })}
+
+        {/* <FilteringSection /> */}
+        {/* <ProgrammesEventList /> */}
+      </FilteringLogic>
     </Container>
   );
 };
