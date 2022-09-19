@@ -1,5 +1,6 @@
 import { TeamCollection } from "@lib/@types/about.types";
 import { useWindowSize } from "@lib/hooks";
+import clsx from "clsx";
 import { motion, Point } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BackSide } from "./back-side";
@@ -79,36 +80,48 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
         ) => {
           const firstIndex = index === 0;
           const lastIndex = index === teamCollection.length - 1;
+          const fullWidth = (1 / cardsPerView) * 2 * 100;
+          const halfWidth = (1 / cardsPerView) * 100;
+          const oneCardPerView = cardsPerView === 1;
+          const cardWidth = oneCardPerView
+            ? `${halfWidth}%`
+            : index === activeCardIndex
+            ? `${fullWidth}%`
+            : `${halfWidth}%`;
 
           const initialPosition =
             (index + 1 - position) * ((1 / cardsPerView) * 100);
-          const animationPosition =
-            activeCardIndex !== null && activeCardIndex < index
-              ? initialPosition + (1 / cardsPerView) * 100
-              : initialPosition * 1;
+          const positionLeft = oneCardPerView
+            ? initialPosition * 1
+            : activeCardIndex !== null && activeCardIndex < index
+            ? initialPosition + (1 / cardsPerView) * 100
+            : initialPosition * 1;
 
           useEffect(() => {
-            if (firstIndex && animationPosition >= 70)
+            if (firstIndex && positionLeft >= 100 / cardsPerView)
               setDisableSwipingRight(true);
-            else if (firstIndex && animationPosition < 70)
+            else if (firstIndex && positionLeft < 100 / cardsPerView)
               setDisableSwipingRight(false);
-            if (lastIndex && animationPosition <= 10)
-              setDisableSwipingLeft(true);
-            else if (lastIndex && animationPosition > 10)
+            if (lastIndex && positionLeft <= 10) setDisableSwipingLeft(true);
+            else if (lastIndex && positionLeft > 10)
               setDisableSwipingLeft(false);
-          }, [animationPosition, windowWidth]);
+          }, [positionLeft, windowWidth]);
 
           return (
             <motion.div
               key={_key}
-              className="flex flex-col overflow-hidden absolute top-0 h-[500px] px-5"
+              className={clsx(
+                "flex flex-col overflow-hidden absolute top-0 h-[500px]"
+              )}
               initial={{ scale: 0.4 }}
               animate={{
-                left: `${animationPosition}vw`,
-                width:
-                  index === activeCardIndex
-                    ? `${(1 / cardsPerView) * 2 * 100}%`
-                    : `${(1 / cardsPerView) * 100}%`,
+                left: `${positionLeft}vw`,
+                width: cardWidth,
+                // filter: `${
+                //   oneCardPerView && activeCardIndex === index
+                //     ? "blur(4px)"
+                //     : "blur(0px)"
+                // }`,
               }}
               whileInView={{ scale: 0.9 }}
               viewport={{ once: true }}
@@ -127,11 +140,13 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                 image={images[0]}
                 cardBackgroundGardiants={cardBackgroundGardiants}
                 active={activeCardIndex === index}
+                cardsPerView={cardsPerView}
               />
               <BackSide
                 description={description}
                 slug={slug}
                 active={activeCardIndex === index}
+                cardsPerView={cardsPerView}
               />
             </motion.div>
           );

@@ -9,15 +9,16 @@ interface FrontSideProps {
   name: string;
   cardBackgroundGardiants: TeamCollection["cardBackgroundGardiants"];
   image: SanityImage;
+  cardsPerView: number;
 }
 
 export const AnimationVariants: Variants = {
   initial: {
     width: "100%",
   },
-  animate: {
-    width: ["100%", "50%", "50%"],
-  },
+  animate: (cardsPerView: number) => ({
+    width: cardsPerView !== 1 ? ["100%", "50%", "50%"] : "100%",
+  }),
 };
 
 export const FrontSide: React.FC<FrontSideProps> = ({
@@ -25,6 +26,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   active,
   cardBackgroundGardiants: { from, to },
   image,
+  cardsPerView,
 }) => {
   return (
     <motion.div
@@ -32,6 +34,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
       initial="initial"
       animate={active ? "animate" : "inital"}
       variants={AnimationVariants}
+      custom={cardsPerView}
       transition={{ duration: 0.6, type: "tween", ease: "easeInOut" }}
       style={{
         background: `linear-gradient(180deg, ${from.hex} 0%, ${to.hex} 100%)`,
