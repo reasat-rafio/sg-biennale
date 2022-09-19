@@ -14,7 +14,7 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
   teamCollection,
 }) => {
   return (
-    <section className="py-section ">
+    <section className="py-section overflow-clip">
       <Container type="section">
         <header>
           {headers.map((text, idx, allText) => (

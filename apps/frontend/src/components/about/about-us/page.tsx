@@ -25,6 +25,7 @@ export const Page: React.FC<PageProps> = ({
 }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const windowWidth = useWindowSize()?.width ?? 0;
+  const windowHeight = useWindowSize()?.height ?? 0;
   const [scrollY, setScrollY] = useState(0);
   const scrollByRatio = useMotionValue(0);
   const scaleRatio = useMotionValue(0);
@@ -35,6 +36,14 @@ export const Page: React.FC<PageProps> = ({
     inputRange: [0, 1],
     physics,
   });
+
+  const y = useTransformSpring({
+    value: scrollByRatio,
+    outputRange: [0, windowHeight],
+    inputRange: [0, 1],
+    physics,
+  });
+
   const scale = useTransformSpring({
     value: scaleRatio,
     outputRange: [1, 0.7],
@@ -61,9 +70,10 @@ export const Page: React.FC<PageProps> = ({
       ref={sectionRef}
       className="h-screen basis-[25vw] w-screen absolute top-0 left-0"
       style={{
-        x: x,
+        x: windowWidth >= 1024 ? x : 0,
+        y: windowWidth >= 1024 ? 0 : y,
         scale,
-        originX: 0,
+        originX: windowWidth >= 1024 ? 0 : 0.5,
         filter: `grayscale(${100 - scrollY * 100}%)`,
       }}
     >
@@ -72,15 +82,16 @@ export const Page: React.FC<PageProps> = ({
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-          viewport={{ margin: "-200px" }}
-          className="z-50 absolute w-[40%] top-1/3 right-64 | font-manrope text-body-1"
+          viewport={{ margin: "-200px", once: true }}
+          className="z-50 absolute max-w-4xl w-full | 2xl:top-1/4 top-1/2 lg:right-0 right-1/2 | font-manrope text-body-1 text-center lg:text-left | -translate-y-1/2 2xl:translate-y-0 translate-x-1/2 lg:translate-x-0 | 2xl:pr-max lg:pr-xxl px-5"
         >
+          {/* text-gray--500 */}
           {description}
         </motion.p>
         <figure className="absolute h-full w-full top-0">
           <SanityImg
             className="h-full w-full object-cover"
-            width={3000}
+            width={windowWidth > 1024 ? 2500 : 1500}
             image={image}
             builder={imageUrlBuilder}
           />
