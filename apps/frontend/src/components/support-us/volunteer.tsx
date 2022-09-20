@@ -2,11 +2,14 @@ import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
 import { SanityImage, SanityImg } from "sanity-react-extra";
-import * as React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { imageUrlBuilder } from "@utils/sanity";
+// import Swiper from "swiper";
+import React from "react";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
 
 interface VolunteerProps {
   header: string;
@@ -52,6 +55,16 @@ export const Volunteer: React.FC<VolunteerProps> = ({
   cta,
   images,
 }) => {
+  // const [sliderRef, instanceRef] = useKeenSlider(
+  //   {
+  //     slideChanged() {
+  //       console.log("slide changed");
+  //     },
+  //   },
+  //   [
+  //     // add plugins here
+  //   ]
+  // );
   return (
     <Container className="2xl:py-max lg:py-xxl py-xl">
       <section className="grid grid-cols-12 | items-center">
