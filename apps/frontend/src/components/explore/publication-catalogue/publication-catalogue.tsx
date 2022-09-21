@@ -1,13 +1,17 @@
-import { Container } from "@components/ui/container";
-import { SanityImage, SanityImg } from "sanity-react-extra";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { imageUrlBuilder } from "@utils/sanity";
-import { MouseEvent, useState } from "react";
-import { transform, useMotionValue, motion } from "framer-motion";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
+import { imageUrlBuilder } from "@utils/sanity";
+import { transform, useMotionValue, motion } from "framer-motion";
+import { MouseEvent, useState } from "react";
+import { SanityImage, SanityImg } from "sanity-react-extra";
 
-interface PublicationsAndCatalogue {
+const physics = {
+  damping: 30,
+  stiffness: 60,
+  bounce: 0.1,
+  mass: 10,
+};
+
+export interface PublicationsAndCatalogue {
   _key: string;
   _type: string;
   author: string;
@@ -16,58 +20,7 @@ interface PublicationsAndCatalogue {
   url: string;
 }
 
-interface PublicationCatalogueProps {
-  type: string;
-  header: string;
-  publicationsAndCatalogues: PublicationsAndCatalogue[];
-}
-
-export const PublicationCatalogue: React.FC<PublicationCatalogueProps> = ({
-  header,
-  publicationsAndCatalogues,
-}) => {
-  return (
-    <section className="py-max">
-      <Container className="flex items-center | space-x-5">
-        <h2 className="flex-1 | font-medium lg:text-heading-6 text-2xl text-gray--400">
-          {header}
-        </h2>
-        <span className="font-medium lg:text-xl text-base text-gray--700 underline">
-          View All
-        </span>
-      </Container>
-
-      <div className="xl:pl-max my-10">
-        <Swiper
-          breakpoints={{
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 1.4,
-              spaceBetween: 30,
-            },
-          }}
-        >
-          {publicationsAndCatalogues.map((data) => (
-            <SwiperSlide className="py-10" key={data._key}>
-              <PublicationsAndCatalogues {...data} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
-  );
-};
-
-const physics = {
-  damping: 30,
-  stiffness: 60,
-  bounce: 0.1,
-  mass: 10,
-};
-const PublicationsAndCatalogues: React.FC<PublicationsAndCatalogue> = ({
+export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
   author,
   image,
   title,
