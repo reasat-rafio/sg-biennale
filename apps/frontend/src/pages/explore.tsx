@@ -8,6 +8,7 @@ import { useCallback } from "react";
 import { Container } from "@components/ui/container";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { CuratorialEssay } from "@components/explore/curatorial-essay";
+import { PublicationCatalogue } from "@components/explore/publication-catalogue";
 
 const query = pageQuery(groq`
     *[_type == "explorePage"][0]{
@@ -48,6 +49,7 @@ const Explore: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
+        "explorePage.publicationAndCatalogue": PublicationCatalogue,
         "explorePage.curatorialEssay": CuratorialEssay,
       })}
     </div>
