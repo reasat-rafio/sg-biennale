@@ -59,10 +59,10 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
         transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
         className="flex items-center | space-x-5"
       >
-        <h2 className="flex-1 | font-medium text-heading-6 text-gray--400">
+        <h2 className="flex-1 | font-medium lg:text-heading-6 text-2xl text-gray--400">
           {header}
         </h2>
-        <span className="font-medium text-xl text-gray--700 underline">
+        <span className="font-medium lg:text-xl text-base text-gray--700 underline">
           {curatorialEssays.length} Essays
         </span>
       </motion.header>
@@ -113,7 +113,7 @@ const Essay: React.FC<EssayProps> = ({ title, author, image, url }) => {
       variants={ItemVariant}
       onClick={onClickAction}
     >
-      <figure className="h-[235px] overflow-hidden">
+      <figure className="aspect-video overflow-hidden">
         <SanityImg
           className="h-full w-full object-cover | group-hover:scale-110 | transition-all duration-500"
           image={image}
@@ -123,10 +123,12 @@ const Essay: React.FC<EssayProps> = ({ title, author, image, url }) => {
         />
       </figure>
       <header className="flex flex-col space-y-6">
-        <h6 className="font-medium text-heading-6 | leading-[125%] | group-hover:text-red-love | transition-all duration-500">
+        <h6 className="font-medium lg:text-heading-6 text-2xl | lg:leading-[125%] | group-hover:text-red-love | transition-all duration-500">
           {title}
         </h6>
-        <span className="text-gray--400 font-manrope font-bold">{author}</span>
+        <span className="text-gray--400 font-manrope font-bold lg:text-body-1 text-body-2">
+          {author}
+        </span>
       </header>
     </motion.article>
   );
