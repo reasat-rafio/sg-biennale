@@ -81,7 +81,7 @@ export const getStaticProps: GetStaticProps = async (
   revalidate: 10,
 });
 
-const Home: NextPage = (props: SanityProps) => {
+const Home: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
   return (
     <div>
