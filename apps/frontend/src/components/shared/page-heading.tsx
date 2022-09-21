@@ -9,8 +9,8 @@ export interface PageHeaderProps {
   position?: "center" | "default";
 }
 
-const AnimationDuration = 0.3;
-const DescriptionVariants: Variants = {
+export const AnimationDuration = 0.3;
+export const DescriptionVariants: Variants = {
   initial: { opacity: 0 },
   animate: (delay: number) => ({
     opacity: 1,

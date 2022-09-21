@@ -11,7 +11,7 @@ const SupportUsPage = {
       name: "sections",
       type: "array",
       of: [
-        { type: "pageHeading" },
+        { type: "supportUs.hero" },
         { type: "supportUs.volunteer" },
         { type: "supportUs.donation" },
         {

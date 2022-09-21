@@ -85,20 +85,20 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
 
   return (
     <section ref={sectionRef} className="h-[100vh]" id="artist-image-carouel">
-      <Suspense fallback={null}>
-        <Canvas
-          style={{ overflow: "hidden" }}
-          onTouchStart={onTouchStartAction}
-          onTouchEnd={onTouchEndAction}
-          onTouchMove={onTouchMoveAction}
-          onPointerDown={onPointerDownAction}
-          onPointerLeave={onPointerLeaveAction}
-          onPointerUp={onPointerUpAction}
-          onPointerMove={onPointerMoveAction}
-          gl={{ antialias: false }}
-          dpr={[1, 1.5]}
-          onPointerMissed={() => setClikced(null)}
-        >
+      <Canvas
+        style={{ overflow: "hidden" }}
+        onTouchStart={onTouchStartAction}
+        onTouchEnd={onTouchEndAction}
+        onTouchMove={onTouchMoveAction}
+        onPointerDown={onPointerDownAction}
+        onPointerLeave={onPointerLeaveAction}
+        onPointerUp={onPointerUpAction}
+        onPointerMove={onPointerMoveAction}
+        gl={{ antialias: false }}
+        dpr={[1, 1.5]}
+        onPointerMissed={() => setClikced(null)}
+      >
+        <Suspense fallback={null}>
           <Images
             offsetX={offsetX}
             isDown={isDown}
@@ -109,8 +109,8 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
             setClikced={setClikced}
             scrollPassRatio={scrollPassRatio}
           />
-        </Canvas>
-      </Suspense>
+        </Suspense>
+      </Canvas>
     </section>
   );
 };
