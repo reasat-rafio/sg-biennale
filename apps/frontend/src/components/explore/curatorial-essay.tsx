@@ -3,6 +3,8 @@ import { imageUrlBuilder } from "@utils/sanity";
 import { useRouter } from "next/router";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
+import { Button } from "@components/ui/button";
+import { useEffect, useState } from "react";
 
 interface EssayProps {
   _key: string;
@@ -20,12 +22,13 @@ interface CuratorialEssayProps {
 }
 
 const ContainerVariants: Variants = {
-  hidden: { y: "50%", opacity: 0 },
+  hidden: { y: "50%", opacity: 0, height: "auto" },
   show: {
     y: 0,
+    height: "auto",
     opacity: 1,
     transition: {
-      staggerChildren: 0.5,
+      staggerChildren: 0.3,
     },
   },
 };
@@ -34,6 +37,20 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   header,
   curatorialEssays,
 }) => {
+  const [page, setPage] = useState(1);
+  const [sortedCuratorialEssays, setCuratorialEssays] = useState(
+    curatorialEssays.slice(0, 6)
+  );
+  const onClickShowMoreAction = () => {
+    sortedCuratorialEssays < curatorialEssays
+      ? setPage((prev) => prev + 1)
+      : setPage(1);
+  };
+
+  useEffect(() => {
+    setCuratorialEssays(curatorialEssays.slice(0, 6 * page));
+  }, [page]);
+
   return (
     <Container className="py-max">
       <motion.header
@@ -55,10 +72,24 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
         variants={ContainerVariants}
         className="grid grid-cols-12 | lg:gap-10 gap-5 my-14"
       >
-        {curatorialEssays.map((data, index) => (
+        {sortedCuratorialEssays.map((data, index) => (
           <Essay key={data._key + index} {...data} />
         ))}
       </motion.div>
+      <motion.div
+        key={page}
+        className="flex justify-center items-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+      >
+        <Button onClick={onClickShowMoreAction}>
+          {sortedCuratorialEssays.length === curatorialEssays.length
+            ? "Show Less"
+            : "Show More"}
+        </Button>
+      </motion.div>
+      {page}
     </Container>
   );
 };

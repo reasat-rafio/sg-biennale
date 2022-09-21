@@ -9,6 +9,7 @@ interface ButtonProps {
   children: ReactNode;
   icon?: JSX.Element;
   className?: string;
+  onClick?: () => any;
 }
 
 const defaultStyles =
@@ -26,11 +27,13 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   className,
   icon,
+  onClick,
 }) => {
   return (
     <>
       {type === "button" && (
         <button
+          onClick={onClick}
           className={clsx(defaultStyles, className, variantStyles[variant])}
         >
           {children}
