@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { Button } from "@components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useIntersection } from "@lib/hooks";
 
 interface EssayProps {
   _key: string;
@@ -22,13 +23,14 @@ interface CuratorialEssayProps {
 }
 
 const ContainerVariants: Variants = {
-  hidden: { y: "50%", opacity: 0, height: "auto" },
+  hidden: { opacity: 0 },
   show: {
-    y: 0,
-    height: "auto",
     opacity: 1,
     transition: {
-      staggerChildren: 0.3,
+      staggerChildren: 0.2,
+      duration: 0.3,
+      type: "tween",
+      ease: "easeInOut",
     },
   },
 };
@@ -37,6 +39,9 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   header,
   curatorialEssays,
 }) => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const intersecting = useIntersection(sectionRef)?.isIntersecting;
+
   const [page, setPage] = useState(1);
   const [sortedCuratorialEssays, setCuratorialEssays] = useState(
     curatorialEssays.slice(0, 6)
@@ -52,7 +57,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   }, [page]);
 
   return (
-    <Container className="py-max">
+    <Container type="section" className="py-max">
       <motion.header
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -68,7 +73,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
       </motion.header>
       <motion.div
         initial="hidden"
-        animate="show"
+        whileInView="show"
         variants={ContainerVariants}
         className="grid grid-cols-12 | lg:gap-10 gap-5 my-14"
       >
@@ -89,17 +94,16 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
             : "Show More"}
         </Button>
       </motion.div>
-      {page}
     </Container>
   );
 };
 
 const ItemVariant: Variants = {
-  hidden: { y: "50%", opacity: 0 },
+  hidden: { y: "30%", opacity: 0 },
   show: {
     y: 0,
     opacity: 1,
-    transition: { type: "tween", duration: 0.5, ease: "easeInOut" },
+    transition: { type: "tween", duration: 0.6, ease: "easeInOut" },
   },
 };
 
