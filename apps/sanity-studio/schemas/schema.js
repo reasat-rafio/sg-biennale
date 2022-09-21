@@ -53,6 +53,7 @@ import SupportUsVolunteer from "./objects/support-us/volunteer";
 import ExplorePage from "./documents/pages/explore";
 import ExplorePublicationAndCatalogue from "./objects/explore/publication-catalogue";
 import ExploreCuratorialEssay from "./objects/explore/curatorial-essay";
+import ExploreDirectoryOfTerm from "./objects/explore/directory-of-term";
 
 import Event from "./documents/event";
 import Category from "./documents/category";
@@ -144,5 +145,6 @@ export default createSchema({
     ExplorePage,
     ExplorePublicationAndCatalogue,
     ExploreCuratorialEssay,
+    ExploreDirectoryOfTerm,
   ]),
 });
