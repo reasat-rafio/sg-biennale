@@ -6,10 +6,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { imageUrlBuilder } from "@utils/sanity";
-// import Swiper from "swiper";
 import React from "react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 interface VolunteerProps {
   header: string;
@@ -55,16 +56,6 @@ export const Volunteer: React.FC<VolunteerProps> = ({
   cta,
   images,
 }) => {
-  // const [sliderRef, instanceRef] = useKeenSlider(
-  //   {
-  //     slideChanged() {
-  //       console.log("slide changed");
-  //     },
-  //   },
-  //   [
-  //     // add plugins here
-  //   ]
-  // );
   return (
     <Container className="2xl:py-max lg:py-xxl py-xl">
       <section className="grid grid-cols-12 | items-center">
@@ -81,12 +72,36 @@ export const Volunteer: React.FC<VolunteerProps> = ({
           <Button>{cta.title}</Button>
         </div>
       </section>
-      {/* <Swiper>
-        <SwiperSlide>asd</SwiperSlide>
-        <SwiperSlide>asd</SwiperSlide>
-        <SwiperSlide>asd</SwiperSlide>
-      </Swiper> */}
-      <Slider className="lg:my-8 my-5" {...settings}>
+      <Swiper
+        className="pt-5"
+        speed={800}
+        slidesPerView={1.2}
+        spaceBetween={10}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1280: {
+            slidesPerView: 2.8,
+            spaceBetween: 20,
+          },
+        }}
+      >
+        {images.map((image) => (
+          <SwiperSlide>
+            <div className="p-5 h-[340px] outline-none" key={image._key}>
+              <SanityImg
+                className="w-full h-full object-cover"
+                width={400}
+                image={image}
+                builder={imageUrlBuilder}
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      {/* <Slider className="lg:my-8 my-5" {...settings}>
         {images.map((image) => (
           <div className="p-5 h-[330px] outline-none" key={image._key}>
             <SanityImg
@@ -97,15 +112,7 @@ export const Volunteer: React.FC<VolunteerProps> = ({
             />
           </div>
         ))}
-      </Slider>
-      {/* <div ref={ref} className="keen-slider">
-        <div className="keen-slider__slide number-slide1">1</div>
-        <div className="keen-slider__slide number-slide2">2</div>
-        <div className="keen-slider__slide number-slide3">3</div>
-        <div className="keen-slider__slide number-slide4">4</div>
-        <div className="keen-slider__slide number-slide5">5</div>
-        <div className="keen-slider__slide number-slide6">6</div>
-      </div> */}
+      </Slider> */}
     </Container>
   );
 };

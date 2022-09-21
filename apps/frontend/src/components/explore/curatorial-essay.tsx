@@ -4,8 +4,7 @@ import { useRouter } from "next/router";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { Button } from "@components/ui/button";
-import { useEffect, useRef, useState } from "react";
-import { useIntersection } from "@lib/hooks";
+import { useEffect, useState } from "react";
 
 interface EssayProps {
   _key: string;
@@ -39,9 +38,6 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   header,
   curatorialEssays,
 }) => {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const intersecting = useIntersection(sectionRef)?.isIntersecting;
-
   const [page, setPage] = useState(1);
   const [sortedCuratorialEssays, setCuratorialEssays] = useState(
     curatorialEssays.slice(0, 6)
