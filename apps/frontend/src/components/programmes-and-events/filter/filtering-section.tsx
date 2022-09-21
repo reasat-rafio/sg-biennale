@@ -1,23 +1,27 @@
 import { ChevronArrow } from "@components/icons/chevron-arrow";
+import useProgrammesAndEventsStore from "@stores/programme-event-store";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 import { useState } from "react";
 import { Filters } from "./filters";
 
 interface FilteringSectionProps {}
 
 export const FilteringSection: React.FC<FilteringSectionProps> = ({}) => {
-  const [showFilters, setShowFilters] = useState(true);
+  const { allCategories } = useProgrammesAndEventsStore();
 
   return (
-    <section>
-      <div
-        className="flex w-min | py-2 | border-black border-t "
-        onClick={() => setShowFilters((prev) => !prev)}
-      >
-        <h6 className="flex-1">Filter</h6>
-        <ChevronArrow />
+    <section className="my-10">
+      <div className="">
+        {allCategories.map(({ name, _id }) => (
+          <span
+            key={_id}
+            className=" text-body-1 text-gray--700 font-manrope flex justify-center items-center"
+          >
+            {name}
+          </span>
+        ))}
       </div>
-
-      {showFilters && <Filters />}
     </section>
   );
 };

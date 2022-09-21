@@ -91,21 +91,25 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
   ]);
 
   return (
-    <Container>
+    <>
       <FilteringLogic>
         {renderObjectArray(page.sections, {
           pageHeading: useCallback(
             (data: PageHeaderProps) => (
-              <PageHeading {...data} color="#292221" />
+              <Container>
+                <PageHeading {...data} color="#292221" />
+              </Container>
             ),
             []
           ),
         })}
 
-        {/* <FilteringSection /> */}
+        <Container>
+          <FilteringSection />
+        </Container>
         {/* <ProgrammesEventList /> */}
       </FilteringLogic>
-    </Container>
+    </>
   );
 };
 

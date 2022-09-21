@@ -50,6 +50,9 @@ import SupportUsPage from "./documents/pages/support-us";
 import SupportUsDonation from "./objects/support-us/donation";
 import SupportUsVolunteer from "./objects/support-us/volunteer";
 
+import ExplorePage from "./documents/pages/explore";
+import ExplorePublicationAndCatalogue from "./objects/explore/publication-catalogue";
+
 import Event from "./documents/event";
 import Category from "./documents/category";
 import EventsListing from "./documents/pages/event-listing";
@@ -136,5 +139,8 @@ export default createSchema({
     SupportUsPage,
     SupportUsDonation,
     SupportUsVolunteer,
+
+    ExplorePage,
+    ExplorePublicationAndCatalogue,
   ]),
 });
