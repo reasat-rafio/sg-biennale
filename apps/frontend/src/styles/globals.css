@@ -67,7 +67,8 @@ body.locked {
   );
 }
 
-.publicationCatalogueCarousel .swiper-scrollbar {
+.publicationCatalogueCarousel .swiper-scrollbar,
+.directorsCarousel .swiper-scrollbar {
   display: block !important;
   width: 200px !important;
   height: 9px !important;
@@ -78,6 +79,7 @@ body.locked {
   background-color: #cccccc;
 }
 
+.directorsCarousel .swiper-scrollbar .swiper-scrollbar-drag,
 .publicationCatalogueCarousel .swiper-scrollbar .swiper-scrollbar-drag {
   background-color: #4d4d4d;
 }

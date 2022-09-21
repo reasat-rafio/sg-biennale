@@ -9,6 +9,7 @@ import { Container } from "@components/ui/container";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { CuratorialEssay } from "@components/explore/curatorial-essay";
 import { PublicationsCatalogues } from "@components/explore/publication-catalogue";
+import { DirectoryOfTerm } from "@components/explore/directory-of-term";
 
 const query = pageQuery(groq`
     *[_type == "explorePage"][0]{
@@ -51,6 +52,7 @@ const Explore: NextPage<SanityProps> = (props) => {
         ),
         "explorePage.publicationAndCatalogue": PublicationsCatalogues,
         "explorePage.curatorialEssay": CuratorialEssay,
+        "explorePage.directoryOfTerm": DirectoryOfTerm,
       })}
     </div>
   );

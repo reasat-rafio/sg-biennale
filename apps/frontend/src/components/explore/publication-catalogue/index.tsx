@@ -19,7 +19,7 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
   publicationsAndCatalogues,
 }) => {
   return (
-    <section className="py-max">
+    <section className="pt-max">
       <Container className="flex items-center | space-x-5">
         <h2 className="flex-1 | font-medium lg:text-heading-6 text-2xl text-gray--400">
           {header}
@@ -31,6 +31,7 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
 
       <div className="publicationCatalogueCarousel | xl:pl-max xl:px-0 sm:px-lg px-md my-10">
         <Swiper
+          className="pb-24"
           modules={[Scrollbar]}
           speed={800}
           spaceBetween={30}
@@ -55,7 +56,7 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
           }}
         >
           {publicationsAndCatalogues.map((data) => (
-            <SwiperSlide className="pt-10 pb-24" key={data._key}>
+            <SwiperSlide className="py-10" key={data._key}>
               <PublicationCatalogue {...data} />
             </SwiperSlide>
           ))}
