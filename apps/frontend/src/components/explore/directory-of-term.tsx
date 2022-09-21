@@ -46,8 +46,9 @@ export const DirectoryOfTerm: React.FC<DirectoryOfTermProps> = ({
   }, [directors]);
 
   return (
-    <Container className="2xl:py-max lg:py-xxl py-x bg-[#F8F8F8] lg:space-y-24 space-y-12">
+    <Container className="2xl:py-max lg:py-xxl py-x bg-[#F8F8F8]">
       <motion.div
+        className="lg:space-y-24 space-y-12"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}

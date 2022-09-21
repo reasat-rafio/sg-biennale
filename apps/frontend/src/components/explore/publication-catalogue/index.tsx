@@ -21,7 +21,7 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
 }) => {
   return (
     <motion.section
-      className="pt-max"
+      className="lg:pt-max pt-x"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -37,7 +37,7 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
 
       <div className="publicationCatalogueCarousel | xl:pl-max xl:px-0 sm:px-lg px-md my-10">
         <Swiper
-          className="pb-24"
+          className="xl:pb-24 lg:pb-12 pb-2"
           modules={[Scrollbar]}
           speed={800}
           spaceBetween={30}
