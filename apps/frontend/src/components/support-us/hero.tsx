@@ -32,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({ heading, image, tagline }) => {
           width={2000}
         />
       </motion.figure>
-      <Container className="!mx-0 flex flex-col space-y-3 | xl:pt-xl md:pt-x pt-lg | justify-start items-start | -translate-y-1/2">
+      <section className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md | flex flex-col space-y-3 | xl:pt-xl md:pt-x pt-lg | justify-start items-start | -translate-y-1/2">
         <motion.h1 className="overflow-hidden text-vulcanic">
           <SlideupLettersAnimation className="xl:text-heading-4 text-heading-5 font-medium">
             {heading}
@@ -55,7 +55,7 @@ export const Hero: React.FC<HeroProps> = ({ heading, image, tagline }) => {
           style={{ background: "#F3F2EC" }}
           className="h-[6px] w-[235px]"
         />
-      </Container>
+      </section>
     </section>
   );
 };
