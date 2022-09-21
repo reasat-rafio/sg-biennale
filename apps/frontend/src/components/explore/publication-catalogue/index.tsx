@@ -27,16 +27,26 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
         </span>
       </Container>
 
-      <div className="xl:pl-max my-10">
+      <div className="xl:pl-max xl:px-0  sm:px-lg px-md my-10">
         <Swiper
+          speed={800}
+          spaceBetween={30}
           breakpoints={{
             640: {
               slidesPerView: 1,
-              spaceBetween: 10,
+              spaceBetween: 30,
             },
             1024: {
-              slidesPerView: 1.4,
+              slidesPerView: 1,
               spaceBetween: 30,
+            },
+            1280: {
+              slidesPerView: 1.2,
+              spaceBetween: 30,
+            },
+            1536: {
+              slidesPerView: 1.7,
+              spaceBetween: 100,
             },
           }}
         >
