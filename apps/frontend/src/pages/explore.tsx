@@ -3,7 +3,11 @@ import { SanityProps } from "next-sanity-extra";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { pageQuery } from "@lib/query";
 import { groq } from "next-sanity";
-import { withDimensions } from "sanity-react-extra";
+import { renderObjectArray, withDimensions } from "sanity-react-extra";
+import { useCallback } from "react";
+import { Container } from "@components/ui/container";
+import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
+import { CuratorialEssay } from "@components/explore/curatorial-essay";
 
 const query = pageQuery(groq`
     *[_type == "explorePage"][0]{
@@ -33,7 +37,21 @@ export const getStaticProps: GetStaticProps = async (
 const Explore: NextPage<SanityProps> = (props) => {
   const { page } = useSanityQuery(query, props).data;
 
-  return <div></div>;
+  return (
+    <div>
+      {renderObjectArray(page.sections, {
+        pageHeading: useCallback(
+          (data: PageHeaderProps) => (
+            <Container>
+              <PageHeading {...data} color="#292221" />
+            </Container>
+          ),
+          []
+        ),
+        "explorePage.curatorialEssay": CuratorialEssay,
+      })}
+    </div>
+  );
 };
 
 export default Explore;
