@@ -1,10 +1,12 @@
 import { Container } from "@components/ui/container";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import {
   PublicationsAndCatalogue,
   PublicationCatalogue,
 } from "./publication-catalogue";
+import "swiper/css";
+import "swiper/css/scrollbar";
+import { Scrollbar } from "swiper";
 
 interface PublicationCatalogueProps {
   type: string;
@@ -27,10 +29,12 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
         </span>
       </Container>
 
-      <div className="xl:pl-max xl:px-0  sm:px-lg px-md my-10">
+      <div className="publicationCatalogueCarousel | xl:pl-max xl:px-0 sm:px-lg px-md my-10">
         <Swiper
+          modules={[Scrollbar]}
           speed={800}
           spaceBetween={30}
+          scrollbar={{ draggable: true, dragSize: 100 }}
           breakpoints={{
             640: {
               slidesPerView: 1,
@@ -51,7 +55,7 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
           }}
         >
           {publicationsAndCatalogues.map((data) => (
-            <SwiperSlide className="py-10" key={data._key}>
+            <SwiperSlide className="pt-10 pb-24" key={data._key}>
               <PublicationCatalogue {...data} />
             </SwiperSlide>
           ))}

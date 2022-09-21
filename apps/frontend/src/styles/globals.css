@@ -66,3 +66,18 @@ body.locked {
     rgba(255, 255, 255, 1) 80%
   );
 }
+
+.publicationCatalogueCarousel .swiper-scrollbar {
+  display: block !important;
+  width: 200px !important;
+  height: 9px !important;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  background-color: #cccccc;
+}
+
+.publicationCatalogueCarousel .swiper-scrollbar .swiper-scrollbar-drag {
+  background-color: #4d4d4d;
+}
