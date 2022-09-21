@@ -1,7 +1,5 @@
 import { ChevronArrow } from "@components/icons/chevron-arrow";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
 import { useState } from "react";
 import { Filters } from "./filters";
 
