@@ -13,6 +13,7 @@ const ExplorePage = {
       of: [
         { type: "pageHeading" },
         { type: "explorePage.publicationAndCatalogue" },
+        { type: "explorePage.curatorialEssay" },
       ],
     },
   ],
