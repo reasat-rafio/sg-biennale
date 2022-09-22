@@ -20,6 +20,7 @@ const query = groq`{
         title,
         eventStartDate,
         eventEndDate,
+        description,
         venue[]->{
           name,
           slug

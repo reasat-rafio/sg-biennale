@@ -30,12 +30,12 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({}) => {
   const viewLessAction = () => {};
 
   return (
-    <section>
+    <section className="pb-[50vh]">
       <div className="grid grid-cols-12 | lg:gap-8 gap-4">
         {onScreenProgrammesAndEvents?.map((pgrmEvnt, index) => (
           <ProgrammeEventListCard
+            {...pgrmEvnt}
             key={pgrmEvnt._id}
-            data={pgrmEvnt}
             index={index}
             imgPositionIngAlgo={imgPositionIngAlgo}
           />

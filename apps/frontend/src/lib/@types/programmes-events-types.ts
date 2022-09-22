@@ -7,12 +7,13 @@ export interface IPgrammeEvents {
   category: Category[];
   images: SanityImage[];
   venue: Venue[];
-  price: string;
+  price?: string;
   title: string;
   eventStartDate: Date;
   eventEndDate?: Date;
   eventStartTime: number;
   eventEndTime: number;
+  description: any;
   slug: Slug;
 }
 
