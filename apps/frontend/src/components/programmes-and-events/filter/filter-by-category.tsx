@@ -53,29 +53,29 @@ export const FilterByCategory: React.FC<{}> = () => {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm | scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 ">
-              {allCategories.map((person, personIdx) => (
+              {allCategories.map((category) => (
                 <Listbox.Option
-                  key={personIdx}
-                  onClick={() => onClickAction(person)}
+                  key={category._id}
+                  onClick={() => onClickAction(category)}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-10 pr-4 ${
                       active ? "bg-vulcanic text-gray--700" : "text-gray-900"
                     }`
                   }
-                  value={person}
+                  value={category}
                 >
                   {() => (
                     <>
                       <span
                         className={`block truncate ${
-                          person.name === selectedCategory
+                          category.name === selectedCategory
                             ? "font-medium"
                             : "font-normal"
                         }`}
                       >
-                        {person.name}
+                        {category.name}
                       </span>
-                      {person.name === selectedCategory ? (
+                      {category.name === selectedCategory ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-love">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

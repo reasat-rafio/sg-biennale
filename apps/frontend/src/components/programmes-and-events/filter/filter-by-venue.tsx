@@ -1,32 +1,25 @@
+import { Listbox, Transition } from "@headlessui/react";
 import { AllVenuesProps } from "@lib/@types/programmes-events-types";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
-import clsx from "clsx";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
-import { filterHeaderStyles } from "./filters";
+import { Fragment, useEffect, useState } from "react";
 
-interface FilterByVenueProps {
-  className?: string;
-}
-
-export const FilterByVenue: React.FC<FilterByVenueProps> = ({ className }) => {
+export const FilterByVenue: React.FC<{}> = () => {
   const router = useRouter();
 
   const { allVenues } = useProgrammesAndEventsStore();
   const [selectedVenue, setSelectedVenue] = useState<null | string>(null);
 
-  const onChangeAction = (e: ChangeEvent<HTMLSelectElement>) => {
-    const [findSelectedVenue] = allVenues.filter(
-      (vanue) => vanue.slug.current === e.target.value
-    );
+  const onChangeAction = (venue: AllVenuesProps) => {
+    setSelectedVenue(venue.name);
+
     router.push(
-      { query: { ...router.query, venue: findSelectedVenue.slug.current } },
+      { query: { ...router.query, venue: venue.slug.current } },
       undefined,
       {
         shallow: true,
       }
     );
-    setSelectedVenue(findSelectedVenue.slug.current);
   };
 
   /*
@@ -42,24 +35,76 @@ export const FilterByVenue: React.FC<FilterByVenueProps> = ({ className }) => {
       const [matchedVanue] = allVenues.filter(
         ({ slug }) => slug.current === selectedVenueFromUrlQuery
       );
-      setSelectedVenue(matchedVanue.slug.current);
+      setSelectedVenue(matchedVanue.name);
     }
   }, [router, allVenues]);
 
   return (
-    <div className={clsx(className)}>
-      <h6 className={filterHeaderStyles}>Venue</h6>
-
-      <select
-        onChange={onChangeAction}
-        value={selectedVenue ?? allVenues[0]?.slug.current}
-      >
-        {allVenues.map(({ _id, name, slug }) => (
-          <option value={slug.current} key={_id}>
-            {name}
-          </option>
-        ))}
-      </select>
+    <div className="w-72 z-20">
+      <Listbox value={selectedVenue}>
+        <div className="relative mt-1">
+          <Listbox.Button className="flex items-center w-[300px] | space-x-4 p-3 | border-b border-black cursor-pointer">
+            <span className="flex-1 text-left block truncate">
+              {selectedVenue ? selectedVenue : "See by Venue"}
+            </span>
+            <img className="w-[18px]" src="/icons/sort.svg" alt="sort icon" />
+          </Listbox.Button>
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm | scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 ">
+              {allVenues.map((venue) => (
+                <Listbox.Option
+                  key={venue._id}
+                  onClick={() => onChangeAction(venue)}
+                  className={({ active }) =>
+                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      active ? "bg-vulcanic text-gray--700" : "text-gray-900"
+                    }`
+                  }
+                  value={venue}
+                >
+                  {() => (
+                    <>
+                      <span
+                        className={`block truncate ${
+                          venue.name === selectedVenue
+                            ? "font-medium"
+                            : "font-normal"
+                        }`}
+                      >
+                        {venue.name}
+                      </span>
+                      {venue.name === selectedVenue ? (
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-love">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="h-5 w-5"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4.5 12.75l6 6 9-13.5"
+                            />
+                          </svg>
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Transition>
+        </div>
+      </Listbox>
     </div>
   );
 };

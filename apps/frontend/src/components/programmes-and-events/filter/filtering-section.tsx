@@ -16,7 +16,9 @@ export const FilteringSection: React.FC<FilteringSectionProps> = ({}) => {
         <h2 className="font-medium text-heading-6">All Events</h2>
       </header>
       <div className="flex space-x-5">
-        <div className="flex-1">{/* <FilterByVenue /> */}</div>
+        <div className="flex-1">
+          <FilterByVenue />
+        </div>
         <div className="flex ">
           <FilterByCategory />
         </div>
