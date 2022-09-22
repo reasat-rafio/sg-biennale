@@ -30,7 +30,7 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({}) => {
   const viewLessAction = () => {};
 
   return (
-    <section className="pb-[50vh]">
+    <section className="pb-[50vh] pt-2">
       <div className="grid grid-cols-12 | lg:gap-8 gap-4">
         {onScreenProgrammesAndEvents?.map((pgrmEvnt, index) => (
           <ProgrammeEventListCard

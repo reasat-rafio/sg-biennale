@@ -1,6 +1,3 @@
-import { FilteringSection } from "@components/programmes-and-events/filter/filtering-section";
-import { FilteringLogic } from "@components/programmes-and-events/filter/filtering-logic";
-import { ProgrammesEventList } from "@components/programmes-and-events/programmes-events-list";
 import { Container } from "@components/ui/container";
 import { siteQuery } from "@lib/query";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
@@ -11,6 +8,7 @@ import { SanityProps } from "next-sanity-extra";
 import { useCallback, useEffect } from "react";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { renderObjectArray } from "sanity-react-extra";
+import { AllEvents } from "@components/programmes-and-events/all-events";
 
 const query = groq`{
   "site": ${siteQuery},
@@ -91,23 +89,17 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   return (
     <>
-      <FilteringLogic>
-        {renderObjectArray(page.sections, {
-          pageHeading: useCallback(
-            (data: PageHeaderProps) => (
-              <Container>
-                <PageHeading {...data} color="#292221" />
-              </Container>
-            ),
-            []
+      {renderObjectArray(page.sections, {
+        pageHeading: useCallback(
+          (data: PageHeaderProps) => (
+            <Container>
+              <PageHeading {...data} color="#292221" />
+            </Container>
           ),
-        })}
-
-        <Container>
-          <FilteringSection />
-          <ProgrammesEventList />
-        </Container>
-      </FilteringLogic>
+          []
+        ),
+      })}
+      <AllEvents />
     </>
   );
 };

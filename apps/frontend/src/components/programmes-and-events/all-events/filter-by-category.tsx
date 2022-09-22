@@ -37,10 +37,10 @@ export const FilterByCategory: React.FC<{}> = () => {
     );
   };
   return (
-    <div className="w-72 z-20">
+    <div className="z-20 col-span-7">
       <Listbox value={selectedCategory}>
         <div className="relative mt-1">
-          <Listbox.Button className="flex items-center w-[300px] | space-x-4 p-3 | border-b border-black cursor-pointer">
+          <Listbox.Button className="flex items-center w-full | space-x-4 p-3 | border-b border-black cursor-pointer">
             <span className="flex-1 text-left block truncate">
               {selectedCategory ? selectedCategory : "Category"}
             </span>

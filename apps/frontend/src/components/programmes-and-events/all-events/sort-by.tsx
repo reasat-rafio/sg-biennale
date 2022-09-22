@@ -3,10 +3,10 @@ import { Fragment } from "react";
 
 export const SortBy: React.FC<{}> = () => {
   return (
-    <div className="z-20">
+    <div className="z-20 col-span-5">
       <Listbox>
         <div className="relative mt-1">
-          <Listbox.Button className="flex items-center w-[300px] | space-x-4 p-3 | border-b border-black cursor-pointer">
+          <Listbox.Button className="flex items-center w-full | space-x-4 p-3 | border-b border-black cursor-pointer">
             <span className="flex-1 text-left block truncate">Sort By</span>
             <img className="w-[18px]" src="/icons/lines.svg" alt="sort icon" />
           </Listbox.Button>
