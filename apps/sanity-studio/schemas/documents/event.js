@@ -58,46 +58,20 @@ const Event = {
         },
       ],
     },
+
     {
-      name: "eventStartDate",
-      description: "When does the event start?",
-      type: "date",
+      title: "Start At",
+      name: "startAt",
+      type: "datetime",
       validation: (Rule) => Rule.required(),
-      options: {
-        dateFormat: "YYYY-MM-DD",
-        calendarTodayLabel: "Today",
-      },
     },
+
     {
-      name: "eventEndDate",
-      description:
-        "When does the event end?\n PS: keep this empty if the event is only a day long",
-      type: "date",
-      options: {
-        dateFormat: "YYYY-MM-DD",
-      },
+      title: "End At",
+      name: "endAt",
+      type: "datetime",
     },
-    {
-      name: "eventStartTime",
-      title: "Event Start Time",
-      type: "number",
-      inputComponent: TimeToSecondsField,
-      description: "Time in the podcast when ad should start",
-      validation: (Rule) => Rule.required(),
-      options: {
-        placeholder: "Value in 00:00 format",
-      },
-    },
-    {
-      name: "eventEndTime",
-      title: "Event End Time",
-      type: "number",
-      inputComponent: TimeToSecondsField,
-      description: "Time in the podcast when ad should start",
-      options: {
-        placeholder: "Value in 00:00 format",
-      },
-    },
+
     {
       name: "price",
       type: "string",

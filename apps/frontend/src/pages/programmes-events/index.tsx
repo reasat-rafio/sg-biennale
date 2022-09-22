@@ -18,17 +18,15 @@ const query = groq`{
   "events":*[_type == "events"][]{
         _id,
         title,
-        eventStartDate,
-        eventEndDate,
         description,
+        price,
+        slug,
+        startAt,
+        endAt,
         venue[]->{
           name,
           slug
         },
-        price,
-        eventStartTime,
-        eventEndTime,
-        slug,
         category[]->,
         images[] {
         asset->{

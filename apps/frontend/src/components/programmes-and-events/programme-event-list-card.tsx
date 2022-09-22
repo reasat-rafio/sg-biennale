@@ -1,15 +1,13 @@
-import { Calender } from "@components/icons/calender";
 import { Clock } from "@components/icons/clock";
-import { Location } from "@components/icons/location";
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import clsx from "clsx";
 import { SanityImg } from "sanity-react-extra";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import { convertDate, convertSecondsToAMPM } from "@lib/helpers/global.helpers";
 import { motion, MotionValue, transform, useMotionValue } from "framer-motion";
 import { MouseEvent, useState } from "react";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { usePortableTextTruncate } from "@lib/hooks";
+import { format } from "date-fns";
 
 interface ProgrammeEventListCardProps extends IPgrammeEvents {
   index: number;
@@ -35,10 +33,25 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   index,
   description,
   imgPositionIngAlgo,
+  startAt,
 }) => {
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
+
+  const formattedDate = format(
+    new Date(startAt),
+    "eee, d LLL yyyy - hh:mm aaaaa'm'"
+  );
+  const containerStylings =
+    imgPositionIngAlgo[index] === 0
+      ? index % 2
+        ? `${styles.smCard} lg:col-start-8 `
+        : styles.smCard
+      : index % 2
+      ? `${styles.lgCard} lg:col-start-6`
+      : styles.lgCard;
+
   const x = useTransformSpring({
     value: screenX,
     outputRange: hovered ? [-10, 60] : [0, 0],
@@ -46,40 +59,33 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   });
   const y = useTransformSpring({
     value: screenY,
-    outputRange: hovered ? [-40, 40] : [0, 0],
+    outputRange: hovered ? [-60, 20] : [0, 0],
     physics,
   });
 
+  const onMouseEnterAction = () => setHovered(true);
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
     const width = transform([0, window.innerWidth], [0, 1])(event.clientX);
     const height = transform([0, window.innerHeight], [0, 1])(event.clientY);
     screenX.set(width);
     screenY.set(height);
   };
+  const onMouseLeaveAction = () => {
+    x.set(0);
+    y.set(0);
+    setHovered(false);
+  };
 
   return (
     <motion.article
       style={{ y: 50 * index }}
-      className={clsx(
-        "",
-        imgPositionIngAlgo[index] === 0
-          ? index % 2
-            ? `${styles.smCard} lg:col-start-8 `
-            : styles.smCard
-          : index % 2
-          ? `${styles.lgCard} lg:col-start-6`
-          : styles.lgCard
-      )}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => {
-        x.set(0);
-        y.set(0);
-        setHovered(false);
-      }}
+      className={clsx(containerStylings)}
+      onMouseEnter={onMouseEnterAction}
+      onMouseLeave={onMouseLeaveAction}
       onMouseMove={handleMouseMove}
     >
       <div className="relative flex justify-center items-center">
-        <div>
+        <div className="flex flex-col | space-y-5">
           <figure className="h-[370px]">
             <SanityImg
               className="h-full w-full object-cover"
@@ -89,10 +95,30 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
               width={600}
             />
           </figure>
-          <section>
-            <h6 className="font-medium text-heading-6">{title}</h6>
+          <section className="flex flex-col | space-y-3">
+            <div className="flex space-x-5">
+              <span className="flex items-center space-x-2">
+                <img
+                  className="h-[18px]"
+                  src="/icons/location.svg"
+                  alt="location-icon"
+                />
+                <span className="font-manrope text-gray--700 text-body-2">
+                  Tao Sik Paulo
+                </span>
+              </span>
+              <span className="flex items-center space-x-2">
+                <Clock className="h-[18px]" />
+                <span className="font-manrope text-gray--700 text-body-2">
+                  <span>{formattedDate}</span>
+                </span>
+              </span>
+            </div>
 
-            <button className=" font-medium lg:text-[18px] text-base leading-[-0.02em] text-black bg-transparent underline">
+            <h6 className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500">
+              {title}
+            </h6>
+            <button className="mr-auto pt-4 | font-medium lg:text-[18px] text-base leading-[-0.02em] text-black bg-transparent underline">
               Book Now
             </button>
           </section>

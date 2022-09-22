@@ -9,10 +9,8 @@ export interface IPgrammeEvents {
   venue: Venue[];
   price?: string;
   title: string;
-  eventStartDate: Date;
-  eventEndDate?: Date;
-  eventStartTime: number;
-  eventEndTime: number;
+  startAt: Date;
+  endAt?: Date;
   description: any;
   slug: Slug;
 }
