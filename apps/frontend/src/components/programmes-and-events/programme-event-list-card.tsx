@@ -6,7 +6,7 @@ import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { motion, MotionValue, transform, useMotionValue } from "framer-motion";
 import { MouseEvent, useState } from "react";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
-import { usePortableTextTruncate } from "@lib/hooks";
+import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 
 interface ProgrammeEventListCardProps extends IPgrammeEvents {
@@ -15,8 +15,8 @@ interface ProgrammeEventListCardProps extends IPgrammeEvents {
 }
 
 const styles = {
-  smCard: "col-span-12 lg:col-span-4",
-  lgCard: "col-span-12 lg:col-span-6",
+  smCard: "col-span-12 xl:col-span-4 lg:col-span-5",
+  lgCard: "col-span-12 lg:col-span-6 ",
 };
 
 const physics = {
@@ -34,10 +34,13 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   description,
   imgPositionIngAlgo,
   startAt,
+  venue,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
+  const [descriptionRef] = usePortableTextTruncate({ maxLength: 300 });
 
   const formattedDate = format(
     new Date(startAt),
@@ -46,10 +49,10 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   const containerStylings =
     imgPositionIngAlgo[index] === 0
       ? index % 2
-        ? `${styles.smCard} lg:col-start-8 `
+        ? `${styles.smCard} xl:col-start-9 lg:col-start-8`
         : styles.smCard
       : index % 2
-      ? `${styles.lgCard} lg:col-start-6`
+      ? `${styles.lgCard} lg:col-start-7`
       : styles.lgCard;
 
   const x = useTransformSpring({
@@ -104,7 +107,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
                   alt="location-icon"
                 />
                 <span className="font-manrope text-gray--700 text-body-2">
-                  Tao Sik Paulo
+                  {venue[0].name}
                 </span>
               </span>
               <span className="flex items-center space-x-2">
@@ -118,18 +121,27 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
             <h6 className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500">
               {title}
             </h6>
+            {windowWidth < 1024 && (
+              <div
+                ref={descriptionRef}
+                className="text-gray--700 font-manrope text-body-2"
+              >
+                <PortableText blocks={description} />
+              </div>
+            )}
             <button className="mr-auto pt-4 | font-medium lg:text-[18px] text-base leading-[-0.02em] text-black bg-transparent underline">
               Book Now
             </button>
           </section>
         </div>
-
-        <FLoatingDescription
-          x={x}
-          y={y}
-          hovered={hovered}
-          description={description}
-        />
+        {windowWidth >= 1024 && (
+          <FLoatingDescription
+            x={x}
+            y={y}
+            hovered={hovered}
+            description={description}
+          />
+        )}
       </div>
     </motion.article>
   );
