@@ -37,17 +37,17 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
 
   const x = useTransformSpring({
     value: screenX,
-    outputRange: hovered ? [-500, 500] : [0, 0],
+    outputRange: hovered ? [-100, 100] : [0, 0],
     physics,
   });
   const y = useTransformSpring({
     value: screenY,
-    outputRange: hovered ? [-200, 200] : [0, 0],
+    outputRange: hovered ? [-100, 100] : [0, 0],
     physics,
   });
   const rotate = useTransformSpring({
     value: _rotate,
-    outputRange: hovered ? [-20, 20] : [0, 0],
+    outputRange: hovered ? [-10, 15] : [0, 0],
     physics,
   });
 

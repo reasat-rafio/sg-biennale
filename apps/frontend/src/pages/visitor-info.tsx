@@ -3,7 +3,7 @@ import { Container } from "@components/ui/container";
 import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { MoreInfos } from "@components/visitor-info/more-infos";
 import { Tour } from "@components/visitor-info/tour/tour";
-import { pageQuery } from "@lib/query";
+import { pageQuery, siteQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
@@ -11,8 +11,9 @@ import { SanityProps } from "next-sanity-extra";
 import { useCallback } from "react";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
 
-const query = pageQuery(groq`
-  *[_type == "visitorInfoPage"][0]{
+const query = groq`{
+  "site": ${siteQuery},
+  "page" : *[_type == "visitorInfoPage"][0]{
     ...,
     sections[]{
         ..., 
@@ -43,7 +44,13 @@ const query = pageQuery(groq`
         }
     }
   }
-`);
+}`;
+
+// "allVenues": *[_type == "venue"]{
+//     _id,
+//     name,
+//     slug
+//   },
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext

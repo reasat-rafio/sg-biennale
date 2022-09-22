@@ -11,13 +11,18 @@ import "swiper/css/effect-fade";
 import "swiper/css/autoplay";
 import { SanityImg } from "sanity-react-extra";
 import { imageUrlBuilder } from "@utils/sanity";
-import Link from "next/link";
 import { convertDate, convertSecondsToAMPM } from "@lib/helpers/global.helpers";
 
 interface ProgrammeEventListCardProps {
   data: IPgrammeEvents;
-  className?: string;
+  index: number;
+  imgPositionIngAlgo: number[];
 }
+
+const styles = {
+  smCard: "col-span-12 lg:col-span-4",
+  lgCard: "col-span-12 lg:col-span-6",
+};
 
 export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   data: {
@@ -32,7 +37,8 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     eventEndTime,
     slug,
   },
-  className,
+  index,
+  imgPositionIngAlgo,
 }) => {
   const timeLocationAndDate = [
     { icon: <Location className="h-4 w-4" />, title: "location" },
@@ -52,59 +58,30 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
       )} - ${convertSecondsToAMPM(eventEndTime, true)}`,
     },
   ];
+
   return (
-    <div
-      className={clsx("h-[450px] | pt-4 | border-t-2 border-black", className)}
+    <article
+      className={
+        (clsx(""),
+        imgPositionIngAlgo[index] === 0
+          ? index % 2
+            ? `${styles.smCard} lg:col-start-8 `
+            : styles.smCard
+          : index % 2
+          ? `${styles.lgCard} lg:col-start-6`
+          : styles.lgCard)
+      }
     >
-      <div className="h-1/2 mb-2">
-        <Swiper
-          className="h-full"
-          modules={[Pagination, EffectFade, Autoplay]}
-          slidesPerView={1}
-          effect="fade"
-          autoplay
-          pagination={{ clickable: true }}
-        >
-          {images.map((img) => (
-            <SwiperSlide key={img.asset}>
-              <SanityImg builder={imageUrlBuilder} image={img} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-      <div className="flex flex-col space-y-3">
-        <div className="">
-          <div className="flex space-x-2">
-            <span className="flex-1">
-              {category.map(({ _id, name }) => (
-                <span className="text-sm font-medium" key={_id}>
-                  {name}{" "}
-                </span>
-              ))}
-            </span>
-            <span className="text-2xl font-medium">S${price}</span>
-          </div>
-          <h6 className="text-2xl font-medium">{title}</h6>
-        </div>
-        <div>
-          {timeLocationAndDate.map(({ icon, title }) => (
-            <div
-              className="flex items-center | space-x-2 | text-lg"
-              key={title}
-            >
-              {icon}
-              <span>{title}</span>
-            </div>
-          ))}
-        </div>
-        <div>
-          <Link href={`/programmes-events/${slug.current}`}>
-            <a className="px-4 py-1 | bg-black text-white | rounded-3xl">
-              Book
-            </a>
-          </Link>
-        </div>
-      </div>
-    </div>
+      <figure className="h-[370px]">
+        <SanityImg
+          className="h-full w-full object-cover"
+          builder={imageUrlBuilder}
+          image={images[0]}
+          alt=""
+          width={600}
+        />
+      </figure>
+      <section></section>
+    </article>
   );
 };

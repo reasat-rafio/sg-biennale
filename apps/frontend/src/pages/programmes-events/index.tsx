@@ -106,8 +106,8 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
         <Container>
           <FilteringSection />
+          <ProgrammesEventList />
         </Container>
-        {/* <ProgrammesEventList /> */}
       </FilteringLogic>
     </>
   );
