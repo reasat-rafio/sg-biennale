@@ -47,7 +47,7 @@ export const FilterByVenue: React.FC<{}> = () => {
             <span className="flex-1 text-left block truncate">
               {selectedVenue ? selectedVenue : "See by Venue"}
             </span>
-            <img className="w-[18px]" src="/icons/sort.svg" alt="sort icon" />
+            <img className="w-[18px]" src="/icons/lines.svg" alt="sort icon" />
           </Listbox.Button>
           <Transition
             as={Fragment}

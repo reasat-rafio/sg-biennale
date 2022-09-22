@@ -1,6 +1,6 @@
-import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import { FilterByCategory } from "./filter-by-category";
 import { FilterByVenue } from "./filter-by-venue";
+import { SortBy } from "./sort-by";
 
 interface FilteringSectionProps {}
 
@@ -15,6 +15,7 @@ export const FilteringSection: React.FC<FilteringSectionProps> = ({}) => {
           <FilterByVenue />
         </div>
         <div className="flex ">
+          <SortBy />
           <FilterByCategory />
         </div>
       </div>
