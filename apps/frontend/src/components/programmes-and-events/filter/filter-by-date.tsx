@@ -1,14 +1,11 @@
 import clsx from "clsx";
-import { filterHeaderStyles } from "./filters";
 
-interface FilterByDateProps {
-  className?: string;
-}
+interface FilterByDateProps {}
 
 export const FilterByDate: React.FC<FilterByDateProps> = ({ className }) => {
   return (
     <div className={clsx(className)}>
-      <h6 className={filterHeaderStyles}>Dates</h6>
+      {/* <h6 className={filterHeaderStyles}>Dates</h6> */}
 
       <ul className="flex flex-wrap justify-between | gap-2">
         <li className=" ">

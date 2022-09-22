@@ -1,15 +1,10 @@
-import { ChevronArrow } from "@components/icons/chevron-arrow";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
-import { useState } from "react";
 import { FilterByCategory } from "./filter-by-category";
 import { FilterByVenue } from "./filter-by-venue";
-import { Filters } from "./filters";
 
 interface FilteringSectionProps {}
 
 export const FilteringSection: React.FC<FilteringSectionProps> = ({}) => {
-  const { allCategories } = useProgrammesAndEventsStore();
-
   return (
     <section className="my-10">
       <header>
