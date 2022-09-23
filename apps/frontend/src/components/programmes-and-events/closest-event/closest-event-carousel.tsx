@@ -1,7 +1,7 @@
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import { useWindowSize } from "@lib/hooks";
 import { motion, Point } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Backside } from "./backside";
 import { FrontSide } from "./front-side";
 
@@ -13,7 +13,7 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-const gap = 3;
+const gapInPixel = 25;
 
 const transition = (index: number) => ({
   left: {
@@ -32,6 +32,7 @@ const transition = (index: number) => ({
 export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
   closestEventArr,
 }) => {
+  const carouselRef = useRef<HTMLElement | null>(null);
   const windowWidth = useWindowSize()?.width ?? 0;
   const [position, setPosition] = useState(1);
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
@@ -41,10 +42,11 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
   const [cardsPerView, setCardsperView] = useState(3);
 
   useEffect(() => {
-    if (windowWidth >= 1024) setCardsperView(3);
+    if (windowWidth >= 1280) setCardsperView(3);
+    else if (windowWidth < 1280 && windowWidth >= 1024) setCardsperView(2.5);
     else if (windowWidth < 1024 && windowWidth >= 768) setCardsperView(2);
     else setCardsperView(1);
-  }, [windowWidth]);
+  }, [windowWidth, setCardsperView]);
 
   const paginate = (newDirection: number) => {
     setPosition(position + newDirection);
@@ -69,7 +71,10 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
   };
 
   return (
-    <section className="relative h-[70vh] flex flex-col items-center justify-center overflow-hidden">
+    <section
+      ref={carouselRef}
+      className="relative h-[70vh] flex flex-col items-center justify-center overflow-hidden"
+    >
       {closestEventArr.map(
         ({ _id, images, title, description, slug, startAt, venue }, index) => {
           const firstIndex = index === 0;
@@ -85,32 +90,37 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
 
           const initialPosition =
             (index + 1 - position) *
-            ((1 / (cardsPerView - 1)) * 50 + gap / cardsPerView);
+            ((1 / (Math.max(cardsPerView, 2) - 1)) *
+              ((100 / cardsPerView) * (Math.max(cardsPerView, 2) - 1)));
+
           const positionLeft = oneCardPerView
             ? initialPosition
             : activeCardIndex !== null && activeCardIndex < index
-            ? initialPosition + (1 / (cardsPerView + 1)) * 100
+            ? initialPosition + (1 / cardsPerView) * 100
             : initialPosition;
 
           useEffect(() => {
-            if (firstIndex && positionLeft >= 100 / cardsPerView)
+            if (firstIndex && positionLeft >= 70 / cardsPerView)
               setDisableSwipingRight(true);
-            else if (firstIndex && positionLeft < 100 / cardsPerView)
+            else if (firstIndex && positionLeft < 70 / cardsPerView) {
               setDisableSwipingRight(false);
-            if (lastIndex && positionLeft <= 10) setDisableSwipingLeft(true);
-            else if (lastIndex && positionLeft > 10)
+            }
+
+            if (lastIndex && positionLeft <= 30) setDisableSwipingLeft(true);
+            else if (lastIndex && positionLeft > 30)
               setDisableSwipingLeft(false);
-          }, [positionLeft, windowWidth]);
+          }, [positionLeft, windowWidth, cardsPerView]);
 
           return (
             <motion.article
               key={_id}
-              className="flex flex-col overflow-hidden absolute top-0 h-[500px] "
+              className="flex flex-col overflow-hidden absolute top-0 h-[500px]"
               initial={{ scale: 0.6 }}
               animate={{
-                left: `${positionLeft}vw`,
+                left: `calc(${positionLeft}% - ${gapInPixel}px)`,
                 width: cardWidth,
               }}
+              style={{ padding: `0 ${gapInPixel}px` }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={transition(index)}
