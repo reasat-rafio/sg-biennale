@@ -13,6 +13,8 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
+const gap = 3;
+
 const transition = (index: number) => ({
   left: {
     type: "tween",
@@ -67,13 +69,13 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
   };
 
   return (
-    <section className="relative h-[70vh] flex flex-col items-center justify-center">
+    <section className="relative h-[70vh] flex flex-col items-center justify-center overflow-hidden">
       {closestEventArr.map(
         ({ _id, images, title, description, slug, startAt, venue }, index) => {
           const firstIndex = index === 0;
           const lastIndex = index === closestEventArr.length - 1;
           const fullWidth = (1 / cardsPerView) * 2 * 100;
-          const halfWidth = (1 / cardsPerView) * 100 + 5;
+          const halfWidth = (1 / cardsPerView) * 100;
           const oneCardPerView = cardsPerView === 1;
           const cardWidth = oneCardPerView
             ? `${halfWidth}%`
@@ -82,12 +84,13 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
             : `${halfWidth}%`;
 
           const initialPosition =
-            (index + 1 - position) * ((1 / cardsPerView) * 100);
+            (index + 1 - position) *
+            ((1 / (cardsPerView - 1)) * 50 + gap / cardsPerView);
           const positionLeft = oneCardPerView
-            ? initialPosition * 1
+            ? initialPosition
             : activeCardIndex !== null && activeCardIndex < index
-            ? initialPosition + (1 / cardsPerView) * 100
-            : initialPosition * 1;
+            ? initialPosition + (1 / (cardsPerView + 1)) * 100
+            : initialPosition;
 
           useEffect(() => {
             if (firstIndex && positionLeft >= 100 / cardsPerView)
@@ -102,7 +105,7 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
           return (
             <motion.article
               key={_id}
-              className="flex flex-col overflow-hidden absolute top-0 h-[500px]"
+              className="flex flex-col overflow-hidden absolute top-0 h-[500px] "
               initial={{ scale: 0.6 }}
               animate={{
                 left: `${positionLeft}vw`,

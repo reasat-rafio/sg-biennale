@@ -41,9 +41,7 @@ export const Backside: React.FC<BacksideProps> = (props) => {
 const SlideRight: React.FC<BacksideProps> = ({ active, description, ref }) => {
   return (
     <motion.div
-      className={
-        "absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | pl-5 pr-10 box-border ml-auto | bg-white"
-      }
+      className="absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | pl-5 pr-10 box-border ml-auto | bg-[#F8F8F8]"
       initial="initial"
       onClick={(e) => e.stopPropagation()}
       animate={active ? "animate" : "initial"}
