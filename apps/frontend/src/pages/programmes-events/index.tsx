@@ -9,6 +9,7 @@ import { useCallback, useEffect } from "react";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { renderObjectArray } from "sanity-react-extra";
 import { AllEvents } from "@components/programmes-and-events/all-events";
+import { ClosestEvent } from "@components/programmes-and-events/closest-event";
 
 const query = groq`{
   "site": ${siteQuery},
@@ -99,6 +100,7 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
           []
         ),
       })}
+      <ClosestEvent events={events} />
       <AllEvents />
     </>
   );

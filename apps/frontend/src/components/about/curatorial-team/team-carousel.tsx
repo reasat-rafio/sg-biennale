@@ -1,6 +1,5 @@
 import { TeamCollection } from "@lib/@types/about.types";
 import { useWindowSize } from "@lib/hooks";
-import clsx from "clsx";
 import { motion, Point } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BackSide } from "./back-side";
@@ -112,9 +111,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
           return (
             <motion.div
               key={_key}
-              className={clsx(
-                "flex flex-col overflow-hidden absolute top-0 h-[500px]"
-              )}
+              className="flex flex-col overflow-hidden absolute top-0 h-[500px]"
               initial={{ scale: 0.4 }}
               animate={{
                 left: `${positionLeft}vw`,
