@@ -42,7 +42,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
       </figure>
 
       <div className="mt-20 relative z-20 py-10">
-        <h6 className="w-full | px-5 | text-center text-2xl font-medium text-white ">
+        <h6 className="w-full | px-5 | text-2xl font-medium text-white ">
           {title}
         </h6>
       </div>

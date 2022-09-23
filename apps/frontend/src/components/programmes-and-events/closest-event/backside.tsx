@@ -1,8 +1,10 @@
+import { Clock } from "@components/icons/clock";
 import { Button } from "@components/ui/button";
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import { usePortableTextTruncate } from "@lib/hooks";
 import { PortableText } from "@utils/sanity";
 import { motion, Variants } from "framer-motion";
+import { format } from "date-fns";
 
 interface BacksideProps {
   description: IPgrammeEvents["description"];
@@ -38,10 +40,21 @@ export const Backside: React.FC<BacksideProps> = (props) => {
   );
 };
 
-const SlideRight: React.FC<BacksideProps> = ({ active, description, ref }) => {
+const SlideRight: React.FC<BacksideProps> = ({
+  active,
+  description,
+  ref,
+  venue,
+  startAt,
+}) => {
+  const formattedDate = format(
+    new Date(startAt),
+    "eee, d LLL yyyy - hh:mm aaaaa'm'"
+  );
+
   return (
     <motion.div
-      className="absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | pl-5 pr-10 box-border ml-auto | bg-[#F8F8F8]"
+      className="absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | p-8 box-border ml-auto | bg-[#F8F8F8]"
       initial="initial"
       onClick={(e) => e.stopPropagation()}
       animate={active ? "animate" : "initial"}
@@ -51,13 +64,32 @@ const SlideRight: React.FC<BacksideProps> = ({ active, description, ref }) => {
       }}
       variants={SlideRightAnimationVariants}
     >
-      <div className="flex-1 flex justify-center items-center">
-        <span className="font-mono text-body-1 text-gray-500" ref={ref}>
+      <div className="flex-1 flex ">
+        <span className="text-body-2 font-manrope text-gray--700" ref={ref}>
           <PortableText blocks={description} />
         </span>
       </div>
-      <div className="w-full">
-        <Button>View Artist</Button>
+      <div className="w-full space-y-10">
+        <div className="space-y-3">
+          <span className="flex items-center space-x-2">
+            <img
+              className="h-[18px]"
+              src="/icons/location.svg"
+              alt="location-icon"
+            />
+            <span className="font-manrope text-gray--700 text-body-2">
+              {venue[0].name}
+            </span>
+          </span>
+          <span className="flex items-center space-x-2">
+            <Clock className="h-[18px]" />
+            <span className="font-manrope text-gray--700 text-body-2">
+              <span>{formattedDate}</span>
+            </span>
+          </span>
+        </div>
+
+        <Button className="w-full">Book Now</Button>
       </div>
     </motion.div>
   );

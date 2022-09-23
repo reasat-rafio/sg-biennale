@@ -100,10 +100,16 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
             : initialPosition;
 
           useEffect(() => {
-            if (firstIndex && positionLeft >= 70 / cardsPerView)
-              setDisableSwipingRight(true);
-            else if (firstIndex && positionLeft < 70 / cardsPerView) {
-              setDisableSwipingRight(false);
+            if (firstIndex) {
+              if (cardsPerView === 1) {
+                if (positionLeft >= 0) setDisableSwipingRight(true);
+                else if (positionLeft < 0) setDisableSwipingRight(false);
+              } else {
+                if (positionLeft >= 70 / cardsPerView)
+                  setDisableSwipingRight(true);
+                else if (positionLeft < 70 / cardsPerView)
+                  setDisableSwipingRight(false);
+              }
             }
 
             if (lastIndex && positionLeft <= 30) setDisableSwipingLeft(true);
