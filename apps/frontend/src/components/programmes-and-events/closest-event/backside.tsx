@@ -5,6 +5,7 @@ import { usePortableTextTruncate } from "@lib/hooks";
 import { PortableText } from "@utils/sanity";
 import { motion, Variants } from "framer-motion";
 import { format } from "date-fns";
+import { Location } from "@components/icons/location";
 
 interface BacksideProps {
   description: IPgrammeEvents["description"];
@@ -13,6 +14,7 @@ interface BacksideProps {
   startAt: IPgrammeEvents["startAt"];
   cardsPerView: number;
   active: boolean;
+  formattedDate?: string;
   ref?: (node: HTMLElement | null) => void;
 }
 
@@ -29,12 +31,16 @@ const SlideRightAnimationVariants: Variants = {
 
 export const Backside: React.FC<BacksideProps> = (props) => {
   const [ref] = usePortableTextTruncate({ maxLength: 200 });
+  const formattedDate = format(
+    new Date(props.startAt),
+    "eee, d LLL yyyy - hh:mm aaaaa'm'"
+  );
   return (
     <>
       {props.cardsPerView !== 1 ? (
-        <SlideRight ref={ref} {...props} />
+        <SlideRight ref={ref} formattedDate={formattedDate} {...props} />
       ) : (
-        <ScaleUp ref={ref} {...props} />
+        <ScaleUp ref={ref} formattedDate={formattedDate} {...props} />
       )}
     </>
   );
@@ -46,12 +52,8 @@ const SlideRight: React.FC<BacksideProps> = ({
   ref,
   venue,
   startAt,
+  formattedDate,
 }) => {
-  const formattedDate = format(
-    new Date(startAt),
-    "eee, d LLL yyyy - hh:mm aaaaa'm'"
-  );
-
   return (
     <motion.div
       className="absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | p-8 box-border ml-auto | bg-[#F8F8F8]"
@@ -72,11 +74,7 @@ const SlideRight: React.FC<BacksideProps> = ({
       <div className="w-full space-y-10">
         <div className="space-y-3">
           <span className="flex items-center space-x-2">
-            <img
-              className="h-[18px]"
-              src="/icons/location.svg"
-              alt="location-icon"
-            />
+            <Location className="h-[18px]" />
             <span className="font-manrope text-gray--700 text-body-2">
               {venue[0].name}
             </span>
@@ -95,7 +93,13 @@ const SlideRight: React.FC<BacksideProps> = ({
   );
 };
 
-const ScaleUp: React.FC<BacksideProps> = ({ active, description, ref }) => {
+const ScaleUp: React.FC<BacksideProps> = ({
+  active,
+  description,
+  formattedDate,
+  venue,
+  ref,
+}) => {
   return (
     <motion.div
       className={
@@ -115,6 +119,20 @@ const ScaleUp: React.FC<BacksideProps> = ({ active, description, ref }) => {
         >
           <PortableText blocks={description} />
         </span>
+
+        <span className="flex items-center space-x-2">
+          <Location className="h-[18px] text-white" />
+          <span className="font-manrope text-white text-body-2">
+            {venue[0].name}
+          </span>
+        </span>
+        <span className="flex items-center space-x-2">
+          <Clock className="h-[18px] text-white" />
+          <span className="font-manrope text-white text-body-2">
+            <span>{formattedDate}</span>
+          </span>
+        </span>
+
         <Button className="!bg-white !text-black">View Artist</Button>
       </div>
     </motion.div>

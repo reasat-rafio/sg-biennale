@@ -13,8 +13,6 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-const gapInPixel = 25;
-
 const transition = (index: number) => ({
   left: {
     type: "tween",
@@ -40,6 +38,8 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
     useState<boolean>(false);
   const [disableSwipingLeft, setDisableSwipingLeft] = useState<boolean>(false);
   const [cardsPerView, setCardsperView] = useState(3);
+
+  const gapInPixel = windowWidth >= 1024 ? 25 : 15;
 
   useEffect(() => {
     if (windowWidth >= 1280) setCardsperView(3);
