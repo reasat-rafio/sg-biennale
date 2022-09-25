@@ -14,7 +14,7 @@ const checkerForTheIntendedQuery = (filteringKeys: string[]) => {
 export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
   const router = useRouter();
 
-  const { allProgrammesAndEvents, setOnScreenProgrammesAndEvents } =
+  const { allProgrammesAndEvents, setSortedProgrammesAndEvents } =
     useProgrammesAndEventsStore();
 
   useEffect(() => {
@@ -47,9 +47,9 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
             return event;
           }
         });
-      setOnScreenProgrammesAndEvents(filteredEvents);
+      setSortedProgrammesAndEvents(filteredEvents);
     }
-  }, [router.query, allProgrammesAndEvents, setOnScreenProgrammesAndEvents]);
+  }, [router.query, allProgrammesAndEvents, setSortedProgrammesAndEvents]);
 
   return <>{children}</>;
 };

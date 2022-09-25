@@ -7,30 +7,26 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 
 interface IProgrammesAndEvents {
-  initialVisibleItems: number;
-  numOfItemsWillIncrease: number;
   allCategories: AllCategoriesProps[];
   allVenues: AllVenuesProps[];
   allProgrammesAndEvents: IPgrammeEvents[];
-  onScreenProgrammesAndEvents: IPgrammeEvents[];
+  sortedProgrammesAndEvents: IPgrammeEvents[];
   setAllProgrammesAndEvents: (data: IPgrammeEvents[]) => void;
-  setOnScreenProgrammesAndEvents: (data: IPgrammeEvents[]) => void;
+  setSortedProgrammesAndEvents: (data: IPgrammeEvents[]) => void;
   setAllCategories: (data: AllCategoriesProps[]) => void;
   setAllVenues: (data: AllVenuesProps[]) => void;
 }
 
 const useProgrammesAndEventsStore = create(
   devtools<IProgrammesAndEvents>((set) => ({
-    initialVisibleItems: 8,
-    numOfItemsWillIncrease: 4,
     allCategories: [],
     allVenues: [],
     allProgrammesAndEvents: [],
-    onScreenProgrammesAndEvents: [],
+    sortedProgrammesAndEvents: [],
     setAllProgrammesAndEvents: (allProgrammesAndEvents) =>
       set((state) => ({ ...state, allProgrammesAndEvents })),
-    setOnScreenProgrammesAndEvents: (onScreenProgrammesAndEvents) =>
-      set((state) => ({ ...state, onScreenProgrammesAndEvents })),
+    setSortedProgrammesAndEvents: (sortedProgrammesAndEvents) =>
+      set((state) => ({ ...state, sortedProgrammesAndEvents })),
     setAllCategories: (allCategories) =>
       set((state) => ({
         ...state,

@@ -14,28 +14,26 @@ interface AllEventsProps {}
 
 const cardsPerPage = 6;
 export const AllEvents: React.FC<AllEventsProps> = ({}) => {
-  const { onScreenProgrammesAndEvents } = useProgrammesAndEventsStore();
+  const { sortedProgrammesAndEvents } = useProgrammesAndEventsStore();
   const [page, setPage] = useState(1);
   const [events, setEvents] = useState(
-    onScreenProgrammesAndEvents.slice(0, cardsPerPage)
+    sortedProgrammesAndEvents.slice(0, cardsPerPage)
   );
 
-  const imgPositionIngAlgo = positioningAlgo(
-    onScreenProgrammesAndEvents.length
-  );
-  const extraPadding = onScreenProgrammesAndEvents.reduce(
+  const imgPositionIngAlgo = positioningAlgo(sortedProgrammesAndEvents.length);
+  const extraPadding = sortedProgrammesAndEvents.reduce(
     (previousValue, _, idx) => previousValue + 50 * idx,
     0
   );
   const showMoreLessButtonAction = () => {
-    events < onScreenProgrammesAndEvents
+    events < sortedProgrammesAndEvents
       ? setPage((prev) => prev + 1)
       : setPage(1);
   };
 
   useEffect(() => {
-    setEvents(onScreenProgrammesAndEvents.slice(0, cardsPerPage * page));
-  }, [page, onScreenProgrammesAndEvents]);
+    setEvents(sortedProgrammesAndEvents.slice(0, cardsPerPage * page));
+  }, [page, sortedProgrammesAndEvents]);
 
   return (
     <FilteringLogic>
@@ -49,7 +47,7 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
           extraPadding={extraPadding}
           imgPositionIngAlgo={imgPositionIngAlgo}
         />
-        {events.length !== onScreenProgrammesAndEvents.length && (
+        {events.length !== sortedProgrammesAndEvents.length && (
           <motion.div
             key={page}
             initial={{ opacity: 0 }}
@@ -57,7 +55,7 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
             transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
           >
             <Button onClick={showMoreLessButtonAction} className="mx-auto">
-              {events.length === onScreenProgrammesAndEvents.length
+              {events.length === sortedProgrammesAndEvents.length
                 ? "Show Less"
                 : "Show More"}
             </Button>

@@ -62,28 +62,23 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
   ).data;
 
   const {
-    initialVisibleItems,
-    setAllProgrammesAndEvents,
-    setOnScreenProgrammesAndEvents,
     setAllCategories,
     setAllVenues,
+    setAllProgrammesAndEvents,
+    setSortedProgrammesAndEvents,
   } = useProgrammesAndEventsStore();
 
   useEffect(() => {
     setAllProgrammesAndEvents(events);
-    setOnScreenProgrammesAndEvents(events);
-    // setOnScreenProgrammesAndEvents(
-    //   (events as IPgrammeEvents[]).slice(0, initialVisibleItems)
-    // );
+    setSortedProgrammesAndEvents(events);
     setAllCategories(allCategories);
     setAllVenues(allVenues);
   }, [
     events,
     allCategories,
     allVenues,
-    initialVisibleItems,
     setAllProgrammesAndEvents,
-    setOnScreenProgrammesAndEvents,
+    setSortedProgrammesAndEvents,
     setAllCategories,
     setAllVenues,
   ]);
