@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { Button } from "@components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useIntersection } from "@lib/hooks";
 
 interface EssayProps {
   _key: string;
@@ -39,6 +40,11 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   curatorialEssays,
 }) => {
   const [page, setPage] = useState(1);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const interseciton = useIntersection(containerRef, {
+    threshold: 0.2,
+  })?.isIntersecting;
+
   const [sortedCuratorialEssays, setCuratorialEssays] = useState(
     curatorialEssays.slice(0, 6)
   );
@@ -54,42 +60,44 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
 
   return (
     <Container type="section" className="lg:py-max py-x">
-      <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-        className="flex items-center | space-x-5"
-      >
-        <h2 className="flex-1 | font-medium lg:text-heading-6 text-2xl text-gray--400">
-          {header}
-        </h2>
-        <span className="font-medium lg:text-xl text-base text-gray--700 underline">
-          {curatorialEssays.length} Essays
-        </span>
-      </motion.header>
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        variants={ContainerVariants}
-        className="grid grid-cols-12 | lg:gap-10 gap-5 my-14"
-      >
-        {sortedCuratorialEssays.map((data, index) => (
-          <Essay key={data._key + index} {...data} />
-        ))}
-      </motion.div>
-      <motion.div
-        key={page}
-        className="flex justify-center items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-      >
-        <Button onClick={onClickShowMoreAction}>
-          {sortedCuratorialEssays.length === curatorialEssays.length
-            ? "Show Less"
-            : "Show More"}
-        </Button>
-      </motion.div>
+      <div ref={containerRef}>
+        <motion.header
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+          className="flex items-center | space-x-5"
+        >
+          <h2 className="flex-1 | font-medium lg:text-heading-6 text-2xl text-gray--400">
+            {header}
+          </h2>
+          <span className="font-medium lg:text-xl text-base text-gray--700 underline">
+            {curatorialEssays.length} Essays
+          </span>
+        </motion.header>
+        <motion.div
+          initial="hidden"
+          animate={interseciton ? "show" : "hidden"}
+          variants={ContainerVariants}
+          className="grid grid-cols-12 | lg:gap-10 gap-5 my-14"
+        >
+          {sortedCuratorialEssays.map((data, index) => (
+            <Essay key={data._key + index} {...data} />
+          ))}
+        </motion.div>
+        <motion.div
+          key={page}
+          className="flex justify-center items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: interseciton ? 1 : 0 }}
+          transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+        >
+          <Button onClick={onClickShowMoreAction}>
+            {sortedCuratorialEssays.length === curatorialEssays.length
+              ? "Show Less"
+              : "Show More"}
+          </Button>
+        </motion.div>
+      </div>
     </Container>
   );
 };
