@@ -73,3 +73,16 @@ export function sliceIntoChunks<T>(arr: T[], chunkSize: number): T[][] {
   }
   return res;
 }
+
+export const positioningAlgo = (arrLen: number) => {
+  const length = Math.ceil(arrLen / 2);
+  const res = [];
+  for (let i = 0; i < length - 1; i++) {
+    for (let j = 0; j < 2; j++) {
+      i % 2 ? res.push(1) : res.push(0);
+    }
+  }
+  res.unshift(1);
+  res.push(0);
+  return res;
+};

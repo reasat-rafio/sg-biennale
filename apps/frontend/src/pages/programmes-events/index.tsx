@@ -45,7 +45,7 @@ const query = groq`{
       _id,
       name,
       slug
-    }
+    },
 }`;
 
 export const getStaticProps: GetStaticProps = async (

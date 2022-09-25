@@ -99,3 +99,13 @@ export interface MoreInfosProps {
     cta: Cta;
   }[];
 }
+
+export interface VenueProps {
+  _id: string;
+  name: string;
+  slug: Slug;
+  description: any;
+  location: string;
+  startAt: Date;
+  images: SanityImage[];
+}

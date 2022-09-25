@@ -20,6 +20,12 @@ const Venue = {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "description",
+      type: "array",
+      of: [{ type: "block" }],
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "images",
       type: "array",
       of: [

@@ -8,8 +8,9 @@ import { MouseEvent, useState } from "react";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
+import { VenueProps } from "@lib/@types/visitor-info.types";
 
-interface ProgrammeEventListCardProps extends IPgrammeEvents {
+interface VenueListCardProps extends VenueProps {
   index: number;
   imgPositionIngAlgo: number[];
 }
@@ -25,16 +26,15 @@ const physics = {
   bounce: 0.1,
   mass: 10,
 };
-export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
+export const VenueListCard: React.FC<VenueListCardProps> = ({
   images,
-  price,
-  title,
   slug,
+  name,
   index,
+  location,
   description,
   imgPositionIngAlgo,
   startAt,
-  venue,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
@@ -101,29 +101,20 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
               width={600}
             />
           </figure>
-          <section className="flex flex-col | space-y-3">
-            <div className="flex space-x-5">
-              <span className="flex items-center space-x-2">
-                <img
-                  className="h-[18px]"
-                  src="/icons/location.svg"
-                  alt="location-icon"
-                />
-                <span className="font-manrope text-gray--700 text-body-2">
-                  {venue[0].name}
-                </span>
+          <section className="flex flex-col | space-y-5">
+            <h6 className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500">
+              {name}
+            </h6>
+
+            <div className="flex flex-col space-y-1">
+              <span className="font-manrope text-gray--700 text-body-2">
+                {location}
               </span>
-              <span className="flex items-center space-x-2">
-                <Clock className="h-[18px]" />
-                <span className="font-manrope text-gray--700 text-body-2">
-                  <span>{formattedDate}</span>
-                </span>
+              <span className="font-manrope text-gray--700 text-body-2">
+                <span>{formattedDate}</span>
               </span>
             </div>
 
-            <h6 className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500">
-              {title}
-            </h6>
             {windowWidth < 1024 && (
               <div
                 ref={descriptionRef}
@@ -132,8 +123,8 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
                 <PortableText blocks={description} />
               </div>
             )}
-            <button className="mr-auto pt-4 | font-medium lg:text-[18px] text-base leading-[-0.02em] text-black bg-transparent underline">
-              Book Now
+            <button className="mr-auto | font-medium lg:text-[18px] text-base leading-[-0.02em] text-black bg-transparent underline">
+              Directions
             </button>
           </section>
         </div>

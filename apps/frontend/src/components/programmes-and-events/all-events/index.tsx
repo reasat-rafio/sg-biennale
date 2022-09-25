@@ -1,14 +1,12 @@
 import { Container } from "@components/ui/container";
 import { FilteringLogic } from "./filtering-logic";
 import { FilteringSection } from "./filtering-section";
-import {
-  positioningAlgo,
-  ProgrammesEventList,
-} from "../programmes-events-list";
+import { ProgrammesEventList } from "../programmes-events-list";
 import { Button } from "@components/ui/button";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { positioningAlgo } from "@lib/helpers/global.helpers";
 
 interface AllEventsProps {}
 
@@ -20,11 +18,14 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
     sortedProgrammesAndEvents.slice(0, cardsPerPage)
   );
 
-  const imgPositionIngAlgo = positioningAlgo(sortedProgrammesAndEvents.length);
-  const extraPadding = sortedProgrammesAndEvents.reduce(
-    (previousValue, _, idx) => previousValue + 50 * idx,
-    0
-  );
+  const imgPositionIngAlgo = positioningAlgo(events.length);
+  const extraPadding = () =>
+    useCallback(
+      () =>
+        events.reduce((previousValue, _, idx) => previousValue + 50 * idx, 0),
+      [events]
+    );
+
   const showMoreLessButtonAction = () => {
     events < sortedProgrammesAndEvents
       ? setPage((prev) => prev + 1)
@@ -45,10 +46,10 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
         <FilteringSection />
         <ProgrammesEventList
           events={events}
-          extraPadding={extraPadding}
+          extraPadding={extraPadding()}
           imgPositionIngAlgo={imgPositionIngAlgo}
         />
-        {events.length !== cardsPerPage && (
+        {sortedProgrammesAndEvents.length !== cardsPerPage && (
           <motion.div
             key={page}
             initial={{ opacity: 0 }}

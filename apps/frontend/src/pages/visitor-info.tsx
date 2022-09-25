@@ -3,6 +3,7 @@ import { Container } from "@components/ui/container";
 import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { MoreInfos } from "@components/visitor-info/more-infos";
 import { Tour } from "@components/visitor-info/tour/tour";
+import { Venue } from "@components/visitor-info/venue";
 import { siteQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
@@ -37,9 +38,18 @@ const query = groq`{
     _id,
     name,
     slug,
+    description,
     location,
     startAt,
-    "image": ${withDimensions("image")}
+    images[] {
+      ..., 
+      asset->{
+        ...,
+        metadata {
+          dimensions
+        }
+      }
+    },
   },
 }`;
 
@@ -51,7 +61,7 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const VisitorInfo: NextPage<SanityProps> = (props) => {
-  const { page } = useSanityQuery(query, props).data;
+  const { page, allVenues } = useSanityQuery(query, props).data;
 
   return (
     <>
@@ -66,8 +76,12 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
         ),
         "visitorInfoPage.moreInfo": MoreInfos,
         "visitorInfoPage.tour": Tour,
+      })}
+      <Venue allVenues={allVenues} />
+      {renderObjectArray(page.sections, {
         "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
       })}
+      ,
     </>
   );
 };
