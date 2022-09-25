@@ -6,17 +6,35 @@ const Venue = {
   type: "document",
   icon: FcReading,
   fields: [
-    { name: "name", type: "string" },
+    {
+      name: "name",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: "slug",
       type: "slug",
       options: {
         source: (doc) => doc.name,
       },
+      validation: (Rule) => Rule.required(),
     },
-    { name: "image", type: "image", options: { hotspot: true } },
-    { name: "icon", type: "image" },
-    { name: "location", type: "string" },
+    {
+      name: "images",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+        },
+      ],
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "location",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    },
     {
       title: "Start At",
       name: "startAt",
@@ -65,19 +83,20 @@ const Venue = {
       name: "artists",
       type: "array",
       of: [{ type: "reference", to: { type: "artist" } }],
+      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {
     select: {
       title: "name",
-      timeAndDate: "timeAndDate",
+      startAt: "startAt",
       location: "location",
       media: "image",
     },
-    prepare({ title, timeAndDate, location, media }) {
+    prepare({ title, startAt, location, media }) {
       return {
         title,
-        subtitle: `${timeAndDate} || ${location}`,
+        subtitle: `${startAt} || ${location}`,
         media,
       };
     },
