@@ -1,9 +1,14 @@
+import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import { ProgrammeEventListCard } from "./programme-event-list-card";
 
-interface ProgrammesEventListProps {}
+interface ProgrammesEventListProps {
+  events: IPgrammeEvents[];
+  extraPadding: number;
+  imgPositionIngAlgo: number[];
+}
 
-const positioningAlgo = (arrLen: number) => {
+export const positioningAlgo = (arrLen: number) => {
   const length = Math.ceil(arrLen / 2);
   const res = [];
   for (let i = 0; i < length - 1; i++) {
@@ -16,26 +21,15 @@ const positioningAlgo = (arrLen: number) => {
   return res;
 };
 
-export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({}) => {
-  const { onScreenProgrammesAndEvents, setOnScreenProgrammesAndEvents } =
-    useProgrammesAndEventsStore();
-
-  const imgPositionIngAlgo = positioningAlgo(
-    onScreenProgrammesAndEvents.length
-  );
-
-  const viewMoreAction = () => {};
-  const viewLessAction = () => {};
-
-  const extraPadding = onScreenProgrammesAndEvents.reduce(
-    (previousValue, _, idx) => previousValue + 50 * idx,
-    0
-  );
-
+export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({
+  extraPadding,
+  imgPositionIngAlgo,
+  events,
+}) => {
   return (
     <section className="pt-2" style={{ paddingBottom: extraPadding / 2 }}>
       <div className="grid grid-cols-12 | lg:gap-8 gap-4">
-        {onScreenProgrammesAndEvents?.map((pgrmEvnt, index) => (
+        {events?.map((pgrmEvnt, index) => (
           <ProgrammeEventListCard
             {...pgrmEvnt}
             key={pgrmEvnt._id}
