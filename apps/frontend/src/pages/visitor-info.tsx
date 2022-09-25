@@ -3,7 +3,7 @@ import { Container } from "@components/ui/container";
 import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { MoreInfos } from "@components/visitor-info/more-infos";
 import { Tour } from "@components/visitor-info/tour/tour";
-import { pageQuery, siteQuery } from "@lib/query";
+import { siteQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
@@ -25,32 +25,23 @@ const query = groq`{
         },
         moreInfos[]{
             ...,
-            "icon": ${withDimensions("icon")}
+            "image": ${withDimensions("image")}
         },
         additionalInfo[]{
             ...,
             "icon": ${withDimensions("icon")}
         },
-        venues[]->{
-            ...,
-            "image": ${withDimensions("image")},
-            faqs[]{
-                ...,
-                answers[]{
-                    ...,
-                    "icon" :${withDimensions("icon")}
-                }
-            }
-        }
     }
-  }
+  },
+  "allVenues": *[_type == "venue"]{
+    _id,
+    name,
+    slug,
+    location,
+    startAt,
+    "image": ${withDimensions("image")}
+  },
 }`;
-
-// "allVenues": *[_type == "venue"]{
-//     _id,
-//     name,
-//     slug
-//   },
 
 export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
