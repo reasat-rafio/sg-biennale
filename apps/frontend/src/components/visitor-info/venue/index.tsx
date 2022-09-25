@@ -37,7 +37,7 @@ export const Venue: React.FC<{
           Accessibility Info
         </span>
       </header>
-      <FilteringSection />
+      <FilteringSection setVenues={setVenues} allVenues={allVenues} />
       <VenueList
         venues={venues}
         extraPadding={extraPadding()}

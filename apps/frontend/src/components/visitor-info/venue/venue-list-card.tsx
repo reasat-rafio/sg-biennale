@@ -1,5 +1,3 @@
-import { Clock } from "@components/icons/clock";
-import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import clsx from "clsx";
 import { SanityImg } from "sanity-react-extra";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
