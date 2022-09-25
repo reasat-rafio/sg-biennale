@@ -34,6 +34,7 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
   useEffect(() => {
     setEvents(sortedProgrammesAndEvents.slice(0, cardsPerPage * page));
   }, [page, sortedProgrammesAndEvents]);
+  cardsPerPage;
 
   return (
     <FilteringLogic>
@@ -47,7 +48,7 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
           extraPadding={extraPadding}
           imgPositionIngAlgo={imgPositionIngAlgo}
         />
-        {events.length !== sortedProgrammesAndEvents.length && (
+        {events.length !== cardsPerPage && (
           <motion.div
             key={page}
             initial={{ opacity: 0 }}

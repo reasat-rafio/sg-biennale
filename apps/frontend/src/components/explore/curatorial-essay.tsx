@@ -35,6 +35,7 @@ const ContainerVariants: Variants = {
   },
 };
 
+const cardsPerPage = 6;
 export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   header,
   curatorialEssays,
@@ -46,7 +47,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   })?.isIntersecting;
 
   const [sortedCuratorialEssays, setCuratorialEssays] = useState(
-    curatorialEssays.slice(0, 6)
+    curatorialEssays.slice(0, cardsPerPage)
   );
   const onClickShowMoreAction = () => {
     sortedCuratorialEssays < curatorialEssays
@@ -55,7 +56,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   };
 
   useEffect(() => {
-    setCuratorialEssays(curatorialEssays.slice(0, 6 * page));
+    setCuratorialEssays(curatorialEssays.slice(0, cardsPerPage * page));
   }, [page]);
 
   return (
@@ -85,7 +86,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
           ))}
         </motion.div>
 
-        {sortedCuratorialEssays.length !== curatorialEssays.length && (
+        {curatorialEssays.length !== cardsPerPage && (
           <motion.div
             key={page}
             className="flex justify-center items-center"

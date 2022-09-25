@@ -1,8 +1,9 @@
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, MouseEvent, useEffect, useState } from "react";
 import { AllCategoriesProps } from "@lib/@types/programmes-events-types";
 import { useRouter } from "next/router";
 import { Listbox, Transition } from "@headlessui/react";
+import { X } from "@components/icons/x";
 
 export const FilterByCategory: React.FC<{}> = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ export const FilterByCategory: React.FC<{}> = () => {
       );
       setSelectedCategory(findThecategory?.name);
     }
-  }, [router, allCategories]);
+  }, [router, allCategories, setSelectedCategory]);
 
   const onClickAction = (_category: AllCategoriesProps) => {
     setSelectedCategory(_category.name);
@@ -36,6 +37,15 @@ export const FilterByCategory: React.FC<{}> = () => {
       }
     );
   };
+
+  const removeCategoryFilteringAction = (e: MouseEvent<SVGSVGElement, any>) => {
+    e.stopPropagation();
+    setSelectedCategory(null);
+    router.push({ query: { ...router.query, category: null } }, undefined, {
+      shallow: true,
+    });
+  };
+
   return (
     <div className="z-20 col-span-7">
       <Listbox value={selectedCategory}>
@@ -44,6 +54,12 @@ export const FilterByCategory: React.FC<{}> = () => {
             <span className="flex-1 text-left block truncate">
               {selectedCategory ? selectedCategory : "Category"}
             </span>
+            {selectedCategory && (
+              <X
+                onClick={removeCategoryFilteringAction}
+                className="h-7 w-7 rounded-full | p-1 | bg-white hover:scale-105 hover:bg-gray-300 | transition-colors duration-300"
+              />
+            )}
             <img className="w-[18px]" src="/icons/sort.svg" alt="sort icon" />
           </Listbox.Button>
           <Transition

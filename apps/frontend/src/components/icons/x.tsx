@@ -1,10 +1,14 @@
+import { MouseEvent } from "react";
+
 interface XProps {
   className?: string;
+  onClick?: (e: MouseEvent<SVGSVGElement, any>) => void;
 }
 
-export const X: React.FC<XProps> = ({ className = "h-6 w-6" }) => {
+export const X: React.FC<XProps> = ({ className = "h-6 w-6", onClick }) => {
   return (
     <svg
+      onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       fill="none"
