@@ -14,10 +14,10 @@ export const FilteringSection: React.FC<FilteringSectionProps> = ({
 }) => {
   return (
     <section className="grid grid-cols-12 gap-5">
-      <div className="xl:col-span-7 md:col-span-6 col-span-12">
+      <div className="xl:col-span-9 md:col-span-6 col-span-12">
         <FilterBy />
       </div>
-      <div className="xl:col-span-5 md:col-span-6 col-span-12 ">
+      <div className="xl:col-span-3 md:col-span-6 col-span-12 ">
         <SearchVenue setVenues={setVenues} allVenues={allVenues} />
       </div>
     </section>

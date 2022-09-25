@@ -4,6 +4,8 @@ import { positioningAlgo } from "@lib/helpers/global.helpers";
 import { useCallback, useEffect, useState } from "react";
 import { FilteringSection } from "./filtering-section";
 import { VenueList } from "./venue-list";
+import { motion } from "framer-motion";
+import { Button } from "@components/ui/button";
 
 const cardsPerPage = 6;
 export const Venue: React.FC<{
@@ -43,6 +45,19 @@ export const Venue: React.FC<{
         extraPadding={extraPadding()}
         imgPositionIngAlgo={imgPositionIngAlgo}
       />
+
+      {allVenues.length !== cardsPerPage && (
+        <motion.div
+          key={page}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+        >
+          <Button onClick={showMoreLessButtonAction} className="mx-auto">
+            {venues.length === allVenues.length ? "Show Less" : "Show More"}
+          </Button>
+        </motion.div>
+      )}
     </Container>
   );
 };

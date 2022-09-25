@@ -1,6 +1,6 @@
 import { Search } from "@components/icons/search";
 import { VenueProps } from "@lib/@types/visitor-info.types";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface SearchVenueProps {
   setVenues: Dispatch<SetStateAction<VenueProps[]>>;

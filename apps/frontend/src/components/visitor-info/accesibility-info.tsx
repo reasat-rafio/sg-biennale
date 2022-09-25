@@ -36,6 +36,7 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
           whileInView="animate"
           variants={SlideUpVariants}
           custom={0.3}
+          viewport={{ once: true }}
           className="text-[32px] font-medium tracking-[-0.02em]"
         >
           {header}
@@ -46,6 +47,7 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
               initial="initial"
               whileInView="animate"
               variants={SlideUpVariants}
+              viewport={{ once: true }}
               custom={(index + 1) * 0.1 + 0.3}
               className="xl:col-span-4 md:col-span-6 col-span-12 | space-y-2 | font-manrope"
               key={_key}
@@ -59,6 +61,7 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
           initial="initial"
           whileInView="animate"
           variants={SlideUpVariants}
+          viewport={{ once: true }}
           custom={1}
           className="flex justify-center items-center"
         >
