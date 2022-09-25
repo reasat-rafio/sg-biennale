@@ -28,7 +28,7 @@ export const Venue: React.FC<{
 
   useEffect(() => {
     setVenues(allVenues.slice(0, cardsPerPage * page));
-  }, [page, allVenues]);
+  }, [page, allVenues, venues]);
   cardsPerPage;
 
   return (
