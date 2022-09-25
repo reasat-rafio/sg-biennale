@@ -2,6 +2,7 @@ import { Container } from "@components/ui/container";
 import { FilteringLogic } from "./filtering-logic";
 import { FilteringSection } from "./filtering-section";
 import { ProgrammesEventList } from "../programmes-events-list";
+import { Button } from "@components/ui/button";
 
 interface AllEventsProps {}
 
@@ -14,6 +15,10 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
         </header>
         <FilteringSection />
         <ProgrammesEventList />
+
+        <div>
+          <Button className="mx-auto">View More</Button>
+        </div>
       </Container>
     </FilteringLogic>
   );

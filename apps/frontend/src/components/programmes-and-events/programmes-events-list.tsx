@@ -1,7 +1,5 @@
-import { ChevronArrow } from "@components/icons/chevron-arrow";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import { ProgrammeEventListCard } from "./programme-event-list-card";
-import clsx from "clsx";
 
 interface ProgrammesEventListProps {}
 
@@ -29,8 +27,13 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({}) => {
   const viewMoreAction = () => {};
   const viewLessAction = () => {};
 
+  const extraPadding = onScreenProgrammesAndEvents.reduce(
+    (previousValue, _, idx) => previousValue + 50 * idx,
+    0
+  );
+
   return (
-    <section className="pb-[50vh] pt-2">
+    <section className="pt-2" style={{ paddingBottom: extraPadding / 2 }}>
       <div className="grid grid-cols-12 | lg:gap-8 gap-4">
         {onScreenProgrammesAndEvents?.map((pgrmEvnt, index) => (
           <ProgrammeEventListCard
@@ -41,12 +44,6 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({}) => {
           />
         ))}
       </div>
-
-      {/* <div className="flex justify-center items-center | my-5">
-        <button className="flex items-center | space-x-2">
-          <span>View More </span>
-        </button>
-      </div> */}
     </section>
   );
 };
