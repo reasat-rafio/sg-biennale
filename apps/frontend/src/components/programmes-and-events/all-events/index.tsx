@@ -12,10 +12,13 @@ import { motion } from "framer-motion";
 
 interface AllEventsProps {}
 
+const cardsPerPage = 6;
 export const AllEvents: React.FC<AllEventsProps> = ({}) => {
   const { onScreenProgrammesAndEvents } = useProgrammesAndEventsStore();
   const [page, setPage] = useState(1);
-  const [events, setEvents] = useState(onScreenProgrammesAndEvents.slice(0, 5));
+  const [events, setEvents] = useState(
+    onScreenProgrammesAndEvents.slice(0, cardsPerPage)
+  );
 
   const imgPositionIngAlgo = positioningAlgo(
     onScreenProgrammesAndEvents.length
@@ -31,7 +34,7 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
   };
 
   useEffect(() => {
-    setEvents(onScreenProgrammesAndEvents.slice(0, 5 * page));
+    setEvents(onScreenProgrammesAndEvents.slice(0, cardsPerPage * page));
   }, [page, onScreenProgrammesAndEvents]);
 
   return (
@@ -46,19 +49,20 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
           extraPadding={extraPadding}
           imgPositionIngAlgo={imgPositionIngAlgo}
         />
-
-        <motion.div
-          key={page}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-        >
-          <Button onClick={showMoreLessButtonAction} className="mx-auto">
-            {events.length === onScreenProgrammesAndEvents.length
-              ? "Show Less"
-              : "Show More"}
-          </Button>
-        </motion.div>
+        {events.length !== onScreenProgrammesAndEvents.length && (
+          <motion.div
+            key={page}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+          >
+            <Button onClick={showMoreLessButtonAction} className="mx-auto">
+              {events.length === onScreenProgrammesAndEvents.length
+                ? "Show Less"
+                : "Show More"}
+            </Button>
+          </motion.div>
+        )}
       </Container>
     </FilteringLogic>
   );

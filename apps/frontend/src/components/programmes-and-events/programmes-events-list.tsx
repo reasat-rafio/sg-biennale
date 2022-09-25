@@ -1,5 +1,4 @@
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
-import useProgrammesAndEventsStore from "@stores/programme-event-store";
 import { ProgrammeEventListCard } from "./programme-event-list-card";
 
 interface ProgrammesEventListProps {

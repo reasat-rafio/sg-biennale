@@ -84,19 +84,22 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
             <Essay key={data._key + index} {...data} />
           ))}
         </motion.div>
-        <motion.div
-          key={page}
-          className="flex justify-center items-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: interseciton ? 1 : 0 }}
-          transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-        >
-          <Button onClick={onClickShowMoreAction}>
-            {sortedCuratorialEssays.length === curatorialEssays.length
-              ? "Show Less"
-              : "Show More"}
-          </Button>
-        </motion.div>
+
+        {sortedCuratorialEssays.length !== curatorialEssays.length && (
+          <motion.div
+            key={page}
+            className="flex justify-center items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: interseciton ? 1 : 0 }}
+            transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+          >
+            <Button onClick={onClickShowMoreAction}>
+              {sortedCuratorialEssays.length === curatorialEssays.length
+                ? "Show Less"
+                : "Show More"}
+            </Button>
+          </motion.div>
+        )}
       </div>
     </Container>
   );
