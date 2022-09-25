@@ -1,5 +1,5 @@
 import { SanityImage, SanityImg } from "sanity-react-extra";
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { imageUrlBuilder } from "@utils/sanity";
 
 interface FrontSideProps {
@@ -7,6 +7,7 @@ interface FrontSideProps {
   title: string;
   active: boolean;
   cardsPerView: number;
+  activeCardIndex: number | null;
 }
 
 export const AnimationVariants: Variants = {
@@ -23,6 +24,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   cardsPerView,
   title,
   images,
+  activeCardIndex,
 }) => {
   return (
     <motion.div
@@ -42,9 +44,20 @@ export const FrontSide: React.FC<FrontSideProps> = ({
       </figure>
 
       <div className="mt-20 relative z-20 py-10">
-        <h6 className="w-full | px-5 | lg:text-2xl text-xl font-medium text-white ">
+        <motion.h6
+          key={String(active)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut",
+            type: "tween",
+            delay: 0.3,
+          }}
+          className="w-full | px-5 | lg:text-2xl text-xl font-medium text-white "
+        >
           {title}
-        </h6>
+        </motion.h6>
       </div>
     </motion.div>
   );

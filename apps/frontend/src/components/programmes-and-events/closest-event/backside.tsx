@@ -51,12 +51,11 @@ const SlideRight: React.FC<BacksideProps> = ({
   description,
   ref,
   venue,
-  startAt,
   formattedDate,
 }) => {
   return (
     <motion.div
-      className="absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | p-8 box-border ml-auto | bg-[#F8F8F8]"
+      className="absolute z-10 h-full w-1/2 | p-8 box-border ml-auto | bg-[#F8F8F8]"
       initial="initial"
       onClick={(e) => e.stopPropagation()}
       animate={active ? "animate" : "initial"}
@@ -66,29 +65,41 @@ const SlideRight: React.FC<BacksideProps> = ({
       }}
       variants={SlideRightAnimationVariants}
     >
-      <div className="flex-1 flex ">
-        <span className="text-body-2 font-manrope text-gray--700" ref={ref}>
-          <PortableText blocks={description} />
-        </span>
-      </div>
-      <div className="w-full space-y-10">
-        <div className="space-y-3">
-          <span className="flex items-center space-x-2">
-            <Location className="h-[18px]" />
-            <span className="font-manrope text-gray--700 text-body-2">
-              {venue[0].name}
-            </span>
-          </span>
-          <span className="flex items-center space-x-2">
-            <Clock className="h-[18px]" />
-            <span className="font-manrope text-gray--700 text-body-2">
-              <span>{formattedDate}</span>
-            </span>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: active ? 1 : 0 }}
+        transition={{
+          duration: 0.3,
+          type: "tween",
+          ease: "easeInOut",
+          delay: 0.4,
+        }}
+        className="flex flex-col justify-center items-center | h-full"
+      >
+        <div className="flex-1 flex ">
+          <span className="text-body-2 font-manrope text-gray--700" ref={ref}>
+            <PortableText blocks={description} />
           </span>
         </div>
+        <div className="w-full space-y-10">
+          <div className="space-y-3">
+            <span className="flex items-center space-x-2">
+              <Location className="h-[18px]" />
+              <span className="font-manrope text-gray--700 text-body-2">
+                {venue[0].name}
+              </span>
+            </span>
+            <span className="flex items-center space-x-2">
+              <Clock className="h-[18px]" />
+              <span className="font-manrope text-gray--700 text-body-2">
+                <span>{formattedDate}</span>
+              </span>
+            </span>
+          </div>
 
-        <Button className="w-full">Book Now</Button>
-      </div>
+          <Button className="w-full">Book Now</Button>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
