@@ -1,4 +1,4 @@
-import useProgrammesAndEventsStore from "@stores/programme-event-store";
+import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { Fragment, MouseEvent, useEffect, useState } from "react";
 import { AllCategoriesProps } from "@lib/@types/programmes-events-types";
 import { useRouter } from "next/router";

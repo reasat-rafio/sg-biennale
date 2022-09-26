@@ -10,7 +10,7 @@ import {
   scalingController,
 } from "@lib/helpers/artist-details.helpers";
 import { ArtworkDescription, CloseIcon } from "./artwork-description";
-import { useScroll } from "@lib/helpers/scroll-controls-helper";
+import { useScroll } from "@lib/helpers/scroll-controls.helper";
 
 interface ImageProps {
   outterArrIndex: number;

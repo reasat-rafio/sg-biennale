@@ -1,6 +1,6 @@
 import { ChevronArrow } from "@components/icons/chevron-arrow";
 import { Combobox } from "@headlessui/react";
-import useArtistsStore from "@stores/artists-store";
+import useArtistsStore from "@stores/artists.store";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

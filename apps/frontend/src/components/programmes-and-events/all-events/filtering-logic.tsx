@@ -1,4 +1,4 @@
-import useProgrammesAndEventsStore from "@stores/programme-event-store";
+import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useRef, useState } from "react";
 

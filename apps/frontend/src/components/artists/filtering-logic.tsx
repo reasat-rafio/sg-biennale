@@ -1,5 +1,5 @@
 import { filterLogicFactory } from "@lib/helpers/artists.helper";
-import useArtistsStore from "@stores/artists-store";
+import useArtistsStore from "@stores/artists.store";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 

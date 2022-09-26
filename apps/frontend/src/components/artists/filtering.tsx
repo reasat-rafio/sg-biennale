@@ -2,7 +2,7 @@ import { Search } from "@components/icons/search";
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { filterLogicFactory } from "@lib/helpers/artists.helper";
-import useArtistsStore from "@stores/artists-store";
+import useArtistsStore from "@stores/artists.store";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import { FilterByCountry } from "./filter-by-country";

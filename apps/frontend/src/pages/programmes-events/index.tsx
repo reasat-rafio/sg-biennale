@@ -1,6 +1,6 @@
 import { Container } from "@components/ui/container";
 import { siteQuery } from "@lib/query";
-import useProgrammesAndEventsStore from "@stores/programme-event-store";
+import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
@@ -10,7 +10,7 @@ import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { renderObjectArray } from "sanity-react-extra";
 import { AllEvents } from "@components/programmes-and-events/all-events";
 import { ClosestEvent } from "@components/programmes-and-events/closest-event";
-import { filterPastEvents } from "@lib/helpers/programme.event-helper";
+import { filterPastEvents } from "@lib/helpers/programme-event.helper";
 
 const query = groq`{
   "site": ${siteQuery},

@@ -6,7 +6,7 @@ import * as THREE from "three";
 import { damp } from "./util";
 import { a, config, useSpring } from "@react-spring/three";
 import { motion } from "framer-motion";
-import { useScroll } from "@lib/helpers/scroll-controls-helper";
+import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { ArtworkImageProps } from "@lib/@types/home.types";
 
 export const Image: React.FC<ArtworkImageProps> = ({

@@ -5,7 +5,7 @@ import { Footer } from "@components/common/footer./footer";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useWindowSize } from "@lib/hooks";
-import useGlobalStore from "@stores/global-store";
+import useGlobalStore from "@stores/global.store";
 import Head from "next/head";
 import { SEO } from "@components/common/seo";
 import { NavDropdown } from "@components/common/navigation/dropdown";

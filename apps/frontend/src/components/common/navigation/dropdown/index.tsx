@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ISite } from "@lib/@types/global.types";
-import { ContainerVariants } from "@lib/helpers/nav-dropdown-helpers";
-import useGlobalStore from "@stores/global-store";
+import { ContainerVariants } from "@lib/helpers/nav-dropdown.helpers";
+import useGlobalStore from "@stores/global.store";
 import { CTA } from "./cta";
 import { Nav } from "./nav";
 import { useEffect } from "react";

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback, useLayoutEffect } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 import { useTransform, useSpring, motion, useScroll } from "framer-motion";
-import useGlobalStore from "@stores/global-store";
+import useGlobalStore from "@stores/global.store";
 React.useLayoutEffect = React.useEffect;
 
 const physics = { damping: 50, mass: 0.4, stiffness: 300 };

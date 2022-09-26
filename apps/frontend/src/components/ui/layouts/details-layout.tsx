@@ -1,5 +1,5 @@
 import { useWindowSize } from "@lib/hooks";
-import useGlobalStore from "@stores/global-store";
+import useGlobalStore from "@stores/global.store";
 
 interface DetailsLayoutProps {
   DescriptionBlock: any;

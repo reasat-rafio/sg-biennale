@@ -4,8 +4,8 @@ import {
   ImageVariants,
   NevItemVariants,
   RedirectIconVariant,
-} from "@lib/helpers/nav-dropdown-helpers";
-import useGlobalStore from "@stores/global-store";
+} from "@lib/helpers/nav-dropdown.helpers";
+import useGlobalStore from "@stores/global.store";
 import { imageUrlBuilder } from "@utils/sanity";
 import { motion } from "framer-motion";
 import Link from "next/link";

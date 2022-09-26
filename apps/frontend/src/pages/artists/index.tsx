@@ -2,7 +2,7 @@ import { ArtistsList } from "@components/artists/artists-list";
 import { Filtering } from "@components/artists/filtering";
 import { FilteringLogic } from "@components/artists/filtering-logic";
 import { siteQuery } from "@lib/query";
-import useArtistsStore from "@stores/artists-store";
+import useArtistsStore from "@stores/artists.store";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";

@@ -3,7 +3,7 @@ import { FilteringLogic } from "./filtering-logic";
 import { FilteringSection } from "./filtering-section";
 import { ProgrammesEventList } from "../programmes-events-list";
 import { Button } from "@components/ui/button";
-import useProgrammesAndEventsStore from "@stores/programme-event-store";
+import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { positioningAlgo } from "@lib/helpers/global.helpers";

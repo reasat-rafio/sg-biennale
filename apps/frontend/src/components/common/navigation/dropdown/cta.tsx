@@ -1,7 +1,7 @@
 import { Button } from "@components/ui/button";
 import { Cta, FooterSocial } from "@lib/@types/global.types";
-import { CTAVarinats } from "@lib/helpers/nav-dropdown-helpers";
-import useGlobalStore from "@stores/global-store";
+import { CTAVarinats } from "@lib/helpers/nav-dropdown.helpers";
+import useGlobalStore from "@stores/global.store";
 import { imageUrlBuilder } from "@utils/sanity";
 import { motion } from "framer-motion";
 import Link from "next/link";

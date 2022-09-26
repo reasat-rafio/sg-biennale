@@ -16,7 +16,7 @@ import "swiper/css/thumbs";
 import "swiper/css/mousewheel";
 import { useRef, useState } from "react";
 import { imageUrlBuilder } from "@utils/sanity";
-import useGlobalStore from "@stores/global-store";
+import useGlobalStore from "@stores/global.store";
 import { useWindowSize } from "@lib/hooks";
 
 interface ImageCarouselProps {

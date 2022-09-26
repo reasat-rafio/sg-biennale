@@ -4,7 +4,7 @@ import { Minimap } from "./minmap";
 import { IArtistProps } from "@lib/@types/home.types";
 import { Image } from "./image";
 import { NextRouter } from "next/router";
-import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls-helper";
+import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls.helper";
 
 interface ImagesProps {
   artists: IArtistProps[];

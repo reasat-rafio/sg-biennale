@@ -1,5 +1,5 @@
 import { sliceIntoChunks } from "@lib/helpers/global.helpers";
-import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls-helper";
+import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls.helper";
 import { useIntersection } from "@lib/hooks";
 import { Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";

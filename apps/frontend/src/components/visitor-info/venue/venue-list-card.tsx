@@ -79,6 +79,7 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
 
   return (
     <motion.article
+      layout
       initial={{ y: 50 * index + 100, opacity: 0 }}
       whileInView={{ y: 50 * index, opacity: 1 }}
       transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}

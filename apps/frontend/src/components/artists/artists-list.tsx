@@ -1,6 +1,6 @@
 import { Container } from "@components/ui/container";
 import { ArtistsProps } from "@lib/@types/artists.types";
-import useArtistsStore from "@stores/artists-store";
+import useArtistsStore from "@stores/artists.store";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect, useState } from "react";
