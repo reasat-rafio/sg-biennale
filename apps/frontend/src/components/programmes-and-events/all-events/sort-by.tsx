@@ -1,31 +1,61 @@
 import { AnimatedHamburgerMenu } from "@components/icons/animated-hamburger-menu";
 import { Listbox, Transition } from "@headlessui/react";
 import clsx from "clsx";
-import { Fragment, useState } from "react";
+import { useRouter } from "next/router";
+import { Fragment, useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 
 interface SortByListProps {
-  name: string;
+  name: "Alphabet" | "Date";
   id: string;
 }
 
 export const SortBy: React.FC<{}> = () => {
+  const router = useRouter();
   const sortByList = [
     { name: "Alphabet", id: uuid() },
     { name: "Date", id: uuid() },
   ];
 
-  const [selectedSortType, setSelectedSortType] = useState<string | null>(null);
+  const [selectedSortType, setSelectedSortType] = useState<
+    "Alphabet" | "Date" | null
+  >(null);
 
   const onClickOnSortImteAction = ({ name }: SortByListProps) => {
     setSelectedSortType(name);
+    router.push(
+      { query: { ...router.query, sort_by: name.toLowerCase() } },
+      undefined,
+      {
+        shallow: true,
+      }
+    );
   };
 
   const onClickOnHamBurgerMenuAction = () => {
+    // setSelectedSortType(null);
     if (selectedSortType !== null) {
-      setSelectedSortType(null);
+      router.push({ query: { ...router.query, sort_by: null } }, undefined, {
+        shallow: true,
+      });
     }
   };
+
+  /*
+  ❓Getting the query from the url and setting them to the state
+  @REASON: This stop the state to reset after refresh
+  */
+  useEffect(() => {
+    /* 🚩 Flag to check if the category query present  */
+    const selectedSortingFromUrlQuery = router.query.sort_by;
+
+    if (selectedSortingFromUrlQuery) {
+      const [matchedVanue] = sortByList.filter(
+        ({ name }) => name.toLowerCase() === selectedSortingFromUrlQuery
+      );
+      setSelectedSortType(matchedVanue.name as any);
+    } else setSelectedSortType(null);
+  }, [router, sortByList, setSelectedSortType, selectedSortType]);
 
   return (
     <div className="z-20 col-span-5">
@@ -58,7 +88,7 @@ export const SortBy: React.FC<{}> = () => {
                     )
                   }
                   value={name}
-                  onClick={() => onClickOnSortImteAction({ id, name })}
+                  onClick={() => onClickOnSortImteAction({ id, name } as any)}
                 >
                   {() => (
                     <>

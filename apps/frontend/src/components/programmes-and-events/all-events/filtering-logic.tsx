@@ -8,7 +8,11 @@ interface FilteringLogicProps {
 
 /* 🚩 gatekeeper of the intended queries */
 const checkerForTheIntendedQuery = (filteringKeys: string[]) => {
-  return filteringKeys.includes("category") || filteringKeys.includes("veneue");
+  return (
+    filteringKeys.includes("category") ||
+    filteringKeys.includes("veneue") ||
+    filteringKeys.includes("sort_by")
+  );
 };
 
 export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
@@ -25,6 +29,9 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
     if (queryParamsNotEmpty && checkerForTheIntendedQuery(queryKeys)) {
       const selectedCatagory = router.query.category;
       const selectedVenue = router.query.venue;
+      const selectedSorting = router.query.sort_by;
+
+      // "alphabet" | "date";
 
       const filteredEvents = allProgrammesAndEvents
         .filter((event) => {
@@ -47,6 +54,12 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
             return event;
           }
         });
+
+      if (selectedSorting === "alphabet") {
+        filteredEvents.sort((a, b) => (a.title > b.title ? 1 : -1));
+      } else if (selectedSorting === "date") {
+        filteredEvents.sort((a, b) => (a.startAt > b.startAt ? 1 : -1));
+      }
       setSortedProgrammesAndEvents(filteredEvents);
     }
   }, [router.query, allProgrammesAndEvents, setSortedProgrammesAndEvents]);

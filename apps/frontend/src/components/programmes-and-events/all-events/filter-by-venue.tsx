@@ -1,5 +1,4 @@
 import { AnimatedHamburgerMenu } from "@components/icons/animated-hamburger-menu";
-import { X } from "@components/icons/x";
 import { Listbox, Transition } from "@headlessui/react";
 import { AllVenuesProps } from "@lib/@types/programmes-events-types";
 import useProgrammesAndEventsStore from "@stores/programme-event-store";
@@ -14,7 +13,6 @@ export const FilterByVenue: React.FC<{}> = () => {
 
   const onChangeAction = (venue: AllVenuesProps) => {
     setSelectedVenue(venue.name);
-
     router.push(
       { query: { ...router.query, venue: venue.slug.current } },
       undefined,
