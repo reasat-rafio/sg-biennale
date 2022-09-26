@@ -49,20 +49,21 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
           extraPadding={extraPadding()}
           imgPositionIngAlgo={imgPositionIngAlgo}
         />
-        {sortedProgrammesAndEvents.length !== cardsPerPage && (
-          <motion.div
-            key={page}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-          >
-            <Button onClick={showMoreLessButtonAction} className="mx-auto">
-              {events.length === sortedProgrammesAndEvents.length
-                ? "Show Less"
-                : "Show More"}
-            </Button>
-          </motion.div>
-        )}
+        {sortedProgrammesAndEvents.length !== cardsPerPage ||
+          (sortedProgrammesAndEvents.length < cardsPerPage && (
+            <motion.div
+              key={page}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+            >
+              <Button onClick={showMoreLessButtonAction} className="mx-auto">
+                {events.length === sortedProgrammesAndEvents.length
+                  ? "Show Less"
+                  : "Show More"}
+              </Button>
+            </motion.div>
+          ))}
       </Container>
     </FilteringLogic>
   );

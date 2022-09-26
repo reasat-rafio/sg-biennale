@@ -10,6 +10,7 @@ import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { renderObjectArray } from "sanity-react-extra";
 import { AllEvents } from "@components/programmes-and-events/all-events";
 import { ClosestEvent } from "@components/programmes-and-events/closest-event";
+import { filterPastEvents } from "@lib/helpers/programme.event-helper";
 
 const query = groq`{
   "site": ${siteQuery},
@@ -60,6 +61,8 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
     query,
     props
   ).data;
+  const currentISODate = new Date().toISOString();
+  const _events = filterPastEvents(currentISODate, events);
 
   const {
     setAllCategories,
@@ -69,8 +72,8 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
   } = useProgrammesAndEventsStore();
 
   useEffect(() => {
-    setAllProgrammesAndEvents(events);
-    setSortedProgrammesAndEvents(events);
+    setAllProgrammesAndEvents(_events);
+    setSortedProgrammesAndEvents(_events);
     setAllCategories(allCategories);
     setAllVenues(allVenues);
   }, [
@@ -95,7 +98,7 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
           []
         ),
       })}
-      <ClosestEvent events={events} />
+      <ClosestEvent events={_events} />
       <AllEvents />
     </>
   );

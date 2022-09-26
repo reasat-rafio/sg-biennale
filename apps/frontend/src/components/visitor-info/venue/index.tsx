@@ -46,18 +46,19 @@ export const Venue: React.FC<{
         imgPositionIngAlgo={imgPositionIngAlgo}
       />
 
-      {allVenues.length !== cardsPerPage && (
-        <motion.div
-          key={page}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-        >
-          <Button onClick={showMoreLessButtonAction} className="mx-auto">
-            {venues.length === allVenues.length ? "Show Less" : "Show More"}
-          </Button>
-        </motion.div>
-      )}
+      {allVenues.length !== cardsPerPage ||
+        (allVenues.length < cardsPerPage && (
+          <motion.div
+            key={page}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+          >
+            <Button onClick={showMoreLessButtonAction} className="mx-auto">
+              {venues.length === allVenues.length ? "Show Less" : "Show More"}
+            </Button>
+          </motion.div>
+        ))}
     </Container>
   );
 };
