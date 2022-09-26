@@ -1,3 +1,4 @@
+import { AnimatedHamburgerMenu } from "@components/icons/animated-hamburger-menu";
 import { X } from "@components/icons/x";
 import { Listbox, Transition } from "@headlessui/react";
 import { AllVenuesProps } from "@lib/@types/programmes-events-types";
@@ -41,7 +42,7 @@ export const FilterByVenue: React.FC<{}> = () => {
   }, [router, allVenues, setSelectedVenue]);
 
   const removeVenueFilteringAction = (e: MouseEvent<SVGSVGElement, any>) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     setSelectedVenue(null);
     router.push({ query: { ...router.query, venue: null } }, undefined, {
       shallow: true,
@@ -57,14 +58,17 @@ export const FilterByVenue: React.FC<{}> = () => {
               {selectedVenue ? selectedVenue : "See by Venue"}
             </span>
 
-            {selectedVenue && (
+            {/* {selectedVenue && (
               <X
                 onClick={removeVenueFilteringAction}
                 className="h-7 w-7 rounded-full | p-1 | bg-white hover:scale-105 hover:bg-gray-300 | transition-colors duration-300"
               />
-            )}
+            )} */}
 
-            <img className="w-[18px]" src="/icons/lines.svg" alt="sort icon" />
+            <AnimatedHamburgerMenu
+              onClick={removeVenueFilteringAction}
+              animate={selectedVenue !== null}
+            />
           </Listbox.Button>
           <Transition
             as={Fragment}

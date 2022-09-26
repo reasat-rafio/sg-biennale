@@ -4,6 +4,7 @@ import { AllCategoriesProps } from "@lib/@types/programmes-events-types";
 import { useRouter } from "next/router";
 import { Listbox, Transition } from "@headlessui/react";
 import { X } from "@components/icons/x";
+import clsx from "clsx";
 
 export const FilterByCategory: React.FC<{}> = () => {
   const router = useRouter();
@@ -74,24 +75,26 @@ export const FilterByCategory: React.FC<{}> = () => {
                   key={category._id}
                   onClick={() => onClickAction(category)}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                    clsx(
+                      "relative cursor-default select-none py-2 pl-10 pr-4",
                       active ? "bg-vulcanic text-gray--700" : "text-gray-900"
-                    }`
+                    )
                   }
                   value={category}
                 >
                   {() => (
                     <>
                       <span
-                        className={`block truncate ${
+                        className={clsx(
+                          "block truncate",
                           category.name === selectedCategory
                             ? "font-medium"
                             : "font-normal"
-                        }`}
+                        )}
                       >
                         {category.name}
                       </span>
-                      {category.name === selectedCategory ? (
+                      {category.name === selectedCategory && (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-love">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +112,7 @@ export const FilterByCategory: React.FC<{}> = () => {
                             />
                           </svg>
                         </span>
-                      ) : null}
+                      )}
                     </>
                   )}
                 </Listbox.Option>

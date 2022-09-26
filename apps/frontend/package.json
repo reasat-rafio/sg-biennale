@@ -42,6 +42,7 @@
     "smee-client": "^1.2.3",
     "swiper": "^8.3.2",
     "three": "^0.143.0",
+    "uuid": "^9.0.0",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
