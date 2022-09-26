@@ -33,7 +33,6 @@ export const SortBy: React.FC<{}> = () => {
   };
 
   const onClickOnHamBurgerMenuAction = () => {
-    // setSelectedSortType(null);
     if (selectedSortType !== null) {
       router.push({ query: { ...router.query, sort_by: null } }, undefined, {
         shallow: true,

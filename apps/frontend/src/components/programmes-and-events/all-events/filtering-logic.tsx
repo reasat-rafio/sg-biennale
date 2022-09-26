@@ -18,8 +18,12 @@ const checkerForTheIntendedQuery = (filteringKeys: string[]) => {
 export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
   const router = useRouter();
 
-  const { allProgrammesAndEvents, setSortedProgrammesAndEvents } =
-    useProgrammesAndEventsStore();
+  const {
+    page,
+    cardsPerPage,
+    allProgrammesAndEvents,
+    setSortedProgrammesAndEvents,
+  } = useProgrammesAndEventsStore();
 
   useEffect(() => {
     /* 🚩 check if the qury field is not empty */
@@ -30,8 +34,6 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
       const selectedCatagory = router.query.category;
       const selectedVenue = router.query.venue;
       const selectedSorting = router.query.sort_by;
-
-      // "alphabet" | "date";
 
       const filteredEvents = allProgrammesAndEvents
         .filter((event) => {
@@ -60,9 +62,18 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
       } else if (selectedSorting === "date") {
         filteredEvents.sort((a, b) => (a.startAt > b.startAt ? 1 : -1));
       }
-      setSortedProgrammesAndEvents(filteredEvents);
+
+      // Show More Filtering
+      setSortedProgrammesAndEvents(
+        filteredEvents.slice(0, cardsPerPage * page)
+      );
     }
-  }, [router.query, allProgrammesAndEvents, setSortedProgrammesAndEvents]);
+  }, [
+    page,
+    router.query,
+    allProgrammesAndEvents,
+    setSortedProgrammesAndEvents,
+  ]);
 
   return <>{children}</>;
 };
