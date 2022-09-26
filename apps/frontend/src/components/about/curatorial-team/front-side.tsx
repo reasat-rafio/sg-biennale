@@ -41,9 +41,20 @@ export const FrontSide: React.FC<FrontSideProps> = ({
       }}
     >
       <header className="mt-20">
-        <h6 className="w-full | px-5 | text-center text-white text-heading-5 font-medium ">
+        <motion.h6
+          key={String(active)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut",
+            type: "tween",
+            delay: 0.3,
+          }}
+          className="w-full | px-5 | text-center text-white text-heading-5 font-medium "
+        >
           {name}
-        </h6>
+        </motion.h6>
       </header>
       <motion.figure className={"h-[250px] mt-auto translate-y-[10%]"}>
         <SanityImg

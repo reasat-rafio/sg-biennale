@@ -1,5 +1,5 @@
 import { SanityImage, SanityImg } from "sanity-react-extra";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { imageUrlBuilder } from "@utils/sanity";
 
 interface FrontSideProps {
@@ -7,7 +7,6 @@ interface FrontSideProps {
   title: string;
   active: boolean;
   cardsPerView: number;
-  activeCardIndex: number | null;
 }
 
 export const AnimationVariants: Variants = {
@@ -24,7 +23,6 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   cardsPerView,
   title,
   images,
-  activeCardIndex,
 }) => {
   return (
     <motion.div

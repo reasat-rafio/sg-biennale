@@ -56,7 +56,7 @@ const SlideRight: React.FC<BackSideVariantsProps> = ({
   return (
     <motion.div
       className={clsx(
-        "absolute z-10 h-full w-1/2 | flex flex-col justify-center items-center | pl-5 pr-10 box-border ml-auto | bg-white"
+        "absolute z-10 h-full w-1/2 |  pl-5 pr-10 box-border ml-auto | bg-white"
       )}
       initial="initial"
       onClick={(e) => e.stopPropagation()}
@@ -67,14 +67,26 @@ const SlideRight: React.FC<BackSideVariantsProps> = ({
       }}
       variants={SlideRightAnimationVariants}
     >
-      <div className="flex-1 flex justify-center items-center">
-        <span className="font-mono text-body-1 text-gray-500" ref={ref}>
-          <PortableText blocks={description} />
-        </span>
-      </div>
-      <div className="w-full">
-        <Button>View Artist</Button>
-      </div>
+      <motion.div
+        className="flex flex-col justify-center items-center | h-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: active ? 1 : 0 }}
+        transition={{
+          duration: 0.3,
+          type: "tween",
+          ease: "easeInOut",
+          delay: 0.4,
+        }}
+      >
+        <div className="flex-1 flex justify-center items-center">
+          <span className="font-mono text-body-1 text-gray-500" ref={ref}>
+            <PortableText blocks={description} />
+          </span>
+        </div>
+        <div className="w-full">
+          <Button>View Director</Button>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
@@ -103,7 +115,7 @@ const ScaleUp: React.FC<BackSideVariantsProps> = ({
         >
           <PortableText blocks={description} />
         </span>
-        <Button className="!bg-white !text-black">View Artist</Button>
+        <Button className="!bg-white !text-black">View Director</Button>
       </div>
     </motion.div>
   );

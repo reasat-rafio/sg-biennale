@@ -143,7 +143,6 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
                 images={images}
                 active={activeCardIndex === index}
                 cardsPerView={cardsPerView}
-                activeCardIndex={activeCardIndex}
               />
               <Backside
                 description={description}

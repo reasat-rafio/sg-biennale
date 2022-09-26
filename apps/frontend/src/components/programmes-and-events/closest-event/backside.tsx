@@ -66,6 +66,7 @@ const SlideRight: React.FC<BacksideProps> = ({
       variants={SlideRightAnimationVariants}
     >
       <motion.div
+        className="flex flex-col justify-center items-center | h-full"
         initial={{ opacity: 0 }}
         animate={{ opacity: active ? 1 : 0 }}
         transition={{
@@ -74,7 +75,6 @@ const SlideRight: React.FC<BacksideProps> = ({
           ease: "easeInOut",
           delay: 0.4,
         }}
-        className="flex flex-col justify-center items-center | h-full"
       >
         <div className="flex-1 flex ">
           <span className="text-body-2 font-manrope text-gray--700" ref={ref}>

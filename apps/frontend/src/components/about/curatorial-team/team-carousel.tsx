@@ -38,6 +38,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     useState<boolean>(false);
   const [disableSwipingLeft, setDisableSwipingLeft] = useState<boolean>(false);
   const [cardsPerView, setCardsperView] = useState(4);
+  const gapInPixel = windowWidth >= 1024 ? 15 : 10;
 
   useEffect(() => {
     if (windowWidth >= 1280) setCardsperView(4);
@@ -91,13 +92,15 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
             : `${halfWidth}%`;
 
           const initialPosition =
-            (index + 1 - position) * ((1 / cardsPerView) * 100);
+            (index + 1 - position) *
+            ((1 / (Math.max(cardsPerView, 2) - 1)) *
+              ((100 / cardsPerView) * (Math.max(cardsPerView, 2) - 1)));
+
           const positionLeft = oneCardPerView
-            ? initialPosition * 1
+            ? initialPosition
             : activeCardIndex !== null && activeCardIndex < index
             ? initialPosition + (1 / cardsPerView) * 100
-            : initialPosition * 1;
-
+            : initialPosition;
           useEffect(() => {
             if (firstIndex && positionLeft >= 100 / cardsPerView)
               setDisableSwipingRight(true);
@@ -114,9 +117,10 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               className="flex flex-col overflow-hidden absolute top-0 h-[500px]"
               initial={{ scale: 0.4 }}
               animate={{
-                left: `${positionLeft}vw`,
+                left: `calc(${positionLeft}% - ${gapInPixel}px)`,
                 width: cardWidth,
               }}
+              style={{ padding: `0 ${gapInPixel}px` }}
               whileInView={{ scale: 0.9 }}
               viewport={{ once: true }}
               transition={transition(index)}
