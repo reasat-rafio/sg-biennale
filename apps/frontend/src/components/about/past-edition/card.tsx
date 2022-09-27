@@ -1,7 +1,9 @@
 import { PastEditionCollection } from "@lib/@types/about.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
+import { useWindowSize } from "@lib/hooks";
 import useAboutStore from "@stores/about.store";
 import { imageUrlBuilder } from "@utils/sanity";
+import clsx from "clsx";
 import { useMotionValue, motion, transform } from "framer-motion";
 import { MouseEvent, useRef, useState } from "react";
 import { SanityImg } from "sanity-react-extra";
@@ -16,13 +18,13 @@ const physics = {
   mass: 10,
 };
 export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
-  const { setSelectedPastEditionId } = useAboutStore();
-
+  const windowWidth = useWindowSize()?.width ?? 0;
   const cardRef = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
   const rotateValue = useMotionValue(0);
+  const { selectedPastEditionId, setSelectedPastEditionId } = useAboutStore();
 
   const x = useTransformSpring({
     value: screenX,
@@ -54,9 +56,11 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
 
   return (
     <motion.article
-      layoutId={`${_id}-img`}
       ref={cardRef}
-      className="xl:col-span-3 lg:col-span-4 sm:col-span-6 col-span-12 | flex flex-col | space-y-4 p-5 | bg-white | rounded | cursor-pointer"
+      className={clsx(
+        "xl:col-span-3 lg:col-span-4 sm:col-span-6 col-span-12 | flex flex-col | space-y-4 p-5 | bg-white | rounded | cursor-pointer",
+        selectedPastEditionId === _id && "z-30"
+      )}
       transition={{
         delay: index * 0.2,
         type: "tween",
