@@ -137,7 +137,11 @@ const deskStructure = () =>
       S.documentTypeListItem("artwork").title("Artworks"),
       S.documentTypeListItem("venue").title("Venues"),
       S.documentTypeListItem("pastEdition").title("Past Edition"),
-      S.documentTypeListItem("news").title("Publications & Catalogues"),
+      S.documentTypeListItem("news").title("Press Release"),
+      S.documentTypeListItem("publicationsCatalogue").title(
+        "Publications And Catalogue"
+      ),
+      S.documentTypeListItem("curatorialEssay").title("Curatorial Essays"),
 
       S.listItem()
         .title("Partners")

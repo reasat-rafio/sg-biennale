@@ -1,6 +1,8 @@
+import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import clsx from "clsx";
+import { transform, useMotionValue, motion } from "framer-motion";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useRef, useState } from "react";
 
 interface ButtonProps {
   variant?: "primary" | "tertiary" | "secondary";
@@ -49,5 +51,50 @@ export const Button: React.FC<ButtonProps> = ({
         </Link>
       )}
     </>
+  );
+};
+
+const physics = {
+  damping: 30,
+  stiffness: 60,
+  bounce: 0.1,
+  mass: 10,
+};
+export const BButton = ({ children }: any) => {
+  const rotateValue = useMotionValue(0);
+  const [hovered, setHovered] = useState(false);
+
+  const rotateY = useTransformSpring({
+    value: rotateValue,
+    outputRange: hovered ? [-20, 20] : [0, 0],
+    physics,
+  });
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  const handleMouseMove = (event: any) => {
+    if (btnRef?.current) {
+      const maxWidth = btnRef.current?.getBoundingClientRect().width;
+
+      const rotateY = transform(
+        [0, maxWidth],
+        [1, 0]
+      )(Math.abs(btnRef.current?.getBoundingClientRect().left - event.clientX));
+      rotateValue.set(rotateY);
+    }
+  };
+
+  return (
+    <motion.button
+      ref={btnRef}
+      // style={{ rotateY: 100 }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => {
+        setHovered(false);
+      }}
+      className={clsx(defaultStyles, variantStyles.primary, "")}
+    >
+      {children}
+    </motion.button>
   );
 };

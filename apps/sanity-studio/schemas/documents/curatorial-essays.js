@@ -1,8 +1,8 @@
 import { FcNews } from "react-icons/fc";
 
-const News = {
-  title: "Press Release",
-  name: "news",
+const CuratorialEssay = {
+  title: "Curatorial Essays",
+  name: "curatorialEssay",
   type: "document",
   icon: FcNews,
   fields: [
@@ -32,10 +32,6 @@ const News = {
       of: [{ type: "block" }],
       validation: (Rule) => Rule.required(),
     },
-    {
-      name: "backgroundColor",
-      type: "color",
-    },
     { name: "cta", type: "cta" },
     { name: "file", type: "file" },
   ],
@@ -48,4 +44,4 @@ const News = {
   },
 };
 
-export default News;
+export default CuratorialEssay;

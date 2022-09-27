@@ -75,6 +75,8 @@ import Tier from "./documents/tier";
 
 import PartnersListing from "./documents/pages/partners-listing";
 import ProgrammesEventsPage from "./documents/pages/programmes-events";
+import PublicationsCatalogue from "./documents/publications-catalogue";
+import CuratorialEssay from "./documents/curatorial-essays";
 
 export default createSchema({
   name: "default",
@@ -107,6 +109,8 @@ export default createSchema({
     Curatorial,
 
     News,
+    PublicationsCatalogue,
+    CuratorialEssay,
 
     HomePage,
     HomeHero,
