@@ -20,6 +20,11 @@ const PublicationsCatalogue = {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "author",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: "images",
       type: "array",
       of: [{ type: "image" }],

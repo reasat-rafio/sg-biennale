@@ -17,45 +17,8 @@ const ExplorePublicationAndCatalogue = {
       validation: (Rule) => Rule.required(),
       of: [
         {
-          name: "publicationAndCatalogue",
-          type: "object",
-          fields: [
-            {
-              name: "title",
-              type: "string",
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: "author",
-              type: "string",
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: "image",
-              type: "image",
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: "url",
-              type: "url",
-              validation: (Rule) => Rule.required(),
-            },
-          ],
-          preview: {
-            select: {
-              title: "title",
-              author: "author",
-              url: "url",
-              media: "image",
-            },
-            prepare({ url, media, title, author }) {
-              return {
-                title,
-                subtitle: `${author} | ${url}`,
-                media,
-              };
-            },
-          },
+          type: "reference",
+          to: { type: "publicationsCatalogue" },
         },
       ],
     },
