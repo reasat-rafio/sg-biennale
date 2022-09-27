@@ -9,6 +9,7 @@ import { CuratorialTeam } from "@components/about/curatorial-team";
 import { AboutUs } from "@components/about/about-us";
 import { Team } from "@components/about/team";
 import { PastEdition } from "@components/about/past-edition";
+import { Modals } from "@components/about/modals";
 
 const query = pageQuery(groq`
   *[_type == "aboutPage"][0]{
@@ -59,15 +60,18 @@ const About: NextPage<SanityProps> = (props) => {
   const pageRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={pageRef} className="h-full ">
-      {renderObjectArray(page.sections, {
-        // "aboutPage.hero": Hero,
-        // "aboutPage.curatorialTeam": CuratorialTeam,
-        // "aboutPage.team": Team,
-        // "aboutPage.about": AboutUs,
-        "aboutPage.pastEdition": PastEdition,
-      })}
-    </div>
+    <>
+      <div ref={pageRef} className="h-full ">
+        {renderObjectArray(page.sections, {
+          // "aboutPage.hero": Hero,
+          // "aboutPage.curatorialTeam": CuratorialTeam,
+          // "aboutPage.team": Team,
+          // "aboutPage.about": AboutUs,
+          "aboutPage.pastEdition": PastEdition,
+        })}
+      </div>
+      <Modals />
+    </>
   );
 };
 export default About;

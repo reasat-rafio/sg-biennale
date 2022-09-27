@@ -1,8 +1,8 @@
 import { PastEditionCollection } from "@lib/@types/about.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
+import useAboutStore from "@stores/about.store";
 import { imageUrlBuilder } from "@utils/sanity";
 import { useMotionValue, motion, transform } from "framer-motion";
-import { useRouter } from "next/router";
 import { MouseEvent, useRef, useState } from "react";
 import { SanityImg } from "sanity-react-extra";
 
@@ -16,7 +16,8 @@ const physics = {
   mass: 10,
 };
 export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
-  const router = useRouter();
+  const { setSelectedPastEditionId } = useAboutStore();
+
   const cardRef = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
@@ -53,11 +54,9 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
 
   return (
     <motion.article
-      key={_id}
+      layoutId={`${_id}-img`}
       ref={cardRef}
-      className="xl:col-span-3 lg:col-span-4 sm:col-span-6 col-span-12 | flex flex-col | space-y-4 p-5 | bg-white | rounded | cursor-pointer overflow-hidden"
-      initial={{ y: 150 }}
-      whileInView={{ y: 0 }}
+      className="xl:col-span-3 lg:col-span-4 sm:col-span-6 col-span-12 | flex flex-col | space-y-4 p-5 | bg-white | rounded | cursor-pointer"
       transition={{
         delay: index * 0.2,
         type: "tween",
@@ -71,7 +70,7 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
         y.set(0);
         setHovered(false);
       }}
-      onClick={() => url && router.push(url)}
+      onClick={() => setSelectedPastEditionId(_id)}
     >
       <motion.figure
         className="max-h-[350px] p-7 overflow-hidden"
@@ -89,9 +88,9 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
         />
       </motion.figure>
       <section>
-        <h6 className="text-lg font-medium mb-1 font-manrope z-20 relative">
+        <motion.h6 className="text-lg font-medium mb-1 font-manrope z-20 relative">
           {name}
-        </h6>
+        </motion.h6>
       </section>
     </motion.article>
   );
