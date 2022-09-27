@@ -1,5 +1,6 @@
 import { AnimatedHamburgerMenu } from "@components/icons/animated-hamburger-menu";
 import { Listbox, Transition } from "@headlessui/react";
+import useVisitorInfoStore from "@stores/visitor-info.store";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
@@ -11,62 +12,35 @@ interface SortByListProps {
 }
 
 export const SortBy: React.FC<{}> = () => {
-  const router = useRouter();
   const sortByList = [
     { name: "Alphabet", id: uuid() },
     { name: "Date", id: uuid() },
   ];
 
-  const [selectedSortType, setSelectedSortType] = useState<
-    "Alphabet" | "Date" | null
-  >(null);
+  const { selectedSorting, setSelectedSorting } = useVisitorInfoStore();
 
   const onClickOnSortItemAction = ({ name }: SortByListProps) => {
-    router.push(
-      { query: { ...router.query, sort_by: name.toLowerCase() } },
-      undefined,
-      {
-        shallow: true,
-      }
-    );
+    setSelectedSorting(name.toLowerCase() as any);
   };
 
   const onClickOnHamBurgerMenuAction = () => {
-    if (selectedSortType !== null) {
-      router.push({ query: { ...router.query, sort_by: null } }, undefined, {
-        shallow: true,
-      });
+    if (selectedSorting !== null) {
+      setSelectedSorting(null);
     }
   };
 
-  /*
-  ❓Getting the query from the url and setting them to the state
-  @REASON: This stop the state to reset after refresh
-  */
-  useEffect(() => {
-    /* 🚩 Flag to check if the category query present  */
-    const selectedSortingFromUrlQuery = router.query.sort_by;
-
-    if (selectedSortingFromUrlQuery) {
-      const [matchedVanue] = sortByList.filter(
-        ({ name }) => name.toLowerCase() === selectedSortingFromUrlQuery
-      );
-      setSelectedSortType(matchedVanue.name as any);
-    } else setSelectedSortType(null);
-  }, [router, sortByList, setSelectedSortType, selectedSortType]);
-
   return (
-    <div className="z-20 col-span-5">
+    <div className="z-20 relative col-span-5">
       <Listbox>
-        <div className="relative mt-1">
-          <Listbox.Button className="flex items-center w-full | space-x-4 p-3 | border-b border-black cursor-pointer">
+        <div className="mt-1">
+          <Listbox.Button className="flex items-center w-fit | space-x-4 p-3 | border-b border-black cursor-pointer">
             <span className="flex-1 text-left block truncate">
-              {selectedSortType ? selectedSortType : "Sort By"}
+              {selectedSorting ? selectedSorting : "Sort By"}
             </span>
 
             <AnimatedHamburgerMenu
               onClick={onClickOnHamBurgerMenuAction}
-              animate={selectedSortType !== null}
+              animate={selectedSorting !== null}
             />
           </Listbox.Button>
           <Transition
@@ -75,10 +49,9 @@ export const SortBy: React.FC<{}> = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm | scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 ">
+            <Listbox.Options className="absolute mt-1 max-h-60 w-fit overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm | scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 ">
               {sortByList.map(({ id, name }) => (
                 <Listbox.Option
-                  key={id}
                   className={({ active }) =>
                     clsx(
                       "relative cursor-default select-none py-2 pl-10 pr-4",
@@ -93,14 +66,14 @@ export const SortBy: React.FC<{}> = () => {
                       <span
                         className={clsx(
                           "block ",
-                          name === selectedSortType
+                          name === selectedSorting
                             ? "font-medium"
                             : "font-normal"
                         )}
                       >
                         {name}
                       </span>
-                      {name === selectedSortType && (
+                      {name === selectedSorting && (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-love">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

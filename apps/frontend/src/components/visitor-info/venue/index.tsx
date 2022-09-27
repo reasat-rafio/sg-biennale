@@ -6,30 +6,29 @@ import { FilteringSection } from "./filtering-section";
 import { VenueList } from "./venue-list";
 import { motion } from "framer-motion";
 import { Button } from "@components/ui/button";
+import useVisitorInfoStore from "@stores/visitor-info.store";
 
-const cardsPerPage = 6;
-export const Venue: React.FC<{
-  allVenues: VenueProps[];
-}> = ({ allVenues }) => {
-  const [page, setPage] = useState(1);
-  const [venues, setVenues] = useState(allVenues.slice(0, cardsPerPage));
+export const Venue: React.FC<{}> = ({}) => {
+  const { allVenues, sortedVenues, page, setPage, cardsPerPage } =
+    useVisitorInfoStore();
 
-  const imgPositionIngAlgo = positioningAlgo(venues.length);
+  const imgPositionIngAlgo = positioningAlgo(sortedVenues.length);
   const extraPadding = () =>
     useCallback(
       () =>
-        venues.reduce((previousValue, _, idx) => previousValue + 50 * idx, 0),
-      [venues]
+        sortedVenues.reduce(
+          (previousValue, _, idx) => previousValue + 50 * idx,
+          0
+        ),
+      [sortedVenues]
     );
 
   const showMoreLessButtonAction = () => {
-    venues < allVenues ? setPage((prev) => prev + 1) : setPage(1);
+    sortedVenues < allVenues ? setPage(page + 1) : setPage(1);
   };
 
-  useEffect(() => {
-    setVenues(allVenues.slice(0, cardsPerPage * page));
-  }, [page, allVenues, venues]);
-  cardsPerPage;
+  const showShowMoreButton =
+    allVenues.length !== cardsPerPage && allVenues.length > cardsPerPage;
 
   return (
     <Container className="py-xl flex flex-col space-y-12">
@@ -39,26 +38,27 @@ export const Venue: React.FC<{
           Accessibility Info
         </span>
       </header>
-      <FilteringSection setVenues={setVenues} allVenues={allVenues} />
+      <FilteringSection />
       <VenueList
-        venues={venues}
+        venues={sortedVenues}
         extraPadding={extraPadding()}
         imgPositionIngAlgo={imgPositionIngAlgo}
       />
 
-      {allVenues.length !== cardsPerPage ||
-        (allVenues.length < cardsPerPage && (
-          <motion.div
-            key={page}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
-          >
-            <Button onClick={showMoreLessButtonAction} className="mx-auto">
-              {venues.length === allVenues.length ? "Show Less" : "Show More"}
-            </Button>
-          </motion.div>
-        ))}
+      {showShowMoreButton && (
+        <motion.div
+          key={page}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
+        >
+          <Button onClick={showMoreLessButtonAction} className="mx-auto">
+            {sortedVenues.length === allVenues.length
+              ? "Show Less"
+              : "Show More"}
+          </Button>
+        </motion.div>
+      )}
     </Container>
   );
 };

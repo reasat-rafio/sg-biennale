@@ -4,12 +4,15 @@ import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { MoreInfos } from "@components/visitor-info/more-infos";
 import { Tour } from "@components/visitor-info/tour/tour";
 import { Venue } from "@components/visitor-info/venue";
+import { FilteringLogic } from "@components/visitor-info/venue/filtering-logic";
 import { siteQuery } from "@lib/query";
+import useVisitorInfoStore from "@stores/visitor-info.store";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
-import { useCallback } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useEffect } from "react";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
 
 const query = groq`{
@@ -62,10 +65,16 @@ export const getStaticProps: GetStaticProps = async (
 
 const VisitorInfo: NextPage<SanityProps> = (props) => {
   const { page, allVenues } = useSanityQuery(query, props).data;
+  const { setAllVenues, setSortedVenues } = useVisitorInfoStore();
+
+  useEffect(() => {
+    setAllVenues(allVenues);
+    setSortedVenues(allVenues);
+  }, [allVenues, setAllVenues, setSortedVenues]);
 
   return (
     <>
-      {renderObjectArray(page.sections, {
+      {/* {renderObjectArray(page.sections, {
         pageHeading: useCallback(
           (data: PageHeaderProps) => (
             <Container>
@@ -76,8 +85,10 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
         ),
         "visitorInfoPage.moreInfo": MoreInfos,
         "visitorInfoPage.tour": Tour,
-      })}
-      <Venue allVenues={allVenues} />
+      })} */}
+      <FilteringLogic>
+        <Venue />
+      </FilteringLogic>
       {renderObjectArray(page.sections, {
         "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
       })}
