@@ -136,6 +136,7 @@ const deskStructure = () =>
       S.documentTypeListItem("curatorial").title("Curatorials"),
       S.documentTypeListItem("artwork").title("Artworks"),
       S.documentTypeListItem("venue").title("Venues"),
+      S.documentTypeListItem("pastEdition").title("Past Edition"),
       S.documentTypeListItem("news").title("Publications & Catalogues"),
 
       S.listItem()

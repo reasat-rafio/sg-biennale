@@ -17,6 +17,7 @@ import Video from "./objects/video";
 import PageHeading from "./objects/page-heading";
 
 import Venue from "./documents/venue";
+import PastEdition from "./documents/past-edition";
 
 import HomePage from "./documents/pages/home";
 import HomeHero from "./objects/home/hero";
@@ -96,6 +97,7 @@ export default createSchema({
     Event,
     EventsListing,
     ProgrammesEventsPage,
+    PastEdition,
 
     Artist,
     Artwork,

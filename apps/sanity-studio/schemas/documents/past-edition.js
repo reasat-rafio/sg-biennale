@@ -7,7 +7,7 @@ const PastEdition = {
   fields: [
     {
       name: "name",
-      type: "sting",
+      type: "string",
       validation: (Rule) => Rule.required(),
     },
     {
@@ -21,6 +21,7 @@ const PastEdition = {
       type: "image",
       validation: (Rule) => Rule.required(),
     },
+    { name: "url", type: "url" },
   ],
   preview: {
     select: {
