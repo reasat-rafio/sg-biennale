@@ -74,7 +74,7 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
 
   return (
     <>
-      {/* {renderObjectArray(page.sections, {
+      {renderObjectArray(page.sections, {
         pageHeading: useCallback(
           (data: PageHeaderProps) => (
             <Container>
@@ -85,7 +85,7 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
         ),
         "visitorInfoPage.moreInfo": MoreInfos,
         "visitorInfoPage.tour": Tour,
-      })} */}
+      })}
       <FilteringLogic>
         <Venue />
       </FilteringLogic>

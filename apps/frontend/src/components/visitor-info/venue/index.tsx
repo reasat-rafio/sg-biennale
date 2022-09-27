@@ -1,7 +1,6 @@
 import { Container } from "@components/ui/container";
-import { VenueProps } from "@lib/@types/visitor-info.types";
 import { positioningAlgo } from "@lib/helpers/global.helpers";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { FilteringSection } from "./filtering-section";
 import { VenueList } from "./venue-list";
 import { motion } from "framer-motion";
