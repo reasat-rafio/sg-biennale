@@ -6,14 +6,15 @@ import { motion, Variants } from "framer-motion";
 import { Button } from "@components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { useIntersection } from "@lib/hooks";
+import { Slug } from "@lib/@types/global.types";
 
 interface EssayProps {
-  _key: string;
-  _type: string;
+  _id: string;
+  header: string;
+  slug: Slug;
   author: string;
-  image: SanityImage;
-  title: string;
-  url: string;
+  images: SanityImage[];
+  description: string;
 }
 
 interface CuratorialEssayProps {
@@ -82,7 +83,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
           className="grid grid-cols-12 | lg:gap-10 gap-5 my-14"
         >
           {sortedCuratorialEssays.map((data, index) => (
-            <Essay key={data._key + index} {...data} />
+            <Essay key={data._id + index} {...data} />
           ))}
         </motion.div>
 
@@ -115,28 +116,28 @@ const ItemVariant: Variants = {
   },
 };
 
-const Essay: React.FC<EssayProps> = ({ title, author, image, url }) => {
+const Essay: React.FC<EssayProps> = ({ header, author, images }) => {
   const router = useRouter();
-  const onClickAction = () => router.push(url);
+  // const onClickAction = () => router.push(url);
 
   return (
     <motion.article
       className="xl:col-span-4 md:col-span-6 col-span-12 space-y-5 | cursor-pointer group"
       variants={ItemVariant}
-      onClick={onClickAction}
+      // onClick={onClickAction}
     >
       <figure className="aspect-video overflow-hidden">
         <SanityImg
           className="h-full w-full object-cover | group-hover:scale-110 | transition-all duration-500"
-          image={image}
+          image={images[0]}
           width={400}
           builder={imageUrlBuilder}
-          alt={`${title}`}
+          alt={`${header}`}
         />
       </figure>
       <header className="flex flex-col space-y-6">
         <h6 className="font-medium lg:text-heading-6 text-2xl | lg:leading-[125%] | group-hover:text-red-love | transition-all duration-500">
-          {title}
+          {header}
         </h6>
         <span className="text-gray--400 font-manrope font-bold lg:text-body-1 text-body-2">
           {author}

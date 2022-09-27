@@ -1,3 +1,4 @@
+import { Slug } from "@lib/@types/global.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
@@ -14,19 +15,18 @@ const physics = {
 };
 
 export interface PublicationsAndCatalogue {
-  _key: string;
-  _type: string;
+  _id: string;
+  header: string;
+  slug: Slug;
   author: string;
-  image: SanityImage;
-  title: string;
-  url: string;
+  images: SanityImage[];
+  description: string;
 }
 
 export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
   author,
-  image,
-  title,
-  url,
+  images,
+  header,
 }) => {
   const router = useRouter();
   const windwoWidth = useWindowSize()?.width ?? 0;
@@ -51,7 +51,7 @@ export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
     physics,
   });
 
-  const onTitleClickAction = () => router.push(url);
+  // const onTitleClickAction = () => router.push(url);
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
     const width = transform([0, window.innerWidth], [0, 1])(event.clientX);
     const height = transform([0, window.innerHeight], [0, 1])(event.clientY);
@@ -87,9 +87,9 @@ export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
       <div className="lg:col-span-7 col-span-12 | flex flex-col space-y-5">
         <h6
           className="lg:text-heading-4 text-heading-5 font-medium | hover:text-red-love cursor-pointer | transition-colors duration-500"
-          onClick={onTitleClickAction}
+          // onClick={onTitleClickAction}
         >
-          {title}
+          {header}
         </h6>
         <span className="font-bold font-manrope text-gray--400 text-body-1">
           {author}
@@ -107,8 +107,8 @@ export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
           className="aspect-video lg:h-auto lg:w-auto  w-full object-cover"
           width={400}
           builder={imageUrlBuilder}
-          image={image}
-          alt={title}
+          image={images[0]}
+          alt={header}
         />
       </motion.figure>
     </motion.article>
