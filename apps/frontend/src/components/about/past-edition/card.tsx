@@ -15,13 +15,7 @@ const physics = {
   bounce: 0.1,
   mass: 10,
 };
-export const Card: React.FC<CardProps> = ({
-  _key,
-  image,
-  title,
-  url,
-  index,
-}) => {
+export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
   const router = useRouter();
   const cardRef = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState(false);
@@ -59,7 +53,7 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <motion.article
-      key={_key}
+      key={_id}
       ref={cardRef}
       className="xl:col-span-3 lg:col-span-4 sm:col-span-6 col-span-12 | flex flex-col | space-y-4 p-5 | bg-white | rounded | cursor-pointer overflow-hidden"
       initial={{ y: 150 }}
@@ -96,7 +90,7 @@ export const Card: React.FC<CardProps> = ({
       </motion.figure>
       <section>
         <h6 className="text-lg font-medium mb-1 font-manrope z-20 relative">
-          {title}
+          {name}
         </h6>
       </section>
     </motion.article>

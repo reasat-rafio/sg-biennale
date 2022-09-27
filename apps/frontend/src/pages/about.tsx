@@ -39,7 +39,7 @@ const query = pageQuery(groq`
               ...,
               'image': ${withDimensions("image")},
             },
-            pastEditionCollection[]{
+            pastEditionCollection[]-> {
               ...,
               'image': ${withDimensions("image")},
             }
@@ -62,9 +62,9 @@ const About: NextPage<SanityProps> = (props) => {
     <div ref={pageRef} className="h-full ">
       {renderObjectArray(page.sections, {
         // "aboutPage.hero": Hero,
-        "aboutPage.curatorialTeam": CuratorialTeam,
-        "aboutPage.team": Team,
-        "aboutPage.about": AboutUs,
+        // "aboutPage.curatorialTeam": CuratorialTeam,
+        // "aboutPage.team": Team,
+        // "aboutPage.about": AboutUs,
         "aboutPage.pastEdition": PastEdition,
       })}
     </div>

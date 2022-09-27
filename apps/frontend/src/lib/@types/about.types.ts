@@ -42,10 +42,10 @@ export interface AboutCollection {
 }
 
 export interface PastEditionCollection {
-  _key: string;
+  _id: string;
   type: string;
-  description?: string;
+  description: string;
   url?: string;
   image: SanityImage;
-  title: string;
+  name: string;
 }

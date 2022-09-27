@@ -1,13 +1,23 @@
+import { PastEditionCollection } from "@lib/@types/about.types";
 import create from "zustand/react";
 
-const setScrollYPosition = () => {};
-
 interface AboutStoreProps {
-  // setScrollYPositions: (data: number[]) =>
+  pastEditions: PastEditionCollection[];
+  selectedPastEditionId: string | null;
+  setSelectedPastEditionId: (data: string | null) => void;
+  setPastEditions: (data: PastEditionCollection[]) => void;
 }
 
 const useAboutStore = create<AboutStoreProps>((set) => ({
-  scrollYPositions: [],
+  pastEditions: [],
+  selectedPastEditionId: null,
+  setSelectedPastEditionId: (selectedPastEditionId) =>
+    set((state) => ({ ...state, selectedPastEditionId })),
+  setPastEditions: (pastEditions) =>
+    set((state) => ({
+      ...state,
+      pastEditions,
+    })),
 }));
 
 export default useAboutStore;
