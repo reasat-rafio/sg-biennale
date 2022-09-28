@@ -1,10 +1,10 @@
 import { convertSectionTypeName } from "@lib/helpers/global.helpers";
 
-interface AnchorsProps {
+interface AnchorsProp {
   anchors: string[];
 }
 
-export const Anchors: React.FC<AnchorsProps> = ({ anchors }) => {
+export const Anchor: React.FC<AnchorsProp> = ({ anchors }) => {
   const onAnchorClickAction = (anchorName: string) => {
     document
       ?.querySelector(`#anchor-${convertSectionTypeName(anchorName)}`)

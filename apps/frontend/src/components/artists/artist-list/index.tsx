@@ -4,8 +4,8 @@ import useArtistsStore from "@stores/artists.store";
 import clsx from "clsx";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { AnchorWrapper } from "./anchor-wrapper";
-import { Anchors } from "./anchors";
+import { AnchorWrapper } from "../anchor-wrapper";
+import { Anchor } from "./anchor";
 
 interface SortedArtistsList {
   title: string;
@@ -84,7 +84,7 @@ export const ArtistsList: React.FC<{}> = ({}) => {
           </AnchorWrapper>
         </div>
 
-        <Anchors anchors={anchors} />
+        <Anchor anchors={anchors} />
       </div>
     </Container>
   );

@@ -9,7 +9,7 @@ import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
 import { useCallback, useEffect } from "react";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
-import { ArtistsList } from "@components/artists/artists-list";
+import { ArtistsList } from "@components/artists/artist-list";
 
 const query = groq`{
     "site": ${siteQuery},
@@ -45,7 +45,7 @@ const query = groq`{
               dimensions
             }
           }
-        },
+        },alphabetical
     }
 }`;
 
