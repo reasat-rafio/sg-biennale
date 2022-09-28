@@ -13,6 +13,11 @@
     "start": "NODE_ENV=production node start.js",
     "lint": "next lint"
   },
+  "workspaces": {
+    "nohoist": [
+      "**"
+    ]
+  },
   "dependencies": {
     "@headlessui/react": "^1.6.5",
     "@react-spring/three": "^9.5.2",
