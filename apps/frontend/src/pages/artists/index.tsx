@@ -25,6 +25,7 @@ const query = groq`{
         name,
         slug,
         artworks[0...4]-> {
+            _id,
             name,
             slug,
             images[] {

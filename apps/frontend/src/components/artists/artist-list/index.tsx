@@ -3,7 +3,7 @@ import { ArtistsProps } from "@lib/@types/artists.types";
 import useArtistsStore from "@stores/artists.store";
 import { useEffect, useState } from "react";
 import { Anchor } from "./anchor";
-import { Artists } from "./artists";
+import { ArtistArtwork } from "./artists-artwork";
 
 export interface SortedArtistsList {
   title: string;
@@ -47,7 +47,7 @@ export const ArtistsList: React.FC<{}> = ({}) => {
   return (
     <Container className="bg-[#F8F8F8] mt-x py-x">
       <div className="flex space-x-20">
-        <Artists
+        <ArtistArtwork
           setActiveAnchor={setActiveAnchor}
           sortedArtistsList={sortedArtistsList}
         />
