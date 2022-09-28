@@ -12,10 +12,9 @@ const ArtistListing = {
     },
 
     {
-      title: "💡 Call Out",
-      name: "callout",
-      type: "text",
-      readOnly: true,
+      name: "sections",
+      type: "array",
+      of: [{ type: "pageHeading" }],
     },
   ],
   preview: {

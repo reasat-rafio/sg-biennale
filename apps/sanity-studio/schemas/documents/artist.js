@@ -29,7 +29,7 @@ const Artist = {
       name: "images",
       type: "array",
       of: [{ type: "image" }],
-      // validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required(),
     },
 
     {
@@ -46,6 +46,7 @@ const Artist = {
     {
       name: "artworks",
       type: "array",
+      validation: (Rule) => Rule.required(),
       of: [
         {
           type: "reference",
