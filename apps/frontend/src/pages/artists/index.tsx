@@ -9,6 +9,7 @@ import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
 import { useCallback, useEffect } from "react";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
+import { ArtistsList } from "@components/artists/artists-list";
 
 const query = groq`{
     "site": ${siteQuery},
@@ -61,7 +62,6 @@ const Artists: NextPage<SanityProps> = (props) => {
   useEffect(() => {
     setAllArtists(artists);
     setFilteredArtists(artists);
-    // setAllVenues(venues);
   }, [artists, setAllArtists, setFilteredArtists, setAllVenues]);
 
   console.log(page);
@@ -78,16 +78,9 @@ const Artists: NextPage<SanityProps> = (props) => {
           []
         ),
       })}
+      <ArtistsList />
     </>
   );
 };
 
 export default Artists;
-// <FilteringLogic>
-{
-  /* <Filtering />
-      <ArtistsList /> */
-}
-{
-  /* </FilteringLogic> */
-}

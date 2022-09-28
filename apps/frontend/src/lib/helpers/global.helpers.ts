@@ -86,3 +86,8 @@ export const positioningAlgo = (arrLen: number) => {
   res.push(0);
   return res;
 };
+
+
+export function convertSectionTypeName(string: string) {
+  return string.split(' ').join('-')
+}
