@@ -9,11 +9,49 @@ const HomeNews = {
     {
       name: "title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
-      name: "news",
+      name: "newsCollection",
       type: "array",
-      of: [{ type: "reference", to: { type: "news" } }],
+      validation: (Rule) => Rule.required(),
+      of: [
+        {
+          name: "news",
+          type: "object",
+          fields: [
+            {
+              name: "header",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "image",
+              type: "image",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "description",
+              type: "array",
+              of: [{ type: "block" }],
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "backgroundColor",
+              type: "color",
+              validation: (Rule) => Rule.required(),
+            },
+            { name: "url", type: "url" },
+          ],
+          preview: {
+            select: {
+              title: "header",
+              subtitle: "description",
+              media: "image",
+            },
+          },
+        },
+      ],
     },
   ],
   preview: {
