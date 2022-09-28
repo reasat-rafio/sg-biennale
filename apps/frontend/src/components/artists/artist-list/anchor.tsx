@@ -13,7 +13,7 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
       ?.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <div className="sticky top-24 h-min | bg-white px-5 py-10 rounded-[43px]">
+    <div className="sticky mt-28 top-24 h-min | bg-white px-5 py-10 rounded-[43px]">
       <ul className="flex flex-col justify-center items-center space-y-5">
         {anchors.map((anchor) => (
           <li

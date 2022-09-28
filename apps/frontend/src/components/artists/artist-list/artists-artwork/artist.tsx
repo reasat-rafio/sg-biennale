@@ -41,7 +41,7 @@ export const Artist: React.FC<ArtistProps> = ({ name, slug, images }) => {
 
   return (
     <motion.article
-      className="relative col-span-6 | bg-white | rounded overflow-hidden cursor-pointer"
+      className="relative col-span-6 h-[600px] | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}
     >

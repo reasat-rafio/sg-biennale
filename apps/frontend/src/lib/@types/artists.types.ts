@@ -1,5 +1,5 @@
 import { Slug } from "./global.types";
-import { SanityImage, SanityImg } from "sanity-react-extra";
+import { SanityImage } from "sanity-react-extra";
 
 export interface IFilterVenue {
   name: string;
