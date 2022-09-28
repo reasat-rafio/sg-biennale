@@ -1,13 +1,11 @@
 import { Container } from "@components/ui/container";
 import { ArtistsProps } from "@lib/@types/artists.types";
 import useArtistsStore from "@stores/artists.store";
-import clsx from "clsx";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { AnchorWrapper } from "../anchor-wrapper";
 import { Anchor } from "./anchor";
+import { Artists } from "./artists";
 
-interface SortedArtistsList {
+export interface SortedArtistsList {
   title: string;
   data: ArtistsProps[];
 }
@@ -47,44 +45,13 @@ export const ArtistsList: React.FC<{}> = ({}) => {
   }, [sortedArtistsList]);
 
   return (
-    <Container>
+    <Container className="bg-[#F8F8F8] mt-x py-x">
       <div className="flex space-x-20">
-        <div className="flex-1">
-          <AnchorWrapper setActiveAnchor={setActiveAnchor}>
-            {sortedArtistsList.map(({ data, title }, index) => (
-              <div
-                id={title}
-                className={clsx(
-                  "flex flex-col | lg:py-14 py-8",
-                  index !== sortedArtistsList.length - 1 &&
-                    "border-b-2 border-black"
-                )}
-                key={title}
-              >
-                <h5 className="mb-7 text-xl font-medium">{title}</h5>
-                <div className="grid grid-cols-12 | lg:gap-10 gap-5">
-                  {data.map(({ _id, name, slug }) => (
-                    <div
-                      key={_id}
-                      className="col-span-6 md:col-span-4 lg:col-span-3"
-                    >
-                      <h2
-                        style={{ wordSpacing: "2000px" }}
-                        className="text-2xl font-semibold leading-snug mb-3"
-                      >
-                        <Link href={`artists/${slug?.current ?? ""}`}>
-                          <a>{name}</a>
-                        </Link>
-                      </h2>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </AnchorWrapper>
-        </div>
-
-        <Anchor anchors={anchors} />
+        <Artists
+          setActiveAnchor={setActiveAnchor}
+          sortedArtistsList={sortedArtistsList}
+        />
+        <Anchor activeAnchor={activeAnchor} anchors={anchors} />
       </div>
     </Container>
   );

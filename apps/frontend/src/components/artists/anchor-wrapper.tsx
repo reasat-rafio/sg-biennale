@@ -54,12 +54,16 @@ const Section: React.FC<{
 
   useEffect(() => {
     if (sectionOnview?.isIntersecting) {
-      setActiveAnchor(`anchor-${anchorName}`);
+      setActiveAnchor(anchorName);
     }
   }, [sectionOnview?.isIntersecting, anchorName, setActiveAnchor]);
 
   return (
-    <div className="" id={`anchor-${anchorName}`} ref={sectionRef}>
+    <div
+      className="lg:scroll-mt-40 scroll-mt-24 first:scroll-mt-40 first:lg:scroll-mt-52"
+      id={`anchor-${anchorName}`}
+      ref={sectionRef}
+    >
       {children}
     </div>
   );
