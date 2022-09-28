@@ -46,7 +46,7 @@ export const ArtistsList: React.FC<{}> = ({}) => {
 
   return (
     <Container className="bg-[#F8F8F8] mt-x py-x">
-      <div className="flex space-x-20">
+      <div className="flex space-x-10">
         <ArtistArtwork
           setActiveAnchor={setActiveAnchor}
           sortedArtistsList={sortedArtistsList}

@@ -10,16 +10,16 @@ interface ArtistProps {
   images: SanityImage[];
 }
 
-const ImageVariants: Variants = {
+export const ImageVariants: Variants = {
   initial: {
-    scale: 0.7,
+    scale: 0.75,
   },
   animate: {
-    scale: 1.05,
+    scale: 1.01,
   },
 };
 
-const TextVaiants: Variants = {
+export const TextVaiants: Variants = {
   initial: {
     left: 35,
     bottom: 35,
@@ -31,9 +31,6 @@ const TextVaiants: Variants = {
     bottom: 50,
     color: "white",
     scale: 1.5,
-    // transition: {
-    //   color: { delay: 0.2 },
-    // },
   },
 };
 
@@ -44,7 +41,7 @@ export const Artist: React.FC<ArtistProps> = ({ name, slug, images }) => {
 
   return (
     <motion.article
-      className="relative col-span-6 h-[590px] | bg-white | rounded overflow-hidden"
+      className="relative col-span-6 | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}
     >
@@ -52,7 +49,7 @@ export const Artist: React.FC<ArtistProps> = ({ name, slug, images }) => {
         initial="initial"
         animate={hovered ? "animate" : "initial"}
         transition={{
-          duration: 1,
+          duration: 2,
           type: "tween",
           ease: [0.075, 0.52, 0.1, 1],
         }}
@@ -70,7 +67,11 @@ export const Artist: React.FC<ArtistProps> = ({ name, slug, images }) => {
 
       <motion.h6
         animate={hovered ? "animate" : "initial"}
-        transition={{ duration: 0.6, type: "tween", ease: "easeInOut" }}
+        transition={{
+          duration: 0.6,
+          type: "tween",
+          ease: [0.075, 0.52, 0.1, 1],
+        }}
         variants={TextVaiants}
         className="absolute | text-body-2 font-manrope font-semibold"
       >

@@ -1,5 +1,4 @@
 import { AnchorWrapper } from "@components/artists/anchor-wrapper";
-import clsx from "clsx";
 import { Dispatch, SetStateAction } from "react";
 import { SortedArtistsList } from "..";
 import { Artist } from "./artist";
@@ -24,18 +23,18 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
             className="flex flex-col | lg:py-14 py-8"
           >
             <span className="mb-7 text-xl font-medium">{title}</span>
-            <div className="grid grid-cols-12 | lg:gap-10 gap-5">
-              {data.map(({ _id, name, slug, images, artworks }, index) => (
-                <section className="grid grid-cols-12 col-span-12">
+            <div className="grid grid-cols-12 | gap-10 ">
+              {data.map(({ name, slug, images, artworks }, index) => (
+                <section className="grid grid-cols-12 col-span-12 gap-10 h-[600px]">
                   {index % 2 ? (
                     <>
-                      <Artworks />
+                      <Artworks artworks={artworks} />
                       <Artist name={name} slug={slug} images={images} />
                     </>
                   ) : (
                     <>
                       <Artist name={name} slug={slug} images={images} />
-                      <Artworks />
+                      <Artworks artworks={artworks} />
                     </>
                   )}
                 </section>

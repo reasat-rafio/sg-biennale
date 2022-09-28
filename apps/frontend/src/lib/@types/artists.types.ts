@@ -6,7 +6,7 @@ export interface IFilterVenue {
   slug: Slug;
 }
 
-export interface ArtworkProps {
+export interface IArtworkProps {
   _id: string;
   name: string;
   slug: Slug;
@@ -18,7 +18,7 @@ export interface ArtistsProps {
   slug: Slug;
   name: string;
   images: SanityImage[];
-  artworks: ArtworkProps[];
+  artworks: IArtworkProps[];
   countries: {
     label: string;
     value: string;
