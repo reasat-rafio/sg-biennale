@@ -88,7 +88,7 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   return (
     <>
-      {renderObjectArray(page.sections, {
+      {/* {renderObjectArray(page.sections, {
         pageHeading: useCallback(
           (data: PageHeaderProps) => (
             <Container>
@@ -98,7 +98,7 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
           []
         ),
       })}
-      <ClosestEvent events={_events} />
+      <ClosestEvent events={_events} /> */}
       <AllEvents />
     </>
   );

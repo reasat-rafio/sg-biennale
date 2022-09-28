@@ -1,19 +1,34 @@
-import { FilterByCategory } from "./filter-by-category";
+import React, { useState } from "react";
+import { CategoryDropdown, FilterByCategory } from "./filter-by-category";
 import { FilterByVenue } from "./filter-by-venue";
 import { SortBy } from "./sort-by";
 
 interface FilteringSectionProps {}
 
 export const FilteringSection: React.FC<FilteringSectionProps> = ({}) => {
+  const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<null | string>(null);
+
   return (
-    <section className="grid grid-cols-12 gap-5">
-      <div className="xl:col-span-7 md:col-span-6 col-span-12">
-        <FilterByVenue />
+    <section>
+      <div className="grid grid-cols-12 gap-5">
+        <div className="xl:col-span-7 md:col-span-6 col-span-12">
+          <FilterByVenue />
+        </div>
+        <div className="xl:col-span-5 md:col-span-6 col-span-12 | grid grid-cols-12 gap-5">
+          <SortBy />
+          <FilterByCategory
+            selectedCategory={selectedCategory}
+            setShowCategoryDropdown={setShowCategoryDropdown}
+          />
+        </div>
       </div>
-      <div className="xl:col-span-5 md:col-span-6 col-span-12 | grid grid-cols-12 gap-5">
-        <SortBy />
-        <FilterByCategory />
-      </div>
+
+      <CategoryDropdown
+        showCategoryDropdown={showCategoryDropdown}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
     </section>
   );
 };
