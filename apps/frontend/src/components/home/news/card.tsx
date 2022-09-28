@@ -16,9 +16,9 @@ const CardImgScene = dynamic(() => import("./card-img-scene"), { ssr: false });
 export const NewsCard: React.FC<INewsProps> = ({
   description,
   header,
-  images,
+  image,
   index = 1,
-  _id,
+  _key,
   length,
   backgroundColor,
 }) => {
@@ -49,7 +49,7 @@ export const NewsCard: React.FC<INewsProps> = ({
 
   return (
     <motion.article
-      id={_id}
+      id={_key}
       ref={cardRef}
       style={{
         y: animatedY,
@@ -75,7 +75,7 @@ export const NewsCard: React.FC<INewsProps> = ({
         <figure className="aspect-video w-[70%] rounded overflow-hidden">
           <CardImgScene
             hovered={hovered}
-            url={images[0].asset.url}
+            url={image.asset.url}
             scalePos={scalePos}
           />
         </figure>

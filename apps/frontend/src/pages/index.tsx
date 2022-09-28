@@ -55,20 +55,9 @@ const query = pageQuery(groq`
           },
         }
       },
-      news[]-> {
-        _id,
-        header,
-        description,
-        backgroundColor,
-        images[] {
-          ..., 
-          asset->{
-            ...,
-            metadata {
-              dimensions
-            }
-          }
-        },
+      newsCollection [] {
+        ...,
+        "image": ${withDimensions("image")}
       }
     }
   }

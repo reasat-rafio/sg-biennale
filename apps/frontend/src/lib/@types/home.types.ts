@@ -43,18 +43,19 @@ export interface IArtistProps {
   countries: ICountry[];
 }
 export interface INewsProps {
-  _id: string;
+  _key: string;
   description: any[];
-  images: SanityImage[];
+  image: SanityImage;
   header: string;
   index?: number;
   length?: number;
-  backgroundColor?: {
+  backgroundColor: {
     hex: string;
     hsl: any;
     hsv: any;
     rgb: any;
   };
+  url?: string;
 }
 
 export interface IPromotion {
