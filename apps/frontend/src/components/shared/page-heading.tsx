@@ -1,4 +1,5 @@
 import { SlideupLettersAnimation } from "@components/ui/animated-component/slideup-letters-animation";
+import { Header } from "@components/ui/header";
 import clsx from "clsx";
 import { motion, Variants } from "framer-motion";
 
@@ -40,11 +41,9 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
         position === "default" && "justify-start items-start"
       )}
     >
-      <motion.h1 className="overflow-hidden">
-        <SlideupLettersAnimation className="xl:text-heading-4 text-heading-5 font-medium">
-          {heading}
-        </SlideupLettersAnimation>
-      </motion.h1>
+      <Header>
+        <SlideupLettersAnimation>{heading}</SlideupLettersAnimation>
+      </Header>
       <motion.h4
         initial="initial"
         animate="animate"

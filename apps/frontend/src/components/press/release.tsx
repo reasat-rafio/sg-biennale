@@ -1,5 +1,5 @@
 import { Container } from "@components/ui/container";
-import { Header } from "@components/ui/header";
+import { Header } from "@components/ui/title";
 import { Cta, Slug } from "@lib/@types/global.types";
 import { doTruncate } from "@lib/helpers/global.helpers";
 import {

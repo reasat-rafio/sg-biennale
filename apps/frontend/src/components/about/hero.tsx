@@ -1,5 +1,5 @@
 import { Container } from "@components/ui/container";
-import { Header } from "@components/ui/header";
+import { Header } from "@components/ui/title";
 import { Cta } from "@lib/@types/global.types";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";

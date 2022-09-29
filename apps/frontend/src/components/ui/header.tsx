@@ -1,28 +1,35 @@
 import clsx from "clsx";
+import { ReactNode } from "react";
 
-interface HeaderProps {
-  type?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  className?: string;
+interface PageHeaderProps {
+  color?: string;
+  fontWeight?: number;
   variant?: "primary" | "secondary";
-  children: React.ReactNode;
+  type?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  className?: "string";
+  children: ReactNode;
 }
 
-export const Header: React.FC<HeaderProps> = ({
+const styles = {
+  primary: "xl:text-heading-4 text-heading-5",
+  secondary: "xl:text-heading-6 text-heading-6 text-[24px]",
+};
+export const Header: React.FC<PageHeaderProps> = ({
+  type = "h4",
+  variant = "primary",
+  fontWeight = 500,
+  color = "#000000",
   className,
   children,
-  type = "h6",
-  variant = "primary",
 }) => {
-  const Component = type;
-
-  const styles: { primary: string; secondary: string } = {
-    primary: "py-2 | lg:text-2xl text-lg font-medium",
-    secondary: "",
-  };
+  const Element = type;
 
   return (
-    <Component className={clsx(styles[`${variant}`], className)}>
+    <Element
+      style={{ color, fontWeight }}
+      className={clsx("overflow-hidden", className, styles[variant])}
+    >
       {children}
-    </Component>
+    </Element>
   );
 };

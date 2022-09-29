@@ -1,5 +1,5 @@
 import { Container } from "@components/ui/container";
-import { Header } from "@components/ui/header";
+import { Header } from "@components/ui/title";
 import { IPromotion } from "@lib/@types/home.types";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";

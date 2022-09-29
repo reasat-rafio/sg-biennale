@@ -1,4 +1,3 @@
-import { Container } from "@components/ui/container";
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import { ClosestEventCarousel } from "./closest-event-carousel";
 
