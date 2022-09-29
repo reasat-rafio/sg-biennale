@@ -7,6 +7,7 @@ import { imageUrlBuilder } from "@utils/sanity";
 import { useEffect, useState } from "react";
 import { SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
+import { Header } from "@components/ui/header";
 
 export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
@@ -46,7 +47,7 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
     <div className="flex flex-col | space-y-10 xl:my-xxl lg:my-xl my-x">
       {_partners?.map(({ tierName, data, id }) => (
         <article className="pb-5 space-y-10" key={id}>
-          <h2 className="text-heading-6 font-medium">Partner {tierName}</h2>
+          <Header variant="secondary">Partner {tierName}</Header>
 
           <section className="grid grid-cols-12 | gap-5">
             {data.map(({ _id, name, image, href }) => (

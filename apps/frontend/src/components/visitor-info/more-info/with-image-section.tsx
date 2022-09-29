@@ -1,4 +1,5 @@
 import { Button } from "@components/ui/button";
+import { Header } from "@components/ui/header";
 import { Cta } from "@lib/@types/global.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { imageUrlBuilder } from "@utils/sanity";
@@ -77,7 +78,7 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
       className="grid grid-cols-12 col-span-12 justify-center items-center | py-10 lg:gap-10 gap-5"
     >
       <section className="xl:col-span-7 md:col-span-6 col-span-12 | space-y-6">
-        <h3 className="lg:text-heading-6 text-3xl">{title}</h3>
+        <Header variant="secondary">{title}</Header>
         {subtitle && (
           <h6 className="lg:text-heading-4 text-heading-5 font-medium text-skyblue">
             {subtitle}

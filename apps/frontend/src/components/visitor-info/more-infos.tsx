@@ -4,6 +4,7 @@ import { Cta } from "@lib/@types/global.types";
 import { MoreInfosProps } from "@lib/@types/visitor-info.types";
 import { WithImageSection } from "./more-info/with-image-section";
 import { motion } from "framer-motion";
+import { Header } from "@components/ui/header";
 
 export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
   return (
@@ -53,7 +54,7 @@ const Section: React.FC<{
       className=" grid grid-cols-12 sm:col-span-6 col-span-12 justify-center items-center | py-10"
     >
       <section className="col-span-12 | space-y-6">
-        <h3 className="text-heading-6">{title}</h3>
+        <Header variant="secondary">{title}</Header>
         {subtitle && (
           <h6 className="text-heading-4 font-medium text-skyblue">
             {subtitle}

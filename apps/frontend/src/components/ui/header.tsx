@@ -3,16 +3,16 @@ import { ReactNode } from "react";
 
 interface PageHeaderProps {
   color?: string;
-  fontWeight?: number;
+  fontWeight?: 500 | 600 | 700 | 800;
   variant?: "primary" | "secondary";
   type?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  className?: "string";
+  className?: string;
   children: ReactNode;
 }
 
 const styles = {
   primary: "xl:text-heading-4 text-heading-5",
-  secondary: "xl:text-heading-6 text-heading-6 text-[24px]",
+  secondary: "xl:text-heading-6 text-[24px]",
 };
 export const Header: React.FC<PageHeaderProps> = ({
   type = "h4",

@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import { Scrollbar } from "swiper";
 import { motion } from "framer-motion";
+import { Header } from "@components/ui/header";
 
 interface PublicationCatalogueProps {
   type: string;
@@ -27,9 +28,9 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
       transition={{ duration: 0.6, ease: "easeInOut" }}
     >
       <Container className="flex items-center | space-x-5">
-        <h2 className="flex-1 | font-medium lg:text-heading-6 text-2xl text-gray--400">
+        <Header className="flex-1" variant="secondary" color="#999999">
           {header}
-        </h2>
+        </Header>
         <span className="font-medium lg:text-xl text-base text-gray--700 underline">
           View All
         </span>

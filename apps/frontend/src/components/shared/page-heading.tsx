@@ -41,7 +41,7 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
         position === "default" && "justify-start items-start"
       )}
     >
-      <Header>
+      <Header type="h1">
         <SlideupLettersAnimation>{heading}</SlideupLettersAnimation>
       </Header>
       <motion.h4

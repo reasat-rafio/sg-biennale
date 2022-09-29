@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import { Scrollbar } from "swiper";
 import { motion } from "framer-motion";
+import { Header } from "@components/ui/header";
 
 interface DirectoryOfTermProps {
   type: string;
@@ -54,9 +55,7 @@ export const DirectoryOfTerm: React.FC<DirectoryOfTermProps> = ({
         transition={{ duration: 0.6, ease: "easeInOut" }}
       >
         <header>
-          <h2 className="max-w-xs | font-medium lg:text-heading-4 text-heading-5">
-            {header}
-          </h2>
+          <Header className="max-w-xs">{header}</Header>
         </header>
 
         <div className="">

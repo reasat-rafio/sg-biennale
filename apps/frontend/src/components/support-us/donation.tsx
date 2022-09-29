@@ -1,5 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
+import { Header } from "@components/ui/header";
 import { Cta } from "@lib/@types/global.types";
 
 interface DonationProps {
@@ -20,9 +21,7 @@ export const Donation: React.FC<DonationProps> = ({
     >
       <div className="flex-1">
         <div className="lg:max-w-xl | space-y-2">
-          <h2 className="font-medium lg:text-heading-4 text-heading-5">
-            {header}
-          </h2>
+          <Header>{header}</Header>
           <p className="font-manrope text-body-1 text-gray--700">
             {description}
           </p>

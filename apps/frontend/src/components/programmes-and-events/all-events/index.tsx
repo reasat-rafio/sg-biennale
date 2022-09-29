@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { positioningAlgo } from "@lib/helpers/global.helpers";
 import { useWindowSize } from "@lib/hooks";
 import { FilteringMobileSection } from "./filters/mobile";
+import { Header } from "@components/ui/header";
 
 interface AllEventsProps {}
 
@@ -45,7 +46,7 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
     <Container className="py-xl flex-col flex space-y-6 ">
       <section className="flex items-center md:items-stretch md:flex-col | md:space-y-6 space-x-2 md:space-x-0">
         <header className="flex-1">
-          <h2 className="font-medium text-heading-6">All Events</h2>
+          <Header variant="secondary">All Events</Header>
         </header>
         {windowWidth >= 768 ? (
           <FilteringDesktopSection />

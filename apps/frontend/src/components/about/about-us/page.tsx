@@ -85,7 +85,6 @@ export const Page: React.FC<PageProps> = ({
           viewport={{ margin: "-200px", once: true }}
           className="z-50 absolute max-w-4xl w-full | 2xl:top-1/4 top-1/2 lg:right-0 right-1/2 | font-manrope text-body-1 text-center lg:text-left | -translate-y-1/2 2xl:translate-y-0 translate-x-1/2 lg:translate-x-0 | 2xl:pr-max lg:pr-xxl px-5"
         >
-          {/* text-gray--500 */}
           {description}
         </motion.p>
         <figure className="absolute h-full w-full top-0">

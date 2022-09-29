@@ -6,6 +6,7 @@ import { imageUrlBuilder } from "@utils/sanity";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Header } from "@components/ui/header";
 
 interface VolunteerProps {
   header: string;
@@ -24,9 +25,8 @@ export const Volunteer: React.FC<VolunteerProps> = ({
     <Container className="2xl:py-max lg:py-xxl py-xl">
       <section className="grid grid-cols-12 | items-center">
         <header className="xl:col-span-10 col-span-12 grid grid-cols-12 | items-center">
-          <h2 className="2xl:col-span-2 col-span-12  lg:text-heading-4 text-heading-5 font-medium">
-            {header}
-          </h2>
+          <Header className=" 2xl:col-span-2 col-span-12 ">{header}</Header>
+
           <p className="2xl:col-span-10 col-span-12 | text-gray--700 text-body-1 | font-manrope | 2xl:mx-20 2xl:my-0 my-5">
             {description}
           </p>

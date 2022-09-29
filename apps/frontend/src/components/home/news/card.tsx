@@ -81,9 +81,9 @@ export const NewsCard: React.FC<INewsProps> = ({
         </figure>
       </motion.div>
       <section className="space-y-5 bg-white">
-        <h4 className="xl:text-heading-5 text-heading-6 font-semibold">
+        <h6 className="xl:text-heading-5 text-heading-6 font-semibold">
           {header}
-        </h4>
+        </h6>
         <div className="text-gray-600 font-manrope" ref={newsDescriptionRef}>
           <PortableText blocks={description} />
         </div>

@@ -6,6 +6,7 @@ import { VenueList } from "./venue-list";
 import { motion } from "framer-motion";
 import { Button } from "@components/ui/button";
 import useVisitorInfoStore from "@stores/visitor-info.store";
+import { Header } from "@components/ui/header";
 
 export const Venue: React.FC<{}> = ({}) => {
   const { allVenues, sortedVenues, page, setPage, cardsPerPage } =
@@ -32,7 +33,10 @@ export const Venue: React.FC<{}> = ({}) => {
   return (
     <Container className="py-xl flex flex-col space-y-12">
       <header className="flex space-x-2">
-        <h2 className="flex-1 font-medium text-heading-6">Venue</h2>
+        <Header variant="secondary" className="flex-1">
+          Venue
+        </Header>
+
         <span className="underline font-medium lg:text-xl text-base">
           Accessibility Info
         </span>

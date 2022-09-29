@@ -1,3 +1,4 @@
+import { Header } from "@components/ui/header";
 import { Slug } from "@lib/@types/global.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { useWindowSize } from "@lib/hooks";
@@ -85,12 +86,12 @@ export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
       className="grid grid-cols-12 gap-x-8 overflow-visible lg:h-auto "
     >
       <div className="lg:col-span-7 col-span-12 | flex flex-col space-y-5">
-        <h6
-          className="lg:text-heading-4 text-heading-5 font-medium | hover:text-red-love cursor-pointer | transition-colors duration-500"
-          // onClick={onTitleClickAction}
+        <Header
+          type="h6"
+          className="hover:text-red-love cursor-pointer | transition-colors duration-500"
         >
           {header}
-        </h6>
+        </Header>
         <span className="font-bold font-manrope text-gray--400 text-body-1">
           {author}
         </span>

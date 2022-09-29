@@ -9,6 +9,7 @@ const ImageScene = dynamic(() => import("./image-scene"), {
 });
 
 import dynamic from "next/dynamic";
+import { Header } from "@components/ui/header";
 
 interface TourProps {
   header: string;
@@ -31,7 +32,7 @@ export const Tour: React.FC<TourProps> = ({
         transition={{ duration: 0.8 }}
         viewport={{ margin: "-10%" }}
       >
-        <h2 className="text-heading-4 font-medium">{header}</h2>
+        <Header>{header}</Header>
         <div className="grid grid-cols-12 | mt-10 lg:gap-10 gap-5">
           <figure className="xl:col-span-8 lg:col-span-6 col-span-12 | 2xl:h-[600px] xl:h-[550px] lg:h-[480px] md:h-[450px] sm:h-[400px] h-[300px]">
             <ImageScene image={image} />

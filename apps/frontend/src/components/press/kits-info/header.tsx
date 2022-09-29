@@ -8,6 +8,7 @@ import { useCallback, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
 import { Image } from "./image";
+import { Header as SectionHeader } from "@components/ui/header";
 
 export const Header: React.FC<{
   header: string;
@@ -39,14 +40,14 @@ export const Header: React.FC<{
         positionedAtRight ? "max-w-2xl" : "xl:pl-max"
       )}
     >
-      <motion.h2 className="text-red-love font-medium xl:text-heading-4 text-heading-5 | overflow-hidden">
-        <SlideupLettersAnimation
+      <SectionHeader color="#DE5742">
+        {/* <SlideupLettersAnimation
           animationType="inview"
           intersecting={intersecting}
-        >
-          {header}
-        </SlideupLettersAnimation>
-      </motion.h2>
+        > */}
+        {header}
+        {/* </SlideupLettersAnimation> */}
+      </SectionHeader>
 
       {image && windowWidth < 1024 && (
         <div className="flex justify-center items-center overflow-hidden">

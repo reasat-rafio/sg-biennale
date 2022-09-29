@@ -7,6 +7,7 @@ import { Button } from "@components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { useIntersection } from "@lib/hooks";
 import { Slug } from "@lib/@types/global.types";
+import { Header } from "@components/ui/header";
 
 interface EssayProps {
   _id: string;
@@ -69,9 +70,14 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
           className="flex items-center | space-x-5"
         >
-          <h2 className="flex-1 | font-medium lg:text-heading-6 text-2xl text-gray--400">
+          <Header
+            type="h6"
+            variant="secondary"
+            color="#999999"
+            className="flex-1"
+          >
             {header}
-          </h2>
+          </Header>
           <span className="font-medium lg:text-xl text-base text-gray--700 underline">
             {curatorialEssays.length} Essays
           </span>
@@ -139,6 +145,7 @@ const Essay: React.FC<EssayProps> = ({ header, author, images }) => {
         <h6 className="font-medium lg:text-heading-6 text-2xl | lg:leading-[125%] | group-hover:text-red-love | transition-all duration-500">
           {header}
         </h6>
+        {/* <Heade */}
         <span className="text-gray--400 font-manrope font-bold lg:text-body-1 text-body-2">
           {author}
         </span>

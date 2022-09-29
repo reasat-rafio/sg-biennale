@@ -1,4 +1,5 @@
 import { Container } from "@components/ui/container";
+import { Header } from "@components/ui/header";
 import { AboutCollection } from "@lib/@types/about.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import {
@@ -60,15 +61,15 @@ export const AboutUs: React.FC<AboutUsProps> = ({
     >
       <div className="sticky top-0 ">
         <Container className="z-50 relative h-screen ">
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
             viewport={{ margin: "-200px", once: true }}
-            className="absolute lg:max-w-3xl w-full lg:top-1/4 lg:left-0 top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 | xl:text-heading-4 lg:text-heading-5 text-heading-6 font-medium text-center lg:text-left | 2xl:pl-max lg:pl-xxl"
+            className="absolute lg:max-w-3xl w-full lg:top-1/4 lg:left-0 top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 | 2xl:pl-max lg:pl-xxl"
           >
-            {header}
-          </motion.h2>
+            <Header className="text-center lg:text-left">{header}</Header>
+          </motion.div>
         </Container>
         <div className="inline-flex  ">
           {aboutCollection.map((data, index) => (

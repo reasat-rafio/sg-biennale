@@ -1,5 +1,6 @@
 import { Container } from "@components/ui/container";
-import { Header } from "@components/ui/title";
+import { Header } from "@components/ui/header";
+// import { Header } from "@components/ui/title";
 import { IPromotion } from "@lib/@types/home.types";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
@@ -15,8 +16,7 @@ interface PromotionProps {
 export const Promotion: React.FC<PromotionProps> = ({ header, promotions }) => {
   return (
     <Container type="section" className="py-section | border-y-2 border-black">
-      <Header type="h3">{header}</Header>
-
+      {/* <Header variant="secondary">{header}</Header> */}
       <div className="grid grid-cols-12 | pt-5 lg:gap-10 gap-5">
         {promotions.map((newsData) => (
           <PromotionCard key={newsData._id} {...newsData} />

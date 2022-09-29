@@ -1,3 +1,4 @@
+import { Header } from "@components/ui/header";
 import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
 import { ClosestEventCarousel } from "./closest-event-carousel";
 
@@ -13,9 +14,7 @@ export const ClosestEvent: React.FC<ClosestEventProps> = ({ events }) => {
   return (
     <section className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg mx-auto | pt-xl overflow-hidden">
       <header className="mb-16">
-        <h2 className="font-medium md:text-heading-6 text-3xl">
-          Closest event
-        </h2>
+        <Header variant="secondary">Closest event</Header>
       </header>
 
       <ClosestEventCarousel closestEventArr={closestEventArr} />

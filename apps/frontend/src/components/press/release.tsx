@@ -1,5 +1,4 @@
 import { Container } from "@components/ui/container";
-import { Header } from "@components/ui/title";
 import { Cta, Slug } from "@lib/@types/global.types";
 import { doTruncate } from "@lib/helpers/global.helpers";
 import {
@@ -13,6 +12,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variant, Variants } from "framer-motion";
 import clsx from "clsx";
+import { Header } from "@components/ui/header";
 
 interface ReleaseItemProps {
   _id: string;
@@ -69,8 +69,8 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
   );
 
   return (
-    <Container type="section" className="">
-      <Header type="h1">{header}</Header>
+    <Container type="section">
+      <Header>{header}</Header>
       <motion.div
         ref={containerRef}
         className="min-h-screen relative flex flex-wrap "

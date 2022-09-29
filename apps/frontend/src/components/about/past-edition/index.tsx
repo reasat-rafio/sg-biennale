@@ -1,5 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
+import { Header } from "@components/ui/header";
 import { PastEditionCollection } from "@lib/@types/about.types";
 import { Cta } from "@lib/@types/global.types";
 import useAboutStore from "@stores/about.store";
@@ -29,7 +30,7 @@ export const PastEdition: React.FC<PastEditionProps> = ({
       type="section"
       className="py-max space-y-28 | bg-[#F8F8F8] z-40 relative"
     >
-      <h2 className="text-heading-4 font-medium">{header}</h2>
+      <Header>{header}</Header>
       <div className={clsx("grid grid-cols-12 lg:gap-10 gap-5 | mt-7 ")}>
         {pastEditionCollection.map((data, index) => (
           <Card {...data} index={index + 1} />

@@ -8,6 +8,7 @@ import { MouseEvent, useState } from "react";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
+import { Header } from "@components/ui/header";
 
 interface ProgrammeEventListCardProps extends IPgrammeEvents {
   index: number;
@@ -122,9 +123,13 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
               </span>
             </div>
 
-            <h6 className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500">
+            <Header
+              type="h6"
+              className="cursor-pointer | hover:text-red-love | transition-colors duration-500"
+              variant="secondary"
+            >
               {title}
-            </h6>
+            </Header>
             {windowWidth < 1024 && (
               <div
                 ref={descriptionRef}
