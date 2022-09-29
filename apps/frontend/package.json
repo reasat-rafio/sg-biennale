@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.6.5",
+    "@reach/portal": "^0.17.0",
     "@react-spring/three": "^9.5.2",
     "@react-three/drei": "^9.22.1",
     "@react-three/fiber": "^8.3.1",
