@@ -77,6 +77,7 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
       onClick={() => setSelectedPastEditionId(_id)}
     >
       <motion.figure
+        layoutId={`past-edition-card-image-${_id}`}
         className="max-h-[350px] p-7 overflow-hidden"
         style={{
           x,
@@ -92,7 +93,10 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
         />
       </motion.figure>
       <section>
-        <motion.h6 className="text-lg font-medium mb-1 font-manrope z-20 relative">
+        <motion.h6
+          layoutId={`past-edition-card-header-${_id}`}
+          className="text-lg font-medium mb-1 font-manrope z-20 relative"
+        >
           {name}
         </motion.h6>
       </section>
