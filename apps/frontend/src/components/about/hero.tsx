@@ -1,5 +1,5 @@
 import { Container } from "@components/ui/container";
-import { Header } from "@components/ui/title";
+// import { Header } from "@components/ui/title";
 import { Cta } from "@lib/@types/global.types";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
@@ -29,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({
       <h1 className="pb-10 text-3xl font-medium">{header}</h1>
       <article className="grid grid-cols-12 | gap-5">
         <section className="col-span-12 lg:col-span-6">
-          <Header>{subheader}</Header>
+          {/* <Header>{subheader}</Header> */}
           <div className="text-lg">
             <PortableText blocks={description} />
           </div>

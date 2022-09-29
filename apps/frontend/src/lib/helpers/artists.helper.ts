@@ -20,37 +20,36 @@ export const filterLogicFactory = (
       const selectedVenue = router.query.venue;
       const selectedCountry: TSelectedCountry = router.query.country;
 
-      const filterdArtists = allArtists
-        .filter((artist) => {
-          if (selectedCountry) {
-            if (typeof selectedCountry === "string") {
-              return artist.countries.some(
-                (country) => country.value === selectedCountry
-              );
-            } else {
-              return selectedCountry.some((cntry) =>
-                artist.countries.some(
-                  (artistCntry) => artistCntry.label === cntry
-                )
-              );
-            }
-          } else return artist;
-        })
-        .filter((artist) => {
-          if (selectedVenue) {
-            if (typeof selectedVenue === "string") {
-              return artist.venues?.some(
-                (venue) => venue.slug.current === selectedVenue
-              );
-            } else {
-              return selectedVenue.some((venue) =>
-                artist.venues?.some(
-                  (artistVenue) => artistVenue.slug.current === venue
-                )
-              );
-            }
-          } else return artist;
-        });
+      const filterdArtists = allArtists.filter((artist) => {
+        if (selectedCountry) {
+          if (typeof selectedCountry === "string") {
+            return artist.countries.some(
+              (country) => country.value === selectedCountry
+            );
+          } else {
+            return selectedCountry.some((cntry) =>
+              artist.countries.some(
+                (artistCntry) => artistCntry.label === cntry
+              )
+            );
+          }
+        } else return artist;
+      });
+      // .filter((artist) => {
+      //   if (selectedVenue) {
+      //     if (typeof selectedVenue === "string") {
+      //       return artist.venues?.some(
+      //         (venue) => venue.slug.current === selectedVenue
+      //       );
+      //     } else {
+      //       return selectedVenue.some((venue) =>
+      //         artist.venues?.some(
+      //           (artistVenue) => artistVenue.slug.current === venue
+      //         )
+      //       );
+      //     }
+      //   } else return artist;
+      // });
       return filterdArtists;
     }
   }

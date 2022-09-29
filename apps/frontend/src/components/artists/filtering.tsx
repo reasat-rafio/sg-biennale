@@ -1,6 +1,6 @@
 import { Search } from "@components/icons/search";
 import { Container } from "@components/ui/container";
-import { Title } from "@components/ui/title";
+// import { Title } from "@components/ui/title";
 import { filterLogicFactory } from "@lib/helpers/artists.helper";
 import useArtistsStore from "@stores/artists.store";
 import { useRouter } from "next/router";
@@ -36,7 +36,7 @@ export const Filtering: React.FC<{}> = () => {
   return (
     <Container className="flex lg:flex-row flex-col items-center | py-5 ">
       <div className="flex-1 flex items-center lg:flex-row flex-col | space-x-6 mb-3 lg:mb-0">
-        <Title>Artist & Collaborators</Title>
+        {/* <Title>Artist & Collaborators</Title> */}
 
         <div className="flex | lg:space-x-6 space-x-3">
           <FilterByCountry />
