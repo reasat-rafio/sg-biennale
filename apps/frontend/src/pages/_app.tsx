@@ -10,7 +10,6 @@ import Head from "next/head";
 import { SEO } from "@components/common/seo";
 import { NavDropdown } from "@components/common/navigation/dropdown";
 import { AnimatePresence } from "framer-motion";
-import SmoothScroll from "@components/ui/smooth-scrolling";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { addFooterHeight, addNavbarHeight, setShowNavDropDown } =
@@ -55,10 +54,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           <NavDropdown {...pageProps.data?.site?.site} />
         </>
       )}
-      {/* <SmoothScroll> */}
       <Component {...pageProps} />
       {!is404Page && <Footer {...pageProps.data?.site?.site} />}
-      {/* </SmoothScroll> */}
     </AnimatePresence>
   );
 }

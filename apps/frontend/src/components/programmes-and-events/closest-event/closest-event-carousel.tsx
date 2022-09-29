@@ -39,7 +39,7 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
   const [disableSwipingLeft, setDisableSwipingLeft] = useState<boolean>(false);
   const [cardsPerView, setCardsperView] = useState(3);
 
-  const gapInPixel = windowWidth >= 1024 ? 25 : 15;
+  const gapInPixel = windowWidth >= 1024 ? 25 : windowWidth >= 720 ? 15 : 0;
 
   useEffect(() => {
     if (windowWidth >= 1280) setCardsperView(3);

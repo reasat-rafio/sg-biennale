@@ -12,7 +12,7 @@ export const ClosestEvent: React.FC<ClosestEventProps> = ({ events }) => {
     .slice(0, 4);
 
   return (
-    <Container className="pt-xl overflow-hidden">
+    <section className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg mx-auto | pt-xl overflow-hidden">
       <header className="mb-16">
         <h2 className="font-medium md:text-heading-6 text-3xl">
           Closest event
@@ -20,6 +20,6 @@ export const ClosestEvent: React.FC<ClosestEventProps> = ({ events }) => {
       </header>
 
       <ClosestEventCarousel closestEventArr={closestEventArr} />
-    </Container>
+    </section>
   );
 };

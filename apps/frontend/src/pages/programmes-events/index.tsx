@@ -1,4 +1,3 @@
-import { Container } from "@components/ui/container";
 import { siteQuery } from "@lib/query";
 import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
@@ -11,6 +10,8 @@ import { renderObjectArray } from "sanity-react-extra";
 import { AllEvents } from "@components/programmes-and-events/all-events";
 import { ClosestEvent } from "@components/programmes-and-events/closest-event";
 import { filterPastEvents } from "@lib/helpers/programme-event.helper";
+import { FilteringLogic } from "@components/programmes-and-events/all-events/filters/filtering-logic";
+import { Container } from "@components/ui/container";
 
 const query = groq`{
   "site": ${siteQuery},
@@ -88,7 +89,7 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
 
   return (
     <>
-      {/* {renderObjectArray(page.sections, {
+      {renderObjectArray(page.sections, {
         pageHeading: useCallback(
           (data: PageHeaderProps) => (
             <Container>
@@ -98,8 +99,10 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
           []
         ),
       })}
-      <ClosestEvent events={_events} /> */}
-      <AllEvents />
+      <ClosestEvent events={_events} />
+      <FilteringLogic>
+        <AllEvents />
+      </FilteringLogic>
     </>
   );
 };

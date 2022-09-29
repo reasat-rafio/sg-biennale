@@ -5,7 +5,9 @@ import { SortBy } from "./sort-by";
 
 interface FilteringSectionProps {}
 
-export const FilteringSection: React.FC<FilteringSectionProps> = ({}) => {
+export const FilteringDesktopSection: React.FC<
+  FilteringSectionProps
+> = ({}) => {
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<null | string>(null);
 

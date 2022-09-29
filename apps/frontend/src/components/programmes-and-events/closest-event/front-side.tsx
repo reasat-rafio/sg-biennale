@@ -44,6 +44,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
       <div className="mt-20 relative z-20 py-10">
         <motion.h6
           key={String(active)}
+          className="w-full | px-5 | lg:text-2xl text-xl font-medium text-white "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -52,7 +53,6 @@ export const FrontSide: React.FC<FrontSideProps> = ({
             type: "tween",
             delay: 0.3,
           }}
-          className="w-full | px-5 | lg:text-2xl text-xl font-medium text-white "
         >
           {title}
         </motion.h6>
