@@ -13,6 +13,7 @@ export interface Site {
   date: string;
   footer: Footer;
   logo: SanityImage;
+  eventLogo: SanityImage;
   navigations: Navigations;
   ogImage: SanityImage;
 }
@@ -69,7 +70,6 @@ export interface Menu {
   _type: string;
   slug: Slug;
   title: string;
-  highLight?: boolean;
 }
 
 export interface Slug {

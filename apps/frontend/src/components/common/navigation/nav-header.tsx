@@ -1,20 +1,20 @@
 import { HamburgerMenu } from "@components/icons/hamburger-menu";
 import { Container } from "@components/ui/container";
-import { ISite, Menu } from "@lib/@types/global.types";
+import { ISite } from "@lib/@types/global.types";
 import { imageUrlBuilder } from "@utils/sanity";
 import Link from "next/link";
-import { SanityImg } from "sanity-react-extra";
+import { SanityImg, SanityImage } from "sanity-react-extra";
 
 interface NavHeaderProps {
-  logo: ISite["site"]["logo"];
+  logo: SanityImage;
+  eventLogo: SanityImage;
   date: ISite["site"]["date"];
-  highLightedMenu: Menu;
 }
 
 export const NavHeader: React.FC<NavHeaderProps> = ({
   logo,
   date,
-  highLightedMenu,
+  eventLogo,
 }) => {
   return (
     <Container className="py-3">
@@ -36,10 +36,16 @@ export const NavHeader: React.FC<NavHeaderProps> = ({
         </div>
 
         <div className="flex justify-around items-center | ml-auto xl:space-x-20 md:space-x-10 space-x-5 | lg:text-body-1 text-body-2 font-semibold font-manrope">
-          <span className="text-right">{date}</span>
-          <Link href={`/${highLightedMenu.slug}`}>
-            <a>{highLightedMenu.title}</a>
-          </Link>
+          <figure>
+            <SanityImg
+              className="max-h-[65px]"
+              image={eventLogo}
+              builder={imageUrlBuilder}
+              width={150}
+              alt="natasha biennale 2022 logo"
+            />
+          </figure>
+
           <HamburgerMenu />
         </div>
       </div>

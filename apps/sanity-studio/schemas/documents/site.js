@@ -32,6 +32,15 @@ const Site = {
       },
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: "eventLogo",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      validation: (Rule) => Rule.required(),
+    },
+
     { name: "date", type: "text" },
     {
       name: "navigations",

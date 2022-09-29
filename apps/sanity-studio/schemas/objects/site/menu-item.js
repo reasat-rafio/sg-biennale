@@ -7,11 +7,11 @@ const MenuItems = {
   icon: MdLink,
   fields: [
     { name: "title", type: "string" },
-    {
-      name: "highLight",
-      description: "toggle to show to the primary navbar",
-      type: "boolean",
-    },
+    // {
+    //   name: "highLight",
+    //   description: "toggle to show to the primary navbar",
+    //   type: "boolean",
+    // },
     {
       name: "slug",
       type: "slug",
