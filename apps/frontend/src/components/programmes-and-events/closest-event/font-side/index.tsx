@@ -49,7 +49,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         />
       </figure>
 
-      <div className="mx-5 mt-20 relative z-20 py-10">
+      <div className="mx-5 mt-20 relative z-20 py-10 space-y-5">
         <motion.h6
           key={String(active)}
           className="w-full | lg:text-2xl text-xl font-medium text-white "

@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Tooltip from "rc-tooltip";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import "rc-tooltip/assets/bootstrap.css";
+import { UserIcon } from "@components/icons/user";
 
 interface RelatedArtistsListProps {
   index: number;
@@ -97,12 +98,13 @@ export const RelatedArtistsList: React.FC<RelatedArtistsListProps> = ({
 
   return (
     <div
-      className="overflow-visible flex-nowrap flex whitespace-nowrap space-x-3 relative w-full "
+      className="relative overflow-visible items-center w-full flex-nowrap flex whitespace-nowrap | space-x-3 | font-semibold font-manrope text-body-2 text-white"
       ref={artistRef}
       onClick={(e) => e.stopPropagation()}
     >
-      {relatedArtists.map(({ name, _id }) => (
-        <span key={_id} id={`related-artist-${index}`} className="text-white">
+      <UserIcon />
+      {relatedArtists.map(({ name, _id }, idx) => (
+        <span className="" key={_id} id={`related-artist-${index}`}>
           {name}
         </span>
       ))}
@@ -113,26 +115,28 @@ export const RelatedArtistsList: React.FC<RelatedArtistsListProps> = ({
         onVisibleChange={() => setShowToopTip((prev) => !prev)}
         trigger="click"
         overlayInnerStyle={{
-          background: "#0D0E14",
+          background: "#000000",
           border: "1px solid #1E2531",
           opacity: "1",
           color: "white",
         }}
         overlay={
-          <span className="">
-            {overflownArtists?.map((e: string, idx: number) =>
-              idx === overflownArtists.length - 1 ? e : `${e}, `
-            )}
-          </span>
+          <>
+            {overflownArtists?.map((e: string, idx: number) => (
+              <span className="text-white text-body-2 font-semibold">
+                {e},{" "}
+              </span>
+            ))}
+          </>
         }
       >
         <span
           className={clsx(
-            `text-white show-more-${index}`,
+            `text-white text-body-2 cursor-pointer show-more-${index}`,
             overflownArtists?.length ? "visible" : "invisible"
           )}
         >
-          + {overflownArtists?.length} More
+          and + {overflownArtists?.length} More
         </span>
       </Tooltip>
     </div>
