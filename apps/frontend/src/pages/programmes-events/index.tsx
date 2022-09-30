@@ -28,6 +28,10 @@ const query = groq`{
           name,
           slug
         },
+        relatedArtists[]->{
+          _id,
+          name
+        },
         category[]->,
         images[] {
         asset->{

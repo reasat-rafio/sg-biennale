@@ -1,5 +1,4 @@
 import { FcCalendar } from "react-icons/fc";
-import TimeToSecondsField from "sanity-plugin-time-seconds";
 
 const Event = {
   title: "Event Details Page",
@@ -31,6 +30,17 @@ const Event = {
       validation: (Rule) => Rule.required(),
       type: "array",
       of: [{ type: "block" }],
+    },
+    {
+      name: "relatedArtists",
+      type: "array",
+      validation: (Rule) => Rule.required(),
+      of: [
+        {
+          type: "reference",
+          to: { type: "artist" },
+        },
+      ],
     },
     {
       name: "category",

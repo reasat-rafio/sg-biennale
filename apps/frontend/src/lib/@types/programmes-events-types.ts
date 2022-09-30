@@ -13,6 +13,10 @@ export interface IPgrammeEvents {
   endAt?: Date;
   description: any;
   slug: Slug;
+  relatedArtists: {
+    _id: string;
+    name: string;
+  }[];
 }
 
 export interface AllCategoriesProps {

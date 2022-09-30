@@ -76,7 +76,19 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
       className="relative h-[70vh] flex flex-col items-center justify-center overflow-hidden"
     >
       {closestEventArr.map(
-        ({ _id, images, title, description, slug, startAt, venue }, index) => {
+        (
+          {
+            _id,
+            images,
+            title,
+            description,
+            slug,
+            startAt,
+            venue,
+            relatedArtists,
+          },
+          index
+        ) => {
           const firstIndex = index === 0;
           const lastIndex = index === closestEventArr.length - 1;
           const fullWidth = (1 / cardsPerView) * 2 * 100;
@@ -143,6 +155,7 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
                 images={images}
                 active={activeCardIndex === index}
                 cardsPerView={cardsPerView}
+                relatedArtists={relatedArtists}
               />
               <Backside
                 description={description}

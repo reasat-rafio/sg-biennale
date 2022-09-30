@@ -7,6 +7,10 @@ interface FrontSideProps {
   title: string;
   active: boolean;
   cardsPerView: number;
+  relatedArtists: {
+    _id: string;
+    name: string;
+  }[];
 }
 
 export const AnimationVariants: Variants = {
@@ -23,6 +27,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   cardsPerView,
   title,
   images,
+  relatedArtists,
 }) => {
   return (
     <motion.div
@@ -56,6 +61,11 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         >
           {title}
         </motion.h6>
+        <ul className="text-white">
+          {relatedArtists?.map(({ _id, name }) => (
+            <li key={_id}>{name}</li>
+          ))}
+        </ul>
       </div>
     </motion.div>
   );
