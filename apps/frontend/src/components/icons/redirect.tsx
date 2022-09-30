@@ -13,6 +13,7 @@ export const RedirectIcon: React.FC<RedirectProps> = ({ triggerAnimation }) => {
       initial="initial"
       animate={triggerAnimation ? "enter" : "exit"}
       variants={RedirectIconVariant}
+      transition={{ duration: 0.4 }}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -55,17 +55,22 @@ export const ContainerBrightBackgroundVariants = {
 
 export const NevItemVariants: Variants = {
   initial: {
-    opacity: 0,
+    y: "-100%",
     color: "#999999",
   },
-  enter: (stagging: number) => ({
-    opacity: 1,
+  enter: () => ({
+    y: 0,
     transition: {
-      delay: 0.5 + stagging,
+      ease: [0.2, 0.5, 0.4, 1],
+      delay: 0.8,
+      duration: 0.8,
     },
   }),
   exit: {
-    opacity: 0,
+    y: "-100%",
+    transition: {
+      ease: [0.2, 0.01, 0.3, 1],
+    },
   },
 };
 
@@ -73,17 +78,26 @@ export const ImageVariants: Variants = {
   initial: {
     opacity: 0,
     scale: 0.8,
+    rotate: 15,
   },
   enter: {
     opacity: 1,
     scale: 1,
-    transition: { delay: 0.7, type: "tween" },
+    rotate: 0,
+    transition: {
+      delay: 0.9,
+      type: "tween",
+      duration: 0.6,
+    },
   },
   exit: {
-    scale: 0.7,
+    rotate: 5,
+    scale: 1,
     opacity: 0,
+    y: "-50%",
     transition: {
       type: "tween",
+      duration: 0.5,
     },
   },
 };
