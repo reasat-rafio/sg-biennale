@@ -107,10 +107,10 @@ export const CTAVarinats: Variants = {
     opacity: 0,
     scale: 0.8,
   },
-  enter: (delay: number) => ({
+  enter: () => ({
     opacity: 1,
     scale: 1,
-    transition: { delay: delay, type: "tween" },
+    transition: { delay: 1, type: "tween" },
   }),
   exit: {
     scale: 0.7,

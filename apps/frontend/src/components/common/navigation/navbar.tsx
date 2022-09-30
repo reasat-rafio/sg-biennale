@@ -17,12 +17,8 @@ export const Navbar: React.FC<Site> = ({
   const scroll = useWindowScroll()?.y ?? 0;
 
   return (
-    <motion.nav
+    <nav
       ref={navbarRef}
-      // initial={{ backgroundColor: "white" }}
-      // animate={{
-      //   backgroundColor: showNavDropDown ? "transparent" : "white",
-      // }}
       id="navbar"
       className={clsx(
         "lg:sticky top-0 left-0 z-40  | transition-all duration-500 ease-in-out",
@@ -31,6 +27,6 @@ export const Navbar: React.FC<Site> = ({
     >
       <NavHeader logo={logo} eventLogo={eventLogo} />
       <NavItems ctas={ctas} />
-    </motion.nav>
+    </nav>
   );
 };
