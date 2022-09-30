@@ -1,11 +1,13 @@
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { imageUrlBuilder } from "@utils/sanity";
+import { RelatedArtistsList } from "./related-artists-list";
 
 interface FrontSideProps {
-  images: SanityImage[];
+  index: number;
   title: string;
   active: boolean;
+  images: SanityImage[];
   cardsPerView: number;
   relatedArtists: {
     _id: string;
@@ -23,6 +25,7 @@ export const AnimationVariants: Variants = {
 };
 
 export const FrontSide: React.FC<FrontSideProps> = ({
+  index,
   active,
   cardsPerView,
   title,
@@ -46,10 +49,10 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         />
       </figure>
 
-      <div className="mt-20 relative z-20 py-10">
+      <div className="mx-5 mt-20 relative z-20 py-10">
         <motion.h6
           key={String(active)}
-          className="w-full | px-5 | lg:text-2xl text-xl font-medium text-white "
+          className="w-full | lg:text-2xl text-xl font-medium text-white "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -61,11 +64,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         >
           {title}
         </motion.h6>
-        <ul className="text-white">
-          {relatedArtists?.map(({ _id, name }) => (
-            <li key={_id}>{name}</li>
-          ))}
-        </ul>
+        <RelatedArtistsList index={index} relatedArtists={relatedArtists} />
       </div>
     </motion.div>
   );

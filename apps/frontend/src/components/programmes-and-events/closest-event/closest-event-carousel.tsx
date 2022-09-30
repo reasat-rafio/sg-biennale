@@ -3,7 +3,7 @@ import { useWindowSize } from "@lib/hooks";
 import { motion, Point } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Backside } from "./backside";
-import { FrontSide } from "./front-side";
+import { FrontSide } from "./font-side";
 
 interface ClosestEventCarouselProps {
   closestEventArr: IPgrammeEvents[];
@@ -151,6 +151,7 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
               }
             >
               <FrontSide
+                index={index}
                 title={title}
                 images={images}
                 active={activeCardIndex === index}
