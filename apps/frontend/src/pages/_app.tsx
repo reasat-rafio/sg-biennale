@@ -23,8 +23,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const navbarHeight = document.querySelector("#navbar")?.clientHeight!!;
     const footerHeight = document.querySelector("#footer")?.clientHeight!!;
-    addFooterHeight(navbarHeight);
-    addNavbarHeight(footerHeight);
+    addNavbarHeight(navbarHeight);
+    addFooterHeight(footerHeight);
   }, [windowWidth, addFooterHeight, addNavbarHeight]);
 
   useEffect(() => {

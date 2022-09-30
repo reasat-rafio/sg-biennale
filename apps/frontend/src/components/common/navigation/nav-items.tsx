@@ -1,17 +1,29 @@
 import { HamburgerMenu } from "@components/icons/hamburger-menu";
 import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
+import { useWindowScroll } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
+import clsx from "clsx";
 import Link from "next/link";
 import { SanityImg } from "sanity-react-extra";
+import { motion } from "framer-motion";
 
 interface NavItemsProps {
   ctas: Cta[];
 }
 
 export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
+  const scroll = useWindowScroll()?.y ?? 0;
+
   return (
-    <Container className="flex items-center| py-5">
+    <motion.section
+      initial={{ paddingTop: 10.5, paddingBottom: 10.5 }}
+      animate={{
+        paddingTop: scroll ? 7 : 10.5,
+        paddingBottom: scroll ? 7 : 10.5,
+      }}
+      className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto | flex items-center"
+    >
       <div className="flex flex-1 | lg:space-x-4 space-x-2">
         {ctas.map(({ _key, title, href, icon }) => (
           <Link href={href} key={_key}>
@@ -31,6 +43,6 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
         ))}
       </div>
       <HamburgerMenu />
-    </Container>
+    </motion.section>
   );
 };
