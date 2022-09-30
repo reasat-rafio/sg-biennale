@@ -8,19 +8,14 @@ import { SanityImg, SanityImage } from "sanity-react-extra";
 interface NavHeaderProps {
   logo: SanityImage;
   eventLogo: SanityImage;
-  date: ISite["site"]["date"];
 }
 
-export const NavHeader: React.FC<NavHeaderProps> = ({
-  logo,
-  date,
-  eventLogo,
-}) => {
+export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
   return (
-    <Container className="py-3">
+    <Container className="py-3 relative z-40 ">
       <div className="flex items-center | space-x-3">
         <div className="flex-1">
-          <figure className="w-fit ">
+          <figure className="w-fit">
             <Link href="/">
               <a>
                 <SanityImg
@@ -36,7 +31,7 @@ export const NavHeader: React.FC<NavHeaderProps> = ({
         </div>
 
         <div className="flex justify-around items-center | ml-auto xl:space-x-20 md:space-x-10 space-x-5 | lg:text-body-1 text-body-2 font-semibold font-manrope">
-          <figure>
+          <figure className="w-fit">
             <SanityImg
               className="max-h-[65px]"
               image={eventLogo}

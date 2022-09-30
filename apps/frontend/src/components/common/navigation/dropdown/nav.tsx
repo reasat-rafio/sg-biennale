@@ -3,7 +3,6 @@ import { Menu } from "@lib/@types/global.types";
 import {
   ImageVariants,
   NevItemVariants,
-  RedirectIconVariant,
 } from "@lib/helpers/nav-dropdown.helpers";
 import useGlobalStore from "@stores/global.store";
 import { imageUrlBuilder } from "@utils/sanity";
@@ -20,13 +19,12 @@ interface NavProps {
 export const Nav: React.FC<NavProps> = ({ menu, image }) => {
   const { showNavDropDown, setShowNavDropDown } = useGlobalStore();
   const [hoveredIdx, setHoveredIdx] = useState<null | number>(null);
-  const _menu = menu.filter((m) => !m.highLight);
 
   return (
     <div className="flex-1 | grid grid-cols-12 justify-center items-center">
       <section className="col-span-6 ">
         <ul className="space-y-5">
-          {_menu.map(({ _key, slug, title }, index) => (
+          {menu.map(({ _key, slug, title }, index) => (
             <motion.li
               key={_key}
               className="flex items-center | space-x-3 "

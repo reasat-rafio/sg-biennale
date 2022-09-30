@@ -4,25 +4,51 @@ export const ContainerVariants: Variants = {
   initial: {
     y: -50,
     height: 0,
-    display: "none",
   },
   enter: {
     y: 0,
     height: "100vh",
-    display: "block",
-    transition: { duration: 0.8, damping: 2, ease: "easeInOut" },
+    transition: {
+      delay: 0.1,
+      duration: 0.7,
+      damping: 2,
+      ease: [0.2, 0.01, 0.3, 1],
+    },
   },
   exit: {
     y: -50,
     height: 0,
-    display: "none",
     transition: {
-      duration: 0.5,
+      duration: 0.6,
       damping: 12,
       delay: 0.3,
-      display: {
-        delay: 0.8,
-      },
+      ease: [0.2, 0.5, 0.4, 1],
+    },
+  },
+};
+
+export const ContainerBrightBackgroundVariants = {
+  initial: {
+    y: -50,
+    height: 0,
+  },
+  enter: {
+    y: 0,
+    height: "100vh",
+    transition: {
+      duration: 0.7,
+      damping: 2,
+      ease: [0.2, 0.5, 0.4, 1],
+    },
+  },
+  exit: {
+    y: -50,
+    height: 0,
+    transition: {
+      delay: 0.4,
+      duration: 0.5,
+      damping: 12,
+      ease: [0.2, 0.01, 0.3, 1],
     },
   },
 };

@@ -67,7 +67,7 @@ const Explore: NextPage<SanityProps> = (props) => {
   const { page, curatorialEssays } = useSanityQuery(query, props).data;
 
   return (
-    <div>
+    <>
       {renderObjectArray(page.sections, {
         pageHeading: useCallback(
           (data: PageHeaderProps) => (
@@ -86,7 +86,7 @@ const Explore: NextPage<SanityProps> = (props) => {
         ),
         "explorePage.directoryOfTerm": DirectoryOfTerm,
       })}
-    </div>
+    </>
   );
 };
 

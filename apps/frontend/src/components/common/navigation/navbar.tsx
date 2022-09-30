@@ -1,12 +1,24 @@
-import { ISite } from "@lib/@types/global.types";
+import { Site } from "@lib/@types/global.types";
 import { NavHeader } from "./nav-header";
 import React from "react";
+import useGlobalStore from "@stores/global.store";
+import { motion } from "framer-motion";
 
-export const Navbar: React.FC<ISite["site"]> = ({ date, logo,eventLogo }) => {
+export const Navbar: React.FC<Site> = ({ logo, eventLogo }) => {
+  const { showNavDropDown } = useGlobalStore();
+
   return (
-    <nav id="navbar" className="lg:sticky top-0 left-0 z-50 bg-white">
-      <NavHeader date={date} logo={logo} eventLogo={eventLogo} />
+    <motion.nav
+      // initial={{ backgroundColor: "white" }}
+      // animate={{
+      //   backgroundColor: showNavDropDown ? "transparent" : "white",
+      //   transition: { delay: 1 },
+      // }}
+      id="navbar"
+      className="lg:sticky top-0 left-0 z-40 bg-white"
+    >
+      <NavHeader logo={logo} eventLogo={eventLogo} />
       {/* <NavItems heightlights={heightlights} menu={menu} /> */}
-    </nav>
+    </motion.nav>
   );
 };
