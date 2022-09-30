@@ -20,9 +20,10 @@ const Menu = {
     },
 
     {
-      name: "cta",
-      type: "cta",
-      description: "will display on the nav dropdown",
+      name: "ctas",
+      type: "array",
+      of: [{ type: "cta" }],
+      description: "will display on the navbar",
     },
   ],
 };

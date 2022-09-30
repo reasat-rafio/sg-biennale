@@ -119,6 +119,7 @@ export const RelatedArtistsList: React.FC<RelatedArtistsListProps> = ({
           border: "1px solid #1E2531",
           opacity: "1",
           color: "white",
+          maxWidth: 400,
         }}
         overlay={
           <>

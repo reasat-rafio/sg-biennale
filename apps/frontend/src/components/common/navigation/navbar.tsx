@@ -3,6 +3,7 @@ import { NavHeader } from "./nav-header";
 import React from "react";
 import useGlobalStore from "@stores/global.store";
 import { motion } from "framer-motion";
+import { NavItems } from "./nav-items";
 
 export const Navbar: React.FC<Site> = ({ logo, eventLogo }) => {
   const { showNavDropDown } = useGlobalStore();
@@ -18,7 +19,11 @@ export const Navbar: React.FC<Site> = ({ logo, eventLogo }) => {
       className="lg:sticky top-0 left-0 z-40 bg-white"
     >
       <NavHeader logo={logo} eventLogo={eventLogo} />
-      {/* <NavItems heightlights={heightlights} menu={menu} /> */}
+      {/* <NavItems
+        // heightlights={heightlights}
+
+        menu={menu}
+      /> */}
     </motion.nav>
   );
 };

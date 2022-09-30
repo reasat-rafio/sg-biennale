@@ -135,7 +135,7 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
 
     return () => {
       target.removeChild(el);
-      events.connect?.(oldTarget);
+      events?.connect?.(oldTarget);
     };
   }, [pages, distance, horizontal, el, fill, fixed, target, enabled]);
 
