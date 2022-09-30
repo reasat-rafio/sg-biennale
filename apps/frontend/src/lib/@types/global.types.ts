@@ -54,7 +54,7 @@ export interface Social {
 export interface Navigations {
   type: string;
   menu: Menu[];
-  cta: Cta;
+  ctas: Cta[];
 }
 
 export interface Heightlight {
