@@ -28,7 +28,7 @@ export interface AllCategoriesProps {
 }
 
 export interface AllVenuesProps {
-  _id: string;
+  _id?: string;
   name: string;
   slug: Slug;
 }

@@ -1,4 +1,4 @@
-import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
+import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
 
 export const filterPastEvents = (
   currentISODate: string,

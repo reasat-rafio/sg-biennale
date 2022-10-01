@@ -1,12 +1,12 @@
-import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
+import { Backside } from "@components/programmes-and-events/closest-event/backside";
+import { FrontSide } from "@components/programmes-and-events/closest-event/font-side";
+import { RelatedEventsProps } from "@lib/@types/artist-details.types";
 import { useWindowSize } from "@lib/hooks";
 import { motion, Point } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { Backside } from "./backside";
-import { FrontSide } from "./font-side";
 
-interface ClosestEventCarouselProps {
-  closestEventArr: IPgrammeEvents[];
+interface ProgrammesEventsCarouselProps {
+  relatedEvents: RelatedEventsProps[];
 }
 const swipeConfidenceThreshold = 1500;
 const swipePower = (offset: number, velocity: number) => {
@@ -27,9 +27,9 @@ const transition = (index: number) => ({
   },
 });
 
-export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
-  closestEventArr,
-}) => {
+export const ProgrammesEventsCarousel: React.FC<
+  ProgrammesEventsCarouselProps
+> = ({ relatedEvents }) => {
   const carouselRef = useRef<HTMLElement | null>(null);
   const windowWidth = useWindowSize()?.width ?? 0;
   const [position, setPosition] = useState(1);
@@ -75,7 +75,7 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
       ref={carouselRef}
       className="relative h-[70vh] flex flex-col items-center justify-center overflow-hidden"
     >
-      {closestEventArr.map(
+      {relatedEvents.map(
         (
           {
             _id,
@@ -90,7 +90,7 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
           index
         ) => {
           const firstIndex = index === 0;
-          const lastIndex = index === closestEventArr.length - 1;
+          const lastIndex = index === relatedEvents.length - 1;
           const fullWidth = (1 / cardsPerView) * 2 * 100;
           const halfWidth = (1 / cardsPerView) * 100;
           const oneCardPerView = cardsPerView === 1;

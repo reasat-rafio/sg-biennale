@@ -1,6 +1,6 @@
 import { Clock } from "@components/icons/clock";
 import { Button } from "@components/ui/button";
-import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
+import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
 import { usePortableTextTruncate } from "@lib/hooks";
 import { PortableText } from "@utils/sanity";
 import { motion, Variants } from "framer-motion";
@@ -32,7 +32,7 @@ const SlideRightAnimationVariants: Variants = {
 export const Backside: React.FC<BacksideProps> = (props) => {
   const [ref] = usePortableTextTruncate({ maxLength: 200 });
   const formattedDate = format(
-    new Date(props.startAt),
+    new Date(props?.startAt),
     "eee, d LLL yyyy - hh:mm aaaaa'm'"
   );
   return (

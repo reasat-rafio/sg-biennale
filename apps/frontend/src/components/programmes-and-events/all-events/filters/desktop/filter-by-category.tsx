@@ -1,7 +1,7 @@
 import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/router";
-import { AllCategoriesProps } from "@lib/@types/programmes-events-types";
+import { AllCategoriesProps } from "@lib/@types/programmes-events.types";
 import { Checkbox } from "./checkbox";
 import { motion } from "framer-motion";
 

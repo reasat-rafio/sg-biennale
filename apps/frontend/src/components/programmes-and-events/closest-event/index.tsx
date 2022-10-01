@@ -1,5 +1,5 @@
 import { Header } from "@components/ui/header";
-import { IPgrammeEvents } from "@lib/@types/programmes-events-types";
+import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
 import { ClosestEventCarousel } from "./closest-event-carousel";
 
 interface ClosestEventProps {

@@ -1,4 +1,4 @@
-import { RelatedArtistsProps } from "@lib/@types/programmes-events-types";
+import { RelatedArtistsProps } from "@lib/@types/programmes-events.types";
 import { useWindowSize } from "@lib/hooks";
 import clsx from "clsx";
 import Tooltip from "rc-tooltip";

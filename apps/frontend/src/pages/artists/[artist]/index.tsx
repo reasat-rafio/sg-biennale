@@ -1,5 +1,6 @@
 import { Artwork } from "@components/artist-details/artwork/artwork";
 import { Hero } from "@components/artist-details/hero";
+import { ProgrammesEvents } from "@components/artist-details/programmes-events";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
@@ -38,6 +39,7 @@ const query = pageQuery(groq`
           }
         },
         "relatedEvents" : *[_type == "events" && ^._id in relatedArtists[]._ref][]{
+          _id,
           title,
           slug,
           description,
@@ -45,7 +47,8 @@ const query = pageQuery(groq`
           venue[]->{
             _id,
             name,
-          }
+            slug
+          },
           images[]{
             ...,
             asset-> {
@@ -58,8 +61,8 @@ const query = pageQuery(groq`
           relatedArtists[]-> {
             _id,
             name
-          }
-        }
+          },
+        },
     },
 `);
 
@@ -98,6 +101,9 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
         countries={countries}
       />
       <Artwork name={name} artworks={artworks} />
+      {relatedEvents.length && (
+        <ProgrammesEvents name={name} relatedEvents={relatedEvents} />
+      )}
     </section>
   );
 };

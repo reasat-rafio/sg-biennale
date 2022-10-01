@@ -2,7 +2,7 @@ import {
   AllCategoriesProps,
   AllVenuesProps,
   IPgrammeEvents,
-} from "../lib/@types/programmes-events-types";
+} from "../lib/@types/programmes-events.types";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 

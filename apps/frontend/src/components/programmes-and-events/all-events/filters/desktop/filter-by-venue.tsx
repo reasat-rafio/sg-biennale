@@ -1,6 +1,6 @@
 import { AnimatedHamburgerMenu } from "@components/icons/animated-hamburger-menu";
 import { Listbox, Transition } from "@headlessui/react";
-import { AllVenuesProps } from "@lib/@types/programmes-events-types";
+import { AllVenuesProps } from "@lib/@types/programmes-events.types";
 import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { useRouter } from "next/router";
 import { Fragment, MouseEvent, useEffect, useState } from "react";
