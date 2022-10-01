@@ -1,9 +1,11 @@
 import { Container } from "@components/ui/container";
 import { ArtistsProps } from "@lib/@types/artists.types";
+import { useWindowSize } from "@lib/hooks";
 import useArtistsStore from "@stores/artists.store";
 import { useEffect, useState } from "react";
 import { Anchor } from "./anchor";
-import { ArtistArtwork } from "./artists-artwork";
+import { DesktopView } from "./desktop-view";
+import { ArtistArtwork } from "./desktop-view/artist-artwork";
 
 export interface SortedArtistsList {
   title: string;
@@ -12,6 +14,7 @@ export interface SortedArtistsList {
 
 export const ArtistsList: React.FC<{}> = ({}) => {
   const { filteredArtists } = useArtistsStore();
+  const windowWidth = useWindowSize()?.width ?? 0;
   const [activeAnchor, setActiveAnchor] = useState("");
   const [anchors, setAnchors] = useState<string[]>([]);
 
@@ -46,13 +49,16 @@ export const ArtistsList: React.FC<{}> = ({}) => {
 
   return (
     <Container className="bg-[#F8F8F8] mt-x py-x">
-      <div className="flex space-x-10">
-        <ArtistArtwork
+      {windowWidth >= 1024 ? (
+        <DesktopView
+          activeAnchor={activeAnchor}
+          anchors={anchors}
           setActiveAnchor={setActiveAnchor}
           sortedArtistsList={sortedArtistsList}
         />
-        <Anchor activeAnchor={activeAnchor} anchors={anchors} />
-      </div>
+      ) : (
+        ""
+      )}
     </Container>
   );
 };

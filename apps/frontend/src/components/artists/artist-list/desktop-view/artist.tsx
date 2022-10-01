@@ -1,16 +1,18 @@
-import { IArtworkProps } from "@lib/@types/artists.types";
+import { Slug } from "@lib/@types/global.types";
 import { imageUrlBuilder } from "@utils/sanity";
+import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { useState } from "react";
-import { SanityImg } from "sanity-react-extra";
 
-interface ArtworskProps {
-  artworks: IArtworkProps[];
+interface ArtistProps {
+  name: string;
+  slug: Slug;
+  images: SanityImage[];
 }
 
 export const ImageVariants: Variants = {
   initial: {
-    scale: 0.7,
+    scale: 0.75,
   },
   animate: {
     scale: 1.01,
@@ -19,37 +21,27 @@ export const ImageVariants: Variants = {
 
 export const TextVaiants: Variants = {
   initial: {
-    left: 20,
-    bottom: 20,
+    left: 35,
+    bottom: 35,
     color: "black",
     scale: 1,
   },
   animate: {
-    left: 35,
-    bottom: 35,
+    left: 50,
+    bottom: 50,
     color: "white",
-    scale: 1.2,
-    originX: 0.6,
+    scale: 1.5,
   },
 };
 
-export const Artworks: React.FC<ArtworskProps> = ({ artworks }) => {
-  return (
-    <section className="col-span-6 grid grid-cols-12  gap-5">
-      {artworks.map((artwork) => (
-        <Card {...artwork} />
-      ))}
-    </section>
-  );
-};
-
-const Card: React.FC<IArtworkProps> = ({ _id, images, name }) => {
+export const Artist: React.FC<ArtistProps> = ({ name, slug, images }) => {
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);
+
   return (
     <motion.article
-      className="relative col-span-6 h-[300px] | bg-white | rounded overflow-hidden cursor-pointer"
+      className="relative lg:col-span-6 col-span-12 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}
     >
@@ -74,7 +66,6 @@ const Card: React.FC<IArtworkProps> = ({ _id, images, name }) => {
       </motion.figure>
 
       <motion.h6
-        layout
         animate={hovered ? "animate" : "initial"}
         transition={{
           duration: 0.6,
