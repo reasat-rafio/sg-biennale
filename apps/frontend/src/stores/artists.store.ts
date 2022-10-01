@@ -1,29 +1,28 @@
-import { ArtistsProps, IFilterVenue } from "@lib/@types/artists.types";
-import { ICountry } from "@lib/@types/global.types";
+import { ArtistsProps } from "@lib/@types/artists.types";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
-import countries from "../../../../libs/countries";
 
 interface IArtistsStore {
-  allCountries: ICountry[];
+  page: number;
+  searchInput: string | null;
   allArtists: ArtistsProps[];
-  allVenues: IFilterVenue[];
   filteredArtists: ArtistsProps[];
+  setSearchInput: (data: string | null) => void;
   setAllArtists: (data: ArtistsProps[]) => void;
   setFilteredArtists: (data: ArtistsProps[]) => void;
-  setAllVenues: (data: IFilterVenue[]) => void;
 }
 
 const useArtistsStore = create(
   devtools<IArtistsStore>((set) => ({
-    allCountries: countries,
+    page: 1,
     allArtists: [],
-    allVenues: [],
     filteredArtists: [],
+    searchInput: null,
     setAllArtists: (allArtists) => set((state) => ({ ...state, allArtists })),
     setFilteredArtists: (filteredArtists) =>
       set((state) => ({ ...state, filteredArtists })),
-    setAllVenues: (allVenues) => set((state) => ({ ...state, allVenues })),
+    setSearchInput: (searchInput) =>
+      set((state) => ({ ...state, searchInput })),
   }))
 );
 

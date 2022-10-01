@@ -1,4 +1,4 @@
-import { FilteringLogic } from "@components/artists/filtering-logic";
+import { FilteringLogic } from "@components/artists/filters/filtering-logic";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
 import { siteQuery } from "@lib/query";
@@ -10,6 +10,7 @@ import { SanityProps } from "next-sanity-extra";
 import { useCallback, useEffect } from "react";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
 import { ArtistsList } from "@components/artists/artist-list";
+import { Filters } from "@components/artists/filters";
 
 const query = groq`{
     "site": ${siteQuery},
@@ -79,6 +80,7 @@ const Artists: NextPage<SanityProps> = (props) => {
           []
         ),
       })}
+      <Filters />
       <ArtistsList />
     </>
   );

@@ -2,8 +2,7 @@ import { AnimatedHamburgerMenu } from "@components/icons/animated-hamburger-menu
 import { Listbox, Transition } from "@headlessui/react";
 import useVisitorInfoStore from "@stores/visitor-info.store";
 import clsx from "clsx";
-import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { v4 as uuid } from "uuid";
 
 interface SortByListProps {
@@ -66,14 +65,15 @@ export const SortBy: React.FC<{}> = () => {
                       <span
                         className={clsx(
                           "block ",
-                          name === selectedSorting
+                          name.toLowerCase() === selectedSorting?.toLowerCase()
                             ? "font-medium"
                             : "font-normal"
                         )}
                       >
                         {name}
                       </span>
-                      {name === selectedSorting && (
+                      {name.toLowerCase() ===
+                        selectedSorting?.toLowerCase() && (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-love">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
