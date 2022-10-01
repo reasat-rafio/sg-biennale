@@ -11,12 +11,13 @@ const ImageScene = dynamic(() => import("./image-scene"), {
 const TextAnimationVariants: Variants = {
   enter: {
     color: "#000000",
-    scale: 1.1,
-    originX: 0.1,
+    scale: 1,
+    originX: 0.5,
   },
   exit: {
     color: "#999999",
-    scale: 1,
+    scale: 0.95,
+    originX: 0,
   },
 };
 
@@ -79,7 +80,9 @@ export const Organisations: React.FC<OrganisationProps> = ({
                 animate={selectedImg._id === logo.asset._id ? "enter" : "exit"}
                 transition={{ duration: 0.4, type: "tween", ease: "easeInOut" }}
                 variants={TextAnimationVariants}
-                className={clsx("text-heading-5 font-semibold max-w-xl")}
+                className={clsx(
+                  "lg:text-heading-5 text-heading-6 font-semibold max-w-xl"
+                )}
               >
                 {name}
               </motion.h4>
