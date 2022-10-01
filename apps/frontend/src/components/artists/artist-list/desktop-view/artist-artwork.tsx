@@ -1,4 +1,4 @@
-import { AnchorWrapper } from "@components/artists/anchor-wrapper";
+import { AnchorWrapper } from "@components/artists/artist-list/anchor-wrapper";
 import { Dispatch, SetStateAction } from "react";
 import { SortedArtistsList } from "..";
 import { Artist } from "../artist";
