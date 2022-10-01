@@ -59,14 +59,12 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const Artists: NextPage<SanityProps> = (props) => {
-  const { setAllArtists, setFilteredArtists, setAllVenues } = useArtistsStore();
+  const { setAllArtists, setFilteredArtists } = useArtistsStore();
   const { artists, page } = useSanityQuery(query, props).data;
   useEffect(() => {
     setAllArtists(artists);
     setFilteredArtists(artists);
-  }, [artists, setAllArtists, setFilteredArtists, setAllVenues]);
-
-  console.log(page);
+  }, [artists, setAllArtists, setFilteredArtists]);
 
   return (
     <>
@@ -80,7 +78,9 @@ const Artists: NextPage<SanityProps> = (props) => {
           []
         ),
       })}
-      <Filters />
+      <FilteringLogic>
+        <Filters />
+      </FilteringLogic>
       <ArtistsList />
     </>
   );

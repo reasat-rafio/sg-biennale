@@ -1,15 +1,9 @@
 import useVisitorInfoStore from "@stores/visitor-info.store";
-import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 
 interface FilteringLogicProps {
   children: ReactNode;
 }
-
-/* 🚩 gatekeeper of the intended queries */
-const checkerForTheIntendedQuery = (filteringKeys: string[]) => {
-  return filteringKeys.includes("search") || filteringKeys.includes("sort_by");
-};
 
 export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
   const {
@@ -17,7 +11,6 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
     cardsPerPage,
     searchInput,
     allVenues,
-    setSearchInput,
     selectedSorting,
     setSortedVenues,
   } = useVisitorInfoStore();
