@@ -44,11 +44,11 @@ export const Artworks: React.FC<ArtworskProps> = ({
   screen = "desktop",
 }) => {
   return (
-    <section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
+    <motion.section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
       {artworks.map((artwork) => (
         <ArtworkCard screen={screen} {...artwork} />
       ))}
-    </section>
+    </motion.section>
   );
 };
 
@@ -62,6 +62,7 @@ export const ArtworkCard: React.FC<ArtworkCardProps> = ({
   const onMouseLeaveAction = () => setHoverd(false);
   return (
     <motion.article
+      layout
       className="relative col-span-6 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}

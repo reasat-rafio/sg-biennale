@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 import { SortedArtistsList } from "..";
 import { Artist } from "../artist";
 import { Artworks } from "../artworks";
+import { motion } from "framer-motion";
 
 interface ArtistsProps {
   setActiveAnchor: Dispatch<SetStateAction<string>>;
@@ -25,7 +26,10 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
             <span className="mb-7 text-xl font-medium">{title}</span>
             <div className="grid grid-cols-12 | gap-10 ">
               {data.map(({ name, slug, images, artworks }, index) => (
-                <section className="grid grid-cols-12 col-span-12 gap-10">
+                <motion.section
+                  layout
+                  className="grid grid-cols-12 col-span-12 gap-10"
+                >
                   {index % 2 ? (
                     <>
                       <Artworks artworks={artworks} />
@@ -37,7 +41,7 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
                       <Artworks artworks={artworks} />
                     </>
                   )}
-                </section>
+                </motion.section>
               ))}
             </div>
           </section>

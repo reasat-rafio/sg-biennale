@@ -1,5 +1,3 @@
-import { VenueProps } from "@lib/@types/visitor-info.types";
-import { Dispatch, SetStateAction } from "react";
 import { SortBy } from "./filters/sort-by";
 import { SearchVenue } from "./filters/search-venue";
 

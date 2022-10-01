@@ -2,7 +2,8 @@ import { AnchorWrapper } from "@components/artists/artist-list/anchor-wrapper";
 import { Dispatch, SetStateAction } from "react";
 import { SortedArtistsList } from "..";
 import { Artist } from "../artist";
-import { ArtworkCard, Artworks } from "../artworks";
+import { ArtworkCard } from "../artworks";
+import { motion } from "framer-motion";
 
 interface ArtistArtworkProps {
   setActiveAnchor: Dispatch<SetStateAction<string>>;
@@ -25,26 +26,35 @@ export const ArtistArtwork: React.FC<ArtistArtworkProps> = ({
             <span className="mb-7 text-xl font-medium">{title}</span>
             <div className="grid grid-cols-12 | gap-5">
               {data.map(({ name, slug, images, artworks }) => (
-                <section className="grid grid-cols-12 col-span-12 gap-5 pb-20">
-                  <div className="col-span-12 grid grid-cols-12 gap-5">
+                <motion.section
+                  layout
+                  className="grid grid-cols-12 col-span-12 gap-5 pb-20"
+                >
+                  <motion.div
+                    layout
+                    className="col-span-12 grid grid-cols-12 gap-5"
+                  >
                     {artworks.map(
                       (art, idx) =>
                         idx < 2 && <ArtworkCard screen="mobile" {...art} />
                     )}
-                  </div>
+                  </motion.div>
                   <Artist
                     name={name}
                     slug={slug}
                     images={images}
                     screen="mobile"
                   />
-                  <div className="col-span-12 grid grid-cols-12 gap-5 ">
+                  <motion.div
+                    layout
+                    className="col-span-12 grid grid-cols-12 gap-5 "
+                  >
                     {artworks.map(
                       (art, idx) =>
                         idx >= 2 && <ArtworkCard screen="mobile" {...art} />
                     )}
-                  </div>
-                </section>
+                  </motion.div>
+                </motion.section>
               ))}
             </div>
           </section>

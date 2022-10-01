@@ -48,6 +48,7 @@ export const Artist: React.FC<ArtistProps> = ({
 
   return (
     <motion.article
+      layout
       className="relative lg:col-span-6 col-span-12 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}
