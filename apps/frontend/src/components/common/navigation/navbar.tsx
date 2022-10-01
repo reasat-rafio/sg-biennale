@@ -20,7 +20,7 @@ export const Navbar: React.FC<Site> = ({
       ref={navbarRef}
       id="navbar"
       className={clsx(
-        "sticky top-0 left-0 z-40  | transition-all duration-500 ease-in-out",
+        "sticky top-0 left-0 z-40  | transition-all duration-500 ease-in-out lg:py-0 py-1",
         scroll && !showNavDropDown && "backdrop-blur-lg bg-white/30 shadow-md"
       )}
     >

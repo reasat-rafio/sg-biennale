@@ -49,7 +49,7 @@ export const PastEdition: React.FC<PastEditionProps> = ({}) => {
               <X className="lg:h-9 lg:w-9 w-7 h-7" />
             </motion.span>
 
-            <div className="max-w-6xl | lg:flex justify-center items-center | mx-auto lg:h-[80vh] h-screen lg:my-[10vh] overflow-auto | py-x lg:py-0">
+            <div className="max-w-6xl | lg:flex justify-center items-center | mx-auto lg:h-[80vh] h-screen lg:my-[10vh] overflow-y-auto | py-x lg:py-0 overflow-x-hidden">
               <Edition {...selectedPastEdition} />
             </div>
           </motion.div>

@@ -18,7 +18,7 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
   };
   return (
     <aside
-      style={{ top: navbarHeight }}
+      style={{ top: navbarHeight + 5 }}
       className="sticky mt-28 h-min | bg-white px-5 py-10 rounded-[43px]"
     >
       <Swiper

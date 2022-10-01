@@ -95,7 +95,7 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
       <section>
         <motion.h6
           layoutId={`past-edition-card-header-${_id}`}
-          className="text-lg font-medium mb-1 font-manrope z-20 relative"
+          className="text-lg font-medium mb-1 font-manrope z-10 relative"
         >
           {name}
         </motion.h6>

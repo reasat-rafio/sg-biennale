@@ -3,9 +3,7 @@ import { ArtistsProps } from "@lib/@types/artists.types";
 import { useWindowSize } from "@lib/hooks";
 import useArtistsStore from "@stores/artists.store";
 import { useEffect, useState } from "react";
-import { Anchor } from "./desktop-view/anchor";
 import { DesktopView } from "./desktop-view";
-import { ArtistArtwork } from "./desktop-view/artist-artwork";
 import { MobileView } from "./mobile-view";
 
 export interface SortedArtistsList {
