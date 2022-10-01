@@ -1,9 +1,7 @@
 import { HamburgerMenu } from "@components/icons/hamburger-menu";
-import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
 import { useWindowScroll } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
-import clsx from "clsx";
 import Link from "next/link";
 import { SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
@@ -22,12 +20,12 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
         paddingTop: scroll ? 7 : 10.5,
         paddingBottom: scroll ? 7 : 10.5,
       }}
-      className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto | flex items-center"
+      className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto | flex items-center relative z-40"
     >
       <div className="flex flex-1 | lg:space-x-4 space-x-2">
         {ctas.map(({ _key, title, href, icon }) => (
           <Link href={href} key={_key}>
-            <a className="flex space-x-2 items-center">
+            <a className="hidden lg:flex | space-x-2 items-center">
               <figure className="w-4 h-4">
                 <SanityImg
                   className="h-full w-full object-contain"

@@ -22,28 +22,28 @@ export const CTASection: React.FC<CtaProps> = ({ social, ctas }) => {
           animate="enter"
           exit="exit"
           variants={CTAVarinats}
-          className="grid grid-cols-12 gap-5 my-5"
+          className="flex flex-col my-5"
         >
-          <div className="col-span-6 flex space-x-4">
-            {/* {ctas.map(({ href, title, _key, icon }) => (
-          <Link href={href} key={_key}>
-            <a className="flex space-x-2 items-center">
-              <figure className="w-4 h-4">
-                <SanityImg
-                  className="h-full w-full object-contain"
-                  image={icon}
-                  builder={imageUrlBuilder}
-                  width={100}
-                  alt="icon"
-                />
-              </figure>
-              <span>{title}</span>
-            </a>
-          </Link>
-        ))} */}
+          <div className="lg:hidden flex flex-wrap mb-3">
+            {ctas.map(({ href, title, _key, icon }) => (
+              <Link href={href} key={_key}>
+                <a className="flex space-x-2 items-center last:mr-0 mr-3">
+                  <figure className="w-4 h-4">
+                    <SanityImg
+                      className="h-full w-full object-contain"
+                      image={icon}
+                      builder={imageUrlBuilder}
+                      width={100}
+                      alt="icon"
+                    />
+                  </figure>
+                  <span className="sm:text-body-1 text-body-2">{title}</span>
+                </a>
+              </Link>
+            ))}
           </div>
-          <div className="col-span-6 flex space-x-5 justify-end">
-            <span className="font-manrope text-xl font-semibold">
+          <div className="flex space-x-5 lg:justify-end">
+            <span className="font-manrope lg:text-xl text-base font-semibold">
               Social Media
             </span>
             <div className="flex justify-end space-x-4">
