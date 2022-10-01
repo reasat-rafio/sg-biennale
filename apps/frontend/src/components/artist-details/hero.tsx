@@ -4,7 +4,7 @@ import { Container } from "@components/ui/container";
 import { ICountry } from "@lib/@types/global.types";
 import { PortableText } from "@utils/sanity";
 import { Dispatch, SetStateAction, useState } from "react";
-import { SanityImage, SanityImg } from "sanity-react-extra";
+import { SanityImage } from "sanity-react-extra";
 
 interface HeroProps {
   name: string;

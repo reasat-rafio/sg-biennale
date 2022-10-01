@@ -1,17 +1,7 @@
-import { ArtistDescription } from "@components/artist-details/artist-description";
 import { Artwork } from "@components/artist-details/artwork/artwork";
 import { Hero } from "@components/artist-details/hero";
-import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
-import { Container } from "@components/ui/container";
-import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
-import useArtistsDetailsStore from "@stores/artist-details.store";
-import {
-  imageUrlBuilder,
-  PortableText,
-  sanityClient,
-  sanityStaticProps,
-} from "@utils/sanity";
+import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -47,7 +37,29 @@ const query = pageQuery(groq`
             }
           }
         },
-
+        "relatedEvents" : *[_type == "events" && ^._id in relatedArtists[]._ref][]{
+          title,
+          slug,
+          description,
+          startAt,
+          venue[]->{
+            _id,
+            name,
+          }
+          images[]{
+            ...,
+            asset-> {
+              ...,
+              metadata{
+                dimensions
+              }
+            }
+          },
+          relatedArtists[]-> {
+            _id,
+            name
+          }
+        }
     },
 `);
 
@@ -74,7 +86,8 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
-  const { name, artworks, images, description, countries } = props.data.page;
+  const { name, artworks, images, description, countries, relatedEvents } =
+    props.data.page;
 
   return (
     <section>
