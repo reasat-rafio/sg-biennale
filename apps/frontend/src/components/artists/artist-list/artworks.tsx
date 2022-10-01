@@ -37,13 +37,13 @@ export const Artworks: React.FC<ArtworskProps> = ({ artworks }) => {
   return (
     <section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
       {artworks.map((artwork) => (
-        <Card {...artwork} />
+        <ArtworkCard {...artwork} />
       ))}
     </section>
   );
 };
 
-const Card: React.FC<IArtworkProps> = ({ _id, images, name }) => {
+export const ArtworkCard: React.FC<IArtworkProps> = ({ _id, images, name }) => {
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);

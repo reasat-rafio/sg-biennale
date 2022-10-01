@@ -1,8 +1,8 @@
 import { AnchorWrapper } from "@components/artists/anchor-wrapper";
 import { Dispatch, SetStateAction } from "react";
 import { SortedArtistsList } from "..";
-import { Artist } from "./artist";
-import { Artworks } from "./artworks";
+import { Artist } from "../artist";
+import { Artworks } from "../artworks";
 
 interface ArtistsProps {
   setActiveAnchor: Dispatch<SetStateAction<string>>;

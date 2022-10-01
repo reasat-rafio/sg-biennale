@@ -3,26 +3,26 @@ import { SortedArtistsList } from "..";
 import { Anchor } from "./anchor";
 import { ArtistArtwork } from "./artist-artwork";
 
-interface DesktopViewProps {
+interface MobileViewProps {
   anchors: string[];
   activeAnchor: string;
   sortedArtistsList: SortedArtistsList[];
   setActiveAnchor: Dispatch<SetStateAction<string>>;
 }
 
-export const DesktopView: React.FC<DesktopViewProps> = ({
+export const MobileView: React.FC<MobileViewProps> = ({
   anchors,
   activeAnchor,
   sortedArtistsList,
   setActiveAnchor,
 }) => {
   return (
-    <div className="flex space-x-10">
+    <div className="">
+      <Anchor activeAnchor={activeAnchor} anchors={anchors} />
       <ArtistArtwork
         setActiveAnchor={setActiveAnchor}
         sortedArtistsList={sortedArtistsList}
       />
-      <Anchor activeAnchor={activeAnchor} anchors={anchors} />
     </div>
   );
 };

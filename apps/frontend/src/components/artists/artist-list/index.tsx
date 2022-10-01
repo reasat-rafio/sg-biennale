@@ -3,9 +3,10 @@ import { ArtistsProps } from "@lib/@types/artists.types";
 import { useWindowSize } from "@lib/hooks";
 import useArtistsStore from "@stores/artists.store";
 import { useEffect, useState } from "react";
-import { Anchor } from "./anchor";
+import { Anchor } from "./desktop-view/anchor";
 import { DesktopView } from "./desktop-view";
 import { ArtistArtwork } from "./desktop-view/artist-artwork";
+import { MobileView } from "./mobile-view";
 
 export interface SortedArtistsList {
   title: string;
@@ -47,17 +48,19 @@ export const ArtistsList: React.FC<{}> = ({}) => {
     setAnchors(sortedArtistsList.map(({ title }) => title));
   }, [sortedArtistsList]);
 
+  const props = {
+    activeAnchor,
+    anchors,
+    sortedArtistsList,
+    setActiveAnchor,
+  };
+
   return (
     <Container className="bg-[#F8F8F8] mt-x py-x">
       {windowWidth >= 1024 ? (
-        <DesktopView
-          activeAnchor={activeAnchor}
-          anchors={anchors}
-          setActiveAnchor={setActiveAnchor}
-          sortedArtistsList={sortedArtistsList}
-        />
+        <DesktopView {...props} />
       ) : (
-        ""
+        <MobileView {...props} />
       )}
     </Container>
   );
