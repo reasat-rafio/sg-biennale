@@ -14,7 +14,7 @@ export const News: React.FC<NewsProps> = ({ title, newsCollection }) => {
   return (
     <Container type="section" className="pt-32 pb-60">
       <Header fontWeight={600}>{title}</Header>
-      <motion.div className="grid grid-cols-12 | pb-56 xl:gap-28 lg:gap-16 gap-3">
+      <motion.div className="grid grid-cols-12 | pb-56 2xl:gap-28 xl:gap-24 lg:gap-16 gap-3">
         {newsCollection.map((newsData, index) => (
           <NewsCard
             key={newsData._key}

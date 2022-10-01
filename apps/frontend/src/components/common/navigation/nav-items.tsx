@@ -25,7 +25,14 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
       <div className="flex flex-1 | lg:space-x-4 space-x-2">
         {ctas.map(({ _key, title, href, icon }) => (
           <Link href={href} key={_key}>
-            <a className="hidden lg:flex | space-x-2 items-center">
+            <motion.a
+              whileHover={{
+                scale: 1.05,
+                // backgroundColor: ["#eeeeee", "#DE5742"],
+              }}
+              transition={{ damping: 2 }}
+              className="hidden lg:flex | space-x-2 items-center cursor-pointer"
+            >
               <figure className="w-4 h-4">
                 <SanityImg
                   className="h-full w-full object-contain"
@@ -36,7 +43,7 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
                 />
               </figure>
               <span>{title}</span>
-            </a>
+            </motion.a>
           </Link>
         ))}
       </div>
