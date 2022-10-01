@@ -4,7 +4,7 @@ import React, { RefObject, useRef } from "react";
 interface ContainerProps {
   className?: string;
   id?: string;
-  type?: "section" | "div" | "p" | "footer" | "ul";
+  type?: "section" | "div" | "p" | "footer" | "ul" | "article";
   children: React.ReactNode;
   style?: any;
   ref?: RefObject<any>;
