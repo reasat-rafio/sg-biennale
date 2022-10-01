@@ -25,18 +25,23 @@ export const ArtistArtwork: React.FC<ArtistArtworkProps> = ({
             <span className="mb-7 text-xl font-medium">{title}</span>
             <div className="grid grid-cols-12 | gap-5">
               {data.map(({ name, slug, images, artworks }) => (
-                <section className="grid grid-cols-12 col-span-12 gap-5  pb-20">
+                <section className="grid grid-cols-12 col-span-12 gap-5 pb-20">
                   <div className="col-span-12 grid grid-cols-12 gap-5">
                     {artworks.map(
-                      (art, idx) => idx < 2 && <ArtworkCard {...art} />
+                      (art, idx) =>
+                        idx < 2 && <ArtworkCard screen="mobile" {...art} />
                     )}
                   </div>
-
-                  <Artist name={name} slug={slug} images={images} />
-
+                  <Artist
+                    name={name}
+                    slug={slug}
+                    images={images}
+                    screen="mobile"
+                  />
                   <div className="col-span-12 grid grid-cols-12 gap-5 ">
                     {artworks.map(
-                      (art, idx) => idx >= 2 && <ArtworkCard {...art} />
+                      (art, idx) =>
+                        idx >= 2 && <ArtworkCard screen="mobile" {...art} />
                     )}
                   </div>
                 </section>

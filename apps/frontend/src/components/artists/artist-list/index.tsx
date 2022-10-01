@@ -56,7 +56,7 @@ export const ArtistsList: React.FC<{}> = ({}) => {
   };
 
   return (
-    <Container className="bg-[#F8F8F8] mt-x py-x">
+    <Container className="bg-[#F8F8F8] mt-x lg:py-x py-md">
       {windowWidth >= 1024 ? (
         <DesktopView {...props} />
       ) : (

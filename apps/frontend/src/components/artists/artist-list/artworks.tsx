@@ -4,8 +4,14 @@ import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 import { SanityImg } from "sanity-react-extra";
 
+type Screen = "desktop" | "mobile";
 interface ArtworskProps {
   artworks: IArtworkProps[];
+  screen?: Screen;
+}
+
+interface ArtworkCardProps extends IArtworkProps {
+  screen?: Screen;
 }
 
 export const ImageVariants: Variants = {
@@ -18,32 +24,39 @@ export const ImageVariants: Variants = {
 };
 
 export const TextVaiants: Variants = {
-  initial: {
-    left: 20,
-    bottom: 20,
+  initial: (screen: Screen) => ({
+    left: screen === "desktop" ? 20 : 8,
+    bottom: screen === "desktop" ? 20 : 8,
     color: "black",
     scale: 1,
-  },
-  animate: {
-    left: 35,
-    bottom: 35,
+  }),
+  animate: (screen: Screen) => ({
+    left: screen === "desktop" ? 35 : 25,
+    bottom: screen === "desktop" ? 35 : 25,
     color: "white",
     scale: 1.2,
     originX: 0.6,
-  },
+  }),
 };
 
-export const Artworks: React.FC<ArtworskProps> = ({ artworks }) => {
+export const Artworks: React.FC<ArtworskProps> = ({
+  artworks,
+  screen = "desktop",
+}) => {
   return (
     <section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
       {artworks.map((artwork) => (
-        <ArtworkCard {...artwork} />
+        <ArtworkCard screen={screen} {...artwork} />
       ))}
     </section>
   );
 };
 
-export const ArtworkCard: React.FC<IArtworkProps> = ({ _id, images, name }) => {
+export const ArtworkCard: React.FC<ArtworkCardProps> = ({
+  _id,
+  images,
+  name,
+}) => {
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);
@@ -54,6 +67,7 @@ export const ArtworkCard: React.FC<IArtworkProps> = ({ _id, images, name }) => {
       onMouseLeave={onMouseLeaveAction}
     >
       <motion.figure
+        className="h-full w-full"
         initial="initial"
         animate={hovered ? "animate" : "initial"}
         transition={{
@@ -62,7 +76,6 @@ export const ArtworkCard: React.FC<IArtworkProps> = ({ _id, images, name }) => {
           ease: [0.075, 0.52, 0.1, 1],
         }}
         variants={ImageVariants}
-        className="h-full w-full"
       >
         <SanityImg
           className="h-full w-full object-cover"
@@ -75,14 +88,15 @@ export const ArtworkCard: React.FC<IArtworkProps> = ({ _id, images, name }) => {
 
       <motion.h6
         layout
+        className="absolute | text-body-2 font-manrope font-semibold"
         animate={hovered ? "animate" : "initial"}
         transition={{
           duration: 0.6,
           type: "tween",
           ease: [0.075, 0.52, 0.1, 1],
         }}
+        custom={screen}
         variants={TextVaiants}
-        className="absolute | text-body-2 font-manrope font-semibold"
       >
         {name}
       </motion.h6>

@@ -4,10 +4,12 @@ import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 
+type Screen = "desktop" | "mobile";
 interface ArtistProps {
   name: string;
   slug: Slug;
   images: SanityImage[];
+  screen?: Screen;
 }
 
 export const ImageVariants: Variants = {
@@ -20,21 +22,26 @@ export const ImageVariants: Variants = {
 };
 
 export const TextVaiants: Variants = {
-  initial: {
-    left: 35,
-    bottom: 35,
+  initial: (screen: Screen) => ({
+    left: screen === "desktop" ? 35 : 10,
+    bottom: screen === "desktop" ? 35 : 10,
     color: "black",
     scale: 1,
-  },
-  animate: {
-    left: 50,
-    bottom: 50,
+  }),
+  animate: (screen: Screen) => ({
+    left: screen === "desktop" ? 50 : 25,
+    bottom: screen === "desktop" ? 50 : 25,
     color: "white",
     scale: 1.5,
-  },
+  }),
 };
 
-export const Artist: React.FC<ArtistProps> = ({ name, slug, images }) => {
+export const Artist: React.FC<ArtistProps> = ({
+  name,
+  slug,
+  images,
+  screen = "desktop",
+}) => {
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);
@@ -73,6 +80,7 @@ export const Artist: React.FC<ArtistProps> = ({ name, slug, images }) => {
           ease: [0.075, 0.52, 0.1, 1],
         }}
         variants={TextVaiants}
+        custom={screen}
         className="absolute | text-body-2 font-manrope font-semibold"
       >
         {name}
