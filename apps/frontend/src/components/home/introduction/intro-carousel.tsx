@@ -69,7 +69,7 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
   // );
 
   return (
-    <div className="relative max-h-[800px] w-full | overflow-hidden aspect-video">
+    <div className="relative max-h-[700px] w-full | overflow-hidden aspect-video">
       <AnimatePresence initial={false} custom={{ direction, page }}>
         {Array.from({ length: 3 }, (_, idx) => idx).map((index) => (
           <motion.div

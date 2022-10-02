@@ -29,7 +29,7 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
   cta,
 }) => {
   return (
-    <section className="md:py-xxl py-xl | bg-gray--100">
+    <section id="accesibility-info" className="md:py-xxl py-xl | bg-gray--100">
       <Container className="space-y-14">
         <motion.h2
           initial="initial"

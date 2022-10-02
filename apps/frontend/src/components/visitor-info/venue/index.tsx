@@ -11,7 +11,6 @@ import { Header } from "@components/ui/header";
 export const Venue: React.FC<{}> = ({}) => {
   const { allVenues, sortedVenues, page, setPage, cardsPerPage } =
     useVisitorInfoStore();
-
   const imgPositionIngAlgo = positioningAlgo(sortedVenues.length);
   const extraPadding = () =>
     useCallback(
@@ -26,7 +25,11 @@ export const Venue: React.FC<{}> = ({}) => {
   const showMoreLessButtonAction = () => {
     sortedVenues < allVenues ? setPage(page + 1) : setPage(1);
   };
-
+  const scrollToAccesiblityInfoSection = () => {
+    document
+      ?.querySelector(`#accesibility-info`)
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
   const showShowMoreButton =
     allVenues.length !== cardsPerPage && allVenues.length > cardsPerPage;
 
@@ -37,7 +40,10 @@ export const Venue: React.FC<{}> = ({}) => {
           Venue
         </Header>
 
-        <span className="underline font-medium lg:text-xl text-base">
+        <span
+          onClick={scrollToAccesiblityInfoSection}
+          className="underline cursor-pointer | font-medium lg:text-xl text-base"
+        >
           Accessibility Info
         </span>
       </header>
