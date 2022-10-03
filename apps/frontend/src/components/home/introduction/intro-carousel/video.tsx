@@ -19,20 +19,34 @@ export const Video: React.FC<VideoProps> = ({ video, thumbnail, page }) => {
   })?.isIntersecting;
 
   const [play, setPlay] = useState(false);
+  const [hovered, setHovered] = useState(false);
   useEffect(() => {
-    !intersecting && videoRef?.current?.pause();
+    if (intersecting) {
+      setPlay(false);
+      videoRef?.current?.pause();
+    }
   }, [intersecting]);
 
   return (
-    <div className="w-full h-full object-cover object-center overflow-hidden">
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="w-full h-full object-cover object-center overflow-hidden"
+    >
       <div className="relative h-full w-full">
-        <PlayIcon page={page} setPlay={setPlay} videoRef={videoRef} />
+        <PlayIcon
+          page={page}
+          play={play}
+          hovered={hovered}
+          setPlay={setPlay}
+          videoRef={videoRef}
+        />
         <video
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover introcution-video"
           ref={videoRef}
           width="100%"
           height="100%"
-          controls={play}
+          // controls={play}
           disablePictureInPicture
           controlsList="nodownload noplaybackrate"
         >
