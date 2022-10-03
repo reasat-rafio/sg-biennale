@@ -9,28 +9,30 @@ import { motion } from "framer-motion";
 interface VideoProps {
   thumbnail: SanityImage;
   video: IVideo;
+  page: number;
 }
 
-export const Video: React.FC<VideoProps> = ({ video, thumbnail }) => {
+export const Video: React.FC<VideoProps> = ({ video, thumbnail, page }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const intersecting = useIntersection(videoRef, {
     threshold: 0.1,
   })?.isIntersecting;
 
   const [play, setPlay] = useState(false);
-
-  //   useEffect(() => {
-  //     !intersecting && videoRef?.current?.pause();
-  //   }, [intersecting]);
+  useEffect(() => {
+    !intersecting && videoRef?.current?.pause();
+  }, [intersecting]);
 
   return (
     <div className="w-full h-full object-cover object-center overflow-hidden">
-      {play ? (
+      <div className="relative h-full w-full">
+        <PlayIcon page={page} setPlay={setPlay} videoRef={videoRef} />
         <video
+          className="h-full w-full object-cover"
           ref={videoRef}
           width="100%"
           height="100%"
-          controls
+          controls={play}
           disablePictureInPicture
           controlsList="nodownload noplaybackrate"
         >
@@ -38,18 +40,7 @@ export const Video: React.FC<VideoProps> = ({ video, thumbnail }) => {
           <source src={video?.mp4} type="video/mp4" />
           Sorry, your browser doesn&apos;t support embedded videos.
         </video>
-      ) : (
-        <div className="relative h-full w-full">
-          <PlayIcon setPlay={setPlay} videoRef={videoRef} />
-          <SanityImg
-            className="w-full h-full object-cover pointer-events-none object-center overflow-hidden"
-            draggable={false}
-            builder={imageUrlBuilder}
-            width={900}
-            image={thumbnail}
-          />
-        </div>
-      )}
+      </div>
     </div>
   );
 };

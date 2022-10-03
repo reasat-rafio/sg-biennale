@@ -75,7 +75,7 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
             >
               <motion.div className="overflow-hidden w-[95%] h-full">
                 {video ? (
-                  <Video video={video} thumbnail={thumbnail} />
+                  <Video page={page} video={video} thumbnail={thumbnail} />
                 ) : (
                   <Image image={thumbnail} />
                 )}
