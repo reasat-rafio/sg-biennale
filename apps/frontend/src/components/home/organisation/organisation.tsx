@@ -49,8 +49,9 @@ export const Organisations: React.FC<OrganisationProps> = ({
         cardRef?.current!.offsetHeight ?? 0) - 0.5;
 
     bgPositionAnim.start({
-      x: XDelta * 50,
-      y: YDelta * 50,
+      x: XDelta * 60,
+      y: YDelta * 60,
+      rotate: (XDelta + YDelta) * 5,
     });
   };
 
@@ -94,7 +95,11 @@ export const Organisations: React.FC<OrganisationProps> = ({
           ref={cardRef}
           onMouseMove={imgContainerStateOn}
           onMouseLeave={() => {
-            bgPositionAnim.start({ x: 0, y: 0 });
+            bgPositionAnim.start({
+              x: 0,
+              y: 0,
+              rotate: 0,
+            });
           }}
         >
           <motion.div

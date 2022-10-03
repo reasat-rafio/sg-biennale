@@ -19,7 +19,7 @@ const Image: React.FC<{
       setDoAnimation(true);
       setTimeout(() => {
         setDoAnimation(false);
-      }, 400);
+      }, 300);
     }
   }, [selectedImg]);
 
