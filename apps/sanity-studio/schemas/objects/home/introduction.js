@@ -25,15 +25,21 @@ const HomeIntroduction = {
               type: "string",
             },
             {
-              name: "image",
+              name: "thubmnil",
               type: "image",
+              options: {
+                hotspot: true,
+              },
               validation: (Rule) => Rule.required(),
             },
-            {
-              name: "video",
-              type: "video",
-            },
+            { name: "video", type: "video" },
           ],
+          preview: {
+            select: {
+              title: "title",
+              media: "thubmnil",
+            },
+          },
         },
       ],
     },
