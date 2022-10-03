@@ -25,7 +25,7 @@ const HomeIntroduction = {
               type: "string",
             },
             {
-              name: "thubmnil",
+              name: "thumbnail",
               type: "image",
               options: {
                 hotspot: true,
@@ -37,7 +37,7 @@ const HomeIntroduction = {
           preview: {
             select: {
               title: "title",
-              media: "thubmnil",
+              media: "thumbnail",
             },
           },
         },

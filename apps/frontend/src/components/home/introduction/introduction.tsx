@@ -1,7 +1,8 @@
 import { AnimatedHeader } from "@components/ui/animated-component/animated-header";
 import { Container } from "@components/ui/container";
+import { IntroCarouselProps } from "@lib/@types/home.types";
 import { Description } from "./description";
-import { IntroCarousel, IntroCarouselProps } from "./intro-carousel";
+import { IntroCarousel } from "./intro-carousel";
 
 interface IntroductionProps {
   type: string;

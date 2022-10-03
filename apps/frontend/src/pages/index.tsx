@@ -26,7 +26,12 @@ const query = pageQuery(groq`
       },
       collection[]{
         ..., 
-        "image": ${withDimensions("image")}
+        "thumbnail": ${withDimensions("thumbnail")},
+        video {
+          ...,
+          "webm": video_webm.asset->url,
+          "mp4": video_mp4.asset->url
+        },
       },
       artists[]->{
         _id,

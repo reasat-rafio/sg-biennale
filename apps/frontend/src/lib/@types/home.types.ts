@@ -83,3 +83,16 @@ export interface ArtworkImageProps {
   isDown: boolean;
   setClikced: Dispatch<SetStateAction<null | number>>;
 }
+
+export interface IntroCarouselProps {
+  _key: string;
+  _type: string;
+  thumbnail: SanityImage;
+  title?: string;
+  video?: Video;
+}
+
+export interface Video {
+  mp4?: string;
+  webm?: string;
+}

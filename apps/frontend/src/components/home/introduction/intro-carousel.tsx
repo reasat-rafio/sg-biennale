@@ -1,3 +1,4 @@
+import { IntroCarouselProps } from "@lib/@types/home.types";
 import { useVisibleScrollEffect } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
@@ -38,14 +39,6 @@ const variants = (length: number) => {
     },
   };
 };
-
-export interface IntroCarouselProps {
-  _key: string;
-  _type: string;
-  image: SanityImage;
-  title?: string;
-  video?: any;
-}
 
 export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
   collection,
@@ -117,7 +110,8 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
                 builder={imageUrlBuilder}
                 width={900}
                 image={
-                  collection[imageIndex(page + index, collection.length)].image
+                  collection[imageIndex(page + index, collection.length)]
+                    .thumbnail
                 }
               />
             </motion.div>
