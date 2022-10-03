@@ -7,6 +7,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import SEO from "./objects/seo";
 import CTA from "./objects/cta";
 import Info from "./objects/more-info";
+import VideoContent from "./objects/video-content";
 
 import Site from "./documents/site";
 import MenuItems from "./objects/site/menu-item";
@@ -84,6 +85,7 @@ export default createSchema({
     SEO,
     CTA,
     Info,
+    VideoContent,
 
     Site,
     Menu,
