@@ -26,7 +26,7 @@ const query = pageQuery(groq`
       },
       collection[]{
         ..., 
-        "thumbnail": ${withDimensions("thumbnail")},
+        "image": ${withDimensions("image")},
         video {
           ...,
           "webm": video_webm.asset->url,

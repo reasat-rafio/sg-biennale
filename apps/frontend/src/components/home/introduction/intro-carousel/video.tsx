@@ -1,18 +1,15 @@
 import { PlayIcon } from "@components/home/introduction/intro-carousel/play-icon";
 import { Video as IVideo } from "@lib/@types/home.types";
 import { useIntersection } from "@lib/hooks";
-import { imageUrlBuilder } from "@utils/sanity";
 import { useEffect, useRef, useState } from "react";
-import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
 
 interface VideoProps {
-  thumbnail: SanityImage;
   video: IVideo;
   page: number;
 }
 
-export const Video: React.FC<VideoProps> = ({ video, thumbnail, page }) => {
+export const Video: React.FC<VideoProps> = ({ video, page }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const intersecting = useIntersection(videoRef, {
     threshold: 0.1,

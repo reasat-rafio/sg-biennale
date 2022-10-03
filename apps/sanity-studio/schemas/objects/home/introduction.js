@@ -1,4 +1,5 @@
 import { FcAbout } from "react-icons/fc";
+import * as React from "react";
 
 const HomeIntroduction = {
   title: "Introduction",
@@ -19,25 +20,50 @@ const HomeIntroduction = {
         {
           name: "item",
           type: "object",
+          validation: (Rule) => Rule.required(),
+          description: "Choose either an image or a video",
           fields: [
             {
               name: "title",
               type: "string",
             },
             {
-              name: "thumbnail",
+              name: "image",
               type: "image",
               options: {
                 hotspot: true,
               },
-              validation: (Rule) => Rule.required(),
             },
             { name: "video", type: "video" },
           ],
           preview: {
             select: {
               title: "title",
-              media: "thumbnail",
+              media: "image",
+              webm: "video.video_webm.asset.url",
+              hevc: "video.video_hevc.asset.url",
+            },
+            prepare({ title, image, webm, hevc }) {
+              return {
+                title,
+                media: image ? (
+                  image
+                ) : (
+                  <video
+                    muted
+                    playsInline
+                    autoPlay
+                    loop
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  >
+                    <source src={webm} type="video/webm" />
+                    <source src={hevc} type="video/quicktime" />
+                  </video>
+                ),
+              };
             },
           },
         },

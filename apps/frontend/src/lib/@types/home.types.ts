@@ -87,7 +87,7 @@ export interface ArtworkImageProps {
 export interface IntroCarouselProps {
   _key: string;
   _type: string;
-  thumbnail: SanityImage;
+  image?: SanityImage;
   title?: string;
   video?: Video;
 }

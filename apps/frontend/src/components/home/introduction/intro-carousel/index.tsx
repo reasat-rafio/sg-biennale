@@ -31,8 +31,8 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
     <div className="relative max-h-[700px] w-full | overflow-hidden aspect-video">
       <AnimatePresence initial={false} custom={{ direction, page }}>
         {Array.from({ length: 3 }, (_, idx) => idx).map((index) => {
-          const thumbnail =
-            collection[imageIndex(page + index, collection.length)].thumbnail;
+          const image =
+            collection[imageIndex(page + index, collection.length)]?.image;
           const video =
             collection[imageIndex(page + index, collection.length)]?.video;
 
@@ -75,9 +75,9 @@ export const IntroCarousel: React.FC<{ collection: IntroCarouselProps[] }> = ({
             >
               <motion.div className="overflow-hidden w-[95%] h-full">
                 {video ? (
-                  <Video page={page} video={video} thumbnail={thumbnail} />
+                  <Video page={page} video={video} />
                 ) : (
-                  <Image image={thumbnail} />
+                  <Image image={image} />
                 )}
               </motion.div>
             </motion.div>

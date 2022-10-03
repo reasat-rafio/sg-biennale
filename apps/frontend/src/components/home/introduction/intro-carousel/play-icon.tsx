@@ -41,7 +41,7 @@ export const PlayIcon: React.FC<PlayIconProps> = ({
   return (
     <>
       <motion.svg
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 | cursor-pointer z-30 | hover:scale-105 transition-all duration-300"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 | cursor-pointer z-30 | hover:scale-105 transition-all duration-300 | lg:h-[100px] h-[70px] w-[70px] lg:w-[100px]"
         key={page}
         initial={false}
         animate={{ opacity: !play ? 1 : hovered ? 1 : 0 }}
