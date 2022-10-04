@@ -151,7 +151,7 @@ export const LiquidButtonClass = class LiquidButton {
   }
 
   get clearHandler() {
-    return (e) => {
+    return () => {
       this.touches = [];
     };
   }
