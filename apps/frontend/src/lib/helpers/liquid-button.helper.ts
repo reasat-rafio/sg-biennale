@@ -27,7 +27,7 @@ export const LiquidButtonClass = class LiquidButton {
   color1: string;
   color2: string;
   color3: string;
-  textColor: string;
+  textColor: "#000000" | "#eeeeee";
   text: string;
   debug: boolean;
   layers: LayerProps[];
@@ -49,7 +49,7 @@ export const LiquidButtonClass = class LiquidButton {
     this.tension = options.tension * 1 || 0.4;
     this.width = options.width * 1 || 200;
     this.height = options.height * 1 || 50;
-    this.margin = options.margin || 40;
+    this.margin = options.margin || 20;
     this.hoverFactor = options.hoverFactor || -0.1;
     this.gap = options.gap || 5;
     this.debug = options.debug || false;
@@ -57,7 +57,7 @@ export const LiquidButtonClass = class LiquidButton {
     this.color1 = options.color1 || "#DE5742";
     this.color2 = options.color2 || "#000000";
     this.color3 = options.color3 || "#BF09E6";
-    this.textColor = options.textColor || "#eeeeee";
+    this.textColor = options.textcolor || "#eeeeee";
     this.text = options.text || "Button";
     this.svg = svg;
     this.layers = [
@@ -151,7 +151,7 @@ export const LiquidButtonClass = class LiquidButton {
   }
 
   get clearHandler() {
-    return (e: any) => {
+    return (e) => {
       this.touches = [];
     };
   }
@@ -293,6 +293,7 @@ export const LiquidButtonClass = class LiquidButton {
         }
       } else {
         layer.path.style.fill = this.color1;
+        layer.path.style.stroke = this.color1;
       }
       const points = layer.points;
       const commands = [];
@@ -346,7 +347,8 @@ export const LiquidButtonClass = class LiquidButton {
             (Math.sin(angle) * this.height) / 2 +
               this.margin +
               this.width -
-              this.height / 2,
+              this.height / 2 -
+              0.4,
             (Math.cos(angle) * this.height) / 2 + this.margin + this.height / 2
           )
         );
