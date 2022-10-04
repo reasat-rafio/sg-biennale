@@ -10,6 +10,7 @@ import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { CuratorialEssay } from "@components/explore/curatorial-essay";
 import { PublicationsCatalogues } from "@components/explore/publication-catalogue";
 import { DirectoryOfTerm } from "@components/explore/directory-of-term";
+import { LiquidButton } from "@components/ui/liquid-button";
 
 const query = groq`{
   "site": ${siteQuery},
