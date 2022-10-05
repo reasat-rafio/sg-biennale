@@ -6,9 +6,28 @@ import { useEffect, useState } from "react";
 import { DesktopView } from "./desktop-view";
 import { MobileView } from "./mobile-view";
 
-export interface SortedArtistsList {
+export interface DataProps {
+  artist: ArtistsProps;
+  artistCollection: ArtistsProps[];
+}
+
+export interface SortedArtists {
   title: string;
-  data: ArtistsProps[];
+  data: DataProps[];
+}
+
+export function sliceIntoChunks<T>(arr: T[], chunkSize: number) {
+  const res = [];
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    const chunk = arr.slice(i, i + chunkSize);
+    const newArr = {
+      artist: chunk[0],
+      artistCollection: chunk.filter((_, idx) => idx !== 0),
+    };
+
+    res.push(newArr);
+  }
+  return res;
 }
 
 export const ArtistsList: React.FC<{}> = ({}) => {
@@ -17,12 +36,12 @@ export const ArtistsList: React.FC<{}> = ({}) => {
   const [activeAnchor, setActiveAnchor] = useState("");
   const [anchors, setAnchors] = useState<string[]>([]);
 
-  const [sortedArtistsList, setSortedArtistList] = useState<
-    SortedArtistsList[]
-  >([]);
+  const [sortedArtistsList, setSortedArtistList] = useState<SortedArtists[]>(
+    []
+  );
 
   useEffect(() => {
-    const newSortedArtistListWithTitleAsFirstLatter: SortedArtistsList[] =
+    const newSortedArtistListWithTitleAsFirstLatter: SortedArtists[] =
       Object.values(
         filteredArtists.reduce((newVal: any, artist) => {
           let firstLetter = artist.name[0].toLocaleUpperCase();
@@ -39,7 +58,12 @@ export const ArtistsList: React.FC<{}> = ({}) => {
       (a, b) => (a.title > b.title ? 1 : -1)
     );
 
-    setSortedArtistList(alphabeticalSorting);
+    const chunking = alphabeticalSorting.map((artist) => ({
+      ...artist,
+      data: sliceIntoChunks(artist.data, 5),
+    }));
+
+    setSortedArtistList(chunking as any);
   }, [filteredArtists]);
 
   useEffect(() => {

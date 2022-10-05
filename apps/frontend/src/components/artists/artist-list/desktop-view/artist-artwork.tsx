@@ -1,13 +1,13 @@
 import { AnchorWrapper } from "@components/artists/artist-list/anchor-wrapper";
 import { Dispatch, SetStateAction } from "react";
-import { SortedArtistsList } from "..";
 import { Artist } from "../artist";
-import { Artworks } from "../artworks";
+import { ArtistCollection } from "../artist-collection";
 import { motion } from "framer-motion";
+import { SortedArtists } from "..";
 
 interface ArtistsProps {
   setActiveAnchor: Dispatch<SetStateAction<string>>;
-  sortedArtistsList: SortedArtistsList[];
+  sortedArtistsList: SortedArtists[];
 }
 
 export const ArtistArtwork: React.FC<ArtistsProps> = ({
@@ -17,7 +17,7 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
   return (
     <div className="flex-1">
       <AnchorWrapper setActiveAnchor={setActiveAnchor}>
-        {sortedArtistsList.map(({ data, title }) => (
+        {sortedArtistsList.map(({ data, title }, rootIndex) => (
           <section
             id={title}
             key={title}
@@ -25,20 +25,54 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
           >
             <span className="mb-7 text-xl font-medium">{title}</span>
             <div className="grid grid-cols-12 | gap-10 ">
-              {data.map(({ name, slug, images, artworks }, index) => (
+              {data.map(({ artist, artistCollection }, index) => (
                 <motion.section
                   layout
                   className="grid grid-cols-12 col-span-12 gap-10"
                 >
-                  {index % 2 ? (
+                  {rootIndex % 2 ? (
                     <>
-                      <Artworks artworks={artworks} />
-                      <Artist name={name} slug={slug} images={images} />
+                      {index % 2 ? (
+                        <>
+                          <ArtistCollection artists={artistCollection} />
+                          <Artist
+                            name={artist.name}
+                            slug={artist.slug}
+                            images={artist.images}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <Artist
+                            name={artist.name}
+                            slug={artist.slug}
+                            images={artist.images}
+                          />
+                          <ArtistCollection artists={artistCollection} />
+                        </>
+                      )}
                     </>
                   ) : (
                     <>
-                      <Artist name={name} slug={slug} images={images} />
-                      <Artworks artworks={artworks} />
+                      {index % 2 ? (
+                        <>
+                          <Artist
+                            name={artist.name}
+                            slug={artist.slug}
+                            images={artist.images}
+                          />
+                          <ArtistCollection artists={artistCollection} />
+                        </>
+                      ) : (
+                        <>
+                          <ArtistCollection artists={artistCollection} />
+                          <Artist
+                            name={artist.name}
+                            slug={artist.slug}
+                            images={artist.images}
+                          />
+                        </>
+                      )}
                     </>
                   )}
                 </motion.section>

@@ -5,7 +5,7 @@ import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 
 type Screen = "desktop" | "mobile";
-interface ArtistProps {
+export interface ArtistProps {
   name: string;
   slug: Slug;
   images: SanityImage[];

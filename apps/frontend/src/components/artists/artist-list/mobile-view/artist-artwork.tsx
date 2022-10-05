@@ -2,7 +2,7 @@ import { AnchorWrapper } from "@components/artists/artist-list/anchor-wrapper";
 import { Dispatch, SetStateAction } from "react";
 import { SortedArtistsList } from "..";
 import { Artist } from "../artist";
-import { ArtworkCard } from "../artworks";
+import { ArtworkCard } from "../artist-collection";
 import { motion } from "framer-motion";
 
 interface ArtistArtworkProps {

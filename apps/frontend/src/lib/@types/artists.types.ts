@@ -13,14 +13,17 @@ export interface IArtworkProps {
   images: SanityImage[];
 }
 
+export interface Tag {
+  label: string;
+  value: string;
+}
+
 export interface ArtistsProps {
   _id: string;
   slug: Slug;
   name: string;
   images: SanityImage[];
   artworks: IArtworkProps[];
-  countries: {
-    label: string;
-    value: string;
-  }[];
+  countries: Tag[];
+  region: Tag;
 }

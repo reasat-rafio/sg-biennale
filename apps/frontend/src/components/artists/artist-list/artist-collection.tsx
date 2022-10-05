@@ -1,16 +1,15 @@
-import { IArtworkProps } from "@lib/@types/artists.types";
 import { imageUrlBuilder } from "@utils/sanity";
 import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 import { SanityImg } from "sanity-react-extra";
+import { ArtistProps } from "./artist";
 
 type Screen = "desktop" | "mobile";
-interface ArtworskProps {
-  artworks: IArtworkProps[];
+interface ArtistCollectionProps {
+  artists: ArtistProps[];
   screen?: Screen;
 }
-
-interface ArtworkCardProps extends IArtworkProps {
+interface ArtistCardProps extends ArtistProps {
   screen?: Screen;
 }
 
@@ -39,24 +38,20 @@ export const TextVaiants: Variants = {
   }),
 };
 
-export const Artworks: React.FC<ArtworskProps> = ({
-  artworks,
+export const ArtistCollection: React.FC<ArtistCollectionProps> = ({
+  artists,
   screen = "desktop",
 }) => {
   return (
     <motion.section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
-      {artworks.map((artwork) => (
-        <ArtworkCard screen={screen} {...artwork} />
+      {artists.map((artist) => (
+        <ArtworkCard screen={screen} {...artist} />
       ))}
     </motion.section>
   );
 };
 
-export const ArtworkCard: React.FC<ArtworkCardProps> = ({
-  _id,
-  images,
-  name,
-}) => {
+export const ArtworkCard: React.FC<ArtistCardProps> = ({ images, name }) => {
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);
