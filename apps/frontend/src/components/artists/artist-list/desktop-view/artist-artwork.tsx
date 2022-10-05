@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Artist } from "../artist";
 import { ArtistCollection } from "../artist-collection";
 import { motion } from "framer-motion";
-import { SortedArtists } from "..";
+import { DataProps, SortedArtists } from "..";
 
 interface ArtistsProps {
   setActiveAnchor: Dispatch<SetStateAction<string>>;
@@ -18,14 +18,14 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
     <div className="flex-1">
       <AnchorWrapper setActiveAnchor={setActiveAnchor}>
         {sortedArtistsList.map(({ data, title }, rootIndex) => (
-          <section
+          <motion.section
             id={title}
             key={title}
             className="flex flex-col | lg:py-14 py-8"
           >
             <span className="mb-7 text-xl font-medium">{title}</span>
-            <div className="grid grid-cols-12 | gap-10 ">
-              {data.map(({ artist, artistCollection }, index) => (
+            <motion.div layout className="grid grid-cols-12 | gap-10 ">
+              {data.map((props, index) => (
                 <motion.section
                   layout
                   className="grid grid-cols-12 col-span-12 gap-10"
@@ -33,54 +33,43 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
                   {rootIndex % 2 ? (
                     <>
                       {index % 2 ? (
-                        <>
-                          <ArtistCollection artists={artistCollection} />
-                          <Artist
-                            name={artist.name}
-                            slug={artist.slug}
-                            images={artist.images}
-                          />
-                        </>
+                        <PositionRight {...props} />
                       ) : (
-                        <>
-                          <Artist
-                            name={artist.name}
-                            slug={artist.slug}
-                            images={artist.images}
-                          />
-                          <ArtistCollection artists={artistCollection} />
-                        </>
+                        <PositionLeft {...props} />
                       )}
                     </>
                   ) : (
                     <>
                       {index % 2 ? (
-                        <>
-                          <Artist
-                            name={artist.name}
-                            slug={artist.slug}
-                            images={artist.images}
-                          />
-                          <ArtistCollection artists={artistCollection} />
-                        </>
+                        <PositionLeft {...props} />
                       ) : (
-                        <>
-                          <ArtistCollection artists={artistCollection} />
-                          <Artist
-                            name={artist.name}
-                            slug={artist.slug}
-                            images={artist.images}
-                          />
-                        </>
+                        <PositionRight {...props} />
                       )}
                     </>
                   )}
                 </motion.section>
               ))}
-            </div>
-          </section>
+            </motion.div>
+          </motion.section>
         ))}
       </AnchorWrapper>
     </div>
+  );
+};
+
+const PositionRight: React.FC<DataProps> = ({ artist, artistCollection }) => {
+  return (
+    <>
+      <ArtistCollection artists={artistCollection} />
+      <Artist name={artist.name} slug={artist.slug} images={artist.images} />
+    </>
+  );
+};
+const PositionLeft: React.FC<DataProps> = ({ artist, artistCollection }) => {
+  return (
+    <>
+      <Artist name={artist.name} slug={artist.slug} images={artist.images} />
+      <ArtistCollection artists={artistCollection} />
+    </>
   );
 };
