@@ -35,10 +35,8 @@ export const LiquidButtonClass = class LiquidButton {
   svgDefs: any;
   touches: TouchesProps[];
   noise: number;
-  __raf:
-    | (((callback: iFrameRequestCallback) => number) &
-        ((callback: iFrameRequestCallback) => number))
-    | null = null;
+  __raf: (((callback: any) => number) & ((callback: any) => number)) | null =
+    null;
 
   constructor(svg: SVGElement) {
     const options: any = svg.dataset;
