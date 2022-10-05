@@ -23,7 +23,6 @@ export interface ArtistsProps {
   slug: Slug;
   name: string;
   images: SanityImage[];
-  artworks: IArtworkProps[];
   countries: Tag[];
   region: Tag;
 }

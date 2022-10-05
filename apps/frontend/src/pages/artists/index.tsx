@@ -25,20 +25,6 @@ const query = groq`{
         _id,
         name,
         slug,
-        artworks[0...4]-> {
-            _id,
-            name,
-            slug,
-            images[] {
-            ...,
-            asset->{
-              ...,
-              metadata {
-                dimensions
-              }
-            }
-          },
-        },
         images[] {
           ...,
           asset->{
