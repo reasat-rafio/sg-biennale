@@ -10,7 +10,7 @@ interface SortByListProps {
   id: string;
 }
 
-export const SortBy: React.FC<{}> = () => {
+export const SortByRegion: React.FC<{}> = () => {
   const sortByList = [{ name: "Alphabet", id: uuid() }];
 
   const { selectedSorting, setSelectedSorting } = useArtistsStore();
@@ -31,7 +31,7 @@ export const SortBy: React.FC<{}> = () => {
         <div className="mt-1">
           <Listbox.Button className="flex items-center w-fit | space-x-4 p-3 | border-b border-black cursor-pointer">
             <span className="flex-1 text-left block truncate">
-              {selectedSorting ? selectedSorting : "Sort By"}
+              {selectedSorting ? selectedSorting : "Sort By Region"}
             </span>
 
             <AnimatedHamburgerMenu
