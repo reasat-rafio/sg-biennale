@@ -24,12 +24,9 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
             className="flex flex-col | lg:py-14 py-8"
           >
             <span className="mb-7 text-xl font-medium">{title}</span>
-            <motion.div layout className="grid grid-cols-12 | gap-10 ">
+            <div className="grid grid-cols-12 | gap-10 ">
               {data.map((props, index) => (
-                <motion.section
-                  layout
-                  className="grid grid-cols-12 col-span-12 gap-10"
-                >
+                <section className="grid grid-cols-12 col-span-12 gap-10">
                   {rootIndex % 2 ? (
                     <>
                       {index % 2 ? (
@@ -47,9 +44,9 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
                       )}
                     </>
                   )}
-                </motion.section>
+                </section>
               ))}
-            </motion.div>
+            </div>
           </motion.section>
         ))}
       </AnchorWrapper>

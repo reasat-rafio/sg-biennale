@@ -43,11 +43,11 @@ export const ArtistCollection: React.FC<ArtistCollectionProps> = ({
   screen = "desktop",
 }) => {
   return (
-    <motion.section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
+    <section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
       {artists.map((artist) => (
         <ArtistCard screen={screen} {...artist} />
       ))}
-    </motion.section>
+    </section>
   );
 };
 
@@ -58,6 +58,8 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({ images, name }) => {
   return (
     <motion.article
       layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className="relative col-span-6 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}

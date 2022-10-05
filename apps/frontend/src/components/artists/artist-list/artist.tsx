@@ -49,6 +49,8 @@ export const Artist: React.FC<ArtistProps> = ({
   return (
     <motion.article
       layout
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       className="relative lg:col-span-6 col-span-12 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}
