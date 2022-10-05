@@ -1,5 +1,6 @@
 import { FcButtingIn } from "react-icons/fc";
 import countries from "../../../../libs/countries";
+import regions from "../../../../libs/regions.ts";
 
 const Artist = {
   title: "Artist Details Page",
@@ -69,11 +70,7 @@ const Artist = {
       name: "region",
       type: "tag",
       options: {
-        predefinedTags: [
-          { label: "Singapore", value: "singapore" },
-          { label: "Rest of the Asia", value: "rest-of-the-asia" },
-          { label: "Rest of the world", value: "rest-of-the-world" },
-        ],
+        predefinedTags: [...regions],
         allowCreate: false,
       },
       validation: (Rule) => Rule.required(),

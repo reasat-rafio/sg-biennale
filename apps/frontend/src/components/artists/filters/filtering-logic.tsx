@@ -6,11 +6,11 @@ interface FilteringLogicProps {
 }
 
 export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
-  const { searchInput, allArtists, selectedSorting, setFilteredArtists } =
+  const { searchInput, allArtists, selectedRegionSorting, setFilteredArtists } =
     useArtistsStore();
 
   useEffect(() => {
-    const filteredVenues = allArtists.filter((venue) => {
+    const filteredArtist = allArtists.filter((venue) => {
       if (searchInput?.length) {
         return venue.name.toLowerCase().includes(searchInput);
       } else {
@@ -18,12 +18,14 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
       }
     });
 
-    if (selectedSorting === "alphabet") {
-      filteredVenues.sort((a, b) => (a.name > b.name ? 1 : -1));
-    }
-
-    setFilteredArtists(filteredVenues);
-  }, [allArtists, searchInput, selectedSorting, setFilteredArtists]);
+    if (selectedRegionSorting !== null) {
+      setFilteredArtists(
+        filteredArtist.filter(
+          ({ region }) => region?.value === selectedRegionSorting.value
+        )
+      );
+    } else setFilteredArtists(filteredArtist);
+  }, [allArtists, searchInput, selectedRegionSorting, setFilteredArtists]);
 
   return <>{children}</>;
 };

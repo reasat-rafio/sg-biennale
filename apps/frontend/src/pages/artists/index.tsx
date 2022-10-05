@@ -25,6 +25,7 @@ const query = groq`{
         _id,
         name,
         slug,
+        region,
         images[] {
           ...,
           asset->{
@@ -33,7 +34,7 @@ const query = groq`{
               dimensions
             }
           }
-        },alphabetical
+        }
     }
 }`;
 
