@@ -45,13 +45,13 @@ export const ArtistCollection: React.FC<ArtistCollectionProps> = ({
   return (
     <motion.section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
       {artists.map((artist) => (
-        <ArtworkCard screen={screen} {...artist} />
+        <ArtistCard screen={screen} {...artist} />
       ))}
     </motion.section>
   );
 };
 
-export const ArtworkCard: React.FC<ArtistCardProps> = ({ images, name }) => {
+export const ArtistCard: React.FC<ArtistCardProps> = ({ images, name }) => {
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);

@@ -35,7 +35,6 @@ export const ArtistsList: React.FC<{}> = ({}) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [activeAnchor, setActiveAnchor] = useState("");
   const [anchors, setAnchors] = useState<string[]>([]);
-
   const [sortedArtistsList, setSortedArtistList] = useState<SortedArtists[]>(
     []
   );

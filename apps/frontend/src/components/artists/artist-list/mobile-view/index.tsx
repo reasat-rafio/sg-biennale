@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
-import { SortedArtistsList } from "..";
+import { SortedArtists } from "..";
 import { Anchor } from "./anchor";
 import { ArtistArtwork } from "./artist-artwork";
 
 interface MobileViewProps {
   anchors: string[];
   activeAnchor: string;
-  sortedArtistsList: SortedArtistsList[];
+  sortedArtistsList: SortedArtists[];
   setActiveAnchor: Dispatch<SetStateAction<string>>;
 }
 

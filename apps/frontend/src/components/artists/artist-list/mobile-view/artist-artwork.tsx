@@ -1,13 +1,13 @@
 import { AnchorWrapper } from "@components/artists/artist-list/anchor-wrapper";
 import { Dispatch, SetStateAction } from "react";
-import { SortedArtistsList } from "..";
 import { Artist } from "../artist";
-import { ArtworkCard } from "../artist-collection";
+import { ArtistCard } from "../artist-collection";
 import { motion } from "framer-motion";
+import { SortedArtists } from "..";
 
 interface ArtistArtworkProps {
   setActiveAnchor: Dispatch<SetStateAction<string>>;
-  sortedArtistsList: SortedArtistsList[];
+  sortedArtistsList: SortedArtists[];
 }
 
 export const ArtistArtwork: React.FC<ArtistArtworkProps> = ({
@@ -25,7 +25,7 @@ export const ArtistArtwork: React.FC<ArtistArtworkProps> = ({
           >
             <span className="mb-7 text-xl font-medium">{title}</span>
             <div className="grid grid-cols-12 | gap-5">
-              {data.map(({ name, slug, images, artworks }) => (
+              {data.map(({ artist, artistCollection }, index) => (
                 <motion.section
                   layout
                   className="grid grid-cols-12 col-span-12 gap-5 pb-20"
@@ -34,24 +34,26 @@ export const ArtistArtwork: React.FC<ArtistArtworkProps> = ({
                     layout
                     className="col-span-12 grid grid-cols-12 gap-5"
                   >
-                    {artworks.map(
-                      (art, idx) =>
-                        idx < 2 && <ArtworkCard screen="mobile" {...art} />
+                    {artistCollection.map(
+                      (artist, idx) =>
+                        idx < 2 && <ArtistCard screen="mobile" {...artist} />
                     )}
                   </motion.div>
+
                   <Artist
-                    name={name}
-                    slug={slug}
-                    images={images}
+                    name={artist.name}
+                    slug={artist.slug}
+                    images={artist.images}
                     screen="mobile"
                   />
+
                   <motion.div
                     layout
                     className="col-span-12 grid grid-cols-12 gap-5 "
                   >
-                    {artworks.map(
-                      (art, idx) =>
-                        idx >= 2 && <ArtworkCard screen="mobile" {...art} />
+                    {artistCollection.map(
+                      (artist, idx) =>
+                        idx >= 2 && <ArtistCard screen="mobile" {...artist} />
                     )}
                   </motion.div>
                 </motion.section>
