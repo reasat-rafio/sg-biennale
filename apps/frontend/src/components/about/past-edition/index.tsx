@@ -39,7 +39,7 @@ export const PastEdition: React.FC<PastEditionProps> = ({
 
       <div className="pt-5">
         <Button className="mx-auto " variant="secondary">
-          {cta.title}
+          {cta?.title}
         </Button>
       </div>
     </Container>

@@ -1,5 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Header } from "@components/ui/header";
+import { LiquidButton } from "@components/ui/liquid-button";
 import { Cta } from "@lib/@types/global.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { imageUrlBuilder } from "@utils/sanity";
@@ -85,7 +86,7 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
           </h6>
         )}
         <p className="text-body-1 text-gray--700 font-manrope">{description}</p>
-        <Button variant="secondary">{cta.title}</Button>
+        <LiquidButton variant="secondary">{cta.title}</LiquidButton>
       </section>
       <motion.figure
         className="xl:col-span-5 md:col-span-6 col-span-12 -z-20"

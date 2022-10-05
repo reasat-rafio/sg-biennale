@@ -1,4 +1,3 @@
-import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
 import { SanityImage, SanityImg } from "sanity-react-extra";
@@ -7,6 +6,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Header } from "@components/ui/header";
+import { LiquidButton } from "@components/ui/liquid-button";
 
 interface VolunteerProps {
   header: string;
@@ -33,7 +33,7 @@ export const Volunteer: React.FC<VolunteerProps> = ({
         </header>
 
         <div className="xl:col-span-2 col-span-12">
-          <Button>{cta.title}</Button>
+          <LiquidButton>{cta.title}</LiquidButton>
         </div>
       </section>
       <Swiper

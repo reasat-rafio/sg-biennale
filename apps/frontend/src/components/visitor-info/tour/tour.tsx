@@ -1,4 +1,3 @@
-import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
 import { SanityImage } from "sanity-react-extra";
@@ -10,6 +9,7 @@ const ImageScene = dynamic(() => import("./image-scene"), {
 
 import dynamic from "next/dynamic";
 import { Header } from "@components/ui/header";
+import { LiquidButton } from "@components/ui/liquid-button";
 
 interface TourProps {
   header: string;
@@ -39,7 +39,7 @@ export const Tour: React.FC<TourProps> = ({
           </figure>
           <div className="xl:col-span-4 lg:col-span-6 col-span-12 | font-manrope text-gray--700 text-body-1 | space-y-4 mt-auto">
             <p>{description}</p>
-            <Button variant="secondary">{cta.title}</Button>
+            <LiquidButton variant="secondary">{cta.title}</LiquidButton>
           </div>
         </div>
       </motion.div>

@@ -4,6 +4,7 @@ import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
 import { useWindowSize } from "@lib/hooks";
+import { LiquidButton } from "@components/ui/liquid-button";
 
 interface RecentUpdateProps {
   header: string;
@@ -55,13 +56,17 @@ export const RecentUpdate: React.FC<RecentUpdateProps> = ({
                 alt=""
               />
             </figure>
-            <section>
+            <section className=" w-full">
               <h6 className="text-gray--700 font-medium text-heading-6 leading-[120%]">
                 {update.header}
               </h6>
-              <Button className="mt-7" variant="secondary">
+
+              <LiquidButton
+                variant="secondary"
+                className="mt-7 overflow-visible"
+              >
                 Read More
-              </Button>
+              </LiquidButton>
             </section>
           </motion.article>
         ))}

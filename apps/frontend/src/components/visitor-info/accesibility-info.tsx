@@ -1,5 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
+import { LiquidButton } from "@components/ui/liquid-button";
 import { AccesibilityInfoProps } from "@lib/@types/visitor-info.types";
 import { motion, Variants } from "framer-motion";
 
@@ -65,7 +66,7 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
           custom={1}
           className="flex justify-center items-center"
         >
-          <Button variant="secondary">{cta.title}</Button>
+          <LiquidButton variant="secondary">{cta.title}</LiquidButton>
         </motion.div>
       </Container>
     </section>

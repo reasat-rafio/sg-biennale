@@ -1,6 +1,7 @@
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
+import { LiquidButton } from "@components/ui/liquid-button";
 import { Cta } from "@lib/@types/global.types";
 
 interface DonationProps {
@@ -28,7 +29,7 @@ export const Donation: React.FC<DonationProps> = ({
         </div>
       </div>
       <div>
-        <Button>{cta.title}</Button>
+        <LiquidButton>{cta.title}</LiquidButton>
       </div>
     </Container>
   );

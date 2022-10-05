@@ -36,8 +36,8 @@ export const LiquidButtonClass = class LiquidButton {
   touches: TouchesProps[];
   noise: number;
   __raf:
-    | (((callback: FrameRequestCallback) => number) &
-        ((callback: FrameRequestCallback) => number))
+    | (((callback: iFrameRequestCallback) => number) &
+        ((callback: iFrameRequestCallback) => number))
     | null = null;
 
   constructor(svg: SVGElement) {
@@ -49,7 +49,7 @@ export const LiquidButtonClass = class LiquidButton {
     this.tension = options.tension * 1 || 0.4;
     this.width = options.width * 1 || 200;
     this.height = options.height * 1 || 50;
-    this.margin = options.margin || 20;
+    this.margin = options.margin || 5;
     this.hoverFactor = options.hoverFactor || -0.1;
     this.gap = options.gap || 5;
     this.debug = options.debug || false;

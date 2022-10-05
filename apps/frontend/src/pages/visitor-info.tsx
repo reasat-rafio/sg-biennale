@@ -11,7 +11,6 @@ import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
-import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
 

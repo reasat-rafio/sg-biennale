@@ -1,10 +1,10 @@
-import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Cta } from "@lib/@types/global.types";
 import { MoreInfosProps } from "@lib/@types/visitor-info.types";
 import { WithImageSection } from "./more-info/with-image-section";
 import { motion } from "framer-motion";
 import { Header } from "@components/ui/header";
+import { LiquidButton } from "@components/ui/liquid-button";
 
 export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
   return (
@@ -61,7 +61,7 @@ const Section: React.FC<{
           </h6>
         )}
         <p className="text-body-1 text-gray--700 font-manrope">{description}</p>
-        <Button variant="secondary">{cta.title}</Button>
+        <LiquidButton variant="secondary">{cta.title}</LiquidButton>
       </section>
     </article>
   );

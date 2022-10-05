@@ -1,20 +1,26 @@
 import { LiquidButtonClass } from "@lib/helpers/liquid-button.helper";
-import { ReactNode, useEffect } from "react";
+import clsx from "clsx";
+import { ReactNode, useEffect, useState } from "react";
 
 interface LiquidButtonProps {
   children: ReactNode;
   variant?: "primary" | "secondary";
+  className?: string;
+  onClick?: () => void;
 }
 
 export const LiquidButton: React.FC<LiquidButtonProps> = ({
   children,
   variant = "primary",
+  className,
+  onClick,
 }) => {
   useEffect(() => {
-    const buttons = document.getElementsByClassName("liquid-button");
+    <LiquidButton>View Director</LiquidButton>;
+    const buttons: any = document.getElementsByClassName("liquid-button");
     for (let buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++) {
       const button = buttons[buttonIndex];
-      new LiquidButtonClass(button as SVGElement);
+      new LiquidButtonClass(button as SVGAElement);
     }
   }, []);
 
@@ -22,7 +28,11 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
     <>
       {variant === "primary" && (
         <svg
-          className="m-auto cursor-pointer | liquid-button"
+          className={clsx(
+            className,
+            "cursor-pointer overflow-visible | liquid-button"
+          )}
+          onClick={onClick}
           data-text={children}
           data-force-factor="0.1"
           data-layer-1-viscosity="0.5"
@@ -40,7 +50,11 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
       )}
       {variant === "secondary" && (
         <svg
-          className="m-auto cursor-pointer | liquid-button"
+          className={clsx(
+            className,
+            "cursor-pointer overflow-visible | liquid-button"
+          )}
+          onClick={onClick}
           data-text={children}
           data-force-factor="0.1"
           data-hover-factor="0.05"
@@ -59,5 +73,3 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
     </>
   );
 };
-
-//340
