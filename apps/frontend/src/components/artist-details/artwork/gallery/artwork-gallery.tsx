@@ -26,12 +26,13 @@ export interface ArtworkGalleryProps {
 
 export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   let myTimeout: NodeJS.Timeout | null = null;
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
   const { galleryImagePerPage } = useArtistsDetailsStore();
   const { selectedImage, setGalleryIsScrollable } = useArtistsDetailsStore();
   const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [scrollPassRatio, setScrollPassRatio] = useState(0);
   const [isDown, setDown] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -39,45 +40,45 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const [pages, setPages] = useState(
     () => artworks.length / galleryImagePerPage + 0.5
   );
-  const intersection = useIntersection(canvasRef, { threshold: 0.8 });
+  const intersection = useIntersection(sectionRef, { threshold: 0.8 });
 
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {
     myTimeout = setTimeout(() => {
       setDown(true);
-      if (canvasRef?.current) canvasRef.current!.style.cursor = "grabbing";
-      setStartX(e.pageX - canvasRef?.current!.offsetLeft);
+      if (sectionRef?.current) sectionRef.current!.style.cursor = "grabbing";
+      setStartX(e.pageX - sectionRef?.current!.offsetLeft);
     }, 100);
   };
   const onPointerLeaveAction = () => {
     if (myTimeout) clearTimeout(myTimeout);
     setDown(false);
-    if (canvasRef?.current) canvasRef.current!.style.cursor = "auto";
+    if (sectionRef?.current) sectionRef.current!.style.cursor = "auto";
   };
   const onPointerUpAction = () => {
     if (myTimeout) clearTimeout(myTimeout);
     setDown(false);
-    if (canvasRef?.current) canvasRef.current!.style.cursor = "auto";
+    if (sectionRef?.current) sectionRef.current!.style.cursor = "auto";
   };
   const onPointerMoveAction = (e: PointerEvent<HTMLDivElement>) => {
     if (!isDown) return;
-    const x = e.pageX - canvasRef?.current!.offsetLeft;
+    const x = e.pageX - sectionRef?.current!.offsetLeft;
     const walk = (x - startX) * 0.00001 * -5;
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
   };
   const onTouchStartAction = (e: TouchEvent) => {
     setDown(true);
-    setStartX(e.touches[0].pageX - canvasRef?.current!.offsetLeft);
+    setStartX(e.touches[0].pageX - sectionRef?.current!.offsetLeft);
   };
   const onTouchEndAction = () => setDown(false);
   const onTouchMoveAction = (e: TouchEvent) => {
     if (!isDown) return;
-    const x = e.touches[0].pageX - canvasRef?.current!.offsetLeft;
+    const x = e.touches[0].pageX - sectionRef?.current!.offsetLeft;
     const walk = (x - startX) * 0.00001 * -5;
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
   };
 
   useVisibleScrollEffect(
-    canvasRef,
+    sectionRef,
     (offsetBoundingRect, _, y) =>
       animationFrameEffect(() => {
         if (windowWidth >= 1024) {
@@ -96,7 +97,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
       setGalleryIsScrollable(false);
       document.body.style.position = "fixed";
       window.scrollTo({
-        top: canvasRef.current!.getBoundingClientRect().top,
+        top: sectionRef.current!.getBoundingClientRect().top,
         behavior: "smooth",
       });
     } else {
@@ -106,40 +107,41 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   }, [selectedImage, intersection?.isIntersecting]);
 
   return (
-    <Canvas
-      className="h-[100vh] sticky top-0 left-0"
-      ref={canvasRef}
-      gl={{ antialias: false }}
-      dpr={[1, 1.5]}
-      onTouchStart={onTouchStartAction}
-      onTouchEnd={onTouchEndAction}
-      onTouchMove={onTouchMoveAction}
-      onPointerDown={onPointerDownAction}
-      onPointerLeave={onPointerLeaveAction}
-      onPointerUp={onPointerUpAction}
-      onPointerMove={onPointerMoveAction}
-    >
-      <Suspense fallback={null}>
-        <ScrollControls
-          horizontal
-          damping={4}
-          pages={pages}
-          distance={1}
-          enabled={false}
-        >
-          <Scroll>
-            <Pages
-              offsetX={offsetX}
-              isDown={isDown}
-              pages={pages}
-              myTimeout={myTimeout}
-              scrollPassRatio={scrollPassRatio}
-              artworks={_artworks}
-            />
-          </Scroll>
-        </ScrollControls>
-        <Preload />
-      </Suspense>
-    </Canvas>
+    <section ref={sectionRef} className="h-[100vh] ">
+      <Canvas
+        ref={canvasRef}
+        gl={{ antialias: false }}
+        dpr={[1, 1.5]}
+        onTouchStart={onTouchStartAction}
+        onTouchEnd={onTouchEndAction}
+        onTouchMove={onTouchMoveAction}
+        onPointerDown={onPointerDownAction}
+        onPointerLeave={onPointerLeaveAction}
+        onPointerUp={onPointerUpAction}
+        onPointerMove={onPointerMoveAction}
+      >
+        <Suspense fallback={null}>
+          <ScrollControls
+            horizontal
+            damping={4}
+            pages={pages}
+            distance={1}
+            enabled={false}
+          >
+            <Scroll>
+              <Pages
+                offsetX={offsetX}
+                isDown={isDown}
+                pages={pages}
+                myTimeout={myTimeout}
+                scrollPassRatio={scrollPassRatio}
+                artworks={_artworks}
+              />
+            </Scroll>
+          </ScrollControls>
+          <Preload />
+        </Suspense>
+      </Canvas>
+    </section>
   );
 };

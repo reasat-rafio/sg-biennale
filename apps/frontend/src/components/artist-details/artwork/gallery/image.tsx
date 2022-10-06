@@ -87,25 +87,23 @@ export const Image: React.FC<ImageProps> = ({
       setOffset({ x, y });
     }
 
-    // ? Scale Up On Scroll Animation
-    // if (groupRef?.current) {
-    //   groupRef.current.position.z = THREE.MathUtils.damp(
-    //     groupRef.current.position.z,
-    //     Math.max(0, scrollData.delta * 40),
-    //     4,
-    //     delta
-    //   );
-    // }
+    // ? Scale Up On Hover Animation
+    if (groupRef?.current) {
+      groupRef.current.position.z = THREE.MathUtils.damp(
+        groupRef.current.position.z,
+        hovered ? 0.3 : 0,
+        4,
+        delta
+      );
+    }
     if (imageRef?.current) {
-      // ? Rotate to the scrolling side animation
-      // imageRef.current.material.shift = THREE.MathUtils.damp(
-      //   imageRef.current.material.shift,
-      //   prevOffset > scrollData.offset
-      //     ? -scrollData.delta * 10
-      //     : scrollData.delta * 10,
-      //   4,
-      //   delta
-      // );
+      // ? belding the image to the scrolling side animation
+      imageRef.current.material.shift = THREE.MathUtils.damp(
+        imageRef.current.material.shift,
+        prevOffset > scrollData.offset ? -scrollData.delta : scrollData.delta,
+        4,
+        delta
+      );
       prevOffset = scrollData.offset;
 
       imageRef.current.material.mouseoffset[0] = THREE.MathUtils.damp(
@@ -137,10 +135,20 @@ export const Image: React.FC<ImageProps> = ({
         delta
       );
 
+      // ? On Hover Zoom Animation
+      imageRef.current.material.zoom = THREE.MathUtils.damp(
+        imageRef.current.material.zoom,
+        hovered ? 1.05 : 1,
+        4,
+        delta
+      );
+
       // ? OnScroll Zooming animation
       // imageRef.current.material.zoom = THREE.MathUtils.damp(
       //   imageRef.current.material.zoom,
-      //   selectedImage && hovered ? 1.5 : Math.max(0, 1 - scrollData.delta * 5),
+      //   selectedImage && hovered
+      //     ? 0.5
+      //     : Math.max(0, 1 - scrollData.delta * 0.5),
       //   4,
       //   delta
       // );

@@ -47,13 +47,9 @@ function calcZ(
   isHovered: boolean,
   positionZ: number
 ): number {
-  if (isSelecterd) {
-    return 1;
-  } else if (!isSelecterd && isHovered) {
-    return 1;
-  } else {
-    return positionZ;
-  }
+  if (isSelecterd) return 1;
+  else if (!isSelecterd && isHovered) return 1;
+  else return positionZ;
 }
 
 export const positionController = ({
@@ -66,13 +62,13 @@ export const positionController = ({
   animateXTo,
   hovered,
 }: PositionControllerProps) => {
-  // controlling the z index
-  imageRef.current.position.z = THREE.MathUtils.damp(
-    imageRef.current.position.z,
-    calcZ(selectedImage?.index === uniqueIndex, hovered, position[2]),
-    selectedImage?.index === uniqueIndex ? 5 : 1,
-    delta
-  );
+  // ? controlling the z index / Scalling up the image on scroll and hover
+  // imageRef.current.position.z = THREE.MathUtils.damp(
+  //   imageRef.current.position.z,
+  //   calcZ(selectedImage?.index === uniqueIndex, hovered, position[2]),
+  //   selectedImage?.index === uniqueIndex ? 5 : 3,
+  //   delta
+  // );
 
   // controling the y position
   imageRef.current.position.y = THREE.MathUtils.damp(

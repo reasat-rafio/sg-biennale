@@ -1,7 +1,5 @@
 import { PageProps, PagesProps } from "@lib/@types/artist-details.types";
-import { useScroll } from "@lib/helpers/scroll-controls.helper";
-import { config, useSpring } from "@react-spring/three";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
 import React from "react";
 import { Image } from "./image";

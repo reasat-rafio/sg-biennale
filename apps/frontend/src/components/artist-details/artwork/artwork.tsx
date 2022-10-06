@@ -1,6 +1,4 @@
-import { ISeo, Slug } from "@lib/@types/global.types";
 import useArtistsDetailsStore from "@stores/artist-details.store";
-import { SanityImage } from "sanity-react-extra";
 import { ArtworkGallery } from "./gallery/artwork-gallery";
 import { motion } from "framer-motion";
 import { ArtworkProps } from "@lib/@types/artist-details.types";
@@ -26,11 +24,8 @@ export const Artwork: React.FC<ArtworkPageProps> = ({ name, artworks }) => {
       >
         {name}'s Artworks
       </motion.h2>
-      <div className="">
-        <section className="h-[100vh] overflow-x-hidden">
-          <ArtworkGallery artworks={artworks} />
-        </section>
-      </div>
+
+      <ArtworkGallery artworks={artworks} />
     </section>
   );
 };
