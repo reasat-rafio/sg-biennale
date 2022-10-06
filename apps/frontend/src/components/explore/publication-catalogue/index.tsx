@@ -28,7 +28,11 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
       transition={{ duration: 0.6, ease: "easeInOut" }}
     >
       <Container className="flex items-center | space-x-5">
-        <Header className="flex-1" variant="secondary" color="#999999">
+        <Header
+          className="flex-1 py-1 sm:py-0"
+          variant="secondary"
+          color="#999999"
+        >
           {header}
         </Header>
         <span className="font-medium lg:text-xl text-base text-gray--700 underline">
