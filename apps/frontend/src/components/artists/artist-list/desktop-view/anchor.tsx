@@ -19,16 +19,20 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
   return (
     <aside
       style={{ top: navbarHeight + 5 }}
-      className="sticky mt-28 h-min | bg-white px-5 py-10 rounded-[43px]"
+      className={clsx(
+        "sticky mt-28 h-min | bg-white px-5 rounded-[43px]",
+        anchors.length && "py-10"
+      )}
     >
       <Swiper
-        className={clsx(
-          anchors.length < 5
-            ? "h-[30vh]"
-            : anchors.length < 10
-            ? "h-[40vh]"
-            : "h-[70vh]"
-        )}
+        style={{
+          height:
+            anchors.length < 5
+              ? `${anchors.length * 50}px`
+              : anchors.length < 10
+              ? "40vh"
+              : "h-[70vh]",
+        }}
         spaceBetween={5}
         direction="vertical"
         slidesPerView={Math.min(anchors.length, 12)}
