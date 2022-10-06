@@ -8,6 +8,7 @@ export interface PageHeaderProps {
   tagline: string;
   color?: string;
   position?: "center" | "default";
+  className?: string;
 }
 
 export const AnimationDuration = 0.3;
@@ -29,6 +30,7 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
   tagline,
   color = "#F3F2EC",
   position = "default",
+  className,
 }) => {
   const letters = Array.from(heading);
   const headerAnimationDuration = (letters.length - 1) * 0.1 + 0.7;
@@ -36,12 +38,13 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
   return (
     <header
       className={clsx(
+        className,
         "flex flex-col space-y-3 | xl:pt-xl md:pt-x pt-lg",
         position === "center" && "justify-center items-center",
         position === "default" && "justify-start items-start"
       )}
     >
-      <Header type="h1">
+      <Header className="py-1 max-w-[210px] sm:max-w-max" type="h1">
         <SlideupLettersAnimation>{heading}</SlideupLettersAnimation>
       </Header>
       <motion.h4
