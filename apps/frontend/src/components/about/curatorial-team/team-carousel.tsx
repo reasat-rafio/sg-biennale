@@ -70,7 +70,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   };
 
   return (
-    <section className="relative h-[70vh] flex flex-col items-center justify-center">
+    <section className="relative xl:h-[700px] h-[450px] flex flex-col items-center justify-center">
       {teamCollection.map(
         (
           {
@@ -114,7 +114,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
           return (
             <motion.div
               key={_key}
-              className="flex flex-col overflow-hidden absolute top-0 h-[500px]"
+              className="flex flex-col overflow-hidden absolute top-0 xl:h-[500px] h-[400px]"
               initial={{ scale: 0.4 }}
               animate={{
                 left: `calc(${positionLeft}% - ${gapInPixel}px)`,
