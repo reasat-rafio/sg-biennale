@@ -57,8 +57,11 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
                 whileHover={{
                   scaleX: 1.2,
                   scaleY: 1.1,
-                  rotate: -6,
-                  transition: { type: "tween", delay: 0.1, ease: "easeInOut" },
+                  transition: {
+                    type: "tween",
+                    delay: 0.1,
+                    ease: "easeInOut",
+                  },
                 }}
                 onClick={() => onClickAction(href)}
               >
