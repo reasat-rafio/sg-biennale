@@ -123,6 +123,7 @@ export const Image: React.FC<ArtworkImageProps> = ({
         attachObject={undefined}
       />
       <Html
+        zIndexRange={[10, 20]}
         className="pointer-events-none -translate-x-[50%]"
         position={position}
         scale={scale}
@@ -139,8 +140,10 @@ export const Image: React.FC<ArtworkImageProps> = ({
             router.push(`/artists/${slug.current}`);
           }}
         >
-          <h6 className="text-white font-bold text-[24px] ">{name}</h6>
-          <span className="z-0 relative">
+          <h6 className="text-white font-bold lg:text-[24px] text-base">
+            {name}
+          </h6>
+          <span>
             {countries.map(({ label }) => (
               <span>{label} ,</span>
             ))}
