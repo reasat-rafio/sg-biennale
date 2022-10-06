@@ -9,6 +9,7 @@ export interface PageHeaderProps {
   color?: string;
   position?: "center" | "default";
   className?: string;
+  headerClassName?: string;
 }
 
 export const AnimationDuration = 0.3;
@@ -31,6 +32,7 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
   color = "#F3F2EC",
   position = "default",
   className,
+  headerClassName,
 }) => {
   const letters = Array.from(heading);
   const headerAnimationDuration = (letters.length - 1) * 0.1 + 0.7;
@@ -44,7 +46,7 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
         position === "default" && "justify-start items-start"
       )}
     >
-      <Header className="py-1 max-w-[210px] sm:max-w-max" type="h1">
+      <Header className={clsx("py-1", headerClassName)} type="h1">
         <SlideupLettersAnimation>{heading}</SlideupLettersAnimation>
       </Header>
       <motion.h4

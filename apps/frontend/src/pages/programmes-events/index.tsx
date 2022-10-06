@@ -97,7 +97,11 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
         pageHeading: useCallback(
           (data: PageHeaderProps) => (
             <Container>
-              <PageHeading {...data} color="#292221" />
+              <PageHeading
+                headerClassName="max-w-[210px] sm:max-w-max"
+                {...data}
+                color="#292221"
+              />
             </Container>
           ),
           []
