@@ -3,14 +3,7 @@ import useArtistsDetailsStore from "@stores/artist-details.store";
 import { SanityImage } from "sanity-react-extra";
 import { ArtworkGallery } from "./gallery/artwork-gallery";
 import { motion } from "framer-motion";
-
-export interface ArtworkProps {
-  seo: ISeo;
-  name: string;
-  slug: Slug;
-  images: SanityImage[];
-  description: any;
-}
+import { ArtworkProps } from "@lib/@types/artist-details.types";
 
 export interface ArtworkPageProps {
   name: string;
@@ -33,9 +26,11 @@ export const Artwork: React.FC<ArtworkPageProps> = ({ name, artworks }) => {
       >
         {name}'s Artworks
       </motion.h2>
-      <section className="h-[100vh]">
-        <ArtworkGallery artworks={artworks} />
-      </section>
+      <div className="">
+        <section className="h-[100vh] overflow-x-hidden">
+          <ArtworkGallery artworks={artworks} />
+        </section>
+      </div>
     </section>
   );
 };

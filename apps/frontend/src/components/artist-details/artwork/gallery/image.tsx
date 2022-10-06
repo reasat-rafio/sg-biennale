@@ -3,7 +3,6 @@ import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
 import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
-import { ArtworkProps } from "../artwork";
 import {
   opacityController,
   positionController,
@@ -11,16 +10,8 @@ import {
 } from "@lib/helpers/artist-details.helpers";
 import { ArtworkDescription, CloseIcon } from "./artwork-description";
 import { useScroll } from "@lib/helpers/scroll-controls.helper";
-
-interface ImageProps {
-  outterArrIndex: number;
-  innerArrIndex: number;
-  position: any;
-  scale: any;
-  url: string;
-  artwork: ArtworkProps;
-  positionXMax: number;
-}
+import { ImageProps } from "@lib/@types/artist-details.types";
+import { config, useSpring } from "@react-spring/three";
 
 export const Image: React.FC<ImageProps> = ({
   innerArrIndex,
@@ -30,6 +21,10 @@ export const Image: React.FC<ImageProps> = ({
   url,
   artwork,
   positionXMax,
+  isDown,
+  myTimeout,
+  offsetX,
+  scrollPassRatio,
 }) => {
   const { selectedImage, setSelectedImage, galleryImagePerPage } =
     useArtistsDetailsStore();
@@ -77,31 +72,40 @@ export const Image: React.FC<ImageProps> = ({
   };
   const onPointerMoveAction = (e: ThreeEvent<globalThis.PointerEvent>) => {};
 
+  const { progress } = useSpring({
+    progress: Math.min(scrollPassRatio * 0.1 + offsetX * 2, 1),
+    config: config.molasses,
+  });
+
   let prevOffset = 0;
   useFrame(({ mouse }, delta) => {
+    scrollData.offset = progress.get();
+
     if (hovered && selectedImage) {
       const x = (mouse.x * data.width) / 2;
       const y = (mouse.y * data.height) / 2;
       setOffset({ x, y });
     }
 
-    if (groupRef?.current) {
-      groupRef.current.position.z = THREE.MathUtils.damp(
-        groupRef.current.position.z,
-        Math.max(0, scrollData.delta * 40),
-        4,
-        delta
-      );
-    }
+    // ? Scale Up On Scroll Animation
+    // if (groupRef?.current) {
+    //   groupRef.current.position.z = THREE.MathUtils.damp(
+    //     groupRef.current.position.z,
+    //     Math.max(0, scrollData.delta * 40),
+    //     4,
+    //     delta
+    //   );
+    // }
     if (imageRef?.current) {
-      imageRef.current.material.shift = THREE.MathUtils.damp(
-        imageRef.current.material.shift,
-        prevOffset > scrollData.offset
-          ? -scrollData.delta * 10
-          : scrollData.delta * 10,
-        4,
-        delta
-      );
+      // ? Rotate to the scrolling side animation
+      // imageRef.current.material.shift = THREE.MathUtils.damp(
+      //   imageRef.current.material.shift,
+      //   prevOffset > scrollData.offset
+      //     ? -scrollData.delta * 10
+      //     : scrollData.delta * 10,
+      //   4,
+      //   delta
+      // );
       prevOffset = scrollData.offset;
 
       imageRef.current.material.mouseoffset[0] = THREE.MathUtils.damp(
@@ -133,12 +137,13 @@ export const Image: React.FC<ImageProps> = ({
         delta
       );
 
-      imageRef.current.material.zoom = THREE.MathUtils.damp(
-        imageRef.current.material.zoom,
-        selectedImage && hovered ? 1.5 : Math.max(0, 1 - scrollData.delta * 5),
-        4,
-        delta
-      );
+      // ? OnScroll Zooming animation
+      // imageRef.current.material.zoom = THREE.MathUtils.damp(
+      //   imageRef.current.material.zoom,
+      //   selectedImage && hovered ? 1.5 : Math.max(0, 1 - scrollData.delta * 5),
+      //   4,
+      //   delta
+      // );
 
       opacityController({ imageRef, selectedImage, delta, uniqueIndex });
       scalingController({
@@ -163,16 +168,16 @@ export const Image: React.FC<ImageProps> = ({
 
   return (
     <group
-      onClick={onClickAction}
+      // onClick={onClickAction}
       onPointerOver={onPointerOverAction}
       onPointerOut={onPointerOutAction}
       ref={groupRef}
     >
-      <ArtworkDescription
+      {/* <ArtworkDescription
         triggerExitAnimation={triggerExitAnimation}
         uniqueIndex={uniqueIndex}
         positionXMax={positionXMax}
-      />
+      /> */}
       <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon
         data={data}

@@ -1,7 +1,6 @@
 import CardImgScene from "@components/home/news/card-img-scene";
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { ICountry } from "@lib/@types/global.types";
 import { PortableText } from "@utils/sanity";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -49,7 +48,7 @@ export const Hero: React.FC<HeroProps> = ({
           <PortableText blocks={description} />
         </div>
         <div className="">
-          <LiquidButton variant="secondary">View Artist</LiquidButton>
+          <Button variant="secondary">View Artist</Button>
         </div>
       </section>
       <div className="col-span-5 | lg:block hidden">

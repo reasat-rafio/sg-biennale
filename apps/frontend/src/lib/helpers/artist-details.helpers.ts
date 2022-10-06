@@ -70,7 +70,7 @@ export const positionController = ({
   imageRef.current.position.z = THREE.MathUtils.damp(
     imageRef.current.position.z,
     calcZ(selectedImage?.index === uniqueIndex, hovered, position[2]),
-    selectedImage?.index === uniqueIndex ? 10 : 4,
+    selectedImage?.index === uniqueIndex ? 5 : 1,
     delta
   );
 

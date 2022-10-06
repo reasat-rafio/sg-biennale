@@ -1,5 +1,5 @@
 import { SanityImage } from "sanity-react-extra";
-import { Slug } from "./global.types";
+import { ISeo, Slug } from "./global.types";
 
 export interface RelatedEventsProps {
   _id: string;
@@ -20,4 +20,54 @@ export interface RelatedVenue {
   _id: string;
   slug: Slug;
   name: string;
+}
+
+export interface ArtworkProps {
+  seo: ISeo;
+  name: string;
+  slug: Slug;
+  images: SanityImage[];
+  description: any;
+}
+
+export interface PagesProps {
+  artworks: ArtworkProps[][];
+  pages: number;
+  myTimeout: NodeJS.Timeout | null;
+  isDown: boolean;
+  offsetX: number;
+  scrollPassRatio: number;
+}
+
+export interface DimensionsProps {
+  aspectRatio: number;
+  height: number;
+  width: number;
+}
+
+export interface PageProps {
+  outterArrIndex: number;
+  position: any;
+  length: number;
+  pages: number;
+  artworks: ArtworkProps[];
+  dimensions: DimensionsProps[];
+  myTimeout: NodeJS.Timeout | null;
+  isDown: boolean;
+  offsetX: number;
+  scrollPassRatio: number;
+}
+
+export interface ImageProps {
+  outterArrIndex: number;
+  innerArrIndex: number;
+  position: any;
+  scale: any;
+  url: string;
+  artwork: ArtworkProps;
+  positionXMax: number;
+  myTimeout: NodeJS.Timeout | null;
+  isDown: boolean;
+  offsetX: number;
+  scrollPassRatio: number;
 }
