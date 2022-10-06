@@ -114,7 +114,14 @@ export const Image: React.FC<ArtworkImageProps> = ({
 
   return (
     <a.group onClick={click} onPointerOver={over} onPointerOut={out}>
-      <ImageImpl ref={imageRef} scale={scale} position={position} url={url} />
+      <ImageImpl
+        ref={imageRef}
+        scale={scale}
+        position={position}
+        url={url}
+        attachArray={undefined}
+        attachObject={undefined}
+      />
       <Html
         className="pointer-events-none -translate-x-[50%]"
         position={position}
@@ -122,7 +129,7 @@ export const Image: React.FC<ArtworkImageProps> = ({
       >
         <motion.div
           className={clsx(
-            "duration-500 transition-all w-[200px] text-white font-manrope cursor-pointer",
+            "duration-500 transition-all w-[200px] text-white font-manrope cursor-pointer ",
             clicked !== null && index > clicked && "!translate-x-full",
             clicked !== null && index < clicked && "!-translate-x-full",
             isDown ? "pointer-events-none" : "pointer-events-auto"
@@ -132,8 +139,8 @@ export const Image: React.FC<ArtworkImageProps> = ({
             router.push(`/artists/${slug.current}`);
           }}
         >
-          <h6 className="text-white font-bold text-[24px]">{name}</h6>
-          <span>
+          <h6 className="text-white font-bold text-[24px] ">{name}</h6>
+          <span className="z-0 relative">
             {countries.map(({ label }) => (
               <span>{label} ,</span>
             ))}
