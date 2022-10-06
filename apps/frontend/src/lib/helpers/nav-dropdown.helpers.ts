@@ -55,7 +55,7 @@ export const ContainerBrightBackgroundVariants = {
 
 export const NevItemVariants: Variants = {
   initial: {
-    y: "-100%",
+    y: "-105%",
     color: "#999999",
   },
   enter: () => ({
@@ -67,7 +67,7 @@ export const NevItemVariants: Variants = {
     },
   }),
   exit: {
-    y: "-100%",
+    y: "-105%",
     transition: {
       ease: [0.2, 0.01, 0.3, 1],
     },

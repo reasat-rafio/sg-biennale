@@ -26,7 +26,9 @@ export const NavSection: React.FC<NavProps> = ({ menu, image }) => {
   return (
     <section className="flex-1 flex">
       <div
-        style={{ marginTop: windowWidth >= 1024 ? 0 : navbarHeight + 20 }}
+        style={{
+          marginTop: windowWidth >= 1024 ? navbarHeight : navbarHeight + 20,
+        }}
         className=" flex-1 | grid grid-cols-12 justify-center lg:items-center"
       >
         <div className="lg:col-span-8 col-span-12 ">
@@ -47,7 +49,7 @@ export const NavSection: React.FC<NavProps> = ({ menu, image }) => {
                   onClick={() => setShowNavDropDown(false)}
                 >
                   <Link href={`/${slug.current}`}>
-                    <a className="xl:text-heading-3 lg:text-heading-4 sm:text-heading-5 text-heading-6 font-medium">
+                    <a className="2xl:text-6xl xl:text-5xl md:text-heading-5 text-heading-6 font-medium sm:py-1">
                       {title}
                     </a>
                   </Link>
@@ -81,3 +83,8 @@ export const NavSection: React.FC<NavProps> = ({ menu, image }) => {
     </section>
   );
 };
+// 1	1920×1080	104,190(22.62%)
+// 2	1366×768	51,580(11.20%)
+// 3	1440×900	44,003(9.55%)
+// 4	1536×864	39,606(8.60%)
+// 5	2560×1440	34,152(7.41%)
