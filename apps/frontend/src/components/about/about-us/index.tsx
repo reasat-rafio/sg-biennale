@@ -68,7 +68,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
             viewport={{ margin: "-200px", once: true }}
             className="absolute lg:max-w-3xl w-full lg:top-1/4 lg:left-0 top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 | 2xl:pl-max lg:pl-xxl"
           >
-            <Header className="text-center lg:text-left">{header}</Header>
+            <Header className="text-center lg:text-left py-2">{header}</Header>
           </motion.div>
         </Container>
         <div className="inline-flex  ">
