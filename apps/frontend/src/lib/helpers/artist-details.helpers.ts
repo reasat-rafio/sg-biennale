@@ -84,6 +84,13 @@ export const positionController = ({
     4,
     delta
   );
+
+  imageRef.current.position.x = THREE.MathUtils.damp(
+    imageRef.current.position.x,
+    selectedImage?.index === uniqueIndex ? 0.6 : 0,
+    4,
+    delta
+  );
 };
 
 interface ScalingControllerProps extends InitialProps {

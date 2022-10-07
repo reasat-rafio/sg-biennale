@@ -8,7 +8,7 @@ import {
   positionController,
   scalingController,
 } from "@lib/helpers/artist-details.helpers";
-import { CloseIcon } from "./artwork-description";
+import { ArtworkDescription, CloseIcon } from "./artwork-description";
 import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { ImageProps } from "@lib/@types/artist-details.types";
 import { config, useSpring } from "@react-spring/three";
@@ -186,11 +186,11 @@ export const Image: React.FC<ImageProps> = ({
       onPointerOut={onPointerOutAction}
       ref={groupRef}
     >
-      {/* <ArtworkDescription
+      <ArtworkDescription
         triggerExitAnimation={triggerExitAnimation}
         uniqueIndex={uniqueIndex}
         positionXMax={positionXMax}
-      /> */}
+      />
       <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon
         data={data}
