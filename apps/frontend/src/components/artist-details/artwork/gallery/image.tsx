@@ -82,9 +82,7 @@ export const Image: React.FC<ImageProps> = ({
     scrollData.offset = !selectedImage ? progress.get() : 0;
 
     if (hovered && selectedImage) {
-      const x = (mouse.x * data.width) / 2;
-      const y = (mouse.y * data.height) / 2;
-      setOffset({ x, y });
+      setOffset({ x: mouse.x * 2, y: mouse.y * 2 });
     }
 
     // ? Scale Up On Hover Animation
