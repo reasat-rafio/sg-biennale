@@ -93,21 +93,24 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   );
 
   useEffect(() => {
-    if (selectedImage) {
+    if (selectedImage && sectionRef?.current) {
       setGalleryIsScrollable(false);
-      document.body.style.position = "fixed";
-      window.scrollTo({
-        top: sectionRef.current!.getBoundingClientRect().top,
-        behavior: "smooth",
-      });
+      const galleryContainer = document?.querySelector(
+        `#artwork-gallery-container`
+      );
+      galleryContainer?.scrollIntoView({ behavior: "smooth" });
     } else {
-      document.body.style.position = "static";
+      // document.body.style.position = "static";
       setGalleryIsScrollable(true);
     }
   }, [selectedImage, intersection?.isIntersecting]);
 
   return (
-    <section ref={sectionRef} className="h-[100vh] ">
+    <section
+      ref={sectionRef}
+      className="h-[100vh]"
+      id="artwork-gallery-container"
+    >
       <Canvas
         ref={canvasRef}
         gl={{ antialias: false }}

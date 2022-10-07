@@ -1,14 +1,14 @@
+import * as THREE from "three";
+import { useRef, useState, useEffect } from "react";
 import { Image as ImageImpl } from "./image-impl";
 import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
-import { useRef, useState, useEffect } from "react";
-import * as THREE from "three";
 import {
   opacityController,
   positionController,
   scalingController,
 } from "@lib/helpers/artist-details.helpers";
-import { ArtworkDescription, CloseIcon } from "./artwork-description";
+import { CloseIcon } from "./artwork-description";
 import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { ImageProps } from "@lib/@types/artist-details.types";
 import { config, useSpring } from "@react-spring/three";
@@ -79,7 +79,7 @@ export const Image: React.FC<ImageProps> = ({
 
   let prevOffset = 0;
   useFrame(({ mouse }, delta) => {
-    scrollData.offset = progress.get();
+    scrollData.offset = !selectedImage ? progress.get() : 0;
 
     if (hovered && selectedImage) {
       const x = (mouse.x * data.width) / 2;
@@ -91,16 +91,23 @@ export const Image: React.FC<ImageProps> = ({
     if (groupRef?.current) {
       groupRef.current.position.z = THREE.MathUtils.damp(
         groupRef.current.position.z,
-        hovered ? 0.3 : 0,
+        selectedImage?.index === uniqueIndex
+          ? 0.4
+          : !isDown && hovered
+          ? 0.2
+          : 0,
         4,
         delta
       );
     }
+
     if (imageRef?.current) {
       // ? belding the image to the scrolling side animation
       imageRef.current.material.shift = THREE.MathUtils.damp(
         imageRef.current.material.shift,
-        prevOffset > scrollData.offset ? -scrollData.delta : scrollData.delta,
+        prevOffset > scrollData.offset
+          ? -scrollData.delta * 0.5
+          : scrollData.delta * 0.5,
         4,
         delta
       );
@@ -138,7 +145,7 @@ export const Image: React.FC<ImageProps> = ({
       // ? On Hover Zoom Animation
       imageRef.current.material.zoom = THREE.MathUtils.damp(
         imageRef.current.material.zoom,
-        hovered ? 1.05 : 1,
+        !isDown && hovered ? 1.05 : 1,
         4,
         delta
       );
@@ -176,7 +183,7 @@ export const Image: React.FC<ImageProps> = ({
 
   return (
     <group
-      // onClick={onClickAction}
+      onClick={onClickAction}
       onPointerOver={onPointerOverAction}
       onPointerOut={onPointerOutAction}
       ref={groupRef}
