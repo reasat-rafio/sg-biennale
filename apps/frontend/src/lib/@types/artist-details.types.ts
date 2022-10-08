@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { SanityImage } from "sanity-react-extra";
 import { ISeo, Slug } from "./global.types";
 
@@ -37,6 +38,9 @@ export interface PagesProps {
   isDown: boolean;
   offsetX: number;
   scrollPassRatio: number;
+  setDown: Dispatch<SetStateAction<boolean>>;
+  setOffsetX: Dispatch<SetStateAction<number>>;
+  setScrollPassRatio: Dispatch<SetStateAction<number>>;
 }
 
 export interface DimensionsProps {
@@ -56,6 +60,9 @@ export interface PageProps {
   isDown: boolean;
   offsetX: number;
   scrollPassRatio: number;
+  setDown: Dispatch<SetStateAction<boolean>>;
+  setOffsetX: Dispatch<SetStateAction<number>>;
+  setScrollPassRatio: Dispatch<SetStateAction<number>>;
 }
 
 export interface ImageProps {
@@ -66,8 +73,13 @@ export interface ImageProps {
   url: string;
   artwork: ArtworkProps;
   positionXMax: number;
+  posisitonXMin: number;
   myTimeout: NodeJS.Timeout | null;
   isDown: boolean;
   offsetX: number;
   scrollPassRatio: number;
+  pages: number;
+  setDown: Dispatch<SetStateAction<boolean>>;
+  setOffsetX: Dispatch<SetStateAction<number>>;
+  setScrollPassRatio: Dispatch<SetStateAction<number>>;
 }

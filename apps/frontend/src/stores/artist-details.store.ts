@@ -1,4 +1,4 @@
-import { ArtworkProps } from "../components/artist-details/artwork/artwork";
+import { ArtworkProps } from "@lib/@types/artist-details.types";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 

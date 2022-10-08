@@ -31,18 +31,21 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
   const { galleryImagePerPage } = useArtistsDetailsStore();
-  const { selectedImage, setGalleryIsScrollable } = useArtistsDetailsStore();
+  const { selectedImage } = useArtistsDetailsStore();
   const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
   const [scrollPassRatio, setScrollPassRatio] = useState(0);
   const [isDown, setDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
   const [pages, setPages] = useState(
-    () => artworks.length / galleryImagePerPage + 0.5
+    () => artworks.length / galleryImagePerPage
   );
-  const intersection = useIntersection(sectionRef, { threshold: 0.8 });
-
+  // + 0.5
+  console.log("====================================");
+  console.log(pages);
+  console.log("====================================");
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {
+    // if (!selectedImage)
     myTimeout = setTimeout(() => {
       setDown(true);
       if (sectionRef?.current) sectionRef.current!.style.cursor = "grabbing";
@@ -60,10 +63,12 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     if (sectionRef?.current) sectionRef.current!.style.cursor = "auto";
   };
   const onPointerMoveAction = (e: PointerEvent<HTMLDivElement>) => {
+    // if (!selectedImage) {
     if (!isDown) return;
     const x = e.pageX - sectionRef?.current!.offsetLeft;
     const walk = (x - startX) * 0.00001 * -5;
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
+    // }
   };
   const onTouchStartAction = (e: TouchEvent) => {
     setDown(true);
@@ -77,33 +82,22 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
   };
 
-  useVisibleScrollEffect(
-    sectionRef,
-    (offsetBoundingRect, _, y) =>
-      animationFrameEffect(() => {
-        if (windowWidth >= 1024) {
-          const yDelta = y + windowHeight - offsetBoundingRect.top;
-          const ratio = Math.max(0, Math.min(yDelta / windowHeight));
-          setScrollPassRatio(ratio);
-        } else {
-          setScrollPassRatio(-0.3);
-        }
-      }),
-    [windowHeight]
-  );
-
-  useEffect(() => {
-    if (selectedImage && sectionRef?.current) {
-      setGalleryIsScrollable(false);
-      const galleryContainer = document?.querySelector(
-        `#artwork-gallery-container`
-      );
-      galleryContainer?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      // document.body.style.position = "static";
-      setGalleryIsScrollable(true);
-    }
-  }, [selectedImage, intersection?.isIntersecting]);
+  // useVisibleScrollEffect(
+  //   sectionRef,
+  //   (offsetBoundingRect, _, y) =>
+  //     animationFrameEffect(() => {
+  //       if (!selectedImage) {
+  //         if (windowWidth >= 1024) {
+  //           const yDelta = y + windowHeight - offsetBoundingRect.top;
+  //           const ratio = Math.max(0, Math.min(yDelta / windowHeight));
+  //           setScrollPassRatio(ratio);
+  //         } else {
+  //           setScrollPassRatio(-0.3);
+  //         }
+  //       }
+  //     }),
+  //   [windowHeight, selectedImage]
+  // );
 
   return (
     <section
@@ -138,7 +132,10 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
                 pages={pages}
                 myTimeout={myTimeout}
                 scrollPassRatio={scrollPassRatio}
+                setScrollPassRatio={setScrollPassRatio}
                 artworks={_artworks}
+                setDown={setDown}
+                setOffsetX={setOffsetX}
               />
             </Scroll>
           </ScrollControls>

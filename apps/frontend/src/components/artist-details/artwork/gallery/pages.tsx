@@ -11,6 +11,9 @@ export const Pages: React.FC<PagesProps> = ({
   isDown,
   myTimeout,
   offsetX,
+  setDown,
+  setOffsetX,
+  setScrollPassRatio,
 }) => {
   const data = useThree((state) => state.viewport);
 
@@ -23,11 +26,15 @@ export const Pages: React.FC<PagesProps> = ({
             pages={pages}
             scrollPassRatio={scrollPassRatio}
             isDown={isDown}
+            setDown={setDown}
             myTimeout={myTimeout}
             offsetX={offsetX}
             length={arts.length}
-            position={[5 + data.width * index, 0, 0]}
+            setScrollPassRatio={setScrollPassRatio}
+            // position={[5 + data.width * index, 0, 0]}
+            position={[data.width * index, 0, 0]}
             artworks={arts.map((_, idx) => artworks[index][idx])}
+            setOffsetX={setOffsetX}
             dimensions={arts.map(
               (_, idx) =>
                 artworks[index][idx].images[0].asset.metadata.dimensions
@@ -50,14 +57,16 @@ const Page: React.FC<PageProps> = ({
   isDown,
   myTimeout,
   offsetX,
+  setOffsetX,
+  setDown,
+  setScrollPassRatio,
 }) => {
   const { galleryImagePerPage } = useArtistsDetailsStore();
-  const data = useThree((state) => state.viewport);
+  const { width } = useThree((state) => state.viewport);
 
-  const w = pages / galleryImagePerPage;
-
-  const posisitonXMin = Math.floor(-data.width * w);
-  let positionXMax = Math.ceil(data.width * w);
+  const spaecBetween = pages / galleryImagePerPage + 0.07;
+  const posisitonXMin = Math.floor(-width * spaecBetween);
+  let positionXMax = Math.ceil(width * spaecBetween);
   const posXIncreaseBY =
     (positionXMax + Math.abs(posisitonXMin)) / (galleryImagePerPage - 1);
 
@@ -70,16 +79,21 @@ const Page: React.FC<PageProps> = ({
 
         return (
           <Image
+            setScrollPassRatio={setScrollPassRatio}
             outterArrIndex={outterArrIndex}
             innerArrIndex={idx}
             url={artworks[idx].images[0].asset.url}
             artwork={artworks[idx]}
-            positionXMax={posisitonXMin}
+            positionXMax={positionXMax}
+            posisitonXMin={posisitonXMin}
             scale={[scaleX, scaleY, 1]}
             scrollPassRatio={scrollPassRatio}
             isDown={isDown}
+            setDown={setDown}
             myTimeout={myTimeout}
             offsetX={offsetX}
+            setOffsetX={setOffsetX}
+            pages={pages}
             position={[
               posisitonXMin + idx * posXIncreaseBY,
               idx % 2 ? 1.4 : -1.1,

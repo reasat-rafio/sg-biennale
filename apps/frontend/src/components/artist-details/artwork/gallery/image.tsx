@@ -12,6 +12,7 @@ import { ArtworkDescription, CloseIcon } from "./artwork-description";
 import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { ImageProps } from "@lib/@types/artist-details.types";
 import { config, useSpring } from "@react-spring/three";
+import { damp } from "@components/home/artist/util";
 
 export const Image: React.FC<ImageProps> = ({
   innerArrIndex,
@@ -25,12 +26,22 @@ export const Image: React.FC<ImageProps> = ({
   myTimeout,
   offsetX,
   scrollPassRatio,
+  setDown,
+  setOffsetX,
+  posisitonXMin,
+  pages,
+  setScrollPassRatio,
 }) => {
   const { selectedImage, setSelectedImage, galleryImagePerPage } =
     useArtistsDetailsStore();
   const imageRef = useRef<
     THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]> | any
   >(null);
+
+  const { progress } = useSpring({
+    progress: Math.min(scrollPassRatio * 0.15 + offsetX * 2, 1),
+    config: config.molasses,
+  });
 
   const groupRef = useRef<THREE.Group | null>(null);
   const scrollData = useScroll();
@@ -39,16 +50,14 @@ export const Image: React.FC<ImageProps> = ({
     useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [triggerExitAnimation, setTriggerExitAnimation] = useState(false);
-  const data = useThree((state) => state.viewport);
   const w = scrollData.pages / galleryImagePerPage;
   const uniqueIndex = outterArrIndex * 10 + innerArrIndex;
+  const {
+    viewport: { width, height },
+  } = useThree((state) => state);
+
   const selectedImagePosition =
-    outterArrIndex !== 0
-      ? scrollData.offset * data.width -
-        2.5 +
-        scrollData.offset * 2 -
-        data.width * w * 2.7
-      : scrollData.offset * data.width - 2.3 + scrollData.offset * 2;
+    Math.floor(pages) === outterArrIndex ? -positionXMax / 2 : positionXMax / 2;
 
   useEffect(() => {
     if (hovered && !selectedImage) {
@@ -56,10 +65,16 @@ export const Image: React.FC<ImageProps> = ({
         setTimeout(() => setImageHoverGlitchAnimation(false), 500);
     } else setImageHoverGlitchAnimation(false);
   }, [hovered, selectedImage]);
-
+  // const totalCurrPage = pages -
   const onClickAction = () => {
+    setDown(false);
     if (!selectedImage) {
       setSelectedImage({ index: uniqueIndex, artwork: artwork });
+    } else {
+      const galleryContainer = document?.querySelector(
+        `#artwork-gallery-container`
+      );
+      galleryContainer?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -72,21 +87,27 @@ export const Image: React.FC<ImageProps> = ({
   };
   const onPointerMoveAction = (e: ThreeEvent<globalThis.PointerEvent>) => {};
 
-  const { progress } = useSpring({
-    progress: Math.min(scrollPassRatio * 0.1 + offsetX * 2, 1),
-    config: config.molasses,
-  });
-
   let prevOffset = 0;
-  useFrame(({ mouse }, delta) => {
-    scrollData.offset = !selectedImage ? progress.get() : 0;
 
-    if (hovered && selectedImage) {
-      setOffset({ x: mouse.x * 2, y: mouse.y * 2 });
+  useEffect(() => {
+    if (selectedImage) {
+      progress.set(
+        Math.floor(pages) === outterArrIndex
+          ? -1 / pages + outterArrIndex - 0.3
+          : 1 / pages + outterArrIndex
+      );
     }
+  }, [selectedImage]);
+
+  useFrame(({ mouse }, delta) => {
+    scrollData.offset = progress.get();
 
     // ? Scale Up On Hover Animation
     if (groupRef?.current) {
+      if (hovered && selectedImage) {
+        setOffset({ x: mouse.x * 2, y: mouse.y * 2 });
+      }
+
       groupRef.current.position.z = THREE.MathUtils.damp(
         groupRef.current.position.z,
         selectedImage?.index === uniqueIndex
@@ -131,14 +152,15 @@ export const Image: React.FC<ImageProps> = ({
         delta
       );
 
-      imageRef.current.material.grayscale = THREE.MathUtils.damp(
-        imageRef.current.material.grayscale,
-        hovered || selectedImage?.index === uniqueIndex
-          ? Math.max(0, 1 - delta * 10000)
-          : Math.max(0, 1 - scrollData.delta * 1000),
-        4,
-        delta
-      );
+      // ? Gray Scale
+      // imageRef.current.material.grayscale = THREE.MathUtils.damp(
+      //   imageRef.current.material.grayscale,
+      //   hovered || selectedImage?.index === uniqueIndex
+      //     ? Math.max(0, 1 - delta * 10000)
+      //     : Math.max(0, delta * 20),
+      //   4,
+      //   delta
+      // );
 
       // ? On Hover Zoom Animation
       imageRef.current.material.zoom = THREE.MathUtils.damp(
@@ -189,12 +211,14 @@ export const Image: React.FC<ImageProps> = ({
       <ArtworkDescription
         triggerExitAnimation={triggerExitAnimation}
         uniqueIndex={uniqueIndex}
-        positionXMax={positionXMax}
+        // FIX IT
+        positionXMax={posisitonXMin}
       />
       <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon
-        data={data}
         w={w}
+        width={width}
+        height={height}
         uniqueIndex={uniqueIndex}
         setTriggerExitAnimation={setTriggerExitAnimation}
       />

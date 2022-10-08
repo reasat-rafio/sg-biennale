@@ -168,15 +168,17 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
 };
 
 interface CloseIconProps {
-  data: any;
+  width: number;
+  height: number;
   w: number;
   uniqueIndex: number;
   setTriggerExitAnimation: Dispatch<SetStateAction<boolean>>;
 }
 
 export const CloseIcon: React.FC<CloseIconProps> = ({
-  data,
   w,
+  width,
+  height,
   uniqueIndex,
   setTriggerExitAnimation,
 }) => {
@@ -188,7 +190,7 @@ export const CloseIcon: React.FC<CloseIconProps> = ({
         <Html
           zIndexRange={[10, 20]}
           className="w-6 h-6"
-          position={[(data.width * w) / 2 + 0.5, data.height * 0.3, 0]}
+          position={[(width * w) / 2 + 0.5, height * 0.3, 0]}
         >
           <motion.img
             onClick={() => {
