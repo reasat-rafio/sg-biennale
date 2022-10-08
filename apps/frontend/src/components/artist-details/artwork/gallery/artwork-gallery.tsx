@@ -40,17 +40,14 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const [pages, setPages] = useState(
     () => artworks.length / galleryImagePerPage
   );
-  // + 0.5
-  console.log("====================================");
-  console.log(pages);
-  console.log("====================================");
+
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {
-    // if (!selectedImage)
-    myTimeout = setTimeout(() => {
-      setDown(true);
-      if (sectionRef?.current) sectionRef.current!.style.cursor = "grabbing";
-      setStartX(e.pageX - sectionRef?.current!.offsetLeft);
-    }, 100);
+    if (!selectedImage)
+      myTimeout = setTimeout(() => {
+        setDown(true);
+        if (sectionRef?.current) sectionRef.current!.style.cursor = "grabbing";
+        setStartX(e.pageX - sectionRef?.current!.offsetLeft);
+      }, 100);
   };
   const onPointerLeaveAction = () => {
     if (myTimeout) clearTimeout(myTimeout);
@@ -63,12 +60,12 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     if (sectionRef?.current) sectionRef.current!.style.cursor = "auto";
   };
   const onPointerMoveAction = (e: PointerEvent<HTMLDivElement>) => {
-    // if (!selectedImage) {
-    if (!isDown) return;
-    const x = e.pageX - sectionRef?.current!.offsetLeft;
-    const walk = (x - startX) * 0.00001 * -5;
-    setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
-    // }
+    if (!selectedImage) {
+      if (!isDown) return;
+      const x = e.pageX - sectionRef?.current!.offsetLeft;
+      const walk = (x - startX) * 0.00001 * -5;
+      setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
+    }
   };
   const onTouchStartAction = (e: TouchEvent) => {
     setDown(true);

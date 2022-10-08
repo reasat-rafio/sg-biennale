@@ -45,7 +45,7 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
   return (
     <Html
       zIndexRange={[20, 30]}
-      position={[positionXMax * 1.7, 0, 0]}
+      position={[positionXMax * 1.8, 0, 0]}
       className="w-[70vw] flex justify-center items-center -translate-y-1/2 pointer-events-none"
     >
       <AnimatePresence>

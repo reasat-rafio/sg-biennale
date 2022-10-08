@@ -1,7 +1,8 @@
 import { PageProps, PagesProps } from "@lib/@types/artist-details.types";
+import { config, useSpring } from "@react-spring/three";
 import { useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
-import React from "react";
+import React, { useEffect } from "react";
 import { Image } from "./image";
 
 export const Pages: React.FC<PagesProps> = ({
@@ -61,14 +62,23 @@ const Page: React.FC<PageProps> = ({
   setDown,
   setScrollPassRatio,
 }) => {
-  const { galleryImagePerPage } = useArtistsDetailsStore();
+  const { galleryImagePerPage, selectedImage } = useArtistsDetailsStore();
   const { width } = useThree((state) => state.viewport);
-
-  const spaecBetween = pages / galleryImagePerPage + 0.07;
-  const posisitonXMin = Math.floor(-width * spaecBetween);
-  let positionXMax = Math.ceil(width * spaecBetween);
+  const spaecBetween = pages / galleryImagePerPage;
+  const posisitonXMin = Math.ceil(-width * spaecBetween);
+  let positionXMax = Math.floor(width * spaecBetween) - 0.5;
   const posXIncreaseBY =
-    (positionXMax + Math.abs(posisitonXMin)) / (galleryImagePerPage - 1);
+    (positionXMax + Math.abs(posisitonXMin)) / (galleryImagePerPage - 1) - 0.5;
+
+  const selectedImagePosition =
+    Math.floor(pages) === outterArrIndex + 1
+      ? positionXMax / 2
+      : positionXMax / 2;
+
+  const { progress } = useSpring({
+    progress: Math.min(scrollPassRatio * 0.15 + offsetX * 2, 1),
+    config: config.molasses,
+  });
 
   return (
     <group position={position}>
@@ -90,6 +100,8 @@ const Page: React.FC<PageProps> = ({
             scrollPassRatio={scrollPassRatio}
             isDown={isDown}
             setDown={setDown}
+            progress={progress}
+            selectedImagePosition={selectedImagePosition}
             myTimeout={myTimeout}
             offsetX={offsetX}
             setOffsetX={setOffsetX}

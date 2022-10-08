@@ -1,3 +1,4 @@
+import { SpringValue } from "@react-spring/three";
 import { Dispatch, SetStateAction } from "react";
 import { SanityImage } from "sanity-react-extra";
 import { ISeo, Slug } from "./global.types";
@@ -76,6 +77,8 @@ export interface ImageProps {
   posisitonXMin: number;
   myTimeout: NodeJS.Timeout | null;
   isDown: boolean;
+  progress: SpringValue<number>;
+  selectedImagePosition: number;
   offsetX: number;
   scrollPassRatio: number;
   pages: number;

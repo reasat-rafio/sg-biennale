@@ -87,7 +87,7 @@ export const positionController = ({
 
   imageRef.current.position.x = THREE.MathUtils.damp(
     imageRef.current.position.x,
-    selectedImage?.index === uniqueIndex ? 0.6 : 0,
+    selectedImage?.index === uniqueIndex ? 0.8 : 0,
     2,
     delta
   );

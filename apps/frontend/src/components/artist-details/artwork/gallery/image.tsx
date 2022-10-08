@@ -30,18 +30,16 @@ export const Image: React.FC<ImageProps> = ({
   setOffsetX,
   posisitonXMin,
   pages,
-  setScrollPassRatio,
+  // selectedImagePosition,
+  progress,
 }) => {
+  const [state, setState] = useState(0);
+
   const { selectedImage, setSelectedImage, galleryImagePerPage } =
     useArtistsDetailsStore();
   const imageRef = useRef<
     THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]> | any
   >(null);
-
-  const { progress } = useSpring({
-    progress: Math.min(scrollPassRatio * 0.15 + offsetX * 2, 1),
-    config: config.molasses,
-  });
 
   const groupRef = useRef<THREE.Group | null>(null);
   const scrollData = useScroll();
@@ -57,7 +55,16 @@ export const Image: React.FC<ImageProps> = ({
   } = useThree((state) => state);
 
   const selectedImagePosition =
-    Math.floor(pages) === outterArrIndex ? -positionXMax / 2 : positionXMax / 2;
+    outterArrIndex !== 0
+      ? scrollData.offset * width + 1 / pages + 2.5
+      : scrollData.offset * width + 1 / pages + 2.5;
+
+  // const selectedImagePosition =
+  //   Math.floor(pages) === outterArrIndex + 1
+  //     ? (positionXMax / 2) * -1
+  //     : positionXMax / 2;
+
+  // const selectedImagePosition = 0;
 
   useEffect(() => {
     if (hovered && !selectedImage) {
@@ -65,7 +72,7 @@ export const Image: React.FC<ImageProps> = ({
         setTimeout(() => setImageHoverGlitchAnimation(false), 500);
     } else setImageHoverGlitchAnimation(false);
   }, [hovered, selectedImage]);
-  // const totalCurrPage = pages -
+
   const onClickAction = () => {
     setDown(false);
     if (!selectedImage) {
@@ -88,16 +95,6 @@ export const Image: React.FC<ImageProps> = ({
   const onPointerMoveAction = (e: ThreeEvent<globalThis.PointerEvent>) => {};
 
   let prevOffset = 0;
-
-  useEffect(() => {
-    if (selectedImage) {
-      progress.set(
-        Math.floor(pages) === outterArrIndex
-          ? -1 / pages + outterArrIndex - 0.3
-          : 1 / pages + outterArrIndex
-      );
-    }
-  }, [selectedImage]);
 
   useFrame(({ mouse }, delta) => {
     scrollData.offset = progress.get();
