@@ -96,6 +96,7 @@ export const positionController = ({
 interface ScalingControllerProps extends InitialProps {
   imageRef: RefObject<any>;
   scale: any;
+  windowWidth: number;
 }
 export const scalingController = ({
   imageRef,
@@ -103,12 +104,22 @@ export const scalingController = ({
   delta,
   uniqueIndex,
   selectedImage,
+  windowWidth,
 }: ScalingControllerProps) => {
+  const scaleTo = (initial: number) =>
+    windowWidth >= 1536
+      ? initial * 1.5
+      : windowWidth >= 1280
+      ? initial * 1.3
+      : windowWidth >= 1024
+      ? initial * 1.2
+      : 1;
+
   // sacling x
   imageRef.current.material.scale[0] = imageRef.current.scale.x =
     THREE.MathUtils.damp(
       imageRef.current.scale.x,
-      selectedImage?.index === uniqueIndex ? scale[0] * 1.5 : scale[0],
+      selectedImage?.index === uniqueIndex ? scaleTo(scale[0]) : scale[0],
       6,
       delta
     );
@@ -117,7 +128,7 @@ export const scalingController = ({
   imageRef.current.material.scale[1] = imageRef.current.scale.y =
     THREE.MathUtils.damp(
       imageRef.current.scale.y,
-      selectedImage?.index === uniqueIndex ? scale[1] * 1.5 : scale[1],
+      selectedImage?.index === uniqueIndex ? scaleTo(scale[1]) : scale[1],
       8,
       delta
     );

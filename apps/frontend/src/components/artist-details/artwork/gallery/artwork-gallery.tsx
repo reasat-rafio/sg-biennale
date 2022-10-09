@@ -99,10 +99,10 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
         if (!selectedImage) {
           if (windowWidth >= 1024) {
             const yDelta = y + windowHeight - offsetBoundingRect.top;
-            const ratio = Math.max(0, Math.min(yDelta / windowHeight));
-            setScrollPassRatio(ratio);
+            const ratio = Math.max(0, Math.min(yDelta / windowHeight, 1));
+            setScrollPassRatio(ratio * 0.5);
           } else {
-            setScrollPassRatio(-0.3);
+            setScrollPassRatio(-0.4);
           }
         }
       }),

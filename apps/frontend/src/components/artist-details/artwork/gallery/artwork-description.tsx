@@ -45,8 +45,8 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
   return (
     <Html
       zIndexRange={[20, 30]}
-      position={[positionXMin * 1.8, 0, 0]}
-      className="w-[70vw] flex justify-center items-center -translate-y-1/2 pointer-events-none"
+      position={[positionXMin * 2, 0, 0]}
+      className="2xl:w-[70vw] xl:w-[60vw] w-[50vw]  flex justify-center items-center -translate-y-1/2  pointer-events-none"
     >
       <AnimatePresence>
         {selectedImage?.index === uniqueIndex && (

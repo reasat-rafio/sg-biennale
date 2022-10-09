@@ -12,6 +12,7 @@ import { ArtworkDescription, CloseIcon } from "./artwork-description";
 import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { ImageProps } from "@lib/@types/artist-details.types";
 import { damp } from "@components/home/artist/util";
+import { useWindowSize } from "@lib/hooks";
 
 export const Image: React.FC<ImageProps> = ({
   innerArrIndex,
@@ -34,7 +35,7 @@ export const Image: React.FC<ImageProps> = ({
   const imageRef = useRef<
     THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]> | any
   >(null);
-
+  const windowWidth = useWindowSize()?.width ?? 0;
   const groupRef = useRef<THREE.Group | null>(null);
   const scrollData = useScroll();
   const [hovered, setHovered] = useState(false);
@@ -58,16 +59,15 @@ export const Image: React.FC<ImageProps> = ({
   }, [hovered, selectedImage]);
 
   const onClickAction = () => {
+    if (!selectedImage)
+      setSelectedImage({ index: uniqueIndex, artwork: artwork });
+
     setSelectedCollectionIndex(outterArrIndex);
     setDown(false);
-    if (!selectedImage) {
-      setSelectedImage({ index: uniqueIndex, artwork: artwork });
-    } else {
-      const galleryContainer = document?.querySelector(
-        `#artwork-gallery-container`
-      );
-      galleryContainer?.scrollIntoView({ behavior: "smooth" });
-    }
+    const galleryContainer = document?.querySelector(
+      `#artwork-gallery-container`
+    );
+    galleryContainer?.scrollIntoView({ behavior: "smooth" });
   };
 
   const onPointerOverAction = () => {
@@ -169,6 +169,7 @@ export const Image: React.FC<ImageProps> = ({
         delta,
         uniqueIndex,
         selectedImage,
+        windowWidth,
       });
       positionController({
         groupRef,
@@ -193,7 +194,7 @@ export const Image: React.FC<ImageProps> = ({
       <ArtworkDescription
         triggerExitAnimation={triggerExitAnimation}
         uniqueIndex={uniqueIndex}
-        positionXMin={positionXMin + 1}
+        positionXMin={positionXMin}
       />
       <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon

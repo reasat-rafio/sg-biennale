@@ -57,7 +57,7 @@ const Page: React.FC<PageProps> = ({
   const positionXMin = -galleryImagePerPage;
   let positionXMax = galleryImagePerPage;
   const posXIncreaseBY =
-    (positionXMax + Math.abs(positionXMin)) / (galleryImagePerPage - 1) - 0.5;
+    (positionXMax + Math.abs(positionXMin)) / (galleryImagePerPage - 1);
 
   const scrollTo =
     selectedCollectionIndex && selectedCollectionIndex === 0

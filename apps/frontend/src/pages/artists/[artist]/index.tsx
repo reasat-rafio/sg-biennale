@@ -94,16 +94,16 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
 
   return (
     <section>
-      {/* <Hero
+      <Hero
         name={name}
         images={images}
         description={description}
         countries={countries}
-      /> */}
+      />
       <Artwork name={name} artworks={artworks} />
-      {/* {relatedEvents?.length && (
+      {relatedEvents?.length && (
         <ProgrammesEvents name={name} relatedEvents={relatedEvents} />
-      )} */}
+      )}
     </section>
   );
 };
