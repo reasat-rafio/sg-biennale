@@ -10,6 +10,7 @@ import { useMotionValue, useSpring, useTransform, motion } from "framer-motion";
 import { PortableText } from "@utils/sanity";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 
 const CardImgScene = dynamic(() => import("./card-img-scene"), { ssr: false });
 
@@ -21,7 +22,9 @@ export const NewsCard: React.FC<INewsProps> = ({
   _key,
   length,
   backgroundColor,
+  url,
 }) => {
+  const router = useRouter();
   const windowHeight = useWindowSize()?.height ?? 0;
   const cardRef = useRef<HTMLElement>(null);
   const [newsDescriptionRef] = usePortableTextTruncate({ maxLength: 800 });
@@ -81,7 +84,10 @@ export const NewsCard: React.FC<INewsProps> = ({
         </figure>
       </motion.div>
       <section className="space-y-5 bg-white">
-        <h6 className="xl:text-heading-5 text-heading-6 font-semibold">
+        <h6
+          onClick={() => router.push(url)}
+          className="xl:text-heading-5 text-heading-6 font-semibold hover:text-red-love | transition-colors duration-500 cursor-pointer"
+        >
           {header}
         </h6>
         <div className="text-gray-600 font-manrope" ref={newsDescriptionRef}>
