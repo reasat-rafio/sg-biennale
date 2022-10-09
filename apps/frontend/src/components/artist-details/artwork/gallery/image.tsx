@@ -82,7 +82,7 @@ export const Image: React.FC<ImageProps> = ({
   let prevOffset = 0;
 
   useFrame(({ mouse }, delta) => {
-    scrollData.offset = progress.get();
+    scrollData.offset = progress.get() ?? 0;
 
     // ? Scale Up On Hover Animation
     if (groupRef?.current) {

@@ -12,6 +12,7 @@ export const Pages: React.FC<PagesProps> = ({
   offsetX,
   setDown,
   setScrollPassRatio,
+  pages,
 }) => {
   const data = useThree((state) => state.viewport);
   return (
@@ -19,6 +20,7 @@ export const Pages: React.FC<PagesProps> = ({
       {artworks.map((arts, index) => {
         return (
           <Page
+            pages={pages}
             outterArrIndex={index}
             scrollPassRatio={scrollPassRatio}
             isDown={isDown}
@@ -50,6 +52,7 @@ const Page: React.FC<PageProps> = ({
   offsetX,
   setDown,
   setScrollPassRatio,
+  pages,
 }) => {
   const { galleryImagePerPage, selectedImage, selectedCollectionIndex } =
     useArtistsDetailsStore();
@@ -60,13 +63,7 @@ const Page: React.FC<PageProps> = ({
     (positionXMax + Math.abs(positionXMin)) / (galleryImagePerPage - 1);
 
   const scrollTo =
-    selectedCollectionIndex && selectedCollectionIndex === 0
-      ? 0
-      : selectedCollectionIndex === 1
-      ? 0.4
-      : selectedCollectionIndex === 2
-      ? 0.8
-      : 0;
+    selectedCollectionIndex && selectedCollectionIndex * (0.8 / (pages - 1.5));
 
   const { progress } = useSpring({
     progress: !selectedImage

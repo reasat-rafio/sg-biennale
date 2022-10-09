@@ -37,6 +37,7 @@ export interface PagesProps {
   isDown: boolean;
   offsetX: number;
   scrollPassRatio: number;
+  pages: number;
   setDown: Dispatch<SetStateAction<boolean>>;
   setScrollPassRatio: Dispatch<SetStateAction<number>>;
 }
@@ -48,6 +49,7 @@ export interface DimensionsProps {
 }
 
 export interface PageProps {
+  pages: number;
   outterArrIndex: number;
   position: any;
   length: number;
@@ -69,7 +71,7 @@ export interface ImageProps {
   artwork: ArtworkProps;
   positionXMin: number;
   isDown: boolean;
-  progress: SpringValue<number>;
+  progress: SpringValue<number | null>;
   setDown: Dispatch<SetStateAction<boolean>>;
   setScrollPassRatio: Dispatch<SetStateAction<number>>;
 }

@@ -137,6 +137,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
           >
             <Scroll>
               <Pages
+                pages={pages}
                 offsetX={offsetX}
                 isDown={isDown}
                 scrollPassRatio={scrollPassRatio}
