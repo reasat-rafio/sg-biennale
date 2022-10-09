@@ -38,7 +38,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const [startX, setStartX] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
   const [pages, setPages] = useState(
-    () => artworks.length / galleryImagePerPage
+    () => artworks.length / galleryImagePerPage + 0.5
   );
 
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {

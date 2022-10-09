@@ -78,7 +78,6 @@ export interface ImageProps {
   myTimeout: NodeJS.Timeout | null;
   isDown: boolean;
   progress: SpringValue<number>;
-  selectedImagePosition: number;
   offsetX: number;
   scrollPassRatio: number;
   pages: number;

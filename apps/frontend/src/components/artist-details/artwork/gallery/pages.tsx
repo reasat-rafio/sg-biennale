@@ -17,7 +17,6 @@ export const Pages: React.FC<PagesProps> = ({
   setScrollPassRatio,
 }) => {
   const data = useThree((state) => state.viewport);
-
   return (
     <>
       {artworks.map((arts, index) => {
@@ -33,7 +32,7 @@ export const Pages: React.FC<PagesProps> = ({
             length={arts.length}
             setScrollPassRatio={setScrollPassRatio}
             // position={[5 + data.width * index, 0, 0]}
-            position={[data.width * index, 0, 0]}
+            position={[5 + data.width * index, 0, 0]}
             artworks={arts.map((_, idx) => artworks[index][idx])}
             setOffsetX={setOffsetX}
             dimensions={arts.map(
@@ -62,7 +61,9 @@ const Page: React.FC<PageProps> = ({
   setDown,
   setScrollPassRatio,
 }) => {
-  const { galleryImagePerPage, selectedImage } = useArtistsDetailsStore();
+  const { galleryImagePerPage, selectedImage, selectedCollectionIndex } =
+    useArtistsDetailsStore();
+
   const { width } = useThree((state) => state.viewport);
   const spaecBetween = pages / galleryImagePerPage;
   const posisitonXMin = Math.ceil(-width * spaecBetween);
@@ -70,13 +71,15 @@ const Page: React.FC<PageProps> = ({
   const posXIncreaseBY =
     (positionXMax + Math.abs(posisitonXMin)) / (galleryImagePerPage - 1) - 0.5;
 
-  const selectedImagePosition =
-    Math.floor(pages) === outterArrIndex + 1
-      ? positionXMax / 2
-      : positionXMax / 2;
+  const scrollTo =
+    selectedCollectionIndex && Math.floor(pages) === selectedCollectionIndex + 1
+      ? 1 / pages
+      : 0;
 
   const { progress } = useSpring({
-    progress: Math.min(scrollPassRatio * 0.15 + offsetX * 2, 1),
+    progress: !selectedImage
+      ? Math.min(scrollPassRatio * 0.15 + offsetX * 2, 1)
+      : scrollTo,
     config: config.molasses,
   });
 
@@ -101,7 +104,6 @@ const Page: React.FC<PageProps> = ({
             isDown={isDown}
             setDown={setDown}
             progress={progress}
-            selectedImagePosition={selectedImagePosition}
             myTimeout={myTimeout}
             offsetX={offsetX}
             setOffsetX={setOffsetX}

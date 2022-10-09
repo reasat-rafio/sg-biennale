@@ -30,13 +30,16 @@ export const Image: React.FC<ImageProps> = ({
   setOffsetX,
   posisitonXMin,
   pages,
-  // selectedImagePosition,
   progress,
 }) => {
   const [state, setState] = useState(0);
 
-  const { selectedImage, setSelectedImage, galleryImagePerPage } =
-    useArtistsDetailsStore();
+  const {
+    selectedImage,
+    setSelectedImage,
+    galleryImagePerPage,
+    setSelectedCollectionIndex,
+  } = useArtistsDetailsStore();
   const imageRef = useRef<
     THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]> | any
   >(null);
@@ -55,14 +58,7 @@ export const Image: React.FC<ImageProps> = ({
   } = useThree((state) => state);
 
   const selectedImagePosition =
-    outterArrIndex !== 0
-      ? scrollData.offset * width + 1 / pages + 2.5
-      : scrollData.offset * width + 1 / pages + 2.5;
-
-  // const selectedImagePosition =
-  //   Math.floor(pages) === outterArrIndex + 1
-  //     ? (positionXMax / 2) * -1
-  //     : positionXMax / 2;
+    Math.floor(pages) === outterArrIndex + 1 ? positionXMax / 2 : 0;
 
   // const selectedImagePosition = 0;
 
@@ -74,6 +70,7 @@ export const Image: React.FC<ImageProps> = ({
   }, [hovered, selectedImage]);
 
   const onClickAction = () => {
+    setSelectedCollectionIndex(outterArrIndex);
     setDown(false);
     if (!selectedImage) {
       setSelectedImage({ index: uniqueIndex, artwork: artwork });
@@ -209,7 +206,7 @@ export const Image: React.FC<ImageProps> = ({
         triggerExitAnimation={triggerExitAnimation}
         uniqueIndex={uniqueIndex}
         // FIX IT
-        positionXMax={posisitonXMin}
+        positionXMax={posisitonXMin + 1}
       />
       <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon

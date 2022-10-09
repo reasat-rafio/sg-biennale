@@ -14,6 +14,7 @@ interface GalleryAnimationValsProps {
 
 interface IArtistsStore {
   galleryIsScrollable: boolean;
+  selectedCollectionIndex: null | number;
   selectedImage: SelectedImageProps | null;
   galleryImagePerPage: number;
   galleryAnimationVals: GalleryAnimationValsProps | null;
@@ -21,12 +22,14 @@ interface IArtistsStore {
   setGalleryAnimationVals: (data: GalleryAnimationValsProps | null) => void;
   setSelectedImage: (data: SelectedImageProps | null) => void;
   setGalleryIsScrollable: (data: boolean) => void;
+  setSelectedCollectionIndex: (data: null | number) => void;
 }
 
 const useArtistsDetailsStore = create(
   devtools<IArtistsStore>((set) => ({
     galleryIsScrollable: true,
     selectedImage: null,
+    selectedCollectionIndex: null,
     galleryAnimationVals: null,
     galleryImagePerPage: 6,
     setGalleryAnimationVals: (
@@ -41,6 +44,8 @@ const useArtistsDetailsStore = create(
       set((state) => ({ ...state, galleryIsScrollable })),
     setGalleryImagePerPage: (galleryImagePerPage) =>
       set((state) => ({ ...state, galleryImagePerPage })),
+    setSelectedCollectionIndex: (selectedCollectionIndex) =>
+      set((state) => ({ ...state, selectedCollectionIndex })),
   }))
 );
 

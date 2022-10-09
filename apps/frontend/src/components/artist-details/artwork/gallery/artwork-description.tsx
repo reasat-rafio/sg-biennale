@@ -187,11 +187,7 @@ export const CloseIcon: React.FC<CloseIconProps> = ({
   return (
     <>
       {selectedImage?.index === uniqueIndex && (
-        <Html
-          zIndexRange={[10, 20]}
-          className="w-6 h-6"
-          position={[(width * w) / 2 + 0.5, height * 0.3, 0]}
-        >
+        <Html zIndexRange={[10, 20]} className="w-6 h-6" position={[1, 2.5, 0]}>
           <motion.img
             onClick={() => {
               setTriggerExitAnimation(true);
