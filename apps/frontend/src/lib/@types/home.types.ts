@@ -55,7 +55,7 @@ export interface INewsProps {
     hsv: any;
     rgb: any;
   };
-  url?: string;
+  url: string;
 }
 
 export interface IPromotion {

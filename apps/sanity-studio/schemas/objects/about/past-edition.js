@@ -22,7 +22,6 @@ const AboutPagePastEditions = {
         },
       ],
     },
-    { name: "cta", type: "cta" },
   ],
 };
 

@@ -36,12 +36,6 @@ export const PastEdition: React.FC<PastEditionProps> = ({
           <Card {...data} index={index + 1} />
         ))}
       </div>
-
-      <div className="pt-5">
-        <Button className="mx-auto " variant="secondary">
-          {cta?.title}
-        </Button>
-      </div>
     </Container>
   );
 };
