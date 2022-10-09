@@ -34,13 +34,10 @@ export interface ArtworkProps {
 
 export interface PagesProps {
   artworks: ArtworkProps[][];
-  pages: number;
-  myTimeout: NodeJS.Timeout | null;
   isDown: boolean;
   offsetX: number;
   scrollPassRatio: number;
   setDown: Dispatch<SetStateAction<boolean>>;
-  setOffsetX: Dispatch<SetStateAction<number>>;
   setScrollPassRatio: Dispatch<SetStateAction<number>>;
 }
 
@@ -54,15 +51,12 @@ export interface PageProps {
   outterArrIndex: number;
   position: any;
   length: number;
-  pages: number;
   artworks: ArtworkProps[];
   dimensions: DimensionsProps[];
-  myTimeout: NodeJS.Timeout | null;
   isDown: boolean;
   offsetX: number;
   scrollPassRatio: number;
   setDown: Dispatch<SetStateAction<boolean>>;
-  setOffsetX: Dispatch<SetStateAction<number>>;
   setScrollPassRatio: Dispatch<SetStateAction<number>>;
 }
 
@@ -73,15 +67,9 @@ export interface ImageProps {
   scale: any;
   url: string;
   artwork: ArtworkProps;
-  positionXMax: number;
-  posisitonXMin: number;
-  myTimeout: NodeJS.Timeout | null;
+  positionXMin: number;
   isDown: boolean;
   progress: SpringValue<number>;
-  offsetX: number;
-  scrollPassRatio: number;
-  pages: number;
   setDown: Dispatch<SetStateAction<boolean>>;
-  setOffsetX: Dispatch<SetStateAction<number>>;
   setScrollPassRatio: Dispatch<SetStateAction<number>>;
 }

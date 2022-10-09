@@ -2,7 +2,6 @@ import { sliceIntoChunks } from "@lib/helpers/global.helpers";
 import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls.helper";
 import {
   animationFrameEffect,
-  useIntersection,
   useVisibleScrollEffect,
   useWindowSize,
 } from "@lib/hooks";
@@ -48,6 +47,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     else if (windowWidth >= 1024) setGalleryImagePerPage(4);
     else if (windowWidth >= 768) setGalleryImagePerPage(3);
     else if (windowWidth >= 640) setGalleryImagePerPage(2);
+    else setGalleryImagePerPage(2);
   }, [windowWidth]);
 
   useEffect(() => {
@@ -92,22 +92,22 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
   };
 
-  // useVisibleScrollEffect(
-  //   sectionRef,
-  //   (offsetBoundingRect, _, y) =>
-  //     animationFrameEffect(() => {
-  //       if (!selectedImage) {
-  //         if (windowWidth >= 1024) {
-  //           const yDelta = y + windowHeight - offsetBoundingRect.top;
-  //           const ratio = Math.max(0, Math.min(yDelta / windowHeight));
-  //           setScrollPassRatio(ratio);
-  //         } else {
-  //           setScrollPassRatio(-0.3);
-  //         }
-  //       }
-  //     }),
-  //   [windowHeight, selectedImage]
-  // );
+  useVisibleScrollEffect(
+    sectionRef,
+    (offsetBoundingRect, _, y) =>
+      animationFrameEffect(() => {
+        if (!selectedImage) {
+          if (windowWidth >= 1024) {
+            const yDelta = y + windowHeight - offsetBoundingRect.top;
+            const ratio = Math.max(0, Math.min(yDelta / windowHeight));
+            setScrollPassRatio(ratio);
+          } else {
+            setScrollPassRatio(-0.3);
+          }
+        }
+      }),
+    [windowHeight, selectedImage]
+  );
 
   return (
     <section
@@ -139,13 +139,10 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
               <Pages
                 offsetX={offsetX}
                 isDown={isDown}
-                pages={pages}
-                myTimeout={myTimeout}
                 scrollPassRatio={scrollPassRatio}
                 setScrollPassRatio={setScrollPassRatio}
                 artworks={_artworks}
                 setDown={setDown}
-                setOffsetX={setOffsetX}
               />
             </Scroll>
           </ScrollControls>

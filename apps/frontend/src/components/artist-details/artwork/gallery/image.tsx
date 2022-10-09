@@ -11,7 +11,6 @@ import {
 import { ArtworkDescription, CloseIcon } from "./artwork-description";
 import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { ImageProps } from "@lib/@types/artist-details.types";
-import { config, useSpring } from "@react-spring/three";
 import { damp } from "@components/home/artist/util";
 
 export const Image: React.FC<ImageProps> = ({
@@ -21,15 +20,9 @@ export const Image: React.FC<ImageProps> = ({
   scale,
   url,
   artwork,
-  positionXMax,
   isDown,
-  myTimeout,
-  offsetX,
-  scrollPassRatio,
   setDown,
-  setOffsetX,
-  posisitonXMin,
-  pages,
+  positionXMin,
   progress,
 }) => {
   const {
@@ -54,9 +47,6 @@ export const Image: React.FC<ImageProps> = ({
   const {
     viewport: { width, height },
   } = useThree((state) => state);
-
-  // const selectedImagePosition =
-  //   Math.floor(pages) === outterArrIndex + 1 ? positionXMax / 2 : 0;
 
   const selectedImagePosition = -0.5;
 
@@ -203,8 +193,7 @@ export const Image: React.FC<ImageProps> = ({
       <ArtworkDescription
         triggerExitAnimation={triggerExitAnimation}
         uniqueIndex={uniqueIndex}
-        // FIX IT
-        positionXMax={posisitonXMin + 1}
+        positionXMin={positionXMin + 1}
       />
       <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon

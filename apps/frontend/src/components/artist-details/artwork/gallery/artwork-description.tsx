@@ -32,20 +32,20 @@ const AnimationVariant: Variants = {
 interface ArtworkDescriptionProps {
   uniqueIndex: number;
   triggerExitAnimation: boolean;
-  positionXMax: number;
+  positionXMin: number;
 }
 
 export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
   uniqueIndex,
   triggerExitAnimation,
-  positionXMax,
+  positionXMin,
 }) => {
   const { selectedImage } = useArtistsDetailsStore();
 
   return (
     <Html
       zIndexRange={[20, 30]}
-      position={[positionXMax * 1.8, 0, 0]}
+      position={[positionXMin * 1.8, 0, 0]}
       className="w-[70vw] flex justify-center items-center -translate-y-1/2 pointer-events-none"
     >
       <AnimatePresence>
