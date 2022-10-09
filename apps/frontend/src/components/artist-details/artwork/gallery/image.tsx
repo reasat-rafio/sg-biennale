@@ -32,8 +32,6 @@ export const Image: React.FC<ImageProps> = ({
   pages,
   progress,
 }) => {
-  const [state, setState] = useState(0);
-
   const {
     selectedImage,
     setSelectedImage,
@@ -57,10 +55,10 @@ export const Image: React.FC<ImageProps> = ({
     viewport: { width, height },
   } = useThree((state) => state);
 
-  const selectedImagePosition =
-    Math.floor(pages) === outterArrIndex + 1 ? positionXMax / 2 : 0;
+  // const selectedImagePosition =
+  //   Math.floor(pages) === outterArrIndex + 1 ? positionXMax / 2 : 0;
 
-  // const selectedImagePosition = 0;
+  const selectedImagePosition = -0.5;
 
   useEffect(() => {
     if (hovered && !selectedImage) {

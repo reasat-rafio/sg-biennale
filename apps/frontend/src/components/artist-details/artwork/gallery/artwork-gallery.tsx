@@ -30,7 +30,8 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
-  const { galleryImagePerPage } = useArtistsDetailsStore();
+  const { galleryImagePerPage, setGalleryImagePerPage } =
+    useArtistsDetailsStore();
   const { selectedImage } = useArtistsDetailsStore();
   const _artworks = sliceIntoChunks(artworks, galleryImagePerPage);
   const [scrollPassRatio, setScrollPassRatio] = useState(0);
@@ -38,8 +39,20 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const [startX, setStartX] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
   const [pages, setPages] = useState(
-    () => artworks.length / galleryImagePerPage + 0.5
+    artworks.length / galleryImagePerPage + 0.5
   );
+
+  useEffect(() => {
+    if (windowWidth >= 1536) setGalleryImagePerPage(6);
+    else if (windowWidth >= 1280) setGalleryImagePerPage(5);
+    else if (windowWidth >= 1024) setGalleryImagePerPage(4);
+    else if (windowWidth >= 768) setGalleryImagePerPage(3);
+    else if (windowWidth >= 640) setGalleryImagePerPage(2);
+  }, [windowWidth]);
+
+  useEffect(() => {
+    setPages(artworks.length / galleryImagePerPage + 0.5);
+  }, [galleryImagePerPage]);
 
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {
     if (!selectedImage)

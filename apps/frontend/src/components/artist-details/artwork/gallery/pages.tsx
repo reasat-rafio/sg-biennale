@@ -66,14 +66,20 @@ const Page: React.FC<PageProps> = ({
 
   const { width } = useThree((state) => state.viewport);
   const spaecBetween = pages / galleryImagePerPage;
-  const posisitonXMin = Math.ceil(-width * spaecBetween);
-  let positionXMax = Math.floor(width * spaecBetween) - 0.5;
+  const posisitonXMin = -galleryImagePerPage;
+  let positionXMax = galleryImagePerPage;
   const posXIncreaseBY =
     (positionXMax + Math.abs(posisitonXMin)) / (galleryImagePerPage - 1) - 0.5;
 
+  console.log(positionXMax);
+
   const scrollTo =
-    selectedCollectionIndex && Math.floor(pages) === selectedCollectionIndex + 1
-      ? 1 / pages
+    selectedCollectionIndex && selectedCollectionIndex === 0
+      ? 0
+      : selectedCollectionIndex === 1
+      ? 0.4
+      : selectedCollectionIndex === 2
+      ? 0.8
       : 0;
 
   const { progress } = useSpring({
