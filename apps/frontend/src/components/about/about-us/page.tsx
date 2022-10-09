@@ -79,7 +79,10 @@ export const Page: React.FC<PageProps> = ({
     >
       <div className="h-full w-full overflow-hidden">
         <motion.p
-          initial={{ opacity: 0, y: 50 }}
+          initial={{
+            opacity: windowWidth >= 1024 ? 0 : 1,
+            y: windowWidth >= 1024 ? 0 : 50,
+          }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
           viewport={{ margin: "-200px", once: true }}
@@ -87,7 +90,7 @@ export const Page: React.FC<PageProps> = ({
         >
           {description}
         </motion.p>
-        <figure className="absolute h-full w-full top-0">
+        <figure className="absolute h-full w-full top-0 z-0">
           <SanityImg
             className="h-full w-full object-cover"
             width={windowWidth > 1024 ? 2500 : 1500}

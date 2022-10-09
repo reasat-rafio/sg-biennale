@@ -22,6 +22,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
   aboutCollection,
   header,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   const stickyRef = useRef<HTMLElement>(null);
   const [scrollYRatio, setScrollYRatio] = useState(0);
   const windowHeight = useWindowSize()?.height ?? 0;
@@ -62,13 +63,18 @@ export const AboutUs: React.FC<AboutUsProps> = ({
       <div className="sticky top-0 ">
         <Container className="z-50 relative h-screen ">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{
+              opacity: windowWidth >= 1024 ? 0 : 1,
+              y: windowWidth >= 1024 ? 50 : 0,
+            }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
             viewport={{ margin: "-200px", once: true }}
             className="absolute lg:max-w-3xl w-full lg:top-1/4 lg:left-0 top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 lg:translate-x-0 lg:translate-y-0 | 2xl:pl-max lg:pl-xxl"
           >
-            <Header className="text-center lg:text-left py-2">{header}</Header>
+            <Header className="text-center lg:text-left py-2 text-black">
+              {header}
+            </Header>
           </motion.div>
         </Container>
         <div className="inline-flex  ">
