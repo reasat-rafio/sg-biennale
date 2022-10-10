@@ -108,11 +108,11 @@ export const scalingHandler = ({
 }: ScalingHandler) => {
   const scaleTo = (initial: number) =>
     windowWidth >= 1536
-      ? initial * 1.5
+      ? initial * 1.35
       : windowWidth >= 1280
-      ? initial * 1.3
-      : windowWidth >= 1024
       ? initial * 1.2
+      : windowWidth >= 1024
+      ? initial * 1.1
       : 1;
 
   // sacling x

@@ -92,27 +92,27 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
   };
 
-  // useVisibleScrollEffect(
-  //   sectionRef,
-  //   (offsetBoundingRect, _, y) =>
-  //     animationFrameEffect(() => {
-  //       if (!selectedImage) {
-  //         if (windowWidth >= 1024) {
-  //           const yDelta = y + windowHeight - offsetBoundingRect.top;
-  //           const ratio = Math.max(0, Math.min(yDelta / windowHeight, 1));
-  //           setScrollPassRatio(ratio * 0.5);
-  //         } else {
-  //           setScrollPassRatio(-0.4);
-  //         }
-  //       }
-  //     }),
-  //   [windowHeight, selectedImage]
-  // );
+  useVisibleScrollEffect(
+    sectionRef,
+    (offsetBoundingRect, _, y) =>
+      animationFrameEffect(() => {
+        if (!selectedImage) {
+          if (windowWidth >= 1024) {
+            const yDelta = y + windowHeight - offsetBoundingRect.top;
+            const ratio = Math.max(0, Math.min(yDelta / windowHeight, 1));
+            setScrollPassRatio(ratio * 0.5);
+          } else {
+            setScrollPassRatio(-0.4);
+          }
+        }
+      }),
+    [windowHeight, selectedImage, setScrollPassRatio, windowWidth]
+  );
 
   return (
     <section
       ref={sectionRef}
-      className="h-[100vh]"
+      className="h-[100vh] max-h-[1080px]"
       id="artwork-gallery-container"
     >
       <Canvas

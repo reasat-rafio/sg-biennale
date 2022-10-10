@@ -24,6 +24,7 @@ export const Image: React.FC<ImageProps> = ({
   setDown,
   progress,
   imgEndPoint,
+  positionXMin,
 }) => {
   const {
     selectedImage,
@@ -177,11 +178,11 @@ export const Image: React.FC<ImageProps> = ({
       onPointerOut={onPointerOutAction}
       ref={groupRef}
     >
-      {/* <ArtworkDescription
+      <ArtworkDescription
         triggerExitAnimation={triggerExitAnimation}
         uniqueIndex={uniqueIndex}
         positionXMin={positionXMin}
-      /> */}
+      />
       <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon
         w={w}

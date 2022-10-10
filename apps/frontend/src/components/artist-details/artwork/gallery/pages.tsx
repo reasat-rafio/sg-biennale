@@ -1,4 +1,5 @@
 import { PageProps, PagesProps } from "@lib/@types/artist-details.types";
+import { useWindowSize } from "@lib/hooks";
 import { config, useSpring } from "@react-spring/three";
 import { useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
@@ -54,21 +55,28 @@ const Page: React.FC<PageProps> = ({
   setScrollPassRatio,
   pages,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   const { galleryImagePerPage, selectedImage, selectedCollectionIndex } =
     useArtistsDetailsStore();
-
   const { width } = useThree((state) => state.viewport);
+
+  const marginLeftInPercentage =
+    windowWidth >= 1536
+      ? 50
+      : windowWidth >= 1280
+      ? 45
+      : windowWidth >= 1024
+      ? 40
+      : windowWidth >= 768
+      ? 20
+      : 50;
 
   const positionXMin = -(width - 1) / 2;
   let positionXMax = (width - 1) / 2;
-
   const posXIncreaseBY =
     (positionXMax + Math.abs(positionXMin)) / (galleryImagePerPage - 1);
-
-  // ? 40 because we want 20% extra and its starting from 0 so we are doubling it up
-  const extraUnits = (50 * positionXMax) / 100;
+  const extraUnits = (marginLeftInPercentage * positionXMax) / 100;
   const imgEndPoint = positionXMax - extraUnits;
-
   const scrollTo =
     selectedCollectionIndex && (1 / (pages - 1.05)) * selectedCollectionIndex;
 
