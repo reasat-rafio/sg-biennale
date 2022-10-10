@@ -38,7 +38,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const [startX, setStartX] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
   const [pages, setPages] = useState(
-    Math.ceil(artworks.length / galleryImagePerPage)
+    Math.ceil(artworks.length / galleryImagePerPage) + 0.5
   );
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   }, [windowWidth]);
 
   useEffect(() => {
-    setPages(Math.ceil(artworks.length / galleryImagePerPage));
+    setPages(Math.ceil(artworks.length / galleryImagePerPage) + 0.5);
   }, [galleryImagePerPage]);
 
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {

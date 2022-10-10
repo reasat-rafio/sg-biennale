@@ -1,5 +1,4 @@
 import { PageProps, PagesProps } from "@lib/@types/artist-details.types";
-import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { config, useSpring } from "@react-spring/three";
 import { useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
@@ -66,17 +65,12 @@ const Page: React.FC<PageProps> = ({
   const posXIncreaseBY =
     (positionXMax + Math.abs(positionXMin)) / (galleryImagePerPage - 1);
 
-  const { offset } = useScroll();
-
   // ? 40 because we want 20% extra and its starting from 0 so we are doubling it up
-  const extraUnits = (30 * positionXMax) / 100;
+  const extraUnits = (50 * positionXMax) / 100;
   const imgEndPoint = positionXMax - extraUnits;
 
-  const scrollTo = (1 / (pages - 1)) * selectedCollectionIndex;
-
-  console.log("====================================");
-  console.log({ scrollTo });
-  console.log("====================================");
+  const scrollTo =
+    selectedCollectionIndex && (1 / (pages - 1.05)) * selectedCollectionIndex;
 
   const { progress } = useSpring({
     progress: !selectedImage
@@ -85,19 +79,12 @@ const Page: React.FC<PageProps> = ({
     config: config.molasses,
   });
 
-  // const { progress } = useSpring({
-  //   progress: Math.min(scrollPassRatio * 0.15 + offsetX * 2, 1),
-  //   config: config.molasses,
-  // });
-
   return (
     <group position={position}>
       {Array.from({ length }).map((_, idx) => {
         const aspectRatio = dimensions[idx].aspectRatio;
-        // const scaleX = 0.8 + aspectRatio * 1.8;
-        // const scaleY = 3.5 - aspectRatio;
-        const scaleX = 1;
-        const scaleY = 1;
+        const scaleX = 0.8 + aspectRatio * 1.8;
+        const scaleY = 3.5 - aspectRatio;
 
         return (
           <Image
@@ -111,10 +98,9 @@ const Page: React.FC<PageProps> = ({
             isDown={isDown}
             setDown={setDown}
             progress={progress}
-            scrollTo={scrollTo}
             imgEndPoint={imgEndPoint}
             position={[
-              positionXMin + idx * posXIncreaseBY,
+              5 + positionXMin + idx * posXIncreaseBY,
               idx % 2 ? 1.4 : -1.1,
               Math.min(aspectRatio * Math.random(), 0.9),
             ]}

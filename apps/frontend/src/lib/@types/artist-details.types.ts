@@ -72,7 +72,6 @@ export interface ImageProps {
   positionXMin: number;
   isDown: boolean;
   imgEndPoint: number;
-  scrollTo: number;
   progress: SpringValue<number | null>;
   setDown: Dispatch<SetStateAction<boolean>>;
   setScrollPassRatio: Dispatch<SetStateAction<number>>;

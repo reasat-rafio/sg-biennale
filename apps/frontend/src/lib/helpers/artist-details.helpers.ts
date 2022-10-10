@@ -116,20 +116,20 @@ export const scalingHandler = ({
       : 1;
 
   // sacling x
-  // imageRef.current.material.scale[0] = imageRef.current.scale.x =
-  //   THREE.MathUtils.damp(
-  //     imageRef.current.scale.x,
-  //     selectedImage?.index === uniqueIndex ? scaleTo(scale[0]) : scale[0],
-  //     6,
-  //     delta
-  //   );
+  imageRef.current.material.scale[0] = imageRef.current.scale.x =
+    THREE.MathUtils.damp(
+      imageRef.current.scale.x,
+      selectedImage?.index === uniqueIndex ? scaleTo(scale[0]) : scale[0],
+      6,
+      delta
+    );
 
   // sacling y
-  // imageRef.current.material.scale[1] = imageRef.current.scale.y =
-  //   THREE.MathUtils.damp(
-  //     imageRef.current.scale.y,
-  //     selectedImage?.index === uniqueIndex ? scaleTo(scale[1]) : scale[1],
-  //     8,
-  //     delta
-  //   );
+  imageRef.current.material.scale[1] = imageRef.current.scale.y =
+    THREE.MathUtils.damp(
+      imageRef.current.scale.y,
+      selectedImage?.index === uniqueIndex ? scaleTo(scale[1]) : scale[1],
+      8,
+      delta
+    );
 };

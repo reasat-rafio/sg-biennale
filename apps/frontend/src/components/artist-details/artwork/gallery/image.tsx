@@ -22,7 +22,6 @@ export const Image: React.FC<ImageProps> = ({
   artwork,
   isDown,
   setDown,
-  positionXMin,
   progress,
   imgEndPoint,
 }) => {
@@ -78,7 +77,6 @@ export const Image: React.FC<ImageProps> = ({
   const onPointerMoveAction = (e: ThreeEvent<globalThis.PointerEvent>) => {};
 
   let prevOffset = 0;
-
   useFrame(({ mouse }, delta) => {
     scrollData.offset = progress.get() ?? 0;
 
@@ -88,28 +86,28 @@ export const Image: React.FC<ImageProps> = ({
         setOffset({ x: mouse.x * 2, y: mouse.y * 2 });
       }
 
-      // groupRef.current.position.z = THREE.MathUtils.damp(
-      //   groupRef.current.position.z,
-      //   selectedImage?.index === uniqueIndex
-      //     ? 0.4
-      //     : !isDown && hovered
-      //     ? 0.2
-      //     : 0,
-      //   4,
-      //   delta
-      // );
+      groupRef.current.position.z = THREE.MathUtils.damp(
+        groupRef.current.position.z,
+        selectedImage?.index === uniqueIndex
+          ? 0.4
+          : !isDown && hovered
+          ? 0.2
+          : 0,
+        4,
+        delta
+      );
     }
 
     if (imageRef?.current) {
       // ? belding the image to the scrolling side animation
-      // imageRef.current.material.shift = THREE.MathUtils.damp(
-      //   imageRef.current.material.shift,
-      //   prevOffset > scrollData.offset
-      //     ? -scrollData.delta * 0.5
-      //     : scrollData.delta * 0.5,
-      //   4,
-      //   delta
-      // );
+      imageRef.current.material.shift = THREE.MathUtils.damp(
+        imageRef.current.material.shift,
+        prevOffset > scrollData.offset
+          ? -scrollData.delta * 0.5
+          : scrollData.delta * 0.5,
+        4,
+        delta
+      );
       prevOffset = scrollData.offset;
 
       imageRef.current.material.mouseoffset[0] = THREE.MathUtils.damp(
@@ -149,16 +147,6 @@ export const Image: React.FC<ImageProps> = ({
         4,
         delta
       );
-
-      // ? OnScroll Zooming animation
-      // imageRef.current.material.zoom = THREE.MathUtils.damp(
-      //   imageRef.current.material.zoom,
-      //   selectedImage && hovered
-      //     ? 0.5
-      //     : Math.max(0, 1 - scrollData.delta * 0.5),
-      //   4,
-      //   delta
-      // );
 
       opacityHandler({ imageRef, selectedImage, delta, uniqueIndex });
       scalingHandler({
