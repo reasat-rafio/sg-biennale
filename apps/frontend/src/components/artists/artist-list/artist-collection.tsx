@@ -1,5 +1,6 @@
 import { imageUrlBuilder } from "@utils/sanity";
 import { motion, Variants } from "framer-motion";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { SanityImg } from "sanity-react-extra";
 import { ArtistProps } from "./artist";
@@ -51,10 +52,16 @@ export const ArtistCollection: React.FC<ArtistCollectionProps> = ({
   );
 };
 
-export const ArtistCard: React.FC<ArtistCardProps> = ({ images, name }) => {
+export const ArtistCard: React.FC<ArtistCardProps> = ({
+  images,
+  name,
+  slug,
+}) => {
+  const router = useRouter();
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);
+  const onClickAction = () => router.push(`artists/${slug.current}`);
   return (
     <motion.article
       layout
@@ -63,6 +70,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({ images, name }) => {
       className="relative col-span-6 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}
+      onClick={onClickAction}
     >
       <motion.figure
         className="h-full w-full"

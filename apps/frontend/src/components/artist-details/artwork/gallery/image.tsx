@@ -4,14 +4,13 @@ import { Image as ImageImpl } from "./image-impl";
 import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import useArtistsDetailsStore from "@stores/artist-details.store";
 import {
-  opacityController,
-  positionController,
-  scalingController,
+  opacityHandler,
+  positionHandler,
+  scalingHandler,
 } from "@lib/helpers/artist-details.helpers";
 import { ArtworkDescription, CloseIcon } from "./artwork-description";
 import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { ImageProps } from "@lib/@types/artist-details.types";
-import { damp } from "@components/home/artist/util";
 import { useWindowSize } from "@lib/hooks";
 
 export const Image: React.FC<ImageProps> = ({
@@ -25,6 +24,7 @@ export const Image: React.FC<ImageProps> = ({
   setDown,
   positionXMin,
   progress,
+  imgEndPoint,
 }) => {
   const {
     selectedImage,
@@ -48,8 +48,6 @@ export const Image: React.FC<ImageProps> = ({
   const {
     viewport: { width, height },
   } = useThree((state) => state);
-
-  const selectedImagePosition = -0.5;
 
   useEffect(() => {
     if (hovered && !selectedImage) {
@@ -90,28 +88,28 @@ export const Image: React.FC<ImageProps> = ({
         setOffset({ x: mouse.x * 2, y: mouse.y * 2 });
       }
 
-      groupRef.current.position.z = THREE.MathUtils.damp(
-        groupRef.current.position.z,
-        selectedImage?.index === uniqueIndex
-          ? 0.4
-          : !isDown && hovered
-          ? 0.2
-          : 0,
-        4,
-        delta
-      );
+      // groupRef.current.position.z = THREE.MathUtils.damp(
+      //   groupRef.current.position.z,
+      //   selectedImage?.index === uniqueIndex
+      //     ? 0.4
+      //     : !isDown && hovered
+      //     ? 0.2
+      //     : 0,
+      //   4,
+      //   delta
+      // );
     }
 
     if (imageRef?.current) {
       // ? belding the image to the scrolling side animation
-      imageRef.current.material.shift = THREE.MathUtils.damp(
-        imageRef.current.material.shift,
-        prevOffset > scrollData.offset
-          ? -scrollData.delta * 0.5
-          : scrollData.delta * 0.5,
-        4,
-        delta
-      );
+      // imageRef.current.material.shift = THREE.MathUtils.damp(
+      //   imageRef.current.material.shift,
+      //   prevOffset > scrollData.offset
+      //     ? -scrollData.delta * 0.5
+      //     : scrollData.delta * 0.5,
+      //   4,
+      //   delta
+      // );
       prevOffset = scrollData.offset;
 
       imageRef.current.material.mouseoffset[0] = THREE.MathUtils.damp(
@@ -162,8 +160,8 @@ export const Image: React.FC<ImageProps> = ({
       //   delta
       // );
 
-      opacityController({ imageRef, selectedImage, delta, uniqueIndex });
-      scalingController({
+      opacityHandler({ imageRef, selectedImage, delta, uniqueIndex });
+      scalingHandler({
         imageRef,
         scale,
         delta,
@@ -171,7 +169,7 @@ export const Image: React.FC<ImageProps> = ({
         selectedImage,
         windowWidth,
       });
-      positionController({
+      positionHandler({
         groupRef,
         imageRef,
         selectedImage,
@@ -179,7 +177,7 @@ export const Image: React.FC<ImageProps> = ({
         position,
         delta,
         hovered,
-        animateXTo: selectedImagePosition,
+        animateXTo: imgEndPoint,
       });
     }
   });
@@ -191,11 +189,11 @@ export const Image: React.FC<ImageProps> = ({
       onPointerOut={onPointerOutAction}
       ref={groupRef}
     >
-      <ArtworkDescription
+      {/* <ArtworkDescription
         triggerExitAnimation={triggerExitAnimation}
         uniqueIndex={uniqueIndex}
         positionXMin={positionXMin}
-      />
+      /> */}
       <ImageImpl onPointerMove={onPointerMoveAction} ref={imageRef} url={url} />
       <CloseIcon
         w={w}

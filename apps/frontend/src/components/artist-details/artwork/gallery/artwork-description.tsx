@@ -45,7 +45,8 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
   return (
     <Html
       zIndexRange={[20, 30]}
-      position={[positionXMin * 2, 0, 0]}
+      position={[0, 0, 0]}
+      // position={[positionXMin * 2, 0, 0]}
       className="2xl:w-[70vw] xl:w-[60vw] w-[50vw]  flex justify-center items-center -translate-y-1/2  pointer-events-none"
     >
       <AnimatePresence>
@@ -187,7 +188,8 @@ export const CloseIcon: React.FC<CloseIconProps> = ({
   return (
     <>
       {selectedImage?.index === uniqueIndex && (
-        <Html zIndexRange={[10, 20]} className="w-6 h-6" position={[1, 2.5, 0]}>
+        // <Html zIndexRange={[10, 20]} className="w-6 h-6" position={[1, 2.5, 0]}>
+        <Html zIndexRange={[10, 20]} className="w-6 h-6" position={[0, 0, 0]}>
           <motion.img
             onClick={() => {
               setTriggerExitAnimation(true);

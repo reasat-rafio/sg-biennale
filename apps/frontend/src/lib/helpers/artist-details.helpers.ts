@@ -11,7 +11,7 @@ interface InitialProps {
 interface OpacityControllerProps extends InitialProps {
   imageRef: RefObject<any>;
 }
-export const opacityController = ({
+export const opacityHandler = ({
   imageRef,
   selectedImage,
   delta,
@@ -34,7 +34,7 @@ export const opacityController = ({
   }
 };
 
-interface PositionControllerProps extends InitialProps {
+interface PositionHandlerProps extends InitialProps {
   groupRef: RefObject<any>;
   imageRef: RefObject<any>;
   position: any;
@@ -52,7 +52,7 @@ function calcZ(
   else return positionZ;
 }
 
-export const positionController = ({
+export const positionHandler = ({
   groupRef,
   imageRef,
   selectedImage,
@@ -61,7 +61,7 @@ export const positionController = ({
   delta,
   animateXTo,
   hovered,
-}: PositionControllerProps) => {
+}: PositionHandlerProps) => {
   // ? controlling the z index / Scalling up the image on scroll and hover
   // imageRef.current.position.z = THREE.MathUtils.damp(
   //   imageRef.current.position.z,
@@ -85,27 +85,27 @@ export const positionController = ({
     delta
   );
 
-  imageRef.current.position.x = THREE.MathUtils.damp(
-    imageRef.current.position.x,
-    selectedImage?.index === uniqueIndex ? -1.5 : 0,
-    2,
-    delta
-  );
+  // imageRef.current.position.x = THREE.MathUtils.damp(
+  //   imageRef.current.position.x,
+  //   selectedImage?.index === uniqueIndex ? -1.5 : 0,
+  //   2,
+  //   delta
+  // );
 };
 
-interface ScalingControllerProps extends InitialProps {
+interface ScalingHandler extends InitialProps {
   imageRef: RefObject<any>;
   scale: any;
   windowWidth: number;
 }
-export const scalingController = ({
+export const scalingHandler = ({
   imageRef,
   scale,
   delta,
   uniqueIndex,
   selectedImage,
   windowWidth,
-}: ScalingControllerProps) => {
+}: ScalingHandler) => {
   const scaleTo = (initial: number) =>
     windowWidth >= 1536
       ? initial * 1.5
@@ -116,20 +116,20 @@ export const scalingController = ({
       : 1;
 
   // sacling x
-  imageRef.current.material.scale[0] = imageRef.current.scale.x =
-    THREE.MathUtils.damp(
-      imageRef.current.scale.x,
-      selectedImage?.index === uniqueIndex ? scaleTo(scale[0]) : scale[0],
-      6,
-      delta
-    );
+  // imageRef.current.material.scale[0] = imageRef.current.scale.x =
+  //   THREE.MathUtils.damp(
+  //     imageRef.current.scale.x,
+  //     selectedImage?.index === uniqueIndex ? scaleTo(scale[0]) : scale[0],
+  //     6,
+  //     delta
+  //   );
 
   // sacling y
-  imageRef.current.material.scale[1] = imageRef.current.scale.y =
-    THREE.MathUtils.damp(
-      imageRef.current.scale.y,
-      selectedImage?.index === uniqueIndex ? scaleTo(scale[1]) : scale[1],
-      8,
-      delta
-    );
+  // imageRef.current.material.scale[1] = imageRef.current.scale.y =
+  //   THREE.MathUtils.damp(
+  //     imageRef.current.scale.y,
+  //     selectedImage?.index === uniqueIndex ? scaleTo(scale[1]) : scale[1],
+  //     8,
+  //     delta
+  //   );
 };

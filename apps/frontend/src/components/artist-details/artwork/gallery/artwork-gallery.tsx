@@ -38,7 +38,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   const [startX, setStartX] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
   const [pages, setPages] = useState(
-    Math.ceil(artworks.length / galleryImagePerPage) + 0.5
+    Math.ceil(artworks.length / galleryImagePerPage)
   );
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
   }, [windowWidth]);
 
   useEffect(() => {
-    setPages(Math.ceil(artworks.length / galleryImagePerPage) + 0.5);
+    setPages(Math.ceil(artworks.length / galleryImagePerPage));
   }, [galleryImagePerPage]);
 
   const onPointerDownAction = (e: PointerEvent<HTMLDivElement>) => {
@@ -92,22 +92,22 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
     setOffsetX((prev) => Math.max(0, Math.min(2, prev + walk)));
   };
 
-  useVisibleScrollEffect(
-    sectionRef,
-    (offsetBoundingRect, _, y) =>
-      animationFrameEffect(() => {
-        if (!selectedImage) {
-          if (windowWidth >= 1024) {
-            const yDelta = y + windowHeight - offsetBoundingRect.top;
-            const ratio = Math.max(0, Math.min(yDelta / windowHeight, 1));
-            setScrollPassRatio(ratio * 0.5);
-          } else {
-            setScrollPassRatio(-0.4);
-          }
-        }
-      }),
-    [windowHeight, selectedImage]
-  );
+  // useVisibleScrollEffect(
+  //   sectionRef,
+  //   (offsetBoundingRect, _, y) =>
+  //     animationFrameEffect(() => {
+  //       if (!selectedImage) {
+  //         if (windowWidth >= 1024) {
+  //           const yDelta = y + windowHeight - offsetBoundingRect.top;
+  //           const ratio = Math.max(0, Math.min(yDelta / windowHeight, 1));
+  //           setScrollPassRatio(ratio * 0.5);
+  //         } else {
+  //           setScrollPassRatio(-0.4);
+  //         }
+  //       }
+  //     }),
+  //   [windowHeight, selectedImage]
+  // );
 
   return (
     <section
@@ -130,7 +130,7 @@ export const ArtworkGallery: React.FC<ArtworkGalleryProps> = ({ artworks }) => {
         <Suspense fallback={null}>
           <ScrollControls
             horizontal
-            damping={4}
+            damping={0}
             pages={pages}
             distance={1}
             enabled={false}

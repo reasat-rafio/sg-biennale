@@ -3,6 +3,7 @@ import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 type Screen = "desktop" | "mobile";
 export interface ArtistProps {
@@ -42,9 +43,11 @@ export const Artist: React.FC<ArtistProps> = ({
   images,
   screen = "desktop",
 }) => {
+  const router = useRouter();
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);
+  const onClickAction = () => router.push(`artists/${slug.current}`);
 
   return (
     <motion.article
@@ -54,6 +57,7 @@ export const Artist: React.FC<ArtistProps> = ({
       className="relative lg:col-span-6 col-span-12 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
       onMouseEnter={onMouseEnterAction}
       onMouseLeave={onMouseLeaveAction}
+      onClick={onClickAction}
     >
       <motion.figure
         initial="initial"
