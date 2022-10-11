@@ -20,9 +20,9 @@ export const Footer: React.FC<ISite["site"]> = ({
     >
       <section className="relative z-10 | flex flex-col justify-center items-center col-span-12 lg:col-span-6 xl:col-span-5 | xl:space-y-20 xl:pl-max">
         <header className="w-full | font-semibold">
-          <h2 className=" mb-4 | lg:text-left text-center | whitespace-pre-wrap | lg:text-heading-4 text-heading-6">
+          <h4 className=" mb-4 | lg:text-left text-center | whitespace-pre-wrap | lg:text-heading-4 text-heading-6">
             {header}
-          </h2>
+          </h4>
           <h6 className="font-manrope | lg:text-left text-center"> {date}</h6>
         </header>
         <NewsLetter {...newsLetter} />

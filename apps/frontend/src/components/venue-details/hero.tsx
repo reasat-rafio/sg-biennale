@@ -1,9 +1,9 @@
 import { Anchor } from "@components/ui/anchor";
 import { Container } from "@components/ui/container";
+import { LiquidButton } from "@components/ui/liquid-button";
 import { InformationProps } from "@lib/@types/venue-details";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
-import { Header } from "./header";
 
 interface HeroProps {
   name: string;
@@ -37,6 +37,17 @@ export const Hero: React.FC<HeroProps> = ({ image, informations, name }) => {
         </div>
       </section>
     </Container>
+  );
+};
+
+const Header: React.FC<{ name: string }> = ({ name }) => {
+  return (
+    <div className="flex items-center space-x-5">
+      <header className="flex-1">
+        <h1 className="text-heading-3 font-medium">{name}</h1>
+      </header>
+      <LiquidButton variant="secondary">Get Directions</LiquidButton>
+    </div>
   );
 };
 

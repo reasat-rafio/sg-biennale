@@ -1,3 +1,4 @@
+import { Carousel } from "@components/venue-details/carousel";
 import { Hero } from "@components/venue-details/hero";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
@@ -56,6 +57,7 @@ const VenueDetailPage: NextPage<SanityProps> = (props) => {
   return (
     <section>
       <Hero name={name} image={images[0]} informations={iformations} />
+      <Carousel images={images} />
     </section>
   );
 };
