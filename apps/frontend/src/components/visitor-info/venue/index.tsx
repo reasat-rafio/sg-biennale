@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import useVisitorInfoStore from "@stores/visitor-info.store";
 import { Header } from "@components/ui/header";
 import { LiquidButton } from "@components/ui/liquid-button";
+import { Anchor } from "@components/ui/anchor";
 
 export const Venue: React.FC<{}> = ({}) => {
   const { allVenues, sortedVenues, page, setPage, cardsPerPage } =
@@ -40,12 +41,9 @@ export const Venue: React.FC<{}> = ({}) => {
           Venue
         </Header>
 
-        <span
-          onClick={scrollToAccesiblityInfoSection}
-          className="underline cursor-pointer | font-medium lg:text-xl text-base"
-        >
+        <Anchor onClick={scrollToAccesiblityInfoSection}>
           Accessibility Info
-        </span>
+        </Anchor>
       </header>
       <FilteringSection />
       <VenueList

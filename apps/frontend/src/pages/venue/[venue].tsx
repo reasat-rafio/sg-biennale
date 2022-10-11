@@ -1,4 +1,4 @@
-import { Header } from "@components/venue-details/header";
+import { Hero } from "@components/venue-details/hero";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
@@ -55,7 +55,7 @@ const VenueDetailPage: NextPage<SanityProps> = (props) => {
 
   return (
     <section>
-      <Header name={name} />
+      <Hero name={name} image={images[0]} informations={iformations} />
     </section>
   );
 };

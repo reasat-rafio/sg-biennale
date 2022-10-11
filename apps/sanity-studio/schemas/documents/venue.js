@@ -48,12 +48,14 @@ const Venue = {
       validation: (Rule) => Rule.required(),
     },
     {
+      title: "Informations",
       name: "iformations",
       type: "array",
       validation: (Rule) => Rule.required(),
 
       of: [
         {
+          title: "Information",
           name: "iformation",
           type: "object",
           icon: FcInfo,
