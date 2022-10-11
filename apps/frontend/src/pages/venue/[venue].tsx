@@ -1,3 +1,4 @@
+import { Header } from "@components/venue-details/header";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
@@ -52,6 +53,10 @@ export const getStaticProps: GetStaticProps = async (
 const VenueDetailPage: NextPage<SanityProps> = (props) => {
   const { _id, name, images, description, iformations } = props.data.page;
 
-  return <section></section>;
+  return (
+    <section>
+      <Header name={name} />
+    </section>
+  );
 };
 export default VenueDetailPage;
