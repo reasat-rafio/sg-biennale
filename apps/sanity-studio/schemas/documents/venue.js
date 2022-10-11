@@ -1,4 +1,4 @@
-import { FcFaq, FcInfo, FcReading } from "react-icons/fc";
+import { FcInfo, FcReading } from "react-icons/fc";
 
 const Venue = {
   name: "venue",
@@ -45,6 +45,8 @@ const Venue = {
     {
       name: "iformations",
       type: "array",
+      validation: (Rule) => Rule.required(),
+
       of: [
         {
           name: "iformation",
@@ -59,6 +61,7 @@ const Venue = {
             {
               name: "infos",
               type: "array",
+              validation: (Rule) => Rule.required(),
               of: [
                 {
                   name: "info",
@@ -68,12 +71,21 @@ const Venue = {
                     {
                       name: "type",
                       type: "string",
+                      validation: (Rule) => Rule.required(),
                     },
                     {
                       name: "value",
-                      type: "text",
+                      type: "array",
+                      of: [{ type: "block" }],
+                      validation: (Rule) => Rule.required(),
                     },
                   ],
+                  preview: {
+                    select: {
+                      title: "type",
+                      subtitle: "value",
+                    },
+                  },
                 },
               ],
             },
@@ -95,7 +107,7 @@ const Venue = {
       title: "name",
       startAt: "startAt",
       location: "location",
-      media: "image",
+      media: "images.0",
     },
     prepare({ title, startAt, location, media }) {
       return {
