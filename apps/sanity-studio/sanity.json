@@ -16,7 +16,8 @@
     "time-seconds",
     "tags",
     "order-documents",
-    "@sanity/color-input"
+    "@sanity/color-input",
+    "table"
   ],
   "env": {
     "development": {

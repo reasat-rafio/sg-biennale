@@ -22,6 +22,18 @@ const Venue = {
     {
       name: "description",
       type: "array",
+      of: [
+        { type: "block" },
+        {
+          type: "image",
+        },
+      ],
+      validation: (Rule) => Rule.required(),
+    },
+
+    {
+      name: "content",
+      type: "array",
       of: [{ type: "block" }],
       validation: (Rule) => Rule.required(),
     },
