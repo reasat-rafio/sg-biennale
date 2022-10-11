@@ -41,7 +41,12 @@ const Venue = {
       type: "string",
       validation: (Rule) => Rule.required(),
     },
-
+    {
+      title: "Start At",
+      name: "startAt",
+      type: "datetime",
+      validation: (Rule) => Rule.required(),
+    },
     {
       name: "iformations",
       type: "array",
