@@ -1,4 +1,5 @@
 import { Carousel } from "@components/venue-details/carousel";
+import { Description } from "@components/venue-details/description";
 import { Hero } from "@components/venue-details/hero";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
@@ -15,7 +16,7 @@ const query = pageQuery(groq`
     *[_type == "venue" && slug.current == $venue][0]{
         _id,
         name,
-        description,
+        content,
         iformations,
         images[] {
           ...        
@@ -52,11 +53,12 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const VenueDetailPage: NextPage<SanityProps> = (props) => {
-  const { _id, name, images, description, iformations } = props.data.page;
+  const { name, images, content, iformations } = props.data.page;
 
   return (
     <section>
       <Hero name={name} image={images[0]} informations={iformations} />
+      <Description content={content} />
       <Carousel images={images} />
     </section>
   );

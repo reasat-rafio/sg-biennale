@@ -15,7 +15,7 @@ export const Hero: React.FC<HeroProps> = ({ image, informations, name }) => {
   const onAnchorClickAction = () => {};
 
   return (
-    <Container className="flex flex-col | space-y-7 mt-xl">
+    <Container className="flex flex-col | space-y-7 md:mt-xl mt-x">
       <Anchor onClick={onAnchorClickAction} className="text-gray--700">
         Back to Visitor Info
       </Anchor>
