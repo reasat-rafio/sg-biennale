@@ -17,7 +17,7 @@
     "tags",
     "order-documents",
     "@sanity/color-input",
-    "table"
+    "another-table"
   ],
   "env": {
     "development": {

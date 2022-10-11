@@ -20,21 +20,17 @@ const Venue = {
       validation: (Rule) => Rule.required(),
     },
     {
+      title: "Short Description",
       name: "description",
       type: "array",
-      of: [
-        { type: "block" },
-        {
-          type: "image",
-        },
-      ],
+      of: [{ type: "block" }],
       validation: (Rule) => Rule.required(),
     },
 
     {
       name: "content",
       type: "array",
-      of: [{ type: "block" }],
+      of: [{ type: "block" }, { type: "image" }, { type: "table" }],
       validation: (Rule) => Rule.required(),
     },
     {
