@@ -1,4 +1,3 @@
-import { Clock } from "@components/icons/clock";
 import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
 import clsx from "clsx";
 import { SanityImg } from "sanity-react-extra";
@@ -9,16 +8,11 @@ import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 import { Header } from "@components/ui/header";
+import { LiquidButton } from "@components/ui/liquid-button";
 
 interface ProgrammeEventListCardProps extends IPgrammeEvents {
   index: number;
-  imgPositionIngAlgo: number[];
 }
-
-const styles = {
-  smCard: "col-span-12 xl:col-span-4 lg:col-span-5",
-  lgCard: "col-span-12 lg:col-span-6 ",
-};
 
 const physics = {
   damping: 30,
@@ -33,28 +27,20 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   slug,
   index,
   description,
-  imgPositionIngAlgo,
   startAt,
   venue,
+  relatedArtists,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
-  const [descriptionRef] = usePortableTextTruncate({ maxLength: 300 });
 
+  const formattedShortDate = format(new Date(startAt), "dd.LL");
   const formattedDate = format(
     new Date(startAt),
     "eee, d LLL yyyy - hh:mm aaaaa'm'"
   );
-  const containerStylings =
-    imgPositionIngAlgo[index] === 0
-      ? index % 2
-        ? `${styles.smCard} xl:col-start-9 lg:col-start-8`
-        : styles.smCard
-      : index % 2
-      ? `${styles.lgCard} lg:col-start-7`
-      : styles.lgCard;
 
   const x = useTransformSpring({
     value: screenX,
@@ -79,6 +65,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     y.set(0);
     setHovered(false);
   };
+  const priceVal = `Book Now - ${price ? `$${price}` : "Free"}`;
 
   return (
     <motion.article
@@ -87,62 +74,21 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
       whileInView={{ y: 50 * index, opacity: 1 }}
       transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
       viewport={{ once: true }}
-      className={clsx(containerStylings)}
-      onMouseEnter={onMouseEnterAction}
-      onMouseLeave={onMouseLeaveAction}
+      className={clsx("grid grid-cols-12 col-span-12 | gap-5")}
       onMouseMove={handleMouseMove}
     >
-      <div className="relative flex justify-center items-center">
-        <div className="flex flex-col w-full | space-y-5">
-          <figure className="h-[370px] w-full">
-            <SanityImg
-              className="h-full w-full object-cover"
-              builder={imageUrlBuilder}
-              image={images[0]}
-              alt=""
-              width={600}
-            />
-          </figure>
-          <section className="flex flex-col | space-y-3">
-            <div className="flex space-x-5">
-              <span className="flex items-center space-x-2">
-                <img
-                  className="h-[18px]"
-                  src="/icons/location.svg"
-                  alt="location-icon"
-                />
-                <span className="font-manrope text-gray--700 text-body-2">
-                  {venue[0].name}
-                </span>
-              </span>
-              <span className="flex items-center space-x-2">
-                <Clock className="h-[18px]" />
-                <span className="font-manrope text-gray--700 text-body-2">
-                  <span>{formattedDate}</span>
-                </span>
-              </span>
-            </div>
-
-            <Header
-              type="h6"
-              className="cursor-pointer | hover:text-red-love | transition-colors duration-500"
-              variant="secondary"
-            >
-              {title}
-            </Header>
-            {windowWidth < 1024 && (
-              <div
-                ref={descriptionRef}
-                className="text-gray--700 font-manrope text-body-2"
-              >
-                <PortableText blocks={description} />
-              </div>
-            )}
-            <button className="mr-auto pt-4 | font-medium lg:text-[18px] text-base leading-[-0.02em] text-black bg-transparent underline">
-              Book Now
-            </button>
-          </section>
-        </div>
+      <div className="col-span-1 | text-center text-2xl font-medium">
+        {formattedShortDate}
+      </div>
+      <section className="col-span-4 relative">
+        <figure className="h-[250px] ">
+          <SanityImg
+            className="w-full h-full object-cover"
+            builder={imageUrlBuilder}
+            image={images[0]}
+            height={300}
+          />
+        </figure>
         {windowWidth >= 1024 && (
           <FLoatingDescription
             x={x}
@@ -151,7 +97,56 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
             description={description}
           />
         )}
-      </div>
+      </section>
+      <section
+        className="col-span-7 relative | flex flex-col justify-between | font-manrope"
+        onMouseEnter={onMouseEnterAction}
+        onMouseLeave={onMouseLeaveAction}
+      >
+        <div className="flex flex-col space-y-5">
+          <Header
+            type="h6"
+            className="cursor-pointer | hover:text-red-love | transition-colors duration-500"
+            variant="secondary"
+          >
+            {title}
+          </Header>
+          <div className="flex flex-col space-y-2">
+            <div className="flex space-x-10 | text-body-2">
+              <span className="font-semibold">Artist</span>
+              <ul className="flex space-x-1 flex-wrap | text-gray--700">
+                {relatedArtists.map(({ _id, name }, index) => (
+                  <li key={_id}>
+                    {name}
+                    {index !== relatedArtists.length - 1
+                      ? index !== relatedArtists.length - 2
+                        ? ","
+                        : " &"
+                      : ""}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex space-x-10 | text-body-2">
+              <span className="font-semibold">Venue</span>
+
+              <ul className="flex space-x-1 | text-gray--700">
+                {venue.map(({ name }) => (
+                  <li key={name}>{name}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex | items-center">
+          <div className="flex-1 flex space-x-10 | text-body-2">
+            <span className="font-semibold">Date & Time</span>
+            <span className="text-gray--700">{formattedDate}</span>
+          </div>
+          <LiquidButton variant="secondary">{priceVal}</LiquidButton>
+        </div>
+      </section>
     </motion.article>
   );
 };
@@ -171,7 +166,7 @@ const FLoatingDescription: React.FC<{
       animate={{ opacity: hovered ? 1 : 0 }}
       style={{ x, y }}
       transition={{ duration: 0.5, type: "tween", ease: "easeInOut" }}
-      className="absolute -left-[15%] | w-11/12 | p-5 bg-[#F8F8F8] | text-gray--700 font-manrope text-body-2 leading-[150%] rounded"
+      className="absolute -left-[15%] top-1/2 | w-11/12 | p-5 bg-[#F8F8F8] | text-gray--700 font-manrope text-body-2 leading-[150%] rounded"
     >
       <PortableText blocks={description} />
     </motion.div>

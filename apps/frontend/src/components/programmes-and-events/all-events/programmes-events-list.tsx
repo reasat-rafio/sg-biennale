@@ -4,12 +4,10 @@ import { ProgrammeEventListCard } from "./programme-event-list-card";
 interface ProgrammesEventListProps {
   events: IPgrammeEvents[];
   extraPadding: () => number;
-  imgPositionIngAlgo: number[];
 }
 
 export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({
   extraPadding,
-  imgPositionIngAlgo,
   events,
 }) => {
   return (
@@ -20,7 +18,6 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({
             {...pgrmEvnt}
             key={pgrmEvnt._id}
             index={index}
-            imgPositionIngAlgo={imgPositionIngAlgo}
           />
         ))}
       </div>

@@ -84,7 +84,8 @@ const Event = {
 
     {
       name: "price",
-      type: "string",
+      type: "number",
+      description: "If it's free ignore this field",
     },
 
     {
