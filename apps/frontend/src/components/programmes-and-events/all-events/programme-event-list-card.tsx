@@ -8,7 +8,8 @@ import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 import { Header } from "@components/ui/header";
-import { LiquidButton } from "@components/ui/liquid-button";
+import { Button } from "@components/ui/button";
+import { useRouter } from "next/router";
 
 interface ProgrammeEventListCardProps extends IPgrammeEvents {
   index: number;
@@ -31,11 +32,13 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   venue,
   relatedArtists,
 }) => {
+  const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
 
+  const priceVal = `Book Now - ${price ? `$${price}` : "Free"}`;
   const formattedShortDate = format(new Date(startAt), "dd.LL");
   const formattedDate = format(
     new Date(startAt),
@@ -53,6 +56,10 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     physics,
   });
 
+  const onHeaderClickAction = () => {
+    router.push(`/programmes-events/${slug.current}`);
+    router.reload();
+  };
   const onMouseEnterAction = () => setHovered(true);
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
     const width = transform([0, window.innerWidth], [0, 1])(event.clientX);
@@ -65,7 +72,6 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     y.set(0);
     setHovered(false);
   };
-  const priceVal = `Book Now - ${price ? `$${price}` : "Free"}`;
 
   return (
     <motion.article
@@ -77,11 +83,11 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
       className={clsx("grid grid-cols-12 col-span-12 | gap-5")}
       onMouseMove={handleMouseMove}
     >
-      <div className="col-span-1 | text-center text-2xl font-medium">
+      <div className="lg:col-span-1 col-span-12 | text-center text-2xl font-medium">
         {formattedShortDate}
       </div>
-      <section className="col-span-4 relative">
-        <figure className="h-[250px] ">
+      <section className="lg:col-span-4 col-span-12 relative">
+        <figure className="lg:h-[250px] md:h-[400px] h-auto">
           <SanityImg
             className="w-full h-full object-cover"
             builder={imageUrlBuilder}
@@ -99,15 +105,16 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
         )}
       </section>
       <section
-        className="col-span-7 relative | flex flex-col justify-between | font-manrope"
+        className="lg:col-span-7 col-span-12 relative | flex flex-col justify-between | font-manrope"
         onMouseEnter={onMouseEnterAction}
         onMouseLeave={onMouseLeaveAction}
       >
         <div className="flex flex-col space-y-5">
           <Header
             type="h6"
-            className="cursor-pointer | hover:text-red-love | transition-colors duration-500"
+            className="cursor-pointer | hover:text-red-love | transition-colors duration-500 p-1"
             variant="secondary"
+            onClick={onHeaderClickAction}
           >
             {title}
           </Header>
@@ -139,12 +146,14 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
           </div>
         </div>
 
-        <div className="flex | items-center">
-          <div className="flex-1 flex space-x-10 | text-body-2">
+        <div className="flex md:flex-row flex-col | md:items-center | md:mt-0 mt-5 md:space-y-0 space-y-5">
+          <div className="flex-1 flex | space-x-10 | text-body-2">
             <span className="font-semibold">Date & Time</span>
             <span className="text-gray--700">{formattedDate}</span>
           </div>
-          <LiquidButton variant="secondary">{priceVal}</LiquidButton>
+          <Button className="md:w-auto w-full" variant="secondary">
+            {priceVal}
+          </Button>
         </div>
       </section>
     </motion.article>

@@ -41,10 +41,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await sanityClient("anonymous").fetch(pathsQuery);
 
   return {
-    // paths: slugs
-    //   .filter((s: any) => s)
-    //   .map((s: any) => ({ params: { event: s.slug.current } })),
-    paths: [],
+    paths: slugs
+      .filter((s: any) => s)
+      .map((s: any) => ({ params: { event: s.slug.current } })),
     fallback: "blocking",
   };
 };
@@ -71,7 +70,7 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
     venue,
   }: EventDetailProps = props.data.page;
 
-  return <div />;
+  return <div>hi</div>;
   //   <DetailsLayout
   //     DescriptionBlock={
   //       <EventDescription

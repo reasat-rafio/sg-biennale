@@ -6,7 +6,7 @@ interface ClosestEventProps {
   events: IPgrammeEvents[];
 }
 
-export const ClosestEvent: React.FC<ClosestEventProps> = ({ events }) => {
+const ClosestEvent: React.FC<ClosestEventProps> = ({ events }) => {
   const closestEventArr = events
     .sort((a, b) => (a.startAt > b.startAt ? 1 : -1))
     .slice(0, 4);
@@ -21,3 +21,5 @@ export const ClosestEvent: React.FC<ClosestEventProps> = ({ events }) => {
     </section>
   );
 };
+
+export default ClosestEvent;

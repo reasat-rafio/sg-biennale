@@ -8,6 +8,7 @@ interface PageHeaderProps {
   type?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   className?: string;
   children: ReactNode;
+  onClick?: () => void;
 }
 
 const styles = {
@@ -21,6 +22,7 @@ export const Header: React.FC<PageHeaderProps> = ({
   color = "#000000",
   className,
   children,
+  onClick,
 }) => {
   const Element = type;
 
@@ -28,6 +30,7 @@ export const Header: React.FC<PageHeaderProps> = ({
     <Element
       style={{ color, fontWeight }}
       className={clsx("overflow-hidden", className, styles[variant])}
+      onClick={onClick}
     >
       {children}
     </Element>

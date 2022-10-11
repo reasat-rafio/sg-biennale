@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <AnimatePresence onExitComplete={handleExitComplete}>
+    <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
       <Head>
         <link
           rel="icon"
@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <NavDropdown {...pageProps.data?.site?.site} />
         </>
       )}
-      <Component {...pageProps} />
+      <Component {...pageProps} key={router.asPath} />
       {!is404Page && <Footer {...pageProps.data?.site?.site} />}
     </AnimatePresence>
   );
