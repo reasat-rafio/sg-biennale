@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { SanityImage } from "sanity-react-extra";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
+import clsx from "clsx";
 
 interface HeroProps {
   name: string;
@@ -32,6 +33,7 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const [hovered, setHovered] = useState(false);
   const [scalePos, _] = useState([0, 0, 0]);
+  const aspectRatio = images[0].metadata.dimensions.aspectRatio;
 
   return (
     <Container
@@ -41,6 +43,7 @@ export const Hero: React.FC<HeroProps> = ({
       <section className="lg:col-span-7 col-span-12 | lg:max-w-[90%] max-w-full | space-y-10">
         <div className="lg:hidden block ">
           <Image
+            aspectRatio={aspectRatio}
             hovered={hovered}
             scalePos={scalePos}
             setHovered={setHovered}
@@ -63,6 +66,7 @@ export const Hero: React.FC<HeroProps> = ({
       </section>
       <div className="col-span-5 | lg:block hidden">
         <Image
+          aspectRatio={aspectRatio}
           hovered={hovered}
           scalePos={scalePos}
           setHovered={setHovered}
@@ -78,12 +82,14 @@ interface ImageProps {
   setHovered: Dispatch<SetStateAction<boolean>>;
   url: string;
   scalePos: number[];
+  aspectRatio: number;
 }
 const Image: React.FC<ImageProps> = ({
   hovered,
   setHovered,
   url,
   scalePos,
+  aspectRatio,
 }) => {
   return (
     <div
@@ -91,7 +97,9 @@ const Image: React.FC<ImageProps> = ({
       onMouseLeave={() => setHovered(false)}
       className="bg-[#F8F8F8] sm:p-20 p-14"
     >
-      <figure className="aspect-square">
+      <figure
+        className={clsx(aspectRatio > 1.1 ? "aspect-video" : "aspect-square")}
+      >
         <CardImgScene hovered={hovered} url={url} scalePos={scalePos} />
       </figure>
     </div>
