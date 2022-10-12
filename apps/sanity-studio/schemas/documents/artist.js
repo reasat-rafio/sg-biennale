@@ -36,7 +36,7 @@ const Artist = {
     {
       name: "description",
       type: "array",
-      of: [{ type: "block" }],
+      of: [{ type: "block" }, { type: "youtube" }],
       validation: (Rule) => Rule.required(),
     },
     {

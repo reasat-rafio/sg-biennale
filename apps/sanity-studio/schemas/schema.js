@@ -15,6 +15,7 @@ import Footer from "./objects/site/footer";
 import Menu from "./objects/menu";
 import Video from "./objects/video";
 import PageHeading from "./objects/page-heading";
+import YouTube from "./objects/youtube";
 
 import Venue from "./documents/venue";
 import PastEdition from "./documents/past-edition";
@@ -87,6 +88,7 @@ export default createSchema({
 
     Site,
     Menu,
+    YouTube,
     PageHeading,
     Footer,
     MenuItems,
