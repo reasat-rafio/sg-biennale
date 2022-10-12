@@ -4,7 +4,7 @@ import { LiquidButton } from "@components/ui/liquid-button";
 import { RelatedArtistsProps, Venue } from "@lib/@types/event.types";
 import { useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 interface InformationProps {
   venue: Venue[];
@@ -44,7 +44,7 @@ export const Information: React.FC<InformationProps> = ({
 
   return (
     <section className="grid grid-cols-12 | gap-5">
-      <div className="col-span-7 grid grid-cols-12 gap-5">
+      <div className="lg:col-span-7 col-span-12 grid grid-cols-12 sm:gap-5 gap-2">
         <div className="col-span-6">
           <span className="text-gray--400 | text-body-2 font-manrope">
             Artist
@@ -72,13 +72,19 @@ export const Information: React.FC<InformationProps> = ({
           </ul>
         </div>
       </div>
-      <div className="col-span-5 grid grid-cols-12 | gap-5 ">
-        <span ref={secondaryBtnRef} className="col-span-5 w-full">
+      <div className="lg:col-span-5 col-span-12 grid grid-cols-12 | sm:gap-5 gap-2">
+        <span
+          ref={secondaryBtnRef}
+          className="lg:col-span-5 sm:col-span-6 col-span-12 w-full"
+        >
           <LiquidButton width={secondaryBtnWidth} variant="secondary">
             View Artist
           </LiquidButton>
         </span>
-        <span ref={primaryBtnRef} className="col-span-7 w-full">
+        <span
+          ref={primaryBtnRef}
+          className="lg:col-span-7 sm:col-span-6 col-span-12  w-full"
+        >
           <LiquidButton width={primaryBtnWidth} className="">
             Book Now
           </LiquidButton>
