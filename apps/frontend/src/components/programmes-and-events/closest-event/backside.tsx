@@ -16,7 +16,6 @@ interface BacksideProps {
   cardsPerView: number;
   active: boolean;
   formattedDate?: string;
-  ref?: (node: HTMLElement | null) => void;
 }
 
 const SlideRightAnimationVariants: Variants = {
@@ -31,7 +30,6 @@ const SlideRightAnimationVariants: Variants = {
 };
 
 export const Backside: React.FC<BacksideProps> = (props) => {
-  const [ref] = usePortableTextTruncate({ maxLength: 200 });
   const formattedDate = format(
     new Date(props?.startAt),
     "eee, d LLL yyyy - hh:mm aaaaa'm'"
@@ -39,9 +37,9 @@ export const Backside: React.FC<BacksideProps> = (props) => {
   return (
     <>
       {props.cardsPerView !== 1 ? (
-        <SlideRight ref={ref} formattedDate={formattedDate} {...props} />
+        <SlideRight formattedDate={formattedDate} {...props} />
       ) : (
-        <ScaleUp ref={ref} formattedDate={formattedDate} {...props} />
+        <ScaleUp formattedDate={formattedDate} {...props} />
       )}
     </>
   );
@@ -50,10 +48,11 @@ export const Backside: React.FC<BacksideProps> = (props) => {
 const SlideRight: React.FC<BacksideProps> = ({
   active,
   description,
-  ref,
   venue,
   formattedDate,
 }) => {
+  const [ref] = usePortableTextTruncate({ maxLength: 200 });
+
   return (
     <motion.div
       className="absolute z-10 h-full w-1/2 | p-8 box-border ml-auto | bg-[#F8F8F8]"
@@ -110,8 +109,9 @@ const ScaleUp: React.FC<BacksideProps> = ({
   description,
   formattedDate,
   venue,
-  ref,
 }) => {
+  const [ref] = usePortableTextTruncate({ maxLength: 200 });
+
   return (
     <motion.div
       className={
@@ -126,7 +126,7 @@ const ScaleUp: React.FC<BacksideProps> = ({
     >
       <div className="w-[80%] mx-auto flex justify-center items-center flex-col h-full space-y-5">
         <span
-          className="font-mono text-body-1 text-white text-center"
+          className="font-manrope text-body-1 text-white text-center"
           ref={ref}
         >
           <PortableText blocks={description} />

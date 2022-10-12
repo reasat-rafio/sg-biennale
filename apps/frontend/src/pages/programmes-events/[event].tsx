@@ -15,11 +15,17 @@ import { SanityProps } from "next-sanity-extra";
 
 const query = pageQuery(groq`
     *[_type == "events" && slug.current == $event][0]{
-        ...,
+        _id,
+        title,
         category[]->,
         venue[]->{
           name,
           slug
+        },
+        relatedArtists[]->{
+          _id,
+          name,
+          slug,
         },
         images[] {
         ...        
