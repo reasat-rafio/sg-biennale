@@ -17,8 +17,11 @@ const query = pageQuery(groq`
     *[_type == "events" && slug.current == $event][0]{
         _id,
         title,
+        startAt,
+        description,
         category[]->,
         venue[]->{
+          _id,
           name,
           slug
         },
@@ -62,19 +65,8 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const EventDetailPage: NextPage<SanityProps> = (props) => {
-  const {
-    title,
-    description,
-    eventEndTime,
-    eventEndDate,
-    price,
-    eventStartTime,
-    eventStartDate,
-    moreInfo,
-    category,
-    images,
-    venue,
-  }: EventDetailProps = props.data.page;
+  const { title, description, category, images, venue }: EventDetailProps =
+    props.data.page;
 
   return <div>hi</div>;
   //   <DetailsLayout

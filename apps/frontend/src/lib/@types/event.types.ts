@@ -2,23 +2,15 @@ import { SanityImage } from "sanity-react-extra";
 import { IAccordion, Slug } from "./global.types";
 
 export interface EventDetailProps {
-  createdAt: Date;
   _id: string;
-  rev: string;
-  type: string;
-  updatedAt: Date;
   category: Category[];
   description: any[];
-  eventStartDate: Date;
-  eventEndDate?: Date;
-  eventStartTime: number;
-  eventEndTime: number;
+  startAt: Date;
   images: SanityImage[];
-  moreInfo?: IAccordion[];
-  price: string;
   slug: Slug;
   title: string;
   venue: Venue[];
+  relatedArtists: RelatedArtistsProps[];
 }
 
 export interface EventDescriptionProps {
@@ -46,6 +38,13 @@ export interface Category {
 }
 
 export interface Venue {
+  _id: string;
+  name: string;
+  slug: Slug;
+}
+
+export interface RelatedArtistsProps {
+  _id: string;
   name: string;
   slug: Slug;
 }
