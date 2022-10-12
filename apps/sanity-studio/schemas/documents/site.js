@@ -32,6 +32,7 @@ const Site = {
       },
       validation: (Rule) => Rule.required(),
     },
+
     {
       name: "eventLogo",
       type: "image",
@@ -39,6 +40,14 @@ const Site = {
         hotspot: true,
       },
       validation: (Rule) => Rule.required(),
+    },
+
+    {
+      title: "KV's",
+      name: "kvs",
+      type: "array",
+      of: [{ type: "image" }],
+      validation: (Rule) => Rule.required().length(4),
     },
 
     { name: "date", type: "text" },

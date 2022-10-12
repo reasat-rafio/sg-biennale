@@ -6,6 +6,15 @@ export const siteQuery = groq`{
       ...,
       "logo": ${withDimensions("logo")},
       "ogImage": ${withDimensions("ogImage")},
+      kvs[] {
+        ..., 
+        asset->{
+          ...,
+          metadata {
+            dimensions
+          }
+        }
+      },
       favicon {
         ...,
         asset->
