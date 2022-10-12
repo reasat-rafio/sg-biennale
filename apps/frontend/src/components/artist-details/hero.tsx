@@ -1,11 +1,11 @@
 import CardImgScene from "@components/home/news/card-img-scene";
-import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { ICountry } from "@lib/@types/global.types";
 import { PortableText } from "@utils/sanity";
 import { Dispatch, SetStateAction, useState } from "react";
 import { SanityImage } from "sanity-react-extra";
-import getYouTubeID from "get-youtube-id";
+import getYouTubeId from "get-youtube-id";
+import YouTube from "react-youtube";
 
 interface HeroProps {
   name: string;
@@ -13,6 +13,16 @@ interface HeroProps {
   images: SanityImage[];
   countries: ICountry[];
 }
+
+const serializers = {
+  types: {
+    youtube: ({ node }: any) => {
+      const { url } = node;
+      const id = getYouTubeId(url as string);
+      return <YouTube videoId={id as string} />;
+    },
+  },
+};
 
 export const Hero: React.FC<HeroProps> = ({
   countries,
@@ -48,7 +58,7 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
         </header>
         <div className="font-manrope text-body-1 text-gray--700 | pb-10">
-          <PortableText blocks={description} />
+          <PortableText blocks={description} serializers={serializers} />
         </div>
       </section>
       <div className="col-span-5 | lg:block hidden">
