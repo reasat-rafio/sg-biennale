@@ -1,9 +1,10 @@
 import { Carousel } from "@components/event-details/carousel";
+import { Information } from "@components/event-details/information";
 import { Anchor } from "@components/ui/anchor";
 import { Container } from "@components/ui/container";
 import { EventDetailProps } from "@lib/@types/event.types";
 import { pageQuery } from "@lib/query";
-import { sanityClient, sanityStaticProps } from "@utils/sanity";
+import { PortableText, sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -20,7 +21,6 @@ const query = pageQuery(groq`
         title,
         startAt,
         description,
-        category[]->,
         venue[]->{
           _id,
           name,
@@ -66,8 +66,14 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const EventDetailPage: NextPage<SanityProps> = (props) => {
-  const { title, description, category, images, venue }: EventDetailProps =
-    props.data.page;
+  const {
+    title,
+    description,
+    images,
+    venue,
+    relatedArtists,
+    startAt,
+  }: EventDetailProps = props.data.page;
   const router = useRouter();
 
   const onAnchorClickAction = () => router.push("/programmes-events");
@@ -85,6 +91,17 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
         </header>
       </Container>
       <Carousel images={images} />
+
+      <Container>
+        <div className="text-gray--700 font-manrope text-body-2 | my-xl">
+          <PortableText blocks={description} />
+        </div>
+        <Information
+          venue={venue}
+          relatedArtists={relatedArtists}
+          startAt={startAt}
+        />
+      </Container>
     </section>
   );
 };

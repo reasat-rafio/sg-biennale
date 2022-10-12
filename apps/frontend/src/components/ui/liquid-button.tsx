@@ -6,6 +6,7 @@ interface LiquidButtonProps {
   children: ReactNode;
   variant?: "primary" | "secondary";
   className?: string;
+  width?: number;
   onClick?: () => void;
 }
 
@@ -14,6 +15,7 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
   variant = "primary",
   className,
   onClick,
+  width = 200,
 }) => {
   useEffect(() => {
     <LiquidButton>View Director</LiquidButton>;
@@ -22,7 +24,7 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
       const button = buttons[buttonIndex];
       new LiquidButtonClass(button as SVGAElement);
     }
-  }, []);
+  }, [width]);
 
   return (
     <>
@@ -46,6 +48,7 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
           data-color2="#000000"
           data-color3="#292221"
           data-textcolor="#eeeeee"
+          data-width={width}
         />
       )}
       {variant === "secondary" && (
@@ -68,6 +71,7 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
           data-color2="#ffffff"
           data-color3="#F3F2EC"
           data-textcolor="#000000"
+          data-width={width}
         />
       )}
     </>
