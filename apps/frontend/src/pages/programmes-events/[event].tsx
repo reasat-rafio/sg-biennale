@@ -1,5 +1,6 @@
-import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
-import { EventDescription } from "@components/event-details/event-description";
+import { Carousel } from "@components/event-details/carousel";
+import { Anchor } from "@components/ui/anchor";
+import { Container } from "@components/ui/container";
 import { EventDetailProps } from "@lib/@types/event.types";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
@@ -11,6 +12,7 @@ import {
 } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
+import { useRouter } from "next/router";
 
 const query = pageQuery(groq`
     *[_type == "events" && slug.current == $event][0]{
@@ -66,26 +68,25 @@ export const getStaticProps: GetStaticProps = async (
 const EventDetailPage: NextPage<SanityProps> = (props) => {
   const { title, description, category, images, venue }: EventDetailProps =
     props.data.page;
+  const router = useRouter();
 
-  return <div>hi</div>;
-  //   <DetailsLayout
-  //     DescriptionBlock={
-  //       <EventDescription
-  //         title={title}
-  //         description={description}
-  //         eventEndDate={eventEndDate}
-  //         eventEndTime={eventEndTime}
-  //         price={price}
-  //         eventStartTime={eventStartTime}
-  //         eventStartDate={eventStartDate}
-  //         venue={venue}
-  //         moreInfo={moreInfo}
-  //         category={category}
-  //       />
-  //     }
-  //     CarouselBlock={<DetailsPageImageCarousel images={images} />}
-  //   />
-  // );
+  const onAnchorClickAction = () => router.push("/programmes-events");
+
+  return (
+    <section className="pt-x">
+      <Container>
+        <Anchor onClick={onAnchorClickAction} className="text-gray--700">
+          Back to Event List
+        </Anchor>
+        <header className="my-7">
+          <h1 className="2xl:text-heading-3 xl:text-heading-4 text-heading-5 font-medium md:text-left text-center">
+            {title}
+          </h1>
+        </header>
+      </Container>
+      <Carousel images={images} />
+    </section>
+  );
 };
 
 export default EventDetailPage;
