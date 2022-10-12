@@ -2,8 +2,8 @@ import { Search } from "@components/icons/search";
 import useArtistsStore from "@stores/artists.store";
 import { ChangeEvent } from "react";
 
-interface SeachByProps {}
-export const SeachBy: React.FC<SeachByProps> = ({}) => {
+interface SearchByProps {}
+export const SearchBy: React.FC<SearchByProps> = ({}) => {
   const { setSearchInput } = useArtistsStore();
 
   const onChangeAction = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,7 @@ export const SeachBy: React.FC<SeachByProps> = ({}) => {
         onChange={onChangeAction}
         className="flex-1 outline-none border-none"
         type="text"
-        placeholder="Seach Artist"
+        placeholder="Search Artist"
       />
       <Search />
     </div>

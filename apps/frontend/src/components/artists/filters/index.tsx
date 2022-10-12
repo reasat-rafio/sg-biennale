@@ -1,5 +1,5 @@
 import { Container } from "@components/ui/container";
-import { SeachBy } from "./search-by";
+import { SearchBy } from "./search-by";
 import { SortByRegion } from "./sort-by-region";
 
 interface IndexProps {}
@@ -11,7 +11,7 @@ export const Filters: React.FC<IndexProps> = ({}) => {
         <SortByRegion />
       </div>
       <div className="xl:col-span-3 md:col-span-6 col-span-12 ">
-        <SeachBy />
+        <SearchBy />
       </div>
     </Container>
   );
