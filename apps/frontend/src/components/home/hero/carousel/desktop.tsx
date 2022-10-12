@@ -1,33 +1,21 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { HomHeroProps } from "@lib/@types/home.types";
 import { SanityImg, SanityImage } from "sanity-react-extra";
 import { imageUrlBuilder } from "@utils/sanity";
-import { Pagination, EffectFade, Autoplay } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/autoplay";
-import { useWindowSize } from "@lib/hooks";
+import { Autoplay } from "swiper";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { getShuffledArr } from "@lib/helpers/global.helpers";
 
-interface HeroCarouselProps {
-  kvs: SanityImage[];
+interface DesktopProps {
+  suffledKVs: SanityImage[];
 }
 
-export const HeroCarousel: React.FC<HeroCarouselProps> = ({ kvs }) => {
-  const [suffledKVs, setSuffledKVs] = useState<SanityImage[]>([]);
-  const windowWidth = useWindowSize()?.width ?? 0;
-
-  useEffect(() => {
-    setSuffledKVs(getShuffledArr(kvs));
-  }, []);
-
+export const Desktop: React.FC<DesktopProps> = ({ suffledKVs }) => {
   return (
     <Swiper
       className="pl-xxl"
       speed={600}
       grabCursor
+      modules={[Autoplay]}
+      autoplay={{ delay: 4000 }}
       slidesPerView="auto"
       spaceBetween={20}
     >
