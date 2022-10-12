@@ -28,7 +28,6 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
             <motion.a
               whileHover={{
                 scale: 1.05,
-                // backgroundColor: ["#eeeeee", "#DE5742"],
               }}
               transition={{ damping: 2 }}
               className="hidden lg:flex | space-x-2 items-center cursor-pointer"

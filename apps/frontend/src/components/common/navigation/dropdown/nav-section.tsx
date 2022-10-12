@@ -13,7 +13,6 @@ import { useState } from "react";
 import { SanityImg, SanityImage } from "sanity-react-extra";
 
 interface NavProps {
-  image: SanityImage;
   menu: Menu[];
 }
 
@@ -60,7 +59,7 @@ export const NavSection: React.FC<NavProps> = ({ menu, image }) => {
             ))}
           </ul>
         </div>
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {showNavDropDown && (
             <motion.figure
               className="lg:flex hidden | flex-col justify-center items-center | lg:col-span-4 | h-[70vh] | overflow-hidden"
@@ -78,7 +77,7 @@ export const NavSection: React.FC<NavProps> = ({ menu, image }) => {
               />
             </motion.figure>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </div>
     </section>
   );
