@@ -16,6 +16,7 @@ export interface Site {
   eventLogo: SanityImage;
   navigations: Navigations;
   ogImage: SanityImage;
+  kvs: SanityImage[];
 }
 
 export interface Footer {

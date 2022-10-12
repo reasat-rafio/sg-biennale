@@ -9,6 +9,9 @@ import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
+import { Hero } from "@components/home/hero/hero";
+import { useCallback } from "react";
+import { HomHeroProps } from "@lib/@types/home.types";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -76,11 +79,20 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const Home: NextPage<SanityProps> = (props) => {
-  const { page } = useSanityQuery(query, props).data;
+  const {
+    page,
+    site: {
+      site: { kvs },
+    },
+  } = useSanityQuery(query, props).data;
+
   return (
     <div>
       {renderObjectArray(page.sections, {
-        // "homePage.hero": Hero,t
+        "homePage.hero": useCallback(
+          (props: HomHeroProps) => <Hero {...props} kvs={kvs} />,
+          []
+        ),
         "homePage.introduction": Introduction,
         "homePage.promotion": Promotion,
         "homePage.artists": Artist,

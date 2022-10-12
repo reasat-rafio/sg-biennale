@@ -1,52 +1,57 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HomHeroProps } from "@lib/@types/home.types";
-import { SanityImg } from "sanity-react-extra";
+import { SanityImg, SanityImage } from "sanity-react-extra";
 import { imageUrlBuilder } from "@utils/sanity";
 import { Pagination, EffectFade, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
 import "swiper/css/autoplay";
 import { useWindowSize } from "@lib/hooks";
+import clsx from "clsx";
 
 interface HeroCarouselProps {
-  carouselItems: HomHeroProps["image"];
+  kvs: SanityImage[];
 }
 
-export const HeroCarousel: React.FC<HeroCarouselProps> = ({
-  carouselItems,
-}) => {
+export const HeroCarousel: React.FC<HeroCarouselProps> = ({ kvs }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
-    <div />
-    // <Swiper
-    //   className="h-[400px] md:h-[75vh]"
-    //   modules={[Pagination, EffectFade, Autoplay]}
-    //   slidesPerView={1}
-    //   effect="fade"
-    //   autoplay
-    //   pagination={{ clickable: true }}
-    //   onSlideChange={() => console.log("slide change")}
-    //   onSwiper={(swiper) => console.log(swiper)}
-    // >
-    //   {carouselItems.map(({ key, image, description, title }) => (
-    //     <SwiperSlide className="relative" key={key}>
-    //       <SanityImg
-    //         width={windowWidth >= 1024 ? 3000 : 1400}
-    //         className="h-full w-full absolute object-cover object-center "
-    //         image={image}
-    //         builder={imageUrlBuilder}
-    //         alt={title}
-    //       />
-    //       <div className="absolute h-full w-full | flex flex-col justify-center items-center | space-y-8">
-    //         <h3 className="text-5xl font-semibold text-white">{title}</h3>
-    //         <p className="max-w-sm text-center | text-xl text-gray-300">
-    //           {description}
-    //         </p>
-    //       </div>
-    //     </SwiperSlide>
-    //   ))}
-    // </Swiper>
+    <Swiper
+      className="pl-xxl"
+      speed={600}
+      grabCursor
+      slidesPerView="auto"
+      spaceBetween={20}
+    >
+      {kvs.map((image, index) => (
+        <SwiperSlide
+          className={clsx(
+            "relative flex justify-center items-center",
+            index === 0 && "w-[40vw] mt-[5%] p-16",
+            index === 1 && "w-[15vw] p-5",
+            index === 2 && "w-[20vw] mt-[25%] -translate-x-[10%] p-10",
+            index === 3 && "w-[35vw] mt-[2%] p-14"
+          )}
+          key={image._key}
+        >
+          <figure className="w-full relative z-10">
+            <SanityImg
+              className="h-full w-full | object-contain"
+              image={image}
+              builder={imageUrlBuilder}
+              width={500}
+            />
+          </figure>
+
+          <div
+            className={clsx(
+              "absolute top-0 left-0  w-full bg-[#F8F8F8] z-0",
+              index === 1 ? "h-[65%]" : "h-full"
+            )}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 };

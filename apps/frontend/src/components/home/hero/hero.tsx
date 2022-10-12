@@ -1,36 +1,29 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { HomHeroProps } from "@lib/@types/home.types";
-import { PortableText } from "@utils/sanity";
+import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { Container } from "@components/ui/container";
-import dynamic from "next/dynamic";
-import { Vector2 } from "@react-three/fiber";
+import { SanityImg } from "sanity-react-extra";
+import { HeroCarousel } from "./hero-carousel";
 
-const HeroScene = dynamic(() => import("./hero-scene"), {
-  ssr: false,
-});
-
-export const Hero: React.FC<HomHeroProps> = ({ image, description }) => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [coords, setCoords] = useState<Vector2>([0, 0]);
-
-  const handleMouseMove = (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => {
-    setCoords([
-      (event.clientX / window.innerWidth) * 2 - 1,
-      -(event.clientY / window.innerHeight) * 2 + 1,
-    ]);
-  };
-
+export const Hero: React.FC<HomHeroProps> = ({ image, description, kvs }) => {
   return (
-    <section
-      ref={sectionRef}
-      className="h-screen"
-      onMouseMove={handleMouseMove}
-    >
-      <HeroScene sectionRef={sectionRef} coords={coords} image={image} />
-      <Container>
-        <PortableText blocks={description} />
+    <section className="mt-x">
+      <HeroCarousel kvs={kvs} />
+      <Container className="flex space-x-5 mt-xl">
+        <div className="flex-1">
+          <div className="max-w-lg text-gray--700 | font-manrope text-body-1">
+            <PortableText blocks={description} />
+          </div>
+        </div>
+        <figure>
+          <SanityImg
+            className="w-full object-contain"
+            image={image}
+            builder={imageUrlBuilder}
+            width={600}
+            alt=""
+          />
+        </figure>
       </Container>
     </section>
   );

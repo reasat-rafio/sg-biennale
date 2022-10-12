@@ -46,7 +46,14 @@ const Site = {
       title: "KV's",
       name: "kvs",
       type: "array",
-      of: [{ type: "image" }],
+      of: [
+        {
+          type: "image",
+          options: {
+            hotspot: true,
+          },
+        },
+      ],
       validation: (Rule) => Rule.required().length(4),
     },
 
