@@ -49,9 +49,6 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="font-manrope text-body-1 text-gray--700 | pb-10">
           <PortableText blocks={description} />
         </div>
-        <div className="">
-          <Button variant="secondary">View Artist</Button>
-        </div>
       </section>
       <div className="col-span-5 | lg:block hidden">
         <Image
