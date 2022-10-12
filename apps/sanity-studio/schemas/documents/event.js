@@ -87,11 +87,9 @@ const Event = {
       type: "number",
       description: "If it's free ignore this field",
     },
-
     {
-      name: "moreInfo",
-      type: "array",
-      of: [{ type: "info" }],
+      name: "additionalInfo",
+      type: "string",
     },
   ],
   preview: {

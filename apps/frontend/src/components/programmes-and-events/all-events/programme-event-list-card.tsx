@@ -58,7 +58,6 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
 
   const onHeaderClickAction = () => {
     router.push(`/programmes-events/${slug.current}`);
-    router.reload();
   };
   const onMouseEnterAction = () => setHovered(true);
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
