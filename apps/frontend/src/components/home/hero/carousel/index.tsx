@@ -21,7 +21,11 @@ export const Carousel: React.FC<HeroCarouselProps> = ({ kvs }) => {
 
   return (
     <>
-      {windowWidth >= 1024 ? <Desktop suffledKVs={suffledKVs} /> : <Mobile />}
+      {windowWidth >= 768 ? (
+        <Desktop suffledKVs={suffledKVs} />
+      ) : (
+        <Mobile suffledKVs={suffledKVs} />
+      )}
     </>
   );
 };
