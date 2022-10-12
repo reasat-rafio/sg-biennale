@@ -1,5 +1,7 @@
+import { Button } from "@components/ui/button";
 import { Header } from "@components/ui/header";
 import { RelatedEventsProps } from "@lib/@types/artist-details.types";
+import { useRouter } from "next/router";
 import { ProgrammesEventsCarousel } from "./programmes-events-carousel";
 
 interface ProgrammesEventsProps {
@@ -11,11 +13,19 @@ export const ProgrammesEvents: React.FC<ProgrammesEventsProps> = ({
   relatedEvents,
   name,
 }) => {
+  const router = useRouter();
+  const onBtnClickAction = () => router.push("/programmes-events");
+
   return (
     <section className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg mx-auto | pt-xl overflow-hidden">
-      <header className="mb-16">
-        <Header variant="secondary">{name}’s Programmes & Events</Header>
-      </header>
+      <div className="flex sm:flex-row flex-col items-center | sm:space-x-5 space-y-3 sm:space-y-0 mb-16">
+        <header className="flex-1 ">
+          <Header className="p-1" variant="secondary">
+            {name}’s Programmes & Events
+          </Header>
+        </header>
+        <Button onClick={onBtnClickAction}>View Events</Button>
+      </div>
 
       <ProgrammesEventsCarousel relatedEvents={relatedEvents} />
     </section>
