@@ -16,6 +16,7 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
       ?.querySelector(`#anchor-${convertSectionTypeName(anchorName)}`)
       ?.scrollIntoView({ behavior: "smooth" });
   };
+
   return (
     <aside
       style={{ top: navbarHeight + 5 }}
@@ -31,7 +32,7 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
               ? `${anchors.length * 50}px`
               : anchors.length < 10
               ? "40vh"
-              : "h-[70vh]",
+              : "70vh",
         }}
         spaceBetween={5}
         direction="vertical"
