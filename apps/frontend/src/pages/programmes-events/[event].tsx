@@ -1,6 +1,5 @@
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
 import { EventDescription } from "@components/event-details/event-description";
-import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { EventDetailProps } from "@lib/@types/event.types";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
