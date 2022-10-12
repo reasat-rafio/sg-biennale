@@ -23,7 +23,10 @@ export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
       spaceBetween={30}
     >
       {suffledKVs.map((image, index) => (
-        <SwiperSlide className="relative p-10 h-[500px]" key={image._key}>
+        <SwiperSlide
+          className="relative p-10 sm:h-[500px] h-[400px]"
+          key={image._key}
+        >
           <figure className="relative z-10 h-full w-full | object-contain">
             <SanityImg
               className="h-full w-full | object-contain"
