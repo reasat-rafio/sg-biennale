@@ -22,7 +22,6 @@ export interface Site {
 export interface Footer {
   type: string;
   header: string;
-  image: SanityImage;
   menu?: Menu[];
   newsLetter: FooterNewsLetter;
   location: FooterLocation;

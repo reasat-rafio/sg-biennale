@@ -12,14 +12,6 @@ const Footer = {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "image",
-      type: "image",
-      validation: (Rule) => Rule.required(),
-      options: {
-        hotspot: true,
-      },
-    },
-    {
       name: "menu",
       type: "array",
       of: [{ type: "menuItem" }],
