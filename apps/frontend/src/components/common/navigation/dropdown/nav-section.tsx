@@ -16,7 +16,7 @@ interface NavProps {
   menu: Menu[];
 }
 
-export const NavSection: React.FC<NavProps> = ({ menu, image }) => {
+export const NavSection: React.FC<NavProps> = ({ menu }) => {
   const { showNavDropDown, setShowNavDropDown, navbarHeight } =
     useGlobalStore();
   const windowWidth = useWindowSize()?.width ?? 0;
@@ -82,8 +82,3 @@ export const NavSection: React.FC<NavProps> = ({ menu, image }) => {
     </section>
   );
 };
-// 1	1920×1080	104,190(22.62%)
-// 2	1366×768	51,580(11.20%)
-// 3	1440×900	44,003(9.55%)
-// 4	1536×864	39,606(8.60%)
-// 5	2560×1440	34,152(7.41%)
