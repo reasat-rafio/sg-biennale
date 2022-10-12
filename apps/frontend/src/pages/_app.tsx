@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <NavDropdown {...pageProps.data?.site?.site} />
         </>
       )}
-      <Component {...pageProps} key={router.asPath} />
+      <Component {...pageProps} />
       {!is404Page && <Footer {...pageProps.data?.site?.site} />}
     </AnimatePresence>
   );

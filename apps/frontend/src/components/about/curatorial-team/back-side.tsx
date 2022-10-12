@@ -15,7 +15,6 @@ interface BackSideProps {
 interface BackSideVariantsProps {
   active: boolean;
   description: any;
-  ref: (node: HTMLElement | null) => void;
 }
 
 const SlideRightAnimationVariants: Variants = {
@@ -34,11 +33,9 @@ export const BackSide: React.FC<BackSideProps> = ({
   active,
   cardsPerView,
 }) => {
-  const [ref] = usePortableTextTruncate({ maxLength: 200 });
   const props = {
     active,
     description,
-    ref,
   };
 
   return (
@@ -51,8 +48,9 @@ export const BackSide: React.FC<BackSideProps> = ({
 const SlideRight: React.FC<BackSideVariantsProps> = ({
   active,
   description,
-  ref,
 }) => {
+  const [ref] = usePortableTextTruncate({ maxLength: 250 });
+
   return (
     <motion.div
       className={clsx(
@@ -79,9 +77,9 @@ const SlideRight: React.FC<BackSideVariantsProps> = ({
         }}
       >
         <div className="flex-1 flex justify-center items-center">
-          <span className="font-mono text-body-1 text-gray-500" ref={ref}>
+          <div className="font-manrope text-body-1 text-gray-500" ref={ref}>
             <PortableText blocks={description} />
-          </span>
+          </div>
         </div>
         <div className="w-full">
           <Button>View Director</Button>
@@ -91,11 +89,9 @@ const SlideRight: React.FC<BackSideVariantsProps> = ({
   );
 };
 
-const ScaleUp: React.FC<BackSideVariantsProps> = ({
-  active,
-  description,
-  ref,
-}) => {
+const ScaleUp: React.FC<BackSideVariantsProps> = ({ active, description }) => {
+  const [ref] = usePortableTextTruncate({ maxLength: 250 });
+
   return (
     <motion.div
       className={clsx(
@@ -109,12 +105,12 @@ const ScaleUp: React.FC<BackSideVariantsProps> = ({
       transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
     >
       <div className="w-[80%] mx-auto flex justify-center items-center flex-col h-full space-y-5">
-        <span
-          className="font-mono text-body-1 text-white text-center"
+        <div
+          className="font-manrope text-body-1 text-white text-center"
           ref={ref}
         >
           <PortableText blocks={description} />
-        </span>
+        </div>
         <Button className="!bg-white !text-black">View Director</Button>
       </div>
     </motion.div>
