@@ -39,8 +39,10 @@ export const Hero: React.FC<HeroProps> = ({
         <header className="space-y-2">
           <h1 className="font-medium text-heading-6">{name}</h1>
           <div>
-            {countries.map(({ label, value }) => (
-              <span key={value}>{label}, </span>
+            {countries.map(({ label, value }, index) => (
+              <span key={value}>
+                {label} {index === countries.length - 1 ? "" : ","}
+              </span>
             ))}
           </div>
         </header>
