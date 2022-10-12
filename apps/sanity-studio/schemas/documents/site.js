@@ -49,6 +49,14 @@ const Site = {
       of: [
         {
           type: "image",
+          fields: [
+            {
+              title: "Short Background",
+              name: "shortBackground",
+              type: "boolean",
+              hidden: true,
+            },
+          ],
           options: {
             hotspot: true,
           },

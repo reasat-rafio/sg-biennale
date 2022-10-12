@@ -8,13 +8,20 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { useWindowSize } from "@lib/hooks";
 import clsx from "clsx";
+import { useEffect, useState } from "react";
+import { getShuffledArr } from "@lib/helpers/global.helpers";
 
 interface HeroCarouselProps {
   kvs: SanityImage[];
 }
 
 export const HeroCarousel: React.FC<HeroCarouselProps> = ({ kvs }) => {
+  const [suffledKVs, setSuffledKVs] = useState<SanityImage[]>([]);
   const windowWidth = useWindowSize()?.width ?? 0;
+
+  useEffect(() => {
+    setSuffledKVs(getShuffledArr(kvs));
+  }, []);
 
   return (
     <Swiper
@@ -24,7 +31,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ kvs }) => {
       slidesPerView="auto"
       spaceBetween={20}
     >
-      {kvs.map((image, index) => (
+      {suffledKVs.map((image, index) => (
         <SwiperSlide
           className={clsx(
             "relative flex justify-center items-center",
@@ -47,7 +54,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ kvs }) => {
           <div
             className={clsx(
               "absolute top-0 left-0  w-full bg-[#F8F8F8] z-0",
-              index === 1 ? "h-[65%]" : "h-full"
+              image.shortBackground ? "h-[65%]" : "h-full"
             )}
           />
         </SwiperSlide>
