@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { AllCategoriesProps } from "@lib/@types/programmes-events.types";
 import { Checkbox } from "./checkbox";
 import { motion } from "framer-motion";
+import { SortIcon } from "@components/icons/sort";
 
 interface FilterByCategoryProps {
   selectedCategory: string | null;
@@ -24,7 +25,7 @@ export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
           {selectedCategory ? selectedCategory : "Category"}
         </span>
 
-        <img className="w-[18px]" src="/icons/sort.svg" alt="sort icon" />
+        <SortIcon />
       </div>
     </div>
   );

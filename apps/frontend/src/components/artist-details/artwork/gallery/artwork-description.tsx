@@ -82,57 +82,6 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
                   custom={0.6}
                 >
                   <PortableText blocks={selectedImage.artwork.description} />
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Laboriosam dolores ut omnis similique non atque iste esse
-                  inventore! Fuga totam tempora quisquam quae dolorem! Commodi
-                  minus nihil veniam excepturi fugiat nulla dolorem, iure
-                  pariatur voluptatum ducimus cumque, exercitationem quam porro
-                  non quidem sequi! Impedit dolorem sed consectetur temporibus
-                  neque praesentium voluptate consequatur, voluptatem
-                  voluptates! Adipisci consequuntur provident recusandae alias
-                  numquam voluptatum id asperiores voluptatibus perspiciatis
-                  excepturi blanditiis sed facere, quasi odit neque vero tempore
-                  necessitatibus voluptas totam nam corrupti quaerat fuga? Nam
-                  tempora quas, cum similique officiis asperiores nulla, alias
-                  ex quasi esse numquam aut unde repellat. Non voluptatum saepe
-                  quia iusto, earum obcaecati eaque similique officiis dicta
-                  iste aliquid nihil maiores assumenda nulla, temporibus et
-                  culpa accusamus consequatur aut dolore animi dolorum hic
-                  atque. Maiores laboriosam perspiciatis quo suscipit sunt,
-                  placeat, molestiae deserunt architecto et fuga, velit quod!
-                  Eum neque exercitationem cupiditate, non quis eveniet nihil
-                  est. Quos minus ullam labore? Sequi ad expedita beatae
-                  blanditiis animi obcaecati ipsa tenetur maxime et esse iusto
-                  quam quaerat reprehenderit adipisci officiis enim ut, hic,
-                  fugit repudiandae aspernatur eum voluptates, accusamus
-                  explicabo. Minima sint, laborum alias ut aperiam odit quae
-                  perspiciatis debitis cumque laboriosam repudiandae delectus
-                  facilis sit aliquid, ipsa, ab Lorem ipsum dolor sit amet
-                  consectetur, adipisicing elit. Quo debitis voluptatem natus
-                  maiores aliquid aut odit dolores, consequuntur sed sint est
-                  porro quasi labore corporis, possimus atque praesentium
-                  quaerat obcaecati et vero dolorem! Modi in, molestias libero
-                  quae quam doloribus. Veniam neque, nihil hic laborum quasi
-                  enim blanditiis impedit aspernatur totam temporibus autem
-                  itaque explicabo! Neque perferendis minus facilis nostrum,
-                  inventore, labore reprehenderit quas molestiae et sit dolores
-                  consectetur ex veniam at distinctio, alias nulla quam
-                  voluptates dolor enim possimus atque. Aspernatur odit ducimus
-                  ea delectus error porro alias aperiam itaque illum nesciunt,
-                  consequuntur, magni impedit assumenda blanditiis tempore cum
-                  ratione velit recusandae ad nobis necessitatibus eum explicabo
-                  nulla et. Laborum repellat vel aperiam rem provident nisi illo
-                  cupiditate voluptatem laudantium nulla saepe, deleniti
-                  mollitia quia necessitatibus aliquid accusantium debitis vitae
-                  corrupti rerum? Sequi quisquam hic vitae nisi mollitia sunt
-                  vero nemo possimus voluptates dolorem est dolor iusto, culpa
-                  odit similique dignissimos odio eligendi eum quam deserunt.
-                  Aperiam consectetur reprehenderit eaque similique dolore
-                  perspiciatis impedit numquam nostrum velit. Reprehenderit eos
-                  maxime consectetur sed numquam obcaecati quibusdam molestiae
-                  aliquam magnam illum recusandae voluptas laudantium rerum odio
-                  adipisci iure facilis possimus et, fugit deserunt modi. Nam
-                  est laudantium dolorem. Ipsum, neque aliquid? id?
                 </motion.div>
               </div>
               <div className="overflow-hidden">
@@ -188,7 +137,7 @@ export const CloseIcon: React.FC<CloseIconProps> = ({
     <>
       {selectedImage?.index === uniqueIndex && (
         <Html zIndexRange={[10, 20]} className="w-6 h-6" position={[1, 2.5, 0]}>
-          <motion.img
+          <motion.svg
             onClick={() => {
               setTriggerExitAnimation(true);
               setTimeout(() => {
@@ -196,12 +145,18 @@ export const CloseIcon: React.FC<CloseIconProps> = ({
                 setSelectedImage(null);
               }, 1200);
             }}
-            className="h-10 w-10 cursor-pointer hover:scale-125 transition-all duration-300 ease-in-out"
             initial={{ scale: 0 }}
-            animate={{ scale: 1, transition: { delay: 1 } }}
-            src="/icons/cross.svg"
-            alt="close icon"
-          />
+            animate={{ scale: 1, transition: { delay: 1 }, originX: 0.5 }}
+            className="h-6 w-6 cursor-pointer hover:scale-125 transition-all duration-300 ease-in-out"
+            width="27"
+            height="28"
+            viewBox="0 0 27 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M25.5 2L1.5 26" stroke="black" stroke-width="3" />
+            <path d="M1.5 2L25.5 26" stroke="black" stroke-width="3" />
+          </motion.svg>
         </Html>
       )}
     </>
