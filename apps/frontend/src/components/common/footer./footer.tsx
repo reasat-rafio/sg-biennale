@@ -35,8 +35,8 @@ export const Footer: React.FC<ISite["site"]> = ({
       <section className="col-span-12 xl:col-span-6 lg:col-span-7 flex justify-center items-center ">
         <figure className="aspect-square">
           <SanityImg
-            className="w-full h-full aspect-square object-cover"
-            width={600}
+            className="w-full max-h-[600px] aspect-square object-contain"
+            width={900}
             image={suffledKVs[0] ?? kvs[0]}
             builder={imageUrlBuilder}
             alt={`${header}' image`}

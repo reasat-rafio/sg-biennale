@@ -1,6 +1,6 @@
 import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect } from "react";
 
 interface FilteringLogicProps {
   children: ReactNode;

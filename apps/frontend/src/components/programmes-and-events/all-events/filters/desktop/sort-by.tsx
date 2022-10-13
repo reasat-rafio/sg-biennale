@@ -43,10 +43,10 @@ export const SortBy: React.FC<{}> = () => {
   ❓Getting the query from the url and setting them to the state
   @REASON: This stop the state to reset after refresh
   */
+
   useEffect(() => {
     /* 🚩 Flag to check if the category query present  */
     const selectedSortingFromUrlQuery = router.query.sort_by;
-
     if (selectedSortingFromUrlQuery) {
       const [matchedVanue] = sortByList.filter(
         ({ name }) => name.toLowerCase() === selectedSortingFromUrlQuery
