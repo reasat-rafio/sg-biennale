@@ -144,8 +144,11 @@ export const Image: React.FC<ArtworkImageProps> = ({
             {name}
           </h6>
           <span>
-            {countries.map(({ label }) => (
-              <span>{label} ,</span>
+            {countries.map(({ label }, index) => (
+              <span>
+                {label}
+                {index === countries.length - 1 ? "" : ","}
+              </span>
             ))}
           </span>
         </motion.div>
