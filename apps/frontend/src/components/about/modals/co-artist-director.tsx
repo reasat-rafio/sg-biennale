@@ -77,9 +77,14 @@ const Content: React.FC<TeamCollection> = ({
           {team.name}
         </motion.h6>
 
-        <motion.figure className="lg:hidden block">
+        <motion.figure
+          className="lg:hidden flex | justify-center items-end"
+          style={{
+            background: `linear-gradient(180deg, ${from.hex} 0%, ${to.hex} 100%)`,
+          }}
+        >
           <SanityImg
-            className="w-full object-cover max-h-[400px]"
+            className="w-full object-contain max-h-[400px]"
             width={400}
             image={team.images[0]}
             builder={imageUrlBuilder}

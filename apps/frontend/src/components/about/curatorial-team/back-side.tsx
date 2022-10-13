@@ -105,7 +105,9 @@ const SlideRightVariant: React.FC<BackSideVariantsProps> = ({
 const ScaleUpVarian: React.FC<BackSideVariantsProps> = ({
   active,
   description,
+  id,
 }) => {
+  const { setSelectedCoArtisticDirectorId } = useAboutStore();
   const [ref] = usePortableTextTruncate({ maxLength: 250 });
 
   return (
@@ -127,7 +129,12 @@ const ScaleUpVarian: React.FC<BackSideVariantsProps> = ({
         >
           <PortableText blocks={description} />
         </div>
-        <Button className="!bg-white !text-black">View Director</Button>
+        <Button
+          onClick={() => setSelectedCoArtisticDirectorId(id)}
+          className="!bg-white !text-black"
+        >
+          View Director
+        </Button>
       </div>
     </motion.div>
   );
