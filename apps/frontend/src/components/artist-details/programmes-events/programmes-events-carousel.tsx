@@ -85,6 +85,7 @@ export const ProgrammesEventsCarousel: React.FC<
             slug,
             startAt,
             venue,
+            bookNowUrl,
             relatedArtists,
           },
           index
@@ -165,6 +166,7 @@ export const ProgrammesEventsCarousel: React.FC<
                 startAt={startAt}
                 active={activeCardIndex === index}
                 cardsPerView={cardsPerView}
+                bookNowUrl={bookNowUrl}
               />
             </motion.article>
           );

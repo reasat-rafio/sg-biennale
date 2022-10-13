@@ -12,6 +12,7 @@ export interface RelatedEventsProps {
   startAt: Date;
   title: string;
   venue: RelatedVenue[];
+  bookNowUrl?: string;
 }
 
 export interface RelatedArtist {

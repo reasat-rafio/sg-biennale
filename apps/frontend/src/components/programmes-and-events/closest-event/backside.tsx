@@ -1,5 +1,4 @@
 import { Clock } from "@components/icons/clock";
-import { Button } from "@components/ui/button";
 import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
 import { usePortableTextTruncate } from "@lib/hooks";
 import { PortableText } from "@utils/sanity";
@@ -7,6 +6,7 @@ import { motion, Variants } from "framer-motion";
 import { format } from "date-fns";
 import { Location } from "@components/icons/location";
 import { LiquidButton } from "@components/ui/liquid-button";
+import { useRouter } from "next/router";
 
 interface BacksideProps {
   description: IPgrammeEvents["description"];
@@ -16,6 +16,7 @@ interface BacksideProps {
   cardsPerView: number;
   active: boolean;
   formattedDate?: string;
+  bookNowUrl?: string;
 }
 
 const SlideRightAnimationVariants: Variants = {
@@ -49,8 +50,10 @@ const SlideRight: React.FC<BacksideProps> = ({
   active,
   description,
   venue,
+  bookNowUrl,
   formattedDate,
 }) => {
+  const router = useRouter();
   const [ref] = usePortableTextTruncate({ maxLength: 200 });
 
   return (
@@ -96,8 +99,11 @@ const SlideRight: React.FC<BacksideProps> = ({
               </span>
             </span>
           </div>
-
-          <LiquidButton>Book Now</LiquidButton>
+          {bookNowUrl && (
+            <LiquidButton onClick={() => router.push(bookNowUrl)}>
+              Book Now
+            </LiquidButton>
+          )}
         </div>
       </motion.div>
     </motion.div>
@@ -109,7 +115,9 @@ const ScaleUp: React.FC<BacksideProps> = ({
   description,
   formattedDate,
   venue,
+  bookNowUrl,
 }) => {
+  const router = useRouter();
   const [ref] = usePortableTextTruncate({ maxLength: 200 });
 
   return (
@@ -144,7 +152,11 @@ const ScaleUp: React.FC<BacksideProps> = ({
             <span>{formattedDate}</span>
           </span>
         </span>
-        <Button className="!bg-white !text-black">View Artist</Button>
+        {bookNowUrl && (
+          <LiquidButton onClick={() => router.push(bookNowUrl)}>
+            Book Now
+          </LiquidButton>
+        )}
       </div>
     </motion.div>
   );

@@ -49,6 +49,7 @@ const query = pageQuery(groq`
           slug,
           description,
           startAt,
+          bookNowUrl,
           venue[]->{
             _id,
             name,
