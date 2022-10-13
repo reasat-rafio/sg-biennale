@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Header } from "@components/ui/header";
 import { LiquidButton } from "@components/ui/liquid-button";
+import { useRouter } from "next/router";
 
 interface VolunteerProps {
   header: string;
@@ -21,6 +22,7 @@ export const Volunteer: React.FC<VolunteerProps> = ({
   cta,
   images,
 }) => {
+  const router = useRouter();
   return (
     <Container className="2xl:py-max lg:py-xxl py-xl">
       <section className="grid grid-cols-12 | items-center">
@@ -33,7 +35,9 @@ export const Volunteer: React.FC<VolunteerProps> = ({
         </header>
 
         <div className="xl:col-span-2 col-span-12">
-          <LiquidButton>{cta.title}</LiquidButton>
+          <LiquidButton onClick={() => router.push(cta.href)}>
+            {cta.title}
+          </LiquidButton>
         </div>
       </section>
       <Swiper
