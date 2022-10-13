@@ -17,6 +17,28 @@ const Footer = {
       of: [{ type: "menuItem" }],
     },
     {
+      title: "KV's",
+      name: "kvs",
+      type: "array",
+      validation: (Rule) => Rule.required().length(4),
+      of: [
+        {
+          type: "image",
+          fields: [
+            {
+              title: "Short Background",
+              name: "shortBackground",
+              type: "boolean",
+              hidden: true,
+            },
+          ],
+          options: {
+            hotspot: true,
+          },
+        },
+      ],
+    },
+    {
       name: "newsLetter",
       type: "object",
       fields: [
