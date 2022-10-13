@@ -1,6 +1,5 @@
 import { ArtworkDescription } from "@components/artwok-details/artwork-description";
 import { DetailsPageImageCarousel } from "@components/common/deatils-page/image-carousel";
-import { DetailsLayout } from "@components/ui/layouts/details-layout";
 import { pageQuery } from "@lib/query";
 import {
   imageUrlBuilder,
