@@ -1,8 +1,6 @@
-import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { PastEditionCollection } from "@lib/@types/about.types";
-import { Cta } from "@lib/@types/global.types";
 import useAboutStore from "@stores/about.store";
 import clsx from "clsx";
 import { useEffect } from "react";
@@ -12,13 +10,11 @@ interface PastEditionProps {
   type: string;
   header: string;
   pastEditionCollection: PastEditionCollection[];
-  cta: Cta;
 }
 
 export const PastEdition: React.FC<PastEditionProps> = ({
   header,
   pastEditionCollection,
-  cta,
 }) => {
   const { setPastEditions } = useAboutStore();
   useEffect(() => {
