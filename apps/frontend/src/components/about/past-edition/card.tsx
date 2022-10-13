@@ -1,6 +1,5 @@
 import { PastEditionCollection } from "@lib/@types/about.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
-import { useWindowSize } from "@lib/hooks";
 import useAboutStore from "@stores/about.store";
 import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
@@ -18,7 +17,6 @@ const physics = {
   mass: 10,
 };
 export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
-  const windowWidth = useWindowSize()?.width ?? 0;
   const cardRef = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);

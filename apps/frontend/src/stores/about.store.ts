@@ -8,8 +8,9 @@ interface AboutStoreProps {
   selectedPastEditionId: string | null;
   selectedCoArtisticDirectorId: string | null;
   setSelectedPastEditionId: (data: string | null) => void;
+  setSelectedCoArtisticDirectorId: (data: string | null) => void;
   setPastEditions: (data: PastEditionCollection[]) => void;
-  setCoArtisticDirector: (data: TeamCollection[]) => void;
+  setCoArtisticDirectors: (data: TeamCollection[]) => void;
 }
 
 const useAboutStore = create(
@@ -20,12 +21,14 @@ const useAboutStore = create(
     selectedCoArtisticDirectorId: null,
     setSelectedPastEditionId: (selectedPastEditionId) =>
       set((state) => ({ ...state, selectedPastEditionId })),
+    setSelectedCoArtisticDirectorId: (selectedCoArtisticDirectorId) =>
+      set((state) => ({ ...state, selectedCoArtisticDirectorId })),
     setPastEditions: (pastEditions) =>
       set((state) => ({
         ...state,
         pastEditions,
       })),
-    setCoArtisticDirector: (coArtisticDirectors) =>
+    setCoArtisticDirectors: (coArtisticDirectors) =>
       set((state) => ({
         ...state,
         coArtisticDirectors,

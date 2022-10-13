@@ -1,6 +1,8 @@
 import { AnimatedHeader } from "@components/ui/animated-component/animated-header";
 import { Container } from "@components/ui/container";
 import { TeamCollection } from "@lib/@types/about.types";
+import useAboutStore from "@stores/about.store";
+import { useEffect } from "react";
 import { TeamCarousel } from "./team-carousel";
 
 interface CuratorialTeamProps {
@@ -13,6 +15,11 @@ export const CuratorialTeam: React.FC<CuratorialTeamProps> = ({
   headers,
   teamCollection,
 }) => {
+  const { setCoArtisticDirectors } = useAboutStore();
+  useEffect(() => {
+    setCoArtisticDirectors(teamCollection);
+  }, []);
+
   return (
     <section className="py-section overflow-hidden">
       <Container type="section">

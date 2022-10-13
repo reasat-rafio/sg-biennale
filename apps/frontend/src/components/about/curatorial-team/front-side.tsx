@@ -10,6 +10,7 @@ interface FrontSideProps {
   cardBackgroundGardiants: TeamCollection["cardBackgroundGardiants"];
   image: SanityImage;
   cardsPerView: number;
+  id: string;
 }
 
 export const AnimationVariants: Variants = {
@@ -27,10 +28,11 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   cardBackgroundGardiants: { from, to },
   image,
   cardsPerView,
+  id,
 }) => {
   return (
     <motion.div
-      className="absolute h-full bottom-0 | flex flex-col justify-end z-20 cursor-pointer"
+      className="z-20 absolute h-full bottom-0 | flex flex-col justify-end | cursor-pointer"
       initial="initial"
       animate={active ? "animate" : "inital"}
       variants={AnimationVariants}
@@ -45,6 +47,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
           key={String(active)}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          layoutId={`co-artist-card-header-${id}`}
           transition={{
             duration: 0.5,
             ease: "easeInOut",
@@ -56,7 +59,10 @@ export const FrontSide: React.FC<FrontSideProps> = ({
           {name}
         </motion.h6>
       </header>
-      <motion.figure className={"h-[250px] mt-auto translate-y-[10%]"}>
+      <motion.figure
+        className="h-[250px] mt-auto translate-y-[10%]"
+        layoutId={`co-artist-card-image-${id}`}
+      >
         <SanityImg
           className={clsx(
             "pointer-events-none h-full w-full object-contain transition-transform duration-500 ease-in-out",

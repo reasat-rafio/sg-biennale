@@ -76,7 +76,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
           {
             _key,
             cardBackgroundGardiants,
-            team: { name, images, slug, description },
+            team: { name, images, slug, description, _id },
           },
           index
         ) => {
@@ -135,6 +135,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               <FrontSide
                 key={_key}
                 name={name}
+                id={_key}
                 image={images[0]}
                 cardBackgroundGardiants={cardBackgroundGardiants}
                 active={activeCardIndex === index}
@@ -143,6 +144,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               <BackSide
                 description={description}
                 slug={slug}
+                id={_key}
                 active={activeCardIndex === index}
                 cardsPerView={cardsPerView}
               />

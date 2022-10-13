@@ -1,6 +1,7 @@
 import { Button } from "@components/ui/button";
 import { Slug } from "@lib/@types/global.types";
 import { usePortableTextTruncate } from "@lib/hooks";
+import useAboutStore from "@stores/about.store";
 import { PortableText } from "@utils/sanity";
 import clsx from "clsx";
 import { motion, Variants } from "framer-motion";
@@ -10,11 +11,13 @@ interface BackSideProps {
   slug: Slug;
   cardsPerView: number;
   active: boolean;
+  id: string;
 }
 
 interface BackSideVariantsProps {
   active: boolean;
   description: any;
+  id: string;
 }
 
 const SlideRightAnimationVariants: Variants = {
@@ -32,23 +35,31 @@ export const BackSide: React.FC<BackSideProps> = ({
   description,
   active,
   cardsPerView,
+  id,
 }) => {
   const props = {
     active,
     description,
+    id,
   };
 
   return (
     <>
-      {cardsPerView !== 1 ? <SlideRight {...props} /> : <ScaleUp {...props} />}
+      {cardsPerView !== 1 ? (
+        <SlideRightVariant {...props} />
+      ) : (
+        <ScaleUpVarian {...props} />
+      )}
     </>
   );
 };
 
-const SlideRight: React.FC<BackSideVariantsProps> = ({
+const SlideRightVariant: React.FC<BackSideVariantsProps> = ({
   active,
   description,
+  id,
 }) => {
+  const { setSelectedCoArtisticDirectorId } = useAboutStore();
   const [ref] = usePortableTextTruncate({ maxLength: 250 });
 
   return (
@@ -82,14 +93,19 @@ const SlideRight: React.FC<BackSideVariantsProps> = ({
           </div>
         </div>
         <div className="w-full">
-          <Button>View Director</Button>
+          <Button onClick={() => setSelectedCoArtisticDirectorId(id)}>
+            View Director
+          </Button>
         </div>
       </motion.div>
     </motion.div>
   );
 };
 
-const ScaleUp: React.FC<BackSideVariantsProps> = ({ active, description }) => {
+const ScaleUpVarian: React.FC<BackSideVariantsProps> = ({
+  active,
+  description,
+}) => {
   const [ref] = usePortableTextTruncate({ maxLength: 250 });
 
   return (
