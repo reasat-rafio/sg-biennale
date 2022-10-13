@@ -104,7 +104,10 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
             />
           </figure>
           <section className="flex flex-col | space-y-5">
-            <h6 className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500">
+            <h6
+              onClick={() => router.push(`/venue/${slug.current}`)}
+              className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500"
+            >
               {name}
             </h6>
 
