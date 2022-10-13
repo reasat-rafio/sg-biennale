@@ -25,10 +25,10 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
           <motion.figure
             initial={{ scale: 1 }}
             animate={{ scale: scroll ? 0.9 : 1 }}
-            className="w-fit"
+            className="w-fit cursor-pointer"
           >
             <Link href="/">
-              <motion.a className="max-h-[40px]">
+              <motion.a className="max-h-[40px] ">
                 <SanityImg
                   className="h-full w-full object-contain"
                   image={logo}

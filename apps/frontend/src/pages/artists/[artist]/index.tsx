@@ -101,7 +101,7 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
         countries={countries}
       />
       <Artwork name={name} artworks={artworks} />
-      {relatedEvents?.length && (
+      {relatedEvents?.length !== 0 && (
         <ProgrammesEvents name={name} relatedEvents={relatedEvents} />
       )}
     </section>
