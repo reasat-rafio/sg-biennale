@@ -42,15 +42,11 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
 
   return (
     <Container className="py-xl flex-col flex space-y-6 ">
-      <section className="flex items-center md:items-stretch md:flex-col | md:space-y-6 space-x-2 md:space-x-0">
-        <header className="flex-1">
+      <section className="flex md:items-stretch items-center  flex-col | md:space-y-6 space-x-2 md:space-x-0">
+        <header className="flex-1 md:mb-0 mb-5">
           <Header variant="secondary">All Events</Header>
         </header>
-        {windowWidth >= 768 ? (
-          <FilteringDesktopSection />
-        ) : (
-          <FilteringMobileSection />
-        )}
+        <FilteringDesktopSection />
       </section>
 
       <ProgrammesEventList

@@ -114,7 +114,7 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
           []
         ),
       })}
-      {/* <ClosestEvent events={_events} /> */}
+      <ClosestEvent events={_events} />
       <FilteringLogic>
         <AllEvents />
       </FilteringLogic>
