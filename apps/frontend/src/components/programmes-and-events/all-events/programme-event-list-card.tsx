@@ -30,6 +30,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   description,
   startAt,
   venue,
+  additionalInfo,
   relatedArtists,
 }) => {
   const router = useRouter();
@@ -38,7 +39,9 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
 
-  const priceVal = `Book Now - ${price ? `$${price}` : "Free"}`;
+  const priceVal = `Book Now - ${price ? `$${price}` : "Free"}${
+    additionalInfo ? "*" : ""
+  }`;
   const formattedShortDate = format(new Date(startAt), "dd.LL");
   const formattedDate = format(
     new Date(startAt),
@@ -145,14 +148,21 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
           </div>
         </div>
 
-        <div className="flex md:flex-row flex-col | md:items-center | md:mt-0 mt-5 md:space-y-0 space-y-5">
-          <div className="flex-1 flex | space-x-10 | text-body-2">
-            <span className="font-semibold">Date & Time</span>
-            <span className="text-gray--700">{formattedDate}</span>
+        <div className="flex | space-x-10 | text-body-2">
+          <span className="font-semibold">Date & Time</span>
+          <span className="text-gray--700">{formattedDate}</span>
+        </div>
+        <div className="flex sm:flex-row flex-col sm:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-0 mt-5">
+          <div className="flex-1">
+            <Button className="" variant="secondary">
+              {priceVal}
+            </Button>
           </div>
-          <Button className="md:w-auto w-full" variant="secondary">
-            {priceVal}
-          </Button>
+          {additionalInfo && (
+            <span className="text-body-2 text-gray--700">
+              *{additionalInfo}
+            </span>
+          )}
         </div>
       </section>
     </motion.article>

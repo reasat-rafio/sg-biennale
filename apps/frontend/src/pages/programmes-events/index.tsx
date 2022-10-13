@@ -29,6 +29,7 @@ const query = groq`{
         slug,
         startAt,
         endAt,
+        additionalInfo,
         venue[]->{
           name,
           slug
