@@ -87,7 +87,9 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
             {subtitle}
           </h6>
         )}
-        <p className="text-body-1 text-gray--700 font-manrope">{description}</p>
+        <p className="text-body-1 text-gray--700 font-manrope | whitespace-pre-line">
+          {description}
+        </p>
         {cta && (
           <LiquidButton
             onClick={() => router.push(cta.href)}

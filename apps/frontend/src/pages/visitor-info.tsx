@@ -74,7 +74,7 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
   }, [allVenues, setAllVenues, setSortedVenues]);
 
   return (
-    <>
+    <section className="overflow-hidden">
       {renderObjectArray(page.sections, {
         pageHeading: useCallback(
           (data: PageHeaderProps) => (
@@ -94,7 +94,7 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
       {renderObjectArray(page.sections, {
         "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
       })}
-    </>
+    </section>
   );
 };
 
