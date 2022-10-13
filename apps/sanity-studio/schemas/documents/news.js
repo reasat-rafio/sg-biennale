@@ -32,10 +32,6 @@ const News = {
       of: [{ type: "block" }],
       validation: (Rule) => Rule.required(),
     },
-    {
-      name: "backgroundColor",
-      type: "color",
-    },
     { name: "cta", type: "cta" },
     { name: "file", type: "file" },
   ],

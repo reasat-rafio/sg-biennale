@@ -73,7 +73,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
       <Header>{header}</Header>
       <motion.div
         ref={containerRef}
-        className="min-h-screen relative flex flex-wrap "
+        className="min-h-screen relative flex flex-wrap"
       >
         {_releases.map((release) => (
           <motion.div

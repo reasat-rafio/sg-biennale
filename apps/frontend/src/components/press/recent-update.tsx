@@ -5,6 +5,8 @@ import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
 import { useWindowSize } from "@lib/hooks";
 import { LiquidButton } from "@components/ui/liquid-button";
+import { Cta } from "@lib/@types/global.types";
+import { useRouter } from "next/router";
 
 interface RecentUpdateProps {
   header: string;
@@ -13,6 +15,7 @@ interface RecentUpdateProps {
     _id: string;
     header: string;
     images: SanityImage;
+    cta?: Cta;
   }[];
 }
 
@@ -21,6 +24,7 @@ export const RecentUpdate: React.FC<RecentUpdateProps> = ({
   header,
   updates,
 }) => {
+  const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
@@ -60,13 +64,17 @@ export const RecentUpdate: React.FC<RecentUpdateProps> = ({
               <h6 className="text-gray--700 font-medium text-heading-6 leading-[120%]">
                 {update.header}
               </h6>
-
-              <LiquidButton
-                variant="secondary"
-                className="mt-7 overflow-visible"
-              >
-                Read More
-              </LiquidButton>
+              {update?.cta?.title && (
+                <LiquidButton
+                  variant="secondary"
+                  className="mt-7 overflow-visible"
+                  onClick={() =>
+                    update.cta?.href && router.push(update.cta.href)
+                  }
+                >
+                  {update.cta.title}
+                </LiquidButton>
+              )}
             </section>
           </motion.article>
         ))}

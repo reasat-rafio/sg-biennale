@@ -19,6 +19,7 @@ const query = pageQuery(groq`
         "recentUpdates" : *[_type == "news"] | order(_createdAt desc) [0...2]{
           _id,
           header,
+          cta,
           images[] {
             ..., 
             asset->{
