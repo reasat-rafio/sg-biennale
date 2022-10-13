@@ -96,7 +96,7 @@ export interface MoreInfosProps {
     image?: SanityImage;
     subtitle?: string;
     title: string;
-    cta: Cta;
+    cta?: Cta;
   }[];
 }
 

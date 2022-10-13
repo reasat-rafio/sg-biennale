@@ -3,6 +3,7 @@ import { Container } from "@components/ui/container";
 import { LiquidButton } from "@components/ui/liquid-button";
 import { AccesibilityInfoProps } from "@lib/@types/visitor-info.types";
 import { motion, Variants } from "framer-motion";
+import { useRouter } from "next/router";
 
 const SlideUpVariants: Variants = {
   initial: {
@@ -29,6 +30,8 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
   infos,
   cta,
 }) => {
+  const router = useRouter();
+
   return (
     <section id="accesibility-info" className="md:py-xxl py-xl | bg-gray--100">
       <Container className="space-y-14">
@@ -58,7 +61,7 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
             </motion.li>
           ))}
         </motion.ul>
-        {cta.title && (
+        {cta?.title && (
           <motion.div
             initial="initial"
             whileInView="animate"
@@ -67,7 +70,12 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
             custom={1}
             className="flex justify-center items-center"
           >
-            <LiquidButton variant="secondary">{cta.title}</LiquidButton>
+            <LiquidButton
+              onClick={() => router.push(cta.href)}
+              variant="secondary"
+            >
+              {cta.title}
+            </LiquidButton>
           </motion.div>
         )}
       </Container>

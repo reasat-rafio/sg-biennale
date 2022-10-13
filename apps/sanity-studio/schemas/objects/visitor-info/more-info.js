@@ -33,7 +33,6 @@ const VisitorMoreInfo = {
             {
               name: "cta",
               type: "cta",
-              validation: (Rule) => Rule.required(),
             },
             {
               name: "image",

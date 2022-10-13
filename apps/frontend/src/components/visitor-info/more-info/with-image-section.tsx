@@ -5,6 +5,7 @@ import { Cta } from "@lib/@types/global.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { imageUrlBuilder } from "@utils/sanity";
 import { transform, useMotionValue, motion } from "framer-motion";
+import { useRouter } from "next/router";
 import { MouseEvent, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 
@@ -13,7 +14,7 @@ interface WithImageSectionProps {
   title: string;
   subtitle?: string;
   description: string;
-  cta: Cta;
+  cta?: Cta;
   image: SanityImage;
 }
 
@@ -32,6 +33,7 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
   _key,
   subtitle,
 }) => {
+  const router = useRouter();
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
@@ -86,7 +88,14 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
           </h6>
         )}
         <p className="text-body-1 text-gray--700 font-manrope">{description}</p>
-        <LiquidButton variant="secondary">{cta.title}</LiquidButton>
+        {cta && (
+          <LiquidButton
+            onClick={() => router.push(cta.href)}
+            variant="secondary"
+          >
+            {cta.title}
+          </LiquidButton>
+        )}
       </section>
       <motion.figure
         className="xl:col-span-5 md:col-span-6 col-span-12 -z-20"

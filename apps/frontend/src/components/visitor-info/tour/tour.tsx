@@ -10,6 +10,7 @@ const ImageScene = dynamic(() => import("./image-scene"), {
 import dynamic from "next/dynamic";
 import { Header } from "@components/ui/header";
 import { LiquidButton } from "@components/ui/liquid-button";
+import { useRouter } from "next/router";
 
 interface TourProps {
   header: string;
@@ -24,6 +25,7 @@ export const Tour: React.FC<TourProps> = ({
   image,
   cta,
 }) => {
+  const router = useRouter();
   return (
     <Container type="section" className="lg:pb-max pb-xxl">
       <motion.div
@@ -39,7 +41,12 @@ export const Tour: React.FC<TourProps> = ({
           </figure>
           <div className="xl:col-span-4 lg:col-span-6 col-span-12 | font-manrope text-gray--700 text-body-1 | space-y-4 mt-auto">
             <p>{description}</p>
-            <LiquidButton variant="secondary">{cta.title}</LiquidButton>
+            <LiquidButton
+              onClick={() => router.push(cta.href)}
+              variant="secondary"
+            >
+              {cta.title}
+            </LiquidButton>
           </div>
         </div>
       </motion.div>

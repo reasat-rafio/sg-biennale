@@ -5,6 +5,7 @@ import { WithImageSection } from "./more-info/with-image-section";
 import { motion } from "framer-motion";
 import { Header } from "@components/ui/header";
 import { LiquidButton } from "@components/ui/liquid-button";
+import { useRouter } from "next/router";
 
 export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
   return (
@@ -46,8 +47,9 @@ const Section: React.FC<{
   title: string;
   subtitle?: string;
   description: string;
-  cta: Cta;
+  cta?: Cta;
 }> = ({ cta, description, title, subtitle, _key }) => {
+  const router = useRouter();
   return (
     <article
       key={_key}
@@ -61,7 +63,14 @@ const Section: React.FC<{
           </h6>
         )}
         <p className="text-body-1 text-gray--700 font-manrope">{description}</p>
-        <LiquidButton variant="secondary">{cta.title}</LiquidButton>
+        {cta?.title && (
+          <LiquidButton
+            onClick={() => router.push(cta.href)}
+            variant="secondary"
+          >
+            {cta.title}
+          </LiquidButton>
+        )}
       </section>
     </article>
   );

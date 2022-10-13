@@ -33,7 +33,7 @@ const VisitorInfoAccesibilityInfo = {
       ],
     },
 
-    { name: "cta", type: "cta", validation: (Rule) => Rule.required() },
+    { name: "cta", type: "cta" },
   ],
 };
 
