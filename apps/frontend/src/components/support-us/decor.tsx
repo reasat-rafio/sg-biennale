@@ -8,7 +8,7 @@ interface DecorProps {
 
 export const Decor: React.FC<DecorProps> = ({ image }) => {
   return (
-    <section className="overflow-hidden">
+    <section className="overflow-hidden mb-x">
       <motion.figure
         initial={{ scale: 1 }}
         whileInView={{ scale: 1.05 }}

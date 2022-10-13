@@ -24,7 +24,7 @@ export const LiquidButton: React.FC<LiquidButtonProps> = ({
       const button = buttons[buttonIndex];
       new LiquidButtonClass(button as SVGAElement);
     }
-  }, [width]);
+  }, []);
 
   return (
     <>
