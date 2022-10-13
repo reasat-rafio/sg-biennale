@@ -7,7 +7,6 @@ export interface HomHeroProps {
   type: string;
   image: SanityImage;
   description: any[];
-  kvs: SanityImage[];
 }
 
 export interface Carousel {

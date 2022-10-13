@@ -12,6 +12,7 @@ import { renderObjectArray, withDimensions } from "sanity-react-extra";
 import { Hero } from "@components/home/hero/hero";
 import { useCallback } from "react";
 import { HomHeroProps } from "@lib/@types/home.types";
+import { Carousel } from "@components/home/hero/carousel";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -88,9 +89,10 @@ const Home: NextPage<SanityProps> = (props) => {
 
   return (
     <div>
+      <Carousel kvs={kvs} />
       {renderObjectArray(page.sections, {
         "homePage.hero": useCallback(
-          (props: HomHeroProps) => <Hero {...props} kvs={kvs} />,
+          (props: HomHeroProps) => <Hero {...props} />,
           []
         ),
         "homePage.introduction": Introduction,
