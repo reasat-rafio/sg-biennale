@@ -9,7 +9,6 @@ export const FilteringDesktopSection: React.FC<
   FilteringSectionProps
 > = ({}) => {
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<null | string>(null);
 
   return (
     <section>
@@ -19,18 +18,11 @@ export const FilteringDesktopSection: React.FC<
         </div>
         <div className="xl:col-span-5 md:col-span-6 col-span-12 | grid grid-cols-12 gap-5">
           <SortBy />
-          <FilterByCategory
-            selectedCategory={selectedCategory}
-            setShowCategoryDropdown={setShowCategoryDropdown}
-          />
+          <FilterByCategory setShowCategoryDropdown={setShowCategoryDropdown} />
         </div>
       </div>
 
-      <CategoryDropdown
-        showCategoryDropdown={showCategoryDropdown}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <CategoryDropdown showCategoryDropdown={showCategoryDropdown} />
     </section>
   );
 };

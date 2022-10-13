@@ -1,20 +1,19 @@
 import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { Dispatch, SetStateAction } from "react";
-import { useRouter } from "next/router";
 import { AllCategoriesProps } from "@lib/@types/programmes-events.types";
 import { Checkbox } from "./checkbox";
 import { motion } from "framer-motion";
 import { SortIcon } from "@components/icons/sort";
 
 interface FilterByCategoryProps {
-  selectedCategory: string | null;
   setShowCategoryDropdown: Dispatch<SetStateAction<boolean>>;
 }
 
 export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
-  selectedCategory,
   setShowCategoryDropdown,
 }) => {
+  const { selectedCategory } = useProgrammesAndEventsStore();
+
   return (
     <div className="z-20 col-span-7 mt-1">
       <div
@@ -22,7 +21,7 @@ export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
         className="flex items-center w-full | space-x-4 p-3 | border-b border-black cursor-pointer"
       >
         <span className="flex-1 text-left block truncate">
-          {selectedCategory ? selectedCategory : "Category"}
+          {selectedCategory?.name ? selectedCategory.name : "Category"}
         </span>
 
         <SortIcon />
@@ -33,28 +32,13 @@ export const FilterByCategory: React.FC<FilterByCategoryProps> = ({
 
 export const CategoryDropdown: React.FC<{
   showCategoryDropdown: boolean;
-  selectedCategory: null | string;
-  setSelectedCategory: Dispatch<SetStateAction<null | string>>;
-}> = ({ showCategoryDropdown, selectedCategory, setSelectedCategory }) => {
-  const router = useRouter();
-  const { allCategories } = useProgrammesAndEventsStore();
+}> = ({ showCategoryDropdown }) => {
+  const { allCategories, selectedCategory, setSelectedCategory } =
+    useProgrammesAndEventsStore();
 
   const onClickAction = (category: AllCategoriesProps) => {
-    if (category.name === selectedCategory) {
-      setSelectedCategory(null);
-      router.push({ query: { ...router.query, category: null } }, undefined, {
-        shallow: true,
-      });
-    } else {
-      setSelectedCategory(category.name);
-      router.push(
-        { query: { ...router.query, category: category?.slug.current } },
-        undefined,
-        {
-          shallow: true,
-        }
-      );
-    }
+    if (category.name === selectedCategory?.name) setSelectedCategory(null);
+    else setSelectedCategory(category);
   };
 
   return (
@@ -74,7 +58,7 @@ export const CategoryDropdown: React.FC<{
             className="xl:col-span-3 md:col-span-4 col-span-6  flex items-center | space-x-3 | cursor-pointer my-2"
             key={_id}
           >
-            <Checkbox check={name === selectedCategory} />{" "}
+            <Checkbox check={_id === selectedCategory?._id} />{" "}
             <span className="truncate">{name}</span>
           </li>
         ))}

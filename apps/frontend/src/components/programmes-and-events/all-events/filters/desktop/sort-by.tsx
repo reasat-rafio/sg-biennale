@@ -1,8 +1,8 @@
 import { AnimatedHamburgerMenu } from "@components/icons/animated-hamburger-menu";
 import { Listbox, Transition } from "@headlessui/react";
+import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import clsx from "clsx";
-import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { v4 as uuid } from "uuid";
 
 interface SortByListProps {
@@ -11,62 +11,31 @@ interface SortByListProps {
 }
 
 export const SortBy: React.FC<{}> = () => {
-  const router = useRouter();
+  const { selectedSorting, setSelectedSorting } = useProgrammesAndEventsStore();
   const sortByList = [
     { name: "Alphabet", id: uuid() },
     { name: "Date", id: uuid() },
   ];
 
-  const [selectedSortType, setSelectedSortType] = useState<
-    "Alphabet" | "Date" | null
-  >(null);
-
-  const onClickOnSortItemAction = ({ name }: SortByListProps) => {
-    router.push(
-      { query: { ...router.query, sort_by: name.toLowerCase() } },
-      undefined,
-      {
-        shallow: true,
-      }
-    );
-  };
+  const onClickOnSortItemAction = ({ name }: SortByListProps) =>
+    setSelectedSorting(name.toLowerCase() as any);
 
   const onClickOnHamBurgerMenuAction = () => {
-    if (selectedSortType !== null) {
-      router.push({ query: { ...router.query, sort_by: null } }, undefined, {
-        shallow: true,
-      });
-    }
+    if (selectedSorting !== null) setSelectedSorting(null);
   };
-
-  /*
-  ❓Getting the query from the url and setting them to the state
-  @REASON: This stop the state to reset after refresh
-  */
-
-  useEffect(() => {
-    /* 🚩 Flag to check if the category query present  */
-    const selectedSortingFromUrlQuery = router.query.sort_by;
-    if (selectedSortingFromUrlQuery) {
-      const [matchedVanue] = sortByList.filter(
-        ({ name }) => name.toLowerCase() === selectedSortingFromUrlQuery
-      );
-      setSelectedSortType(matchedVanue.name as any);
-    } else setSelectedSortType(null);
-  }, [router, sortByList, setSelectedSortType, selectedSortType]);
 
   return (
     <div className="z-20 col-span-5">
       <Listbox>
         <div className="relative mt-1">
           <Listbox.Button className="flex items-center w-full | space-x-4 p-3 | border-b border-black cursor-pointer">
-            <span className="flex-1 text-left block truncate">
-              {selectedSortType ? selectedSortType : "Sort By"}
+            <span className="flex-1 text-left block truncate capitalize">
+              {selectedSorting ? selectedSorting : "Sort By"}
             </span>
 
             <AnimatedHamburgerMenu
               onClick={onClickOnHamBurgerMenuAction}
-              animate={selectedSortType !== null}
+              animate={selectedSorting !== null}
             />
           </Listbox.Button>
           <Transition
@@ -93,14 +62,14 @@ export const SortBy: React.FC<{}> = () => {
                       <span
                         className={clsx(
                           "block ",
-                          name === selectedSortType
+                          name === selectedSorting
                             ? "font-medium"
                             : "font-normal"
                         )}
                       >
                         {name}
                       </span>
-                      {name === selectedSortType && (
+                      {name === selectedSorting && (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-love">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

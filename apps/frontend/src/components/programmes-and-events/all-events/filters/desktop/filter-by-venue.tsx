@@ -2,50 +2,16 @@ import { AnimatedHamburgerMenu } from "@components/icons/animated-hamburger-menu
 import { Listbox, Transition } from "@headlessui/react";
 import { AllVenuesProps } from "@lib/@types/programmes-events.types";
 import useProgrammesAndEventsStore from "@stores/programme-event.store";
-import { useRouter } from "next/router";
 import { Fragment, MouseEvent, useEffect, useState } from "react";
 
 export const FilterByVenue: React.FC<{}> = () => {
-  const router = useRouter();
+  const { allVenues, selectedVenue, setSelectedVenue } =
+    useProgrammesAndEventsStore();
 
-  const { allVenues } = useProgrammesAndEventsStore();
-  const [selectedVenue, setSelectedVenue] = useState<null | string>(null);
+  const onChangeAction = (venue: AllVenuesProps) => setSelectedVenue(venue);
 
-  const onChangeAction = (venue: AllVenuesProps) => {
-    setSelectedVenue(venue.name);
-    router.push(
-      { query: { ...router.query, venue: venue.slug.current } },
-      undefined,
-      {
-        shallow: true,
-      }
-    );
-  };
-
-  /*
-  ❓Getting the query from the url and setting them to the state
-  @REASON: This stop the state to reset after refresh
-  */
-  useEffect(() => {
-    /* 🚩 Flag to check if the category query present  */
-    const selectedVenueFromUrlQuery = router.query.venue;
-
-    if (selectedVenueFromUrlQuery) {
-      /* ❓Filtering out the events from allCategories */
-      const [matchedVanue] = allVenues.filter(
-        ({ slug }) => slug.current === selectedVenueFromUrlQuery
-      );
-      setSelectedVenue(matchedVanue.name);
-    }
-  }, [router, allVenues, setSelectedVenue]);
-
-  const removeVenueFilteringAction = (e: MouseEvent<SVGSVGElement, any>) => {
-    // e.stopPropagation();
+  const removeVenueFilteringAction = (e: MouseEvent<SVGSVGElement, any>) =>
     setSelectedVenue(null);
-    router.push({ query: { ...router.query, venue: null } }, undefined, {
-      shallow: true,
-    });
-  };
 
   return (
     <div className="z-20">
@@ -53,15 +19,8 @@ export const FilterByVenue: React.FC<{}> = () => {
         <div className="relative mt-1">
           <Listbox.Button className="flex items-center xl:w-[40%] md:w-[70%] w-full | space-x-4 p-3 | border-b border-black cursor-pointer">
             <span className="flex-1 text-left block truncate">
-              {selectedVenue ? selectedVenue : "See by Venue"}
+              {selectedVenue?.name ? selectedVenue.name : "See by Venue"}
             </span>
-
-            {/* {selectedVenue && (
-              <X
-                onClick={removeVenueFilteringAction}
-                className="h-7 w-7 rounded-full | p-1 | bg-white hover:scale-105 hover:bg-gray-300 | transition-colors duration-300"
-              />
-            )} */}
 
             <AnimatedHamburgerMenu
               onClick={removeVenueFilteringAction}
@@ -90,14 +49,14 @@ export const FilterByVenue: React.FC<{}> = () => {
                     <>
                       <span
                         className={`block truncate ${
-                          venue.name === selectedVenue
+                          venue._id === selectedVenue?._id
                             ? "font-medium"
                             : "font-normal"
                         }`}
                       >
                         {venue.name}
                       </span>
-                      {venue.name === selectedVenue ? (
+                      {venue._id === selectedVenue?._id ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-love">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

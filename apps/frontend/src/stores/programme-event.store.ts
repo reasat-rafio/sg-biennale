@@ -9,9 +9,9 @@ import { devtools } from "zustand/middleware";
 interface IProgrammesAndEvents {
   page: number;
   cardsPerPage: number;
-  selectedCatagory: string | null;
+  selectedCategory: AllCategoriesProps | null;
   selectedSorting: string | null;
-  selectedVenue: string | null;
+  selectedVenue: AllVenuesProps | null;
   allCategories: AllCategoriesProps[];
   allVenues: AllVenuesProps[];
   allProgrammesAndEvents: IPgrammeEvents[];
@@ -21,16 +21,16 @@ interface IProgrammesAndEvents {
   setSortedProgrammesAndEvents: (data: IPgrammeEvents[]) => void;
   setAllCategories: (data: AllCategoriesProps[]) => void;
   setAllVenues: (data: AllVenuesProps[]) => void;
-  setSelectedVenue: (data: string | null) => void;
+  setSelectedVenue: (data: AllVenuesProps | null) => void;
   setSelectedSorting: (data: "alphabet" | "date" | null) => void;
-  setSelectedCatagory: (data: string | null) => void;
+  setSelectedCategory: (data: AllCategoriesProps | null) => void;
 }
 
 const useProgrammesAndEventsStore = create(
   devtools<IProgrammesAndEvents>((set) => ({
     page: 1,
     cardsPerPage: 6,
-    selectedCatagory: null,
+    selectedCategory: null,
     selectedSorting: null,
     selectedVenue: null,
     allCategories: [],
@@ -50,8 +50,8 @@ const useProgrammesAndEventsStore = create(
     setAllVenues: (allVenues) => set((state) => ({ ...state, allVenues })),
     setSelectedVenue: (selectedVenue) =>
       set((state) => ({ ...state, selectedVenue })),
-    setSelectedCatagory: (selectedCatagory) =>
-      set((state) => ({ ...state, selectedCatagory })),
+    setSelectedCategory: (selectedCategory) =>
+      set((state) => ({ ...state, selectedCategory })),
     setSelectedSorting: (selectedSorting) =>
       set((state) => ({ ...state, selectedSorting })),
   }))

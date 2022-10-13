@@ -1,45 +1,29 @@
 import useProgrammesAndEventsStore from "@stores/programme-event.store";
-import { useRouter } from "next/router";
 import { ReactNode, useEffect } from "react";
 
 interface FilteringLogicProps {
   children: ReactNode;
 }
 
-/* 🚩 gatekeeper of the intended queries */
-const checkerForTheIntendedQuery = (filteringKeys: string[]) => {
-  return (
-    filteringKeys.includes("category") ||
-    filteringKeys.includes("veneue") ||
-    filteringKeys.includes("sort_by")
-  );
-};
-
 export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
-  const router = useRouter();
-
   const {
     page,
     cardsPerPage,
     allProgrammesAndEvents,
+    selectedCategory,
+    selectedVenue,
+    selectedSorting,
     setSortedProgrammesAndEvents,
   } = useProgrammesAndEventsStore();
 
   useEffect(() => {
-    /* 🚩 check if the qury field is not empty */
-    const queryParamsNotEmpty = JSON.stringify(router.query) !== "{}";
-    const queryKeys = Object.keys(router.query);
-
-    if (queryParamsNotEmpty && checkerForTheIntendedQuery(queryKeys)) {
-      const selectedCatagory = router.query.category;
-      const selectedVenue = router.query.venue;
-      const selectedSorting = router.query.sort_by;
-
+    if (selectedSorting || selectedVenue || selectedCategory) {
       const filteredEvents = allProgrammesAndEvents
         .filter((event) => {
-          if (selectedCatagory) {
+          if (selectedCategory) {
             const [matchedEvent] = event.category.filter(
-              ({ slug: { current } }) => current === selectedCatagory
+              ({ slug: { current } }) =>
+                current === selectedCategory.slug.current
             );
             return matchedEvent;
           } else {
@@ -49,8 +33,12 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
         .filter((event) => {
           if (selectedVenue) {
             const [matchedVanue] = event.venue.filter(
-              ({ slug: { current } }) => current === selectedVenue
+              ({ slug: { current } }) => {
+                console.log(current, selectedVenue.slug.current);
+                return current === selectedVenue.slug.current;
+              }
             );
+
             return matchedVanue;
           } else {
             return event;
@@ -70,7 +58,9 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
     }
   }, [
     page,
-    router.query,
+    selectedCategory,
+    selectedVenue,
+    selectedSorting,
     allProgrammesAndEvents,
     setSortedProgrammesAndEvents,
   ]);
