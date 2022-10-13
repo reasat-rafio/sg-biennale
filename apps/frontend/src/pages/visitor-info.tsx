@@ -44,6 +44,7 @@ const query = groq`{
     description,
     location,
     startAt,
+    direction,
     images[] {
       ..., 
       asset->{

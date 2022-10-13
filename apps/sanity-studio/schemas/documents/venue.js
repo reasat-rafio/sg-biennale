@@ -56,6 +56,10 @@ const Venue = {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "direction",
+      type: "url",
+    },
+    {
       title: "Informations",
       name: "iformations",
       type: "array",

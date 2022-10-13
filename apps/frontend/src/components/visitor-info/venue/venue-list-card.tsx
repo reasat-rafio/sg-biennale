@@ -7,6 +7,7 @@ import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 import { VenueProps } from "@lib/@types/visitor-info.types";
+import { useRouter } from "next/router";
 
 interface VenueListCardProps extends VenueProps {
   index: number;
@@ -33,7 +34,9 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
   description,
   imgPositionIngAlgo,
   startAt,
+  direction,
 }) => {
+  const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
@@ -122,9 +125,14 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
                 <PortableText blocks={description} />
               </div>
             )}
-            <button className="mr-auto | font-medium lg:text-[18px] text-base leading-[-0.02em] text-black bg-transparent underline">
-              Directions
-            </button>
+            {direction && (
+              <button
+                onClick={() => router.push(direction)}
+                className="mr-auto | font-medium lg:text-[18px] text-base leading-[-0.02em] text-black bg-transparent underline"
+              >
+                Directions
+              </button>
+            )}
           </section>
         </div>
         {windowWidth >= 1024 && (
