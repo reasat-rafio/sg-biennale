@@ -1,6 +1,7 @@
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
 import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
+import { Map } from "@components/visitor-info/map";
 import { MoreInfos } from "@components/visitor-info/more-infos";
 import { Tour } from "@components/visitor-info/tour/tour";
 import { Venue } from "@components/visitor-info/venue";
@@ -88,10 +89,10 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
       <FilteringLogic>
         <Venue />
       </FilteringLogic>
+      <Map />
       {renderObjectArray(page.sections, {
         "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
       })}
-      ,
     </>
   );
 };
