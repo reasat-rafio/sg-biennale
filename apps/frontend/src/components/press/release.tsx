@@ -1,17 +1,10 @@
 import { Container } from "@components/ui/container";
 import { Cta, Slug } from "@lib/@types/global.types";
-import { doTruncate } from "@lib/helpers/global.helpers";
-import {
-  useIntersection,
-  usePortableTextTruncate,
-  useWindowSize,
-} from "@lib/hooks";
+import { usePortableTextTruncate } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
-import { motion, Variant, Variants } from "framer-motion";
-import clsx from "clsx";
+import { motion, Variants } from "framer-motion";
 import { Header } from "@components/ui/header";
 
 interface ReleaseItemProps {
@@ -43,85 +36,49 @@ const CardVariants: Variants = {
 };
 
 export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
-  const windowWidth = useWindowSize()?.width ?? 0;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
-  const [colum, setColum] = useState(3);
-
-  useEffect(() => {
-    windowWidth >= 1280
-      ? setColum(3)
-      : windowWidth >= 768
-      ? setColum(2)
-      : setColum(1);
-  }, [windowWidth]);
-
-  const _releases: ReleaseItemProps[][] = releases.reduce(
-    (prev: any, curr, idx) => {
-      const chunkIndex = Math.floor(idx / colum);
-      if (!prev[chunkIndex]) {
-        prev[chunkIndex] = [];
-      }
-      prev[chunkIndex].push(curr);
-      return prev;
-    },
-    []
-  );
 
   return (
     <Container type="section">
       <Header>{header}</Header>
-      <motion.div
-        ref={containerRef}
-        className="min-h-screen relative flex flex-wrap"
-      >
-        {_releases.map((release) => (
-          <motion.div
-            style={{
-              flex: `calc(${100 / colum}%)`,
-              maxWidth: `calc(${100 / colum}%)`,
+
+      <div ref={containerRef} className="xl:columns-3 md:columns-2 columns-1">
+        {releases.map((data, index) => (
+          <motion.article
+            key={data._id}
+            initial="initial"
+            whileInView="animate"
+            variants={CardVariants}
+            custom={index}
+            transition={{
+              duration: 0.5,
+              type: "tween",
+              ease: "easeInOut",
             }}
-            className="p-5"
+            className="cursor-pointer | overflow-hidden | group | lg:pt-14 pt-7"
           >
-            {release.map((data, index) => (
-              <motion.article
-                key={data._id}
-                initial="initial"
-                whileInView="animate"
-                variants={CardVariants}
-                custom={index}
-                transition={{
-                  duration: 0.5,
-                  type: "tween",
-                  ease: "easeInOut",
-                }}
-                className={clsx(
-                  "cursor-pointer space-y-4 | group | lg:pt-14 pt-7"
-                )}
-              >
-                <figure className="flex justify-center items-center | overflow-hidden">
-                  <SanityImg
-                    className="h-full w-full object-cover | group-hover:scale-110 transition-transform duration-500 ease-in-out"
-                    image={data.images[0]}
-                    width={500}
-                    builder={imageUrlBuilder}
-                    alt=""
-                  />
-                </figure>
-                <h4 className="text-heading-5 font-medium | group-hover:text-red-love transition-colors duration-500 ease-in-out">
-                  {data.header}
-                </h4>
-                <div
-                  className="text-body-2 font-manrope text-gray--700"
-                  ref={descriptionRef}
-                >
-                  <PortableText blocks={data.description} />
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
+            <figure className="flex justify-center items-center | overflow-hidden">
+              <SanityImg
+                className="h-full w-full object-cover | group-hover:scale-110 transition-transform duration-500 ease-in-out"
+                image={data.images[0]}
+                width={500}
+                builder={imageUrlBuilder}
+                alt=""
+              />
+            </figure>
+            <h4 className="text-heading-5 font-medium | group-hover:text-red-love transition-colors duration-500 ease-in-out">
+              {data.header}
+            </h4>
+            <div
+              className="text-body-2 font-manrope text-gray--700"
+              ref={descriptionRef}
+            >
+              <PortableText blocks={data.description} />
+            </div>
+          </motion.article>
         ))}
-      </motion.div>
+      </div>
     </Container>
   );
 };
