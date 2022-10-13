@@ -72,14 +72,14 @@ export const Information: React.FC<InformationProps> = ({
           </ul>
         </div>
       </div>
-      {/* <div className="lg:col-span-5 col-span-12 grid grid-cols-12 | sm:gap-5 gap-2">
+      <div className="lg:col-span-5 col-span-12 grid grid-cols-12 | sm:gap-5 gap-2">
         <span
           ref={secondaryBtnRef}
           className="lg:col-span-5 sm:col-span-6 col-span-12 w-full"
         >
-          <LiquidButton width={secondaryBtnWidth} variant="secondary">
+          {/* <LiquidButton width={secondaryBtnWidth} variant="secondary">
             View Artist
-          </LiquidButton>
+          </LiquidButton> */}
         </span>
         <span
           ref={primaryBtnRef}
@@ -89,7 +89,7 @@ export const Information: React.FC<InformationProps> = ({
             Book Now
           </LiquidButton>
         </span>
-      </div> */}
+      </div>
     </section>
   );
 };

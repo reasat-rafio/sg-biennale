@@ -91,6 +91,10 @@ const Event = {
       name: "additionalInfo",
       type: "string",
     },
+    {
+      name: "bookNowUrl",
+      type: "url",
+    },
   ],
   preview: {
     select: {
