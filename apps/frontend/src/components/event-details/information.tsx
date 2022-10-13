@@ -72,7 +72,7 @@ export const Information: React.FC<InformationProps> = ({
           </ul>
         </div>
       </div>
-      <div className="lg:col-span-5 col-span-12 grid grid-cols-12 | sm:gap-5 gap-2">
+      {/* <div className="lg:col-span-5 col-span-12 grid grid-cols-12 | sm:gap-5 gap-2">
         <span
           ref={secondaryBtnRef}
           className="lg:col-span-5 sm:col-span-6 col-span-12 w-full"
@@ -89,33 +89,7 @@ export const Information: React.FC<InformationProps> = ({
             Book Now
           </LiquidButton>
         </span>
-      </div>
+      </div> */}
     </section>
   );
 };
-
-{
-  /* <section className="flex | gap-5">
-  <div className="flex-1 grid grid-cols-12 | gap-5">
-    <div className="col-span-6">
-      <span>Artist</span>
-      <ul>
-        {relatedArtists.map(({ _id, name }) => (
-          <li key={_id}>{name}</li>
-        ))}
-      </ul>
-    </div>
-    <div className="col-span-6">
-      <span>Venue & Details</span>
-    </div>
-  </div>
-  <div className="max-w-lg flex space-x-5">
-    <LiquidButton className="" variant="secondary">
-      View Artist
-    </LiquidButton>
-    <span className="col-span-8">
-      <LiquidButton className="">Book Now</LiquidButton>
-    </span>
-  </div>
-</section>; */
-}
