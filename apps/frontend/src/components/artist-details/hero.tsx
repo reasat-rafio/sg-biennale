@@ -55,7 +55,8 @@ export const Hero: React.FC<HeroProps> = ({
           <div>
             {countries.map(({ label, value }, index) => (
               <span key={value}>
-                {label} {index === countries.length - 1 ? "" : ","}
+                {label}
+                {index === countries.length - 1 ? "" : ", "}
               </span>
             ))}
           </div>
