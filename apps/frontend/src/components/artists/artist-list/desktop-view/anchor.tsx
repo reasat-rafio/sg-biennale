@@ -43,6 +43,7 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
         autoHeight={true}
         mousewheel
         scrollbar={{ draggable: true }}
+        speed={200}
       >
         {anchors.map((anchor) => (
           <SwiperSlide>

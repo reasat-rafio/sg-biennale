@@ -2,6 +2,7 @@ import { Html } from "@react-three/drei";
 import useArtistsDetailsStore from "@stores/artist-details.store";
 import { PortableText } from "@utils/sanity";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 
 const AnimationVariant: Variants = {
@@ -40,7 +41,12 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
   triggerExitAnimation,
   positionXMin,
 }) => {
+  const router = useRouter();
   const { selectedImage } = useArtistsDetailsStore();
+
+  console.log("====================================");
+  console.log(selectedImage?.artwork);
+  console.log("====================================");
 
   return (
     <Html
@@ -84,18 +90,25 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
                   <PortableText blocks={selectedImage.artwork.description} />
                 </motion.div>
               </div>
-              <div className="overflow-hidden">
-                <motion.button
-                  className="bg-black text-white rounded-3xl px-10 py-3 w-fit"
-                  initial="initial"
-                  exit="exit"
-                  animate={triggerExitAnimation ? "exit" : "enter"}
-                  variants={AnimationVariant}
-                  custom={0.9}
-                >
-                  See Venue
-                </motion.button>
-              </div>
+              {selectedImage.artwork.venue && (
+                <div className="overflow-hidden">
+                  <motion.button
+                    onClick={() =>
+                      router.push(
+                        `/venue/${selectedImage.artwork.venue?.slug?.current}`
+                      )
+                    }
+                    className="bg-black text-white rounded-3xl px-10 py-3 w-fit"
+                    initial="initial"
+                    exit="exit"
+                    animate={triggerExitAnimation ? "exit" : "enter"}
+                    variants={AnimationVariant}
+                    custom={0.9}
+                  >
+                    See Venue
+                  </motion.button>
+                </div>
+              )}
             </motion.div>
             <motion.span
               initial={{ opacity: 0 }}

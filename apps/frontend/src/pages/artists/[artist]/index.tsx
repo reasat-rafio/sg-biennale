@@ -28,6 +28,11 @@ const query = pageQuery(groq`
           name,
           slug,
           description,
+          venue->{
+            _id,
+            name,
+            slug
+          },
           images[]{
             ...,
             asset-> {
@@ -91,7 +96,9 @@ export const getStaticProps: GetStaticProps = async (
 const ArtistDetailPage: NextPage<SanityProps> = (props) => {
   const { name, artworks, images, description, countries, relatedEvents } =
     props.data.page;
-
+  console.log("====================================");
+  console.log(artworks);
+  console.log("====================================");
   return (
     <section>
       <Hero

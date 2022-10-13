@@ -32,6 +32,7 @@ export const Image: React.FC<ImageProps> = ({
     galleryImagePerPage,
     setSelectedCollectionIndex,
   } = useArtistsDetailsStore();
+
   const imageRef = useRef<
     THREE.Mesh<THREE.BufferGeometry, THREE.Material | THREE.Material[]> | any
   >(null);

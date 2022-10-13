@@ -30,6 +30,11 @@ export interface ArtworkProps {
   slug: Slug;
   images: SanityImage[];
   description: any;
+  venue?: {
+    _id: string;
+    name: string;
+    slug: Slug;
+  };
 }
 
 export interface PagesProps {

@@ -9,10 +9,12 @@ const Artwork = {
     {
       name: "seo",
       type: "seo",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "name",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
@@ -20,8 +22,14 @@ const Artwork = {
       options: {
         source: (doc) => doc.name,
       },
+      validation: (Rule) => Rule.required(),
     },
-    { name: "images", type: "array", of: [{ type: "image" }] },
+    {
+      name: "images",
+      type: "array",
+      of: [{ type: "image" }],
+      validation: (Rule) => Rule.required(),
+    },
 
     {
       name: "description",
@@ -32,6 +40,11 @@ const Artwork = {
       name: "moreInfo",
       type: "array",
       of: [{ type: "info" }],
+    },
+    {
+      name: "venue",
+      type: "reference",
+      to: { type: "artwork" },
     },
   ],
   preview: {
