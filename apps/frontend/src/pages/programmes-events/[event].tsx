@@ -21,6 +21,7 @@ const query = pageQuery(groq`
         title,
         startAt,
         description,
+        bookNowUrl,
         venue[]->{
           _id,
           name,
@@ -73,6 +74,7 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
     venue,
     relatedArtists,
     startAt,
+    bookNowUrl,
   }: EventDetailProps = props.data.page;
   const router = useRouter();
 
@@ -100,6 +102,7 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
           venue={venue}
           relatedArtists={relatedArtists}
           startAt={startAt}
+          bookNowUrl={bookNowUrl}
         />
       </Container>
     </section>

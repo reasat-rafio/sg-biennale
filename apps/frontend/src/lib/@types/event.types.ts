@@ -10,6 +10,7 @@ export interface EventDetailProps {
   title: string;
   venue: Venue[];
   relatedArtists: RelatedArtistsProps[];
+  bookNowUrl?: string;
 }
 
 export interface Venue {

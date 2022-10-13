@@ -68,20 +68,17 @@ const Event = {
         },
       ],
     },
-
     {
       title: "Start At",
       name: "startAt",
       type: "datetime",
       validation: (Rule) => Rule.required(),
     },
-
     {
       title: "End At",
       name: "endAt",
       type: "datetime",
     },
-
     {
       name: "price",
       type: "number",

@@ -4,19 +4,23 @@ import { LiquidButton } from "@components/ui/liquid-button";
 import { RelatedArtistsProps, Venue } from "@lib/@types/event.types";
 import { useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
+import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 
 interface InformationProps {
   venue: Venue[];
   relatedArtists: RelatedArtistsProps[];
   startAt: Date;
+  bookNowUrl?: string;
 }
 
 export const Information: React.FC<InformationProps> = ({
   relatedArtists,
   startAt,
   venue,
+  bookNowUrl,
 }) => {
+  const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
   const [primaryBtnWidth, setPrimaryBtnWidth] = useState(0);
   const [secondaryBtnWidth, setSecondaryBtnWidth] = useState(0);
@@ -73,22 +77,22 @@ export const Information: React.FC<InformationProps> = ({
         </div>
       </div>
       <div className="lg:col-span-5 col-span-12 grid grid-cols-12 | sm:gap-5 gap-2">
-        <span
+        {/* <span
           ref={secondaryBtnRef}
           className="lg:col-span-5 sm:col-span-6 col-span-12 w-full"
         >
-          {/* <LiquidButton width={secondaryBtnWidth} variant="secondary">
+           <LiquidButton width={secondaryBtnWidth} variant="secondary">
             View Artist
-          </LiquidButton> */}
-        </span>
-        <span
-          ref={primaryBtnRef}
-          className="lg:col-span-7 sm:col-span-6 col-span-12  w-full"
-        >
-          <LiquidButton width={primaryBtnWidth} className="">
-            Book Now
-          </LiquidButton>
-        </span>
+          </LiquidButton> 
+        </span> */}
+
+        {bookNowUrl && (
+          <span className="lg:col-span-7 sm:col-span-6 col-span-12  w-full">
+            <LiquidButton onClick={() => router.push(bookNowUrl)} className="">
+              Book Now
+            </LiquidButton>
+          </span>
+        )}
       </div>
     </section>
   );
