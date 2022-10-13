@@ -24,7 +24,7 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
     useCallback(
       () =>
         sortedProgrammesAndEvents.reduce(
-          (previousValue, _, idx) => previousValue + 50 * idx,
+          (previousValue, _) => previousValue + 100,
           0
         ),
       [sortedProgrammesAndEvents]
@@ -64,7 +64,10 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
           animate={{ opacity: 1 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
         >
-          <Button onClick={showMoreLessButtonAction} className="mx-auto">
+          <Button
+            onClick={showMoreLessButtonAction}
+            className="mx-auto relative z-10"
+          >
             {sortedProgrammesAndEvents.length === allProgrammesAndEvents.length
               ? "Show Less"
               : "Show More"}

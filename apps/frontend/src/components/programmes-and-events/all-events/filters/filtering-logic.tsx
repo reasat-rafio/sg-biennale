@@ -17,8 +17,9 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
   } = useProgrammesAndEventsStore();
 
   useEffect(() => {
+    let filteredEvents = allProgrammesAndEvents;
     if (selectedSorting || selectedVenue || selectedCategory) {
-      const filteredEvents = allProgrammesAndEvents
+      filteredEvents = allProgrammesAndEvents
         .filter((event) => {
           if (selectedCategory) {
             const [matchedEvent] = event.category.filter(
@@ -50,12 +51,12 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
       } else if (selectedSorting === "date") {
         filteredEvents.sort((a, b) => (a.startAt > b.startAt ? 1 : -1));
       }
-
-      // Show More Filtering
       setSortedProgrammesAndEvents(
         filteredEvents.slice(0, cardsPerPage * page)
       );
     }
+    // Show More Filtering
+    setSortedProgrammesAndEvents(filteredEvents.slice(0, cardsPerPage * page));
   }, [
     page,
     selectedCategory,

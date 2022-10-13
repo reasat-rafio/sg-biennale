@@ -54,7 +54,9 @@ export const CategoryDropdown: React.FC<{
       <ul className="grid grid-cols-12 gap-3">
         {allCategories.map(({ _id, name, slug }) => (
           <li
-            onClick={() => onClickAction({ _id, name, slug })}
+            onClick={() =>
+              showCategoryDropdown && onClickAction({ _id, name, slug })
+            }
             className="xl:col-span-3 md:col-span-4 col-span-6  flex items-center | space-x-3 | cursor-pointer my-2"
             key={_id}
           >
