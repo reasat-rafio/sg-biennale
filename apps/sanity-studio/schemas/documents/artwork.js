@@ -44,7 +44,7 @@ const Artwork = {
     {
       name: "venue",
       type: "reference",
-      to: { type: "artwork" },
+      to: { type: "venue" },
     },
   ],
   preview: {
