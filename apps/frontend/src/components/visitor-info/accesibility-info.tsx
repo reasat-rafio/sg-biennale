@@ -58,16 +58,18 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
             </motion.li>
           ))}
         </motion.ul>
-        <motion.div
-          initial="initial"
-          whileInView="animate"
-          variants={SlideUpVariants}
-          viewport={{ once: true }}
-          custom={1}
-          className="flex justify-center items-center"
-        >
-          <LiquidButton variant="secondary">{cta.title}</LiquidButton>
-        </motion.div>
+        {cta.title && (
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            variants={SlideUpVariants}
+            viewport={{ once: true }}
+            custom={1}
+            className="flex justify-center items-center"
+          >
+            <LiquidButton variant="secondary">{cta.title}</LiquidButton>
+          </motion.div>
+        )}
       </Container>
     </section>
   );
