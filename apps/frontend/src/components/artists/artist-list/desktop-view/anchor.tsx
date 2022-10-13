@@ -3,6 +3,8 @@ import useGlobalStore from "@stores/global.store";
 import clsx from "clsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/mousewheel";
+import { Mousewheel } from "swiper";
 
 interface AnchorsProp {
   anchors: string[];
@@ -21,7 +23,7 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
     <aside
       style={{ top: navbarHeight + 5 }}
       className={clsx(
-        "sticky mt-28 h-min | bg-white px-5 rounded-[43px]",
+        "sticky mt-28 h-min | bg-white rounded-[43px]",
         anchors.length && "py-10"
       )}
     >
@@ -34,17 +36,19 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
               ? "40vh"
               : "70vh",
         }}
+        modules={[Mousewheel]}
         spaceBetween={5}
         direction="vertical"
         slidesPerView={Math.min(anchors.length, 12)}
         autoHeight={true}
+        mousewheel
         scrollbar={{ draggable: true }}
       >
         {anchors.map((anchor) => (
           <SwiperSlide>
             <span
               className={clsx(
-                "font-manrope text-body-2 font-semibold | hover:text-red-love | cursor-pointer | transition-colors duration-500 ease-in-out",
+                "font-manrope text-body-2 font-semibold | hover:text-red-love | cursor-pointer | transition-colors duration-500 ease-in-out  px-5",
                 activeAnchor === anchor ? "text-red-love" : "text-gray--700"
               )}
               onClick={() => onAnchorClickAction(anchor)}
