@@ -50,12 +50,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       {!is404Page && (
         <>
-          {/* <Navbar {...pageProps.data?.site?.site} />
-          <NavDropdown {...pageProps.data?.site?.site} /> */}
+          <Navbar {...pageProps.data?.site?.site} />
+          <NavDropdown {...pageProps.data?.site?.site} />
         </>
       )}
       <Component {...pageProps} />
-      {/* {!is404Page && <Footer {...pageProps.data?.site?.site} />} */}
+      {!is404Page && <Footer {...pageProps.data?.site?.site} />}
     </>
   );
 }
