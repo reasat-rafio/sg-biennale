@@ -67,7 +67,7 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
           }}
         >
           {publicationsAndCatalogues.map((data) => (
-            <SwiperSlide className="py-10" key={data._id}>
+            <SwiperSlide className="py-10" key={data.header}>
               <PublicationCatalogue {...data} />
             </SwiperSlide>
           ))}

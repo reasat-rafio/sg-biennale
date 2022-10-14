@@ -78,7 +78,7 @@ export const Description: React.FC<DescriptionProps> = ({
               stiffness: 200,
             }}
             variants={LetterVariant}
-            key={index}
+            key={index + letter}
           >
             {letter}
           </motion.span>

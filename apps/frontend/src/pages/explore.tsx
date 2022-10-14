@@ -40,6 +40,7 @@ const query = groq`{
         }
     },
   "curatorialEssays": *[_type == "curatorialEssay"][]{
+    _id,
     header,
     slug,
     author,

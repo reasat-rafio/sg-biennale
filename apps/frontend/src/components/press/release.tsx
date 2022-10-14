@@ -59,7 +59,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
               type: "tween",
               ease: "easeInOut",
             }}
-            className="cursor-pointer | overflow-hidden | group | lg:pt-14 pt-7 space-y-4"
+            className="cursor-pointer | overflow-hidden | group | lg:pt-14 pt-7 space-y-4 px-4"
           >
             <figure className="flex justify-center items-center | overflow-hidden">
               <SanityImg

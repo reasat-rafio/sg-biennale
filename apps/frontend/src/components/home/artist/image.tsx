@@ -10,6 +10,7 @@ import { useScroll } from "@lib/helpers/scroll-controls.helper";
 import { ArtworkImageProps } from "@lib/@types/home.types";
 
 export const Image: React.FC<ArtworkImageProps> = ({
+  _id,
   index,
   position,
   scale,
@@ -113,7 +114,7 @@ export const Image: React.FC<ArtworkImageProps> = ({
   });
 
   return (
-    <a.group onClick={click} onPointerOver={over} onPointerOut={out}>
+    <a.group key={_id} onClick={click} onPointerOver={over} onPointerOut={out}>
       <ImageImpl
         ref={imageRef}
         scale={scale}
@@ -145,7 +146,7 @@ export const Image: React.FC<ArtworkImageProps> = ({
           </h6>
           <span>
             {countries.map(({ label }, index) => (
-              <span>
+              <span key={label}>
                 {label}
                 {index === countries.length - 1 ? "" : ","}
               </span>

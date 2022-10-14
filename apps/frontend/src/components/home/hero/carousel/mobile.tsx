@@ -13,7 +13,6 @@ interface MobileProps {
 export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
   return (
     <Swiper
-      className=""
       speed={600}
       grabCursor
       modules={[Autoplay]}
@@ -22,7 +21,7 @@ export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
       slidesPerView={1}
       spaceBetween={30}
     >
-      {suffledKVs.map((image, index) => (
+      {suffledKVs.map((image) => (
         <SwiperSlide
           className="relative p-10 sm:h-[500px] h-[400px]"
           key={image._key}
@@ -32,7 +31,7 @@ export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
               className="h-full w-full | object-contain"
               image={image}
               builder={imageUrlBuilder}
-              width={200}
+              width={450}
               alt={image.alt}
             />
           </figure>

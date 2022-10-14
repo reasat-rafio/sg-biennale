@@ -29,7 +29,7 @@ export const PastEdition: React.FC<PastEditionProps> = ({
       <Header>{header}</Header>
       <div className={clsx("grid grid-cols-12 lg:gap-10 gap-5 | mt-7 ")}>
         {pastEditionCollection.map((data, index) => (
-          <Card {...data} index={index + 1} />
+          <Card key={data._id} {...data} index={index + 1} />
         ))}
       </div>
     </Container>

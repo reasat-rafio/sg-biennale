@@ -31,11 +31,15 @@ const PromotionCard: React.FC<IPromotion> = ({
   image,
   title,
   cta,
+  _id,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
-    <article className="flex flex-col col-span-12 lg:col-span-6 | space-y-4">
+    <article
+      key={_id}
+      className="flex flex-col col-span-12 lg:col-span-6 | space-y-4"
+    >
       <figure className="lg:h-[350px] h-auto">
         <SanityImg
           className="h-full w-full object-contain"

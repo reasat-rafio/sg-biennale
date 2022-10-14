@@ -31,14 +31,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     setShowNavDropDown(false);
   }, [router.pathname]);
 
-  function handleExitComplete() {
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0 });
-    }
-  }
+  // function handleExitComplete() {
+  //   if (typeof window !== "undefined") {
+  //     window.scrollTo({ top: 0 });
+  //   }
+  // }
 
   return (
-    <AnimatePresence onExitComplete={handleExitComplete}>
+    <>
       <Head>
         <link
           rel="icon"
@@ -50,13 +50,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       {!is404Page && (
         <>
-          <Navbar {...pageProps.data?.site?.site} />
-          <NavDropdown {...pageProps.data?.site?.site} />
+          {/* <Navbar {...pageProps.data?.site?.site} />
+          <NavDropdown {...pageProps.data?.site?.site} /> */}
         </>
       )}
       <Component {...pageProps} />
-      {!is404Page && <Footer {...pageProps.data?.site?.site} />}
-    </AnimatePresence>
+      {/* {!is404Page && <Footer {...pageProps.data?.site?.site} />} */}
+    </>
   );
 }
 

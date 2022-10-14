@@ -27,7 +27,10 @@ export const CTASection: React.FC<CtaProps> = ({ social, ctas }) => {
           <div className="lg:hidden flex flex-wrap mb-3">
             {ctas.map(({ href, title, _key, icon }) => (
               <Link href={href} key={_key}>
-                <a className="flex space-x-2 items-center last:mr-0 mr-3">
+                <a
+                  key={_key}
+                  className="flex space-x-2 items-center last:mr-0 mr-3"
+                >
                   <figure className="w-4 h-4">
                     <SanityImg
                       className="h-full w-full object-contain"
@@ -49,7 +52,7 @@ export const CTASection: React.FC<CtaProps> = ({ social, ctas }) => {
             <div className="flex justify-end space-x-4">
               {social.socials.map(({ _key, icon, url }) => (
                 <Link href={url} key={_key}>
-                  <a>
+                  <a key={_key}>
                     <figure className="w-6 h-6">
                       <SanityImg
                         className="h-full w-full object-contain"

@@ -30,10 +30,10 @@ export const Organisations: React.FC<OrganisationProps> = ({
   const cardRef = useRef<HTMLDivElement>(null);
   const windowWidth = useWindowSize()?.width ?? 0;
 
-  const [selectedImg, setSelectedImg] = useState(organisations[0].logo.asset);
-  const [prevSelectedImg, setPrevSelectedImage] = useState(
-    organisations[1].logo.asset
-  );
+  const [selectedImg, setSelectedImg] = useState(organisations[0].logo);
+  // const [prevSelectedImg, setPrevSelectedImage] = useState(
+  //   organisations[1].logo
+  // );
 
   // const bgPositionAnim = useAnimation();
   // const imgContainerStateOn = (e: MouseEvent<HTMLDivElement, any>) => {
@@ -73,8 +73,8 @@ export const Organisations: React.FC<OrganisationProps> = ({
               key={_key}
               className="font-manrope cursor-pointer | space-y-4"
               onClick={() => {
-                setPrevSelectedImage(selectedImg);
-                setSelectedImg(logo.asset);
+                // setPrevSelectedImage(selectedImg);
+                setSelectedImg(logo);
               }}
             >
               <span className="text-gray--400 font-bold font-manrope lg:text-body-1 text-body-2">
@@ -82,7 +82,9 @@ export const Organisations: React.FC<OrganisationProps> = ({
               </span>
               <motion.h4
                 initial={false}
-                animate={selectedImg._id === logo.asset._id ? "enter" : "exit"}
+                animate={
+                  selectedImg.asset._id === logo.asset._id ? "enter" : "exit"
+                }
                 transition={{ duration: 0.4, type: "tween", ease: "easeInOut" }}
                 variants={TextAnimationVariants}
                 className={clsx(

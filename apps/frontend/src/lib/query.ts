@@ -5,6 +5,7 @@ export const siteQuery = groq`{
     "site": *[_type == "site"][0] {
       ...,
       "logo": ${withDimensions("logo")},
+      "eventLogo": ${withDimensions("eventLogo")},
       "ogImage": ${withDimensions("ogImage")},
       kvs[] {
         ..., 
@@ -29,6 +30,15 @@ export const siteQuery = groq`{
       footer {
         ...,
         "image": ${withDimensions("image")},
+        kvs[] {
+          ..., 
+          asset->{
+            ...,
+            metadata {
+              dimensions
+            }
+          }
+        },
         social{
           ..., 
           socials[] {
