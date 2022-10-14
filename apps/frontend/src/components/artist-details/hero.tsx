@@ -3,10 +3,11 @@ import { Container } from "@components/ui/container";
 import { ICountry } from "@lib/@types/global.types";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { Dispatch, SetStateAction, useState } from "react";
-import { SanityImage } from "sanity-react-extra";
+import { SanityImage, SanityImg } from "sanity-react-extra";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
 import clsx from "clsx";
+import { useWindowSize } from "@lib/hooks";
 
 interface HeroProps {
   name: string;
@@ -31,17 +32,11 @@ export const Hero: React.FC<HeroProps> = ({
   images,
   name,
 }) => {
-  const [hovered, setHovered] = useState(false);
-  const [scalePos, _] = useState([0, 0, 0]);
-  const aspectRatio = images[0].metadata.dimensions.aspectRatio;
+  // const [hovered, setHovered] = useState(false);
+  // const [scalePos, _] = useState([0, 0, 0]);
+  // const aspectRatio = images[0].metadata.dimensions.aspectRatio;
 
-  const compressedImageUrl = imageUrlBuilder
-    .image(images[0])
-    .width(500)
-    .format("jpg")
-    .auto("format")
-    .quality(80)
-    .url();
+  const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
     <Container
@@ -49,15 +44,22 @@ export const Hero: React.FC<HeroProps> = ({
       className="grid grid-cols-12 lg:gap-10 | lg:py-xl py-x"
     >
       <section className="lg:col-span-7 col-span-12 | lg:max-w-[90%] max-w-full | space-y-10">
-        <div className="lg:hidden block ">
-          <Image
+        <figure className="lg:hidden block sm:h-[450px] h-auto">
+          <SanityImg
+            className="h-full w-full object-cover"
+            image={images[0]}
+            builder={imageUrlBuilder}
+            width={windowWidth >= 640 ? 400 : 250}
+            alt={name}
+          />
+          {/* <Image
             aspectRatio={aspectRatio}
             hovered={hovered}
             scalePos={scalePos}
             setHovered={setHovered}
             url={compressedImageUrl as string}
-          />
-        </div>
+          /> */}
+        </figure>
         <header className="space-y-2">
           <h1 className="font-medium text-heading-6">{name}</h1>
           <div>
@@ -74,13 +76,22 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
       </section>
       <div className="col-span-5 | lg:block hidden">
-        <Image
+        {/* <Image
           aspectRatio={aspectRatio}
           hovered={hovered}
           scalePos={scalePos}
           setHovered={setHovered}
           url={images[0].url}
-        />
+        /> */}
+        <figure>
+          <SanityImg
+            className="h-full w-full object-cover"
+            image={images[0]}
+            builder={imageUrlBuilder}
+            width={500}
+            alt={name}
+          />
+        </figure>
       </div>
     </Container>
   );
