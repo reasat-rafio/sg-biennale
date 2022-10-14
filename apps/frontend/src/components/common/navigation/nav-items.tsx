@@ -4,7 +4,7 @@ import { useWindowScroll } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface NavItemsProps {
   ctas: Cta[];
@@ -12,7 +12,6 @@ interface NavItemsProps {
 
 export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
   const scroll = useWindowScroll()?.y ?? 0;
-  const router = useRouter();
 
   return (
     <motion.section
@@ -25,26 +24,26 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
     >
       <div className="flex flex-1 | lg:space-x-4 space-x-2">
         {ctas.map(({ _key, title, href, icon }) => (
-          <motion.div
-            onClick={() => router.push(href)}
-            key={_key}
-            whileHover={{
-              scale: 1.05,
-            }}
-            transition={{ damping: 2 }}
-            className="hidden lg:flex | space-x-2 items-center cursor-pointer"
-          >
-            <figure className="w-4 h-4">
-              <SanityImg
-                className="h-full w-full object-contain"
-                image={icon}
-                builder={imageUrlBuilder}
-                width={100}
-                alt="icon"
-              />
-            </figure>
-            <span>{title}</span>
-          </motion.div>
+          <Link href={href} passHref key={_key}>
+            <motion.a
+              whileHover={{
+                scale: 1.05,
+              }}
+              transition={{ damping: 2 }}
+              className="hidden lg:flex | space-x-2 items-center cursor-pointer"
+            >
+              <figure className="w-4 h-4">
+                <SanityImg
+                  className="h-full w-full object-contain"
+                  image={icon}
+                  builder={imageUrlBuilder}
+                  width={100}
+                  alt="icon"
+                />
+              </figure>
+              <span>{title}</span>
+            </motion.a>
+          </Link>
         ))}
       </div>
       <HamburgerMenu />

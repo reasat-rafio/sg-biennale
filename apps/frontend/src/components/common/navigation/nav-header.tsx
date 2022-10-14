@@ -27,7 +27,7 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
             animate={{ scale: scroll ? 0.9 : 1 }}
             className="w-fit cursor-pointer"
           >
-            <Link href="/">
+            <Link href="/" passHref>
               <motion.a className="max-h-[40px] ">
                 <SanityImg
                   className="h-full w-full object-contain"
