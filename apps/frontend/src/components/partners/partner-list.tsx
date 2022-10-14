@@ -47,7 +47,7 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
     <div className="flex flex-col | space-y-10 xl:my-xxl lg:my-xl my-x">
       {_partners?.map(({ tierName, data, id }) => (
         <article className="pb-5 space-y-10" key={id}>
-          <Header variant="secondary">Partner {tierName}</Header>
+          <Header variant="secondary">{tierName}</Header>
 
           <section className="grid grid-cols-12 | gap-5">
             {data.map(({ _id, name, image, href }) => (
