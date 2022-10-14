@@ -5,12 +5,14 @@ import { Autoplay } from "swiper";
 import clsx from "clsx";
 import "swiper/css/autoplay";
 import "swiper/css";
+import { useWindowSize } from "@lib/hooks";
 
 interface MobileProps {
   suffledKVs: SanityImage[];
 }
 
 export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   return (
     <Swiper
       speed={600}
@@ -31,7 +33,7 @@ export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
               className="h-full w-full | object-contain"
               image={image}
               builder={imageUrlBuilder}
-              width={450}
+              width={windowWidth >= 640 ? 400 : 250}
               alt={image.alt}
             />
           </figure>

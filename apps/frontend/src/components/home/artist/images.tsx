@@ -6,6 +6,7 @@ import { Image } from "./image";
 import { NextRouter } from "next/router";
 import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls.helper";
 import { imageUrlBuilder } from "@utils/sanity";
+import { useWindowSize } from "@lib/hooks";
 
 interface ImagesProps {
   artists: IArtistProps[];
@@ -29,6 +30,7 @@ export const Images: React.FC<ImagesProps> = ({
   isDown,
   setClikced,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   const { width } = useThree((state) => state.viewport);
   const xW = w + gap;
 
@@ -45,10 +47,10 @@ export const Images: React.FC<ImagesProps> = ({
         {artists.map(({ artworks, name, countries, slug, _id }, i) => {
           const compressedImageUrl = imageUrlBuilder
             .image(artworks[0].images[0])
-            .width(600)
+            .width(windowWidth >= 1024 ? 500 : windowWidth >= 680 ? 400 : 350)
             .format("jpg")
             .auto("format")
-            .quality(80)
+            .quality(100)
             .url();
 
           return (
