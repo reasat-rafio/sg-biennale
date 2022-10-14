@@ -1,6 +1,5 @@
 import { Button } from "@components/ui/button";
 import { Header } from "@components/ui/header";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { Cta } from "@lib/@types/global.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 import { useWindowSize } from "@lib/hooks";
@@ -90,12 +89,9 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
           {description}
         </p>
         {cta && (
-          <LiquidButton
-            onClick={() => router.push(cta.href)}
-            variant="secondary"
-          >
+          <Button onClick={() => router.push(cta.href)} variant="secondary">
             {cta.title}
-          </LiquidButton>
+          </Button>
         )}
       </section>
       <motion.figure

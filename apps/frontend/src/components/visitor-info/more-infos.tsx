@@ -4,8 +4,8 @@ import { MoreInfosProps } from "@lib/@types/visitor-info.types";
 import { WithImageSection } from "./more-info/with-image-section";
 import { motion } from "framer-motion";
 import { Header } from "@components/ui/header";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { useRouter } from "next/router";
+import { Button } from "@components/ui/button";
 
 export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
   return (
@@ -63,12 +63,9 @@ const Section: React.FC<{
           {description}
         </p>
         {cta?.title && (
-          <LiquidButton
-            onClick={() => router.push(cta.href)}
-            variant="secondary"
-          >
+          <Button onClick={() => router.push(cta.href)} variant="secondary">
             {cta.title}
-          </LiquidButton>
+          </Button>
         )}
       </section>
     </article>

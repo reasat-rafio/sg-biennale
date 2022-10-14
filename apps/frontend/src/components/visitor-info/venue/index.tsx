@@ -6,8 +6,8 @@ import { VenueList } from "./venue-list";
 import { motion } from "framer-motion";
 import useVisitorInfoStore from "@stores/visitor-info.store";
 import { Header } from "@components/ui/header";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { Anchor } from "@components/ui/anchor";
+import { Button } from "@components/ui/button";
 
 export const Venue: React.FC<{}> = ({}) => {
   const { allVenues, sortedVenues, page, setPage, cardsPerPage } =
@@ -59,11 +59,11 @@ export const Venue: React.FC<{}> = ({}) => {
           animate={{ opacity: 1 }}
           transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
         >
-          <LiquidButton onClick={showMoreLessButtonAction} className="mx-auto">
+          <Button onClick={showMoreLessButtonAction} className="mx-auto">
             {sortedVenues.length === allVenues.length
               ? "Show More"
               : "Show Less"}
-          </LiquidButton>
+          </Button>
         </motion.div>
       )}
     </Container>

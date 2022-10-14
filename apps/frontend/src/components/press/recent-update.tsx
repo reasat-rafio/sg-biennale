@@ -4,7 +4,6 @@ import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
 import { useWindowSize } from "@lib/hooks";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { Cta } from "@lib/@types/global.types";
 import { useRouter } from "next/router";
 
@@ -66,7 +65,7 @@ export const RecentUpdate: React.FC<RecentUpdateProps> = ({
                 {update.header}
               </h6>
               {update?.cta?.title && (
-                <LiquidButton
+                <Button
                   variant="secondary"
                   className="mt-7 overflow-visible"
                   onClick={() =>
@@ -74,7 +73,7 @@ export const RecentUpdate: React.FC<RecentUpdateProps> = ({
                   }
                 >
                   {update.cta.title}
-                </LiquidButton>
+                </Button>
               )}
             </section>
           </motion.article>

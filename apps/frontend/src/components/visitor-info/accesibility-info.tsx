@@ -1,6 +1,5 @@
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { AccesibilityInfoProps } from "@lib/@types/visitor-info.types";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
@@ -70,12 +69,9 @@ export const AccesibilityInfo: React.FC<AccesibilityInfoProps> = ({
             custom={1}
             className="flex justify-center items-center"
           >
-            <LiquidButton
-              onClick={() => router.push(cta.href)}
-              variant="secondary"
-            >
+            <Button onClick={() => router.push(cta.href)} variant="secondary">
               {cta.title}
-            </LiquidButton>
+            </Button>
           </motion.div>
         )}
       </Container>

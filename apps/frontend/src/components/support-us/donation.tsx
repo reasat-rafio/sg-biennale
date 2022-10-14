@@ -1,7 +1,6 @@
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { Cta } from "@lib/@types/global.types";
 import { useRouter } from "next/router";
 
@@ -32,12 +31,7 @@ export const Donation: React.FC<DonationProps> = ({
         </div>
       </div>
       <div>
-        <LiquidButton
-          width={cta.title.length > 10 ? 300 : 200}
-          onClick={() => router.push(cta.href)}
-        >
-          {cta.title}
-        </LiquidButton>
+        <Button onClick={() => router.push(cta.href)}>{cta.title}</Button>
       </div>
     </Container>
   );

@@ -9,8 +9,8 @@ const ImageScene = dynamic(() => import("./image-scene"), {
 
 import dynamic from "next/dynamic";
 import { Header } from "@components/ui/header";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { useRouter } from "next/router";
+import { Button } from "@components/ui/button";
 
 interface TourProps {
   header: string;
@@ -41,12 +41,9 @@ export const Tour: React.FC<TourProps> = ({
           </figure>
           <div className="xl:col-span-4 lg:col-span-6 col-span-12 | font-manrope text-gray--700 text-body-1 | space-y-4 mt-auto">
             <p>{description}</p>
-            <LiquidButton
-              onClick={() => router.push(cta.href)}
-              variant="secondary"
-            >
+            <Button onClick={() => router.push(cta.href)} variant="secondary">
               {cta.title}
-            </LiquidButton>
+            </Button>
           </div>
         </div>
       </motion.div>

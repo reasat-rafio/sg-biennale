@@ -5,8 +5,8 @@ import { PortableText } from "@utils/sanity";
 import { motion, Variants } from "framer-motion";
 import { format } from "date-fns";
 import { Location } from "@components/icons/location";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { useRouter } from "next/router";
+import { Button } from "@components/ui/button";
 
 interface BacksideProps {
   description: IPgrammeEvents["description"];
@@ -100,9 +100,7 @@ const SlideRight: React.FC<BacksideProps> = ({
             </span>
           </div>
           {bookNowUrl && (
-            <LiquidButton onClick={() => router.push(bookNowUrl)}>
-              Book Now
-            </LiquidButton>
+            <Button onClick={() => router.push(bookNowUrl)}>Book Now</Button>
           )}
         </div>
       </motion.div>
@@ -153,9 +151,7 @@ const ScaleUp: React.FC<BacksideProps> = ({
           </span>
         </span>
         {bookNowUrl && (
-          <LiquidButton onClick={() => router.push(bookNowUrl)}>
-            Book Now
-          </LiquidButton>
+          <Button onClick={() => router.push(bookNowUrl)}>Book Now</Button>
         )}
       </div>
     </motion.div>

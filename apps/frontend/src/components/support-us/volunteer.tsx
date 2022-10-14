@@ -6,8 +6,8 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Header } from "@components/ui/header";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { useRouter } from "next/router";
+import { Button } from "@components/ui/button";
 
 interface VolunteerProps {
   header: string;
@@ -35,9 +35,7 @@ export const Volunteer: React.FC<VolunteerProps> = ({
         </header>
 
         <div className="xl:col-span-2 col-span-12">
-          <LiquidButton onClick={() => router.push(cta.href)}>
-            {cta.title}
-          </LiquidButton>
+          <Button onClick={() => router.push(cta.href)}>{cta.title}</Button>
         </div>
       </section>
       <Swiper

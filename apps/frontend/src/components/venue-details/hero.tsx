@@ -1,6 +1,6 @@
 import { Anchor } from "@components/ui/anchor";
+import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
-import { LiquidButton } from "@components/ui/liquid-button";
 import { InformationProps } from "@lib/@types/venue-details";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
@@ -48,7 +48,7 @@ const Header: React.FC<{ name: string }> = ({ name }) => {
           {name}
         </h1>
       </header>
-      <LiquidButton variant="secondary">Get Directions</LiquidButton>
+      <Button variant="secondary">Get Directions</Button>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { Clock } from "@components/icons/clock";
 import { Location } from "@components/icons/location";
-import { LiquidButton } from "@components/ui/liquid-button";
+import { Button } from "@components/ui/button";
 import { RelatedArtistsProps, Venue } from "@lib/@types/event.types";
 import { useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
@@ -81,16 +81,16 @@ export const Information: React.FC<InformationProps> = ({
           ref={secondaryBtnRef}
           className="lg:col-span-5 sm:col-span-6 col-span-12 w-full"
         >
-           <LiquidButton width={secondaryBtnWidth} variant="secondary">
+           <Button width={secondaryBtnWidth} variant="secondary">
             View Artist
-          </LiquidButton> 
+          </Button> 
         </span> */}
 
         {bookNowUrl && (
           <span className="lg:col-span-7 sm:col-span-6 col-span-12  w-full">
-            <LiquidButton onClick={() => router.push(bookNowUrl)} className="">
+            <Button onClick={() => router.push(bookNowUrl)} className="">
               Book Now
-            </LiquidButton>
+            </Button>
           </span>
         )}
       </div>

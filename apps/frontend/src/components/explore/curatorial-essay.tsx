@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 import { useIntersection } from "@lib/hooks";
 import { Slug } from "@lib/@types/global.types";
 import { Header } from "@components/ui/header";
-import { LiquidButton } from "@components/ui/liquid-button";
 
 interface EssayProps {
   _id: string;
@@ -102,11 +101,11 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
             animate={{ opacity: interseciton ? 1 : 0 }}
             transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
           >
-            <LiquidButton variant="secondary" onClick={onClickShowMoreAction}>
+            <Button variant="secondary" onClick={onClickShowMoreAction}>
               {sortedCuratorialEssays.length === curatorialEssays.length
                 ? "Show Less"
                 : "Show More"}
-            </LiquidButton>
+            </Button>
           </motion.div>
         )}
       </div>
