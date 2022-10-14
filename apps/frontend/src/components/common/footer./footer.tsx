@@ -8,7 +8,6 @@ import { NewsLetter } from "./news-letter";
 
 export const Footer: React.FC<ISite["site"]> = ({
   date,
-
   footer: { header, location, newsLetter, social, kvs },
 }) => {
   const [suffledKVs, setSuffledKVs] = useState<SanityImage[]>(kvs[0]);
@@ -39,7 +38,7 @@ export const Footer: React.FC<ISite["site"]> = ({
             width={900}
             image={suffledKVs[0] ?? kvs[0]}
             builder={imageUrlBuilder}
-            alt={`${header}' image`}
+            alt={suffledKVs[0]?.alt ?? kvs[0]?.alt}
           />
         </figure>
       </section>

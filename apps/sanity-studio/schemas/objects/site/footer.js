@@ -31,6 +31,15 @@ const Footer = {
               type: "boolean",
               hidden: true,
             },
+            {
+              title: "Alternative Text",
+              name: "alt",
+              type: "string",
+              validation: (Rule) =>
+                Rule.required().error(
+                  "Please add an alternative text for the image"
+                ),
+            },
           ],
           options: {
             hotspot: true,

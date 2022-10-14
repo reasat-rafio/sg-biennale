@@ -95,6 +95,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
             builder={imageUrlBuilder}
             image={images[0]}
             height={300}
+            alt={title}
           />
         </figure>
         {windowWidth >= 1024 && (

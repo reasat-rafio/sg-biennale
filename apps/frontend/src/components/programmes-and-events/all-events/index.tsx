@@ -6,7 +6,7 @@ import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { useWindowSize } from "@lib/hooks";
-import { FilteringMobileSection } from "./filters/mobile";
+// import { FilteringMobileSection } from "./filters/mobile";
 import { Header } from "@components/ui/header";
 
 interface AllEventsProps {}

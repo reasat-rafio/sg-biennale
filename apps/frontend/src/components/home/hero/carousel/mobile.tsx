@@ -33,6 +33,7 @@ export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
               image={image}
               builder={imageUrlBuilder}
               width={200}
+              alt={image.alt}
             />
           </figure>
 

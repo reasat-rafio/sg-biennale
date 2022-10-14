@@ -54,7 +54,7 @@ export const Image: React.FC<ImageProps> = ({ image, header }) => {
         )}
         image={image}
         builder={imageUrlBuilder}
-        alt={`${header}'s image`}
+        alt={image.alt}
       />
     </motion.figure>
   );

@@ -44,11 +44,11 @@ export const Volunteer: React.FC<VolunteerProps> = ({
         className="pt-5"
         speed={800}
         slidesPerView={1.2}
-        spaceBetween={10}
+        spaceBetween={5}
         breakpoints={{
           768: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 10,
           },
           1280: {
             slidesPerView: 2.8,
@@ -64,6 +64,7 @@ export const Volunteer: React.FC<VolunteerProps> = ({
                 width={400}
                 image={image}
                 builder={imageUrlBuilder}
+                alt={image.alt}
               />
             </div>
           </SwiperSlide>

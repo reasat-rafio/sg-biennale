@@ -3,6 +3,7 @@ import { Header } from "@components/ui/header";
 import { LiquidButton } from "@components/ui/liquid-button";
 import { Cta } from "@lib/@types/global.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import { transform, useMotionValue, motion } from "framer-motion";
 import { useRouter } from "next/router";
@@ -34,6 +35,7 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
   subtitle,
 }) => {
   const router = useRouter();
+  const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
@@ -107,7 +109,13 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
           rotate,
         }}
       >
-        <SanityImg builder={imageUrlBuilder} image={image} />
+        <SanityImg
+          className="h-full w-full object-cover"
+          builder={imageUrlBuilder}
+          image={image}
+          width={windowWidth >= 768 ? 700 : 400}
+          alt={image.alt}
+        />
       </motion.figure>
     </motion.article>
   );

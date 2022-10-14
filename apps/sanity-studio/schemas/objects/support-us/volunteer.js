@@ -20,8 +20,23 @@ const SupportUsVolunteer = {
     {
       name: "images",
       type: "array",
-      of: [{ type: "image" }],
       validation: (Rule) => Rule.required(),
+      of: [
+        {
+          type: "image",
+          fields: [
+            {
+              title: "Alternative Text",
+              name: "alt",
+              type: "string",
+              validation: (Rule) =>
+                Rule.required().error(
+                  "Please add an alternative text for the image"
+                ),
+            },
+          ],
+        },
+      ],
     },
   ],
 };

@@ -1,3 +1,4 @@
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
@@ -58,6 +59,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
   slug,
 }) => {
   const router = useRouter();
+  const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);
@@ -85,10 +87,10 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
       >
         <SanityImg
           className="h-full w-full object-cover"
-          width={600}
+          width={windowWidth >= 768 ? 450 : 250}
           image={images[0]}
           builder={imageUrlBuilder}
-          alt=""
+          alt={name}
         />
       </motion.figure>
 

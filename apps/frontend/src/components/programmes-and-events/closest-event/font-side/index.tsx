@@ -2,6 +2,7 @@ import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { imageUrlBuilder } from "@utils/sanity";
 import { RelatedArtistsList } from "./related-artists-list";
+import { useWindowSize } from "@lib/hooks";
 
 interface FrontSideProps {
   index: number;
@@ -32,6 +33,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   images,
   relatedArtists,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   return (
     <motion.div
       className="absolute h-full bottom-0 | flex flex-col justify-end z-20 cursor-pointer"
@@ -46,6 +48,8 @@ export const FrontSide: React.FC<FrontSideProps> = ({
           className="h-full w-full object-cover"
           image={images[0]}
           builder={imageUrlBuilder}
+          width={windowWidth >= 768 ? 600 : 400}
+          alt={title}
         />
       </figure>
 

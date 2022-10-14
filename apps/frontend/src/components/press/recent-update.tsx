@@ -57,7 +57,8 @@ export const RecentUpdate: React.FC<RecentUpdateProps> = ({
                 className="w-full h-full object-cover"
                 image={update.images[0]}
                 builder={imageUrlBuilder}
-                alt=""
+                alt={update.header}
+                width={windowWidth >= 768 ? 700 : 400}
               />
             </figure>
             <section className="w-full">

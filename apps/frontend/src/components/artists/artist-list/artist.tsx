@@ -4,6 +4,7 @@ import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useWindowSize } from "@lib/hooks";
 
 type Screen = "desktop" | "mobile";
 export interface ArtistProps {
@@ -44,6 +45,7 @@ export const Artist: React.FC<ArtistProps> = ({
   screen = "desktop",
 }) => {
   const router = useRouter();
+  const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHoverd] = useState(false);
   const onMouseEnterAction = () => setHoverd(true);
   const onMouseLeaveAction = () => setHoverd(false);
@@ -72,10 +74,10 @@ export const Artist: React.FC<ArtistProps> = ({
       >
         <SanityImg
           className="h-full w-full object-cover"
-          width={600}
+          width={windowWidth >= 768 ? 600 : 400}
           image={images[0]}
           builder={imageUrlBuilder}
-          alt=""
+          alt={name}
         />
       </motion.figure>
 

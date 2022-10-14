@@ -94,13 +94,13 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
     >
       <div className="relative flex justify-center items-center">
         <div className="flex flex-col w-full | space-y-5">
-          <figure className="h-[370px] w-full">
+          <figure className="md:h-[370px] h-[300px] w-full">
             <SanityImg
               className="h-full w-full object-cover"
               builder={imageUrlBuilder}
               image={images[0]}
-              alt=""
-              width={600}
+              width={windowWidth >= 768 ? 500 : 350}
+              alt={name}
             />
           </figure>
           <section className="flex flex-col | space-y-5">

@@ -41,6 +41,7 @@ export const Desktop: React.FC<DesktopProps> = ({ suffledKVs }) => {
               image={image}
               builder={imageUrlBuilder}
               width={600}
+              alt={image.alt}
             />
           </motion.figure>
 

@@ -7,6 +7,7 @@ import {
 } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
 import { imageUrlBuilder } from "@utils/sanity";
+import { useWindowSize } from "@lib/hooks";
 
 interface HeroProps {
   heading: string;
@@ -15,6 +16,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ heading, image, tagline }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   const letters = Array.from(heading);
   const headerAnimationDuration = (letters.length - 1) * 0.1 + 0.7;
   return (
@@ -29,7 +31,8 @@ export const Hero: React.FC<HeroProps> = ({ heading, image, tagline }) => {
           className="h-full w-full object-cover"
           image={image}
           builder={imageUrlBuilder}
-          width={2000}
+          width={windowWidth >= 1024 ? 2000 : windowWidth >= 768 ? 1080 : 900}
+          alt={image.alt}
         />
       </motion.figure>
       <section className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md | flex flex-col space-y-3 | xl:pt-xl md:pt-x pt-lg | justify-start items-start | -translate-y-1/2">

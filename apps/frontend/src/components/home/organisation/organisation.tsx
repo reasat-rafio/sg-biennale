@@ -6,6 +6,7 @@ import { motion, useAnimation, Variants } from "framer-motion";
 import { Container } from "@components/ui/container";
 import { SanityImg } from "sanity-react-extra";
 import { imageUrlBuilder } from "@utils/sanity";
+import { useWindowSize } from "@lib/hooks";
 const ImageScene = dynamic(() => import("./image-scene"), {
   ssr: false,
 });
@@ -27,6 +28,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
   organisations,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const windowWidth = useWindowSize()?.width ?? 0;
 
   const [selectedImg, setSelectedImg] = useState(organisations[0].logo.asset);
   const [prevSelectedImg, setPrevSelectedImage] = useState(
@@ -117,10 +119,11 @@ export const Organisations: React.FC<OrganisationProps> = ({
               prevSelectedImg={prevSelectedImg.url}
             /> */}
             <SanityImg
+              className="w-full h-full"
               image={selectedImg}
               builder={imageUrlBuilder}
-              alt={""}
-              width={500}
+              alt={selectedImg.alt}
+              width={windowWidth >= 768 ? 500 : 300}
             />
           </motion.div>
         </div>

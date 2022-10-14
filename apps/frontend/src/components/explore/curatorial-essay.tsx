@@ -139,7 +139,7 @@ const Essay: React.FC<EssayProps> = ({ header, author, images }) => {
           image={images[0]}
           width={400}
           builder={imageUrlBuilder}
-          alt={`${header}`}
+          alt={header}
         />
       </figure>
       <header className="flex flex-col space-y-6">

@@ -1,6 +1,6 @@
 import { Container } from "@components/ui/container";
 import { Cta, Slug } from "@lib/@types/global.types";
-import { usePortableTextTruncate } from "@lib/hooks";
+import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { useRef } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
@@ -38,6 +38,7 @@ const CardVariants: Variants = {
 
 export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
   const router = useRouter();
+  const windowWidth = useWindowSize()?.width ?? 0;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
 
@@ -64,9 +65,9 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
               <SanityImg
                 className="h-full w-full object-cover | group-hover:scale-110 transition-transform duration-500 ease-in-out"
                 image={data.images[0]}
-                width={500}
+                width={windowWidth >= 768 ? 500 : 400}
                 builder={imageUrlBuilder}
-                alt=""
+                alt={data.header}
               />
             </figure>
             <h4

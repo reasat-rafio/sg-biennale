@@ -28,6 +28,17 @@ const HomeOrganisations = {
             {
               name: "logo",
               type: "image",
+              fields: [
+                {
+                  title: "Alternative Text",
+                  name: "alt",
+                  type: "string",
+                  validation: (Rule) =>
+                    Rule.required().error(
+                      "Please add an alternative text for the image"
+                    ),
+                },
+              ],
               options: {
                 hotspot: true,
               },

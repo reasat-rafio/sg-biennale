@@ -1,12 +1,15 @@
 import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
+import { useWindowSize } from "@lib/hooks";
 
 interface DecorProps {
   image: SanityImage;
 }
 
 export const Decor: React.FC<DecorProps> = ({ image }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <section className="overflow-hidden mb-x">
       <motion.figure
@@ -19,9 +22,9 @@ export const Decor: React.FC<DecorProps> = ({ image }) => {
         <SanityImg
           className="h-full w-full object-cover"
           image={image}
-          width={2000}
+          width={windowWidth >= 1024 ? 2000 : windowWidth >= 768 ? 1080 : 900}
           builder={imageUrlBuilder}
-          alt=""
+          alt={image.alt}
         />
       </motion.figure>
     </section>

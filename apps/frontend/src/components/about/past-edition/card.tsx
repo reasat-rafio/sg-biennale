@@ -84,10 +84,11 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
         }}
       >
         <SanityImg
+          className="h-full w-full object-cover"
           width={400}
           image={image}
           builder={imageUrlBuilder}
-          className="h-full w-full object-cover"
+          alt={image.url}
         />
       </motion.figure>
       <section>
