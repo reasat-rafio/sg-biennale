@@ -33,6 +33,7 @@ export const AnchorWrapper: React.FC<AnchorWrapperProps> = (props) => {
         children.map((child: string, index: number) => {
           return (
             <Section
+              key={index}
               setActiveAnchor={props.setActiveAnchor}
               sectionRef={onViewArtistRefs[index]}
             >

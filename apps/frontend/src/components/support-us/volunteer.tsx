@@ -56,8 +56,8 @@ export const Volunteer: React.FC<VolunteerProps> = ({
           },
         }}
       >
-        {images.map((image) => (
-          <SwiperSlide>
+        {images.map((image, idx) => (
+          <SwiperSlide key={images[0].asset._id + idx}>
             <div className="p-5 h-[340px] outline-none" key={image._key}>
               <SanityImg
                 className="w-full h-full object-cover"

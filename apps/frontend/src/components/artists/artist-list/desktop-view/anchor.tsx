@@ -46,7 +46,7 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
         speed={200}
       >
         {anchors.map((anchor) => (
-          <SwiperSlide>
+          <SwiperSlide key={anchor}>
             <span
               className={clsx(
                 "font-manrope text-body-2 font-semibold | hover:text-red-love | cursor-pointer | transition-colors duration-500 ease-in-out  px-5",

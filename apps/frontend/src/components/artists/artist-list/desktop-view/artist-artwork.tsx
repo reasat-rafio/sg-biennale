@@ -26,7 +26,10 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
             <span className="mb-7 text-xl font-medium">{title}</span>
             <div className="grid grid-cols-12 | gap-10 ">
               {data.map((props, index) => (
-                <section className="grid grid-cols-12 col-span-12 gap-10">
+                <section
+                  key={props.artist._id + index}
+                  className="grid grid-cols-12 col-span-12 gap-10"
+                >
                   {rootIndex % 2 ? (
                     <>
                       {index % 2 ? (

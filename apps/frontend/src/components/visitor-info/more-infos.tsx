@@ -20,7 +20,7 @@ export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
         {moreInfos.map(({ _key, title, subtitle, description, image, cta }) =>
           image ? (
             <WithImageSection
-              _key={_key}
+              key={_key}
               title={title}
               subtitle={subtitle}
               description={description}
@@ -29,7 +29,7 @@ export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
             />
           ) : (
             <Section
-              _key={_key}
+              key={_key}
               title={title}
               subtitle={subtitle}
               description={description}
@@ -43,18 +43,15 @@ export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
 };
 
 const Section: React.FC<{
-  _key?: string;
+  key?: string;
   title: string;
   subtitle?: string;
   description: string;
   cta?: Cta;
-}> = ({ cta, description, title, subtitle, _key }) => {
+}> = ({ cta, description, title, subtitle }) => {
   const router = useRouter();
   return (
-    <article
-      key={_key}
-      className=" grid grid-cols-12 sm:col-span-6 col-span-12 justify-center items-center | py-10"
-    >
+    <article className=" grid grid-cols-12 sm:col-span-6 col-span-12 justify-center items-center | py-10">
       <section className="col-span-12 | space-y-6">
         <Header variant="secondary">{title}</Header>
         {subtitle && (

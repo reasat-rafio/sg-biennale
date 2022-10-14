@@ -27,6 +27,7 @@ export const ArtistArtwork: React.FC<ArtistArtworkProps> = ({
             <div className="grid grid-cols-12 | gap-5">
               {data.map(({ artist, artistCollection }, index) => (
                 <motion.section
+                  key={artist._id + index}
                   layout
                   className="grid grid-cols-12 col-span-12 gap-5 pb-20"
                 >
@@ -36,7 +37,13 @@ export const ArtistArtwork: React.FC<ArtistArtworkProps> = ({
                   >
                     {artistCollection.map(
                       (artist, idx) =>
-                        idx < 2 && <ArtistCard screen="mobile" {...artist} />
+                        idx < 2 && (
+                          <ArtistCard
+                            key={artist._id}
+                            screen="mobile"
+                            {...artist}
+                          />
+                        )
                     )}
                   </motion.div>
 
@@ -53,7 +60,13 @@ export const ArtistArtwork: React.FC<ArtistArtworkProps> = ({
                   >
                     {artistCollection.map(
                       (artist, idx) =>
-                        idx >= 2 && <ArtistCard screen="mobile" {...artist} />
+                        idx >= 2 && (
+                          <ArtistCard
+                            key={artist._id}
+                            screen="mobile"
+                            {...artist}
+                          />
+                        )
                     )}
                   </motion.div>
                 </motion.section>

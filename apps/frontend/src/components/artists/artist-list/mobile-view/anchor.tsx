@@ -31,14 +31,13 @@ export const Anchor: React.FC<AnchorProps> = ({ activeAnchor, anchors }) => {
         scrollbar={{ draggable: true }}
       >
         {anchors.map((anchor) => (
-          <SwiperSlide>
+          <SwiperSlide key={anchor}>
             <span
               className={clsx(
                 "font-manrope text-body-2 font-semibold | hover:text-red-love | cursor-pointer | transition-colors duration-500 ease-in-out",
                 activeAnchor === anchor ? "text-red-love" : "text-gray--700"
               )}
               onClick={() => onAnchorClickAction(anchor)}
-              key={anchor}
             >
               {anchor}
             </span>

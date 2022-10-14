@@ -109,7 +109,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
           // }}
         >
           <motion.div
-            key={selectedImg.url}
+            key={selectedImg.asset._id}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}

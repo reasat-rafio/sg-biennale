@@ -11,7 +11,6 @@ import { MouseEvent, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 
 interface WithImageSectionProps {
-  _key?: string;
   title: string;
   subtitle?: string;
   description: string;
@@ -31,7 +30,6 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
   description,
   image,
   title,
-  _key,
   subtitle,
 }) => {
   const router = useRouter();
@@ -72,7 +70,6 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
 
   return (
     <motion.article
-      key={_key}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => {

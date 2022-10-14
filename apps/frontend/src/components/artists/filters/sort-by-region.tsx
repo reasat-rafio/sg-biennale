@@ -40,6 +40,7 @@ export const SortByRegion: React.FC<{}> = () => {
             <Listbox.Options className="absolute mt-1 max-h-60 w-fit overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm | scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 ">
               {allRegions.map(({ label, value }) => (
                 <Listbox.Option
+                  key={value}
                   className={({ active }) =>
                     clsx(
                       "relative cursor-default select-none py-2 pl-10 pr-4",

@@ -47,7 +47,7 @@ export const ArtistCollection: React.FC<ArtistCollectionProps> = ({
   return (
     <section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
       {artists.map((artist) => (
-        <ArtistCard screen={screen} {...artist} />
+        <ArtistCard key={artist.slug.current} screen={screen} {...artist} />
       ))}
     </section>
   );

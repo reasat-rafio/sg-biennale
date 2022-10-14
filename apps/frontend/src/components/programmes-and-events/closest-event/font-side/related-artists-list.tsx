@@ -104,7 +104,7 @@ export const RelatedArtistsList: React.FC<RelatedArtistsListProps> = ({
     >
       <UserIcon />
       {relatedArtists.map(({ name, _id }, idx) => (
-        <span className="" key={_id} id={`related-artist-${index}`}>
+        <span className="" key={_id + idx} id={`related-artist-${index}`}>
           {name}
         </span>
       ))}
@@ -124,7 +124,10 @@ export const RelatedArtistsList: React.FC<RelatedArtistsListProps> = ({
         overlay={
           <>
             {overflownArtists?.map((e: string, idx: number) => (
-              <span className="text-white text-body-2 font-semibold">
+              <span
+                key={e + idx}
+                className="text-white text-body-2 font-semibold"
+              >
                 {e},{" "}
               </span>
             ))}
