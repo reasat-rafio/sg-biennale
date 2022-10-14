@@ -5,6 +5,7 @@ import { IArtistProps } from "@lib/@types/home.types";
 import { Image } from "./image";
 import { NextRouter } from "next/router";
 import { Scroll, ScrollControls } from "@lib/helpers/scroll-controls.helper";
+import { imageUrlBuilder } from "@utils/sanity";
 
 interface ImagesProps {
   artists: IArtistProps[];
@@ -41,26 +42,36 @@ export const Images: React.FC<ImagesProps> = ({
     >
       <Minimap length={artists.length} />
       <Scroll>
-        {artists.map(({ artworks, name, countries, slug, _id }, i) => (
-          <Image
-            key={_id}
-            index={i}
-            position={[i * xW, 0, 0]}
-            scale={[w, 4.5, 1]}
-            length={artists.length}
-            scrollPassRatio={scrollPassRatio}
-            slug={slug}
-            clicked={clicked}
-            name={name}
-            isDown={isDown}
-            offsetX={offsetX}
-            myTimeout={myTimeout}
-            countries={countries}
-            router={router}
-            setClikced={setClikced}
-            url={artworks[0].images[0].asset.url}
-          />
-        ))}
+        {artists.map(({ artworks, name, countries, slug, _id }, i) => {
+          const compressedImageUrl = imageUrlBuilder
+            .image(artworks[0].images[0])
+            .width(600)
+            .format("jpg")
+            .auto("format")
+            .quality(80)
+            .url();
+
+          return (
+            <Image
+              key={_id}
+              index={i}
+              position={[i * xW, 0, 0]}
+              scale={[w, 4.5, 1]}
+              length={artists.length}
+              scrollPassRatio={scrollPassRatio}
+              slug={slug}
+              clicked={clicked}
+              name={name}
+              isDown={isDown}
+              offsetX={offsetX}
+              myTimeout={myTimeout}
+              countries={countries}
+              router={router}
+              setClikced={setClikced}
+              url={compressedImageUrl as string}
+            />
+          );
+        })}
       </Scroll>
     </ScrollControls>
   );

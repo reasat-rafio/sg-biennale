@@ -1,7 +1,7 @@
 import CardImgScene from "@components/home/news/card-img-scene";
 import { Container } from "@components/ui/container";
 import { ICountry } from "@lib/@types/global.types";
-import { PortableText } from "@utils/sanity";
+import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { Dispatch, SetStateAction, useState } from "react";
 import { SanityImage } from "sanity-react-extra";
 import getYouTubeId from "get-youtube-id";
@@ -35,6 +35,14 @@ export const Hero: React.FC<HeroProps> = ({
   const [scalePos, _] = useState([0, 0, 0]);
   const aspectRatio = images[0].metadata.dimensions.aspectRatio;
 
+  const compressedImageUrl = imageUrlBuilder
+    .image(images[0])
+    .width(500)
+    .format("jpg")
+    .auto("format")
+    .quality(80)
+    .url();
+
   return (
     <Container
       type="article"
@@ -47,7 +55,7 @@ export const Hero: React.FC<HeroProps> = ({
             hovered={hovered}
             scalePos={scalePos}
             setHovered={setHovered}
-            url={images[0].url}
+            url={compressedImageUrl as string}
           />
         </div>
         <header className="space-y-2">

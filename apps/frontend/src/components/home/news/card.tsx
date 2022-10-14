@@ -7,7 +7,7 @@ import {
 import { INewsProps } from "@lib/@types/home.types";
 import { useRef, useState } from "react";
 import { useMotionValue, useSpring, useTransform, motion } from "framer-motion";
-import { PortableText } from "@utils/sanity";
+import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
 import { useRouter } from "next/router";
@@ -50,6 +50,14 @@ export const NewsCard: React.FC<INewsProps> = ({
   );
   const animatedY = useSpring(y, { damping: 15 });
 
+  const compressedImageUrl = imageUrlBuilder
+    .image(image)
+    .width(500)
+    .format("jpg")
+    .auto("format")
+    .quality(80)
+    .url();
+
   return (
     <motion.article
       id={_key}
@@ -78,7 +86,7 @@ export const NewsCard: React.FC<INewsProps> = ({
         <figure className="aspect-video w-[70%] rounded overflow-hidden">
           <CardImgScene
             hovered={hovered}
-            url={image.asset.url}
+            url={compressedImageUrl as string}
             scalePos={scalePos}
           />
         </figure>
