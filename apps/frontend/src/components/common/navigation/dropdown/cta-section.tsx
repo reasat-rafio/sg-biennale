@@ -1,5 +1,6 @@
 import { Cta, FooterSocial } from "@lib/@types/global.types";
 import { CTAVarinats } from "@lib/helpers/nav-dropdown.helpers";
+import { useWindowSize } from "@lib/hooks";
 import useGlobalStore from "@stores/global.store";
 import { imageUrlBuilder } from "@utils/sanity";
 import { AnimatePresence, motion } from "framer-motion";
@@ -13,7 +14,6 @@ interface CtaProps {
 
 export const CTASection: React.FC<CtaProps> = ({ social, ctas }) => {
   const { showNavDropDown } = useGlobalStore();
-
   return (
     <AnimatePresence>
       {showNavDropDown && (
@@ -36,7 +36,7 @@ export const CTASection: React.FC<CtaProps> = ({ social, ctas }) => {
                       className="h-full w-full object-contain"
                       image={icon}
                       builder={imageUrlBuilder}
-                      width={100}
+                      width={15}
                       alt="icon"
                     />
                   </figure>
@@ -58,7 +58,7 @@ export const CTASection: React.FC<CtaProps> = ({ social, ctas }) => {
                         className="h-full w-full object-contain"
                         image={icon}
                         builder={imageUrlBuilder}
-                        width={100}
+                        width={20}
                         alt="icon"
                       />
                     </figure>

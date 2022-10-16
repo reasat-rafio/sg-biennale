@@ -1,5 +1,6 @@
 import { ISite } from "@lib/@types/global.types";
 import { getShuffledArr } from "@lib/helpers/global.helpers";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
 import { useEffect, useState } from "react";
 import { SanityImg, SanityImage } from "sanity-react-extra";
@@ -15,6 +16,7 @@ export const Footer: React.FC<ISite["site"]> = ({
   useEffect(() => {
     setSuffledKVs(getShuffledArr(kvs));
   }, []);
+  const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
     <footer

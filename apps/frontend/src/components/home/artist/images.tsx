@@ -47,7 +47,15 @@ export const Images: React.FC<ImagesProps> = ({
         {artists.map(({ artworks, name, countries, slug, _id }, i) => {
           const compressedImageUrl = imageUrlBuilder
             .image(artworks[0].images[0])
-            .width(windowWidth >= 1024 ? 500 : windowWidth >= 680 ? 400 : 350)
+            .width(
+              windowWidth >= 1280
+                ? 600
+                : windowWidth >= 1024
+                ? 450
+                : windowWidth >= 680
+                ? 400
+                : 350
+            )
             .format("jpg")
             .auto("format")
             .quality(100)

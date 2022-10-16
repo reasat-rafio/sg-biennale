@@ -54,7 +54,7 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
                   image={eventLogo}
                   builder={imageUrlBuilder}
                   width={150}
-                  alt="singapore biennale 2022 logo"
+                  alt="natasha"
                 />
               </a>
             </Link>

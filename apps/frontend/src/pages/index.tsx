@@ -88,7 +88,7 @@ const Home: NextPage<SanityProps> = (props) => {
   } = useSanityQuery(query, props).data;
 
   return (
-    <div>
+    <div className="">
       <Carousel kvs={kvs} />
       {renderObjectArray(page.sections, {
         "homePage.hero": useCallback(

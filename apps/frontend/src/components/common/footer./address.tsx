@@ -27,7 +27,8 @@ export const Address: React.FC<AddressProps> = ({ location, social }) => {
             <Link key={_key} href={url}>
               <a>
                 <SanityImg
-                  width={22}
+                  className="h-full w-full object-contain"
+                  width={10}
                   image={icon}
                   builder={imageUrlBuilder}
                   alt={"social icon"}

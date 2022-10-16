@@ -37,7 +37,7 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
                   className="h-full w-full object-contain"
                   image={icon}
                   builder={imageUrlBuilder}
-                  width={100}
+                  width={14}
                   alt="icon"
                 />
               </figure>
