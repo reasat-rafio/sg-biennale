@@ -26,6 +26,7 @@ export const NewsCard: React.FC<INewsProps> = ({
 }) => {
   const router = useRouter();
   const windowHeight = useWindowSize()?.height ?? 0;
+  const windowWidth = useWindowSize()?.width ?? 0;
   const cardRef = useRef<HTMLElement>(null);
   const [newsDescriptionRef] = usePortableTextTruncate({ maxLength: 800 });
   const [hovered, setHover] = useState(false);
@@ -52,7 +53,7 @@ export const NewsCard: React.FC<INewsProps> = ({
 
   const compressedImageUrl = imageUrlBuilder
     .image(image)
-    .width(500)
+    .width(windowWidth >= 1280 ? 500 : windowWidth >= 768 ? 300 : 250)
     .format("jpg")
     .auto("format")
     .quality(80)

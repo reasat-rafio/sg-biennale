@@ -1,7 +1,6 @@
 import { Artist } from "@components/home/artist/artist";
 import { Introduction } from "@components/home/introduction/introduction";
 import { News } from "@components/home/news/news";
-import { Promotion } from "@components/home/promotion";
 import { Organisations } from "@components/home/organisation/organisation";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
@@ -23,10 +22,6 @@ const query = pageQuery(groq`
       organisations[]{
         ...,
         "logo": ${withDimensions("logo")}
-      },
-      promotions[] {
-        ...,
-        "image": ${withDimensions("image")}
       },
       collection[]{
         ..., 
@@ -96,7 +91,6 @@ const Home: NextPage<SanityProps> = (props) => {
           []
         ),
         "homePage.introduction": Introduction,
-        "homePage.promotion": Promotion,
         "homePage.artists": Artist,
         "homePage.news": News,
         "homePage.organisations": Organisations,

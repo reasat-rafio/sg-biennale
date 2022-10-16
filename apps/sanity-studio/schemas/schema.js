@@ -24,7 +24,6 @@ import HomePage from "./documents/pages/home";
 import HomeHero from "./objects/home/hero";
 import HomeHeroCarouselItem from "./objects/home/carousel-item";
 import HomeIntroduction from "./objects/home/introduction";
-import HomePromotion from "./objects/home/promotion";
 import HomeOrganisations from "./objects/home/organisations";
 import HomeArtists from "./objects/home/artist";
 import HomeNews from "./objects/home/news";
@@ -117,7 +116,6 @@ export default createSchema({
     HomePage,
     HomeHero,
     HomeHeroCarouselItem,
-    HomePromotion,
     HomeOrganisations,
     HomeArtists,
     HomeIntroduction,
