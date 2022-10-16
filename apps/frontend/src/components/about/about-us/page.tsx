@@ -93,9 +93,10 @@ export const Page: React.FC<PageProps> = ({
         <figure className="absolute h-full w-full top-0 z-0">
           <SanityImg
             className="h-full w-full object-cover"
-            width={windowWidth > 1024 ? 2500 : 1500}
+            width={windowWidth >= 1280 ? 1200 : windowWidth >= 768 ? 800 : 400}
             image={image}
             builder={imageUrlBuilder}
+            alt={image.alt}
           />
         </figure>
       </div>

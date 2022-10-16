@@ -5,6 +5,7 @@ import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { SanityImg } from "sanity-react-extra";
 import Portal from "@reach/portal";
+import { useWindowSize } from "@lib/hooks";
 
 interface CoArtistDirectorProps {}
 
@@ -67,6 +68,8 @@ const Content: React.FC<TeamCollection> = ({
   team,
   _key,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <motion.article className="grid grid-cols-12 px-5  ">
       <motion.section className="lg:col-span-8 col-span-12 lg:max-w-[90%] space-y-8 ">
@@ -85,10 +88,10 @@ const Content: React.FC<TeamCollection> = ({
         >
           <SanityImg
             className="w-full object-contain max-h-[400px]"
-            width={400}
+            width={windowWidth >= 768 ? 200 : 130}
             image={team.images[0]}
             builder={imageUrlBuilder}
-            alt=""
+            alt={team.name}
           />
         </motion.figure>
 
@@ -111,10 +114,10 @@ const Content: React.FC<TeamCollection> = ({
       >
         <SanityImg
           className="w-full object-cover "
-          width={400}
+          width={windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 150}
           image={team.images[0]}
           builder={imageUrlBuilder}
-          alt=""
+          alt={team.name}
         />
       </motion.figure>
     </motion.article>

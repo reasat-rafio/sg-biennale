@@ -125,7 +125,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
               image={selectedImg}
               builder={imageUrlBuilder}
               alt={selectedImg.alt}
-              width={windowWidth >= 1024 ? 500 : windowWidth >= 680 ? 300 : 200}
+              width={windowWidth >= 1024 ? 500 : windowWidth >= 640 ? 300 : 200}
             />
           </motion.div>
         </div>

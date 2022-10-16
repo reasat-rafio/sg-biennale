@@ -1,5 +1,6 @@
 import { PastEditionCollection } from "@lib/@types/about.types";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
+import { useWindowSize } from "@lib/hooks";
 import useAboutStore from "@stores/about.store";
 import { imageUrlBuilder } from "@utils/sanity";
 import clsx from "clsx";
@@ -19,6 +20,7 @@ const physics = {
 export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
   const cardRef = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState(false);
+  const windowWidth = useWindowSize()?.width ?? 0;
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
   const rotateValue = useMotionValue(0);
@@ -85,10 +87,10 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
       >
         <SanityImg
           className="h-full w-full object-cover"
-          width={400}
+          width={windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 150}
           image={image}
           builder={imageUrlBuilder}
-          alt={image.url}
+          alt={image.alt}
         />
       </motion.figure>
       <section>

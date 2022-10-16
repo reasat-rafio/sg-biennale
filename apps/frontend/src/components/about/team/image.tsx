@@ -45,12 +45,12 @@ export const Image: React.FC<ImageProps> = ({ image, header }) => {
     <motion.figure
       style={{ scale }}
       ref={imageRef}
-      className="mt-10 | rounded | overflow-hidden max-h-fit"
+      className="mt-10 | rounded | overflow-hidden aspect-video"
     >
       <SanityImg
-        width={windowWidth >= 768 ? 2000 : 1000}
+        width={windowWidth >= 1280 ? 1200 : windowWidth >= 768 ? 800 : 400}
         className={clsx(
-          "w-full h-full object-cover | transition-all duration-500 ease-in-out"
+          "h-full w-full object-cover | transition-all duration-500 ease-in-out"
         )}
         image={image}
         builder={imageUrlBuilder}

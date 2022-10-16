@@ -39,9 +39,6 @@ const HomeOrganisations = {
                     ),
                 },
               ],
-              options: {
-                hotspot: true,
-              },
               validation: (Rule) => Rule.required(),
             },
             { name: "url", type: "url", description: "optional" },

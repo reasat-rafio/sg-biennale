@@ -80,6 +80,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({
         <div className="inline-flex  ">
           {aboutCollection.map((data, index) => (
             <Page
+              key={data._key}
               {...data}
               index={index}
               scrollYRatio={scrollYRatio}

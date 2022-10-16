@@ -3,6 +3,7 @@ import { motion, Variants } from "framer-motion";
 import { SanityImg, SanityImage } from "sanity-react-extra";
 import clsx from "clsx";
 import { imageUrlBuilder } from "@utils/sanity";
+import { useWindowSize } from "@lib/hooks";
 
 interface FrontSideProps {
   active: boolean;
@@ -30,6 +31,8 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   cardsPerView,
   id,
 }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <motion.div
       className="z-20 absolute h-full bottom-0 | flex flex-col justify-end | cursor-pointer"
@@ -68,7 +71,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
             "pointer-events-none h-full w-full object-contain transition-transform duration-500 ease-in-out",
             active ? "scale-125" : "scale-100"
           )}
-          width={400}
+          width={windowWidth >= 1280 ? 250 : windowWidth >= 768 ? 200 : 160}
           image={image}
           builder={imageUrlBuilder}
           alt={name}
