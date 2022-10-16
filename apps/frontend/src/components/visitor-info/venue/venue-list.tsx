@@ -15,14 +15,15 @@ export const VenueList: React.FC<VenueListProps> = ({
   return (
     <section className="pt-2" style={{ paddingBottom: extraPadding() / 2 }}>
       <div className="grid grid-cols-12 | lg:gap-8 gap-4">
-        {venues?.map((venue, index) => (
-          <VenueListCard
-            {...venue}
-            key={venue._id}
-            index={index}
-            imgPositionIngAlgo={imgPositionIngAlgo}
-          />
-        ))}
+        {venues?.length &&
+          venues?.map((venue, index) => (
+            <VenueListCard
+              {...venue}
+              key={venue._id}
+              index={index}
+              imgPositionIngAlgo={imgPositionIngAlgo}
+            />
+          ))}
       </div>
     </section>
   );

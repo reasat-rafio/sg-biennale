@@ -106,7 +106,7 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
           className="h-full w-full object-cover"
           builder={imageUrlBuilder}
           image={image}
-          width={windowWidth >= 768 ? 700 : 400}
+          width={windowWidth >= 1280 ? 600 : windowWidth >= 768 ? 400 : 200}
           alt={image.alt}
         />
       </motion.figure>

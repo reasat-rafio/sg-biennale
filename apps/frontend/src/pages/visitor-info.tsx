@@ -3,7 +3,6 @@ import { Container } from "@components/ui/container";
 import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { Map } from "@components/visitor-info/map";
 import { MoreInfos } from "@components/visitor-info/more-infos";
-import { Tour } from "@components/visitor-info/tour/tour";
 import { Venue } from "@components/visitor-info/venue";
 import { FilteringLogic } from "@components/visitor-info/venue/filtering-logic";
 import { siteQuery } from "@lib/query";
@@ -85,7 +84,6 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
           []
         ),
         "visitorInfoPage.moreInfo": MoreInfos,
-        "visitorInfoPage.tour": Tour,
       })}
       <FilteringLogic>
         <Venue />

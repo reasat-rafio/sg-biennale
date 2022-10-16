@@ -35,7 +35,6 @@ import AboutPagePastEditions from "./objects/about/past-edition";
 
 import VisitorInfoPage from "./documents/pages/visitor-info";
 import visitorInfoHero from "./objects/visitor-info/hero";
-import VisitorInfoTour from "./objects/visitor-info/tour";
 import VisitorInfoAccesibilityInfo from "./objects/visitor-info/accesibility-info";
 import VisitorMoreInfo from "./objects/visitor-info/more-info";
 
@@ -137,7 +136,6 @@ export default createSchema({
     VisitorInfoPage,
     visitorInfoHero,
     VisitorMoreInfo,
-    VisitorInfoTour,
     VisitorInfoAccesibilityInfo,
 
     Partner,

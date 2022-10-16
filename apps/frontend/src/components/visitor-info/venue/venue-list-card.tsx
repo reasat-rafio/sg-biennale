@@ -43,10 +43,9 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
   const screenY = useMotionValue(0);
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 300 });
 
-  const formattedDate = format(
-    new Date(startAt),
-    "eee, d LLL yyyy - hh:mm aaaaa'm'"
-  );
+  const formattedDate =
+    startAt && format(new Date(startAt), "eee, d LLL yyyy - hh:mm aaaaa'm'");
+
   const containerStylings =
     imgPositionIngAlgo[index] === 0
       ? index % 2
@@ -94,14 +93,18 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
     >
       <div className="relative flex justify-center items-center">
         <div className="flex flex-col w-full | space-y-5">
-          <figure className="md:h-[370px] h-[300px] w-full">
-            <SanityImg
-              className="h-full w-full object-cover"
-              builder={imageUrlBuilder}
-              image={images[0]}
-              width={windowWidth >= 768 ? 500 : 350}
-              alt={name}
-            />
+          <figure className="md:h-[370px]  w-full">
+            {images?.length && (
+              <SanityImg
+                className="h-full w-full object-cover"
+                builder={imageUrlBuilder}
+                image={images[0]}
+                width={
+                  windowWidth >= 1280 ? 500 : windowWidth >= 768 ? 300 : 200
+                }
+                alt={name}
+              />
+            )}
           </figure>
           <section className="flex flex-col | space-y-5">
             <h6
@@ -120,7 +123,7 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
               </span>
             </div>
 
-            {windowWidth < 1024 && (
+            {windowWidth < 1024 && description && (
               <div
                 ref={descriptionRef}
                 className="text-gray--700 font-manrope text-body-2"
