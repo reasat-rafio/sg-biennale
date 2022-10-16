@@ -46,8 +46,12 @@ export const ArtistCollection: React.FC<ArtistCollectionProps> = ({
 }) => {
   return (
     <section className="lg:col-span-6 col-span-12 grid grid-cols-12 gap-5">
-      {artists.map((artist) => (
-        <ArtistCard key={artist.slug.current} screen={screen} {...artist} />
+      {artists.map((artist, index) => (
+        <ArtistCard
+          key={artist.slug.current + index}
+          screen={screen}
+          {...artist}
+        />
       ))}
     </section>
   );
@@ -85,13 +89,15 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
         }}
         variants={ImageVariants}
       >
-        <SanityImg
-          className="h-full w-full object-cover"
-          width={windowWidth >= 768 ? 450 : 250}
-          image={images[0]}
-          builder={imageUrlBuilder}
-          alt={name}
-        />
+        {images?.length && (
+          <SanityImg
+            className="h-full w-full object-cover"
+            width={windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 100}
+            image={images[0]}
+            builder={imageUrlBuilder}
+            alt={name}
+          />
+        )}
       </motion.figure>
 
       <motion.h6

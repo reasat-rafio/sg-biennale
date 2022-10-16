@@ -72,13 +72,15 @@ export const Artist: React.FC<ArtistProps> = ({
         variants={ImageVariants}
         className="h-full w-full"
       >
-        <SanityImg
-          className="h-full w-full object-cover"
-          width={windowWidth >= 768 ? 600 : 400}
-          image={images[0]}
-          builder={imageUrlBuilder}
-          alt={name}
-        />
+        {images?.length && (
+          <SanityImg
+            className="h-full w-full object-cover"
+            width={windowWidth >= 1280 ? 500 : windowWidth >= 768 ? 250 : 150}
+            image={images[0]}
+            builder={imageUrlBuilder}
+            alt={name}
+          />
+        )}
       </motion.figure>
 
       <motion.h6

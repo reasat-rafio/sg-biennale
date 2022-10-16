@@ -20,7 +20,7 @@ export const ArtistArtwork: React.FC<ArtistsProps> = ({
         {sortedArtistsList.map(({ data, title }, rootIndex) => (
           <motion.section
             id={title}
-            key={title}
+            key={title + rootIndex}
             className="flex flex-col | lg:py-14 py-8"
           >
             <span className="mb-7 text-xl font-medium">{title}</span>
