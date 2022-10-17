@@ -5,7 +5,6 @@ import {
   AnimationDuration,
   DescriptionVariants,
 } from "@components/shared/page-heading";
-import { Container } from "@components/ui/container";
 import { imageUrlBuilder } from "@utils/sanity";
 import { useWindowSize } from "@lib/hooks";
 
@@ -31,7 +30,7 @@ export const Hero: React.FC<HeroProps> = ({ heading, image, tagline }) => {
           className="h-full w-full object-cover"
           image={image}
           builder={imageUrlBuilder}
-          width={windowWidth >= 1024 ? 2000 : windowWidth >= 768 ? 1080 : 900}
+          width={windowWidth >= 1280 ? 1200 : windowWidth >= 768 ? 800 : 600}
           alt={image.alt}
         />
       </motion.figure>

@@ -21,7 +21,7 @@ export const Image: React.FC<ImageProps> = ({ url }) => {
     >
       <SanityImg
         className="h-full w-full object-cover "
-        width={windowWidth >= 768 ? 900 : 400}
+        width={windowWidth >= 1280 ? 700 : windowWidth >= 768 ? 400 : 250}
         image={url}
         builder={imageUrlBuilder}
         alt={url.alt}

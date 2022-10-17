@@ -22,7 +22,7 @@ export const Decor: React.FC<DecorProps> = ({ image }) => {
         <SanityImg
           className="h-full w-full object-cover"
           image={image}
-          width={windowWidth >= 1024 ? 2000 : windowWidth >= 768 ? 1080 : 900}
+          width={windowWidth >= 1024 ? 1400 : windowWidth >= 768 ? 700 : 400}
           builder={imageUrlBuilder}
           alt={image.alt}
         />

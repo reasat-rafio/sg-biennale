@@ -48,7 +48,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
           className="h-full w-full object-cover"
           image={images[0]}
           builder={imageUrlBuilder}
-          width={windowWidth >= 768 ? 600 : 400}
+          width={windowWidth >= 1280 ? 250 : windowWidth >= 768 ? 200 : 160}
           alt={title}
         />
       </figure>

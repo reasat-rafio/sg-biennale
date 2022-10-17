@@ -29,7 +29,6 @@ export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
   images,
   header,
 }) => {
-  const router = useRouter();
   const windwoWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
@@ -83,7 +82,7 @@ export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
         y.set(0);
         setHovered(false);
       }}
-      className="grid grid-cols-12 gap-x-8 overflow-visible lg:h-auto "
+      className="grid grid-cols-12 gap-x-8 overflow-visible lg:h-auto"
     >
       <div className="lg:col-span-7 col-span-12 | flex flex-col space-y-5">
         <Header
@@ -97,7 +96,7 @@ export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
         </span>
       </div>
       <motion.figure
-        className="lg:col-span-5 col-span-12 | lg:mt-0 mt-5"
+        className="aspect-video lg:col-span-5 col-span-12 | lg:mt-0 mt-5"
         style={{
           x,
           y,
@@ -105,8 +104,8 @@ export const PublicationCatalogue: React.FC<PublicationsAndCatalogue> = ({
         }}
       >
         <SanityImg
-          className="aspect-video lg:h-auto lg:w-auto  w-full object-cover"
-          width={400}
+          className="w-full h-full object-cover"
+          width={windwoWidth >= 1280 ? 300 : windwoWidth >= 768 ? 250 : 200}
           builder={imageUrlBuilder}
           image={images[0]}
           alt={header}

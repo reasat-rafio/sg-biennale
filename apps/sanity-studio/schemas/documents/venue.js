@@ -30,7 +30,20 @@ const Venue = {
     {
       name: "content",
       type: "array",
-      of: [{ type: "block" }, { type: "image" }, { type: "table" }],
+      of: [
+        { type: "block" },
+        {
+          type: "image",
+          fields: [
+            {
+              title: "Alternative Text",
+              name: "alt",
+              type: "string",
+            },
+          ],
+        },
+        { type: "table" },
+      ],
       validation: (Rule) => Rule.required(),
     },
     {

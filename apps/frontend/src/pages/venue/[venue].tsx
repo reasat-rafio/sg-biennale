@@ -16,17 +16,25 @@ const query = pageQuery(groq`
     *[_type == "venue" && slug.current == $venue][0]{
         _id,
         name,
-        content,
-        iformations,
-        images[] {
-          ...        
+        content[]{
+          ...,
           asset->{
             ...,
             metadata {
               dimensions
             }
           }
-         },
+        },
+        iformations,
+        images[]{
+          ..., 
+          asset->{
+            ...,
+            metadata {
+              dimensions
+            }
+          }
+        },
     }
 `);
 
@@ -57,7 +65,9 @@ const VenueDetailPage: NextPage<SanityProps> = (props) => {
 
   return (
     <section>
-      <Hero name={name} image={images[0]} informations={iformations} />
+      {images?.length && (
+        <Hero name={name} image={images[0]} informations={iformations} />
+      )}
       <Description content={content} />
       <Carousel images={images} />
     </section>

@@ -8,6 +8,7 @@ import "swiper/css";
 import { Header } from "@components/ui/header";
 import { useRouter } from "next/router";
 import { Button } from "@components/ui/button";
+import { useWindowSize } from "@lib/hooks";
 
 interface VolunteerProps {
   header: string;
@@ -23,12 +24,13 @@ export const Volunteer: React.FC<VolunteerProps> = ({
   images,
 }) => {
   const router = useRouter();
+  const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <Container className="2xl:py-max lg:py-xxl py-xl">
       <section className="grid grid-cols-12 | items-center">
         <header className="xl:col-span-10 col-span-12 grid grid-cols-12 | items-center">
           <Header className=" 2xl:col-span-2 col-span-12 ">{header}</Header>
-
           <p className="2xl:col-span-10 col-span-12 | text-gray--700 text-body-1 | font-manrope | 2xl:mx-20 2xl:my-0 my-5">
             {description}
           </p>
@@ -59,7 +61,9 @@ export const Volunteer: React.FC<VolunteerProps> = ({
             <div className="p-5 h-[340px] outline-none" key={image._key}>
               <SanityImg
                 className="w-full h-full object-cover"
-                width={400}
+                width={
+                  windowWidth >= 1280 ? 400 : windowWidth >= 768 ? 300 : 200
+                }
                 image={image}
                 builder={imageUrlBuilder}
                 alt={image.alt}

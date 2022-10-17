@@ -65,7 +65,9 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
               <SanityImg
                 className="h-full w-full object-cover | group-hover:scale-110 transition-transform duration-500 ease-in-out"
                 image={data.images[0]}
-                width={windowWidth >= 768 ? 500 : 400}
+                width={
+                  windowWidth >= 1280 ? 400 : windowWidth >= 768 ? 250 : 200
+                }
                 builder={imageUrlBuilder}
                 alt={data.header}
               />

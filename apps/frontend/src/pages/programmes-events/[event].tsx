@@ -33,14 +33,14 @@ const query = pageQuery(groq`
           slug,
         },
         images[] {
-        ...        
-        asset->{
-          ...,
-          metadata {
-            dimensions
+          ..., 
+          asset->{
+            ...,
+            metadata {
+              dimensions
+            }
           }
-        }
-      },
+        },
     },
 `);
 

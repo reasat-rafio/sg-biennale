@@ -5,7 +5,7 @@ import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { Button } from "@components/ui/button";
 import { useEffect, useRef, useState } from "react";
-import { useIntersection } from "@lib/hooks";
+import { useIntersection, useWindowSize } from "@lib/hooks";
 import { Slug } from "@lib/@types/global.types";
 import { Header } from "@components/ui/header";
 
@@ -84,7 +84,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
         </motion.header>
         <motion.div
           initial="hidden"
-          animate={interseciton ? "show" : "hidden"}
+          whileInView="show"
           variants={ContainerVariants}
           className="grid grid-cols-12 | lg:gap-10 gap-5 my-14"
         >
@@ -98,7 +98,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
             key={page}
             className="flex justify-center items-center"
             initial={{ opacity: 0 }}
-            animate={{ opacity: interseciton ? 1 : 0 }}
+            whileInView={{ opacity: 1 }}
             transition={{ type: "tween", duration: 0.6, ease: "easeInOut" }}
           >
             <Button variant="secondary" onClick={onClickShowMoreAction}>
@@ -123,8 +123,10 @@ const ItemVariant: Variants = {
 };
 
 const Essay: React.FC<EssayProps> = ({ header, author, images }) => {
-  const router = useRouter();
+  // const router = useRouter();
   // const onClickAction = () => router.push(url);
+
+  const windwoWidth = useWindowSize()?.width ?? 0;
 
   return (
     <motion.article
@@ -136,7 +138,7 @@ const Essay: React.FC<EssayProps> = ({ header, author, images }) => {
         <SanityImg
           className="h-full w-full object-cover | group-hover:scale-110 | transition-all duration-500"
           image={images[0]}
-          width={400}
+          width={windwoWidth >= 1280 ? 300 : windwoWidth >= 768 ? 250 : 200}
           builder={imageUrlBuilder}
           alt={header}
         />

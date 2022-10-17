@@ -25,7 +25,7 @@ export const Table: React.FC<{ rows: TableProps[] }> = ({ rows }) => {
             const childTableHeader = cells[0];
             const childTableBody = cells.slice(1, rows.length);
             return (
-              <tr className="bg-white border-b">
+              <tr key={_key} className="bg-white border-b">
                 <th
                   scope="row"
                   className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "

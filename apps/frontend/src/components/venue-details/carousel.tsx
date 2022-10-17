@@ -26,6 +26,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
                   height={
                     windowWidth >= 1024 ? 600 : windowWidth >= 640 ? 400 : 300
                   }
+                  alt={image?.alt ?? "image"}
                 />
               </figure>
             </SwiperSlide>

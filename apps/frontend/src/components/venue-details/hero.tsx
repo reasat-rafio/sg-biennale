@@ -2,6 +2,7 @@ import { Anchor } from "@components/ui/anchor";
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
 import { InformationProps } from "@lib/@types/venue-details";
+import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 
@@ -12,6 +13,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ image, informations, name }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   const onAnchorClickAction = () => {};
 
   return (
@@ -27,12 +29,13 @@ export const Hero: React.FC<HeroProps> = ({ image, informations, name }) => {
             className="h-full w-full object-cover"
             image={image}
             builder={imageUrlBuilder}
-            width={800}
+            width={windowWidth >= 1280 ? 600 : windowWidth >= 768 ? 400 : 200}
+            alt={name}
           />
         </figure>
         <div className="xl:col-span-5 md:col-span-6 col-span-12 h-min | px-5 rounded | divide-y-2 bg-gray--100 divide-[#CCCCCC]">
           {informations.map((props) => (
-            <Information {...props} />
+            <Information key={props._key} {...props} />
           ))}
         </div>
       </section>

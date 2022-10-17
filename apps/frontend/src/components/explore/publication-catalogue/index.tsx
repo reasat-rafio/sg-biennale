@@ -47,6 +47,7 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
           speed={800}
           spaceBetween={30}
           scrollbar={{ draggable: true, dragSize: 100 }}
+          grabCursor
           breakpoints={{
             640: {
               slidesPerView: 1,

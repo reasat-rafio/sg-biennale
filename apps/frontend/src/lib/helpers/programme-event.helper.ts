@@ -5,7 +5,7 @@ export const filterPastEvents = (
   allEvents: IPgrammeEvents[]
 ): IPgrammeEvents[] => {
   const filterEevnts = allEvents.filter(
-    ({ startAt }) => startAt.toString() > currentISODate
+    ({ startAt }) => startAt?.toString() > currentISODate
   );
 
   return filterEevnts;

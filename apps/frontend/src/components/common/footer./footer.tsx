@@ -2,6 +2,7 @@ import { ISite } from "@lib/@types/global.types";
 import { getShuffledArr } from "@lib/helpers/global.helpers";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { SanityImg, SanityImage } from "sanity-react-extra";
 import { Address } from "./address";
@@ -34,10 +35,12 @@ export const Footer: React.FC<ISite["site"]> = ({
         <Address social={social} location={location} />
       </section>
       <section className="col-span-12 xl:col-span-6 lg:col-span-7 flex justify-center items-center ">
-        <figure className="aspect-square">
+        <figure
+          className={clsx("aspect-square", windowWidth < 760 && "w-full")}
+        >
           <SanityImg
             className="w-full max-h-[600px] aspect-square object-contain"
-            width={900}
+            width={windowWidth >= 1280 ? 600 : windowWidth >= 768 ? 400 : 200}
             image={suffledKVs[0] ?? kvs[0]}
             builder={imageUrlBuilder}
             alt={suffledKVs[0]?.alt ?? kvs[0]?.alt}
