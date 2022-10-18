@@ -1,6 +1,6 @@
 import { Container } from "@components/ui/container";
 import { positioningAlgo } from "@lib/helpers/global.helpers";
-import { useCallback } from "react";
+import { MouseEvent, useCallback } from "react";
 import { FilteringSection } from "./filtering-section";
 import { VenueList } from "./venue-list";
 import { motion } from "framer-motion";
@@ -26,7 +26,8 @@ export const Venue: React.FC<{}> = ({}) => {
   const showMoreLessButtonAction = () => {
     sortedVenues < allVenues ? setPage(page + 1) : setPage(1);
   };
-  const scrollToAccesiblityInfoSection = () => {
+  const scrollToAccesiblityInfoSection = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     document
       ?.querySelector(`#accesibility-info`)
       ?.scrollIntoView({ behavior: "smooth" });
@@ -41,7 +42,7 @@ export const Venue: React.FC<{}> = ({}) => {
           Venue
         </Header>
 
-        <Anchor onClick={scrollToAccesiblityInfoSection}>
+        <Anchor onClick={(e) => scrollToAccesiblityInfoSection(e as any)}>
           Accessibility Info
         </Anchor>
       </header>

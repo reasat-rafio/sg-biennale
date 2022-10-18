@@ -8,6 +8,7 @@ import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 import { VenueProps } from "@lib/@types/visitor-info.types";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface VenueListCardProps extends VenueProps {
   index: number;
@@ -42,9 +43,6 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 300 });
-
-  const formattedDate =
-    startAt && format(new Date(startAt), "eee, d LLL yyyy - hh:mm aaaaa'm'");
 
   const containerStylings =
     imgPositionIngAlgo[index] === 0
@@ -107,20 +105,26 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
             )}
           </figure>
           <section className="flex flex-col | space-y-5">
-            <h6
-              onClick={() => router.push(`/venue/${slug.current}`)}
-              className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500"
-            >
-              {name}
-            </h6>
+            <Link href={`/venue/${slug.current}`}>
+              <a className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500">
+                {name}
+              </a>
+            </Link>
 
             <div className="flex flex-col space-y-1">
               <span className="font-manrope text-gray--700 text-body-2">
                 {location}
               </span>
-              <span className="font-manrope text-gray--700 text-body-2">
-                <span>{formattedDate}</span>
-              </span>
+              {startAt && (
+                <span className="font-manrope text-gray--700 text-body-2">
+                  <span>
+                    {format(
+                      new Date(startAt),
+                      "eee, d LLL yyyy - hh:mm aaaaa'm'"
+                    )}
+                  </span>
+                </span>
+              )}
             </div>
 
             {windowWidth < 1024 && description && (

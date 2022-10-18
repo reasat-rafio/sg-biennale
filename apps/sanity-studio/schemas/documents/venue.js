@@ -71,7 +71,6 @@ const Venue = {
       title: "Start At",
       name: "startAt",
       type: "datetime",
-      validation: (Rule) => Rule.required(),
     },
     {
       name: "direction",
@@ -149,7 +148,7 @@ const Venue = {
     prepare({ title, startAt, location, media }) {
       return {
         title,
-        subtitle: `${startAt} || ${location}`,
+        subtitle: startAt ? `${startAt} || ${location}` : location,
         media,
       };
     },

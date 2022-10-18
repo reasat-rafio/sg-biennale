@@ -78,12 +78,10 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
   }: EventDetailProps = props.data.page;
   const router = useRouter();
 
-  const onAnchorClickAction = () => router.push("/programmes-events");
-
   return (
     <section className="pt-x">
       <Container>
-        <Anchor onClick={onAnchorClickAction} className="text-gray--700">
+        <Anchor href="/programmes-events" className="text-gray--700">
           Back to Event List
         </Anchor>
         <header className="my-7">
