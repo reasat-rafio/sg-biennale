@@ -36,7 +36,7 @@ const query = groq`{
         },
     }
   },
-  "allVenues": *[_type == "venue"]{
+  "allVenues": *[_type == "venue"] | order(order asc) {
     _id,
     name,
     slug,

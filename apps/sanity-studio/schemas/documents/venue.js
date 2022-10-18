@@ -7,6 +7,11 @@ const Venue = {
   icon: FcReading,
   fields: [
     {
+      name: "order",
+      type: "number",
+      hidden: true,
+    },
+    {
       name: "name",
       type: "string",
       validation: (Rule) => Rule.required(),
