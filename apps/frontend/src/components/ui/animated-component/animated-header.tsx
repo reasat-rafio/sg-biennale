@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
 import {
   animationFrameEffect,
-  useIntersection,
   useVisibleScrollEffect,
   useWindowSize,
 } from "@lib/hooks";
 import clsx from "clsx";
 import { useMotionValue } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useTransformSpring } from "@lib/helpers/animation.helpers";
 
 interface AnimatedHeaderProps {
@@ -27,9 +26,6 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
   const headerRef = useRef<HTMLHeadingElement>(null);
   const windowHeight = useWindowSize()?.height ?? 0;
   const windowWidth = useWindowSize()?.width ?? 0;
-  const _ = useIntersection(headerRef);
-  const [, updateState] = useState({});
-  const forceUpdate = useCallback(() => updateState({}), []);
 
   const outputRange: [number, number] =
     idx === lineLength - 1 ? [100, 0] : [-200 * (idx + 1), 0];
@@ -48,19 +44,15 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
       animationFrameEffect(() => {
         const yDelta = y + windowHeight - offsetBoundingRect.top;
         const ratio = Math.max(0, Math.min(yDelta / windowHeight));
-        const displacement = ratio * windowWidth;
-
-        forceUpdate();
-        xValue.set(displacement);
+        xValue.set(ratio * windowWidth);
       }),
-    [windowHeight, windowWidth]
+    [windowWidth]
   );
 
   return (
     <>
       {lineLength === 3 && (
         <motion.h2
-          id={header}
           ref={headerRef}
           style={{ x }}
           className={clsx(
@@ -75,7 +67,6 @@ export const AnimatedHeader: React.FC<AnimatedHeaderProps> = ({
       )}
       {lineLength === 2 && (
         <motion.h2
-          id={header}
           ref={headerRef}
           style={{ x }}
           className={clsx(

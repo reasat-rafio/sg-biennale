@@ -38,9 +38,10 @@ export const Desktop: React.FC<DesktopProps> = ({ suffledKVs }) => {
           >
             <SanityImg
               className="h-full w-full | object-contain"
+              loading="eager"
               image={image}
               builder={imageUrlBuilder}
-              width={600}
+              width={450}
               alt={image.alt}
             />
           </motion.figure>

@@ -6,7 +6,7 @@ type Props = {};
 class Document extends NextDocument<Props> {
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <script
             dangerouslySetInnerHTML={{

@@ -22,6 +22,7 @@ const physics = {
   mass: 10,
 };
 export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
+  cta,
   images,
   price,
   title,
@@ -39,7 +40,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   const screenX = useMotionValue(0);
   const screenY = useMotionValue(0);
 
-  const priceVal = `Book Now - ${price ? `$${price}` : "Free"}${
+  const priceVal = `${cta.title} - ${price ? `$${price}` : "Free"}${
     additionalInfo ? "*" : ""
   }`;
   const formattedShortDate = format(new Date(startAt), "dd.LL");
@@ -59,9 +60,8 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     physics,
   });
 
-  const onHeaderClickAction = () => {
+  const onHeaderClickAction = () =>
     router.push(`/programmes-events/${slug.current}`);
-  };
   const onMouseEnterAction = () => setHovered(true);
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
     const width = transform([0, window.innerWidth], [0, 1])(event.clientX);
@@ -155,7 +155,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
         </div>
         <div className="flex sm:flex-row flex-col sm:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-0 mt-5">
           <div className="flex-1">
-            <Button className="" variant="secondary">
+            <Button href={cta?.href} type="href" variant="secondary">
               {priceVal}
             </Button>
           </div>

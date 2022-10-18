@@ -89,8 +89,9 @@ const Event = {
       type: "string",
     },
     {
-      name: "bookNowUrl",
-      type: "url",
+      name: "cta",
+      type: "cta",
+      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {

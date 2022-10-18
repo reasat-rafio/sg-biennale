@@ -10,7 +10,7 @@ const HomeIntroduction = {
     {
       name: "header",
       type: "array",
-      validation: (Rule) => [Rule.required(), Rule.max(3), Rule.min(3)],
+      validation: (Rule) => Rule.required().length(3),
       of: [{ type: "string" }],
     },
     {

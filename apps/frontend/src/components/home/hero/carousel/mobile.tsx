@@ -32,6 +32,7 @@ export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
             <SanityImg
               className="h-full w-full | object-contain"
               image={image}
+              loading="eager"
               builder={imageUrlBuilder}
               width={windowWidth >= 640 ? 400 : 250}
               alt={image.alt}

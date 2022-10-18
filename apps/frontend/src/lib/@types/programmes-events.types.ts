@@ -1,6 +1,6 @@
 import { SanityImage } from "sanity-react-extra";
 import { Venue } from "./event.types";
-import { Slug } from "./global.types";
+import { Cta, Slug } from "./global.types";
 
 export interface IPgrammeEvents {
   _id: string;
@@ -15,6 +15,7 @@ export interface IPgrammeEvents {
   additionalInfo?: string;
   slug: Slug;
   relatedArtists: RelatedArtistsProps[];
+  cta: Cta;
 }
 
 export interface RelatedArtistsProps {

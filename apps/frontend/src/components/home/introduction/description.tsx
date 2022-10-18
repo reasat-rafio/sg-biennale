@@ -62,7 +62,7 @@ export const Description: React.FC<DescriptionProps> = ({
       style={{ skewY: animatedMotionSkewY }}
       className="flex flex-col space-y-8 max-w-7xl mx-auto pt-xl"
     >
-      <motion.h6
+      <motion.h4
         ref={subtitleRef}
         initial="initial"
         animate={intersection?.isIntersecting && "animate"}
@@ -83,7 +83,7 @@ export const Description: React.FC<DescriptionProps> = ({
             {letter}
           </motion.span>
         ))}
-      </motion.h6>
+      </motion.h4>
       <p className="text-gray--700 font-manrope lg:text-body-1 text-body-2">
         {description}
       </p>

@@ -30,6 +30,7 @@ const query = groq`{
         startAt,
         endAt,
         additionalInfo,
+        cta,
         venue[]->{
           _id,
           name,
