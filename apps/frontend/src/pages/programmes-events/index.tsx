@@ -20,7 +20,22 @@ const ClosestEvent = dynamic(
 );
 const query = groq`{
   "site": ${siteQuery},
-  "page": *[_type == "programmesEventsPage"][0],
+  "page": *[_type == "programmesEventsPage"][0]{
+    ...,
+    sections[]{
+      ...,
+      closestEvents[]->{
+        _id,
+        images,
+        title,
+        description,
+        slug,
+        startAt,
+        venue,
+        relatedArtists,
+      }
+    }
+  },
   "events":*[_type == "events"][]{
         _id,
         title,
@@ -114,8 +129,8 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
+        "programmesEventsPage.closestEvent": ClosestEvent,
       })}
-      <ClosestEvent events={_events} />
       <FilteringLogic>
         <AllEvents />
       </FilteringLogic>
