@@ -14,7 +14,10 @@ const ProgrammesEventsPage = {
       name: "sections",
       type: "array",
       title: "Sections",
-      of: [{ type: "pageHeading" }],
+      of: [
+        { type: "pageHeading" },
+        { type: "programmesEventsPage.closestEvent" },
+      ],
     },
   ],
 };
