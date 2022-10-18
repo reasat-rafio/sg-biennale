@@ -1,13 +1,15 @@
 import clsx from "clsx";
+import Link from "next/link";
 import { ReactNode } from "react";
 
 interface PageHeaderProps {
   color?: string;
   fontWeight?: 500 | 600 | 700 | 800;
   variant?: "primary" | "secondary";
-  type?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  type?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "a";
   className?: string;
   children: ReactNode;
+  href?: string;
   onClick?: () => void;
 }
 
@@ -22,17 +24,31 @@ export const Header: React.FC<PageHeaderProps> = ({
   color = "#000000",
   className,
   children,
+  href,
   onClick,
 }) => {
   const Element = type;
 
   return (
-    <Element
-      style={{ color, fontWeight }}
-      className={clsx("overflow-hidden", className, styles[variant])}
-      onClick={onClick}
-    >
-      {children}
-    </Element>
+    <>
+      {type === "a" ? (
+        <Link href={href ?? "/"}>
+          <a
+            style={{ color, fontWeight }}
+            className={clsx("overflow-hidden", className, styles[variant])}
+          >
+            {children}
+          </a>
+        </Link>
+      ) : (
+        <Element
+          style={{ color, fontWeight }}
+          className={clsx("overflow-hidden", className, styles[variant])}
+          onClick={onClick}
+        >
+          {children}
+        </Element>
+      )}
+    </>
   );
 };

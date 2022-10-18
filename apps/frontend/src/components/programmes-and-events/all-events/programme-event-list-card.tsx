@@ -9,7 +9,7 @@ import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 import { Header } from "@components/ui/header";
 import { Button } from "@components/ui/button";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface ProgrammeEventListCardProps extends IPgrammeEvents {
   index: number;
@@ -34,7 +34,6 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   additionalInfo,
   relatedArtists,
 }) => {
-  const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
@@ -44,10 +43,10 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     additionalInfo ? "*" : ""
   }`;
   const formattedShortDate = format(new Date(startAt), "dd.LL");
-  const formattedDate = format(
-    new Date(startAt),
-    "eee, d LLL yyyy - hh:mm aaaaa'm'"
-  );
+  // const formattedDate = format(
+  //   new Date(startAt),
+  //   "eee, d LLL yyyy - hh:mm aaaaa'm'"
+  // );
 
   const x = useTransformSpring({
     value: screenX,
@@ -60,8 +59,6 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     physics,
   });
 
-  const onHeaderClickAction = () =>
-    router.push(`/programmes-events/${slug.current}`);
   const onMouseEnterAction = () => setHovered(true);
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
     const width = transform([0, window.innerWidth], [0, 1])(event.clientX);
@@ -114,13 +111,14 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
       >
         <div className="flex flex-col space-y-5">
           <Header
-            type="h6"
+            type="a"
+            href={`/programmes-events/${slug.current}`}
             className="cursor-pointer | hover:text-red-love | transition-colors duration-500 p-1"
             variant="secondary"
-            onClick={onHeaderClickAction}
           >
             {title}
           </Header>
+
           <div className="flex flex-col space-y-2">
             <div className="flex space-x-10 | text-body-2">
               <span className="font-semibold">Artist</span>
@@ -149,10 +147,10 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
           </div>
         </div>
 
-        <div className="flex | space-x-10 | text-body-2">
+        {/* <div className="flex | space-x-10 | text-body-2">
           <span className="font-semibold">Date & Time</span>
-          <span className="text-gray--700">{formattedDate}</span>
-        </div>
+         <span className="text-gray--700">{formattedDate}</span> 
+        </div> */}
         <div className="flex sm:flex-row flex-col sm:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-0 mt-5">
           <div className="flex-1">
             <Button href={cta?.href} type="href" variant="secondary">
