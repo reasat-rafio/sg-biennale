@@ -1,8 +1,8 @@
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { SanityImg } from "sanity-react-extra";
 import { ArtistProps } from "./artist";
 
@@ -14,31 +14,6 @@ interface ArtistCollectionProps {
 interface ArtistCardProps extends ArtistProps {
   screen?: Screen;
 }
-
-export const ImageVariants: Variants = {
-  initial: {
-    scale: 0.7,
-  },
-  animate: {
-    scale: 1.01,
-  },
-};
-
-export const TextVaiants: Variants = {
-  initial: (screen: Screen) => ({
-    left: screen === "desktop" ? 20 : 8,
-    bottom: screen === "desktop" ? 20 : 8,
-    color: "black",
-    scale: 1,
-  }),
-  animate: (screen: Screen) => ({
-    left: screen === "desktop" ? 35 : 25,
-    bottom: screen === "desktop" ? 35 : 25,
-    color: "white",
-    scale: 1.2,
-    originX: 0.6,
-  }),
-};
 
 export const ArtistCollection: React.FC<ArtistCollectionProps> = ({
   artists,
@@ -62,58 +37,35 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
   name,
   slug,
 }) => {
-  const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
-  const [hovered, setHoverd] = useState(false);
-  const onMouseEnterAction = () => setHoverd(true);
-  const onMouseLeaveAction = () => setHoverd(false);
-  const onClickAction = () => router.push(`artists/${slug.current}`);
   return (
-    <motion.article
-      layout
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="relative col-span-6 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
-      onMouseEnter={onMouseEnterAction}
-      onMouseLeave={onMouseLeaveAction}
-      onClick={onClickAction}
-    >
-      <motion.figure
-        className="h-full w-full"
-        initial="initial"
-        animate={hovered ? "animate" : "initial"}
-        transition={{
-          duration: 2,
-          type: "tween",
-          ease: [0.075, 0.52, 0.1, 1],
-        }}
-        variants={ImageVariants}
-      >
-        {images?.length && (
-          <SanityImg
-            className="h-full w-full object-cover"
-            width={windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 100}
-            image={images[0]}
-            builder={imageUrlBuilder}
-            alt={name}
-          />
-        )}
-      </motion.figure>
-
-      <motion.h6
+    <Link href={`artists/${slug.current}`} passHref>
+      <motion.a
         layout
-        className="absolute | text-body-2 font-manrope font-semibold"
-        animate={hovered ? "animate" : "initial"}
-        transition={{
-          duration: 0.6,
-          type: "tween",
-          ease: [0.075, 0.52, 0.1, 1],
-        }}
-        custom={screen}
-        variants={TextVaiants}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="relative col-span-6 aspect-square | bg-white | rounded overflow-hidden cursor-pointer | group"
       >
-        {name}
-      </motion.h6>
-    </motion.article>
+        <motion.article className="h-full w-full">
+          <figure className="flex justify-center items-center | p-[20%] | h-full w-full overflow-hidden hover:bg-[#C59986] | transition-colors duration-300 ease-in-out">
+            {images?.length && (
+              <SanityImg
+                className="h-full w-full object-cover group-hover:scale-105 transition-all duration-300 ease-in-out"
+                width={
+                  windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 100
+                }
+                image={images[0]}
+                builder={imageUrlBuilder}
+                alt={name}
+              />
+            )}
+          </figure>
+
+          <h6 className="absolute bottom-[5%] left-[5%] | text-body-2 group-hover:text-body-1 font-manrope font-semibold group-hover:text-white text-black | transition-all duration-300 ease-in-out | pointer-events-none">
+            {name}
+          </h6>
+        </motion.article>
+      </motion.a>
+    </Link>
   );
 };
