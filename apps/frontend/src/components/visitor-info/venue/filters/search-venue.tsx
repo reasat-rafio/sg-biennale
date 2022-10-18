@@ -16,7 +16,7 @@ export const SearchVenue: React.FC<SearchVenueProps> = ({}) => {
         onChange={onChangeAction}
         className="flex-1 outline-none border-none"
         type="text"
-        placeholder="Seach Venue"
+        placeholder="Search Venue"
       />
       <Search />
     </div>
