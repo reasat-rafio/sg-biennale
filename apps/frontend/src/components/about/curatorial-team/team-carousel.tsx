@@ -101,6 +101,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
             : activeCardIndex !== null && activeCardIndex < index
             ? initialPosition + (1 / cardsPerView) * 100
             : initialPosition;
+
           useEffect(() => {
             if (firstIndex && positionLeft >= 100 / cardsPerView)
               setDisableSwipingRight(true);

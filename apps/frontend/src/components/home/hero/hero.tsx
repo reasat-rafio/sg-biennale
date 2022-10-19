@@ -23,7 +23,7 @@ export const Hero: React.FC<HomHeroProps> = ({ image, description }) => {
           className="w-full object-contain"
           image={image}
           builder={imageUrlBuilder}
-          width={windowWidth >= 1280 ? 400 : windowWidth >= 768 ? 300 : 250}
+          width={windowWidth >= 1280 ? 400 : windowWidth >= 768 ? 300 : 200}
           alt={image.alt}
         />
       </figure>

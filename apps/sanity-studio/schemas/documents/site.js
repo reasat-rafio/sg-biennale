@@ -46,16 +46,11 @@ const Site = {
       title: "KV's",
       name: "kvs",
       type: "array",
+      validation: (Rule) => Rule.required(),
       of: [
         {
           type: "image",
           fields: [
-            {
-              title: "Short Background",
-              name: "shortBackground",
-              type: "boolean",
-              hidden: true,
-            },
             {
               title: "Alternative Text",
               name: "alt",
@@ -71,9 +66,8 @@ const Site = {
           },
         },
       ],
-      validation: (Rule) => Rule.required().length(4),
     },
-
+    { name: "randomizeKV", type: "boolean" },
     { name: "date", type: "text" },
     {
       name: "navigations",

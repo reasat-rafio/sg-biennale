@@ -33,7 +33,7 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
                   className="h-full w-full object-contain"
                   image={logo}
                   builder={imageUrlBuilder}
-                  width={150}
+                  width={20}
                   alt="singapore biennale 2022 logo"
                 />
               </motion.a>
@@ -53,7 +53,7 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
                   className="h-full w-full object-contain"
                   image={eventLogo}
                   builder={imageUrlBuilder}
-                  width={150}
+                  width={20}
                   alt="natasha"
                 />
               </a>

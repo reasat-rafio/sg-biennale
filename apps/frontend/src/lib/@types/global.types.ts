@@ -17,6 +17,7 @@ export interface Site {
   navigations: Navigations;
   ogImage: SanityImage;
   kvs: SanityImage[];
+  randomizeKV: boolean;
 }
 
 export interface Footer {
