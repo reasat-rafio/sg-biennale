@@ -71,7 +71,7 @@ export const Hero: React.FC<HeroProps> = ({
             ))}
           </div>
         </header>
-        <div className="font-manrope text-body-1 text-gray--700 | pb-10">
+        <div className="font-manrope prose text-gray--700 | pb-10">
           <PortableText blocks={description} serializers={serializers} />
         </div>
       </section>
