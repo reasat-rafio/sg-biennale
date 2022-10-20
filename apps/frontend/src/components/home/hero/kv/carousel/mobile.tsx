@@ -8,10 +8,10 @@ import "swiper/css";
 import { useWindowSize } from "@lib/hooks";
 
 interface MobileProps {
-  suffledKVs: SanityImage[];
+  kvs: SanityImage[];
 }
 
-export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
+export const Mobile: React.FC<MobileProps> = ({ kvs }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   return (
     <Swiper
@@ -23,7 +23,7 @@ export const Mobile: React.FC<MobileProps> = ({ suffledKVs }) => {
       slidesPerView={1}
       spaceBetween={30}
     >
-      {suffledKVs.map((image) => (
+      {kvs.map((image) => (
         <SwiperSlide
           className="relative p-10 sm:h-[500px] h-[400px]"
           key={image._key}

@@ -11,9 +11,8 @@ import { renderObjectArray, withDimensions } from "sanity-react-extra";
 import { Hero } from "@components/home/hero/hero";
 import { useCallback } from "react";
 import { HomHeroProps } from "@lib/@types/home.types";
-import { Carousel } from "@components/home/hero/carousel";
-import { Information } from "@components/home/hero/information";
 import { ISite } from "@lib/@types/global.types";
+import { KV } from "@components/home/hero/kv";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -21,13 +20,25 @@ const query = pageQuery(groq`
     sections[]{
       ...,
       "image": ${withDimensions("image")},
-      information[]{
-        ...,
-        "icon": ${withDimensions("icon")},
+      kvs[] {
+        ..., 
+        asset->{
+          ...,
+          metadata {
+            dimensions
+          }
+        }
       },
-      socials[]{
+      information {
         ...,
-        "icon": ${withDimensions("icon")},
+        address{
+          ...,
+          "icon": ${withDimensions("icon")},
+        },
+        socials[]{
+          ...,
+          "icon": ${withDimensions("icon")},
+        },
       },
       organisations[]{
         ...,
@@ -87,16 +98,13 @@ export const getStaticProps: GetStaticProps = async (
 const Home: NextPage<SanityProps<{ page: any; site: ISite }>> = (props) => {
   const {
     page,
-    site: {
-      site: { kvs, randomizeKV },
-    },
+    site: {},
   } = useSanityQuery(query, props).data;
 
   return (
-    <div className="">
-      <Carousel kvs={kvs} randomizeKV={randomizeKV} />
+    <div>
       {renderObjectArray(page.sections, {
-        "homePage.information": Information,
+        "homePage.kv": KV,
         "homePage.hero": useCallback(
           (props: HomHeroProps) => <Hero {...props} />,
           []

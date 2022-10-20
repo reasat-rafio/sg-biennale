@@ -25,7 +25,16 @@ const HomeKv = {
         },
       ],
     },
-    { name: "informatio", type: "homePage.kv.information" },
+    {
+      name: "randomizeKV",
+      type: "boolean",
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: "information",
+      type: "homePage.kv.information",
+      validation: (Rule) => Rule.required(),
+    },
   ],
   preview: {
     select: {

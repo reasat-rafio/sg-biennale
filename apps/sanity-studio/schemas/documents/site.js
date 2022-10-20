@@ -42,7 +42,6 @@ const Site = {
       validation: (Rule) => Rule.required(),
     },
 
-    { name: "randomizeKV", type: "boolean" },
     { name: "date", type: "text" },
     {
       name: "navigations",
