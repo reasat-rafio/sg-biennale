@@ -1,13 +1,12 @@
-import CardImgScene from "@components/home/news/card-img-scene";
+// import CardImgScene from "@components/home/news/card-img-scene";
 import { Container } from "@components/ui/container";
 import { ICountry } from "@lib/@types/global.types";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import { Dispatch, SetStateAction, useState } from "react";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
-import clsx from "clsx";
 import { useWindowSize } from "@lib/hooks";
+import { Carousel } from "./carousel";
 
 interface HeroProps {
   name: string;
@@ -43,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({
       type="article"
       className="grid grid-cols-12 lg:gap-10 | lg:py-xl py-x"
     >
-      <section className="lg:col-span-7 col-span-12 | lg:max-w-[90%] max-w-full | space-y-10">
+      <section className="lg:col-span-6 col-span-12 | lg:max-w-[90%] max-w-full | space-y-10">
         {images?.length && (
           <figure className="lg:hidden block sm:h-[450px] h-auto">
             <SanityImg
@@ -78,15 +77,9 @@ export const Hero: React.FC<HeroProps> = ({
           <PortableText blocks={description} serializers={serializers} />
         </div>
       </section>
-      <div className="col-span-5 | lg:block hidden">
-        {/* <Image
-          aspectRatio={aspectRatio}
-          hovered={hovered}
-          scalePos={scalePos}
-          setHovered={setHovered}
-          url={images[0].url}
-        /> */}
-        {images?.length && (
+      <div className="col-span-6 | lg:block hidden">
+        {images?.length && <Carousel images={images} />}
+        {/* {images?.length && (
           <figure>
             <SanityImg
               className="h-full w-full object-cover"
@@ -96,37 +89,38 @@ export const Hero: React.FC<HeroProps> = ({
               alt={name}
             />
           </figure>
-        )}
+        )} */}
       </div>
     </Container>
   );
 };
 
-interface ImageProps {
-  hovered: boolean;
-  setHovered: Dispatch<SetStateAction<boolean>>;
-  url: string;
-  scalePos: number[];
-  aspectRatio: number;
-}
-const Image: React.FC<ImageProps> = ({
-  hovered,
-  setHovered,
-  url,
-  scalePos,
-  aspectRatio,
-}) => {
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="bg-[#F8F8F8] sm:p-20 p-14"
-    >
-      <figure
-        className={clsx(aspectRatio > 1.1 ? "aspect-video" : "aspect-square")}
-      >
-        <CardImgScene hovered={hovered} url={url} scalePos={scalePos} />
-      </figure>
-    </div>
-  );
-};
+// interface ImageProps {
+//   hovered: boolean;
+//   setHovered: Dispatch<SetStateAction<boolean>>;
+//   url: string;
+//   scalePos: number[];
+//   aspectRatio: number;
+// }
+
+// const Image: React.FC<ImageProps> = ({
+//   hovered,
+//   setHovered,
+//   url,
+//   scalePos,
+//   aspectRatio,
+// }) => {
+//   return (
+//     <div
+//       onMouseEnter={() => setHovered(true)}
+//       onMouseLeave={() => setHovered(false)}
+//       className="bg-[#F8F8F8] sm:p-20 p-14"
+//     >
+//       <figure
+//         className={clsx(aspectRatio > 1.1 ? "aspect-video" : "aspect-square")}
+//       >
+//         <CardImgScene hovered={hovered} url={url} scalePos={scalePos} />
+//       </figure>
+//     </div>
+//   );
+// };
