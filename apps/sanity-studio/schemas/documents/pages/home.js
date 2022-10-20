@@ -11,6 +11,7 @@ const HomePage = {
       name: "sections",
       type: "array",
       of: [
+        { type: "homePage.kv" },
         { type: "homePage.hero" },
         { type: "homePage.introduction" },
         { type: "homePage.organisations" },

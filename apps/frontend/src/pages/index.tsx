@@ -12,6 +12,8 @@ import { Hero } from "@components/home/hero/hero";
 import { useCallback } from "react";
 import { HomHeroProps } from "@lib/@types/home.types";
 import { Carousel } from "@components/home/hero/carousel";
+import { Information } from "@components/home/hero/information";
+import { ISite } from "@lib/@types/global.types";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -19,6 +21,14 @@ const query = pageQuery(groq`
     sections[]{
       ...,
       "image": ${withDimensions("image")},
+      information[]{
+        ...,
+        "icon": ${withDimensions("icon")},
+      },
+      socials[]{
+        ...,
+        "icon": ${withDimensions("icon")},
+      },
       organisations[]{
         ...,
         "logo": ${withDimensions("logo")}
@@ -74,7 +84,7 @@ export const getStaticProps: GetStaticProps = async (
   revalidate: 10,
 });
 
-const Home: NextPage<SanityProps> = (props) => {
+const Home: NextPage<SanityProps<{ page: any; site: ISite }>> = (props) => {
   const {
     page,
     site: {
@@ -86,6 +96,7 @@ const Home: NextPage<SanityProps> = (props) => {
     <div className="">
       <Carousel kvs={kvs} randomizeKV={randomizeKV} />
       {renderObjectArray(page.sections, {
+        "homePage.information": Information,
         "homePage.hero": useCallback(
           (props: HomHeroProps) => <Hero {...props} />,
           []

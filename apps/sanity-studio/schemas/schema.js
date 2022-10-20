@@ -21,12 +21,13 @@ import Venue from "./documents/venue";
 import PastEdition from "./documents/past-edition";
 
 import HomePage from "./documents/pages/home";
+import HomeKv from "./objects/home/kv";
 import HomeHero from "./objects/home/hero";
-import HomeHeroCarouselItem from "./objects/home/carousel-item";
 import HomeIntroduction from "./objects/home/introduction";
 import HomeOrganisations from "./objects/home/organisations";
 import HomeArtists from "./objects/home/artist";
 import HomeNews from "./objects/home/news";
+import HomeInformation from "./objects/home/information";
 
 import AboutPage from "./documents/pages/about";
 import AboutPageHero from "./objects/about/hero";
@@ -116,12 +117,13 @@ export default createSchema({
     CuratorialEssay,
 
     HomePage,
+    HomeKv,
     HomeHero,
-    HomeHeroCarouselItem,
     HomeOrganisations,
     HomeArtists,
     HomeIntroduction,
     HomeNews,
+    HomeInformation,
 
     AboutPage,
     AboutPageHero,

@@ -42,31 +42,6 @@ const Site = {
       validation: (Rule) => Rule.required(),
     },
 
-    {
-      title: "KV's",
-      name: "kvs",
-      type: "array",
-      validation: (Rule) => Rule.required(),
-      of: [
-        {
-          type: "image",
-          fields: [
-            {
-              title: "Alternative Text",
-              name: "alt",
-              type: "string",
-              validation: (Rule) =>
-                Rule.required().error(
-                  "Please add an alternative text for the image"
-                ),
-            },
-          ],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
-    },
     { name: "randomizeKV", type: "boolean" },
     { name: "date", type: "text" },
     {
