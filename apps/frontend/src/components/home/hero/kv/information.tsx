@@ -22,7 +22,7 @@ export const Information: React.FC<InformationProps> = ({
   socials,
 }) => {
   return (
-    <Container className="flex lg:flex-row flex-col items-center | md:py-1 py-3 md:space-x-5 lg:space-y-0 space-y-2  | border-b-2 border-black text-body-2">
+    <Container className="flex lg:flex-row flex-col items-center | md:py-2 py-3 md:space-x-5 lg:space-y-0 space-y-2  | border-b-2 border-black text-body-2">
       <div className="flex flex-1 sm:flex-row flex-col items-center | md:space-x-4 space-x-1">
         <SanityImg
           image={address.icon}

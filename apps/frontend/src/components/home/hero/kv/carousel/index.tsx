@@ -21,7 +21,7 @@ export const Carousel: React.FC<HeroCarouselProps> = ({ kvs, randomizeKV }) => {
   }, [randomizeKV]);
 
   return (
-    <div className="mt-x">
+    <div className="sm:mt-x">
       {windowWidth >= 768 ? (
         <Desktop kvs={randomizeKV ? suffledKVs : kvs} />
       ) : (
