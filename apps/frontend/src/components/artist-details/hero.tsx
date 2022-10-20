@@ -38,28 +38,35 @@ export const Hero: React.FC<HeroProps> = ({
 
   const windowWidth = useWindowSize()?.width ?? 0;
 
+  console.log("====================================");
+  console.log(images);
+  console.log("====================================");
+
   return (
     <Container
       type="article"
       className="grid grid-cols-12 lg:gap-10 | lg:py-xl py-x"
     >
       <section className="lg:col-span-7 col-span-12 | lg:max-w-[90%] max-w-full | space-y-10">
-        <figure className="lg:hidden block sm:h-[450px] h-auto">
-          <SanityImg
-            className="h-full w-full object-cover"
-            image={images[0]}
-            builder={imageUrlBuilder}
-            width={windowWidth >= 640 ? 400 : 250}
-            alt={name}
-          />
-          {/* <Image
+        {images?.length && (
+          <figure className="lg:hidden block sm:h-[450px] h-auto">
+            <SanityImg
+              className="h-full w-full object-cover"
+              image={images[0]}
+              builder={imageUrlBuilder}
+              width={windowWidth >= 640 ? 400 : 250}
+              alt={name}
+            />
+            {/* <Image
             aspectRatio={aspectRatio}
             hovered={hovered}
             scalePos={scalePos}
             setHovered={setHovered}
             url={compressedImageUrl as string}
           /> */}
-        </figure>
+          </figure>
+        )}
+
         <header className="space-y-2">
           <h1 className="font-medium text-heading-6">{name}</h1>
           <div>
@@ -83,15 +90,17 @@ export const Hero: React.FC<HeroProps> = ({
           setHovered={setHovered}
           url={images[0].url}
         /> */}
-        <figure>
-          <SanityImg
-            className="h-full w-full object-cover"
-            image={images[0]}
-            builder={imageUrlBuilder}
-            width={500}
-            alt={name}
-          />
-        </figure>
+        {images?.length && (
+          <figure>
+            <SanityImg
+              className="h-full w-full object-cover"
+              image={images[0]}
+              builder={imageUrlBuilder}
+              width={500}
+              alt={name}
+            />
+          </figure>
+        )}
       </div>
     </Container>
   );
