@@ -8,6 +8,8 @@ import { useState } from "react";
 import { imageUrlBuilder } from "@utils/sanity";
 import { motion } from "framer-motion";
 import { EyeIcon } from "@components/icons/eye";
+import { ArrowLeftIcon } from "@components/icons/arrow-left";
+import { ArrowRightIcon } from "@components/icons/arrow-right";
 
 interface CarouselProps {
   images: SanityImage[];
@@ -17,30 +19,52 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeImageIndex, setActiveImageIndex] = useState<null | number>(null);
 
+  const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
+  const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
+
   return (
     <>
-      <Swiper
-        spaceBetween={10}
-        navigation={true}
-        thumbs={{
-          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-        }}
-        modules={[Navigation, Thumbs]}
-        onSlideChange={(swiper) => setActiveImageIndex(swiper.activeIndex)}
-      >
-        {images.map((image) => (
-          <SwiperSlide className="h-[580px] w-full">
-            <SanityImg
-              className="w-full h-full object-cover"
-              key={image._key}
-              builder={imageUrlBuilder}
-              height={600}
-              image={image}
-              alt="img"
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="relative">
+        <Swiper
+          spaceBetween={10}
+          navigation={{ prevEl, nextEl }}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          }}
+          modules={[Navigation, Thumbs]}
+          onSlideChange={(swiper) => setActiveImageIndex(swiper.activeIndex)}
+        >
+          {images.map((image) => (
+            <SwiperSlide className="h-[580px] w-full">
+              <SanityImg
+                className="w-full h-full object-cover"
+                key={image._key}
+                builder={imageUrlBuilder}
+                height={600}
+                image={image}
+                alt="img"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <motion.button
+          className="absolute z-10 | left-5 top-1/2 -translate-y-1/2 | flex justify-center items-center | h-5 w-6 | p-5 bg-white rounded-full bg-opacity-50 | hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer hover:shadow"
+          ref={(node) => setPrevEl(node)}
+        >
+          <span className="drop-shadow">
+            <ArrowLeftIcon />
+          </span>
+        </motion.button>
+        <button
+          className="absolute z-10 | right-5 top-1/2 -translate-y-1/2 | flex justify-center items-center | h-5 w-6 | p-5 bg-white rounded-full bg-opacity-50 | hover:scale-110 transition-all duration-300 ease-in-out cursor-pointer hover:shadow"
+          ref={(node) => setNextEl(node)}
+        >
+          <span className="drop-shadow">
+            <ArrowRightIcon />
+          </span>
+        </button>
+      </div>
       <Swiper
         onSwiper={(swiper) => {
           if (swiper && !swiper.destroyed) {
