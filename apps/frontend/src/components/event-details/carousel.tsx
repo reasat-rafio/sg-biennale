@@ -24,7 +24,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
                   image={image}
                   builder={imageUrlBuilder}
                   height={
-                    windowWidth >= 1280 ? 680 : windowWidth >= 768 ? 350 : 250
+                    windowWidth >= 1280 ? 600 : windowWidth >= 768 ? 350 : 250
                   }
                 />
               </figure>

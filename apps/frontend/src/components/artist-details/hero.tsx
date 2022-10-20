@@ -38,10 +38,6 @@ export const Hero: React.FC<HeroProps> = ({
 
   const windowWidth = useWindowSize()?.width ?? 0;
 
-  console.log("====================================");
-  console.log(images);
-  console.log("====================================");
-
   return (
     <Container
       type="article"

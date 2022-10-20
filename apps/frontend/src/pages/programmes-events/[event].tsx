@@ -76,7 +76,6 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
     startAt,
     bookNowUrl,
   }: EventDetailProps = props.data.page;
-  const router = useRouter();
 
   return (
     <section className="pt-x">
