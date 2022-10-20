@@ -10,15 +10,16 @@ import { motion } from "framer-motion";
 import { EyeIcon } from "@components/icons/eye";
 import { ArrowLeftIcon } from "@components/icons/arrow-left";
 import { ArrowRightIcon } from "@components/icons/arrow-right";
+import { useWindowSize } from "@lib/hooks";
 
 interface CarouselProps {
   images: SanityImage[];
 }
 
 export const Carousel: React.FC<CarouselProps> = ({ images }) => {
+  const windowWidth = useWindowSize()?.width ?? 0;
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [activeImageIndex, setActiveImageIndex] = useState<null | number>(null);
-
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
 
@@ -36,12 +37,20 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
           onSlideChange={(swiper) => setActiveImageIndex(swiper.activeIndex)}
         >
           {images.map((image) => (
-            <SwiperSlide className="h-[580px] w-full">
+            <SwiperSlide className="aspect-square w-full lg:max-h-[580px] max-h-[450px]">
               <SanityImg
                 className="w-full h-full object-cover"
                 key={image._key}
                 builder={imageUrlBuilder}
-                height={600}
+                height={
+                  windowWidth >= 1280
+                    ? 600
+                    : windowWidth >= 1024
+                    ? 500
+                    : windowWidth >= 640
+                    ? 250
+                    : 150
+                }
                 image={image}
                 alt="img"
               />
@@ -72,7 +81,12 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
           }
         }}
         spaceBetween={10}
-        slidesPerView={5}
+        slidesPerView={3}
+        breakpoints={{
+          1024: {
+            slidesPerView: 5,
+          },
+        }}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className="mt-5 cursor-pointer"
@@ -81,22 +95,21 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
           <SwiperSlide className="relative" key={image._key}>
             <figure className="w-full h-full">
               <SanityImg
-                className="w-full h-full object-cover aspect-square"
+                className="w-full h-full object-cover aspect-square max-h-[200px]"
                 key={image._key}
                 builder={imageUrlBuilder}
-                width={200}
+                width={windowWidth >= 1024 ? 200 : windowWidth >= 400 ? 70 : 50}
                 image={image}
                 alt="img"
               />
             </figure>
 
             <motion.div
-              layout
               initial={{ opacity: 0 }}
               animate={{ opacity: activeImageIndex === index ? 1 : 0 }}
               className="absolute top-0 left-0 | h-full w-full bg-black bg-opacity-50 | flex justify-center items-center"
             >
-              <EyeIcon />
+              <EyeIcon className="lg:w-8 lg:h-8 w-5 h-5" />
             </motion.div>
           </SwiperSlide>
         ))}

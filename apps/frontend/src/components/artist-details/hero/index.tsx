@@ -44,22 +44,9 @@ export const Hero: React.FC<HeroProps> = ({
     >
       <section className="lg:col-span-6 col-span-12 | lg:max-w-[90%] max-w-full | space-y-10">
         {images?.length && (
-          <figure className="lg:hidden block sm:h-[450px] h-auto">
-            <SanityImg
-              className="h-full w-full object-cover"
-              image={images[0]}
-              builder={imageUrlBuilder}
-              width={windowWidth >= 640 ? 400 : 250}
-              alt={name}
-            />
-            {/* <Image
-            aspectRatio={aspectRatio}
-            hovered={hovered}
-            scalePos={scalePos}
-            setHovered={setHovered}
-            url={compressedImageUrl as string}
-          /> */}
-          </figure>
+          <div className="lg:hidden block">
+            {images?.length && <Carousel images={images} />}
+          </div>
         )}
 
         <header className="space-y-2">

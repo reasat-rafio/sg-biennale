@@ -1,8 +1,11 @@
-interface EyeIconProps {}
+interface EyeIconProps {
+  className?: string;
+}
 
-export const EyeIcon: React.FC<EyeIconProps> = ({}) => {
+export const EyeIcon: React.FC<EyeIconProps> = ({ className }) => {
   return (
     <svg
+      className={className}
       width="50"
       height="38"
       viewBox="0 0 50 38"
