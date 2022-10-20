@@ -78,13 +78,13 @@ const Home: NextPage<SanityProps> = (props) => {
   const {
     page,
     site: {
-      site: { kvs },
+      site: { kvs, randomizeKV },
     },
   } = useSanityQuery(query, props).data;
 
   return (
     <div className="">
-      <Carousel kvs={kvs} />
+      <Carousel kvs={kvs} randomizeKV={randomizeKV} />
       {renderObjectArray(page.sections, {
         "homePage.hero": useCallback(
           (props: HomHeroProps) => <Hero {...props} />,

@@ -6,54 +6,45 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 
 interface DesktopProps {
-  suffledKVs: SanityImage[];
+  kvs: SanityImage[];
 }
 
-export const Desktop: React.FC<DesktopProps> = ({ suffledKVs }) => {
+export const Desktop: React.FC<DesktopProps> = ({ kvs }) => {
   return (
-    <Swiper
-      className="pl-xxl"
-      speed={600}
-      grabCursor
-      modules={[Autoplay]}
-      autoplay={{ delay: 4000 }}
-      slidesPerView="auto"
-      spaceBetween={40}
-    >
-      {suffledKVs.map((image, index) => (
-        <SwiperSlide
-          className={clsx(
-            "relative flex justify-center items-center",
-            index === 0 && "w-[40vw] mt-[5%]",
-            index === 1 && "w-[15vw]",
-            index === 2 && "w-[20vw] mt-[25%] -translate-x-[10%]",
-            index === 3 && "w-[35vw] mt-[2%]"
-          )}
-          key={image._key}
-        >
-          <motion.figure
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="w-full relative z-10"
+    <div className="relative">
+      <Swiper
+        speed={600}
+        grabCursor
+        modules={[Autoplay]}
+        autoplay={{ delay: 4000 }}
+        slidesPerView={3}
+        spaceBetween={40}
+      >
+        {kvs.map((image) => (
+          <SwiperSlide
+            className="h-[65vh] | flex justify-center items-center drop-shadow"
+            key={image._key}
           >
-            <SanityImg
-              className="h-full w-full | object-contain"
-              loading="eager"
-              image={image}
-              builder={imageUrlBuilder}
-              width={450}
-              alt={image.alt}
-            />
-          </motion.figure>
-
-          <div
-            className={clsx(
-              "absolute top-0 left-0 w-full z-0",
-              image.shortBackground ? "h-[65%]" : "h-full"
-            )}
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+            <motion.figure
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="w-full h-full relative z-10"
+            >
+              <SanityImg
+                className="h-full w-full | object-contain"
+                loading="eager"
+                image={image}
+                builder={imageUrlBuilder}
+                width={450}
+                alt={image.alt}
+              />
+            </motion.figure>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <figure className="absolute h-full w-full | top-0 left-0">
+        <div className="h-full w-full | bg-[url(/bg/footer-background-decor.png)] bg-repeat bg-center bg-contain" />
+      </figure>
+    </div>
   );
 };

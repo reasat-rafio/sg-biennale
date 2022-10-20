@@ -9,20 +9,21 @@ import { Mobile } from "./mobile";
 
 interface HeroCarouselProps {
   kvs: SanityImage[];
+  randomizeKV: boolean;
 }
 
-export const Carousel: React.FC<HeroCarouselProps> = ({ kvs }) => {
+export const Carousel: React.FC<HeroCarouselProps> = ({ kvs, randomizeKV }) => {
   const [suffledKVs, setSuffledKVs] = useState<SanityImage[]>([]);
   const windowWidth = useWindowSize()?.width ?? 0;
 
   useEffect(() => {
-    setSuffledKVs(getShuffledArr(kvs));
-  }, []);
+    if (randomizeKV) setSuffledKVs(getShuffledArr(kvs));
+  }, [randomizeKV]);
 
   return (
     <div className="mt-x">
       {windowWidth >= 768 ? (
-        <Desktop suffledKVs={suffledKVs} />
+        <Desktop kvs={randomizeKV ? suffledKVs : kvs} />
       ) : (
         <Mobile suffledKVs={suffledKVs} />
       )}
