@@ -38,7 +38,11 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     useState<boolean>(false);
   const [disableSwipingLeft, setDisableSwipingLeft] = useState<boolean>(false);
   const [cardsPerView, setCardsperView] = useState(4);
+
+  const fullWidth = (1 / cardsPerView) * 2 * 100;
+  const halfWidth = (1 / cardsPerView) * 100;
   const gapInPixel = windowWidth >= 1024 ? 15 : 10;
+  const oneCardInView = cardsPerView === 1;
 
   useEffect(() => {
     if (windowWidth >= 1280) setCardsperView(4);
@@ -67,6 +71,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
       (num) => num === index - position
     );
     if (position <= 0 || (lastPosition && !activeCardIndex)) paginate(1);
+    else paginate(-1);
   };
 
   return (
@@ -76,39 +81,37 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
           {
             _key,
             cardBackgroundGardiants,
-            team: { name, images, slug, description, _id },
+            team: { name, images, slug, description },
           },
           index
         ) => {
-          const firstIndex = index === 0;
-          const lastIndex = index === teamCollection.length - 1;
-          const fullWidth = (1 / cardsPerView) * 2 * 100;
-          const halfWidth = (1 / cardsPerView) * 100;
-          const oneCardPerView = cardsPerView === 1;
-          const cardWidth = oneCardPerView
-            ? `${halfWidth}%`
+          const isFirstIndex = index === 0;
+          const isLastIndex = index === teamCollection.length - 1;
+
+          const cardWidth = oneCardInView
+            ? halfWidth
             : index === activeCardIndex
-            ? `${fullWidth}%`
-            : `${halfWidth}%`;
+            ? fullWidth
+            : halfWidth;
 
           const initialPosition =
             (index + 1 - position) *
             ((1 / (Math.max(cardsPerView, 2) - 1)) *
               ((100 / cardsPerView) * (Math.max(cardsPerView, 2) - 1)));
 
-          const positionLeft = oneCardPerView
+          const positionLeft = oneCardInView
             ? initialPosition
             : activeCardIndex !== null && activeCardIndex < index
             ? initialPosition + (1 / cardsPerView) * 100
             : initialPosition;
 
           useEffect(() => {
-            if (firstIndex && positionLeft >= 100 / cardsPerView)
+            if (isFirstIndex && positionLeft >= 100 / cardsPerView)
               setDisableSwipingRight(true);
-            else if (firstIndex && positionLeft < 100 / cardsPerView)
+            else if (isFirstIndex && positionLeft < 100 / cardsPerView)
               setDisableSwipingRight(false);
-            if (lastIndex && positionLeft <= 10) setDisableSwipingLeft(true);
-            else if (lastIndex && positionLeft > 10)
+            if (isLastIndex && positionLeft <= 10) setDisableSwipingLeft(true);
+            else if (isLastIndex && positionLeft > 10)
               setDisableSwipingLeft(false);
           }, [positionLeft, windowWidth]);
 
@@ -119,7 +122,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
               initial={{ scale: 0.4 }}
               animate={{
                 left: `calc(${positionLeft}% - ${gapInPixel}px)`,
-                width: cardWidth,
+                width: `${cardWidth}%`,
               }}
               style={{ padding: `0 ${gapInPixel}px` }}
               whileInView={{ scale: 0.9 }}
