@@ -88,8 +88,8 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
       <FilteringLogic>
         <Venue />
       </FilteringLogic>
-      <Map />
       {renderObjectArray(page.sections, {
+        "visitorInfoPage.map": Map,
         "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
       })}
     </section>

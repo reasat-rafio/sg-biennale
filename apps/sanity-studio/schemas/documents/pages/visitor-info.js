@@ -15,6 +15,7 @@ const VisitorInfoPage = {
         { type: "pageHeading" },
         { type: "visitorInfoPage.moreInfo" },
         { type: "visitorInfoPage.accesibilityInfo" },
+        { type: "visitorInfoPage.map" },
       ],
     },
   ],
