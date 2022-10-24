@@ -76,7 +76,7 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
       //   y.set(0);
       //   setHovered(false);
       // }}
-      className="grid grid-cols-12 col-span-12 justify-center items-center | py-10 lg:gap-10 gap-5"
+      className="grid grid-cols-12 col-span-12 justify-center items-center | py-5 lg:gap-10 gap-5"
     >
       <section className="xl:col-span-7 md:col-span-6 col-span-12 | space-y-6">
         <Header variant="secondary">{title}</Header>
@@ -106,8 +106,9 @@ export const WithImageSection: React.FC<WithImageSectionProps> = ({
           className="h-full w-full object-cover"
           builder={imageUrlBuilder}
           image={image}
-          width={windowWidth >= 1280 ? 600 : windowWidth >= 768 ? 400 : 200}
+          width={windowWidth >= 1280 ? 500 : windowWidth >= 768 ? 350 : 150}
           alt={image.alt}
+          loading="eager"
         />
       </motion.figure>
     </motion.article>

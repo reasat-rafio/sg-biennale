@@ -9,7 +9,7 @@ import { Button } from "@components/ui/button";
 
 export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
   return (
-    <Container className="xl:py-max lg:py-xl py-section | overflow-hidden">
+    <Container className="xl:py-xxl lg:py-xl py-section | overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -51,7 +51,7 @@ const Section: React.FC<{
 }> = ({ cta, description, title, subtitle }) => {
   const router = useRouter();
   return (
-    <article className=" grid grid-cols-12 sm:col-span-6 col-span-12 justify-center items-center | py-10">
+    <article className=" grid grid-cols-12 sm:col-span-6 col-span-12 justify-center items-center | py-5">
       <section className="col-span-12 | space-y-6">
         <Header variant="secondary">{title}</Header>
         {subtitle && (

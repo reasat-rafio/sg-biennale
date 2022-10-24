@@ -49,7 +49,7 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
       <Header className={clsx("py-1", headerClassName)} type="h1">
         <SlideupLettersAnimation>{heading}</SlideupLettersAnimation>
       </Header>
-      <motion.h4
+      <motion.h2
         initial="initial"
         animate="animate"
         variants={DescriptionVariants}
@@ -61,7 +61,7 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
         )}
       >
         {tagline}
-      </motion.h4>
+      </motion.h2>
       <motion.span
         initial="initial"
         animate="animate"

@@ -81,7 +81,7 @@ const Content: React.FC<PastEditionCollection> = ({
         <motion.figure className="lg:hidden block">
           <SanityImg
             className="w-full object-cover max-h-[400px]"
-            width={windowWidth >= 768 ? 200 : 130}
+            width={windowWidth >= 768 ? 200 : 120}
             image={image}
             builder={imageUrlBuilder}
             alt={name}
@@ -104,7 +104,7 @@ const Content: React.FC<PastEditionCollection> = ({
       >
         <SanityImg
           className="w-full object-cover "
-          width={windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 150}
+          width={windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 120}
           image={image}
           builder={imageUrlBuilder}
           alt={name}

@@ -44,7 +44,7 @@ export const Desktop: React.FC<DesktopProps> = ({ kvs }) => {
         ))}
       </Swiper>
       <figure className="absolute h-full w-full | top-0 left-0">
-        <div className="h-full w-full | bg-[url(/bg/kv.png)] bg-repeat bg-center bg-contain" />
+        <div className="h-full w-full | bg-[url(/bg/kv.webp)] bg-repeat bg-center bg-contain" />
       </figure>
     </div>
   );

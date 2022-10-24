@@ -13,9 +13,9 @@ export const VenueList: React.FC<VenueListProps> = ({
   venues,
 }) => {
   return (
-    <section className="pt-2" style={{ paddingBottom: extraPadding() / 2 }}>
+    <section className="pt-2" style={{ paddingBottom: extraPadding() }}>
       <div className="grid grid-cols-12 | lg:gap-8 gap-4">
-        {venues?.length &&
+        {Boolean(venues?.length) &&
           venues?.map((venue, index) => (
             <VenueListCard
               {...venue}

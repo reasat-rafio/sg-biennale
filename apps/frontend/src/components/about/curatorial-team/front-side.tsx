@@ -71,7 +71,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
             "pointer-events-none h-full w-full object-contain transition-transform duration-500 ease-in-out",
             active ? "scale-125" : "scale-100"
           )}
-          width={windowWidth >= 1280 ? 250 : windowWidth >= 768 ? 200 : 130}
+          width={windowWidth >= 1280 ? 250 : windowWidth >= 768 ? 200 : 100}
           image={image}
           builder={imageUrlBuilder}
           alt={name}

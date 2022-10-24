@@ -44,10 +44,6 @@ export const ArtworkDescription: React.FC<ArtworkDescriptionProps> = ({
   const router = useRouter();
   const { selectedImage } = useArtistsDetailsStore();
 
-  console.log("====================================");
-  console.log(selectedImage?.artwork);
-  console.log("====================================");
-
   return (
     <Html
       zIndexRange={[20, 30]}

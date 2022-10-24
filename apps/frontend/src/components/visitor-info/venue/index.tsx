@@ -1,6 +1,6 @@
 import { Container } from "@components/ui/container";
 import { positioningAlgo } from "@lib/helpers/global.helpers";
-import { MouseEvent, useCallback } from "react";
+import { MouseEvent, useCallback, useRef } from "react";
 import { FilteringSection } from "./filtering-section";
 import { VenueList } from "./venue-list";
 import { motion } from "framer-motion";
@@ -12,19 +12,22 @@ import { Button } from "@components/ui/button";
 export const Venue: React.FC<{}> = ({}) => {
   const { allVenues, sortedVenues, page, setPage, cardsPerPage } =
     useVisitorInfoStore();
+  const venueListRef = useRef<HTMLDivElement | null>(null);
+
   const imgPositionIngAlgo = positioningAlgo(sortedVenues.length);
   const extraPadding = () =>
     useCallback(
-      () =>
-        sortedVenues.reduce(
-          (previousValue, _, idx) => previousValue + 50 * idx,
-          0
-        ),
+      () => sortedVenues.reduce((previousValue, _) => previousValue + 50, 0),
       [sortedVenues]
     );
 
   const showMoreLessButtonAction = () => {
     sortedVenues < allVenues ? setPage(page + 1) : setPage(1);
+    if (sortedVenues.length === allVenues.length && venueListRef?.current)
+      venueListRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
   };
   const scrollToAccesiblityInfoSection = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -47,11 +50,14 @@ export const Venue: React.FC<{}> = ({}) => {
         </Anchor>
       </header>
       <FilteringSection />
-      <VenueList
-        venues={sortedVenues}
-        extraPadding={extraPadding()}
-        imgPositionIngAlgo={imgPositionIngAlgo}
-      />
+
+      <div ref={venueListRef}>
+        <VenueList
+          venues={sortedVenues}
+          extraPadding={extraPadding()}
+          imgPositionIngAlgo={imgPositionIngAlgo}
+        />
+      </div>
 
       {showShowMoreButton && (
         <motion.div
@@ -62,8 +68,8 @@ export const Venue: React.FC<{}> = ({}) => {
         >
           <Button onClick={showMoreLessButtonAction} className="mx-auto">
             {sortedVenues.length === allVenues.length
-              ? "Show More"
-              : "Show Less"}
+              ? "Show Less"
+              : "Show More"}
           </Button>
         </motion.div>
       )}

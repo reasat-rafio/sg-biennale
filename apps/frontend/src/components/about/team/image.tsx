@@ -48,7 +48,15 @@ export const Image: React.FC<ImageProps> = ({ image, header }) => {
       className="mt-10 | rounded | overflow-hidden aspect-video"
     >
       <SanityImg
-        width={windowWidth >= 1280 ? 1200 : windowWidth >= 768 ? 800 : 400}
+        width={
+          windowWidth >= 1280
+            ? 1200
+            : windowWidth >= 768
+            ? 600
+            : windowWidth >= 640
+            ? 400
+            : 200
+        }
         className={clsx(
           "h-full w-full object-cover | transition-all duration-500 ease-in-out"
         )}

@@ -87,19 +87,19 @@ export const Card: React.FC<CardProps> = ({ _id, image, name, url, index }) => {
       >
         <SanityImg
           className="h-full w-full object-cover"
-          width={windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 150}
+          width={windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 120}
           image={image}
           builder={imageUrlBuilder}
           alt={image.alt}
         />
       </motion.figure>
       <section>
-        <motion.h6
+        <motion.span
           layoutId={`past-edition-card-header-${_id}`}
           className="text-lg font-medium mb-1 font-manrope z-10 relative"
         >
           {name}
-        </motion.h6>
+        </motion.span>
       </section>
     </motion.article>
   );
