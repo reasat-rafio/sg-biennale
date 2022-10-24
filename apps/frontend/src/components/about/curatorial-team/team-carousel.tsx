@@ -71,7 +71,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
       (num) => num === index - position
     );
     if (position <= 0 || (lastPosition && !activeCardIndex)) paginate(1);
-    else paginate(-1);
+    else if (lastPosition && activeCardIndex) paginate(-1);
   };
 
   return (

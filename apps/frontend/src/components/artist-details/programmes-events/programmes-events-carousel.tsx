@@ -39,6 +39,9 @@ export const ProgrammesEventsCarousel: React.FC<
   const [disableSwipingLeft, setDisableSwipingLeft] = useState<boolean>(false);
   const [cardsPerView, setCardsperView] = useState(3);
 
+  const fullWidth = (1 / cardsPerView) * 2 * 100;
+  const halfWidth = (1 / cardsPerView) * 100;
+  const oneCardInView = cardsPerView === 1;
   const gapInPixel = windowWidth >= 1024 ? 25 : windowWidth >= 720 ? 15 : 0;
 
   useEffect(() => {
@@ -68,6 +71,7 @@ export const ProgrammesEventsCarousel: React.FC<
       (num) => num === index - position
     );
     if (position <= 0 || (lastPosition && !activeCardIndex)) paginate(1);
+    else if (lastPosition && activeCardIndex) paginate(-1);
   };
 
   return (
@@ -90,30 +94,28 @@ export const ProgrammesEventsCarousel: React.FC<
           },
           index
         ) => {
-          const firstIndex = index === 0;
-          const lastIndex = index === relatedEvents.length - 1;
-          const fullWidth = (1 / cardsPerView) * 2 * 100;
-          const halfWidth = (1 / cardsPerView) * 100;
-          const oneCardPerView = cardsPerView === 1;
-          const cardWidth = oneCardPerView
-            ? `${halfWidth}%`
+          const isFirstIndex = index === 0;
+          const isLastIndex = index === relatedEvents.length - 1;
+
+          const cardWidth = oneCardInView
+            ? halfWidth
             : index === activeCardIndex
-            ? `${fullWidth}%`
-            : `${halfWidth}%`;
+            ? fullWidth
+            : halfWidth;
 
           const initialPosition =
             (index + 1 - position) *
             ((1 / (Math.max(cardsPerView, 2) - 1)) *
               ((100 / cardsPerView) * (Math.max(cardsPerView, 2) - 1)));
 
-          const positionLeft = oneCardPerView
+          const positionLeft = oneCardInView
             ? initialPosition
             : activeCardIndex !== null && activeCardIndex < index
             ? initialPosition + (1 / cardsPerView) * 100
             : initialPosition;
 
           useEffect(() => {
-            if (firstIndex) {
+            if (isFirstIndex) {
               if (cardsPerView === 1) {
                 if (positionLeft >= 0) setDisableSwipingRight(true);
                 else if (positionLeft < 0) setDisableSwipingRight(false);
@@ -125,8 +127,8 @@ export const ProgrammesEventsCarousel: React.FC<
               }
             }
 
-            if (lastIndex && positionLeft <= 30) setDisableSwipingLeft(true);
-            else if (lastIndex && positionLeft > 30)
+            if (isLastIndex && positionLeft <= 30) setDisableSwipingLeft(true);
+            else if (isLastIndex && positionLeft > 30)
               setDisableSwipingLeft(false);
           }, [positionLeft, windowWidth, cardsPerView]);
 
@@ -137,7 +139,7 @@ export const ProgrammesEventsCarousel: React.FC<
               initial={{ scale: 0.6 }}
               animate={{
                 left: `calc(${positionLeft}% - ${gapInPixel}px)`,
-                width: cardWidth,
+                width: `${cardWidth}%`,
               }}
               style={{ padding: `0 ${gapInPixel}px` }}
               whileInView={{ scale: 1 }}
