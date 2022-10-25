@@ -44,13 +44,13 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative col-span-6 aspect-square | bg-white | rounded overflow-hidden cursor-pointer | group"
+        className="relative col-span-6 aspect-square | bg-white | rounded overflow-hidden cursor-pointer "
       >
         <motion.article className="h-full w-full">
-          <figure className="flex justify-center items-center | p-[20%] | h-full w-full overflow-hidden hover:bg-[#C59986] | transition-colors duration-300 ease-in-out">
+          <figure className="flex justify-center items-center | p-[20%] | h-full w-full overflow-hidden">
             {images?.length && (
               <SanityImg
-                className="h-full w-full object-cover group-hover:scale-105 transition-all duration-300 ease-in-out"
+                className="h-full w-full object-cover"
                 width={
                   windowWidth >= 1280 ? 300 : windowWidth >= 768 ? 200 : 100
                 }
@@ -61,7 +61,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
             )}
           </figure>
 
-          <h6 className="absolute bottom-[5%] left-[5%] | text-body-2 group-hover:text-body-1 font-manrope font-semibold group-hover:text-white text-black | transition-all duration-300 ease-in-out | pointer-events-none">
+          <h6 className="absolute bottom-[5%] left-[5%] | text-body-2 font-manrope font-semibold text-black | pointer-events-none">
             {name}
           </h6>
         </motion.article>

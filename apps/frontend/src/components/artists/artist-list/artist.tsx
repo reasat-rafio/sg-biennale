@@ -27,13 +27,13 @@ export const Artist: React.FC<ArtistProps> = ({
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative lg:col-span-6 col-span-12 aspect-square | bg-white | rounded overflow-hidden cursor-pointer | group"
+        className="relative lg:col-span-6 col-span-12 aspect-square | bg-white | rounded overflow-hidden cursor-pointer"
       >
         <motion.article className="h-full w-full">
-          <motion.figure className="flex justify-center items-center | p-[20%] | h-full w-full overflow-hidden hover:bg-[#C59986] | transition-colors duration-300 ease-in-out">
+          <motion.figure className="flex justify-center items-center | p-[20%] | h-full w-full overflow-hidden">
             {images?.length && (
               <SanityImg
-                className="h-full w-full object-cover group-hover:scale-105 transition-all duration-300 ease-in-out"
+                className="h-full w-full object-cover"
                 width={
                   windowWidth >= 1280 ? 500 : windowWidth >= 768 ? 250 : 150
                 }
@@ -44,7 +44,7 @@ export const Artist: React.FC<ArtistProps> = ({
             )}
           </motion.figure>
 
-          <h6 className="absolute bottom-[5%] left-[5%] | text-body-2 group-hover:text-body-1 font-manrope font-semibold group-hover:text-white text-black | transition-all duration-300 ease-in-out | pointer-events-none">
+          <h6 className="absolute bottom-[5%] left-[5%] | text-body-2 group-hover:text-body-1 font-manrope font-semibold text-black | pointer-events-none">
             {name}
           </h6>
         </motion.article>
