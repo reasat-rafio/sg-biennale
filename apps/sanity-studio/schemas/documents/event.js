@@ -88,6 +88,8 @@ const Event = {
       name: "additionalInfo",
       type: "string",
     },
+    { name: "hideCta", type: "boolean", initialValue: false },
+
     {
       name: "cta",
       type: "cta",

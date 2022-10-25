@@ -26,7 +26,14 @@ const query = groq`{
       ...,
       closestEvents[]->{
         _id,
-        images,
+        images[] {
+          asset->{
+            ...,
+            metadata {
+             dimensions
+            }
+          }
+        },
         title,
         description,
         slug,
@@ -46,6 +53,7 @@ const query = groq`{
         endAt,
         additionalInfo,
         cta,
+        hideCta,
         venue[]->{
           _id,
           name,

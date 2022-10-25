@@ -9,7 +9,6 @@ import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 import { Header } from "@components/ui/header";
 import { Button } from "@components/ui/button";
-import Link from "next/link";
 
 interface ProgrammeEventListCardProps extends IPgrammeEvents {
   index: number;
@@ -33,7 +32,12 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   venue,
   additionalInfo,
   relatedArtists,
+  hideCta,
 }) => {
+  console.log("====================================");
+  console.log(hideCta);
+  console.log("====================================");
+
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
@@ -43,10 +47,6 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     additionalInfo ? "*" : ""
   }`;
   const formattedShortDate = format(new Date(startAt), "dd.LL");
-  // const formattedDate = format(
-  //   new Date(startAt),
-  //   "eee, d LLL yyyy - hh:mm aaaaa'm'"
-  // );
 
   const x = useTransformSpring({
     value: screenX,
@@ -146,23 +146,20 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
             </div>
           </div>
         </div>
-
-        {/* <div className="flex | space-x-10 | text-body-2">
-          <span className="font-semibold">Date & Time</span>
-         <span className="text-gray--700">{formattedDate}</span> 
-        </div> */}
-        <div className="flex sm:flex-row flex-col sm:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-0 mt-5">
-          <div className="flex-1">
-            <Button href={cta?.href} type="href" variant="secondary">
-              {priceVal}
-            </Button>
+        {!hideCta && (
+          <div className="flex sm:flex-row flex-col sm:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-0 mt-5">
+            <div className="flex-1">
+              <Button href={cta?.href} type="href" variant="secondary">
+                {priceVal}
+              </Button>
+            </div>
+            {additionalInfo && (
+              <span className="text-body-2 text-gray--700">
+                *{additionalInfo}
+              </span>
+            )}
           </div>
-          {additionalInfo && (
-            <span className="text-body-2 text-gray--700">
-              *{additionalInfo}
-            </span>
-          )}
-        </div>
+        )}
       </section>
     </motion.article>
   );

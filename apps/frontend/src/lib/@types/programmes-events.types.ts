@@ -16,6 +16,7 @@ export interface IPgrammeEvents {
   slug: Slug;
   relatedArtists: RelatedArtistsProps[];
   cta: Cta;
+  hideCta?: boolean;
 }
 
 export interface RelatedArtistsProps {

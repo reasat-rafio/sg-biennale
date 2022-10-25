@@ -5,7 +5,6 @@ import { Button } from "@components/ui/button";
 import useProgrammesAndEventsStore from "@stores/programme-event.store";
 import { useCallback } from "react";
 import { motion } from "framer-motion";
-import { useWindowSize } from "@lib/hooks";
 // import { FilteringMobileSection } from "./filters/mobile";
 import { Header } from "@components/ui/header";
 
@@ -19,7 +18,6 @@ export const AllEvents: React.FC<AllEventsProps> = ({}) => {
     allProgrammesAndEvents,
     setPage,
   } = useProgrammesAndEventsStore();
-  const windowWidth = useWindowSize()?.width ?? 0;
   const extraPadding = () =>
     useCallback(
       () =>
