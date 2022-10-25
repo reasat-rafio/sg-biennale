@@ -9,6 +9,7 @@ import { PortableText } from "@utils/sanity";
 import {
   ArtworkAndArtistImageProps,
   ArtworkProps,
+  MediaSectionProps,
 } from "@lib/@types/artist-details.types";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -58,17 +59,25 @@ export const Hero: React.FC<HeroProps> = ({
     setArtworkAndArtistImages([...imgs, ...artworkImages]);
   }, []);
 
+  const __mediaSectionProps = {
+    images,
+    artworks,
+    activeCarouselIndex,
+    setActiveCarouslIndex,
+    artworkAndArtistImages,
+  };
+
   return (
     <Container
       type="article"
       className="grid grid-cols-12 lg:gap-10 | lg:py-xl py-x"
     >
       <section className="lg:col-span-6 col-span-12 | lg:max-w-[90%] max-w-full | space-y-10">
-        {/* {images?.length && (
+        {artworkAndArtistImages?.length && (
           <div className="lg:hidden block">
-            {images?.length && <Carousel images={images} />}
+            <MediaSection {...__mediaSectionProps} />
           </div>
-        )} */}
+        )}
 
         <header className="space-y-2">
           <h1 className="font-medium text-heading-6">{name}</h1>
@@ -87,37 +96,47 @@ export const Hero: React.FC<HeroProps> = ({
       </section>
       <div className="col-span-6 | lg:block hidden">
         {artworkAndArtistImages?.length && (
-          <>
-            <Carousel
-              activeCarouselIndex={activeCarouselIndex}
-              setActiveCarouslIndex={setActiveCarouslIndex}
-              artworkAndArtistImages={artworkAndArtistImages}
-            />
-            <AnimatePresence exitBeforeEnter>
-              {activeCarouselIndex !== null &&
-                artworks[activeCarouselIndex - images.length - 1] &&
-                artworkAndArtistImages[activeCarouselIndex].type ===
-                  "artwork" && (
-                  <motion.div
-                    key={activeCarouselIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="font-manrope mt-5 prose"
-                  >
-                    <PortableText
-                      blocks={
-                        artworks[activeCarouselIndex - images.length - 1]
-                          ?.description
-                      }
-                    />
-                  </motion.div>
-                )}
-            </AnimatePresence>
-          </>
+          <MediaSection {...__mediaSectionProps} />
         )}
       </div>
     </Container>
+  );
+};
+
+const MediaSection: React.FC<MediaSectionProps> = ({
+  images,
+  artworks,
+  activeCarouselIndex,
+  setActiveCarouslIndex,
+  artworkAndArtistImages,
+}) => {
+  return (
+    <>
+      <Carousel
+        activeCarouselIndex={activeCarouselIndex}
+        setActiveCarouslIndex={setActiveCarouslIndex}
+        artworkAndArtistImages={artworkAndArtistImages}
+      />
+      <AnimatePresence exitBeforeEnter>
+        {activeCarouselIndex !== null &&
+          artworks[activeCarouselIndex - images.length - 1] &&
+          artworkAndArtistImages[activeCarouselIndex].type === "artwork" && (
+            <motion.div
+              key={activeCarouselIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="font-manrope mt-5 prose"
+            >
+              <PortableText
+                blocks={
+                  artworks[activeCarouselIndex - images.length - 1]?.description
+                }
+              />
+            </motion.div>
+          )}
+      </AnimatePresence>
+    </>
   );
 };

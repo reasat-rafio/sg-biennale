@@ -88,3 +88,11 @@ export interface ArtworkAndArtistImageProps {
   type: string;
   image: SanityImage;
 }
+
+export interface MediaSectionProps {
+  images: SanityImage[];
+  artworks: ArtworkProps[];
+  activeCarouselIndex: null | number;
+  setActiveCarouslIndex: Dispatch<SetStateAction<null | number>>;
+  artworkAndArtistImages: ArtworkAndArtistImageProps[];
+}
