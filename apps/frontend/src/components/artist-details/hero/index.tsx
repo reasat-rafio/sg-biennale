@@ -1,18 +1,24 @@
-// import CardImgScene from "@components/home/news/card-img-scene";
 import { Container } from "@components/ui/container";
 import { ICountry } from "@lib/@types/global.types";
-import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import { SanityImage, SanityImg } from "sanity-react-extra";
+import { SanityImage } from "sanity-react-extra";
 import getYouTubeId from "get-youtube-id";
 import YouTube from "react-youtube";
 import { useWindowSize } from "@lib/hooks";
 import { Carousel } from "./carousel";
+import { PortableText } from "@utils/sanity";
+import {
+  ArtworkAndArtistImageProps,
+  ArtworkProps,
+} from "@lib/@types/artist-details.types";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface HeroProps {
   name: string;
   description: any;
   images: SanityImage[];
   countries: ICountry[];
+  artworks: ArtworkProps[];
 }
 
 const serializers = {
@@ -30,12 +36,27 @@ export const Hero: React.FC<HeroProps> = ({
   description,
   images,
   name,
+  artworks,
 }) => {
-  // const [hovered, setHovered] = useState(false);
-  // const [scalePos, _] = useState([0, 0, 0]);
-  // const aspectRatio = images[0].metadata.dimensions.aspectRatio;
-
   const windowWidth = useWindowSize()?.width ?? 0;
+  const [activeCarouselIndex, setActiveCarouslIndex] = useState<null | number>(
+    null
+  );
+  const [artworkAndArtistImages, setArtworkAndArtistImages] = useState<
+    ArtworkAndArtistImageProps[]
+  >([]);
+
+  useEffect(() => {
+    const artworkImages = artworks
+      .map(({ images }) => images)
+      .flat()
+      .map((image) => ({
+        type: "artwork",
+        image: image,
+      }));
+    const imgs = images.map((image) => ({ type: "artist", image: image }));
+    setArtworkAndArtistImages([...imgs, ...artworkImages]);
+  }, []);
 
   return (
     <Container
@@ -43,11 +64,11 @@ export const Hero: React.FC<HeroProps> = ({
       className="grid grid-cols-12 lg:gap-10 | lg:py-xl py-x"
     >
       <section className="lg:col-span-6 col-span-12 | lg:max-w-[90%] max-w-full | space-y-10">
-        {images?.length && (
+        {/* {images?.length && (
           <div className="lg:hidden block">
             {images?.length && <Carousel images={images} />}
           </div>
-        )}
+        )} */}
 
         <header className="space-y-2">
           <h1 className="font-medium text-heading-6">{name}</h1>
@@ -65,49 +86,38 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
       </section>
       <div className="col-span-6 | lg:block hidden">
-        {images?.length && <Carousel images={images} />}
-        {/* {images?.length && (
-          <figure>
-            <SanityImg
-              className="h-full w-full object-cover"
-              image={images[0]}
-              builder={imageUrlBuilder}
-              width={500}
-              alt={name}
+        {artworkAndArtistImages?.length && (
+          <>
+            <Carousel
+              activeCarouselIndex={activeCarouselIndex}
+              setActiveCarouslIndex={setActiveCarouslIndex}
+              artworkAndArtistImages={artworkAndArtistImages}
             />
-          </figure>
-        )} */}
+            <AnimatePresence exitBeforeEnter>
+              {activeCarouselIndex !== null &&
+                artworks[activeCarouselIndex - images.length - 1] &&
+                artworkAndArtistImages[activeCarouselIndex].type ===
+                  "artwork" && (
+                  <motion.div
+                    key={activeCarouselIndex}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="font-manrope mt-5 prose"
+                  >
+                    <PortableText
+                      blocks={
+                        artworks[activeCarouselIndex - images.length - 1]
+                          ?.description
+                      }
+                    />
+                  </motion.div>
+                )}
+            </AnimatePresence>
+          </>
+        )}
       </div>
     </Container>
   );
 };
-
-// interface ImageProps {
-//   hovered: boolean;
-//   setHovered: Dispatch<SetStateAction<boolean>>;
-//   url: string;
-//   scalePos: number[];
-//   aspectRatio: number;
-// }
-
-// const Image: React.FC<ImageProps> = ({
-//   hovered,
-//   setHovered,
-//   url,
-//   scalePos,
-//   aspectRatio,
-// }) => {
-//   return (
-//     <div
-//       onMouseEnter={() => setHovered(true)}
-//       onMouseLeave={() => setHovered(false)}
-//       className="bg-[#F8F8F8] sm:p-20 p-14"
-//     >
-//       <figure
-//         className={clsx(aspectRatio > 1.1 ? "aspect-video" : "aspect-square")}
-//       >
-//         <CardImgScene hovered={hovered} url={url} scalePos={scalePos} />
-//       </figure>
-//     </div>
-//   );
-// };

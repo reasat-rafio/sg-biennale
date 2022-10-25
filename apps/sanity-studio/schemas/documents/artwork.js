@@ -36,11 +36,7 @@ const Artwork = {
       type: "array",
       of: [{ type: "block" }],
     },
-    {
-      name: "moreInfo",
-      type: "array",
-      of: [{ type: "info" }],
-    },
+
     {
       name: "venue",
       type: "reference",

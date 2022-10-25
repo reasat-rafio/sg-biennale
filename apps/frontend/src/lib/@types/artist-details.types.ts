@@ -26,6 +26,7 @@ export interface RelatedVenue {
 }
 
 export interface ArtworkProps {
+  _id: string;
   seo: ISeo;
   name: string;
   slug: Slug;
@@ -81,4 +82,9 @@ export interface ImageProps {
   progress: SpringValue<number | null>;
   setDown: Dispatch<SetStateAction<boolean>>;
   setScrollPassRatio: Dispatch<SetStateAction<number>>;
+}
+
+export interface ArtworkAndArtistImageProps {
+  type: string;
+  image: SanityImage;
 }

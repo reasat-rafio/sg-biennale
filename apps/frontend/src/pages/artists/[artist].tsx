@@ -25,6 +25,7 @@ const query = pageQuery(groq`
           }
         },
         artworks[]-> {
+          _id,
           name,
           slug,
           description,
@@ -105,6 +106,7 @@ const ArtistDetailPage: NextPage<SanityProps> = (props) => {
         images={images}
         description={description}
         countries={countries}
+        artworks={artworks}
       />
       {/* <Artwork name={name} artworks={artworks} /> */}
       {relatedEvents?.length !== 0 && (
