@@ -14,6 +14,8 @@ import {
 } from "@lib/hooks";
 import { Images } from "./images";
 import { useRouter } from "next/router";
+import { Container } from "@components/ui/container";
+import { Header } from "@components/ui/header";
 
 interface ArtistProps {
   type: string;
@@ -21,7 +23,7 @@ interface ArtistProps {
   title: string;
 }
 
-export const Artist: React.FC<ArtistProps> = ({ artists }) => {
+export const Artist: React.FC<ArtistProps> = ({ artists, title }) => {
   const router = useRouter();
   let myTimeout: NodeJS.Timeout | null = null;
   const windowHeight = useWindowSize()?.height ?? 0;
@@ -85,6 +87,9 @@ export const Artist: React.FC<ArtistProps> = ({ artists }) => {
 
   return (
     <section ref={sectionRef} className="h-[100vh]" id="artist-image-carouel">
+      <Container>
+        <Header>{title}</Header>
+      </Container>
       <Canvas
         style={{ overflow: "hidden" }}
         onTouchStart={onTouchStartAction}
