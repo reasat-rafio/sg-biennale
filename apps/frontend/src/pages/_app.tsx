@@ -9,7 +9,6 @@ import useGlobalStore from "@stores/global.store";
 import Head from "next/head";
 import { SEO } from "@components/common/seo";
 import { NavDropdown } from "@components/common/navigation/dropdown";
-import { AnimatePresence } from "framer-motion";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { addFooterHeight, addNavbarHeight, setShowNavDropDown } =
@@ -30,12 +29,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     setShowNavDropDown(false);
   }, [router.pathname]);
-
-  // function handleExitComplete() {
-  //   if (typeof window !== "undefined") {
-  //     window.scrollTo({ top: 0 });
-  //   }
-  // }
 
   return (
     <>
