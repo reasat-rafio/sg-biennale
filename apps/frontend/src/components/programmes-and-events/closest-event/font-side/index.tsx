@@ -43,7 +43,13 @@ export const FrontSide: React.FC<FrontSideProps> = ({
       custom={cardsPerView}
       transition={{ duration: 0.6, type: "tween", ease: "easeInOut" }}
     >
-      <figure className="absolute h-full w-full pointer-events-none">
+      <figure
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.71) 100%)",
+        }}
+        className="absolute h-full w-full pointer-events-none"
+      >
         <SanityImg
           className="h-full w-full object-cover"
           image={images[0]}
