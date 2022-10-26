@@ -12,11 +12,6 @@ export const ProgrammesEvents: React.FC<ProgrammesEventsProps> = ({
   relatedEvents,
   name,
 }) => {
-  const onBtnClickAction = () => {
-    if (typeof window !== "undefined")
-      window.location.href = "/programmes-events";
-  };
-
   return (
     <section className="max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg mx-auto | pt-xl overflow-hidden">
       <div className="flex sm:flex-row flex-col items-center | sm:space-x-5 space-y-3 sm:space-y-0 mb-16">
@@ -25,7 +20,9 @@ export const ProgrammesEvents: React.FC<ProgrammesEventsProps> = ({
             {name}’s Programmes & Events
           </Header>
         </header>
-        <Button onClick={onBtnClickAction}>View Events</Button>
+        <Button type="href" href="/programmes-events">
+          View Events
+        </Button>
       </div>
 
       <ProgrammesEventsCarousel relatedEvents={relatedEvents} />
