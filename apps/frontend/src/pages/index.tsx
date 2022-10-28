@@ -1,4 +1,3 @@
-import { Artist } from "@components/home/artist/artist";
 import { Introduction } from "@components/home/introduction/introduction";
 import { News } from "@components/home/news/news";
 import { Organisations } from "@components/home/organisation";
@@ -11,9 +10,8 @@ import { renderObjectArray, withDimensions } from "sanity-react-extra";
 import { Hero } from "@components/home/hero/hero";
 import { useCallback } from "react";
 import { HomHeroProps } from "@lib/@types/home.types";
-import { ISite } from "@lib/@types/global.types";
 import { KV } from "@components/home/hero/kv";
-import { HighLight } from "@components/home/highlights";
+import { HighLight } from "@components/home/highlight";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -96,11 +94,8 @@ export const getStaticProps: GetStaticProps = async (
   revalidate: 10,
 });
 
-const Home: NextPage<SanityProps<{ page: any; site: ISite }>> = (props) => {
-  const {
-    page,
-    site: {},
-  } = useSanityQuery(query, props).data;
+const Home: NextPage<SanityProps> = (props) => {
+  const { page } = useSanityQuery(query, props).data;
 
   return (
     <div>
@@ -111,7 +106,6 @@ const Home: NextPage<SanityProps<{ page: any; site: ISite }>> = (props) => {
           []
         ),
         "homePage.introduction": Introduction,
-        // "homePage.artists": Artist,
         "homePage.artists": HighLight,
         "homePage.news": News,
         "homePage.organisations": Organisations,
