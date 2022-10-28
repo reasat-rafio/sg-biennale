@@ -13,6 +13,7 @@ import { useCallback } from "react";
 import { HomHeroProps } from "@lib/@types/home.types";
 import { ISite } from "@lib/@types/global.types";
 import { KV } from "@components/home/hero/kv";
+import { HighLight } from "@components/home/highlights";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -110,7 +111,8 @@ const Home: NextPage<SanityProps<{ page: any; site: ISite }>> = (props) => {
           []
         ),
         "homePage.introduction": Introduction,
-        "homePage.artists": Artist,
+        // "homePage.artists": Artist,
+        "homePage.artists": HighLight,
         "homePage.news": News,
         "homePage.organisations": Organisations,
       })}

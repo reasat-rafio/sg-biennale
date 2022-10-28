@@ -83,3 +83,15 @@ body.locked {
 .publicationCatalogueCarousel .swiper-scrollbar .swiper-scrollbar-drag {
   background-color: #4d4d4d;
 }
+
+.highlightCarousel .swiper-scrollbar,
+.directorsCarousel .swiper-scrollbar {
+  display: block !important;
+  width: 300px !important;
+  height: 9px !important;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  background-color: #cccccc;
+}

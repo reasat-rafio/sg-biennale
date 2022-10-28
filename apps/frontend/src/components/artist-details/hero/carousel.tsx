@@ -1,8 +1,8 @@
-import { SanityImg } from "sanity-react-extra";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import { SanityImg } from "sanity-react-extra";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import { Dispatch, SetStateAction, useState } from "react";
 import { imageUrlBuilder } from "@utils/sanity";
@@ -11,10 +11,7 @@ import { EyeIcon } from "@components/icons/eye";
 import { ArrowLeftIcon } from "@components/icons/arrow-left";
 import { ArrowRightIcon } from "@components/icons/arrow-right";
 import { useWindowSize } from "@lib/hooks";
-import {
-  ArtworkAndArtistImageProps,
-  ArtworkProps,
-} from "@lib/@types/artist-details.types";
+import { ArtworkAndArtistImageProps } from "@lib/@types/artist-details.types";
 
 interface CarouselProps {
   artworkAndArtistImages: ArtworkAndArtistImageProps[];
