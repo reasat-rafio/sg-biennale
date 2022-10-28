@@ -82,7 +82,7 @@ const Press: NextPage<SanityProps> = (props) => {
   const intersecting = useIntersection(ref, { threshold: 0.4 });
 
   return (
-    <div>
+    <div className="overflow-hidden">
       {renderObjectArray(page.sections, {
         pageHeading: useCallback(
           (props: PageHeaderProps) => (
