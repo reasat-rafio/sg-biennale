@@ -41,7 +41,7 @@ export const PageHeading: React.FC<PageHeaderProps> = ({
     <header
       className={clsx(
         className,
-        "flex flex-col space-y-3 | xl:pt-xl md:pt-x pt-lg",
+        "flex flex-col space-y-5 | xl:pt-xl md:pt-x pt-lg",
         position === "center" && "justify-center items-center",
         position === "default" && "justify-start items-start"
       )}

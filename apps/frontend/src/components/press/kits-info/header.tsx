@@ -1,4 +1,3 @@
-import { SlideupLettersAnimation } from "@components/ui/animated-component/slideup-letters-animation";
 import { Button } from "@components/ui/button";
 import { Cta } from "@lib/@types/global.types";
 import { useWindowSize } from "@lib/hooks";
@@ -35,20 +34,14 @@ export const Header: React.FC<{
     <div
       ref={headerRef}
       className={clsx(
-        "row-span-4 | flex flex-col | border-b | space-y-4 py-5",
+        "row-span-4 | flex flex-col | border-b | space-y-7 py-4",
         image ? "justify-center" : "justify-start",
         positionedAtRight ? "max-w-2xl" : "xl:pl-max"
       )}
     >
-      <SectionHeader color="#DE5742">
-        {/* <SlideupLettersAnimation
-          animationType="inview"
-          intersecting={intersecting}
-        > */}
+      <SectionHeader className="py-1" color="#DE5742">
         {header}
-        {/* </SlideupLettersAnimation> */}
       </SectionHeader>
-
       {image && windowWidth < 1024 && (
         <div className="flex justify-center items-center overflow-hidden">
           <Image url={image} />

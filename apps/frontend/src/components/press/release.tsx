@@ -43,7 +43,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 400 });
 
   return (
-    <Container type="section">
+    <Container className="py-lg" type="section">
       <Header>{header}</Header>
 
       <div ref={containerRef} className="xl:columns-3 md:columns-2 columns-1">
@@ -59,7 +59,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
               type: "tween",
               ease: "easeInOut",
             }}
-            className="cursor-pointer | overflow-hidden | group | lg:pt-14 pt-7 space-y-4 px-4"
+            className="cursor-pointer | overflow-hidden | group | lg:pt-14 pt-7 space-y-6 px-4"
           >
             <figure className="flex justify-center items-center | overflow-hidden">
               <SanityImg

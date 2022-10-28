@@ -25,12 +25,12 @@ export const Organisations: React.FC<OrganisationProps> = ({
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="grid grid-cols-12 lg:gap-16 sm:gap-10 gap-5"
+        className="grid grid-cols-12 lg:gap-16 sm:gap-10 gap-4"
       >
         {organisations.map(({ _key, logo, name, title, url }) => (
           <article
             key={_key}
-            className="grid grid-rows-6 xl:col-span-4 sm:col-span-6 col-span-12 | space-y-5"
+            className="grid grid-rows-6 xl:col-span-4 sm:col-span-6 col-span-12 | space-y-2 sm:space-y-5"
           >
             <section className="flex flex-col row-span-2 | space-y-2">
               <h4 className="text-gray--400 font-bold font-manrope lg:text-body-1 text-body-2">
@@ -41,7 +41,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
                 className={clsx(
                   "lg:text-heading-5 text-heading-6 font-semibold",
                   url &&
-                    "cursor-pointer hover:text-red-love | transition-colors duration-300 ease-in-out"
+                    "cusor-pointer hover:text-red-love | transition-colors duration-300 ease-in-out"
                 )}
               >
                 {name}
