@@ -11,21 +11,21 @@ interface AddressProps {
 export const Address: React.FC<AddressProps> = ({ location, social }) => {
   return (
     <address
-      className="flex flex-col space-y-6 font-manrope w-full"
+      className="flex md:flex-row flex-col | xl:space-x-20 md:space-x-10 space-y-10 md:space-y-0 | font-manrope w-full"
       style={{ all: "initial" }}
     >
-      <div className="grid grid-cols-12">
-        <span className="col-span-4 | font-semibold">{location.title}</span>
-        <p className="col-span-8 | text-gray | whitespace-pre-line leading-primary">
+      <div className="flex md:flex-row flex-col | md:space-x-10 md:space-y-0 space-y-3">
+        <span className="font-semibold">{location.title}</span>
+        <p className="md:text-body-1 text-body-2 | text-gray--700 | whitespace-pre-line leading-primary">
           {location.address}
         </p>
       </div>
-      <div className="grid grid-cols-12">
-        <span className="col-span-4 | font-semibold">{social.title}</span>
-        <div className="flex space-x-6 col-span-8">
+      <div className="flex md:flex-row flex-col | md:space-x-10 md:space-y-0 space-y-3">
+        <span className="font-semibold">{social.title}</span>
+        <div className="flex items-start space-x-6 ">
           {social.socials.map(({ _key, icon, url }) => (
             <Link key={_key} href={url}>
-              <a>
+              <a className="">
                 <SanityImg
                   className="h-full w-full object-contain"
                   width={10}

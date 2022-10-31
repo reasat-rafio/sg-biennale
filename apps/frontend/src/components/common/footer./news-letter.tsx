@@ -1,5 +1,5 @@
 import { Cta, FooterNewsLetter } from "@lib/@types/global.types";
-import { KeyboardEvent, useRef, useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import MailchimpSubscribe from "react-mailchimp-subscribe";
 import { decode } from "html-entities";
 
@@ -11,8 +11,8 @@ export const NewsLetter: React.FC<FooterNewsLetter> = ({
   const MAILCHIMP_URL = process.env.NEXT_PUBLIC_MAILCHIMP_URL;
 
   return (
-    <section className="w-full | pb-9 | font-semibold">
-      <div className="mb-4 lg:text-left text-center">{title}</div>
+    <section className="w-full lg:absolute lg:right-0 top-0 max-w-lg | font-semibold">
+      <div className="mb-4 text-left">{title}</div>
       <MailchimpSubscribe
         url={MAILCHIMP_URL as string}
         render={(props) => {
@@ -93,12 +93,15 @@ const Form: React.FC<IForm> = ({
       >
         <input
           type="text"
-          className="flex-1 | pl-3 | bg-transparent outline-none placeholder:text-sm"
+          className="flex-1 | md:pl-3 pl-0 | bg-transparent outline-none placeholder:text-sm"
           placeholder={placeholder}
           onChange={(event) => setEmail(event?.target?.value ?? "")}
           onKeyUp={(event) => handleInputKeyEvent(event)}
         />
-        <button type="submit" className="absolute right-5 top-0 h-full">
+        <button
+          type="submit"
+          className="absolute right-5 top-0 h-full text-body-2 lg:text-body-1"
+        >
           {ctaButton.title}
         </button>
       </form>

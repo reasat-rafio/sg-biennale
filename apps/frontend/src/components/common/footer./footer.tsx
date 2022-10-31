@@ -1,52 +1,32 @@
+import { Container } from "@components/ui/container";
 import { ISite } from "@lib/@types/global.types";
-import { getShuffledArr } from "@lib/helpers/global.helpers";
-import { useWindowSize } from "@lib/hooks";
-import { imageUrlBuilder } from "@utils/sanity";
-import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { SanityImg, SanityImage } from "sanity-react-extra";
 import { Address } from "./address";
 import { NewsLetter } from "./news-letter";
 
 export const Footer: React.FC<ISite["site"]> = ({
   date,
-  footer: { header, location, newsLetter, social, kvs },
+  footer: { header, location, newsLetter, social },
 }) => {
-  const [suffledKVs, setSuffledKVs] = useState<SanityImage[]>(kvs[0]);
-
-  useEffect(() => {
-    setSuffledKVs(getShuffledArr(kvs));
-  }, []);
-  const windowWidth = useWindowSize()?.width ?? 0;
-
   return (
-    <footer
-      id="footer"
-      className="relative | grid grid-cols-12 | sm:gap-10 gap-5 xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md py-10 xl:pl-max"
-    >
-      <section className="col-span-12 lg:col-span-5 flex flex-col justify-center items-center | xl:space-y-20">
-        <header className="w-full | font-semibold">
-          <h4 className=" mb-4 | lg:text-left text-center | whitespace-pre-wrap | lg:text-heading-4 text-heading-6">
-            {header}
-          </h4>
-          <h6 className="font-manrope | lg:text-left text-center"> {date}</h6>
-        </header>
-        <NewsLetter {...newsLetter} />
-        <Address social={social} location={location} />
-      </section>
-      <section className="col-span-12 xl:col-span-6 lg:col-span-7 flex justify-center items-center ">
-        <figure
-          className={clsx("aspect-square", windowWidth < 760 && "w-full")}
-        >
-          <SanityImg
-            className="w-full max-h-[600px] aspect-square object-contain"
-            width={windowWidth >= 1280 ? 600 : windowWidth >= 768 ? 400 : 200}
-            image={suffledKVs[0] ?? kvs[0]}
-            builder={imageUrlBuilder}
-            alt={suffledKVs[0]?.alt ?? kvs[0]?.alt}
-          />
-        </figure>
-      </section>
+    <footer className="bg-[#FFFFFF] py-xl" id="footer">
+      <Container>
+        <div className="grid grid-cols-12 | xl:pb-28 md:pb-20 pb-14 md:space-y-0 space-y-10 | border-b-2 border-black">
+          <div className="col-span-12 md:col-span-6 max-w-lg | font-semibold">
+            <h4 className="mb-4 | text-left | whitespace-pre-wrap | xl:text-heading-4 text-heading-5 md:text-heading-6">
+              {header}
+            </h4>
+            <span className="font-manrope xl:text-body-1 text-body-2">
+              {date}
+            </span>
+          </div>
+          <div className="relative | col-span-12 md:col-span-6">
+            <NewsLetter {...newsLetter} />
+          </div>
+        </div>
+        <div className="pt-10">
+          <Address location={location} social={social} />
+        </div>
+      </Container>
     </footer>
   );
 };
