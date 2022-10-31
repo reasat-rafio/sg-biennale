@@ -14,10 +14,6 @@ export const NavDropdown: React.FC<ISite["site"]> = ({
 }) => {
   const { showNavDropDown } = useGlobalStore();
 
-  // useEffect(() => {
-  //   showNavDropDown ? lockBody() : unlockBody();
-  // }, [showNavDropDown]);
-
   return (
     <>
       <AnimatePresence>
