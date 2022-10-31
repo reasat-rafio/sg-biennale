@@ -25,7 +25,6 @@ export interface Footer {
   newsLetter: FooterNewsLetter;
   location: FooterLocation;
   social: FooterSocial;
-  kvs: SanityImage[];
 }
 
 export interface FooterLocation {

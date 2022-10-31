@@ -21,15 +21,6 @@ export const siteQuery = groq`{
       footer {
         ...,
         "image": ${withDimensions("image")},
-        kvs[] {
-          ..., 
-          asset->{
-            ...,
-            metadata {
-              dimensions
-            }
-          }
-        },
         social{
           ..., 
           socials[] {
