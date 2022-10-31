@@ -34,10 +34,6 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   relatedArtists,
   hideCta,
 }) => {
-  console.log("====================================");
-  console.log(hideCta);
-  console.log("====================================");
-
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
   const screenX = useMotionValue(0);
@@ -47,6 +43,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     additionalInfo ? "*" : ""
   }`;
   const formattedShortDate = format(new Date(startAt), "dd.LL");
+  const formattedTime = format(new Date(startAt), "hh:mm bbb");
 
   const x = useTransformSpring({
     value: screenX,
@@ -82,8 +79,9 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
       className={clsx("grid grid-cols-12 col-span-12 | gap-5")}
       onMouseMove={handleMouseMove}
     >
-      <div className="lg:col-span-1 col-span-12 | text-center text-2xl font-medium">
-        {formattedShortDate}
+      <div className="flex flex-col | lg:col-span-1 col-span-12 | text-center | md:space-y-3 space-y-1">
+        <span className="text-2xl font-medium">{formattedShortDate}</span>
+        <span className="text-body-2 text-gray--700">{formattedTime}</span>
       </div>
       <section className="lg:col-span-4 col-span-12 relative">
         <figure className="lg:h-[250px] md:h-[400px] h-auto">

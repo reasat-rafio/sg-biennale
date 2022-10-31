@@ -108,8 +108,8 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
   } = useProgrammesAndEventsStore();
 
   useEffect(() => {
-    setAllProgrammesAndEvents(_events);
-    setSortedProgrammesAndEvents(_events);
+    setAllProgrammesAndEvents(events);
+    setSortedProgrammesAndEvents(events);
     setAllCategories(allCategories);
     setAllVenues(allVenues);
   }, [

@@ -133,7 +133,7 @@ const ScaleUpVarian: React.FC<BackSideVariantsProps> = ({
           onClick={() => setSelectedCoArtisticDirectorId(id)}
           className="!bg-white !text-black"
         >
-          View Director
+          Read More
         </Button>
       </div>
     </motion.div>
