@@ -1,9 +1,7 @@
 import clsx from "clsx";
 import { SanityImg } from "sanity-react-extra";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import { motion, MotionValue, transform, useMotionValue } from "framer-motion";
-import { MouseEvent, useState } from "react";
-import { useTransformSpring } from "@lib/helpers/animation.helpers";
+import { motion } from "framer-motion";
 import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 import { VenueProps } from "@lib/@types/visitor-info.types";
@@ -20,12 +18,6 @@ const styles = {
   lgCard: "col-span-12 lg:col-span-6 ",
 };
 
-const physics = {
-  damping: 30,
-  stiffness: 60,
-  bounce: 0.1,
-  mass: 10,
-};
 export const VenueListCard: React.FC<VenueListCardProps> = ({
   images,
   slug,
@@ -39,9 +31,6 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
 }) => {
   const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
-  const [hovered, setHovered] = useState(false);
-  const screenX = useMotionValue(0);
-  const screenY = useMotionValue(0);
   const [descriptionRef] = usePortableTextTruncate({ maxLength: 300 });
 
   const containerStylings =
@@ -53,30 +42,6 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
       ? `${styles.lgCard} lg:col-start-7`
       : styles.lgCard;
 
-  const x = useTransformSpring({
-    value: screenX,
-    outputRange: hovered ? [-10, 60] : [0, 0],
-    physics,
-  });
-  const y = useTransformSpring({
-    value: screenY,
-    outputRange: hovered ? [-60, 20] : [0, 0],
-    physics,
-  });
-
-  const onMouseEnterAction = () => setHovered(true);
-  const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
-    const width = transform([0, window.innerWidth], [0, 1])(event.clientX);
-    const height = transform([0, window.innerHeight], [0, 1])(event.clientY);
-    screenX.set(width);
-    screenY.set(height);
-  };
-  const onMouseLeaveAction = () => {
-    x.set(0);
-    y.set(0);
-    setHovered(false);
-  };
-
   return (
     <motion.article
       layout
@@ -85,9 +50,6 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
       transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
       viewport={{ once: true }}
       className={clsx(containerStylings)}
-      onMouseEnter={onMouseEnterAction}
-      onMouseLeave={onMouseLeaveAction}
-      onMouseMove={handleMouseMove}
     >
       <div className="relative flex justify-center items-center">
         <div className="flex flex-col w-full | space-y-5">
@@ -145,37 +107,7 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
             )}
           </section>
         </div>
-        {windowWidth >= 1024 && (
-          <FLoatingDescription
-            x={x}
-            y={y}
-            hovered={hovered}
-            description={description}
-          />
-        )}
       </div>
     </motion.article>
-  );
-};
-
-const FLoatingDescription: React.FC<{
-  description: any;
-  hovered: boolean;
-  x: MotionValue<number>;
-  y: MotionValue<number>;
-}> = ({ description, hovered, x, y }) => {
-  const [descriptionRef] = usePortableTextTruncate({ maxLength: 300 });
-
-  return (
-    <motion.div
-      ref={descriptionRef}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: hovered ? 1 : 0 }}
-      style={{ x, y }}
-      transition={{ duration: 0.5, type: "tween", ease: "easeInOut" }}
-      className="absolute -left-[15%] | w-11/12 | p-5 bg-[#F8F8F8] | text-gray--700 font-manrope text-body-2 leading-[150%] rounded"
-    >
-      <PortableText blocks={description} />
-    </motion.div>
   );
 };
