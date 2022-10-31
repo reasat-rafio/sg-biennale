@@ -64,14 +64,21 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     }
   };
 
+  const [temp, setTemp] = useState(false);
   const onClickAction = (index: number) => {
-    setActiveCardIndex((prev) => (prev === index ? null : index));
-    const positionsToCheck = cardsPerView > 2 ? [1, 2] : [0, 1, 2];
-    const lastPosition = positionsToCheck.some(
-      (num) => num === index - position
-    );
-    if (position <= 0 || (lastPosition && !activeCardIndex)) paginate(1);
-    else if (lastPosition && activeCardIndex) paginate(-1);
+    if (activeCardIndex === index) {
+      setActiveCardIndex(null);
+      if (cardsPerView > 1 && temp) {
+        paginate(-1);
+        setTemp(false);
+      }
+    } else {
+      if (cardsPerView > 1 && index - position === cardsPerView - 2) {
+        paginate(1);
+        setTemp(true);
+      }
+      setActiveCardIndex(index);
+    }
   };
 
   return (
