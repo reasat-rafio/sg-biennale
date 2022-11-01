@@ -94,7 +94,7 @@ const SlideRightVariant: React.FC<BackSideVariantsProps> = ({
         </div>
         <div className="w-full">
           <Button onClick={() => setSelectedCoArtisticDirectorId(id)}>
-            View Director
+            Read More
           </Button>
         </div>
       </motion.div>
