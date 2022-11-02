@@ -8,15 +8,18 @@ import { useEffect, useState } from "react";
 import { SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
 import { Header } from "@components/ui/header";
+import { useRouter } from "next/router";
+import clsx from "clsx";
 
 export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
+  const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
   const [_partners, setPartners] = useState<ModifyedPartnersList[] | null>(
     null
   );
 
   const onClickAction = (href?: string) => {
-    if (href && typeof window !== "undefined") window.location.href = href;
+    if (href && typeof window !== "undefined") router.push(href);
   };
 
   useEffect(() => {
@@ -53,16 +56,10 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
             {data.map(({ _id, name, image, href }) => (
               <motion.figure
                 key={_id}
-                className="md:col-span-4 sm:col-span-6 col-span-12 | flex justify-center items-center | h-[255px] p-5 | bg-white  border border-gray--200 hover:border-none | overflow-hidden cursor-pointer | hover:shadow-2xl"
-                whileHover={{
-                  scaleX: 1.2,
-                  scaleY: 1.1,
-                  transition: {
-                    type: "tween",
-                    delay: 0.1,
-                    ease: "easeInOut",
-                  },
-                }}
+                className={clsx(
+                  "md:col-span-4 sm:col-span-6 col-span-12 | flex justify-center items-center | h-[255px] p-5 | bg-white  border border-gray--200 | overflow-hidden",
+                  href && "cursor-pointer"
+                )}
                 onClick={() => onClickAction(href)}
               >
                 <SanityImg
