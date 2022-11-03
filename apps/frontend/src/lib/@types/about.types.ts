@@ -1,5 +1,5 @@
 import { SanityImage } from "sanity-react-extra";
-import { Hsl, RGB, Slug } from "./global.types";
+import { Cta, Hsl, RGB, Slug } from "./global.types";
 
 export interface TeamCollection {
   _key: string;
@@ -48,4 +48,14 @@ export interface PastEditionCollection {
   url?: string;
   image: SanityImage;
   name: string;
+}
+
+export interface SponsorCollection {
+  _key: string;
+  _type: string;
+  cta: Cta;
+  description: string;
+  image: SanityImage;
+  name: string;
+  title: string;
 }

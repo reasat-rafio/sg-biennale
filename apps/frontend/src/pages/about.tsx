@@ -10,6 +10,7 @@ import { AboutUs } from "@components/about/about-us";
 import { Team } from "@components/about/team";
 import { PastEdition } from "@components/about/past-edition";
 import { Modals } from "@components/about/modals";
+import { AboutSponsors } from "@components/about/about-sponsors";
 
 const query = pageQuery(groq`
   *[_type == "aboutPage"][0]{
@@ -40,6 +41,10 @@ const query = pageQuery(groq`
               ...,
               'image': ${withDimensions("image")},
             },
+            sponsorCollection[]{
+              ...,
+              'image': ${withDimensions("image")},
+            },
             pastEditionCollection[]-> {
               ...,
               'image': ${withDimensions("image")},
@@ -66,6 +71,7 @@ const About: NextPage<SanityProps> = (props) => {
           // "aboutPage.hero": Hero,
           "aboutPage.curatorialTeam": CuratorialTeam,
           "aboutPage.team": Team,
+          "aboutPage.aboutSponsors": AboutSponsors,
           "aboutPage.about": AboutUs,
           "aboutPage.pastEdition": PastEdition,
         })}
