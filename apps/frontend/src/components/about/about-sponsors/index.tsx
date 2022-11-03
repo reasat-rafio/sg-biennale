@@ -6,6 +6,9 @@ import clsx from "clsx";
 import { SanityImg } from "sanity-react-extra";
 import { doTruncate } from "@lib/helpers/global.helpers";
 import { Button } from "@components/ui/button";
+import { useEffect } from "react";
+import useAboutStore from "@stores/about.store";
+import { motion } from "framer-motion";
 
 interface AboutSponsorsProps {
   type: string;
@@ -17,6 +20,11 @@ export const AboutSponsors: React.FC<AboutSponsorsProps> = ({
   header,
   sponsorCollection,
 }) => {
+  const { setAbouts, setSelectedAboutId, selectedAboutId } = useAboutStore();
+  useEffect(() => {
+    setAbouts(sponsorCollection);
+  }, [sponsorCollection]);
+
   return (
     <Container className="py-x">
       <Header className="py-1">{header}</Header>
@@ -25,9 +33,12 @@ export const AboutSponsors: React.FC<AboutSponsorsProps> = ({
           ({ _key, image, title, name, description, cta }) => (
             <article
               key={_key}
-              className="md:col-span-6 col-span-12 grid grid-rows-2 | lg:gap-16 gap-10"
+              className={clsx(
+                "relative | md:col-span-6 col-span-12 grid grid-rows-2 | lg:gap-16 gap-10",
+                selectedAboutId === _key && "z-30"
+              )}
             >
-              <figure>
+              <motion.figure layoutId={`about-us-card-image-${_key}`}>
                 <SanityImg
                   className="h-full w-full object-contain shadow-md"
                   image={image}
@@ -35,21 +46,32 @@ export const AboutSponsors: React.FC<AboutSponsorsProps> = ({
                   width={400}
                   alt={image.alt}
                 />
-              </figure>
+              </motion.figure>
               <section>
                 <div className="flex flex-col row-span-2 | space-y-4">
-                  <h4 className="text-gray--400 font-bold font-manrope lg:text-body-1 text-body-2">
+                  <motion.h4
+                    layoutId={`about-us-card-title-${_key}`}
+                    className="text-gray--400 font-bold font-manrope lg:text-body-1 text-body-2"
+                  >
                     {title}
-                  </h4>
-                  <h5
+                  </motion.h4>
+                  <motion.h5
+                    layoutId={`about-us-card-name-${_key}`}
                     className={"lg:text-heading-5 text-heading-6 font-semibold"}
                   >
                     {name}
-                  </h5>
-                  <p className="font-manrope text-body-1 | text-gray--700">
-                    {doTruncate(description, 150)}
-                  </p>
-                  <Button>{cta.title}</Button>
+                  </motion.h5>
+                  <motion.p
+                    layoutId={`about-us-card-description-${_key}`}
+                    className="font-manrope text-body-1 | text-gray--700"
+                  >
+                    {Boolean(description.length > 150)
+                      ? `${doTruncate(description, 150)}...`
+                      : description}
+                  </motion.p>
+                  <Button onClick={() => setSelectedAboutId(_key)}>
+                    {cta.title}
+                  </Button>
                 </div>
               </section>
             </article>

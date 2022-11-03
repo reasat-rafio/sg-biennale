@@ -9,7 +9,7 @@ import { useWindowSize } from "@lib/hooks";
 
 interface PastEditionProps {}
 
-const ContainerVariants: Variants = {
+export const ContainerVariants: Variants = {
   hidden: {
     opacity: 0,
     transition: {
