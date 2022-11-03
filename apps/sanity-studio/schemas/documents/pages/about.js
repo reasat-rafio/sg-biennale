@@ -18,6 +18,7 @@ const AboutPage = {
         { type: "aboutPage.hero" },
         { type: "aboutPage.curatorialTeam" },
         { type: "aboutPage.team" },
+        { type: "aboutPage.aboutSponsors" },
         { type: "aboutPage.about" },
         { type: "aboutPage.pastEdition" },
       ],

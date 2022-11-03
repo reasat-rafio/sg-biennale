@@ -33,6 +33,7 @@ import AboutPage from "./documents/pages/about";
 import AboutPageHero from "./objects/about/hero";
 import AboutPageAboutUs from "./objects/about/about-us";
 import AboutPagePastEditions from "./objects/about/past-edition";
+import AboutPageAboutSponsors from "./objects/about/about-sponsors";
 
 import VisitorInfoPage from "./documents/pages/visitor-info";
 import visitorInfoHero from "./objects/visitor-info/hero";
@@ -130,6 +131,7 @@ export default createSchema({
     AboutPageHero,
     AboutPageAboutUs,
     AboutPagePastEditions,
+    AboutPageAboutSponsors,
     AboutPageCuratorialTeam,
     AboutPageTeam,
 
