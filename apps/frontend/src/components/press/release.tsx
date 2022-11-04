@@ -46,7 +46,7 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
       <Header>{header}</Header>
 
       <div ref={containerRef} className="xl:columns-3 md:columns-2 columns-1">
-        {releases.map((data, index) => (
+        {releases.map((data) => (
           <motion.article
             key={data._id}
             initial="initial"

@@ -8,6 +8,8 @@ const STUDIO_REWRITE = {
       : "/studio/index.html",
 };
 
+// frame-src https://www.onemap.gov.sg;
+
 const ContentSecurityPolicy = `
   default-src 'self' https://66wl3wil.api.sanity.io;
   child-src 'none';
@@ -16,6 +18,7 @@ const ContentSecurityPolicy = `
   script-src 'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com https://www.googletagmanager.com;
   style-src 'self' 'unsafe-inline' https://www.googletagmanager.com fonts.googleapis.com; 
 `;
+
 const securityHeaders = [
   {
     key: "Content-Security-Policy",

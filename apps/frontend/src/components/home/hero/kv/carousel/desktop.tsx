@@ -11,11 +11,12 @@ interface DesktopProps {
 
 export const Desktop: React.FC<DesktopProps> = ({ kvs }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
+
   return (
     <div className="relative">
       <Swiper
         speed={600}
-        grabCursor
+        grabCursor={windowWidth >= 1024 ? kvs.length < 3 : kvs.length < 2}
         modules={[Autoplay]}
         autoplay={{ delay: 4000 }}
         slidesPerView={windowWidth >= 1024 ? 3 : 2}
