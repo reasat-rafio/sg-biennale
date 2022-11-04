@@ -11,9 +11,7 @@ interface HamburgerMenuProps {
   className?: string;
 }
 
-export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
-  className = "h-6 w-6",
-}) => {
+export const HamburgerMenu: React.FC<HamburgerMenuProps> = ({}) => {
   const [animate, setAnimation] = useState(false);
   const { showNavDropDown, setShowNavDropDown } = useGlobalStore();
 
