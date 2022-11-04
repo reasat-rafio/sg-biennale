@@ -24,11 +24,10 @@ interface ReleaseProps {
 }
 
 const CardVariants: Variants = {
-  initial: (index) => ({
+  initial: {
     scale: 0.8,
     y: "20%",
-    rotate: Math.random() < 0.5 ? -1 : 1 * index * Math.random() * 30,
-  }),
+  },
   animate: {
     scale: 1,
     y: 0,
@@ -53,7 +52,6 @@ export const Release: React.FC<ReleaseProps> = ({ header, releases }) => {
             initial="initial"
             whileInView="animate"
             variants={CardVariants}
-            custom={index}
             transition={{
               duration: 0.5,
               type: "tween",

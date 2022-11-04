@@ -26,7 +26,7 @@ export const Introduction: React.FC<IntroductionProps> = ({
       <header>
         {header.map((text, idx, allText) => (
           <AnimatedHeader
-            key={text}
+            key={text + idx}
             className="font-medium xl:text-heading-1 lg:text-heading-2 md:text-heading-3 sm:text-heading-4 text-heading-5"
             lineLength={allText.length}
             header={text}
