@@ -26,16 +26,16 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
           animate={{ scale: scroll ? 0.9 : 1 }}
           className="w-fit cursor-pointer"
         >
-          <Link href="/" passHref>
-            <motion.a className="max-h-[40px] ">
+          <Link href="/">
+            <a className="h-full w-full">
               <SanityImg
-                className="h-full w-full object-contain"
+                className="xl:max-h-[70px] md:max-h-[60px] max-h-[40px] h-full w-full object-contain"
                 image={logo}
                 builder={imageUrlBuilder}
                 width={20}
                 alt="singapore biennale 2022 logo"
               />
-            </motion.a>
+            </a>
           </Link>
         </motion.figure>
 
@@ -45,9 +45,9 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
           animate={{ scale: scroll ? 0.9 : 1 }}
         >
           <Link href="/">
-            <a className="max-h-[40px]">
+            <a className="h-full w-full">
               <SanityImg
-                className="h-full w-full object-contain"
+                className="xl:max-h-[70px] md:max-h-[60px] max-h-[40px] h-full w-full object-contain"
                 image={eventLogo}
                 builder={imageUrlBuilder}
                 width={20}

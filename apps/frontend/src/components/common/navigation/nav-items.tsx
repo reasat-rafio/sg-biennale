@@ -46,7 +46,9 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
           </Link>
         ))}
       </div>
-      <HamburgerMenu />
+      <span className="">
+        <HamburgerMenu />
+      </span>
     </motion.section>
   );
 };
