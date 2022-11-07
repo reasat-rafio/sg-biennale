@@ -1,13 +1,10 @@
-import { X } from "@components/icons/x";
-import { Container } from "@components/ui/container";
+import { ModalBackdrop } from "@components/common/modal-backdrop";
 import { SponsorCollection } from "@lib/@types/about.types";
 import { useWindowSize } from "@lib/hooks";
-import { Portal } from "@reach/portal";
 import useAboutStore from "@stores/about.store";
 import { imageUrlBuilder } from "@utils/sanity";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { SanityImg } from "sanity-react-extra";
-import { ContainerVariants } from "./past-edition";
 
 interface AboutProps {}
 
@@ -18,33 +15,12 @@ export const About: React.FC<AboutProps> = ({}) => {
   );
 
   return (
-    <Portal>
-      <AnimatePresence>
-        {selectedAboutId && (
-          <motion.div
-            initial="hidden"
-            animate="enter"
-            exit="hidden"
-            variants={ContainerVariants}
-            className="fixed min-h-screen w-screen top-0 left-0 z-50  | bg-white"
-          >
-            <motion.span
-              onClick={() => setSelectedAboutId(null)}
-              className="fixed top-10 right-10 | bg-white p-1 rounded-full  | cursor-pointer"
-              whileHover={{ scale: 1.1 }}
-            >
-              <X className="lg:h-9 lg:w-9 w-7 h-7" />
-            </motion.span>
-
-            <Container>
-              <div className="lg:flex justify-center items-center | lg:h-[80vh] h-screen lg:my-[10vh] overflow-y-auto | py-x lg:py-0 overflow-x-hidden">
-                <Content {...selectedPastEdition} />
-              </div>
-            </Container>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Portal>
+    <ModalBackdrop
+      show={Boolean(selectedAboutId)}
+      setSelectedVisible={setSelectedAboutId}
+    >
+      <Content {...selectedPastEdition} />
+    </ModalBackdrop>
   );
 };
 
@@ -58,7 +34,7 @@ const Content: React.FC<SponsorCollection> = ({
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
-    <motion.article className="grid grid-cols-12 xl:gap-20 md:gap-10 ">
+    <motion.article className="grid grid-cols-12 xl:gap-10 md:gap-5 px-5">
       <motion.figure
         layoutId={`about-us-card-image-${_key}`}
         className="col-span-6 lg:block hidden"
