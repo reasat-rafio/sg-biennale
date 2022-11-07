@@ -6,8 +6,9 @@ import useGlobalStore from "@stores/global.store";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-const RedirectIcon = dynamic(() =>
-  import("@components/icons/redirect").then((comp) => comp.RedirectIcon)
+const RedirectIcon = dynamic(
+  () => import("@components/icons/redirect").then((comp) => comp.RedirectIcon),
+  { ssr: false }
 );
 
 interface NavProps {

@@ -8,13 +8,16 @@ import { useWindowSize } from "@lib/hooks";
 import useGlobalStore from "@stores/global.store";
 import Head from "next/head";
 import { SEO } from "@components/common/seo";
-const NavDropdown = dynamic(() =>
-  import("@components/common/navigation/dropdown").then(
-    (comp) => comp.NavDropdown
-  )
+const NavDropdown = dynamic(
+  () =>
+    import("@components/common/navigation/dropdown").then(
+      (comp) => comp.NavDropdown
+    ),
+  { ssr: false }
 );
-const Footer = dynamic(() =>
-  import("@components/common/footer./footer").then((comp) => comp.Footer)
+const Footer = dynamic(
+  () => import("@components/common/footer./footer").then((comp) => comp.Footer),
+  { ssr: false }
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
