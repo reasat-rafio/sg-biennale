@@ -8,14 +8,13 @@ const STUDIO_REWRITE = {
       : "/studio/index.html",
 };
 
-// frame-src https://www.onemap.gov.sg;
-
 const ContentSecurityPolicy = `
   default-src 'self' https://66wl3wil.api.sanity.io;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com https://www.googletagmanager.com;
   child-src 'none';
+  frame-src 'self' https://www.onemap.gov.sg;
   font-src 'self' fonts.gstatic.com  data:;
   img-src 'self' cdn.sanity.io www.googletagmanager.com; 
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com https://www.googletagmanager.com;
   style-src 'self' 'unsafe-inline' https://www.googletagmanager.com fonts.googleapis.com; 
 `;
 
