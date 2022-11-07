@@ -1,4 +1,5 @@
 import { SanityImage } from "sanity-react-extra";
+import { From } from "./about.types";
 
 export interface ISite {
   site: Site;
@@ -122,4 +123,9 @@ export interface RGB {
   b: number;
   g: number;
   r: number;
+}
+
+export interface CardBackgroundGardiants {
+  from: From;
+  to: From;
 }
