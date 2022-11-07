@@ -89,8 +89,6 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
           },
           index
         ) => {
-          const firstIndex = index === 0;
-          const lastIndex = index === closestEventArr.length - 1;
           const fullWidth = (1 / cardsPerView) * 2 * 100;
           const halfWidth = (1 / cardsPerView) * 100;
           const oneCardPerView = cardsPerView === 1;
@@ -112,21 +110,13 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
             : initialPosition;
 
           useEffect(() => {
-            if (firstIndex) {
-              if (cardsPerView === 1) {
-                if (positionLeft >= 0) setDisableSwipingRight(true);
-                else if (positionLeft < 0) setDisableSwipingRight(false);
-              } else {
-                if (positionLeft >= 70 / cardsPerView)
-                  setDisableSwipingRight(true);
-                else if (positionLeft < 70 / cardsPerView)
-                  setDisableSwipingRight(false);
-              }
-            }
+            if (position === (cardsPerView - 2) * -1)
+              setDisableSwipingRight(true);
+            else setDisableSwipingRight(false);
 
-            if (lastIndex && positionLeft <= 30) setDisableSwipingLeft(true);
-            else if (lastIndex && positionLeft > 30)
-              setDisableSwipingLeft(false);
+            if (position === closestEventArr.length)
+              setDisableSwipingLeft(true);
+            else setDisableSwipingLeft(false);
           }, [positionLeft, windowWidth, cardsPerView]);
 
           return (

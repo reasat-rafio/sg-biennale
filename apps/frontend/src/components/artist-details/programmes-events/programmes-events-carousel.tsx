@@ -115,21 +115,12 @@ export const ProgrammesEventsCarousel: React.FC<
             : initialPosition;
 
           useEffect(() => {
-            if (isFirstIndex) {
-              if (cardsPerView === 1) {
-                if (positionLeft >= 0) setDisableSwipingRight(true);
-                else if (positionLeft < 0) setDisableSwipingRight(false);
-              } else {
-                if (positionLeft >= 70 / cardsPerView)
-                  setDisableSwipingRight(true);
-                else if (positionLeft < 70 / cardsPerView)
-                  setDisableSwipingRight(false);
-              }
-            }
+            if (position === (cardsPerView - 2) * -1)
+              setDisableSwipingRight(true);
+            else setDisableSwipingRight(false);
 
-            if (isLastIndex && positionLeft <= 30) setDisableSwipingLeft(true);
-            else if (isLastIndex && positionLeft > 30)
-              setDisableSwipingLeft(false);
+            if (position === relatedEvents.length) setDisableSwipingLeft(true);
+            else setDisableSwipingLeft(false);
           }, [positionLeft, windowWidth, cardsPerView]);
 
           return (
