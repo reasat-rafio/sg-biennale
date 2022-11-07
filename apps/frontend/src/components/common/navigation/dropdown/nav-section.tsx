@@ -1,16 +1,14 @@
-import { RedirectIcon } from "@components/icons/redirect";
-import { Cta, Menu } from "@lib/@types/global.types";
-import {
-  ImageVariants,
-  NevItemVariants,
-} from "@lib/helpers/nav-dropdown.helpers";
+import dynamic from "next/dynamic";
+import { Menu } from "@lib/@types/global.types";
+import { NevItemVariants } from "@lib/helpers/nav-dropdown.helpers";
 import { useWindowSize } from "@lib/hooks";
 import useGlobalStore from "@stores/global.store";
-import { imageUrlBuilder } from "@utils/sanity";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import { SanityImg, SanityImage } from "sanity-react-extra";
+const RedirectIcon = dynamic(() =>
+  import("@components/icons/redirect").then((comp) => comp.RedirectIcon)
+);
 
 interface NavProps {
   menu: Menu[];
@@ -59,25 +57,6 @@ export const NavSection: React.FC<NavProps> = ({ menu }) => {
             ))}
           </ul>
         </div>
-        {/* <AnimatePresence>
-          {showNavDropDown && (
-            <motion.figure
-              className="lg:flex hidden | flex-col justify-center items-center | lg:col-span-4 | h-[70vh] | overflow-hidden"
-              initial="initial"
-              animate="enter"
-              exit="exit"
-              variants={ImageVariants}
-            >
-              <SanityImg
-                className="h-full w-full object-contain"
-                image={image}
-                width={600}
-                builder={imageUrlBuilder}
-                alt=""
-              />
-            </motion.figure>
-          )}
-        </AnimatePresence> */}
       </div>
     </section>
   );

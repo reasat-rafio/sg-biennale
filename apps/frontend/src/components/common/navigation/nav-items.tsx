@@ -24,7 +24,7 @@ export const NavItems: React.FC<NavItemsProps> = ({ ctas }) => {
     >
       <div className="flex flex-1 | lg:space-x-4 space-x-2">
         {ctas.map(({ _key, title, href, icon }) => (
-          <Link href={href} passHref key={_key}>
+          <Link href={href} passHref key={_key} prefetch={false}>
             <motion.a
               whileHover={{
                 scale: 1.05,

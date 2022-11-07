@@ -27,8 +27,10 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
   const clickOnCardAction = (index: number) =>
     setActivehighlightCard((prev) => (prev === index ? null : index));
   const onSlideChanageAction = () => {
+    let timer;
+    clearTimeout(timer);
     setShowMaxGrayScale(false);
-    setTimeout(() => {
+    timer = setTimeout(() => {
       setShowMaxGrayScale(true);
     }, 1000);
   };
@@ -46,7 +48,7 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
           className="py-xl lg:pl-[20%]"
           modules={[Scrollbar]}
           scrollbar={{ draggable: true, dragSize: 100 }}
-          speed={2500}
+          speed={1000}
           slidesPerView="auto"
         >
           {artists.map(({ _id, images, name, countries, slug }, index) => (
@@ -55,7 +57,7 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
               className={clsx(
                 "relative aspect-square | transition-all duration-700 ease-in-out hover:grayscale-0",
                 index === activeHighlight
-                  ? "xl:w-[45%] sm:w-[55%] w-[100%] xl:-translate-y-[12%] sm:-translate-y-[10%] | sm:px-5"
+                  ? "xl:w-[45%] sm:w-[55%] w-[100%] xl:-translate-y-[12%] sm:-translate-y-[10%] | sm:px-5 | will-change-transform"
                   : "xl:w-[35%] sm:w-[45%] w-[100%] | px-3",
                 index === activeHighlight
                   ? "grayscale-0"
@@ -68,7 +70,7 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
               <figure className="h-full w-full overflow-hidden">
                 <SanityImg
                   className={clsx(
-                    "h-full w-full object-cover aspect-square | transition-all duration-500 ease-in-out | ",
+                    "h-full w-full object-cover aspect-square | transition-transform duration-500 ease-in-out | will-change-transform",
                     index === activeHighlight ? "scale-110" : "scale-100"
                   )}
                   image={images[0]}
@@ -76,7 +78,7 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
                   height={
                     windowWidth >= 1024 ? 400 : windowWidth >= 640 ? 250 : 120
                   }
-                  alt=""
+                  alt={name}
                 />
               </figure>
               <section

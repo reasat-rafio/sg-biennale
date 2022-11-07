@@ -32,13 +32,14 @@ export const NavDropdown: React.FC<ISite["site"]> = ({
           </motion.div>
         )}
       </AnimatePresence>
-      <BrightAnimatedBackGround />
+      <BrightAnimatedBackGround showNavDropDown={showNavDropDown} />
     </>
   );
 };
 
-const BrightAnimatedBackGround: React.FC<{}> = () => {
-  const { showNavDropDown } = useGlobalStore();
+const BrightAnimatedBackGround: React.FC<{ showNavDropDown: boolean }> = ({
+  showNavDropDown,
+}) => {
   return (
     <AnimatePresence>
       {showNavDropDown && (
@@ -47,7 +48,7 @@ const BrightAnimatedBackGround: React.FC<{}> = () => {
           animate="enter"
           exit="exit"
           variants={ContainerBrightBackgroundVariants}
-          className="z-20 fixed top-0 left-0 | w-screen | bg-red-love"
+          className="z-20 fixed top-0 left-0 | w-screen | bg-red-love | will-change-transform"
         />
       )}
     </AnimatePresence>

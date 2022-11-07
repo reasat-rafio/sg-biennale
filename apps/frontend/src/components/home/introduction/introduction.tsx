@@ -14,7 +14,7 @@ interface IntroductionProps {
 
 export const Introduction: React.FC<IntroductionProps> = ({
   header,
-  collection,
+  // collection,
   subtitle,
   description,
 }) => {

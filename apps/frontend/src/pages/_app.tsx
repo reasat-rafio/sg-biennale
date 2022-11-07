@@ -1,14 +1,21 @@
+import dynamic from "next/dynamic";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Navbar } from "@components/common/navigation/navbar";
-import { Footer } from "@components/common/footer./footer";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useWindowSize } from "@lib/hooks";
 import useGlobalStore from "@stores/global.store";
 import Head from "next/head";
 import { SEO } from "@components/common/seo";
-import { NavDropdown } from "@components/common/navigation/dropdown";
+const NavDropdown = dynamic(() =>
+  import("@components/common/navigation/dropdown").then(
+    (comp) => comp.NavDropdown
+  )
+);
+const Footer = dynamic(() =>
+  import("@components/common/footer./footer").then((comp) => comp.Footer)
+);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { addFooterHeight, addNavbarHeight, setShowNavDropDown } =
@@ -24,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     const footerHeight = document.querySelector("#footer")?.clientHeight!!;
     addNavbarHeight(navbarHeight);
     addFooterHeight(footerHeight);
-  }, [windowWidth, addFooterHeight, addNavbarHeight]);
+  }, [windowWidth]);
 
   useEffect(() => {
     setShowNavDropDown(false);

@@ -22,11 +22,12 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
     >
       <div className="grid grid-cols-2">
         <motion.figure
-          initial={{ scale: 1 }}
+          initial={false}
           animate={{ scale: scroll ? 0.9 : 1 }}
+          transition={{ type: "tween" }}
           className="w-fit cursor-pointer"
         >
-          <Link href="/">
+          <Link href="/" prefetch={false}>
             <a className="h-full w-full">
               <SanityImg
                 className="xl:max-h-[70px] md:max-h-[60px] max-h-[40px] h-full w-full object-contain"
@@ -41,10 +42,11 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
 
         <motion.figure
           className="w-fit ml-auto"
-          initial={{ scale: 1 }}
+          initial={false}
           animate={{ scale: scroll ? 0.9 : 1 }}
+          transition={{ type: "tween" }}
         >
-          <Link href="/">
+          <Link href="/" prefetch={false}>
             <a className="h-full w-full">
               <SanityImg
                 className="xl:max-h-[70px] md:max-h-[60px] max-h-[40px] h-full w-full object-contain"
