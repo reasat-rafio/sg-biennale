@@ -1,7 +1,7 @@
 import { RedirectIconVariant } from "@lib/helpers/nav-dropdown.helpers";
 import { motion } from "framer-motion";
 
-interface RedirectProps {
+export interface RedirectProps {
   triggerAnimation: boolean;
 }
 

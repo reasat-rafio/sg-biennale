@@ -5,9 +5,10 @@ import { useWindowSize } from "@lib/hooks";
 import useGlobalStore from "@stores/global.store";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
-const RedirectIcon = dynamic(
-  () => import("@components/icons/redirect").then((comp) => comp.RedirectIcon),
+import { Suspense, useState } from "react";
+import { RedirectProps } from "@components/icons/redirect";
+const RedirectIcon = dynamic<RedirectProps>(
+  () => import("@components/icons/redirect").then((mod) => mod.RedirectIcon),
   { ssr: false }
 );
 
@@ -51,8 +52,9 @@ export const NavSection: React.FC<NavProps> = ({ menu }) => {
                       {title}
                     </a>
                   </Link>
-
+                  {/* <Suspense fallback={null}> */}
                   <RedirectIcon triggerAnimation={hoveredIdx === index} />
+                  {/* </Suspense> */}
                 </motion.span>
               </motion.li>
             ))}
