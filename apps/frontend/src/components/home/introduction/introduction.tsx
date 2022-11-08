@@ -1,8 +1,8 @@
 import { AnimatedHeader } from "@components/ui/animated-component/animated-header";
 import { Container } from "@components/ui/container";
 import { IntroCarouselProps } from "@lib/@types/home.types";
-import { Description } from "./description";
-import { IntroCarousel } from "./intro-carousel";
+import { DescriptionBlock } from "./description-block";
+// import { IntroCarousel } from "./intro-carousel";
 
 interface IntroductionProps {
   type: string;
@@ -37,7 +37,7 @@ export const Introduction: React.FC<IntroductionProps> = ({
 
       <div className="">
         {/* <IntroCarousel collection={collection} /> */}
-        <Description subtitle={subtitle} description={description} />
+        <DescriptionBlock subtitle={subtitle} description={description} />
       </div>
     </Container>
   );
