@@ -14,7 +14,7 @@ export const FooterCta: React.FC<FooterCtaProps> = ({ menu }) => {
     <Container className="flex items-center lg:flex-row flex-col | py-5 | border-y-2 border-black">
       <div className="flex flex-1 flex-wrap lg:justify-start justify-center | lg:space-x-4 space-x-2 | font-medium ">
         {menu?.map(({ _key, title, slug }) => (
-          <Link key={_key} href={`${slug.current}`}>
+          <Link key={_key} href={`${slug.current}`} prefetch={false}>
             <a>{title}</a>
           </Link>
         ))}

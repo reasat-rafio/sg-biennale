@@ -39,7 +39,7 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   return (
-    <Link href={`artists/${slug.current}`} passHref>
+    <Link href={`artists/${slug.current}`} passHref prefetch={false}>
       <motion.a
         layout
         initial={{ opacity: 0 }}

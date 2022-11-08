@@ -22,8 +22,7 @@ const Footer = dynamic<ISite["site"]>(
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { addFooterHeight, addNavbarHeight, setShowNavDropDown } =
-    useGlobalStore();
+  const { addNavbarHeight } = useGlobalStore();
   const windowWidth = useWindowSize()?.width ?? 0;
 
   const router = useRouter();
@@ -32,14 +31,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   /* 🔎 @Reason: To find out the additional page height */
   useEffect(() => {
     const navbarHeight = document.querySelector("#navbar")?.clientHeight!!;
-    const footerHeight = document.querySelector("#footer")?.clientHeight!!;
     addNavbarHeight(navbarHeight);
-    addFooterHeight(footerHeight);
   }, [windowWidth]);
-
-  useEffect(() => {
-    setShowNavDropDown(false);
-  }, [router.pathname]);
 
   return (
     <>

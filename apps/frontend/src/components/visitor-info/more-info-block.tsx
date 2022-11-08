@@ -32,7 +32,7 @@ export const MoreInfoBlock: React.FC<MoreInfoBlockProps> = ({
       <h6 className="text-xl font-semibold | mr-auto py-1">{title}</h6>
       <p className="text-lg whitespace-pre-wrap">{description}</p>
       {cta?.href && (
-        <Link href={cta?.href ?? "/"}>
+        <Link href={cta?.href ?? "/"} prefetch={false}>
           <a className="flex | border border-black | mr-auto px-2 py-1 | text-sm | rounded-3xl">
             {cta?.title}
           </a>

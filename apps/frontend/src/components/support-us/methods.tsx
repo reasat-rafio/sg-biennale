@@ -20,7 +20,7 @@ export const Methods: React.FC<MethodsProps> = ({ methods }) => {
         >
           <h5 className="text-xl font-medium">{title}</h5>
           <p className="font-medium | text-lg">{description}</p>
-          <Link href={cta.href}>
+          <Link href={cta.href} prefetch={false}>
             <a className="px-4 py-1 | text-xl | border-2 border-black | rounded-3xl">
               {cta.title}
             </a>

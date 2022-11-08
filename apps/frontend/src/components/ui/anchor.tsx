@@ -16,7 +16,7 @@ export const Anchor: React.FC<AnchorProps> = ({
   onClick,
 }) => {
   return (
-    <Link href={href ?? "/"}>
+    <Link href={href ?? "/"} prefetch={false}>
       <a
         onClick={onClick}
         className={clsx(

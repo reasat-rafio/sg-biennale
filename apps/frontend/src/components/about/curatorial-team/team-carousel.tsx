@@ -1,9 +1,14 @@
+import dynamic from "next/dynamic";
 import { TeamCollection } from "@lib/@types/about.types";
 import { useWindowSize } from "@lib/hooks";
 import { motion, Point } from "framer-motion";
 import { useEffect, useState } from "react";
-import { BackSide } from "./back-side";
 import { FrontSide } from "./front-side";
+import { BackSideProps } from "./back-side";
+const BackSide = dynamic<BackSideProps>(
+  () => import("./back-side").then((com) => com.BackSide),
+  { ssr: false }
+);
 
 interface TeamCarouselProps {
   teamCollection: TeamCollection[];

@@ -47,7 +47,7 @@ export const NavSection: React.FC<NavProps> = ({ menu }) => {
                   onMouseLeave={() => setHoveredIdx(null)}
                   onClick={() => setShowNavDropDown(false)}
                 >
-                  <Link href={`/${slug.current}`}>
+                  <Link href={`/${slug.current}`} prefetch={false}>
                     <a className="2xl:text-[3rem] xl:text-[2.8rem] md:text-heading-5 text-heading-6 font-medium sm:py-1">
                       {title}
                     </a>

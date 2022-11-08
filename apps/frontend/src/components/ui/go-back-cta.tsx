@@ -7,7 +7,7 @@ export const GoBack: React.FC<{ title: string; href: string }> = ({
 }) => {
   return (
     <div className="flex">
-      <Link href={href}>
+      <Link href={href} prefetch={false}>
         <a className="flex items-center | space-x-2 | text-sm | border-t border-black">
           <ArrowNarrowLeft />
           <span> {title}</span>

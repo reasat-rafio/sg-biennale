@@ -34,7 +34,7 @@ export const Information: React.FC<InformationProps> = ({
       </div>
       <ul className="flex flex-wrap items-center sm:justify-start justify-center space-x-4">
         {socials.map(({ _key, icon, url, name }) => (
-          <Link href={url} passHref key={_key}>
+          <Link href={url} passHref key={_key} prefetch={false}>
             <motion.a
               whileHover={{
                 scale: 1.05,

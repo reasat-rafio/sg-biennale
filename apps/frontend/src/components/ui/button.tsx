@@ -43,7 +43,7 @@ export const Button: React.FC<ButtonProps> = ({
         </button>
       )}
       {type === "href" && (
-        <Link href={href ?? "/"}>
+        <Link href={href ?? "/"} prefetch={false}>
           <a className={clsx(defaultStyles, variantStyles[variant], "")}>
             {children}
             {icon && icon}

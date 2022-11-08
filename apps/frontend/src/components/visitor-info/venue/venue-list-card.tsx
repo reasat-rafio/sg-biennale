@@ -67,7 +67,7 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
             )}
           </figure>
           <section className="flex flex-col | space-y-5">
-            <Link href={`/venue/${slug.current}`}>
+            <Link href={`/venue/${slug.current}`} prefetch={false}>
               <a className="font-medium text-heading-6 leading-[125%] | cursor-pointer hover:text-red-love | transition-colors duration-500">
                 {name}
               </a>

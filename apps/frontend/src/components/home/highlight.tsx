@@ -70,7 +70,7 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 | text-white hover:scale-105 | cursor-pointer | transition-transform duration-300"
                 onClick={(e) => e.stopPropagation()}
               >
-                <Link href={`/artists/${slug.current}`}>
+                <Link href={`/artists/${slug.current}`} prefetch={false}>
                   <a>
                     <h6 className="font-bold lg:text-[24px] text-base">
                       {name}

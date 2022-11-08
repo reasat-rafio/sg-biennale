@@ -6,7 +6,7 @@ import { PortableText } from "@utils/sanity";
 import clsx from "clsx";
 import { motion, Variants } from "framer-motion";
 
-interface BackSideProps {
+export interface BackSideProps {
   description: string;
   slug: Slug;
   cardsPerView: number;
