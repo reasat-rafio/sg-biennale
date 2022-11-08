@@ -20,20 +20,11 @@ interface HighLightProps {
 
 export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
-  const [showMaxGrayGrayScale, setShowMaxGrayScale] = useState(true);
   const [activeHighlight, setActivehighlightCard] = useState<number | null>(
     null
   );
   const clickOnCardAction = (index: number) =>
     setActivehighlightCard((prev) => (prev === index ? null : index));
-  const onSlideChanageAction = () => {
-    let timer;
-    clearTimeout(timer);
-    setShowMaxGrayScale(false);
-    timer = setTimeout(() => {
-      setShowMaxGrayScale(true);
-    }, 1000);
-  };
 
   return (
     <section>
@@ -44,7 +35,6 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
       <div className="highlightCarousel py-xl">
         <Swiper
           grabCursor
-          onSlideChange={onSlideChanageAction}
           className="py-xl lg:pl-[20%]"
           modules={[Scrollbar]}
           scrollbar={{ draggable: true, dragSize: 100 }}
@@ -54,18 +44,13 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
           {artists.map(({ _id, images, name, countries, slug }, index) => (
             <SwiperSlide
               key={_id}
+              onClick={() => clickOnCardAction(index)}
               className={clsx(
-                "relative aspect-square | transition-all duration-700 ease-in-out hover:grayscale-0",
+                "relative aspect-square | transition-all duration-700 ease-in-out",
                 index === activeHighlight
                   ? "xl:w-[45%] sm:w-[55%] w-[100%] xl:-translate-y-[12%] sm:-translate-y-[10%] | sm:px-5 | will-change-transform"
-                  : "xl:w-[35%] sm:w-[45%] w-[100%] | px-3",
-                index === activeHighlight
-                  ? "grayscale-0"
-                  : showMaxGrayGrayScale
-                  ? "grayscale"
-                  : "grayscale-0"
+                  : "xl:w-[35%] sm:w-[45%] w-[100%] | px-3"
               )}
-              onClick={() => clickOnCardAction(index)}
             >
               <figure className="h-full w-full overflow-hidden">
                 <SanityImg
