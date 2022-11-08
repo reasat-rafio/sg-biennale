@@ -14,8 +14,8 @@ interface PageHeaderProps {
 }
 
 const styles = {
-  primary: "xl:text-heading-4 text-heading-5",
-  secondary: "xl:text-heading-6 text-[24px]",
+  primary: "xl:text-heading-4 text-heading-5 py-1",
+  secondary: "xl:text-heading-6 text-[24px] py-1",
 };
 export const Header: React.FC<PageHeaderProps> = ({
   type = "h4",

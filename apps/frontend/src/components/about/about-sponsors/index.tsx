@@ -27,7 +27,7 @@ export const AboutSponsors: React.FC<AboutSponsorsProps> = ({
 
   return (
     <Container className="py-x">
-      <Header className="py-1">{header}</Header>
+      <Header>{header}</Header>
       <div className="grid grid-cols-12 | mt-xl lg:gap-x-[9%] md:gap-x-[5%] md:gap-y-0 gap-y-10 ">
         {sponsorCollection.map(
           ({ _key, image, title, name, description, cta }) => (
