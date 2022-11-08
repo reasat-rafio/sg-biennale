@@ -30,7 +30,7 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
           <Link href="/" prefetch={false}>
             <a className="h-full w-full">
               <SanityImg
-                className="xl:max-h-[70px] md:max-h-[60px] max-h-[40px] h-full w-full object-contain"
+                className="xl:h-[70px] md:h-[60px] h-[40px] w-full object-contain"
                 image={logo}
                 builder={imageUrlBuilder}
                 width={20}
@@ -49,7 +49,7 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
           <Link href="/" prefetch={false}>
             <a className="h-full w-full">
               <SanityImg
-                className="xl:max-h-[70px] md:max-h-[60px] max-h-[40px] h-full w-full object-contain"
+                className="xl:h-[70px] md:h-[60px] h-[40px] w-full object-contain"
                 image={eventLogo}
                 builder={imageUrlBuilder}
                 width={20}
