@@ -32,7 +32,7 @@ export const HighLight: React.FC<HighLightProps> = ({ title, artists }) => {
         <Header>{title}</Header>
       </Container>
 
-      <div className="highlightCarousel py-xl">
+      <div className="highlightCarousel md:py-xl">
         <Swiper
           grabCursor
           className="py-xl lg:pl-[20%]"
