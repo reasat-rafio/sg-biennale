@@ -25,7 +25,7 @@ export const Address: React.FC<AddressProps> = ({ location, social }) => {
         <div className="flex items-start space-x-6 ">
           {social.socials.map(({ _key, icon, url }) => (
             <Link key={_key} href={url} prefetch={false}>
-              <a className="">
+              <a className="sm:w-7 sm:h-7 h-6 w-6">
                 <SanityImg
                   className="h-full w-full object-contain"
                   width={10}
