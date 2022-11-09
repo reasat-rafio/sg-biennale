@@ -20,44 +20,47 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
       }}
       className="relative z-40 | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto"
     >
-      <div className="grid grid-cols-2">
-        <motion.figure
-          initial={false}
-          animate={{ scale: scroll ? 0.9 : 1 }}
-          transition={{ type: "tween" }}
-          className="w-fit cursor-pointer"
-        >
-          <Link href="/" prefetch={false}>
-            <a className="h-full w-full">
-              <SanityImg
-                className="xl:h-[70px] md:h-[60px] h-[40px] w-full object-contain"
-                image={logo}
-                builder={imageUrlBuilder}
-                width={20}
-                alt="singapore biennale 2022 logo"
-              />
-            </a>
+      <div className="grid grid-cols-12 gap-2">
+        <figure className="col-span-6 flex">
+          <Link href="/" prefetch={false} passHref>
+            <motion.a className="xl:h-[70px] md:h-[60px] h-[40px] w-full | flex justify-start">
+              <motion.figure
+                className="h-full w-fit"
+                initial={false}
+                animate={{ scale: scroll ? 0.9 : 1, originX: 0 }}
+                transition={{ type: "tween" }}
+              >
+                <SanityImg
+                  className="h-full w-fit object-contain"
+                  image={logo}
+                  builder={imageUrlBuilder}
+                  width={20}
+                  alt="singapore biennale 2022 logo"
+                />
+              </motion.figure>
+            </motion.a>
           </Link>
-        </motion.figure>
-
-        <motion.figure
-          className="w-fit ml-auto"
-          initial={false}
-          animate={{ scale: scroll ? 0.9 : 1 }}
-          transition={{ type: "tween" }}
-        >
-          <Link href="/" prefetch={false}>
-            <a className="h-full w-full">
-              <SanityImg
-                className="xl:h-[70px] md:h-[60px] h-[40px] w-full object-contain"
-                image={eventLogo}
-                builder={imageUrlBuilder}
-                width={20}
-                alt="natasha"
-              />
-            </a>
+        </figure>
+        <div className="col-span-6 flex">
+          <Link href="/" prefetch={false} passHref>
+            <motion.a className="xl:h-[70px] md:h-[60px] h-[40px] w-full | flex justify-end">
+              <motion.figure
+                className="h-full w-fit"
+                initial={false}
+                animate={{ scale: scroll ? 0.9 : 1, originX: 1 }}
+                transition={{ type: "tween" }}
+              >
+                <SanityImg
+                  className="h-full w-fit object-contain"
+                  image={eventLogo}
+                  builder={imageUrlBuilder}
+                  width={20}
+                  alt="natasha"
+                />
+              </motion.figure>
+            </motion.a>
           </Link>
-        </motion.figure>
+        </div>
       </div>
     </motion.section>
   );
