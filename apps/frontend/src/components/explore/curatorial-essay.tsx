@@ -1,18 +1,17 @@
 import { Container } from "@components/ui/container";
 import { imageUrlBuilder } from "@utils/sanity";
-import { useRouter } from "next/router";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { Button } from "@components/ui/button";
-import { useEffect, useRef, useState } from "react";
-import { useIntersection, useWindowSize } from "@lib/hooks";
-import { Slug } from "@lib/@types/global.types";
+import { useEffect, useState } from "react";
+import { useWindowSize } from "@lib/hooks";
 import { Header } from "@components/ui/header";
+import Link from "next/link";
 
 interface EssayProps {
   _id: string;
   header: string;
-  slug: Slug;
+  url: string;
   author: string;
   images: SanityImage[];
   description: string;
@@ -43,11 +42,6 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   curatorialEssays,
 }) => {
   const [page, setPage] = useState(1);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const interseciton = useIntersection(containerRef, {
-    threshold: 0.2,
-  })?.isIntersecting;
-
   const [sortedCuratorialEssays, setCuratorialEssays] = useState(
     curatorialEssays.slice(0, cardsPerPage)
   );
@@ -63,7 +57,8 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
 
   return (
     <Container type="section" className="lg:py-max py-x">
-      <div ref={containerRef}>
+      all
+      <div>
         <motion.header
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -122,36 +117,36 @@ const ItemVariant: Variants = {
   },
 };
 
-const Essay: React.FC<EssayProps> = ({ header, author, images }) => {
-  // const router = useRouter();
-  // const onClickAction = () => router.push(url);
-
+const Essay: React.FC<EssayProps> = ({ header, author, images, url }) => {
   const windwoWidth = useWindowSize()?.width ?? 0;
 
   return (
-    <motion.article
-      className="xl:col-span-4 md:col-span-6 col-span-12 space-y-5 | cursor-pointer group"
-      variants={ItemVariant}
-      // onClick={onClickAction}
-    >
-      <figure className="aspect-video overflow-hidden">
-        <SanityImg
-          className="h-full w-full object-cover | group-hover:scale-110 | transition-all duration-500"
-          image={images[0]}
-          width={windwoWidth >= 1280 ? 300 : windwoWidth >= 768 ? 250 : 200}
-          builder={imageUrlBuilder}
-          alt={header}
-        />
-      </figure>
-      <header className="flex flex-col space-y-6">
-        <h6 className="font-medium lg:text-heading-6 text-2xl | lg:leading-[125%] | group-hover:text-red-love | transition-all duration-500">
-          {header}
-        </h6>
-        {/* <Heade */}
-        <span className="text-gray--400 font-manrope font-bold lg:text-body-1 text-body-2">
-          {author}
-        </span>
-      </header>
-    </motion.article>
+    <Link href={url ?? ""} prefetch={false} passHref>
+      <motion.a
+        className="xl:col-span-4 md:col-span-6 col-span-12 space-y-5 | cursor-pointer group"
+        variants={ItemVariant}
+      >
+        <article>
+          <figure className="aspect-video overflow-hidden">
+            <SanityImg
+              className="h-full w-full object-cover"
+              image={images[0]}
+              width={windwoWidth >= 1280 ? 300 : windwoWidth >= 768 ? 250 : 200}
+              builder={imageUrlBuilder}
+              alt={header}
+            />
+          </figure>
+          <header className="flex flex-col space-y-6">
+            <h6 className="font-medium lg:text-heading-6 text-2xl | lg:leading-[125%] | group-hover:text-red-love | transition-colors duration-500">
+              {header}
+            </h6>
+            {/* <Heade */}
+            <span className="text-gray--400 font-manrope font-bold lg:text-body-1 text-body-2">
+              {author}
+            </span>
+          </header>
+        </article>
+      </motion.a>
+    </Link>
   );
 };

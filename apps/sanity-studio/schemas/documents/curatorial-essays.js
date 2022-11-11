@@ -12,11 +12,8 @@ const CuratorialEssay = {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "slug",
-      type: "slug",
-      options: {
-        source: (doc) => doc.header,
-      },
+      name: "url",
+      type: "url",
       validation: (Rule) => Rule.required(),
     },
     {

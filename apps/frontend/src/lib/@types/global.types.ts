@@ -129,3 +129,23 @@ export interface CardBackgroundGardiants {
   from: From;
   to: From;
 }
+
+export interface FileProps {
+  _type: string;
+  asset: {
+    _createdAt: Date;
+    _id: string;
+    _rev: string;
+    _type: string;
+    _updatedAt: Date;
+    assetId: string;
+    extension: string;
+    mimeType: string;
+    originalFilename: string;
+    path: string;
+    sha1hash: string;
+    size: number;
+    uploadId: string;
+    url: string;
+  };
+}

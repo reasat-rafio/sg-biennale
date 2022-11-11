@@ -12,12 +12,8 @@ const PublicationsCatalogue = {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "slug",
-      type: "slug",
-      options: {
-        source: (doc) => doc.header,
-      },
-      validation: (Rule) => Rule.required(),
+      name: "url",
+      type: "url",
     },
     {
       name: "author",

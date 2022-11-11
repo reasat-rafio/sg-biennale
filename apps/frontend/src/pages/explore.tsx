@@ -23,6 +23,10 @@ const query = groq`{
               slug,
               author,
               description,
+              file {
+                ...,
+                asset->
+              },
               images[] {
                 ..., 
                 asset->{
@@ -42,7 +46,7 @@ const query = groq`{
   "curatorialEssays": *[_type == "curatorialEssay"][]{
     _id,
     header,
-    slug,
+    url,
     author,
     description,
     images[] {
