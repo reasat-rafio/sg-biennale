@@ -1,7 +1,7 @@
 import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
 import { useWindowSize } from "@lib/hooks";
 import { motion, Point } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Backside } from "./backside";
 import { FrontSide } from "./font-side";
 
@@ -39,7 +39,10 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
   const [disableSwipingLeft, setDisableSwipingLeft] = useState<boolean>(false);
   const [cardsPerView, setCardsperView] = useState(3);
 
-  const gapInPixel = windowWidth >= 1024 ? 25 : windowWidth >= 720 ? 15 : 0;
+  const gapInPixel = useMemo(
+    () => (windowWidth >= 1024 ? 25 : windowWidth >= 720 ? 15 : 0),
+    [cardsPerView, windowWidth]
+  );
 
   useEffect(() => {
     if (windowWidth >= 1280) setCardsperView(3);
@@ -89,25 +92,42 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
           },
           index
         ) => {
-          const fullWidth = (1 / cardsPerView) * 2 * 100;
-          const halfWidth = (1 / cardsPerView) * 100;
+          const fullWidth = useMemo(
+            () => (1 / cardsPerView) * 2 * 100,
+            [position, cardsPerView]
+          );
+          const halfWidth = useMemo(
+            () => (1 / cardsPerView) * 100,
+            [position, cardsPerView]
+          );
           const oneCardPerView = cardsPerView === 1;
-          const cardWidth = oneCardPerView
-            ? `${halfWidth}%`
-            : index === activeCardIndex
-            ? `${fullWidth}%`
-            : `${halfWidth}%`;
+          const cardWidth = useMemo(
+            () =>
+              oneCardPerView
+                ? `${halfWidth}%`
+                : index === activeCardIndex
+                ? `${fullWidth}%`
+                : `${halfWidth}%`,
+            [position, activeCardIndex, cardsPerView]
+          );
 
-          const initialPosition =
-            (index + 1 - position) *
-            ((1 / (Math.max(cardsPerView, 2) - 1)) *
-              ((100 / cardsPerView) * (Math.max(cardsPerView, 2) - 1)));
+          const initialPosition = useMemo(
+            () =>
+              (index + 1 - position) *
+              ((1 / (Math.max(cardsPerView, 2) - 1)) *
+                ((100 / cardsPerView) * (Math.max(cardsPerView, 2) - 1))),
+            [position, activeCardIndex, cardsPerView]
+          );
 
-          const positionLeft = oneCardPerView
-            ? initialPosition
-            : activeCardIndex !== null && activeCardIndex < index
-            ? initialPosition + (1 / cardsPerView) * 100
-            : initialPosition;
+          const positionLeft = useMemo(
+            () =>
+              oneCardPerView
+                ? initialPosition
+                : activeCardIndex !== null && activeCardIndex < index
+                ? initialPosition + (1 / cardsPerView) * 100
+                : initialPosition,
+            [position, activeCardIndex, cardsPerView]
+          );
 
           useEffect(() => {
             if (position === (cardsPerView - 2) * -1)

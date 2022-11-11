@@ -9,6 +9,7 @@ import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
 import { Header } from "@components/ui/header";
 import { Button } from "@components/ui/button";
+import Link from "next/link";
 
 interface ProgrammeEventListCardProps extends IPgrammeEvents {
   index: number;
@@ -33,6 +34,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   additionalInfo,
   relatedArtists,
   hideCta,
+  _id,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
@@ -108,14 +110,13 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
         onMouseLeave={onMouseLeaveAction}
       >
         <div className="flex flex-col space-y-5">
-          <Header
-            type="a"
-            href={`/programmes-events/${slug.current}`}
-            className="cursor-pointer | hover:text-red-love | transition-colors duration-500 p-1"
-            variant="secondary"
-          >
-            {title}
-          </Header>
+          <h6>
+            <Link href={`/programmes-events/${slug.current}`} prefetch={false}>
+              <a className="cursor-pointer | hover:text-red-love | transition-colors duration-500 p-1 | xl:text-heading-6 text-[24px] py-1 font-medium">
+                {title}
+              </a>
+            </Link>
+          </h6>
 
           <div className="flex flex-col space-y-2">
             <div className="flex space-x-10 | text-body-2">

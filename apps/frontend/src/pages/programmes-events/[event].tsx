@@ -13,7 +13,6 @@ import {
 } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
-import { useRouter } from "next/router";
 
 const query = pageQuery(groq`
     *[_type == "events" && slug.current == $event][0]{

@@ -32,7 +32,7 @@ export const Header: React.FC<PageHeaderProps> = ({
   return (
     <>
       {type === "a" ? (
-        <Link href={href ?? "/"} prefetch={false}>
+        <Link href={href ?? "/"} prefetch={false} passHref>
           <a
             style={{ color, fontWeight }}
             className={clsx("overflow-hidden", className, styles[variant])}
