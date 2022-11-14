@@ -26,7 +26,6 @@ export interface Organisation {
   _key: string;
   type: string;
   logo: SanityImage;
-  name: string;
   title: string;
   url?: string;
 }

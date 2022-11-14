@@ -21,11 +21,6 @@ const HomeOrganisations = {
               validation: (Rule) => Rule.required(),
             },
             {
-              name: "name",
-              type: "string",
-              validation: (Rule) => Rule.required(),
-            },
-            {
               name: "logo",
               type: "image",
               fields: [
@@ -46,7 +41,6 @@ const HomeOrganisations = {
           preview: {
             select: {
               title: "title",
-              subtitle: "name",
               media: "logo",
             },
           },

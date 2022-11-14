@@ -27,7 +27,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
         viewport={{ once: true }}
         className="grid grid-cols-12 lg:gap-16 sm:gap-10 gap-4"
       >
-        {organisations.map(({ _key, logo, name, title, url }) => (
+        {organisations.map(({ _key, logo, title, url }) => (
           <article
             key={_key}
             className="grid grid-rows-6 xl:col-span-4 sm:col-span-6 col-span-12 | space-y-2 sm:space-y-5"
@@ -36,16 +36,6 @@ export const Organisations: React.FC<OrganisationProps> = ({
               <h4 className="text-gray--400 font-bold font-manrope lg:text-body-1 text-body-2">
                 {title}
               </h4>
-              <h5
-                onClick={() => url && router.push(url)}
-                className={clsx(
-                  "lg:text-heading-5 text-heading-6 font-semibold",
-                  url &&
-                    "cusor-pointer hover:text-red-love | transition-colors duration-300 ease-in-out"
-                )}
-              >
-                {name}
-              </h5>
             </section>
             <figure className="row-span-4">
               <SanityImg
