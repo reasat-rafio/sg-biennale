@@ -18,7 +18,7 @@ function SitePreview({ document, options }) {
       src={`${
         process.env.SANITY_STUDIO_PREVIEW_URL ?? "http://localhost:3000"
       }/api/preview?secret=${process.env.SANITY_STUDIO_PREVIEW_TOKEN}&slug=${
-        options?.slug
+        options.slug
       }`}
       style={{ width: "100%", height: "100%", border: 0 }}
     />
@@ -67,7 +67,7 @@ const deskStructure = () =>
                 schemaType: "visitorInfoPage",
                 id: "visitorInfoPage",
                 title: "Visitor Info",
-                slug: "",
+                slug: "visitor-info",
               }),
               pageItem({
                 schemaType: "pressPage",
