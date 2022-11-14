@@ -9,12 +9,11 @@ import { Button } from "@components/ui/button";
 
 export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
   return (
-    <Container className="xl:py-xxl lg:py-xl py-section | overflow-hidden">
+    <Container className="xl:pt-xxl lg:pt-xl pt-section | overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 2 }}
-        viewport={{ margin: "-30%", once: true }}
         className="grid grid-cols-12 | lg:gap-10 gap-5"
       >
         {moreInfos.map(({ _key, title, subtitle, description, image, cta }) =>

@@ -1,4 +1,4 @@
-import { FcInfo } from "react-icons/fc";
+import { FcInfo, FcAddImage } from "react-icons/fc";
 
 const VisitorInfoPage = {
   name: "visitorInfoPage",
@@ -13,6 +13,7 @@ const VisitorInfoPage = {
       title: "Sections",
       of: [
         { type: "pageHeading" },
+        { type: "visitorInfoPage.imageGallery" },
         { type: "visitorInfoPage.moreInfo" },
         { type: "visitorInfoPage.accesibilityInfo" },
         { type: "visitorInfoPage.map" },

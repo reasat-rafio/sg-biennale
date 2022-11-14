@@ -40,6 +40,7 @@ import visitorInfoHero from "./objects/visitor-info/hero";
 import VisitorInfoMap from "./objects/visitor-info/map";
 import VisitorInfoAccesibilityInfo from "./objects/visitor-info/accesibility-info";
 import VisitorMoreInfo from "./objects/visitor-info/more-info";
+import VisitorInfoPageImageGallery from "./objects/visitor-info/image-gallery";
 
 import AboutPageCuratorialTeam from "./objects/about/curatorial-team";
 import AboutPageTeam from "./objects/about/team";
@@ -146,6 +147,7 @@ export default createSchema({
     VisitorInfoMap,
     VisitorMoreInfo,
     VisitorInfoAccesibilityInfo,
+    VisitorInfoPageImageGallery,
 
     ProgrammesEventsPage,
     ProgrammesEventsClosestEvent,
