@@ -52,7 +52,7 @@ const query = pageQuery(groq`
           "mp4": video_mp4.asset->url
         },
       },
-      artists[]->{
+      highlights[]->{
         _id,
         _type,
         name,
@@ -60,6 +60,8 @@ const query = pageQuery(groq`
         description,
         slug,
         countries,
+        location,
+        startAt,
         images[] {
           ..., 
           asset->{
@@ -69,17 +71,6 @@ const query = pageQuery(groq`
             }
           }
         },
-        artworks[]-> {
-          images[] {
-            ..., 
-            asset->{
-              ...,
-              metadata {
-                dimensions
-             }
-            }
-          },
-        }
       },
       newsCollection [] {
         ...,
@@ -108,7 +99,7 @@ const Home: NextPage<SanityProps> = (props) => {
           []
         ),
         "homePage.introduction": Introduction,
-        "homePage.artists": HighLight,
+        "homePage.highlight": HighLight,
         "homePage.news": News,
         "homePage.organisations": Organisations,
       })}

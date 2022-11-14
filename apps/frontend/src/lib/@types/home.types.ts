@@ -30,17 +30,16 @@ export interface Organisation {
   url?: string;
 }
 
-export interface IArtistProps {
+export interface IHighlightProps {
   _id: string;
   _type: string;
   description: any[];
   images: SanityImage[];
   name?: string;
   title?: string;
+  location?: string;
+  startAt?: string;
   slug: Slug;
-  artworks: {
-    images: SanityImage[];
-  }[];
   countries?: ICountry[];
 }
 export interface INewsProps {

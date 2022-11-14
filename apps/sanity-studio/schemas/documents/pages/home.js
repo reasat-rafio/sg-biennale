@@ -16,7 +16,7 @@ const HomePage = {
         { type: "homePage.introduction" },
         { type: "homePage.organisations" },
         { type: "homePage.news" },
-        { type: "homePage.artists" },
+        { type: "homePage.highlight" },
       ],
     },
   ],

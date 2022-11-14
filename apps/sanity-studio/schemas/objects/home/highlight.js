@@ -1,9 +1,9 @@
 import { FcButtingIn } from "react-icons/fc";
 
-const HomeArtists = {
-  name: "homePage.artists",
+const HomeHighlight = {
+  name: "homePage.highlight",
   type: "object",
-  title: "Highlights",
+  title: "Highlight",
   icon: FcButtingIn,
   fields: [
     {
@@ -11,8 +11,7 @@ const HomeArtists = {
       type: "string",
     },
     {
-      title: "Highlights",
-      name: "artists",
+      name: "highlights",
       type: "array",
       of: [
         {
@@ -29,4 +28,4 @@ const HomeArtists = {
   },
 };
 
-export default HomeArtists;
+export default HomeHighlight;

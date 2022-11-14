@@ -1,6 +1,6 @@
 import "swiper/css";
 import "swiper/css/scrollbar";
-import { IArtistProps } from "@lib/@types/home.types";
+import { IHighlightProps } from "@lib/@types/home.types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper";
 import { Container } from "@components/ui/container";
@@ -14,13 +14,13 @@ import { useWindowSize } from "@lib/hooks";
 
 interface HighLightProps {
   type: string;
-  artists: IArtistProps[];
+  highlights: IHighlightProps[];
   title: string;
 }
 
 export const HighLight: React.FC<HighLightProps> = ({
   title: sectionTitle,
-  artists: highlights,
+  highlights,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [activeHighlight, setActivehighlightCard] = useState<number | null>(
@@ -76,10 +76,13 @@ export const HighLight: React.FC<HighLightProps> = ({
                 >
                   <Link href={`/artists/${slug.current}`} prefetch={false}>
                     <a>
-                      <span>{_type}</span>
-                      <h6 className="font-bold lg:text-[24px] text-base">
+                      <span className="drop-shadow font-medium text-lg">
+                        {_type === "events" ? "event" : _type}
+                      </span>
+                      <h6 className="font-bold lg:text-[24px] text-base | drop-shadow">
                         {name ? name : title}
                       </h6>
+
                       {Boolean(countries?.length) && (
                         <span>
                           {countries?.map(({ label }, index) => (

@@ -25,9 +25,9 @@ import HomeKv from "./objects/home/kv";
 import HomeHero from "./objects/home/hero";
 import HomeIntroduction from "./objects/home/introduction";
 import HomeOrganisations from "./objects/home/organisations";
-import HomeArtists from "./objects/home/artist";
 import HomeNews from "./objects/home/news";
 import HomeInformation from "./objects/home/information";
+import HomeHighlight from "./objects/home/highlight";
 
 import AboutPage from "./documents/pages/about";
 import AboutPageHero from "./objects/about/hero";
@@ -122,10 +122,10 @@ export default createSchema({
     HomeKv,
     HomeHero,
     HomeOrganisations,
-    HomeArtists,
     HomeIntroduction,
     HomeNews,
     HomeInformation,
+    HomeHighlight,
 
     AboutPage,
     AboutPageHero,
