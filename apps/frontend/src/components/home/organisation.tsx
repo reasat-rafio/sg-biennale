@@ -39,7 +39,7 @@ export const Organisations: React.FC<OrganisationProps> = ({
             </section>
             <figure className="row-span-4">
               <SanityImg
-                className="h-full w-full object-contain | drop-shadow-[5px_0px_200px_rgba(0,0,0,0.25)]"
+                className="h-full w-full object-contain"
                 width={
                   windowWidth >= 1024 ? 400 : windowWidth >= 640 ? 250 : 120
                 }
