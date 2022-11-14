@@ -107,6 +107,6 @@ export interface VenueProps {
   description: any;
   location: string;
   direction?: string;
-  startAt?: Date;
+  startAt?: string;
   images: SanityImage[];
 }

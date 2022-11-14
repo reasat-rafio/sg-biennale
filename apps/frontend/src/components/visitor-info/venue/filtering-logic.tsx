@@ -26,11 +26,12 @@ export const FilteringLogic: React.FC<FilteringLogicProps> = ({ children }) => {
 
     if (selectedSorting === "alphabet") {
       filteredVenues.sort((a, b) => (a.name > b.name ? 1 : -1));
-    } else if (selectedSorting === "date") {
-      filteredVenues.sort((a, b) =>
-        (a as any).startAt > (b as any).startAt ? 1 : -1
-      );
     }
+    // else if (selectedSorting === "date") {
+    //   filteredVenues.sort((a, b) =>
+    //     (a as any).startAt > (b as any).startAt ? 1 : -1
+    //   );
+    // }
 
     // Show More Filtering
     setSortedVenues(filteredVenues.slice(0, cardsPerPage * page));

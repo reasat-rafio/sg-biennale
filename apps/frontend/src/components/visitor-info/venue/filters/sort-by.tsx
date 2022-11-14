@@ -13,7 +13,7 @@ interface SortByListProps {
 export const SortBy: React.FC<{}> = () => {
   const sortByList = [
     { name: "Alphabet", id: uuid() },
-    { name: "Date", id: uuid() },
+    // { name: "Date", id: uuid() },
   ];
 
   const { selectedSorting, setSelectedSorting } = useVisitorInfoStore();

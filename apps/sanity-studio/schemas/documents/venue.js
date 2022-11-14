@@ -70,7 +70,7 @@ const Venue = {
     {
       title: "Start At",
       name: "startAt",
-      type: "datetime",
+      type: "string",
     },
     {
       name: "direction",

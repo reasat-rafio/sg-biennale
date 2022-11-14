@@ -79,12 +79,7 @@ export const VenueListCard: React.FC<VenueListCardProps> = ({
               </span>
               {startAt && (
                 <span className="font-manrope text-gray--700 text-body-2">
-                  <span>
-                    {format(
-                      new Date(startAt),
-                      "eee, d LLL yyyy - hh:mm aaaaa'm'"
-                    )}
-                  </span>
+                  <span>{startAt}</span>
                 </span>
               )}
             </div>
