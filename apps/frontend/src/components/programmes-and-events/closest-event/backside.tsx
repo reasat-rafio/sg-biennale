@@ -58,7 +58,7 @@ const SlideRight: React.FC<BacksideProps> = ({
 
   return (
     <motion.div
-      className="absolute z-10 h-full w-1/2 | p-8 box-border ml-auto | bg-[#F8F8F8]"
+      className="absolute z-0 h-full w-1/2 | p-8 box-border ml-auto | bg-[#F8F8F8]"
       initial="initial"
       onClick={(e) => e.stopPropagation()}
       animate={active ? "animate" : "initial"}

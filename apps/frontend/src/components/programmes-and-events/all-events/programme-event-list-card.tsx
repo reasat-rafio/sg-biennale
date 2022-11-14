@@ -31,10 +31,10 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   description,
   startAt,
   venue,
+  endAt,
   additionalInfo,
   relatedArtists,
   hideCta,
-  _id,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [hovered, setHovered] = useState(false);
@@ -45,7 +45,8 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     additionalInfo ? "*" : ""
   }`;
   const formattedShortDate = format(new Date(startAt), "dd.LL");
-  const formattedTime = format(new Date(startAt), "hh:mm bbb");
+  const formattedStartTime = format(new Date(startAt), "hh:mm bbb");
+  const formattedEndTime = endAt && format(new Date(endAt), "hh:mm bbb");
 
   const x = useTransformSpring({
     value: screenX,
@@ -81,9 +82,29 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
       className={clsx("grid grid-cols-12 col-span-12 | gap-5")}
       onMouseMove={handleMouseMove}
     >
-      <div className="flex flex-col | lg:col-span-1 col-span-12 | text-center | md:space-y-3 space-y-1">
-        <span className="text-2xl font-medium">{formattedShortDate}</span>
-        <span className="text-body-2 text-gray--700">{formattedTime}</span>
+      <div className="flex flex-col | lg:col-span-1 col-span-12 | md:space-y-3 space-y-1">
+        <span className="text-[24px] font-medium lg:text-left text-center">
+          {formattedShortDate}
+        </span>
+        <div className="flex flex-col justify-end | mt-auto h-full | space-y-1 | font-manrope lg:text-left text-center text-gray--700">
+          {startAt && (
+            <div className="flex flex-col">
+              <span className="text-[10px]">From</span>
+              <span className="text-[14px] font-semibold">
+                {formattedStartTime}
+              </span>
+            </div>
+          )}
+
+          {endAt && (
+            <div className="flex flex-col">
+              <span className="text-[10px]">To</span>
+              <span className="text-[14px] font-semibold">
+                {formattedEndTime}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
       <section className="lg:col-span-4 col-span-12 relative">
         <figure className="lg:h-[250px] md:h-[400px] h-auto">

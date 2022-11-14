@@ -36,7 +36,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   const windowWidth = useWindowSize()?.width ?? 0;
   return (
     <motion.div
-      className="absolute h-full bottom-0 | flex flex-col justify-end z-20 cursor-pointer"
+      className="absolute h-full bottom-0 | flex flex-col justify-end z-10 cursor-pointer"
       initial="initial"
       animate={active ? "animate" : "inital"}
       variants={AnimationVariants}
@@ -74,7 +74,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         >
           {title}
         </motion.h6>
-        <RelatedArtistsList index={index} relatedArtists={relatedArtists} />
+        {/* <RelatedArtistsList index={index} relatedArtists={relatedArtists} /> */}
       </div>
     </motion.div>
   );
