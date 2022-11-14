@@ -3,7 +3,7 @@ import countries from "../../../../libs/countries";
 import regions from "../../../../libs/regions.ts";
 
 const Artist = {
-  title: "Artist Details Page",
+  title: "Artist",
   name: "artist",
   type: "document",
   icon: FcButtingIn,

@@ -32,14 +32,16 @@ export interface Organisation {
 
 export interface IArtistProps {
   _id: string;
+  _type: string;
   description: any[];
   images: SanityImage[];
-  name: string;
+  name?: string;
+  title?: string;
   slug: Slug;
   artworks: {
     images: SanityImage[];
   }[];
-  countries: ICountry[];
+  countries?: ICountry[];
 }
 export interface INewsProps {
   _key: string;

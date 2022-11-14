@@ -1,7 +1,7 @@
 import { FcCalendar } from "react-icons/fc";
 
 const Event = {
-  title: "Event Details Page",
+  title: "Event",
   name: "events",
   type: "document",
   icon: FcCalendar,

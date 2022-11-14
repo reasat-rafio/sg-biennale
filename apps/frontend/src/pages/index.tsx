@@ -54,7 +54,9 @@ const query = pageQuery(groq`
       },
       artists[]->{
         _id,
+        _type,
         name,
+        title,
         description,
         slug,
         countries,

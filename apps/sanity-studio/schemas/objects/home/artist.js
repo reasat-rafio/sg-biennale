@@ -3,7 +3,7 @@ import { FcButtingIn } from "react-icons/fc";
 const HomeArtists = {
   name: "homePage.artists",
   type: "object",
-  title: "Artists",
+  title: "Highlights",
   icon: FcButtingIn,
   fields: [
     {
@@ -11,9 +11,15 @@ const HomeArtists = {
       type: "string",
     },
     {
+      title: "Highlights",
       name: "artists",
       type: "array",
-      of: [{ type: "reference", to: { type: "artist" } }],
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "artist" }, { type: "events" }, { type: "venue" }],
+        },
+      ],
     },
   ],
   preview: {
