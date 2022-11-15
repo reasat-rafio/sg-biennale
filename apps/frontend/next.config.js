@@ -9,13 +9,17 @@ const STUDIO_REWRITE = {
 };
 
 const ContentSecurityPolicy = `
-  default-src 'self' https://66wl3wil.api.sanity.io;
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com https://www.googletagmanager.com;
+  default-src 'self' 'unsafe-inline' 'unsafe-eval' *.userway.org cdn.sanity.io https://66wl3wil.api.sanity.io;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval'  https://www.google-analytics.com https://www.googletagmanager.com;
   child-src 'none';
-  frame-src 'self' https://www.onemap.gov.sg;
   font-src 'self' fonts.gstatic.com  data:;
-  img-src 'self' cdn.sanity.io www.googletagmanager.com; 
-  style-src 'self' 'unsafe-inline' https://www.googletagmanager.com fonts.googleapis.com; 
+  style-src 'self' 'unsafe-inline' fonts.googleapis.com; 
+  base-uri 'self';
+  frame-ancestors 'self';
+  frame-src 'self' https://www.youtube.com https://www.onemap.gov.sg;
+  img-src 'self' cdn.sanity.io 66wl3wil.api.sanity.io https://www.google.com https://www.google-analytics.com https://stats.g.doubleclick.net; 
+  connect-src 'self' https://66wl3wil.api.sanity.io https://www.google-analytics.com https://www.google-analytics.com https://stats.g.doubleclick.net;
+  media-src 'self' cdn.sanity.io;
 `;
 
 const securityHeaders = [
@@ -39,13 +43,13 @@ module.exports = {
     domains: ["cdn.sanity.io"],
   },
 
-  // async headers() {
-  //   return [
-  //     {
-  //       source: "/:path*",
-  //       headers: securityHeaders,
-  //     },
-  //   ];
-  // },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
+  },
   rewrites: async () => [STUDIO_REWRITE],
 };
