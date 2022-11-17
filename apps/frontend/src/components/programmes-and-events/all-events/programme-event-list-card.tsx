@@ -34,7 +34,9 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   const priceVal = `${cta.title} - ${price ? `$${price}` : "Free"}${
     additionalInfo ? "*" : ""
   }`;
-  const formattedShortDate = format(new Date(startAt), "dd.LL");
+  const formattedShortDateTime = format(new Date(startAt), "dd.LL");
+  const formattedStartDate = format(new Date(startAt), "dd");
+  const formattedEndDate = endAt && format(new Date(endAt), "dd");
   const formattedStartTime = format(new Date(startAt), "hh:mm bbb");
   const formattedEndTime = endAt && format(new Date(endAt), "hh:mm bbb");
 
@@ -49,7 +51,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
     >
       <div className="flex flex-col | lg:col-span-1 col-span-12 | md:space-y-3 space-y-1">
         <span className="text-[24px] font-medium lg:text-left text-center">
-          {formattedShortDate}
+          {formattedShortDateTime}
         </span>
         <div className="flex flex-col justify-end | mt-auto h-full | space-y-1 | font-manrope lg:text-left text-center text-gray--700">
           {startAt && (
@@ -61,7 +63,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
             </div>
           )}
 
-          {endAt && (
+          {endAt && formattedStartDate === formattedEndDate && (
             <div className="flex flex-col">
               <span className="text-[10px]">To</span>
               <span className="text-[14px] font-semibold">
