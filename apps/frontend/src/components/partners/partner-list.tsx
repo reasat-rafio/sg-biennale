@@ -57,7 +57,7 @@ export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
               <motion.figure
                 key={_id}
                 className={clsx(
-                  "md:col-span-4 sm:col-span-6 col-span-12 | flex justify-center items-center | h-[255px] p-5 | bg-white  border border-gray--200 | overflow-hidden",
+                  "md:col-span-4 sm:col-span-6 col-span-12 | flex justify-center items-center | h-[255px] p-5 | bg-white  overflow-hidden",
                   href && "cursor-pointer"
                 )}
                 onClick={() => onClickAction(href)}
