@@ -12,12 +12,6 @@ const PartnersListing = {
     },
 
     {
-      title: "💡 Call Out",
-      name: "callout",
-      type: "text",
-      readOnly: true,
-    },
-    {
       name: "header",
       type: "string",
       validation: (Rule) => Rule.required(),
@@ -26,6 +20,12 @@ const PartnersListing = {
       name: "description",
       type: "text",
       validation: (Rule) => Rule.required(),
+    },
+
+    {
+      name: "greetings",
+      type: "array",
+      of: [{ type: "block" }],
     },
   ],
   preview: {

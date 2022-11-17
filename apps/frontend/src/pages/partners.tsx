@@ -1,3 +1,4 @@
+import { Greeting } from "@components/partners/greeting";
 import { PartnerList } from "@components/partners/partner-list";
 import { PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
@@ -31,7 +32,7 @@ export const getStaticProps: GetStaticProps = async (
 
 const Partners: NextPage<SanityProps> = (props) => {
   const {
-    page: { header, description },
+    page: { header, description, greetings },
     partners,
   } = useSanityQuery(query, props).data;
 
@@ -39,6 +40,7 @@ const Partners: NextPage<SanityProps> = (props) => {
     <Container className="py-section">
       <PageHeading heading={header} tagline={description} />
       <PartnerList partners={partners} />
+      <Greeting greetings={greetings} />
     </Container>
   );
 };
