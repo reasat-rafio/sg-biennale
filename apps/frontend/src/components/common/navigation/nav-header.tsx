@@ -21,17 +21,17 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
       className="relative z-40 | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto"
     >
       <div className="grid grid-cols-12 gap-2">
-        <figure className="col-span-6 flex">
+        <div className="col-span-6 flex">
           <Link href="/" prefetch={false} passHref>
-            <motion.a className="xl:h-[70px] md:h-[60px] h-[40px] w-full | flex justify-start">
+            <motion.a className="xl:h-[70px] md:h-[60px] h-[40px] w-full">
               <motion.figure
-                className="h-full w-fit"
+                className="h-full w-full | flex justify-start"
                 initial={false}
                 animate={{ scale: scroll ? 0.9 : 1, originX: 0 }}
                 transition={{ type: "tween" }}
               >
                 <SanityImg
-                  className="h-full w-fit object-contain"
+                  className="h-full w-auto object-contain"
                   image={logo}
                   builder={imageUrlBuilder}
                   width={20}
@@ -40,18 +40,18 @@ export const NavHeader: React.FC<NavHeaderProps> = ({ logo, eventLogo }) => {
               </motion.figure>
             </motion.a>
           </Link>
-        </figure>
+        </div>
         <div className="col-span-6 flex">
           <Link href="/" prefetch={false} passHref>
-            <motion.a className="xl:h-[70px] md:h-[60px] h-[40px] w-full | flex justify-end">
+            <motion.a className="xl:h-[70px] md:h-[60px] h-[40px] w-full">
               <motion.figure
-                className="h-full w-fit"
+                className="h-full w-full flex justify-end"
                 initial={false}
                 animate={{ scale: scroll ? 0.9 : 1, originX: 1 }}
                 transition={{ type: "tween" }}
               >
                 <SanityImg
-                  className="h-full w-fit object-contain"
+                  className="h-full w-auto object-contain"
                   image={eventLogo}
                   builder={imageUrlBuilder}
                   width={20}
