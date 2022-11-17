@@ -94,9 +94,6 @@ export const ProgrammesEventsCarousel: React.FC<
           },
           index
         ) => {
-          const isFirstIndex = index === 0;
-          const isLastIndex = index === relatedEvents.length - 1;
-
           const cardWidth = oneCardInView
             ? halfWidth
             : index === activeCardIndex
