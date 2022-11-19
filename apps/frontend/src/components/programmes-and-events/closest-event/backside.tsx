@@ -55,7 +55,6 @@ const SlideRight: React.FC<BacksideProps> = ({
 }) => {
   const router = useRouter();
   const [ref] = usePortableTextTruncate({ maxLength: 200 });
-
   return (
     <motion.div
       className="absolute z-0 h-full w-1/2 | p-8 box-border ml-auto | bg-[#F8F8F8]"

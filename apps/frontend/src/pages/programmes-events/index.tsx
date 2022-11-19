@@ -38,7 +38,11 @@ const query = groq`{
         description,
         slug,
         startAt,
-        venue,
+        venue[]-> {
+          _id,
+          name,
+          slug
+        },
         relatedArtists[] -> {
           _id,
           name
