@@ -95,3 +95,7 @@ body.locked {
   right: 0;
   background-color: #cccccc;
 }
+
+.wrapping {
+  background: orange;
+}

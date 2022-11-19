@@ -74,7 +74,9 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         >
           {title}
         </motion.h6>
-        {/* <RelatedArtistsList index={index} relatedArtists={relatedArtists} /> */}
+        {Boolean(relatedArtists?.length) && (
+          <RelatedArtistsList index={index} relatedArtists={relatedArtists} />
+        )}
       </div>
     </motion.div>
   );
