@@ -57,7 +57,6 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
 
   return (
     <Container type="section" className="lg:py-max py-x">
-      all
       <div>
         <motion.header
           initial={{ opacity: 0 }}
