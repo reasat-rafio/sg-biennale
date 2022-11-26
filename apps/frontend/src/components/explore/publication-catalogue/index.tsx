@@ -31,9 +31,6 @@ export const PublicationsCatalogues: React.FC<PublicationCatalogueProps> = ({
         <Header className="flex-1" variant="secondary" color="#999999">
           {header}
         </Header>
-        <span className="font-medium lg:text-xl text-base text-gray--700 underline">
-          View All
-        </span>
       </Container>
 
       <div className="publicationCatalogueCarousel | xl:pl-max xl:px-0 sm:px-lg px-md my-10">
