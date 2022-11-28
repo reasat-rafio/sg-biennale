@@ -34,6 +34,7 @@ export const ArtistsList: React.FC<{}> = ({}) => {
   const { filteredArtists } = useArtistsStore();
   const windowWidth = useWindowSize()?.width ?? 0;
   const [activeAnchor, setActiveAnchor] = useState("");
+  const [activeAnchorIndex, setActiveAnchorIndex] = useState(0);
   const [anchors, setAnchors] = useState<string[]>([]);
   const [sortedArtistsList, setSortedArtistList] = useState<SortedArtists[]>(
     []
@@ -73,7 +74,9 @@ export const ArtistsList: React.FC<{}> = ({}) => {
     activeAnchor,
     anchors,
     sortedArtistsList,
+    activeAnchorIndex,
     setActiveAnchor,
+    setActiveAnchorIndex,
   };
 
   return (

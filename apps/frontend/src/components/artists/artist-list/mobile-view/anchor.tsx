@@ -1,20 +1,35 @@
 import { convertSectionTypeName } from "@lib/helpers/global.helpers";
 import useGlobalStore from "@stores/global.store";
 import clsx from "clsx";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType } from "swiper";
 
 interface AnchorProps {
   anchors: string[];
   activeAnchor: string;
+  activeAnchorIndex: number;
 }
 
-export const Anchor: React.FC<AnchorProps> = ({ activeAnchor, anchors }) => {
+export const Anchor: React.FC<AnchorProps> = ({
+  activeAnchor,
+  anchors,
+  activeAnchorIndex,
+}) => {
+  console.log(activeAnchorIndex);
+
   const { navbarHeight } = useGlobalStore();
+  const swiperRef = useRef<SwiperType>();
+
   const onAnchorClickAction = (anchorName: string) => {
     document
       ?.querySelector(`#anchor-${convertSectionTypeName(anchorName)}`)
       ?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (swiperRef.current) swiperRef.current.slideTo(activeAnchorIndex);
+  }, [activeAnchorIndex, swiperRef.current]);
 
   return (
     <aside
@@ -29,6 +44,9 @@ export const Anchor: React.FC<AnchorProps> = ({ activeAnchor, anchors }) => {
         spaceBetween={5}
         slidesPerView={Math.min(anchors.length, 12)}
         scrollbar={{ draggable: true }}
+        onBeforeInit={(swiper) => {
+          swiperRef.current = swiper;
+        }}
       >
         {anchors.map((anchor) => (
           <SwiperSlide key={anchor}>

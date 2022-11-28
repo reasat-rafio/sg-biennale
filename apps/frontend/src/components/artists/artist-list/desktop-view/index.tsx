@@ -6,8 +6,10 @@ import { ArtistArtwork } from "./artist-artwork";
 interface DesktopViewProps {
   anchors: string[];
   activeAnchor: string;
+  activeAnchorIndex: number;
   sortedArtistsList: SortedArtists[];
   setActiveAnchor: Dispatch<SetStateAction<string>>;
+  setActiveAnchorIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const DesktopView: React.FC<DesktopViewProps> = ({
@@ -15,14 +17,21 @@ export const DesktopView: React.FC<DesktopViewProps> = ({
   activeAnchor,
   sortedArtistsList,
   setActiveAnchor,
+  setActiveAnchorIndex,
+  activeAnchorIndex,
 }) => {
   return (
     <div className="flex space-x-10">
       <ArtistArtwork
-        setActiveAnchor={setActiveAnchor}
         sortedArtistsList={sortedArtistsList}
+        setActiveAnchor={setActiveAnchor}
+        setActiveAnchorIndex={setActiveAnchorIndex}
       />
-      <Anchor activeAnchor={activeAnchor} anchors={anchors} />
+      <Anchor
+        activeAnchorIndex={activeAnchorIndex}
+        activeAnchor={activeAnchor}
+        anchors={anchors}
+      />
     </div>
   );
 };

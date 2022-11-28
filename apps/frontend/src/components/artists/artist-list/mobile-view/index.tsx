@@ -6,8 +6,10 @@ import { ArtistArtwork } from "./artist-artwork";
 interface MobileViewProps {
   anchors: string[];
   activeAnchor: string;
+  activeAnchorIndex: number;
   sortedArtistsList: SortedArtists[];
   setActiveAnchor: Dispatch<SetStateAction<string>>;
+  setActiveAnchorIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const MobileView: React.FC<MobileViewProps> = ({
@@ -15,11 +17,18 @@ export const MobileView: React.FC<MobileViewProps> = ({
   activeAnchor,
   sortedArtistsList,
   setActiveAnchor,
+  activeAnchorIndex,
+  setActiveAnchorIndex,
 }) => {
   return (
     <div className="">
-      <Anchor activeAnchor={activeAnchor} anchors={anchors} />
+      <Anchor
+        anchors={anchors}
+        activeAnchor={activeAnchor}
+        activeAnchorIndex={activeAnchorIndex}
+      />
       <ArtistArtwork
+        setActiveAnchorIndex={setActiveAnchorIndex}
         setActiveAnchor={setActiveAnchor}
         sortedArtistsList={sortedArtistsList}
       />

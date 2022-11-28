@@ -6,20 +6,26 @@ import { motion } from "framer-motion";
 import { DataProps, SortedArtists } from "..";
 
 interface ArtistsProps {
-  setActiveAnchor: Dispatch<SetStateAction<string>>;
   sortedArtistsList: SortedArtists[];
+  setActiveAnchorIndex: Dispatch<SetStateAction<number>>;
+  setActiveAnchor: Dispatch<SetStateAction<string>>;
 }
 
 export const ArtistArtwork: React.FC<ArtistsProps> = ({
   sortedArtistsList,
   setActiveAnchor,
+  setActiveAnchorIndex,
 }) => {
   return (
     <div className="flex-1">
-      <AnchorWrapper setActiveAnchor={setActiveAnchor}>
+      <AnchorWrapper
+        setActiveAnchor={setActiveAnchor}
+        setActiveAnchorIndex={setActiveAnchorIndex}
+      >
         {sortedArtistsList.map(({ data, title }, rootIndex) => (
           <motion.section
             id={title}
+            datatype-index={rootIndex}
             key={title + rootIndex}
             className="flex flex-col | lg:py-14 py-8"
           >

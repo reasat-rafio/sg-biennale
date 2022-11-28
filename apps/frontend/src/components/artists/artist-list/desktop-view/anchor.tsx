@@ -4,20 +4,31 @@ import clsx from "clsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/mousewheel";
-import { Mousewheel } from "swiper";
+import { Swiper as SwiperType, Mousewheel } from "swiper";
+import { useEffect, useRef } from "react";
 
 interface AnchorsProp {
   anchors: string[];
   activeAnchor: string;
+  activeAnchorIndex: number;
 }
 
-export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
+export const Anchor: React.FC<AnchorsProp> = ({
+  anchors,
+  activeAnchor,
+  activeAnchorIndex,
+}) => {
   const { navbarHeight } = useGlobalStore();
+  const swiperRef = useRef<SwiperType>();
   const onAnchorClickAction = (anchorName: string) => {
     document
       ?.querySelector(`#anchor-${convertSectionTypeName(anchorName)}`)
       ?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (swiperRef.current) swiperRef.current.slideTo(activeAnchorIndex);
+  }, [activeAnchorIndex, swiperRef.current]);
 
   return (
     <aside
@@ -42,8 +53,10 @@ export const Anchor: React.FC<AnchorsProp> = ({ anchors, activeAnchor }) => {
         slidesPerView={Math.min(anchors.length, 12)}
         autoHeight={true}
         mousewheel
-        scrollbar={{ draggable: true }}
         speed={200}
+        onBeforeInit={(swiper) => {
+          swiperRef.current = swiper;
+        }}
       >
         {anchors.map((anchor) => (
           <SwiperSlide key={anchor}>

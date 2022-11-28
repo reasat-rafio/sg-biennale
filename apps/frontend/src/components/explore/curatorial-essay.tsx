@@ -82,7 +82,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
           variants={ContainerVariants}
           className="grid grid-cols-12 | lg:gap-10 gap-5 my-14"
         >
-          {sortedCuratorialEssays.map((data, index) => (
+          {sortedCuratorialEssays.map((data) => (
             <Essay key={data._id} {...data} />
           ))}
         </motion.div>

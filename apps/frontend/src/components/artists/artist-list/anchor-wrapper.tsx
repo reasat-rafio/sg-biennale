@@ -12,6 +12,7 @@ import React, {
 
 interface AnchorWrapperProps {
   setActiveAnchor: Dispatch<SetStateAction<string>>;
+  setActiveAnchorIndex: Dispatch<SetStateAction<number>>;
   children: ReactNode;
 }
 
@@ -35,6 +36,7 @@ export const AnchorWrapper: React.FC<AnchorWrapperProps> = (props) => {
             <Section
               key={index}
               setActiveAnchor={props.setActiveAnchor}
+              setActiveAnchorIndex={props.setActiveAnchorIndex}
               sectionRef={onViewArtistRefs[index]}
             >
               {child}
@@ -47,17 +49,25 @@ export const AnchorWrapper: React.FC<AnchorWrapperProps> = (props) => {
 
 const Section: React.FC<{
   sectionRef: RefObject<any>;
-  setActiveAnchor: any;
+  setActiveAnchor: Dispatch<SetStateAction<string>>;
+  setActiveAnchorIndex: Dispatch<SetStateAction<number>>;
   children: React.ReactNode;
-}> = ({ children, sectionRef, setActiveAnchor }) => {
+}> = ({ children, sectionRef, setActiveAnchor, setActiveAnchorIndex }) => {
   const sectionOnview = useIntersection(sectionRef, { threshold: 0.2 });
   const anchorName = convertSectionTypeName((children as any)?.props.id);
+  const anchorIndex: number = +(children as any)?.props["datatype-index"];
 
   useEffect(() => {
     if (sectionOnview?.isIntersecting) {
       setActiveAnchor(anchorName);
+      setActiveAnchorIndex(anchorIndex);
     }
-  }, [sectionOnview?.isIntersecting, anchorName, setActiveAnchor]);
+  }, [
+    sectionOnview?.isIntersecting,
+    anchorName,
+    setActiveAnchor,
+    setActiveAnchorIndex,
+  ]);
 
   return (
     <div

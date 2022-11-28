@@ -13,12 +13,7 @@ export interface ArtistProps {
   screen?: Screen;
 }
 
-export const Artist: React.FC<ArtistProps> = ({
-  name,
-  slug,
-  images,
-  screen = "desktop",
-}) => {
+export const Artist: React.FC<ArtistProps> = ({ name, slug, images }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
