@@ -6,6 +6,8 @@ import "swiper/css";
 import "swiper/css/mousewheel";
 import { Swiper as SwiperType, Mousewheel } from "swiper";
 import { useEffect, useRef } from "react";
+import { ChevronDown } from "@components/icons/chevron-down";
+import { ChevronUp } from "@components/icons/chevron-up";
 
 interface AnchorsProp {
   anchors: string[];
@@ -30,14 +32,31 @@ export const Anchor: React.FC<AnchorsProp> = ({
     if (swiperRef.current) swiperRef.current.slideTo(activeAnchorIndex);
   }, [activeAnchorIndex, swiperRef.current]);
 
+  const onDownChevronIconClickAction = () =>
+    swiperRef.current && swiperRef.current.slideNext();
+
+  const onUpChevronIconClickAction = () =>
+    swiperRef.current && swiperRef.current.slidePrev();
+
   return (
     <aside
       style={{ top: navbarHeight + 5 }}
       className={clsx(
-        "sticky mt-28 h-min | bg-white rounded-[43px]",
-        anchors.length && "py-10"
+        "sticky mt-28 h-min | bg-white rounded-[43px] flex flex-col justify-center items-center",
+        anchors.length && "py-7"
       )}
     >
+      {Boolean(activeAnchorIndex !== 0) && (
+        <ChevronUp
+          onClick={onUpChevronIconClickAction}
+          className={clsx(
+            "cursor-pointer hover:text-red-love mb-3",
+            anchors.length - 1 === activeAnchorIndex &&
+              "animate-bounce hover:animate-none"
+          )}
+        />
+      )}
+
       <Swiper
         style={{
           height:
@@ -73,6 +92,15 @@ export const Anchor: React.FC<AnchorsProp> = ({
           </SwiperSlide>
         ))}
       </Swiper>
+      {Boolean(anchors.length - 1 !== activeAnchorIndex) && (
+        <ChevronDown
+          onClick={onDownChevronIconClickAction}
+          className={clsx(
+            "cursor-pointer hover:text-red-love mt-3",
+            activeAnchorIndex === 0 && "animate-bounce hover:animate-none"
+          )}
+        />
+      )}
     </aside>
   );
 };

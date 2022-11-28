@@ -1,7 +1,7 @@
 import { convertSectionTypeName } from "@lib/helpers/global.helpers";
 import useGlobalStore from "@stores/global.store";
 import clsx from "clsx";
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 
@@ -12,12 +12,10 @@ interface AnchorProps {
 }
 
 export const Anchor: React.FC<AnchorProps> = ({
-  activeAnchor,
   anchors,
+  activeAnchor,
   activeAnchorIndex,
 }) => {
-  console.log(activeAnchorIndex);
-
   const { navbarHeight } = useGlobalStore();
   const swiperRef = useRef<SwiperType>();
 
