@@ -56,7 +56,7 @@ export const HighLight: React.FC<HighLightProps> = ({
                     : "xl:w-[35%] sm:w-[45%] w-[100%] | px-3"
                 )}
               >
-                <figure className="h-full w-full overflow-hidden">
+                <figure className="h-full w-full overflow-hidden pointer-events-none">
                   <SanityImg
                     className={clsx(
                       "h-full w-full object-cover aspect-square | transition-transform duration-500 ease-in-out | will-change-transform",
