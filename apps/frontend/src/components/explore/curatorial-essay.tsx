@@ -3,8 +3,8 @@ import { imageUrlBuilder } from "@utils/sanity";
 import { SanityImage, SanityImg } from "sanity-react-extra";
 import { motion, Variants } from "framer-motion";
 import { Button } from "@components/ui/button";
-import { useEffect, useState } from "react";
-import { useWindowSize } from "@lib/hooks";
+import { useEffect, useRef, useState } from "react";
+import { useIntersection, useWindowSize } from "@lib/hooks";
 import { Header } from "@components/ui/header";
 import Link from "next/link";
 
@@ -41,6 +41,9 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   header,
   curatorialEssays,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const intersection = useIntersection(containerRef)?.isIntersecting;
+
   const [page, setPage] = useState(1);
   const [sortedCuratorialEssays, setCuratorialEssays] = useState(
     curatorialEssays.slice(0, cardsPerPage)
@@ -57,7 +60,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
 
   return (
     <Container type="section" className="lg:py-max py-x">
-      <div>
+      <div ref={containerRef}>
         <motion.header
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -78,7 +81,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
         </motion.header>
         <motion.div
           initial="hidden"
-          whileInView="show"
+          animate={intersection ? "show" : "hidden"}
           variants={ContainerVariants}
           className="grid grid-cols-12 | lg:gap-10 gap-5 my-14"
         >

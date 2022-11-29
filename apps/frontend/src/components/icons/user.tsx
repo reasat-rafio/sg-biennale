@@ -3,6 +3,7 @@ interface UserProps {}
 export const UserIcon: React.FC<UserProps> = ({}) => {
   return (
     <svg
+      className="h-6 w-6"
       width="11"
       height="13"
       viewBox="0 0 11 13"
