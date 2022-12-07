@@ -11,7 +11,16 @@ import { withDimensions } from "sanity-react-extra";
 
 const query = groq`{
   "site": ${siteQuery},
-  "page": *[_type == "partnerListingPage"][0],
+  "page": *[_type == "partnerListingPage"][0]{
+    ...,
+    partnersAndTiers[] {
+      ...,
+      partners[]{
+        ...,
+        'image': ${withDimensions("image")},
+      }
+    }
+  },
   "partners":*[_type == "partner"][]{
         ...,
         tier->{
@@ -32,9 +41,11 @@ export const getStaticProps: GetStaticProps = async (
 
 const Partners: NextPage<SanityProps> = (props) => {
   const {
-    page: { header, description, greetings },
+    page: { header, description, greetings, partnersAndTiers },
     partners,
   } = useSanityQuery(query, props).data;
+
+  console.log(partnersAndTiers);
 
   return (
     <Container className="py-section">
