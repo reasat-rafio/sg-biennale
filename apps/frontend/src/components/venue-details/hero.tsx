@@ -49,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({
   );
 };
 
-const Header: React.FC<{ name: string; cta: Cta }> = ({ name, cta }) => {
+const Header: React.FC<{ name: string; cta?: Cta }> = ({ name, cta }) => {
   return (
     <div className="flex md:flex-row flex-col | items-center md:space-x-5 md:space-y-0 space-y-5">
       <header className="flex-1">
