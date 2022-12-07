@@ -7,6 +7,7 @@ import {
 import useGlobalStore from "@stores/global.store";
 import { NavSection } from "./nav-section";
 import { CTASection } from "./cta-section";
+import { Socials } from "./socials";
 
 export const NavDropdown: React.FC<ISite["site"]> = ({
   navigations: { menu, ctas },
@@ -26,8 +27,9 @@ export const NavDropdown: React.FC<ISite["site"]> = ({
             className="z-30 fixed top-0 left-0 | w-screen | bg-white shadow-xl"
           >
             <div className="h-full w-full | flex flex-col justify-center | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto">
+              <CTASection ctas={ctas} />
               <NavSection menu={menu} />
-              <CTASection ctas={ctas} social={social} />
+              <Socials social={social} />
             </div>
           </motion.div>
         )}
