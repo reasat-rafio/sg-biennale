@@ -20,12 +20,7 @@ export const Hero: React.FC<HeroProps> = ({ heading, image, tagline }) => {
   const headerAnimationDuration = (letters.length - 1) * 0.1 + 0.7;
   return (
     <section className="h-[95vh] relative overflow-hidden flex justify-start items-end">
-      <motion.figure
-        initial={{ scale: 0.6 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.6, type: "tween", ease: "easeInOut" }}
-        className="absolute top-0 left-0 h-full w-full -z-10 overflow-hidden"
-      >
+      <motion.figure className="absolute top-0 left-0 h-full w-full -z-10 overflow-hidden">
         <SanityImg
           className="h-full w-full object-cover"
           image={image}
