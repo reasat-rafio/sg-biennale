@@ -13,6 +13,7 @@ import {
 } from "@lib/@types/artist-details.types";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import parse from "html-react-parser";
 
 interface HeroProps {
   name: string;
@@ -29,6 +30,9 @@ const serializers = {
       const id = getYouTubeId(url as string);
       return <YouTube videoId={id as string} />;
     },
+    code: ({ node }: any) => {
+      return parse(node.code);
+    },
   },
 };
 
@@ -39,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({
   name,
   artworks,
 }) => {
-  const windowWidth = useWindowSize()?.width ?? 0;
+  // const windowWidth = useWindowSize()?.width ?? 0;
   const [activeCarouselIndex, setActiveCarouslIndex] = useState<null | number>(
     null
   );
