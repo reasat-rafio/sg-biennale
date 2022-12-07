@@ -1,5 +1,3 @@
-import { motion, Variants } from "framer-motion";
-
 interface DescriptionProps {
   subtitle: string;
   description: string;
@@ -10,7 +8,7 @@ export const DescriptionBlock: React.FC<DescriptionProps> = ({
   description,
 }) => {
   return (
-    <div className="flex flex-col space-y-8 max-w-7xl mx-auto pt-xl">
+    <div className="flex flex-col space-y-8 max-w-7xl mx-auto pt-section">
       <h4 className="xl:text-heading-3 lg:text-heading-4 text-heading-6 font-medium leading-tight text-black">
         {subtitle}
       </h4>
