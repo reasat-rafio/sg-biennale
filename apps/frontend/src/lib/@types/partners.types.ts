@@ -1,4 +1,3 @@
-import { Slug } from "./global.types";
 import { SanityImage } from "sanity-react-extra";
 
 export interface PartnerListProps {
