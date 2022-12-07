@@ -41,6 +41,7 @@ const PartnersListing = {
             {
               name: "partners",
               type: "array",
+              validation: (Rule) => Rule.required(),
               of: [
                 {
                   name: "partner",

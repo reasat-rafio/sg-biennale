@@ -20,16 +20,7 @@ const query = groq`{
         'image': ${withDimensions("image")},
       }
     }
-  },
-  "partners":*[_type == "partner"][]{
-        ...,
-        tier->{
-          _id,
-          title,
-          order
-        },
-        'image': ${withDimensions("image")},
-    },    
+  },   
 }`;
 
 export const getStaticProps: GetStaticProps = async (
@@ -42,15 +33,12 @@ export const getStaticProps: GetStaticProps = async (
 const Partners: NextPage<SanityProps> = (props) => {
   const {
     page: { header, description, greetings, partnersAndTiers },
-    partners,
   } = useSanityQuery(query, props).data;
-
-  console.log(partnersAndTiers);
 
   return (
     <Container className="py-section">
       <PageHeading heading={header} tagline={description} />
-      <PartnerList partners={partners} />
+      <PartnerList partnersAndTiers={partnersAndTiers} />
       <Greeting greetings={greetings} />
     </Container>
   );

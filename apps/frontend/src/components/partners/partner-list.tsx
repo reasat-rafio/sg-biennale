@@ -1,61 +1,32 @@
-import {
-  ModifyedPartnersList,
-  PartnerListProps,
-} from "@lib/@types/partners.types";
+import { PartnerListProps } from "@lib/@types/partners.types";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder } from "@utils/sanity";
-import { useEffect, useState } from "react";
 import { SanityImg } from "sanity-react-extra";
 import { motion } from "framer-motion";
 import { Header } from "@components/ui/header";
 import { useRouter } from "next/router";
 import clsx from "clsx";
 
-export const PartnerList: React.FC<PartnerListProps> = ({ partners }) => {
+export const PartnerList: React.FC<PartnerListProps> = ({
+  partnersAndTiers,
+}) => {
   const router = useRouter();
   const windowWidth = useWindowSize()?.width ?? 0;
-  const [_partners, setPartners] = useState<ModifyedPartnersList[] | null>(
-    null
-  );
 
   const onClickAction = (href?: string) => {
     if (href && typeof window !== "undefined") router.push(href);
   };
 
-  useEffect(() => {
-    const newPatnersList: ModifyedPartnersList[] = Object.values(
-      partners.reduce((newArr: any, patner) => {
-        let tierName = patner.tier.title;
-        let order = patner.tier.order;
-        !newArr[tierName]
-          ? (newArr[tierName] = {
-              tierName,
-              order,
-              id: patner.tier._id,
-              data: [patner],
-            })
-          : newArr[tierName].data.push(patner);
-
-        return newArr;
-      }, {})
-    );
-    /* ❓ sorting the partnes by their tiper level */
-    const sortPartnersByTierLevel = newPatnersList.sort((a, b) =>
-      a.order > b.order ? 1 : -1
-    );
-    setPartners(sortPartnersByTierLevel);
-  }, [partners]);
-
   return (
     <div className="flex flex-col | space-y-10 xl:my-xxl lg:my-xl my-x">
-      {_partners?.map(({ tierName, data, id }) => (
-        <article className="pb-5 space-y-10" key={id}>
-          <Header variant="secondary">{tierName}</Header>
+      {partnersAndTiers.map(({ _key, partners, title }) => (
+        <article className="pb-5 space-y-10" key={_key}>
+          <Header variant="secondary">{title}</Header>
 
           <section className="grid grid-cols-12 | gap-5">
-            {data.map(({ _id, name, image, href }) => (
+            {partners.map(({ _key, name, image, href }) => (
               <motion.figure
-                key={_id}
+                key={_key}
                 className={clsx(
                   "md:col-span-4 sm:col-span-6 col-span-12 | flex justify-center items-center | h-[255px] p-5 | bg-white  overflow-hidden",
                   href && "cursor-pointer"
