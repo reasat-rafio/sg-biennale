@@ -1,7 +1,7 @@
 import { FcButtingIn } from "react-icons/fc";
 
 const ArtistListing = {
-  title: "Artist Listing Page",
+  title: "Artists & Artworks",
   name: "artistListingPage",
   type: "document",
   icon: FcButtingIn,

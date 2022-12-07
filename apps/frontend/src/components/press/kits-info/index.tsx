@@ -13,7 +13,7 @@ interface KitsInfoProps {
   description: string;
   image?: SanityImage;
   cta: Cta;
-  infoAndContacts: InfoAndContactsProps;
+  infoAndContacts?: InfoAndContactsProps;
 }
 
 export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
@@ -51,8 +51,11 @@ export const KitsInfo: React.FC<{ kitInfos: KitsInfoProps[] }> = ({
                   description={description}
                   cta={cta}
                   image={image}
+                  takeMinRawSpan={Boolean(infoAndContacts?.infos)}
                 />
-                <InfoAndContacts {...infoAndContacts} />
+                {infoAndContacts?.infos && (
+                  <InfoAndContacts {...infoAndContacts} />
+                )}
               </div>
               {image && windowWidth >= 1024 && (
                 <div className="col-span-12 lg:col-span-6 2xl:col-span-7 | flex justify-center items-center overflow-hidden">

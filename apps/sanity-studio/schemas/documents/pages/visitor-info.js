@@ -1,4 +1,4 @@
-import { FcInfo, FcAddImage } from "react-icons/fc";
+import { FcInfo } from "react-icons/fc";
 
 const VisitorInfoPage = {
   name: "visitorInfoPage",

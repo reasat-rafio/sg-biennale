@@ -9,6 +9,7 @@ import { Donation } from "@components/support-us/donation";
 import { Decor } from "@components/support-us/decor";
 import { Volunteer } from "@components/support-us/volunteer";
 import { Hero } from "@components/support-us/hero";
+import { MoreInfos } from "@components/common/more-info";
 
 const query = pageQuery(groq`
   *[_type == "supportUsPage"][0]{
@@ -19,6 +20,10 @@ const query = pageQuery(groq`
       cta {
         ...,
         "icon": ${withDimensions("icon")},
+      },
+      moreInfos[]{
+        ...,
+        'image': ${withDimensions("image")},
       },
       images[] {
         ..., 
@@ -50,6 +55,7 @@ const SupportUs: NextPage<SanityProps> = (props) => {
         "supportUs.volunteer": Volunteer,
         "supportUs.donation": Donation,
         "supportUs.decor": Decor,
+        moreInfo: MoreInfos,
       })}
     </div>
   );

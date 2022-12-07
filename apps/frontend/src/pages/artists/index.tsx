@@ -11,6 +11,7 @@ import { useCallback, useEffect } from "react";
 import { renderObjectArray, withDimensions } from "sanity-react-extra";
 import { ArtistsList } from "@components/artists/artist-list";
 import { Filters } from "@components/artists/filters";
+import { MoreInfos } from "@components/common/more-info";
 
 const query = groq`{
     "site": ${siteQuery},
@@ -19,6 +20,10 @@ const query = groq`{
       sections[]{
         ...,
         'image': ${withDimensions("image")},
+        moreInfos[]{
+          ...,
+          'image': ${withDimensions("image")},
+        },
       }
     },
     "artists": *[_type == "artist"]{
@@ -64,6 +69,7 @@ const Artists: NextPage<SanityProps> = (props) => {
           ),
           []
         ),
+        moreInfo: MoreInfos,
       })}
       <FilteringLogic>
         <Filters />

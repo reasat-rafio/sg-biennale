@@ -1,9 +1,9 @@
+import { MoreInfos } from "@components/common/more-info";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { Container } from "@components/ui/container";
 import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
 import { ImageGallery } from "@components/visitor-info/image-gallery";
 import { Map } from "@components/visitor-info/map";
-import { MoreInfos } from "@components/visitor-info/more-infos";
 import { Venue } from "@components/visitor-info/venue";
 import { FilteringLogic } from "@components/visitor-info/venue/filtering-logic";
 import { siteQuery } from "@lib/query";
@@ -85,7 +85,7 @@ const VisitorInfo: NextPage<SanityProps> = (props) => {
           []
         ),
         "visitorInfoPage.imageGallery": ImageGallery,
-        "visitorInfoPage.moreInfo": MoreInfos,
+        moreInfo: MoreInfos,
       })}
       <FilteringLogic>
         <Venue />

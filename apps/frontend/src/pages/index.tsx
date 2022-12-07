@@ -12,6 +12,7 @@ import { useCallback } from "react";
 import { HomHeroProps } from "@lib/@types/home.types";
 import { KV } from "@components/home/hero/kv";
 import { HighLight } from "@components/home/highlight";
+import { MoreInfos } from "@components/common/more-info";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -27,6 +28,10 @@ const query = pageQuery(groq`
             dimensions
           }
         }
+      },
+      moreInfos[]{
+        ...,
+        'image': ${withDimensions("image")},
       },
       information {
         ...,
@@ -102,6 +107,7 @@ const Home: NextPage<SanityProps> = (props) => {
         "homePage.highlight": HighLight,
         "homePage.news": News,
         "homePage.organisations": Organisations,
+        moreInfo: MoreInfos,
       })}
     </div>
   );

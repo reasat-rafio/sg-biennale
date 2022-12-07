@@ -8,12 +8,10 @@ const KitinfoAndContacts = {
     {
       name: "title",
       type: "string",
-      validation: (Rule) => Rule.required(),
     },
     {
       name: "infos",
       type: "array",
-      validation: (Rule) => Rule.required(),
       of: [
         {
           name: "info",

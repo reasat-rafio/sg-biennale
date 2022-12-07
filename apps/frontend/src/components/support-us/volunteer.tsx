@@ -14,7 +14,7 @@ interface VolunteerProps {
   header: string;
   description: string;
   cta: Cta;
-  images: SanityImage[];
+  images?: SanityImage[];
 }
 
 export const Volunteer: React.FC<VolunteerProps> = ({
@@ -40,38 +40,40 @@ export const Volunteer: React.FC<VolunteerProps> = ({
           <Button onClick={() => router.push(cta.href)}>{cta.title}</Button>
         </div>
       </section>
-      <Swiper
-        className="pt-5"
-        speed={800}
-        slidesPerView={1.2}
-        spaceBetween={5}
-        breakpoints={{
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          1280: {
-            slidesPerView: 2.8,
-            spaceBetween: 20,
-          },
-        }}
-      >
-        {images.map((image, idx) => (
-          <SwiperSlide key={images[0].asset._id + idx}>
-            <div className="p-5 h-[340px] outline-none" key={image._key}>
-              <SanityImg
-                className="w-full h-full object-cover"
-                width={
-                  windowWidth >= 1280 ? 400 : windowWidth >= 768 ? 300 : 200
-                }
-                image={image}
-                builder={imageUrlBuilder}
-                alt={image.alt}
-              />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {images?.length && (
+        <Swiper
+          className="pt-5"
+          speed={800}
+          slidesPerView={1.2}
+          spaceBetween={5}
+          breakpoints={{
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1280: {
+              slidesPerView: 2.8,
+              spaceBetween: 20,
+            },
+          }}
+        >
+          {images.map((image, idx) => (
+            <SwiperSlide key={images[0].asset._id + idx}>
+              <div className="p-5 h-[340px] outline-none" key={image._key}>
+                <SanityImg
+                  className="w-full h-full object-cover"
+                  width={
+                    windowWidth >= 1280 ? 400 : windowWidth >= 768 ? 300 : 200
+                  }
+                  image={image}
+                  builder={imageUrlBuilder}
+                  alt={image.alt}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </Container>
   );
 };

@@ -20,10 +20,10 @@ const SupportUsVolunteer = {
     {
       name: "images",
       type: "array",
-      validation: (Rule) => Rule.required(),
       of: [
         {
           type: "image",
+          validation: (Rule) => Rule.required(),
           fields: [
             {
               title: "Alternative Text",

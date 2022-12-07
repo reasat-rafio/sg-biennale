@@ -14,8 +14,9 @@ export const Header: React.FC<{
   description: string;
   cta: Cta;
   intersecting: boolean | undefined;
+  takeMinRawSpan: boolean;
   image?: SanityImage;
-}> = ({ header, description, cta, intersecting, image }) => {
+}> = ({ header, description, cta, intersecting, image, takeMinRawSpan }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const [positionedAtRight, setPositionedAtRight] = useState(false);
 
@@ -34,9 +35,10 @@ export const Header: React.FC<{
     <div
       ref={headerRef}
       className={clsx(
-        "row-span-4 | flex flex-col | border-b | space-y-7 py-4",
+        "flex flex-col | space-y-7 py-4",
         image ? "justify-center" : "justify-start",
-        positionedAtRight ? "max-w-2xl" : "xl:pl-max"
+        positionedAtRight ? "max-w-2xl" : "xl:pl-max",
+        takeMinRawSpan ? "row-span-4 border-b" : "row-span-6"
       )}
     >
       <SectionHeader className="py-1" color="#DE5742">
@@ -67,7 +69,7 @@ export const Header: React.FC<{
             ease: "easeInOut",
           },
         }}
-        className="xl:pt-9 pt-5"
+        className={clsx("xl:pt-9 pt-5", !takeMinRawSpan && "border-b pb-4")}
       >
         <Button
           variant="secondary"

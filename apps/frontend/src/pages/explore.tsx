@@ -10,6 +10,7 @@ import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
 import { CuratorialEssay } from "@components/explore/curatorial-essay";
 import { PublicationsCatalogues } from "@components/explore/publication-catalogue";
 import { DirectoryOfTerm } from "@components/explore/directory-of-term";
+import { MoreInfos } from "@components/common/more-info";
 
 const query = groq`{
   "site": ${siteQuery},
@@ -36,6 +37,10 @@ const query = groq`{
                   }
                 }
               },
+            },
+            moreInfos[]{
+              ...,
+              'image': ${withDimensions("image")},
             },
             curatorialEssays[]{
                 ...,
@@ -90,6 +95,7 @@ const Explore: NextPage<SanityProps> = (props) => {
           []
         ),
         "explorePage.directoryOfTerm": DirectoryOfTerm,
+        moreInfo: MoreInfos,
       })}
     </>
   );

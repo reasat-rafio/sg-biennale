@@ -8,11 +8,18 @@ import { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
 import { withDimensions } from "sanity-react-extra";
+import { MoreInfos } from "@components/common/more-info";
 
 const query = groq`{
   "site": ${siteQuery},
   "page": *[_type == "partnerListingPage"][0]{
     ...,
+    moreInfoSection{
+      moreInfos[]{
+        ...,
+        'image': ${withDimensions("image")},      
+      }
+    },
     partnersAndTiers[] {
       ...,
       partners[]{
@@ -32,15 +39,26 @@ export const getStaticProps: GetStaticProps = async (
 
 const Partners: NextPage<SanityProps> = (props) => {
   const {
-    page: { header, description, greetings, partnersAndTiers },
+    page: {
+      header,
+      description,
+      greetings,
+      partnersAndTiers,
+      moreInfoSection: { moreInfos },
+    },
   } = useSanityQuery(query, props).data;
 
   return (
-    <Container className="py-section">
-      <PageHeading heading={header} tagline={description} />
-      <PartnerList partnersAndTiers={partnersAndTiers} />
-      <Greeting greetings={greetings} />
-    </Container>
+    <>
+      <Container>
+        <PageHeading heading={header} tagline={description} />
+      </Container>
+      <MoreInfos moreInfos={moreInfos} />
+      <Container>
+        <PartnerList partnersAndTiers={partnersAndTiers} />
+        <Greeting greetings={greetings} />
+      </Container>
+    </>
   );
 };
 

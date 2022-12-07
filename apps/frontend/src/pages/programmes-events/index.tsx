@@ -7,11 +7,12 @@ import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
 import { useCallback, useEffect } from "react";
 import { PageHeaderProps, PageHeading } from "@components/shared/page-heading";
-import { renderObjectArray } from "sanity-react-extra";
+import { renderObjectArray, withDimensions } from "sanity-react-extra";
 import { AllEvents } from "@components/programmes-and-events/all-events";
 import { filterPastEvents } from "@lib/helpers/programme-event.helper";
 import { FilteringLogic } from "@components/programmes-and-events/all-events/filters/filtering-logic";
 import { Container } from "@components/ui/container";
+import { MoreInfos } from "@components/common/more-info";
 const ClosestEvent = dynamic(
   () => import("@components/programmes-and-events/closest-event"),
   {
@@ -24,6 +25,10 @@ const query = groq`{
     ...,
     sections[]{
       ...,
+      moreInfos[]{
+        ...,
+        'image': ${withDimensions("image")},      
+      },
       closestEvents[]->{
         _id,
         images[] {
@@ -145,6 +150,7 @@ const ProgrammesAndEvents: NextPage<SanityProps> = (props) => {
           []
         ),
         "programmesEventsPage.closestEvent": ClosestEvent,
+        moreInfo: MoreInfos,
       })}
       <FilteringLogic>
         <AllEvents />

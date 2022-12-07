@@ -12,6 +12,7 @@ import { RecentUpdate } from "@components/press/recent-update";
 import { motion } from "framer-motion";
 import { useIntersection } from "@lib/hooks";
 import { KitsInfo } from "@components/press/kits-info";
+import { MoreInfos } from "@components/common/more-info";
 
 const query = pageQuery(groq`
   *[_type == "pressPage"][0]{
@@ -36,6 +37,10 @@ const query = pageQuery(groq`
            cta {
               ...,
              "icon": ${withDimensions("icon")},
+           },
+            moreInfos[]{
+            ...,
+            "image": ${withDimensions("image")}
            },
            kitInfos[]{
             ...,
@@ -108,6 +113,7 @@ const Press: NextPage<SanityProps> = (props) => {
           ),
           "pressPage.release": Release,
           "pressPage.kitInfo": KitsInfo,
+          moreInfo: MoreInfos,
         })}
       </motion.div>
     </div>

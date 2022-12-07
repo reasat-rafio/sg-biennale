@@ -99,7 +99,7 @@ const deskStructure = () =>
               pageItem({
                 schemaType: "artistListingPage",
                 id: "artistListingPage",
-                title: "Artists Listing",
+                title: "Artists & Artworks",
                 slug: "artists",
               }),
               pageItem({

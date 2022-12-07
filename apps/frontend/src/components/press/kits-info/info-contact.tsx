@@ -3,7 +3,7 @@ import { useWindowSize } from "@lib/hooks";
 import clsx from "clsx";
 
 export interface InfoAndContactsProps {
-  title: string;
+  title?: string;
   infos: {
     _key?: string;
     label: string;
@@ -36,7 +36,7 @@ export const InfoAndContacts: React.FC<InfoAndContactsProps> = ({
         positionedAtRight ? "max-w-2xl" : "xl:pl-max"
       )}
     >
-      <h6 className="text-body-1 font-semibold">{title}</h6>
+      {title && <h6 className="text-body-1 font-semibold">{title}</h6>}
       <ul>
         {infos.map(({ _key, label, value }) => (
           <li

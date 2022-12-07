@@ -48,7 +48,6 @@ const PressKitInfo = {
             {
               name: "infoAndContacts",
               type: "pressPage.kitInfo.infoAndContacts",
-              validation: (Rule) => Rule.required(),
             },
           ],
           preview: {
@@ -60,18 +59,16 @@ const PressKitInfo = {
           },
         },
       ],
-      preview: {
-        select: {
-          title: "kitInfo[0].title",
-        },
-        prepare(selection) {
-          return {
-            title: "Press Kits",
-          };
-        },
-      },
     },
   ],
+  preview: {
+    select: {
+      title: "",
+    },
+    prepare: () => ({
+      title: "Press Kits",
+    }),
+  },
 };
 
 export default PressKitInfo;
