@@ -19,7 +19,7 @@ export const Desktop: React.FC<DesktopProps> = ({ kvs }) => {
         grabCursor={windowWidth >= 1024 ? kvs.length < 3 : kvs.length < 2}
         modules={[Autoplay]}
         autoplay={{ delay: 4000 }}
-        slidesPerView={windowWidth >= 1024 ? 3 : 2}
+        slidesPerView={windowWidth >= 1280 ? 4 : windowWidth >= 1024 ? 3 : 2}
         spaceBetween={40}
       >
         {kvs.map((image) => (
