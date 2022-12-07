@@ -1,6 +1,7 @@
 import { Anchor } from "@components/ui/anchor";
 import { Button } from "@components/ui/button";
 import { Container } from "@components/ui/container";
+import { Cta } from "@lib/@types/global.types";
 import { InformationProps } from "@lib/@types/venue-details";
 import { useWindowSize } from "@lib/hooks";
 import { imageUrlBuilder, PortableText } from "@utils/sanity";
@@ -10,9 +11,15 @@ interface HeroProps {
   name: string;
   image: SanityImage;
   informations: InformationProps[];
+  cta?: Cta;
 }
 
-export const Hero: React.FC<HeroProps> = ({ image, informations, name }) => {
+export const Hero: React.FC<HeroProps> = ({
+  image,
+  informations,
+  name,
+  cta,
+}) => {
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
@@ -20,7 +27,7 @@ export const Hero: React.FC<HeroProps> = ({ image, informations, name }) => {
       <Anchor href="/visitor-info" className="text-gray--700">
         Back to Visitor Info
       </Anchor>
-      <Header name={name} />
+      <Header name={name} cta={cta} />
 
       <section className="grid grid-cols-12 gap-5">
         <figure className="xl:col-span-7 md:col-span-6 col-span-12">
@@ -42,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({ image, informations, name }) => {
   );
 };
 
-const Header: React.FC<{ name: string }> = ({ name }) => {
+const Header: React.FC<{ name: string; cta: Cta }> = ({ name, cta }) => {
   return (
     <div className="flex md:flex-row flex-col | items-center md:space-x-5 md:space-y-0 space-y-5">
       <header className="flex-1">
@@ -50,7 +57,11 @@ const Header: React.FC<{ name: string }> = ({ name }) => {
           {name}
         </h1>
       </header>
-      <Button variant="secondary">Get Directions</Button>
+      {cta && (
+        <Button type="href" href={cta.href} variant="secondary">
+          {cta.title}
+        </Button>
+      )}
     </div>
   );
 };

@@ -62,6 +62,7 @@ const Venue = {
       ],
       validation: (Rule) => Rule.required(),
     },
+    { name: "cta", type: "cta" },
     {
       name: "location",
       type: "string",
@@ -71,10 +72,6 @@ const Venue = {
       title: "Start At",
       name: "startAt",
       type: "string",
-    },
-    {
-      name: "direction",
-      type: "url",
     },
     {
       title: "Informations",

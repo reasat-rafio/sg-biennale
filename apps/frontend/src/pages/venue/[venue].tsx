@@ -16,6 +16,7 @@ const query = pageQuery(groq`
     *[_type == "venue" && slug.current == $venue][0]{
         _id,
         name,
+        cta,
         content[]{
           ...,
           asset->{
@@ -61,12 +62,17 @@ export const getStaticProps: GetStaticProps = async (
 });
 
 const VenueDetailPage: NextPage<SanityProps> = (props) => {
-  const { name, images, content, iformations } = props.data.page;
+  const { name, images, content, iformations, cta } = props.data.page;
 
   return (
     <section>
       {images?.length && (
-        <Hero name={name} image={images[0]} informations={iformations} />
+        <Hero
+          name={name}
+          image={images[0]}
+          informations={iformations}
+          cta={cta}
+        />
       )}
       <Description content={content} />
       <Carousel images={images} />
