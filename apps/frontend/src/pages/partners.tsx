@@ -39,13 +39,7 @@ export const getStaticProps: GetStaticProps = async (
 
 const Partners: NextPage<SanityProps> = (props) => {
   const {
-    page: {
-      header,
-      description,
-      greetings,
-      partnersAndTiers,
-      moreInfoSection: { moreInfos },
-    },
+    page: { header, description, greetings, partnersAndTiers, moreInfoSection },
   } = useSanityQuery(query, props).data;
 
   return (
@@ -53,7 +47,9 @@ const Partners: NextPage<SanityProps> = (props) => {
       <Container>
         <PageHeading heading={header} tagline={description} />
       </Container>
-      <MoreInfos moreInfos={moreInfos} />
+      {moreInfoSection?.moreInfos && (
+        <MoreInfos moreInfos={moreInfoSection.moreInfos} />
+      )}
       <Container>
         <PartnerList partnersAndTiers={partnersAndTiers} />
         <Greeting greetings={greetings} />
