@@ -17,6 +17,7 @@ const ProgrammesEventsPage = {
       of: [
         { type: "pageHeading" },
         { type: "programmesEventsPage.closestEvent" },
+        { type: "moreInfo" },
       ],
     },
   ],

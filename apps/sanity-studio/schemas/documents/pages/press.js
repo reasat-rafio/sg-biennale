@@ -15,6 +15,7 @@ const PressPage = {
         { type: "pressPage.recentUpdate" },
         { type: "pressPage.release" },
         { type: "pressPage.kitInfo" },
+        { type: "moreInfo" },
       ],
     },
   ],

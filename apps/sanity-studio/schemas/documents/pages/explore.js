@@ -15,6 +15,7 @@ const ExplorePage = {
         { type: "explorePage.publicationAndCatalogue" },
         { type: "explorePage.curatorialEssay" },
         { type: "explorePage.directoryOfTerm" },
+        { type: "moreInfo" },
       ],
     },
   ],

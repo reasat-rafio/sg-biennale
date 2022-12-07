@@ -14,6 +14,7 @@ const SupportUsPage = {
         { type: "supportUs.hero" },
         { type: "supportUs.volunteer" },
         { type: "supportUs.donation" },
+        { type: "moreInfo" },
         {
           name: "supportUs.decor",
           title: "Decor",

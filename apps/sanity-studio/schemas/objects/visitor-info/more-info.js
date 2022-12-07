@@ -61,6 +61,12 @@ const VisitorMoreInfo = {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "title",
+    },
+    prepare: () => ({ title: "More Info" }),
+  },
 };
 
 export default VisitorMoreInfo;

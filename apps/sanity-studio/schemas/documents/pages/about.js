@@ -21,6 +21,7 @@ const AboutPage = {
         { type: "aboutPage.aboutSponsors" },
         { type: "aboutPage.about" },
         { type: "aboutPage.pastEdition" },
+        { type: "moreInfo" },
       ],
     },
   ],

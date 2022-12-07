@@ -80,6 +80,7 @@ const PartnersListing = {
       type: "array",
       of: [{ type: "block" }],
     },
+    { name: "moreInfoSection", type: "moreInfo" },
   ],
   preview: {
     select: {

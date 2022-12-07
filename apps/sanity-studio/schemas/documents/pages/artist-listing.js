@@ -14,7 +14,7 @@ const ArtistListing = {
     {
       name: "sections",
       type: "array",
-      of: [{ type: "pageHeading" }],
+      of: [{ type: "pageHeading" }, { type: "moreInfo" }],
     },
   ],
   preview: {

@@ -17,6 +17,7 @@ const HomePage = {
         { type: "homePage.organisations" },
         { type: "homePage.news" },
         { type: "homePage.highlight" },
+        { type: "moreInfo" },
       ],
     },
   ],

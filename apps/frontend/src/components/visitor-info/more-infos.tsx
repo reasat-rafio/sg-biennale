@@ -17,7 +17,7 @@ export const MoreInfos: React.FC<MoreInfosProps> = ({ moreInfos }) => {
         className="grid grid-cols-12 | lg:gap-10 gap-5"
       >
         {moreInfos.map(({ _key, title, subtitle, description, image, cta }) =>
-          image ? (
+          image?.asset ? (
             <WithImageSection
               key={_key}
               title={title}
