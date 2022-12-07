@@ -1,3 +1,4 @@
+import { SEO } from "@components/common/seo";
 import { Carousel } from "@components/venue-details/carousel";
 import { Description } from "@components/venue-details/description";
 import { Hero } from "@components/venue-details/hero";
@@ -14,6 +15,7 @@ import { SanityProps } from "next-sanity-extra";
 
 const query = pageQuery(groq`
     *[_type == "venue" && slug.current == $venue][0]{
+        seo,
         _id,
         name,
         cta,

@@ -7,6 +7,10 @@ const Venue = {
   icon: FcReading,
   fields: [
     {
+      name: "seo",
+      type: "seo",
+    },
+    {
       name: "order",
       type: "number",
       hidden: true,
