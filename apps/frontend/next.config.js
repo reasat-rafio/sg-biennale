@@ -10,7 +10,7 @@ const STUDIO_REWRITE = {
 
 const ContentSecurityPolicy = `
   default-src 'self' 'unsafe-inline' 'unsafe-eval' *.userway.org cdn.sanity.io https://66wl3wil.api.sanity.io;
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net https://ajax.cloudflare.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com https://www.facebook.com https://connect.facebook.net https://ajax.cloudflare.com *.youtube.com;
   child-src 'none';
   font-src 'self' fonts.gstatic.com  data:;
   style-src 'self' 'unsafe-inline' fonts.googleapis.com; 
