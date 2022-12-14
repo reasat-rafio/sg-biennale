@@ -37,8 +37,7 @@ export const BackSide: React.FC<BackSideProps> = ({
   _key,
   width,
 }) => {
-  const { setSelectedCoArtisticDirectorId, selectedCoArtisticDirectorId } =
-    useAboutStore();
+  const { setSelectedCoArtisticDirectorId } = useAboutStore();
   const [ref] = usePortableTextTruncate({ maxLength: 250 });
 
   return (
@@ -47,7 +46,7 @@ export const BackSide: React.FC<BackSideProps> = ({
         width,
       }}
       initial={{ left: 0 }}
-      animate={{ left: active ? "50%" : 0 }}
+      animate={{ left: active ? "48%" : 0 }}
       transition={{ type: "tween", duration: 0.4 }}
       className="h-full absolute top-0 | pl-5 pr-10 box-border ml-auto | bg-white"
       onClick={(e) => e.stopPropagation()}

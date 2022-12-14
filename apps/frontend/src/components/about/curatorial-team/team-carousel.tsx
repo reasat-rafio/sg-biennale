@@ -25,10 +25,17 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   const swiperRef = useRef<SwiperType>();
   const windowWidth = useWindowSize()?.width ?? 0;
   const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [cardsPerView, setCardsperView] = useState(4);
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsWidth = useMemo(() => windowWidth / 4, [windowWidth]);
+  const cardsWidth = useMemo(
+    () => windowWidth / cardsPerView,
+    [cardsPerView, windowWidth]
+  );
   const sectionMargin = 17;
-  const spaceBetween = 40;
+  const spaceBetween = useMemo(
+    () => (cardsPerView > 2 ? 40 : 30),
+    [cardsPerView]
+  );
 
   const onClickCardAction = (index: number) =>
     setActiveCard((prev) => (prev === index ? null : index));
@@ -42,16 +49,28 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   );
 
   useEffect(() => {
+    if (windowWidth >= 1280) setCardsperView(4);
+    else if (windowWidth < 1280 && windowWidth >= 1024) setCardsperView(3);
+    else if (windowWidth < 1024 && windowWidth >= 768) setCardsperView(2);
+    else setCardsperView(1);
+  }, [windowWidth]);
+
+  useEffect(() => {
     if (swiperRef !== null && !!activeCard) {
-      swiperRef.current?.slideTo(activeCard as number);
+      const slideTo = cardsPerView > 2 ? activeCard - 1 : activeCard;
+      swiperRef.current?.slideTo(slideTo);
     }
-  }, [swiperRef, cardsWidth, activeCard]);
+  }, [swiperRef, cardsWidth, activeCard, cardsPerView]);
+
+  useEffect(() => {
+    swiperRef.current?.update();
+  }, [cardsPerView]);
 
   return (
     <section
       style={{ margin: `0px ${sectionMargin}px` }}
       ref={sectionRef}
-      className="bg-yellow-200 mx-5 highlightCarousel"
+      className="mx-5"
     >
       <Swiper
         grabCursor
@@ -75,7 +94,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
                 width: getWidth(index),
               }}
               className={clsx(
-                "relative aspect-square | transition-all duration-700 ease-in-out h-[600px] hover:cursor-pointer"
+                "relative aspect-square | transition-all duration-700 ease-in-out | xl:h-[500px] h-[400px] | hover:cursor-pointer"
               )}
             >
               <FrontSide
