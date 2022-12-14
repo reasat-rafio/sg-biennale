@@ -3,12 +3,12 @@ import { TeamCollection } from "@lib/@types/about.types";
 import { useWindowSize } from "@lib/hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/scrollbar";
+import "swiper/css/free-mode";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FrontSide } from "./front-side";
 import { BackSideProps } from "./back-side";
 import clsx from "clsx";
-import { Swiper as SwiperType, Mousewheel, Scrollbar } from "swiper";
+import { Swiper as SwiperType, FreeMode } from "swiper";
 
 const BackSide = dynamic<BackSideProps>(
   () => import("./back-side").then((com) => com.BackSide),
@@ -43,9 +43,11 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   const getWidth = useCallback(
     (index: number) =>
       index === activeCard
-        ? cardsWidth * 2 - (spaceBetween + sectionMargin / 2)
+        ? cardsPerView > 1
+          ? cardsWidth * 2 - (spaceBetween + sectionMargin / 2)
+          : cardsWidth - (spaceBetween + sectionMargin / 2)
         : cardsWidth - (spaceBetween + sectionMargin / 2),
-    [activeCard, cardsWidth]
+    [activeCard, cardsWidth, cardsPerView]
   );
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
   }, [windowWidth]);
 
   useEffect(() => {
-    if (swiperRef !== null && !!activeCard) {
+    if (swiperRef !== null && !!activeCard && cardsPerView !== 0) {
       const slideTo = cardsPerView > 2 ? activeCard - 1 : activeCard;
       swiperRef.current?.slideTo(slideTo);
     }
@@ -70,13 +72,15 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     <section
       style={{ margin: `0px ${sectionMargin}px` }}
       ref={sectionRef}
-      className="mx-5"
+      className="mx-5 lg:pb-xxl pb-x"
     >
       <Swiper
         grabCursor
-        speed={600}
+        speed={800}
         slidesPerView="auto"
         spaceBetween={spaceBetween}
+        freeMode={true}
+        modules={[FreeMode]}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
           swiper.update();
