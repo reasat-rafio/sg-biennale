@@ -23,7 +23,7 @@ export const NavSection: React.FC<NavProps> = ({ menu }) => {
     <section className="flex-1 flex mt-10 lg:mt-0">
       <div className=" flex-1 | grid grid-cols-12 justify-center lg:items-center">
         <div className="lg:col-span-8 col-span-12 ">
-          <ul className="2xl:space-y-5 sm:space-y-2 space-y-5">
+          <ul className="2xl:space-y-5 sm:space-y-2 space-y-3">
             {menu.map(({ _key, slug, title }, index) => (
               <motion.li key={_key} className="overflow-hidden">
                 <motion.span
@@ -40,7 +40,7 @@ export const NavSection: React.FC<NavProps> = ({ menu }) => {
                   onClick={() => setShowNavDropDown(false)}
                 >
                   <Link href={`/${slug.current}`} prefetch={false}>
-                    <a className="2xl:text-[3rem] xl:text-[2.8rem] md:text-heading-5 text-heading-6 font-medium sm:py-1">
+                    <a className="2xl:text-[3rem] xl:text-[2.8rem] md:text-heading-5 text-heading-6 font-medium py-[4px]">
                       {title}
                     </a>
                   </Link>

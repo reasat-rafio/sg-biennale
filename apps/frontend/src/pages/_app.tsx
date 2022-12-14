@@ -22,7 +22,7 @@ const Footer = dynamic<ISite["site"]>(
 );
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { addNavbarHeight } = useGlobalStore();
+  const { addNavbarHeight, setShowNavDropDown } = useGlobalStore();
   const windowWidth = useWindowSize()?.width ?? 0;
 
   const router = useRouter();
@@ -33,6 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     const navbarHeight = document.querySelector("#navbar")?.clientHeight!!;
     addNavbarHeight(navbarHeight);
   }, [windowWidth]);
+
+  useEffect(() => {
+    setShowNavDropDown(false);
+  }, [router.pathname]);
 
   return (
     <>
