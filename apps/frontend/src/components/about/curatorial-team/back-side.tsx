@@ -9,9 +9,9 @@ import { motion, Variants } from "framer-motion";
 export interface BackSideProps {
   description: string;
   slug: Slug;
-  cardsPerView: number;
   active: boolean;
-  id: string;
+  _key: string;
+  width: number;
 }
 
 interface BackSideVariantsProps {
@@ -34,26 +34,61 @@ const SlideRightAnimationVariants: Variants = {
 export const BackSide: React.FC<BackSideProps> = ({
   description,
   active,
-  cardsPerView,
-  id,
+  _key,
+  width,
 }) => {
-  const props = {
-    active,
-    description,
-    id,
-  };
+  const { setSelectedCoArtisticDirectorId, selectedCoArtisticDirectorId } =
+    useAboutStore();
+  const [ref] = usePortableTextTruncate({ maxLength: 250 });
 
   return (
-    <>
-      {cardsPerView !== 1 ? (
-        <SlideRightVariant {...props} />
-      ) : (
-        <ScaleUpVarian {...props} />
-      )}
-    </>
+    <motion.section
+      style={{
+        width,
+      }}
+      initial={{ left: 0 }}
+      animate={{ left: active ? "50%" : 0 }}
+      transition={{ type: "tween", duration: 0.4 }}
+      className="h-full absolute top-0 | pl-5 pr-10 box-border ml-auto | bg-white"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <motion.div
+        className="flex flex-col justify-center items-center | h-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: active ? 1 : 0 }}
+        transition={{
+          duration: 0.3,
+          type: "tween",
+          ease: "easeInOut",
+          delay: 0.4,
+        }}
+      >
+        <div className="flex-1 flex justify-center items-center">
+          <div className="font-manrope text-body-1 text-gray-500" ref={ref}>
+            <PortableText blocks={description} />
+          </div>
+        </div>
+        <div className="w-full">
+          <Button
+            onClick={() => {
+              setSelectedCoArtisticDirectorId(_key);
+            }}
+          >
+            Read More
+          </Button>
+        </div>
+      </motion.div>
+    </motion.section>
   );
 };
 
+{
+  /* {cardsPerView !== 1 ? (
+        <SlideRightVariant {...props} />
+      ) : (
+        <ScaleUpVarian {...props} />
+      )} */
+}
 const SlideRightVariant: React.FC<BackSideVariantsProps> = ({
   active,
   description,

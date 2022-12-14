@@ -8,10 +8,11 @@ import { useWindowSize } from "@lib/hooks";
 interface FrontSideProps {
   active: boolean;
   name: string;
-  cardBackgroundGardiants: TeamCollection["cardBackgroundGardiants"];
+  bgGradient: TeamCollection["cardBackgroundGardiants"];
   image: SanityImage;
-  cardsPerView: number;
-  id: string;
+  _key: string;
+  width: number;
+  windowWidth: number;
 }
 
 export const AnimationVariants: Variants = {
@@ -26,31 +27,25 @@ export const AnimationVariants: Variants = {
 export const FrontSide: React.FC<FrontSideProps> = ({
   name,
   active,
-  cardBackgroundGardiants: { from, to },
+  bgGradient: { from, to },
   image,
-  cardsPerView,
-  id,
+  _key,
+  width,
+  windowWidth,
 }) => {
-  const windowWidth = useWindowSize()?.width ?? 0;
-
   return (
-    <motion.div
-      className="z-20 absolute h-full bottom-0 | flex flex-col justify-end | cursor-pointer"
-      initial="initial"
-      animate={active ? "animate" : "inital"}
-      variants={AnimationVariants}
-      custom={cardsPerView}
-      transition={{ duration: 0.6, type: "tween", ease: "easeInOut" }}
+    <motion.section
       style={{
+        width,
         background: `linear-gradient(180deg, ${from.hex} 0%, ${to.hex} 100%)`,
       }}
+      className="h-full absolute top-0 left-0 z-10 |  flex flex-col justify-end | cursor-pointer"
     >
       <header className="mt-20">
         <motion.h6
-          key={String(active)}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          layoutId={`co-artist-card-header-${id}`}
+          // layoutId={`co-artist-card-header-${_key}`}
           transition={{
             duration: 0.5,
             ease: "easeInOut",
@@ -64,7 +59,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
       </header>
       <motion.figure
         className="h-[250px] mt-auto translate-y-[10%]"
-        layoutId={`co-artist-card-image-${id}`}
+        // layoutId={`co-artist-card-image-${_key}`}
       >
         <SanityImg
           className={clsx(
@@ -77,6 +72,6 @@ export const FrontSide: React.FC<FrontSideProps> = ({
           alt={name}
         />
       </motion.figure>
-    </motion.div>
+    </motion.section>
   );
 };
