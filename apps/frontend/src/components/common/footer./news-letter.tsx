@@ -13,6 +13,7 @@ export const NewsLetter: React.FC<FooterNewsLetter> = ({
   return (
     <section className="w-full lg:absolute lg:right-0 top-0 max-w-lg | font-semibold">
       <div className="mb-4 text-left">{title}</div>
+
       <MailchimpSubscribe
         url={MAILCHIMP_URL as string}
         render={(props) => {
@@ -88,7 +89,10 @@ const Form: React.FC<IForm> = ({
   return (
     <>
       <form
-        onSubmit={handleFormSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleFormSubmit();
+        }}
         className="relative flex | px-5 py-3  | border__round"
       >
         <input
