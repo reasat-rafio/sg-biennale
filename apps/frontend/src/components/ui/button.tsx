@@ -36,7 +36,7 @@ export const Button: React.FC<ButtonProps> = ({
       {type === "button" && (
         <button
           onClick={onClick}
-          className={clsx(defaultStyles, className, variantStyles[variant])}
+          className={clsx(className, defaultStyles, variantStyles[variant])}
         >
           {children}
           {icon && icon}
@@ -44,7 +44,14 @@ export const Button: React.FC<ButtonProps> = ({
       )}
       {type === "href" && (
         <Link href={href ?? "/"} prefetch={false}>
-          <a className={clsx(defaultStyles, variantStyles[variant], "")}>
+          <a
+            className={clsx(
+              className,
+              defaultStyles,
+              variantStyles[variant],
+              ""
+            )}
+          >
             {children}
             {icon && icon}
           </a>

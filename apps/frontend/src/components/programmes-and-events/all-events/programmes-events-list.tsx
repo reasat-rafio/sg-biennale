@@ -12,7 +12,7 @@ export const ProgrammesEventList: React.FC<ProgrammesEventListProps> = ({
 }) => {
   return (
     <section className="pt-2" style={{ paddingBottom: extraPadding() / 2 }}>
-      <div className="grid grid-cols-12 | lg:gap-8 gap-4">
+      <div className="grid grid-cols-12 ">
         {events?.map((pgrmEvnt, index) => (
           <ProgrammeEventListCard
             {...pgrmEvnt}

@@ -1,13 +1,10 @@
 import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
 import clsx from "clsx";
 import { SanityImg } from "sanity-react-extra";
-import { imageUrlBuilder, PortableText } from "@utils/sanity";
-import { motion, MotionValue, transform, useMotionValue } from "framer-motion";
-import { MouseEvent, useState } from "react";
-import { useTransformSpring } from "@lib/helpers/animation.helpers";
-import { usePortableTextTruncate, useWindowSize } from "@lib/hooks";
+import { imageUrlBuilder } from "@utils/sanity";
+import { motion } from "framer-motion";
+import { useWindowSize } from "@lib/hooks";
 import { format } from "date-fns";
-import { Header } from "@components/ui/header";
 import { Button } from "@components/ui/button";
 import Link from "next/link";
 
@@ -30,10 +27,10 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   hideCta,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
-
   const priceVal = `${cta.title} - ${price ? `$${price}` : "Free"}${
     additionalInfo ? "*" : ""
   }`;
+
   const formattedShortDateTime = format(new Date(startAt), "dd.LL");
   const formattedStartDate = format(new Date(startAt), "dd");
   const formattedEndDate = endAt && format(new Date(endAt), "dd");
@@ -47,24 +44,27 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
       whileInView={{ y: 50 * index, opacity: 1 }}
       transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
       viewport={{ once: true }}
-      className={clsx("grid grid-cols-12 col-span-12 | gap-5")}
+      className={clsx(
+        "grid grid-cols-12 col-span-12 | gap-5 | border-t-[1.5px] border-[#CCCCCC] lg:pt-8 pt-4"
+      )}
     >
-      <div className="flex flex-col | lg:col-span-1 col-span-12 | md:space-y-3 space-y-1">
-        <span className="text-[24px] font-medium lg:text-left text-center">
+      {/* Time and date part */}
+      <div className="flex lg:flex-col | lg:col-span-1 col-span-12 | lg:space-y-3 lg:space-x-0 space-x-5">
+        <span className="text-[24px] font-medium lg:text-left text-center my-auto lg:my-0">
           {formattedShortDateTime}
         </span>
-        <div className="flex flex-col justify-end | mt-auto h-full | space-y-1 | font-manrope lg:text-left text-center text-gray--700">
+        <div className="flex lg:flex-col justify-end | mt-auto h-full | lg:space-y-1 lg:space-x-0 space-x-5 | font-manrope text-left text-gray--700">
           {startAt && (
-            <div className="flex flex-col">
+            <div className="flex flex-col | lg:leading-normal leading-none">
               <span className="text-[10px]">From</span>
-              <span className="text-[14px] font-semibold">
+              <span className="text-[14px] font-semibold ">
                 {formattedStartTime}
               </span>
             </div>
           )}
 
           {endAt && formattedStartDate === formattedEndDate && (
-            <div className="flex flex-col">
+            <div className="flex flex-col | lg:leading-normal leading-none">
               <span className="text-[10px]">To</span>
               <span className="text-[14px] font-semibold">
                 {formattedEndTime}
@@ -95,36 +95,44 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
           </h6>
 
           <div className="flex flex-col space-y-2">
-            <div className="flex space-x-10 | text-body-2">
-              <span className="font-semibold">Artist</span>
-              <ul className="flex space-x-1 flex-wrap | text-gray--700">
-                {relatedArtists.map(({ _id, name }, index) => (
-                  <li key={_id}>
-                    {name}
-                    {index !== relatedArtists.length - 1
-                      ? index !== relatedArtists.length - 2
-                        ? ","
-                        : " &"
-                      : ""}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex space-x-10 | text-body-2">
-              <span className="font-semibold">Venue</span>
-
-              <ul className="flex space-x-1 | text-gray--700">
-                {venue.map(({ name }) => (
-                  <li key={name}>{name}</li>
-                ))}
-              </ul>
-            </div>
+            {!!relatedArtists.length && (
+              <div className="flex space-x-10 | text-body-2">
+                <span className="font-semibold">Artist</span>
+                <ul className="flex space-x-1 flex-wrap | text-gray--700">
+                  {relatedArtists?.map(({ _id, name }, index) => (
+                    <li key={_id}>
+                      {name}
+                      {index !== relatedArtists.length - 1
+                        ? index !== relatedArtists.length - 2
+                          ? ","
+                          : " &"
+                        : ""}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {!!venue.length && (
+              <div className="flex space-x-10 | text-body-2">
+                <span className="font-semibold">Venue</span>
+                <ul className="flex space-x-1 | text-gray--700">
+                  {venue.map(({ name }) => (
+                    <li key={name}>{name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
         {!hideCta && (
-          <div className="flex sm:flex-row flex-col sm:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-0 mt-5">
-            <div className="flex-1">
-              <Button href={cta?.href} type="href" variant="secondary">
+          <div className="flex lg:flex-row flex-col lg:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-5 mt-10">
+            <div className="lg:flex-1">
+              <Button
+                className="lg:w-fit w-full"
+                href={cta?.href}
+                type="href"
+                variant="secondary"
+              >
                 {priceVal}
               </Button>
             </div>
