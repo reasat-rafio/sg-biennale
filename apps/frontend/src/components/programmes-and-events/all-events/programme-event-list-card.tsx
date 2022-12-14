@@ -128,7 +128,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
           <div className="flex lg:flex-row flex-col lg:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-5 mt-10">
             <div className="lg:flex-1">
               <Button
-                className="lg:w-fit w-full"
+                className="lg:w-fit !w-full"
                 href={cta?.href}
                 type="href"
                 variant="secondary"
