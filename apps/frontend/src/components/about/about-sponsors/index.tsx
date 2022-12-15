@@ -1,7 +1,7 @@
 import { Container } from "@components/ui/container";
 import { Header } from "@components/ui/header";
 import { SponsorCollection } from "@lib/@types/about.types";
-import { imageUrlBuilder } from "@utils/sanity";
+import { imageUrlBuilder, PortableText } from "@utils/sanity";
 import clsx from "clsx";
 import { SanityImg } from "sanity-react-extra";
 import { doTruncate } from "@lib/helpers/global.helpers";
@@ -13,13 +13,17 @@ import { motion } from "framer-motion";
 interface AboutSponsorsProps {
   type: string;
   header: string;
+  description?: any[];
   sponsorCollection: SponsorCollection[];
 }
 
 export const AboutSponsors: React.FC<AboutSponsorsProps> = ({
   header,
+  description,
   sponsorCollection,
 }) => {
+  console.log(description);
+
   const { setAbouts, setSelectedAboutId, selectedAboutId } = useAboutStore();
   useEffect(() => {
     setAbouts(sponsorCollection);
@@ -28,6 +32,9 @@ export const AboutSponsors: React.FC<AboutSponsorsProps> = ({
   return (
     <Container className="py-x">
       <Header>{header}</Header>
+      <div className="prose max-w-none">
+        <PortableText blocks={description} />
+      </div>
       <div className="grid grid-cols-12 | mt-xl lg:gap-x-[9%] md:gap-x-[5%] md:gap-y-0 gap-y-10 ">
         {sponsorCollection.map(
           ({ _key, image, title, name, description, cta }) => (

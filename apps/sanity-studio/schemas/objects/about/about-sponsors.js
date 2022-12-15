@@ -12,6 +12,11 @@ const AboutPageAboutSponsors = {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "description",
+      type: "array",
+      of: [{ type: "block" }],
+    },
+    {
       name: "sponsorCollection",
       type: "array",
       validation: (Rule) => Rule.required(),
@@ -68,6 +73,12 @@ const AboutPageAboutSponsors = {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "header",
+      subtitle: "subtitle",
+    },
+  },
 };
 
 export default AboutPageAboutSponsors;
