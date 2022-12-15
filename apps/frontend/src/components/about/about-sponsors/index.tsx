@@ -22,8 +22,6 @@ export const AboutSponsors: React.FC<AboutSponsorsProps> = ({
   description,
   sponsorCollection,
 }) => {
-  console.log(description);
-
   const { setAbouts, setSelectedAboutId, selectedAboutId } = useAboutStore();
   useEffect(() => {
     setAbouts(sponsorCollection);
