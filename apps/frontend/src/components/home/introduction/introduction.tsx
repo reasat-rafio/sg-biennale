@@ -1,8 +1,9 @@
 import { AnimatedHeader } from "@components/ui/animated-component/animated-header";
 import { Container } from "@components/ui/container";
+import { YoutubeProps } from "@lib/@types/global.types";
 import { IntroCarouselProps } from "@lib/@types/home.types";
 import { DescriptionBlock } from "./description-block";
-// import { IntroCarousel } from "./intro-carousel";
+import { Youtube } from "./youtube";
 
 interface IntroductionProps {
   type: string;
@@ -10,6 +11,7 @@ interface IntroductionProps {
   collection: IntroCarouselProps[];
   subtitle: string;
   description: string;
+  youtube: [YoutubeProps];
 }
 
 export const Introduction: React.FC<IntroductionProps> = ({
@@ -17,6 +19,7 @@ export const Introduction: React.FC<IntroductionProps> = ({
   // collection,
   subtitle,
   description,
+  youtube,
 }) => {
   return (
     <Container type="section" className="lg:py-x py-section overflow-hidden ">
@@ -34,7 +37,8 @@ export const Introduction: React.FC<IntroductionProps> = ({
         </header>
       )}
 
-      <div className="">
+      <div>
+        <Youtube {...youtube[0]} />
         {/* <IntroCarousel collection={collection} /> */}
         <DescriptionBlock subtitle={subtitle} description={description} />
       </div>

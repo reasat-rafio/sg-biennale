@@ -1,11 +1,8 @@
 import { IntroCarouselProps } from "@lib/@types/home.types";
 import { CardVariants } from "@lib/animations/swipable-stack-card";
-import { imageUrlBuilder } from "@utils/sanity";
-import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import { useState } from "react";
-import { SanityImg } from "sanity-react-extra";
 import { Image } from "./image";
 import { Video } from "./video";
 

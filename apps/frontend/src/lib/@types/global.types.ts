@@ -149,3 +149,9 @@ export interface FileProps {
     url: string;
   };
 }
+
+export interface YoutubeProps {
+  _key: string;
+  _type: string;
+  url: string;
+}

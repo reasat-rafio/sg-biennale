@@ -78,6 +78,12 @@ const HomeIntroduction = {
       ],
     },
     {
+      name: "youtube",
+      type: "array",
+      of: [{ type: "youtube" }],
+      validation: (Rule) => Rule.length(1),
+    },
+    {
       name: "subtitle",
       type: "text",
       validation: (Rule) => Rule.required(),

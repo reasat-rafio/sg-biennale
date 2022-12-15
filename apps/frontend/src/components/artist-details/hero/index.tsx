@@ -29,11 +29,7 @@ const serializers = {
       const { url } = node;
       const id = getYouTubeId(url as string);
       return (
-        <YouTube
-          opts={{}}
-          className="[&>*]:max-w-full mb-4"
-          videoId={id as string}
-        />
+        <YouTube className="[&>*]:max-w-full mb-4" videoId={id as string} />
       );
     },
     code: ({ node }: any) => {
