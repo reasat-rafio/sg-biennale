@@ -7,41 +7,26 @@ import { useWindowSize } from "@lib/hooks";
 interface FrontSideProps {
   index: number;
   title: string;
-  active: boolean;
   images: SanityImage[];
-  cardsPerView: number;
+  width: number;
   relatedArtists: {
     _id: string;
     name: string;
   }[];
 }
 
-export const AnimationVariants: Variants = {
-  initial: {
-    width: "100%",
-  },
-  animate: (cardsPerView: number) => ({
-    width: cardsPerView !== 1 ? ["100%", "50%", "50%"] : "100%",
-  }),
-};
-
 export const FrontSide: React.FC<FrontSideProps> = ({
   index,
-  active,
-  cardsPerView,
   title,
   images,
   relatedArtists,
+  width,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   return (
-    <motion.div
-      className="absolute h-full bottom-0 | flex flex-col justify-end z-10 cursor-pointer "
-      initial="initial"
-      animate={active ? "animate" : "inital"}
-      variants={AnimationVariants}
-      custom={cardsPerView}
-      transition={{ duration: 0.6, type: "tween", ease: "easeInOut" }}
+    <motion.section
+      style={{ width }}
+      className="h-full absolute top-0 left-0 z-10 |  flex flex-col justify-end | cursor-pointer"
     >
       <figure className="absolute h-full w-full pointer-events-none">
         <SanityImg
@@ -62,7 +47,6 @@ export const FrontSide: React.FC<FrontSideProps> = ({
 
       <div className="mx-5 mt-20 relative z-20 py-10 space-y-5">
         <motion.h6
-          key={String(active)}
           className="w-full | lg:text-2xl text-xl font-medium text-white "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -75,10 +59,10 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         >
           {title}
         </motion.h6>
-        {Boolean(relatedArtists?.length) && (
+        {!!relatedArtists?.length && (
           <RelatedArtistsList index={index} relatedArtists={relatedArtists} />
         )}
       </div>
-    </motion.div>
+    </motion.section>
   );
 };

@@ -1,13 +1,13 @@
-import dynamic from "next/dynamic";
-import { TeamCollection } from "@lib/@types/about.types";
-import { useWindowSize } from "@lib/hooks";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
+import dynamic from "next/dynamic";
+import clsx from "clsx";
+import { TeamCollection } from "@lib/@types/about.types";
+import { useWindowSize } from "@lib/hooks";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FrontSide } from "./front-side";
 import { BackSideProps } from "./back-side";
-import clsx from "clsx";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType, FreeMode } from "swiper";
 
 const BackSide = dynamic<BackSideProps>(
@@ -55,7 +55,7 @@ export const TeamCarousel: React.FC<TeamCarouselProps> = ({
     else if (windowWidth < 1280 && windowWidth >= 1024) setCardsperView(3);
     else if (windowWidth < 1024 && windowWidth >= 768) setCardsperView(2);
     else setCardsperView(1);
-  }, [windowWidth]);
+  }, [windowWidth, setCardsperView]);
 
   useEffect(() => {
     if (swiperRef !== null && !!activeCard && cardsPerView !== 0) {

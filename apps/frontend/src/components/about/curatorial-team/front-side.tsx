@@ -3,7 +3,6 @@ import { motion, Variants } from "framer-motion";
 import { SanityImg, SanityImage } from "sanity-react-extra";
 import clsx from "clsx";
 import { imageUrlBuilder } from "@utils/sanity";
-import { useWindowSize } from "@lib/hooks";
 
 interface FrontSideProps {
   active: boolean;

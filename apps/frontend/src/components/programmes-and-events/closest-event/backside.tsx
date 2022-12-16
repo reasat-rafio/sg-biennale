@@ -2,33 +2,24 @@ import { Clock } from "@components/icons/clock";
 import { IPgrammeEvents } from "@lib/@types/programmes-events.types";
 import { usePortableTextTruncate } from "@lib/hooks";
 import { PortableText } from "@utils/sanity";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { Location } from "@components/icons/location";
 import { useRouter } from "next/router";
 import { Button } from "@components/ui/button";
+import clsx from "clsx";
 
 interface BacksideProps {
   description: IPgrammeEvents["description"];
   slug: IPgrammeEvents["slug"];
   venue: IPgrammeEvents["venue"];
   startAt: IPgrammeEvents["startAt"];
-  cardsPerView: number;
   active: boolean;
   formattedDate?: string;
   bookNowUrl?: string;
+  className?: string;
+  width?: number;
 }
-
-const SlideRightAnimationVariants: Variants = {
-  initial: {
-    translateX: 0,
-    opacity: 0,
-  },
-  animate: {
-    translateX: ["0%", "100%"],
-    opacity: 1,
-  },
-};
 
 export const Backside: React.FC<BacksideProps> = (props) => {
   const formattedDate = format(
@@ -37,35 +28,42 @@ export const Backside: React.FC<BacksideProps> = (props) => {
   );
   return (
     <>
-      {props.cardsPerView !== 1 ? (
-        <SlideRight formattedDate={formattedDate} {...props} />
-      ) : (
-        <ScaleUp formattedDate={formattedDate} {...props} />
-      )}
+      <SlideRightVariant
+        className="md:block hidden"
+        formattedDate={formattedDate}
+        {...props}
+      />
+      <ScaleUpVarian
+        className="md:hidden block"
+        formattedDate={formattedDate}
+        {...props}
+      />
     </>
   );
 };
 
-const SlideRight: React.FC<BacksideProps> = ({
+const SlideRightVariant: React.FC<BacksideProps> = ({
   active,
   description,
   venue,
   bookNowUrl,
   formattedDate,
+  className,
+  width,
 }) => {
   const router = useRouter();
   const [ref] = usePortableTextTruncate({ maxLength: 200 });
   return (
     <motion.div
-      className="absolute z-0 h-full w-1/2 | p-8 box-border ml-auto | bg-[#F8F8F8]"
-      initial="initial"
+      style={{ width }}
+      className={clsx(
+        "h-full absolute top-0 | pl-5 pr-10 box-border ml-auto | bg-white",
+        className
+      )}
       onClick={(e) => e.stopPropagation()}
-      animate={active ? "animate" : "initial"}
-      transition={{
-        type: "spring",
-        duration: 0.5,
-      }}
-      variants={SlideRightAnimationVariants}
+      initial={{ left: 0 }}
+      animate={{ left: active ? "48%" : 0 }}
+      transition={{ type: "tween", duration: 0.4 }}
     >
       <motion.div
         className="flex flex-col justify-center items-center | h-full"
@@ -107,21 +105,25 @@ const SlideRight: React.FC<BacksideProps> = ({
   );
 };
 
-const ScaleUp: React.FC<BacksideProps> = ({
+const ScaleUpVarian: React.FC<BacksideProps> = ({
   active,
   description,
   formattedDate,
   venue,
   bookNowUrl,
+  className,
+  width,
 }) => {
   const router = useRouter();
   const [ref] = usePortableTextTruncate({ maxLength: 200 });
 
   return (
     <motion.div
-      className={
-        "absolute top-0 left-0 h-full w-full z-20 bg-black bg-opacity-80"
-      }
+      style={{ width }}
+      className={clsx(
+        "absolute top-0 left-0 h-full w-full z-20 bg-black bg-opacity-80",
+        className
+      )}
       initial={{ opacity: 0, y: 100 }}
       animate={{
         opacity: active ? 1 : 0,
