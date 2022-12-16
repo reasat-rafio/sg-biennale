@@ -5,7 +5,6 @@ import { Backside } from "@components/programmes-and-events/closest-event/backsi
 import { FrontSide } from "@components/programmes-and-events/closest-event/font-side";
 import { RelatedEventsProps } from "@lib/@types/artist-details.types";
 import { useWindowSize } from "@lib/hooks";
-import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Swiper as SwiperType, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";

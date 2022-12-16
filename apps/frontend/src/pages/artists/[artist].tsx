@@ -1,4 +1,4 @@
-import { Artwork } from "@components/artist-details/artwork/artwork";
+// import { Artwork } from "@components/artist-details/artwork/artwork";
 import { Hero } from "@components/artist-details/hero";
 import { ProgrammesEvents } from "@components/artist-details/programmes-events";
 import { pageQuery } from "@lib/query";

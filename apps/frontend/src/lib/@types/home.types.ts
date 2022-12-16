@@ -32,7 +32,7 @@ export interface Organisation {
 
 export interface IHighlightProps {
   _id: string;
-  _type: string;
+  _type: "venue" | "events" | "artist";
   description: any[];
   images: SanityImage[];
   name?: string;
