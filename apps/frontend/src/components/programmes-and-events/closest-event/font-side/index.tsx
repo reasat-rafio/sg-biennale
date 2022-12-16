@@ -36,26 +36,27 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   const windowWidth = useWindowSize()?.width ?? 0;
   return (
     <motion.div
-      className="absolute h-full bottom-0 | flex flex-col justify-end z-10 cursor-pointer"
+      className="absolute h-full bottom-0 | flex flex-col justify-end z-10 cursor-pointer "
       initial="initial"
       animate={active ? "animate" : "inital"}
       variants={AnimationVariants}
       custom={cardsPerView}
       transition={{ duration: 0.6, type: "tween", ease: "easeInOut" }}
     >
-      <figure
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.71) 100%)",
-        }}
-        className="absolute h-full w-full pointer-events-none"
-      >
+      <figure className="absolute h-full w-full pointer-events-none">
         <SanityImg
           className="h-full w-full object-cover"
           image={images[0]}
           builder={imageUrlBuilder}
           width={windowWidth >= 1280 ? 250 : windowWidth >= 768 ? 200 : 160}
           alt={title}
+        />
+        <span
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.71) 100%)",
+          }}
+          className="absolute w-full h-full top-0 left-0"
         />
       </figure>
 
