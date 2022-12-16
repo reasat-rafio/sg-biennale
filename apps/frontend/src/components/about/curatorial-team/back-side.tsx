@@ -4,7 +4,7 @@ import { usePortableTextTruncate } from "@lib/hooks";
 import useAboutStore from "@stores/about.store";
 import { PortableText } from "@utils/sanity";
 import clsx from "clsx";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
 export interface BackSideProps {
   description: string;

@@ -101,7 +101,7 @@ export const ClosestEventCarousel: React.FC<ClosestEventCarouselProps> = ({
                 width: getWidth(index),
               }}
               className={clsx(
-                "relative aspect-square | transition-all duration-700 ease-in-out | xl:h-[500px] h-[400px] | hover:cursor-pointer"
+                "relative aspect-square | transition-all duration-700 ease-in-out | xl:h-[500px] h-[400px]"
               )}
             >
               <FrontSide

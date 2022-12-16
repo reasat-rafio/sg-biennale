@@ -26,7 +26,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
   return (
     <motion.section
       style={{ width }}
-      className="h-full absolute top-0 left-0 z-10 |  flex flex-col justify-end | cursor-pointer"
+      className="h-full absolute top-0 left-0 z-10 |  flex flex-col justify-end"
     >
       <figure className="absolute h-full w-full pointer-events-none">
         <SanityImg

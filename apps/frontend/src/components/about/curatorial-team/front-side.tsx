@@ -38,7 +38,7 @@ export const FrontSide: React.FC<FrontSideProps> = ({
         width,
         background: `linear-gradient(180deg, ${from.hex} 0%, ${to.hex} 100%)`,
       }}
-      className="h-full absolute top-0 left-0 z-10 |  flex flex-col justify-end | cursor-pointer"
+      className="h-full absolute top-0 left-0 z-10 |  flex flex-col justify-end"
     >
       <header className="mt-20">
         <motion.h6
