@@ -19,7 +19,7 @@ export const ImageGallery: React.FC<{ image: SanityImage }> = ({ image }) => {
           image={image}
           builder={imageUrlBuilder}
           alt={image.alt}
-          width={windowWidth >= 1280 ? 800 : windowWidth >= 768 ? 400 : 250}
+          width={windowWidth >= 1280 ? 1200 : windowWidth >= 768 ? 600 : 300}
         />
       </motion.figure>
     </Container>
