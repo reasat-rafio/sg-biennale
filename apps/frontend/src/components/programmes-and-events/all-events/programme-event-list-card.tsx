@@ -27,7 +27,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   hideCta,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
-  const priceVal = `${cta.title} - ${price ? `$${price}` : "Free"}${
+  const priceVal = `${cta?.title} - ${price ? `$${price}` : "Free"}${
     additionalInfo ? "*" : ""
   }`;
 

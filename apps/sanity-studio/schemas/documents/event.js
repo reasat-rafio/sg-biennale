@@ -93,7 +93,6 @@ const Event = {
     {
       name: "cta",
       type: "cta",
-      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {
