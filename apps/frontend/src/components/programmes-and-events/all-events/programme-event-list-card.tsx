@@ -43,7 +43,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
       initial={{ y: 50 * index + 100, opacity: 0 }}
       whileInView={{ y: 50 * index, opacity: 1 }}
       transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "250px" }}
       className={clsx(
         "grid grid-cols-12 col-span-12 | gap-5 | border-t-[1.5px] border-[#CCCCCC] lg:pt-8 pt-4"
       )}

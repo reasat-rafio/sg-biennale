@@ -31,7 +31,7 @@ const useProgrammesAndEventsStore = create(
     page: 1,
     cardsPerPage: 6,
     selectedCategory: null,
-    selectedSorting: null,
+    selectedSorting: "date",
     selectedVenue: null,
     allCategories: [],
     allVenues: [],
