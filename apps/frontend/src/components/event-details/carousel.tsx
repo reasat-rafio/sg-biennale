@@ -13,18 +13,19 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
 
   return (
-    <section className="xl:pb-14 xl:px-0 lg:px-x sm:px-lg px-md lg:py-xxl py-x">
-      <div className="xl:pl-max ">
+    <section className="xl:px-0 lg:px-x sm:px-lg px-md lg:py-[2rem] py-[1rem] | max-w-[1920px] mx-auto">
+      <div className="2xl:pl-max xl:pl-xxl">
         <Swiper speed={600} grabCursor slidesPerView="auto" spaceBetween={20}>
           {images.map((image) => (
             <SwiperSlide className="w-auto" key={image._key}>
-              <figure>
+              <figure className="h-[300px]">
                 <SanityImg
                   className="h-full w-full | object-cover"
                   image={image}
+                  alt={image?.alt ?? "event image"}
                   builder={imageUrlBuilder}
                   height={
-                    windowWidth >= 1280 ? 600 : windowWidth >= 768 ? 350 : 250
+                    windowWidth >= 1280 ? 450 : windowWidth >= 768 ? 350 : 250
                   }
                 />
               </figure>

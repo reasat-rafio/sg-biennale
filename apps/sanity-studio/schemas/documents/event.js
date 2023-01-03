@@ -7,6 +7,10 @@ const Event = {
   icon: FcCalendar,
   fields: [
     {
+      name: "seo",
+      type: "seo",
+    },
+    {
       name: "title",
       type: "string",
       validation: (Rule) => Rule.required(),
@@ -22,7 +26,22 @@ const Event = {
     {
       name: "images",
       type: "array",
-      of: [{ type: "image" }],
+      of: [
+        {
+          type: "image",
+          fields: [
+            {
+              title: "Alternative Text",
+              name: "alt",
+              type: "string",
+              validation: (Rule) =>
+                Rule.required().error(
+                  "Please add an alternative text for the image"
+                ),
+            },
+          ],
+        },
+      ],
       validation: (Rule) => Rule.required(),
     },
     {

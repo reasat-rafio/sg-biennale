@@ -17,6 +17,7 @@ import { SanityProps } from "next-sanity-extra";
 const query = pageQuery(groq`
     *[_type == "events" && slug.current == $event][0]{
         _id,
+        seo,
         title,
         startAt,
         description,
@@ -91,7 +92,7 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
       <Carousel images={images} />
 
       <Container>
-        <div className="text-gray--700 font-manrope text-body-2 | my-xl">
+        <div className="text-gray--700 font-manrope text-body-2 | my-x">
           <PortableText blocks={description} />
         </div>
         <Information
