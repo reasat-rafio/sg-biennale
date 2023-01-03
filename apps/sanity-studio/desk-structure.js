@@ -15,7 +15,7 @@ function SitePreview({ document, options }) {
   return (
     <iframe
       title="Page preview"
-      src={`https://staging.singaporebiennale.org/api/preview?secret=${process.env.SANITY_STUDIO_PREVIEW_TOKEN}&slug=${options.slug}`}
+      src={`${process.env.SANITY_STUDIO_PREVIEW_URL}/api/preview?secret=${process.env.SANITY_STUDIO_PREVIEW_TOKEN}&slug=${options.slug}`}
       style={{ width: "100%", height: "100%", border: 0 }}
     />
   );
