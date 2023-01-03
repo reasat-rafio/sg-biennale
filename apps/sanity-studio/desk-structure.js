@@ -15,7 +15,7 @@ function SitePreview({ document, options }) {
   return (
     <iframe
       title="Page preview"
-      src={`https://staging.singaporebiennale.org/api/preview?secret=${process.env.SANITY_STUDIO_PREVIEW_TOKEN}&slug=${options.slug}`}
+      src={`https://staging.singaporebiennale.org/api/preview?secret=skMTyubVGGfBRerzI3SLuvOsKqY3FIv5ugkIB0l0WDxDg7KTVbJIQi7sMbryntcW1k3NdBBXIqbt3WTvzJWnrvAPr9A0yceupqUD2kb93bF7Zgzwr2AABhgIQIBy4BqK3Zyanyc8Oggfi15DJ6DIsakuRcfSodXkCnc8Olr3i80dGbGFakEJ&slug=${options.slug}`}
       style={{ width: "100%", height: "100%", border: 0 }}
     />
   );
