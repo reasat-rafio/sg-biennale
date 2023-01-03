@@ -19,6 +19,12 @@ const PressPage = {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "seo.title",
+      subtitle: "seo.description",
+    },
+  },
 };
 
 export default PressPage;

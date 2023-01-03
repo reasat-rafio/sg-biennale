@@ -21,6 +21,12 @@ const VisitorInfoPage = {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "seo.title",
+      subtitle: "seo.description",
+    },
+  },
 };
 
 export default VisitorInfoPage;

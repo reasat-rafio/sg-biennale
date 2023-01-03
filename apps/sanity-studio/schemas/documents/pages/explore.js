@@ -19,6 +19,12 @@ const ExplorePage = {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "seo.title",
+      subtitle: "seo.description",
+    },
+  },
 };
 
 export default ExplorePage;

@@ -47,6 +47,12 @@ const SupportUsPage = {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "seo.title",
+      subtitle: "seo.description",
+    },
+  },
 };
 
 export default SupportUsPage;
