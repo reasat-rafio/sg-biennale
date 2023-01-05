@@ -133,7 +133,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="font-manrope mt-5 prose"
+              className="font-manrope mt-5 prose max-w-none"
             >
               <PortableText
                 blocks={
