@@ -92,7 +92,7 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
       <Carousel images={images} />
 
       <Container>
-        <div className="text-gray--700 font-manrope text-body-2 | my-x">
+        <div className="text-gray--700 font-manrope prose max-w-none | my-x">
           <PortableText blocks={description} />
         </div>
         <Information
