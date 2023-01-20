@@ -75,9 +75,6 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
           >
             {header}
           </Header>
-          <span className="font-medium lg:text-xl text-base text-gray--700 underline">
-            {curatorialEssays.length} Essays
-          </span>
         </motion.header>
         <motion.div
           initial="hidden"
