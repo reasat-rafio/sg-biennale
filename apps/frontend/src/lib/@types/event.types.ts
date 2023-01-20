@@ -13,6 +13,7 @@ export interface EventDetailProps {
   additionalInfo?: string;
   cta?: Cta;
   hideCta?: boolean;
+  price?: number;
 }
 
 export interface Venue {
