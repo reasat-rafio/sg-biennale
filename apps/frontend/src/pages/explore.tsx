@@ -11,6 +11,24 @@ import { CuratorialEssay } from "@components/explore/curatorial-essay";
 import { PublicationsCatalogues } from "@components/explore/publication-catalogue";
 import { DirectoryOfTerm } from "@components/explore/directory-of-term";
 import { MoreInfos } from "@components/common/more-info";
+import { KV } from "@components/home/hero/kv";
+import { Introduction } from "@components/home/introduction/introduction";
+import { HighLight } from "@components/home/highlight";
+import { News } from "@components/home/news/news";
+import { Organisations } from "@components/home/organisation";
+import { Team } from "@components/about/team";
+import { AboutUs } from "@components/about/about-us";
+import { PastEdition } from "@components/about/past-edition";
+import { AboutSponsors } from "@components/about/about-sponsors";
+import { CuratorialTeam } from "@components/about/curatorial-team";
+import { Release } from "@components/press/release";
+import { KitsInfo } from "@components/press/kits-info";
+import ClosestEvent from "@components/programmes-and-events/closest-event";
+import { Volunteer } from "@components/support-us/volunteer";
+import { Donation } from "@components/support-us/donation";
+import { ImageGallery } from "@components/visitor-info/image-gallery";
+import { AccesibilityInfo } from "@components/visitor-info/accesibility-info";
+import { Map } from "@components/visitor-info/map";
 
 const query = groq`{
   "site": ${siteQuery},
@@ -218,6 +236,26 @@ const Explore: NextPage<SanityProps> = (props) => {
         ),
         "explorePage.directoryOfTerm": DirectoryOfTerm,
         moreInfo: MoreInfos,
+
+        // ? adding every other schema component type here cause client wants it
+        "homePage.kv": KV,
+        "homePage.introduction": Introduction,
+        "homePage.highlight": HighLight,
+        "homePage.news": News,
+        "homePage.organisations": Organisations,
+        "aboutPage.curatorialTeam": CuratorialTeam,
+        "aboutPage.team": Team,
+        "aboutPage.aboutSponsors": AboutSponsors,
+        "aboutPage.about": AboutUs,
+        "aboutPage.pastEdition": PastEdition,
+        "pressPage.release": Release,
+        "pressPage.kitInfo": KitsInfo,
+        "programmesEventsPage.closestEvent": ClosestEvent,
+        "supportUs.volunteer": Volunteer,
+        "supportUs.donation": Donation,
+        "visitorInfoPage.imageGallery": ImageGallery,
+        "visitorInfoPage.accesibilityInfo": AccesibilityInfo,
+        "visitorInfoPage.map": Map,
       })}
     </>
   );
