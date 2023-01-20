@@ -1,7 +1,6 @@
-import { SEO } from "@components/common/seo";
-import { Carousel } from "@components/venue-details/carousel";
-import { Description } from "@components/venue-details/description";
-import { Hero } from "@components/venue-details/hero";
+import { Carousel } from "@components/[venue]/carousel";
+import { Description } from "@components/[venue]/description";
+import { Hero } from "@components/[venue]/hero";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {

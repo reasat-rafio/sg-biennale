@@ -1,6 +1,6 @@
 // import { Artwork } from "@components/artist-details/artwork/artwork";
-import { Hero } from "@components/artist-details/hero";
-import { ProgrammesEvents } from "@components/artist-details/programmes-events";
+import { Hero } from "@components/[artist]/hero";
+import { ProgrammesEvents } from "@components/[artist]/programmes-events";
 import { pageQuery } from "@lib/query";
 import { sanityClient, sanityStaticProps } from "@utils/sanity";
 import {
