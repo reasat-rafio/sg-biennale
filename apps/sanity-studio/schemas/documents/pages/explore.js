@@ -23,6 +23,7 @@ const ExplorePage = {
         { type: "aboutPage.aboutSponsors" },
         { type: "aboutPage.about" },
         { type: "aboutPage.pastEdition" },
+        { type: "homePage.kv" },
         { type: "homePage.introduction" },
         { type: "homePage.organisations" },
         { type: "homePage.news" },

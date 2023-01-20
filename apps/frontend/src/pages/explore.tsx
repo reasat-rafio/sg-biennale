@@ -15,38 +15,160 @@ import { MoreInfos } from "@components/common/more-info";
 const query = groq`{
   "site": ${siteQuery},
   "page": *[_type == "explorePage"][0]{
-        ...,
-        sections[]{
+    ...,
+    sections[]{
+      ...,
+      "image": ${withDimensions("image")},
+      images[] {
+        ..., 
+        asset->{
+          ...,
+          metadata {
+            dimensions
+          }
+        }
+      },
+      publicationsAndCatalogues[]-> {
+        header,
+        slug,
+        author,
+        description,
+        file {
+          ...,
+          asset->
+        },
+        images[] {
+          ..., 
+          asset->{
             ...,
-            "image": ${withDimensions("image")},
-            publicationsAndCatalogues[]-> {
-              header,
-              slug,
-              author,
-              description,
-              file {
-                ...,
-                asset->
-              },
-              images[] {
-                ..., 
-                asset->{
+            metadata {
+              dimensions
+            }
+          }
+        },
+      },
+      moreInfos[]{
+        ...,
+        'image': ${withDimensions("image")},
+      },
+      curatorialEssays[]{
+          ...,
+          "image": ${withDimensions("image")},
+      },
+      kvs[] {
+        ..., 
+        asset->{
+          ...,
+          metadata {
+            dimensions
+          }
+        }
+      },
+      teamCollection[] {
+        ...,
+        team->{
+          ...,
+          images[] {
+            ..., 
+            asset->{
+              ...,
+              metadata {
+                dimensions
+              }
+            }
+          },
+        }
+      },
+      aboutCollection[]{
+        ...,
+        'image': ${withDimensions("image")},
+      },
+      sponsorCollection[]{
+        ...,
+        'image': ${withDimensions("image")},
+      },
+      pastEditionCollection[]-> {
+        ...,
+        'image': ${withDimensions("image")},
+      },
+      releases[]-> {
+          _id,
+          header,
+          description,
+          slug,
+          cta,
+          file {
+            ...,
+            asset->
+          },
+          images[] {
+              ..., 
+              asset->{
                   ...,
                   metadata {
-                    dimensions
-                  }
-                }
-              },
-            },
-            moreInfos[]{
-              ...,
-              'image': ${withDimensions("image")},
-            },
-            curatorialEssays[]{
-                ...,
-                "image": ${withDimensions("image")},
+                      dimensions
+                   }
+              }
+          },
+      },
+      highlights[]->{
+        _id,
+        _type,
+        name,
+        title,
+        description,
+        slug,
+        countries,
+        location,
+        startAt,
+        images[] {
+          ..., 
+          asset->{
+            ...,
+            metadata {
+              dimensions
             }
-        }
+          }
+        },
+      },
+      newsCollection [] {
+        ...,
+        "image": ${withDimensions("image")}
+      },
+      closestEvents[]->{
+        _id,
+        images[] {
+          asset->{
+            ...,
+            metadata {
+            dimensions
+            }
+          }
+        },
+        title,
+        description,
+        slug,
+        startAt,
+        venue[]-> {
+          _id,
+          name,
+          slug
+        },
+        relatedArtists[] -> {
+          _id,
+          name
+        },
+      },
+      shortGuide{
+          ...,
+          "icon": ${withDimensions("icon")},
+          asset->
+      },
+      additionalInfo[]{
+          ...,
+          "icon": ${withDimensions("icon")}
+        },
+      }
     },
   "curatorialEssays": *[_type == "curatorialEssay"][]{
     _id,
