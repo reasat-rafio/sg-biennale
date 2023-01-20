@@ -55,7 +55,14 @@ export const Information: React.FC<InformationProps> = ({
           </ul>
         </div>
       </div>
-      <div className="lg:col-span-5 col-span-12 grid grid-cols-12 | sm:gap-5 gap-2">
+      <div className="lg:col-span-5 col-span-12 grid grid-cols-12 | sm:gap-5 gap-2 bg-red-300">
+        <span className="lg:col-span-7 sm:col-span-6 col-span-12  w-full">
+          <div>
+            <Button type="href" href={bookNowUrl} className="">
+              Book Now
+            </Button>
+          </div>
+        </span>
         {/* <span
           ref={secondaryBtnRef}
           className="lg:col-span-5 sm:col-span-6 col-span-12 w-full"
@@ -65,13 +72,27 @@ export const Information: React.FC<InformationProps> = ({
           </Button> 
         </span> */}
 
-        {bookNowUrl && (
-          <span className="lg:col-span-7 sm:col-span-6 col-span-12  w-full">
-            <Button type="href" href={bookNowUrl} className="">
-              Book Now
+        {/* {bookNowUrl && ( */}
+
+        {/* <div className="flex lg:flex-row flex-col lg:items-end | sm:space-x-3 sm:space-y-3 space-y-3 md:mt-5 mt-10">
+          <div className="lg:flex-1">
+            <Button
+              className="lg:w-fit !w-full"
+              href={cta?.href}
+              type="href"
+              variant="secondary"
+            >
+              {priceVal}
             </Button>
-          </span>
-        )}
+          </div>
+          {additionalInfo && (
+            <span className="text-body-2 text-gray--700">
+              *{additionalInfo}
+            </span>
+          )}
+        </div> */}
+
+        {/* )} */}
       </div>
     </section>
   );

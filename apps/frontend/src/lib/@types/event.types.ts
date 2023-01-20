@@ -1,5 +1,5 @@
 import { SanityImage } from "sanity-react-extra";
-import { Slug } from "./global.types";
+import { Cta, Slug } from "./global.types";
 
 export interface EventDetailProps {
   _id: string;
@@ -10,7 +10,9 @@ export interface EventDetailProps {
   title: string;
   venue: Venue[];
   relatedArtists: RelatedArtistsProps[];
-  bookNowUrl?: string;
+  additionalInfo?: string;
+  cta?: Cta;
+  hideCta?: boolean;
 }
 
 export interface Venue {

@@ -1,5 +1,5 @@
-import { Carousel } from "@components/event-details/carousel";
-import { Information } from "@components/event-details/information";
+import { Carousel } from "@components/[event]/carousel";
+import { Information } from "@components/[event]/information";
 import { Anchor } from "@components/ui/anchor";
 import { Container } from "@components/ui/container";
 import { EventDetailProps } from "@lib/@types/event.types";
@@ -21,7 +21,9 @@ const query = pageQuery(groq`
         title,
         startAt,
         description,
-        bookNowUrl,
+        additionalInfo,
+        cta,
+        hideCta,
         venue[]->{
           _id,
           name,
@@ -74,7 +76,6 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
     venue,
     relatedArtists,
     startAt,
-    bookNowUrl,
   }: EventDetailProps = props.data.page;
 
   return (
