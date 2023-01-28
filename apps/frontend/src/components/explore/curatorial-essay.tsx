@@ -59,7 +59,7 @@ export const CuratorialEssay: React.FC<CuratorialEssayProps> = ({
   }, [page]);
 
   return (
-    <Container type="section" className="lg:py-max py-x">
+    <Container type="section" className="lg:py-[60px] py-x">
       <div ref={containerRef}>
         <motion.header
           initial={{ opacity: 0 }}
