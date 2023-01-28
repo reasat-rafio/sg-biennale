@@ -9,8 +9,8 @@ interface IntroductionProps {
   type: string;
   header?: string[];
   collection: IntroCarouselProps[];
-  subtitle: string;
-  description: string;
+  subtitle?: string;
+  description?: string;
   youtube?: [YoutubeProps];
 }
 
@@ -38,7 +38,9 @@ export const Introduction: React.FC<IntroductionProps> = ({
       )}
       {/* <IntroCarousel collection={collection} /> */}
       {!!youtube && <Youtube {...youtube[0]} />}
-      <DescriptionBlock subtitle={subtitle} description={description} />
+      {!!subtitle && !!description && (
+        <DescriptionBlock subtitle={subtitle} description={description} />
+      )}
     </Container>
   );
 };
