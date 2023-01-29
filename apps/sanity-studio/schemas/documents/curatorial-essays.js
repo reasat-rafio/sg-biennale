@@ -7,6 +7,11 @@ const CuratorialEssay = {
   icon: FcNews,
   fields: [
     {
+      name: "order",
+      type: "number",
+      hidden: true,
+    },
+    {
       name: "header",
       type: "string",
       validation: (Rule) => Rule.required(),

@@ -188,7 +188,7 @@ const query = groq`{
         },
       }
     },
-  "curatorialEssays": *[_type == "curatorialEssay"][]{
+  "curatorialEssays": *[_type == "curatorialEssay"] | order(order asc) []{
     _id,
     header,
     url,
