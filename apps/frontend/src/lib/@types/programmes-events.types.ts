@@ -10,6 +10,11 @@ export interface IPgrammeEvents {
   price?: number;
   title: string;
   startAt: Date;
+  venueNames?: {
+    _key: string;
+    name: string;
+    url?: string;
+  }[];
   endAt?: Date;
   description: any;
   additionalInfo?: string;

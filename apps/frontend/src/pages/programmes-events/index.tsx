@@ -65,6 +65,7 @@ const query = groq`{
         endAt,
         additionalInfo,
         cta,
+        venueNames,
         hideCta,
         venue[]->{
           _id,

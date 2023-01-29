@@ -25,6 +25,7 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
   additionalInfo,
   relatedArtists,
   hideCta,
+  venueNames,
 }) => {
   const windowWidth = useWindowSize()?.width ?? 0;
   const priceVal = `${cta?.title} - ${price ? `$${price}` : "Free"}${
@@ -112,15 +113,48 @@ export const ProgrammeEventListCard: React.FC<ProgrammeEventListCardProps> = ({
                 </ul>
               </div>
             )}
-            {!!venue.length && (
+            {!!venueNames?.length ? (
               <div className="flex space-x-10 | text-body-2">
                 <span className="font-semibold">Venue</span>
                 <ul className="flex space-x-1 | text-gray--700">
-                  {venue.map(({ name }) => (
-                    <li key={name}>{name}</li>
+                  {venueNames.map(({ _key, name, url }) => (
+                    <>
+                      {!!url ? (
+                        <Link href={url}>
+                          <a>
+                            {name}
+                            {index !== venueNames.length - 1
+                              ? index !== venueNames.length - 2
+                                ? ","
+                                : " &"
+                              : ""}
+                          </a>
+                        </Link>
+                      ) : (
+                        <li key={_key}>
+                          {name}
+                          {index !== venueNames.length - 1
+                            ? index !== venueNames.length - 2
+                              ? ","
+                              : " &"
+                            : ""}
+                        </li>
+                      )}
+                    </>
                   ))}
                 </ul>
               </div>
+            ) : (
+              !!venue.length && (
+                <div className="flex space-x-10 | text-body-2">
+                  <span className="font-semibold">Venue</span>
+                  <ul className="flex space-x-1 | text-gray--700">
+                    {venue.map(({ name }) => (
+                      <li key={name}>{name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )
             )}
           </div>
         </div>

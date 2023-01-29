@@ -1,4 +1,4 @@
-import { FcCalendar } from "react-icons/fc";
+import { FcCalendar, FcReading } from "react-icons/fc";
 
 const Event = {
   title: "Event",
@@ -87,6 +87,24 @@ const Event = {
         },
       ],
     },
+    {
+      name: "venueNames",
+      type: "array",
+      description:
+        "The name of the venue will be displayed on the 'Programs and Events' page. If it is not specified, the default venue name will be used.",
+      of: [
+        {
+          name: "venueName",
+          type: "object",
+          icon: FcReading,
+          fields: [
+            { name: "name", type: "string" },
+            { name: "url", type: "url" },
+          ],
+        },
+      ],
+    },
+
     {
       title: "Start At",
       name: "startAt",
