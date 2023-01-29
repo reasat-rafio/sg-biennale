@@ -1,7 +1,6 @@
 import { PortableText } from "@utils/sanity";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useWindowSize } from "@lib/hooks";
 import { usePortableTextTruncate } from "@lib/hooks";
 
 interface TickerProps {
@@ -10,9 +9,8 @@ interface TickerProps {
 
 export const Ticker: React.FC<TickerProps> = ({ ticker }) => {
   const [ref] = usePortableTextTruncate({ maxLength: 250 });
-
-  const [showTicker, setShowTicker] = useState(true);
   const [navbarHeight, setNavbarHeight] = useState(0);
+  const [showTicker, setShowTicker] = useState<boolean>(true);
   const onCloseAction = () => setShowTicker(false);
   const getNavbarHeight = () => {
     const height = document.getElementById("navbar")?.clientHeight ?? 0;
