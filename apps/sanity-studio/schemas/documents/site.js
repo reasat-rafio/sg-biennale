@@ -44,6 +44,20 @@ const Site = {
 
     { name: "date", type: "text" },
     {
+      name: "ticker",
+      type: "array",
+      of: [
+        {
+          type: "block",
+          lists: [],
+          marks: {
+            decorators: [],
+          },
+          styles: [{ title: "Normal", value: "normal" }],
+        },
+      ],
+    },
+    {
       name: "navigations",
       type: "menu",
       group: "navigations",

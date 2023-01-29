@@ -9,6 +9,7 @@ import useGlobalStore from "@stores/global.store";
 import Head from "next/head";
 import { SEO } from "@components/common/seo";
 import { ISite } from "@lib/@types/global.types";
+import { Ticker } from "@components/common/ticker";
 const NavDropdown = dynamic<ISite["site"]>(
   () =>
     import("@components/common/navigation/dropdown").then(
@@ -53,6 +54,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
           <Navbar {...pageProps.data?.site?.site} />
           <NavDropdown {...pageProps.data?.site?.site} />
+          <Ticker ticker={pageProps.data?.site.site.ticker} />
         </>
       )}
       <Component {...pageProps} />

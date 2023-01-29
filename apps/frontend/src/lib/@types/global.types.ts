@@ -16,6 +16,7 @@ export interface Site {
   logo: SanityImage;
   eventLogo: SanityImage;
   navigations: Navigations;
+  ticker: any[];
   ogImage: SanityImage;
 }
 
