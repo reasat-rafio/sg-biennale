@@ -54,7 +54,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
           <Navbar {...pageProps.data?.site?.site} />
           <NavDropdown {...pageProps.data?.site?.site} />
-          <Ticker ticker={pageProps.data?.site.site.ticker} />
+          {!!pageProps.data?.site?.site?.ticker?.length && (
+            <Ticker ticker={pageProps.data.site.site.ticker} />
+          )}
         </>
       )}
       <Component {...pageProps} />

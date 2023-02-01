@@ -40,7 +40,7 @@ export const Ticker: React.FC<TickerProps> = ({ ticker }) => {
           style={{ top: `${navbarHeight}px` }}
           className="fixed w-full z-10 | flex items-center | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto py-1 space-x-1 | bg-black | text-white sm:text-sm text-sm"
         >
-          <div ref={ref} className="flex-1">
+          <div className="flex-1">
             <PortableText blocks={ticker} />
           </div>
           <button onClick={onCloseAction}>

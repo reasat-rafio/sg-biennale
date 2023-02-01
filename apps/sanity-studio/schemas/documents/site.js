@@ -49,6 +49,17 @@ const Site = {
       of: [
         {
           type: "block",
+          validation: (Rule) =>
+            Rule.custom((block) => {
+              const totalLength = block.children
+                .map((c) => c.text)
+                .join("").length;
+
+              if (totalLength > 50)
+                return "Text is too long (50 character max).";
+
+              return true;
+            }),
           lists: [],
           marks: {
             decorators: [],
