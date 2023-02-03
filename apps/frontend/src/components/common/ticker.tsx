@@ -6,11 +6,14 @@ import { usePortableTextTruncate } from "@lib/hooks";
 interface TickerProps {
   ticker: any[];
 }
-
 export const Ticker: React.FC<TickerProps> = ({ ticker }) => {
   const [ref] = usePortableTextTruncate({ maxLength: 250 });
   const [navbarHeight, setNavbarHeight] = useState(0);
   const [showTicker, setShowTicker] = useState<boolean>(true);
+  const totalAlphaLength = ticker
+    .map((e) => e.children.map((c: any) => c?.text?.trim()).join("").length)
+    .reduce((a, b) => a + b, 0);
+
   const onCloseAction = () => setShowTicker(false);
   const getNavbarHeight = () => {
     const height = document.getElementById("navbar")?.clientHeight ?? 0;
@@ -32,7 +35,7 @@ export const Ticker: React.FC<TickerProps> = ({ ticker }) => {
 
   return (
     <AnimatePresence>
-      {showTicker && (
+      {showTicker && totalAlphaLength > 0 && (
         <motion.aside
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
