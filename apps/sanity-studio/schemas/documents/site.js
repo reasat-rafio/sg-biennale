@@ -46,6 +46,8 @@ const Site = {
     {
       name: "ticker",
       type: "array",
+      description:
+        "For link, Enter a valid URL starting with '/' for internal page redirect or 'https://' for external URL",
       of: [
         {
           type: "block",
