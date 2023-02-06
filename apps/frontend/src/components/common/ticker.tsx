@@ -39,7 +39,7 @@ export const Ticker: React.FC<TickerProps> = ({ ticker }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           style={{ top: `${navbarHeight}px` }}
-          className="fixed w-full z-10 | flex items-center | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto py-1 space-x-1 | bg-black | text-white  text-sm"
+          className="fixed left-1/2 -translate-x-1/2 w-full z-10 | flex items-center | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto py-1 space-x-1 | bg-black | text-white  text-sm"
         >
           <div className="flex-1">
             <PortableText
