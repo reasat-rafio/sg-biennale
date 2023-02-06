@@ -39,27 +39,29 @@ export const Ticker: React.FC<TickerProps> = ({ ticker }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           style={{ top: `${navbarHeight}px` }}
-          className="fixed left-1/2 -translate-x-1/2 w-full z-10 | flex items-center | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto py-1 space-x-1 | bg-black | text-white  text-sm"
+          className="fixed left-1/2 -translate-x-1/2 w-screen bg-black z-10"
         >
-          <div className="flex-1">
-            <PortableText
-              blocks={ticker}
-              serializers={{
-                marks: {
-                  link: (props: any) => {
-                    return (
-                      <a className="underline" href={props?.mark?.href}>
-                        {props.children}
-                      </a>
-                    );
+          <div className="flex items-center | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto py-1 space-x-1 |  text-white  text-sm">
+            <div className="flex-1">
+              <PortableText
+                blocks={ticker}
+                serializers={{
+                  marks: {
+                    link: (props: any) => {
+                      return (
+                        <a className="underline" href={props?.mark?.href}>
+                          {props.children}
+                        </a>
+                      );
+                    },
                   },
-                },
-              }}
-            />
+                }}
+              />
+            </div>
+            <button onClick={onCloseAction}>
+              <XRoundedIcon />
+            </button>
           </div>
-          <button onClick={onCloseAction}>
-            <XRoundedIcon />
-          </button>
         </motion.aside>
       )}
     </AnimatePresence>
