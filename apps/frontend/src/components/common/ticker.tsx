@@ -1,13 +1,11 @@
 import { PortableText } from "@utils/sanity";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { usePortableTextTruncate } from "@lib/hooks";
 
 interface TickerProps {
   ticker: any[];
 }
 export const Ticker: React.FC<TickerProps> = ({ ticker }) => {
-  const [ref] = usePortableTextTruncate({ maxLength: 250 });
   const [navbarHeight, setNavbarHeight] = useState(0);
   const [showTicker, setShowTicker] = useState<boolean>(true);
   const totalAlphaLength = ticker
@@ -41,10 +39,23 @@ export const Ticker: React.FC<TickerProps> = ({ ticker }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           style={{ top: `${navbarHeight}px` }}
-          className="fixed w-full z-10 | flex items-center | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto py-1 space-x-1 | bg-black | text-white sm:text-sm text-sm"
+          className="fixed w-full z-10 | flex items-center | max-w-[1920px] | 2xl:px-max xl:px-xxl lg:px-x sm:px-lg px-md mx-auto py-1 space-x-1 | bg-black | text-white  text-sm"
         >
           <div className="flex-1">
-            <PortableText blocks={ticker} />
+            <PortableText
+              blocks={ticker}
+              serializers={{
+                marks: {
+                  link: (props: any) => {
+                    return (
+                      <a className="underline" href={props?.mark?.href}>
+                        {props.children}
+                      </a>
+                    );
+                  },
+                },
+              }}
+            />
           </div>
           <button onClick={onCloseAction}>
             <XRoundedIcon />
