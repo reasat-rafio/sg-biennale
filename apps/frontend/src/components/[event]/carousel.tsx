@@ -17,10 +17,10 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
       <div className="2xl:pl-max xl:pl-xxl">
         <Swiper speed={600} grabCursor slidesPerView="auto" spaceBetween={20}>
           {images.map((image) => (
-            <SwiperSlide className="w-auto" key={image._key}>
+            <SwiperSlide className="sm:w-auto w-full" key={image._key}>
               <figure className="h-[300px]">
                 <SanityImg
-                  className="h-full w-full | object-cover"
+                  className="h-full w-full object-contain"
                   image={image}
                   alt={image?.alt ?? "event image"}
                   builder={imageUrlBuilder}
