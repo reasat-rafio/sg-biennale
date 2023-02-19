@@ -4,9 +4,16 @@ import { Button } from "@components/ui/button";
 import { RelatedArtistsProps, Venue } from "@lib/@types/event.types";
 import { Cta } from "@lib/@types/global.types";
 import { format } from "date-fns";
+import Link from "next/link";
 
+interface VenueName {
+  _key: string;
+  name: string;
+  url?: string;
+}
 interface InformationProps {
-  venue: Venue[];
+  venue?: Venue[];
+  venueNames?: VenueName[];
   relatedArtists: RelatedArtistsProps[];
   startAt?: Date;
   cta?: Cta;
@@ -23,10 +30,28 @@ export const Information: React.FC<InformationProps> = ({
   additionalInfo,
   hideCta,
   price,
+  venueNames,
 }) => {
   const priceVal = `${cta?.title} - ${price ? `$${price}` : "Free"}${
     additionalInfo ? "*" : ""
   }`;
+
+  const mergedVenues = () => {
+    let allVenues: VenueName[] = [];
+    if (!!venue?.length) {
+      venue?.map((venue) =>
+        allVenues.push({
+          _key: venue._id,
+          name: venue.name,
+          url: `event/${venue?.slug?.current}`,
+        })
+      );
+    }
+    if (!!venueNames?.length) {
+      venueNames.map((v) => allVenues.push(v));
+    }
+    return allVenues;
+  };
 
   return (
     <section className="grid grid-cols-12 | gap-5">
@@ -47,11 +72,30 @@ export const Information: React.FC<InformationProps> = ({
             Venue & Details
           </span>
           <ul className="flex flex-col | space-y-2 mt-2 | text-gray--700 | font-manrope text-body-2">
-            <li className="flex items-center space-x-2">
+            <li className="flex space-x-2">
               <Location className="h-5 w-5" />
-              <span>{venue[0].name}</span>
+              <ul className="flex whitespace-pre flex-wrap">
+                {!!mergedVenues().length &&
+                  mergedVenues().map(({ _key, url, name }, index) => (
+                    <li key={_key} className="">
+                      {!!url ? (
+                        <Link href={url as string}>
+                          <a>{name}</a>
+                        </Link>
+                      ) : (
+                        <span className="">{name}</span>
+                      )}
+                      <span className="inline-block">
+                        {index !== mergedVenues().length - 1
+                          ? index !== mergedVenues().length - 2
+                            ? ", "
+                            : " & "
+                          : ""}
+                      </span>
+                    </li>
+                  ))}
+              </ul>
             </li>
-
             {startAt && (
               <li className="flex items-center space-x-2">
                 <Clock className="h-5 w-5" />

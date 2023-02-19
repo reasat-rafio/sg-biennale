@@ -25,6 +25,7 @@ const query = pageQuery(groq`
         cta,
         hideCta,
         price,
+        venueNames,
         venue[]->{
           _id,
           name,
@@ -81,6 +82,7 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
     additionalInfo,
     hideCta,
     price,
+    venueNames,
   }: EventDetailProps = props.data.page;
 
   return (
@@ -103,6 +105,7 @@ const EventDetailPage: NextPage<SanityProps> = (props) => {
         </div>
         <Information
           venue={venue}
+          venueNames={venueNames}
           relatedArtists={relatedArtists}
           startAt={startAt}
           cta={cta}

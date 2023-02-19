@@ -14,6 +14,11 @@ export interface EventDetailProps {
   cta?: Cta;
   hideCta?: boolean;
   price?: number;
+  venueNames?: {
+    _key: string;
+    name: string;
+    url?: string;
+  }[];
 }
 
 export interface Venue {
