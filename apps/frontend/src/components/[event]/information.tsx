@@ -77,13 +77,13 @@ export const Information: React.FC<InformationProps> = ({
               <ul className="flex whitespace-pre flex-wrap">
                 {!!mergedVenues().length &&
                   mergedVenues().map(({ _key, url, name }, index) => (
-                    <li key={_key} className="">
+                    <li className="break-all whitespace-pre-wrap" key={_key}>
                       {!!url ? (
                         <Link href={url as string}>
                           <a>{name}</a>
                         </Link>
                       ) : (
-                        <span className="">{name}</span>
+                        <span>{name}</span>
                       )}
                       <span className="inline-block">
                         {index !== mergedVenues().length - 1
