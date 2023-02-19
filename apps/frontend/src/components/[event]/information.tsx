@@ -43,7 +43,7 @@ export const Information: React.FC<InformationProps> = ({
         allVenues.push({
           _key: venue._id,
           name: venue.name,
-          url: `event/${venue?.slug?.current}`,
+          url: `/venue/${venue?.slug?.current}`,
         })
       );
     }
@@ -79,7 +79,7 @@ export const Information: React.FC<InformationProps> = ({
                   mergedVenues().map(({ _key, url, name }, index) => (
                     <li className="break-all whitespace-pre-wrap" key={_key}>
                       {!!url ? (
-                        <Link href={url as string}>
+                        <Link href={url}>
                           <a>{name}</a>
                         </Link>
                       ) : (
