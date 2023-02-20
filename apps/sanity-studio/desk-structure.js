@@ -5,17 +5,19 @@ import { RiPagesLine } from "react-icons/ri";
 import React from "react";
 import { FaUserFriends } from "react-icons/fa";
 
-function SitePreview({ document, options }) {
+function SitePreview({ _, options }) {
   if (!process.env.SANITY_STUDIO_PREVIEW_URL) {
     console.warn(
       "SANITY_STUDIO_PREVIEW_URL should be set for preview to work! Falling back to localhost:3000"
     );
   }
-
   return (
     <iframe
-      title="Page preview"
-      src={`https://singaporebiennale.org/api/preview?secret=skMTyubVGGfBRerzI3SLuvOsKqY3FIv5ugkIB0l0WDxDg7KTVbJIQi7sMbryntcW1k3NdBBXIqbt3WTvzJWnrvAPr9A0yceupqUD2kb93bF7Zgzwr2AABhgIQIBy4BqK3Zyanyc8Oggfi15DJ6DIsakuRcfSodXkCnc8Olr3i80dGbGFakEJ&slug=${options.slug}`}
+      src={`${
+        process.env.SANITY_STUDIO_PREVIEW_URL ?? "http://localhost:3000"
+      }/api/preview?secret=${process.env.SANITY_STUDIO_PREVIEW_TOKEN}&slug=${
+        options.slug
+      }`}
       style={{ width: "100%", height: "100%", border: 0 }}
     />
   );
