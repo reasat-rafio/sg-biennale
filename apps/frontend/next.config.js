@@ -18,7 +18,7 @@ const ContentSecurityPolicy = `
   frame-ancestors 'self';
   frame-src 'self' https://www.youtube.com https://www.onemap.gov.sg www.facebook.com;
   img-src 'self' cdn.sanity.io 66wl3wil.api.sanity.io https://www.google.com https://www.google-analytics.com https://stats.g.doubleclick.net https://www.facebook.com https://www.google.com.sg; 
-  connect-src 'self' https://66wl3wil.api.sanity.io https://www.google-analytics.com https://www.google-analytics.com https://stats.g.doubleclick.net;
+  connect-src 'self' https://66wl3wil.api.sanity.io https://www.google-analytics.com https://www.google-analytics.com https://stats.g.doubleclick.net wss://66wl3wil.api.sanity.io https://66wl3wil.api.sanity.io;
   media-src 'self' cdn.sanity.io;
 `;
 
