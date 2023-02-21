@@ -15,7 +15,7 @@ const ContentSecurityPolicy = `
   font-src 'self' fonts.gstatic.com  data:;
   style-src 'self' 'unsafe-inline' fonts.googleapis.com; 
   base-uri 'self';
-  frame-ancestors 'self' https://singaporebiennale.org;
+  frame-ancestors 'self' https://singaporebiennale.org https://www.singaporebiennale.org;
   frame-src 'self' https://www.youtube.com https://www.onemap.gov.sg www.facebook.com https://singaporebiennale.org https://www.singaporebiennale.org;
   img-src 'self' cdn.sanity.io 66wl3wil.api.sanity.io https://www.google.com https://www.google-analytics.com https://stats.g.doubleclick.net https://www.facebook.com https://www.google.com.sg; 
   connect-src 'self' https://66wl3wil.api.sanity.io https://www.google-analytics.com https://www.google-analytics.com https://stats.g.doubleclick.net wss://66wl3wil.api.sanity.io https://66wl3wil.api.sanity.io;
