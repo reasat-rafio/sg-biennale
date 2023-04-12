@@ -1,15 +1,15 @@
-import dynamic from "next/dynamic";
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import { Navbar } from "@components/common/navigation/navbar";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { SEO } from "@components/common/seo";
+import { Ticker } from "@components/common/ticker";
+import { ISite } from "@lib/@types/global.types";
 import { useWindowSize } from "@lib/hooks";
 import useGlobalStore from "@stores/global.store";
+import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
 import Head from "next/head";
-import { SEO } from "@components/common/seo";
-import { ISite } from "@lib/@types/global.types";
-import { Ticker } from "@components/common/ticker";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import "../styles/globals.css";
 const NavDropdown = dynamic<ISite["site"]>(
   () =>
     import("@components/common/navigation/dropdown").then(

@@ -1,18 +1,19 @@
+import { MoreInfos } from "@components/common/more-info";
+import { Hero } from "@components/home/hero/hero";
+import { KV } from "@components/home/hero/kv";
+import { HighLight } from "@components/home/highlight";
 import { Introduction } from "@components/home/introduction/introduction";
 import { News } from "@components/home/news/news";
 import { Organisations } from "@components/home/organisation";
+import { HomHeroProps } from "@lib/@types/home.types";
 import { pageQuery } from "@lib/query";
 import { sanityStaticProps, useSanityQuery } from "@utils/sanity";
 import type { GetStaticProps, GetStaticPropsContext, NextPage } from "next";
 import { groq } from "next-sanity";
 import { SanityProps } from "next-sanity-extra";
-import { renderObjectArray, withDimensions } from "sanity-react-extra";
-import { Hero } from "@components/home/hero/hero";
+import Head from "next/head";
 import { useCallback } from "react";
-import { HomHeroProps } from "@lib/@types/home.types";
-import { KV } from "@components/home/hero/kv";
-import { HighLight } from "@components/home/highlight";
-import { MoreInfos } from "@components/common/more-info";
+import { renderObjectArray, withDimensions } from "sanity-react-extra";
 
 const query = pageQuery(groq`
   *[_type == "homePage"][0]{
@@ -97,6 +98,12 @@ const Home: NextPage<SanityProps> = (props) => {
 
   return (
     <div>
+      <Head>
+        <meta
+          name="facebook-domain-verification"
+          content={process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION}
+        />
+      </Head>
       {renderObjectArray(page.sections, {
         "homePage.kv": KV,
         "homePage.hero": useCallback(
