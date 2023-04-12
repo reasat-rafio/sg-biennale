@@ -86,7 +86,7 @@ const SlideRightVariant: React.FC<BacksideProps> = ({
             <span className="flex items-center space-x-2">
               <Location className="h-[18px]" />
               <span className="font-manrope text-gray--700 text-body-2">
-                {venue[0].name}
+                {venue[0]?.name}
               </span>
             </span>
             <span className="flex items-center space-x-2">
@@ -142,7 +142,7 @@ const ScaleUpVarian: React.FC<BacksideProps> = ({
         <span className="flex items-center space-x-2">
           <Location className="h-[18px] text-white" />
           <span className="font-manrope text-white text-body-2">
-            {venue[0].name}
+            {venue[0]?.name}
           </span>
         </span>
         <span className="flex items-center space-x-2">
